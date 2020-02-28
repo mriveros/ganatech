@@ -1,0 +1,19 @@
+<% if @valido %>
+
+  <% if @imprimir %>
+
+    swal("Datos Procesados!", "", "success");
+    window.open("<%= url_for(produccion_planilla_resumen_produccion_pdf_path(@parametros))%>", '_blank')
+
+  <% else %>
+  		
+    $("#<%= params[:window_id]%>").html("<%= escape_javascript(render :partial => 'planilla_resumen_produccion')%>");
+    $("#<%= params[:window_id]%>").modal('show');
+
+  <% end %>
+
+<% else %>
+  
+  swal("<%= @msg.html_safe %>", "", "error");
+
+<% end %>

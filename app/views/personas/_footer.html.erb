@@ -1,0 +1,11 @@
+<% if personas.present? %>
+
+  <tr id="tab-paginacion">
+    <td colspan="9" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate personas, :params => params %></div></td>
+  </tr>
+
+  <tr id="tab-cantidad-registros" style="background:#e6e6e6;">
+    <!--<td colspan="9">Cantidad de registros encontrados: <%#= @total_encontrados %> de <%#= @total_registros %></td>-->
+  </tr>
+
+<% end %>

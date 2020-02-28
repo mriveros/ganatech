@@ -1,0 +1,85 @@
+<div class="modal-dialog">
+
+  <div class="modal-content">
+
+    <div class="modal-header" style="background:#e6e6e6;">
+
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Disciplina</h4>
+
+    </div>
+
+    <%= form_for @disciplina, remote: true, url: disciplinas_guardar_url, html: { id: "form-agregar-disciplina" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%#= f.hidden_field :tipologia_obra_id, value: @tipologia_obra_id %>
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <%= f.label nil, "Descripci&oacuten".html_safe %>
+          <%= f.text_area :descripcion, :class => "form-control", :style => "width:60%;" %><br /><br />
+
+          <%= f.label nil, "Descripci&oacuten Guaran&iacute".html_safe %>
+          <%= f.text_area :descripcion_guarani, :class => "form-control", :style => "width:60%;" %><br /><br />
+         
+        </div>
+
+        <div class="modal-footer">
+
+         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+         <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-agregar-disciplina" %>
+          
+        </div>
+
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+
+<style type="text/css">
+
+      #form-agregar-disciplina label, #form-agregar-disciplina input[type='text'] { float:left; margin-top:5px;}
+      #form-agregar-disciplina br {clear:both; }
+      #form-agregar-disciplina label { width:200px;}
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    $("#disciplina_descripcion").focus();
+  }, 1000);
+  aplicar_datepicker2(); 
+
+  $("#btn-agregar-disciplina").bind('click', function() {
+
+    var valido = true;
+    var msg = "";
+
+    if($("#disciplina_descripcion").val().length == 0){
+      valido = false;
+      msg += "El campo descripcion no puede quedar vacio.!!\n";
+    }
+               
+    if(valido){
+        
+      var x = confirm("Esta seguro de guardar la nueva Disciplina ?");
+
+      if(x){
+
+        $("#form-agregar-disciplina").submit(); 
+        
+      }
+
+    }else{
+
+      alert(msg);
+
+    }
+
+    return false;    
+  })
+      
+</script>

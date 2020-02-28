@@ -1,0 +1,30 @@
+<% if usuarios.present? %>
+
+  <% usuarios.each do |u| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= u.id %></td>
+      <td><%= u.titulo %></td>
+      <td><%= u.contenido %></td>
+      <td><%= u.fecha_publicacion.strftime("%d/%m/%Y") %></td>
+      <td style="text-align:center;width:150px;">
+	 <%= link_to_enlaces(u) %>
+        <%= link_to_perfiles(u) %>
+        <%= link_to_editar_informacion(u) %>
+        <%= link_to icon_eliminar, informaciones_eliminar_path(id: u.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar', data: { confirm: "Está seguro de eliminar ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

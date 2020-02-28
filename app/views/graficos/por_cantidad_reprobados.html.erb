@@ -1,0 +1,185 @@
+<%= stylesheet_link_tag "AdminLTE.min", "ionicons.min", "morris" %>
+<%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js", "morris.min" %>
+<div class="col-sm-12 content-wrapper index-grafico" style="margin-left:0px;">
+
+  <div style="text-align:center;color:#000;font-size:50px;text-shadow:3px 3px 3px gray;">Cantidad Matriculados y Reprobados</div>
+  <em style="text-align:center;color:#000;font-size:25px;text-shadow:3px 3px 3px gray;">OBS.: Los datos provienen de las matriculas vinculadas al usuario director.</em>
+
+  <% if @estadisticas_cantidades.present? %>
+
+    <% @estadisticas_cantidades.each_with_index do |ec, i| %>
+
+      <h1>
+        <span style="color: #465f6e;"><%= "Periodo: #{ec.periodo}".html_safe %></span><br />
+        <span style="color: #465f6e;"><%= "Etapa: Primer Parcial".html_safe %></span><br />
+        <%= ec.codigo_institucion %>
+        <small><%= ec.nombre_institucion %></small>
+      </h1>
+
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-4 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+          <div class="inner">
+            <h3><%= ec.cantidad_matriculados.to_i %></h3>
+            <p>Cantidad de matriculados</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+        
+        </div>
+      
+      </div><!-- ./col -->
+          
+      <div class="col-lg-4 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+          <div class="inner">
+            <h3><%= ec.cantidad_no_logrados_primer_parcial.to_i %></h3>
+            <p>Cantidad no logrados primer parcial</p>
+          </div>
+          
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+               
+        </div>
+          
+      </div><!-- ./col -->
+      
+      <div class="col-lg-2"></div>
+      
+      <% if ec.cantidad_no_logrados_primer_parcial.to_i > 0 %>
+
+        <!-- Morris chart - Sales -->
+        <div class="chart tab-pane active" id="revenue-chart-<%= i %>" style="position: relative; height: 300px;"><%= ec.cantidad_no_logrados_primer_parcial%></div>
+        <script type="text/javascript">
+
+          $(function () {
+  
+            //BAR CHART
+            var bar = new Morris.Bar({
+              element: 'revenue-chart-<%= i %>',
+                resize: true,
+                data: [
+                  
+                  {y: '<%= ec.periodo %>', a: <%= ec.cantidad_matriculados.to_i %>, b: <%= ec.cantidad_no_logrados_primer_parcial.to_i%> },
+
+                ],
+                barColors: ['#00c0ef', '#f56954'],
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['Matriculados', 'No logrados primer parcial'],
+                hideHover: 'auto'
+            });
+          });
+
+
+        </script>
+
+      <% end %>
+
+      <div style="clear:both;"></div>  
+      <div style="clear:both; border-bottom: 1px dashed silver; color: gray; font-size: 25px;text-align:center; margin-top:50px;"><em>Fin del Periodo</em></div>
+
+    <% end %>
+
+  <% end %>
+
+
+
+  <div style="clear:both;"></div>
+  <div style="text-align:center;color:#000;font-size:50px;text-shadow:3px 3px 3px gray;">Reportes</div>
+
+  <div class="col-sm-1"></div>
+
+  <div class="col-sm-10">
+
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" id="btn-por-matriculaciones">De Frecuencias</button>
+    </div>
+<!-- 
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" id="btn-por-ofertas-educativas">Por Ofertas Educativas</button>
+    </div>
+    
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" id="btn-por-instituciones">Por Instituciones</button>
+    </div>
+-->
+  </div>
+
+  <div class="col-sm-1"></div>
+
+  <br />
+
+  <div class="table-responsive" id="area-reportes"></div>
+
+</div
+
+</div>
+
+<style type="text/css">
+
+  .index-grafico {
+
+
+    border:solid 1px #5c5c5c;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright:5px;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+
+  
+  
+  }
+
+  .td-nivel-0 {background: #ffd8da !important;color:#000 !important;font-weight:none; font-size:12px;}
+  .td-nivel-1 {background: #e6e6e6 !important;color:#000 !important;font-weight:bold; font-size:10px;}
+  .td-nivel-2 {background: silver !important;color:#000 !important;font-weight:bold; font-size:30px; text-align:right;}
+  .td-nivel-3 {background: #fff !important;color:#000 !important;font-weight:bold; font-size:10px;}
+  .td-nivel-4 {background: #465f6e !important;color:#fff !important;font-weight:bold; font-size:30px; text-align:right;}
+  .td-nivel-5 {background: #465f6e !important;color:#fff !important;font-weight:bold; font-size:12px;}
+  .td-nivel-0 select, .td-nivel-0 input { font-size: 10px; color: #000;}
+  .td-nivel-1 select, .td-nivel-1 input { font-size: 10px; color: #000;}
+  .td-nivel-2 select, .td-nivel-2 input { font-size: 10px; color: #000;}
+  .td-nivel-3 select, .td-nivel-3 input { font-size: 10px; color: #000;}
+  .td-nivel-1 span.limpiar { background: #fff !important;}
+
+</style>
+
+<script type="text/javascript">
+
+
+  $("#btn-por-matriculaciones").bind('click', function(){
+
+    $("#area-reportes").html("<%= escape_javascript("<div style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</div>").html_safe %>")
+
+    $("#btn-por-matriculaciones").attr('style', 'background: #e7e7e7') 
+    $("#btn-por-ofertas-educativas").attr('background', '#f4f4f4') 
+    $("#btn-por-instituciones").attr('background', '#f4f4f4')
+
+    $.ajax({
+      type: 'POST',
+      url: "<%= graficos_reportes_matriculaciones_path %>",
+      dataType: 'script'
+    
+    })
+
+  })
+
+  $("#btn-por-matriculaciones").trigger('click');
+
+</script>

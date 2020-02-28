@@ -1,0 +1,89 @@
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Disciplina</h4>
+      
+    </div>
+
+    <%= form_for @disciplina, remote: true, url: disciplinas_actualizar_url, html: { id: "form-editar-disciplina" }, method: 'POST' do |f| %>
+
+      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <%= f.label nil, "Descripci&oacuten".html_safe %>
+          <%= f.text_area :descripcion, :class => "form-control", :style => "width:60%;" %><br /><br />
+          <%= f.label nil, "Descripci&oacuten Guaran&iacute".html_safe %>
+          <%= f.text_area :descripcion_guarani, :class => "form-control", :style => "width:60%;" %><br /><br />
+         
+        </div>
+
+        <div class="modal-footer">
+
+          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+          <%= f.submit "Actualizar", class: "btn btn-primary", id: "btn-editar-disciplina" %>
+          
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-disciplina label, #form-editar-disciplina input[type='text'], #form-editar-disciplina select { float:left; margin-top:5px;}
+  #form-editar-disciplina br {clear:both; }
+  #form-editar-disciplina label { width:200px;font-size:12px;margin-top:10px;}
+ 
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    $("#disciplina_descripcion").focus();
+  }, 1000);
+  aplicar_datepicker2();
+
+
+  $("#btn-editar-disciplina").bind('click', function() {
+
+    var valido = true;
+    var msg = "";
+            
+    if($("#disciplina_descripcion").val().length == 0){
+      valido = false;
+      msg += "El campo Descripción no puede quedar vacio.!!\n";
+    } 
+
+     
+    if(valido){
+        
+      var x = confirm("Esta seguro de actualizar la nueva Disciplina ?");
+
+      if(x){
+
+        $("#form-editar-disciplina").submit(); 
+        
+      }
+
+    }else{
+
+      alert(msg);
+
+    }
+
+    return false;    
+  })
+
+</script>

@@ -1,0 +1,43 @@
+<%= link_to "<i class='glyphicon glyphicon-th-list'></i>".html_safe, "#", id: "link-to-enlaces-#{usuario.id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los enlaces.', onclick: "return false;" %>
+
+
+
+<script type="text/javascript">
+
+  $("#link-to-enlaces-<%= usuario.id %>").bind('click', function(){
+
+    var contenido = $.trim($("#enlaces-<%= usuario.id %>").html());
+
+    //$(".enlaces").html('');
+	
+	$('.enlaces').remove();
+	$('.perfiles').remove();
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='enlaces-<%= usuario.id %>' class='enlaces'><td colspan='9' style='text-align:center;'>\n\
+<i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(informaciones_enlaces_path) %>',  
+        data: {usuario_id: <%= usuario.usuario_id %>, 
+		informacion_id: <%= usuario.id %> },
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>
+
+
+
+
+
+
+

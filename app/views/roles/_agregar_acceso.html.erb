@@ -1,0 +1,115 @@
+<%= javascript_include_tag "modulos/roles.js" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Acceso</h4>
+      
+    </div>
+
+    <%= form_tag roles_agregar_acceso_path, remote: true, id: "form-buscar-acciones", method: 'GET' do  %>
+
+      <%= hidden_field_tag :rol_id, params[:rol_id] %>
+      <%= hidden_field_tag :window_id, params[:window_id] %>
+
+      <div style='float:left;width:40%;margin-right:10px;'>
+
+        <%= label_tag nil, "Controlador" %>
+        <%= collection_select :form_buscar_acciones, :controlador_id, Controlador.ordenado_descripcion, :id, :descripcion, { include_blank: true}, { class: "form-control input-sm"} %><br />
+
+      </div>
+
+      <div style='float:left;width:40%;'>
+        <%= label_tag nil, "Descripci&oacute;n".html_safe %>
+        <%= text_field_tag :form_buscar_acciones_descripcion, params[:form_buscar_acciones_descripcion], class: "form-control input-sm" %><br /><br />
+
+      </div>
+
+      <div style='clear:both;'></div>
+
+      <%= submit_tag "Buscar", :class => "btn btn-primary btn-xs", id: "btn-buscar-acciones" %>
+      <%= link_to "Limpiar", "#", :id => 'link-to-limpiar-form-buscar-acciones', :class => 'btn btn-warning btn-xs' %>
+
+    <% end %>
+    
+    <div class="panel-body">
+      <div class="table-responsive" id="table-acciones">
+        <div role="grid" class="dataTables_wrapper" id="example_wrapper">
+          
+          <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+            <thead>
+              
+              <tr role="row">
+              
+                <th>Controlador</th>
+                <th>Acci&oacute;n</th>
+              
+              </tr>
+            
+            </thead>
+       
+            <tbody id="accesos-lista">
+              
+              <% @acciones.each do |a|%>
+
+                <tr>
+                  <% ruta = roles_guardar_acceso_path(:rol_id => params[:rol_id], :window_id => params[:window_id], :accion_id => a.id)%>
+                  <td><%= link_to a.controlador.descripcion, ruta, remote: true if a.controlador %></td>
+                  <td><%= link_to a.descripcion, ruta, remote: true %></td>
+
+                </tr>
+
+              <% end %>
+
+              <tr>
+                <th colspan="2">
+                  <div class="apple_pagination" style="padding:0px;">
+                    <%= ajax_will_paginate @acciones, :params => params %>
+                    </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+      
+        </div>
+      
+      </div>
+       
+    </div>
+  
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+  //--------------------------- LIMPIAR FORM BUSCAR ACCIONES ----------------//
+  $("#link-to-limpiar-form-buscar-acciones").bind('click', function(){
+    $("#form_buscar_acciones_controlador_id").val('');    
+    $("#form_buscar_acciones_descripcion").val('');
+    $("#form-buscar-acciones").submit();
+
+    return false;    
+  })
+  //------------------------------------------------------------------------//
+  //------------------------------ INICIO ----------------------------------//
+  <% if params[:form_buscar_acciones] && params[:form_buscar_acciones][:controlador_id].present? %>
+    $("#form_buscar_acciones_controlador_id").val(<%= params[:form_buscar_acciones][:controlador_id]%>);
+  <% end %>
+  //------------------------------------------------------------------------//
+</script>
+
+<style type="text/css">
+
+  #form-buscar-acciones {margin: 10px 0 0 20px;}
+  #form-buscar-acciones input[type="text"], #form-buscar-acciones label, #form-buscar-acciones select {float:left; margin-top:5px;}
+  #form-buscar-acciones label {width:150px;}
+  #form-buscar-acciones br {clear:both;}
+
+  #table-acciones .pagination { margin: 5px 0 0 0;}
+
+</style>

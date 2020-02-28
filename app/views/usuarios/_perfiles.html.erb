@@ -1,0 +1,69 @@
+<td colspan="9">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Perfiles</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-perfil", class: "btn btn-primary btn-xs", style: "float:right;", onclick: "$('.modal').html('');return false;" %>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-perfiles">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Rol</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="perfiles-lista">
+
+            <% if @perfiles.present? %>
+            
+              <% @perfiles.each do |p|%>
+
+                <tr>
+                  <td><%= p.id %></td>
+                  <td><%= p.rol.descripcion if p.rol %></td>
+                  <td style="width: 50px;text-align:right;">
+                    <%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, usuarios_eliminar_perfil_path(id: p.id), remote: true, class: 'btn btn-danger btn-xs', title: "Haga click para eliminar el perfil", data: {confirm: 'Esta seguro de eliminar este perfil ?'} %>
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=9>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-perfil", link_to_id: "#link-to-agregar-perfil", url: usuarios_agregar_perfil_path( window_id: "modal-window-agregar-perfil", usuario_id: params[:usuario_id]) )%>
+
+</td>

@@ -1,0 +1,3 @@
+<%= link_to "<i class='glyphicon glyphicon-edit'></i>".html_safe, "#", id: "link-to-editar-rol-#{rol.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el rol.' %>
+<%= modal_window( window_id: "modal-window-editar-rol", link_to_id: "#link-to-editar-rol-#{rol.id}", url: roles_editar_path( window_id: "modal-window-editar-rol", id: rol.id) )%>
+

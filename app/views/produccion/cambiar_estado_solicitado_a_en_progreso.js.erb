@@ -1,0 +1,12 @@
+<% if @actualizado %>
+	
+	$("#form_buscar_produccion_id").val('<%= @produccion.id %>');
+	$("#form-buscar-produccion").submit();
+
+    swal({title: "Atención", text: "<%= j(@msg)%>", html: false})
+
+<% else %>
+
+  	swal({title: "Atención", text: "<%= j(@msg)%>", html: false})
+
+<% end %>

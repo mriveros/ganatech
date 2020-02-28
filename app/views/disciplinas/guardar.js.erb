@@ -1,0 +1,13 @@
+<% if @disciplina_ok %>
+
+  swal('<%= @msg %>');
+    $('#<%= params[:window_id] %>').modal('hide');
+    $("#form_buscar_disciplinas_id").val('<%= @disciplina.id %>');
+    $("#form_buscar_disciplinas_descripcion").val('');
+    $("#form-buscar-disciplinas").submit();
+<% else %>
+
+  swal('<%= @msg %>');
+
+<% end %>
+

@@ -1,0 +1,20 @@
+<% if @usuario_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-agregar-usuario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-usuario");
+   
+  $("#form_buscar_usuarios_id").val('<%= @usuario.id %>');
+  $("#form_buscar_usuarios_nacionalidad_id").val('');
+  $("#form_buscar_usuarios_tipo_documento_id").val('');
+  $("#form_buscar_usuarios_documento_persona").val('');
+  $("#form_buscar_usuarios_nombre_persona").val('');
+  $("#form_buscar_usuarios_apellido_persona").val('');
+  $("#form_buscar_usuarios_email").val('');
+  $("#form_buscar_usuarios_active").val('');
+  $("#form-buscar-usuarios").submit();
+  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); }, 3000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-agregar-usuario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg.html_safe %></div>").insertBefore("#form-agregar-usuario");
+
+<% end %>

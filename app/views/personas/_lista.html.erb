@@ -1,0 +1,36 @@
+<% if personas.present? %>
+
+  <% personas.each do |p| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= p.id %></td>
+      <td><%= p.nacionalidad.descripcion if p.nacionalidad %></td>
+      <td><%= p.tipo_documento.descripcion if p.tipo_documento %></td>
+      <td style="width:120px;"><%= p.documento_persona %></td>
+      <td><%= p.nombre_persona %></td>
+      <td><%= p.apellido_persona %></td>
+      <td style="text-align:center;"><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present? %></td>
+      <td><%= p.genero.descripcion if p.genero %></td>
+      <td><%= p.libro if p.libro %></td>
+      <td><%= p.folio if p.folio %></td>
+      <td><%= p.acta if p.acta %></td>
+      <td style="text-align:center;width:150px;">
+      <%= link_to_editar_persona(p) %>
+      <%= link_to_unificar_persona(p) %>
+      <%= link_to icon_eliminar, personas_eliminar_path(id: p.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la persona', data: { confirm: "Está seguro de eliminar la persona ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

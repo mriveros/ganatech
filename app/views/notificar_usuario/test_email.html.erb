@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <h1> Hola!</h1>
+    <p>
+     <bold> Existen producciones con falta de cobro actualmente.</bold>
+     <br />
+      
+      <% @producciones = VProduccion.where("produccion_id in (?)",@datos_adjuntos)%>
+      <%@producciones.each do |pr|%>
+        
+        <p>
+
+        Código Producción: <%= pr.codigo_produccion %> <br />
+        Cliente: <%= pr.cliente_nombre%><br />
+        Fecha Produccion: <%= pr.fecha_produccion%><br />
+        Flota: <%= pr.codigo_flota %> - <%= pr.modelo %> - <%= pr.marca %><br />
+        Origen: <%= pr.origen%><br />
+        Destino: <%= pr.destino%>  <br />   
+        Destino Final: <%= pr.destino_final %>  <br />
+        Monto: <%= pr.costo%> 
+      <p>**************************************************************</p>
+      </p> <br />
+
+      <%end%>
+
+
+      <b> </b><br />
+    </p>
+
+    <p>
+      Ingrese al sistema a la sección de reportes para obtener mayor información <br /> 
+    </p>
+    
+  </body>
+</html>

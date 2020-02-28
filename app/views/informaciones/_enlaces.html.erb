@@ -1,0 +1,72 @@
+<td colspan="9">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Enlaces</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-enlace", class: "btn btn-primary btn-xs", style: "float:right;", onclick: "$('.modal').html('');return false;" %>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-enlaces">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Titulo</th>
+			  <th>Enlace</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="enlaces-lista">
+
+            <% if @info_enlaces.present? %>
+            
+              <% @info_enlaces.each do |u|%>
+
+                <tr>
+                  <td><%= u.id %></td>
+                  <td><%= u.titulo%></td>
+				  <td><%= u.enlace%></td>
+                  <td style="width: 69px;text-align:right;">
+			<%= link_to_editar_enlace(u) %>
+                    <%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, informaciones_eliminar_enlace_path(id: u.id, informacion_id: u.informacion_id), remote: true, class: 'btn btn-danger btn-xs', title: "Haga click para eliminar", data: {confirm: 'Esta seguro de eliminar ?'} %>
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=9>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-enlace", link_to_id: "#link-to-agregar-enlace", url: informaciones_agregar_enlace_path( window_id: "modal-window-agregar-enlace", usuario_id: params[:usuario_id], informacion_id: params[:informacion_id]) )%>
+
+</td>

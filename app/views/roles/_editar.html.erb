@@ -1,0 +1,57 @@
+<%= javascript_include_tag "modulos/roles.js" %>
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Rol</h4>
+      
+    </div>
+
+    <%= form_for @rol, remote: true, url: roles_actualizar_url, html: { id: "form-editar-rol" }, method: 'POST' do |f| %>
+
+      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <div class="col-sm-4"><%= label_tag nil, "Descripci&oacute;n #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+          
+          <div class="col-sm-4"><%= label_tag nil, "Sistema #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :sistema_id, Sistema.ordenado_descripcion, :id, :descripcion, {:include_blank => true}, {class: 'form-control input-sm',readonly: true  }%></div>
+          <div class="col-sm-1"></div><br />
+ 
+        </div>
+            
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Actualizar", class: "btn btn-primary", id: "btn-actualizar-rol" %>
+          
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-rol label, #form-editar-rol input[type='text'] { float:left; margin-top:5px;}
+  #form-editar-rol br {clear:both; }
+  #form-editar-rol label { width:200px; font-size:12px;}
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ $("#rol_descripcion").focus(); }, 1000);
+
+</script>

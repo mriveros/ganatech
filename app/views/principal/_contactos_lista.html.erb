@@ -1,0 +1,36 @@
+<% if contactos.present? %>
+
+  <% contactos.each do |c| %>
+
+    <div class="consulta col-sm-6">
+
+      <div class="well">
+        <h3><%= link_to c.asunto, "#", id: "link-to-contacto-#{c.id}", style: "color:navy;text-decoration:none;" %> <small>por <%= "#{c.nombre} #{c.apellido}"%> - <%= c.fecha.strftime("%d/%m/%Y") %></small></h3>
+        <p><%= c.mensaje %></p>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  <div class="text-center">
+    <nav>
+      <ul class="pagination">
+        <div class="flickr_pagination">
+          <%= ajax_will_paginate contactos, :params => params %>
+        </div>
+      </ul>
+    </nav>
+  </div>
+
+  <p>Cantidad de participantes: <%= @total_registros %></p>
+
+<% else %>
+
+  <div class="consulta col-sm-6">
+    <div class="well">
+      <p>No hay participantes... Se el primer ciudadano !!</p>
+    </div>
+  </div>
+
+<% end %>

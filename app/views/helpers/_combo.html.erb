@@ -1,0 +1,52 @@
+<% data = "{ #{param}: $('##{linked}').val() }" %>
+<% data = "{ #{param}: $('##{linked}').val(), #{extra}: $('##{extra}').val() }" if extra.present? %>
+<% data = "{ #{param}: $('##{linked}').val(), #{extra}: $('##{extra}').val(), #{extra1}: $('##{extra1}').val()}" if extra.present? && extra1.present?  %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var nada = "<%= js_selected %> ";
+    var selected = "<% selected != "null" ? selected : js_selected != "null" ? js_selected : "null" %>";
+    <% if selected.to_i > 0 %>
+      <%# display_value = clase.camelize.constantize.find(selected).descripcion if display == 'descripcion'%>
+      <% display_value = clase.camelize.constantize.find(selected).send(display) %>
+
+      <% valor = selected%>
+    <% else %>
+      <% display_value = prompt %>
+      <% valor = ""%>
+    <% end %>
+    // carga el combo cuando se refresca la p�gina
+    if ($('#<%= linked %>').val() != "") {
+      $.getJSON("<%= url %>", <%= data.html_safe %>, function(j){
+        var opciones = '';
+        opciones += '<option value="<%= valor %>"><%= display_value.sub("'", " ") %></option>';
+        for (var i=0; i < j.length; i++) {
+         // var selected = j[i].<%#=  clase %>.<%#=  value %> == selected ? ' selected="selected"' : '';
+          if(j[i].<%=value%> != '<%= valor %>' || j.length == 1)
+            opciones += '<option value="' + j[i].<%=value%> + '"' + selected + '>' + j[i].<%=display%>+ '</option>';
+        }
+        $("select#<%=nombre%>").html(opciones);
+      })
+    }
+
+    // carga el combo cuando cambia el valor del linked
+    $('#<%=linked %>').change( function(){      
+      $.getJSON("<%= url %>", <%= data.html_safe %>, function(j){
+        var opciones = '';
+        opciones += '<option value=""><%= prompt %></option>';
+
+        for (var i=0; i < j.length; i++) {
+          var selected = j[i].<%=  value %> == selected ? ' selected="selected"' : '';
+          if(j[i].<%=value%> != '<%= valor %>' || j.length == 1)
+            opciones += '<option value="' + j[i].<%=value%> + '"' + selected + '>' + j[i].<%=display%>+ '</option>';
+        }
+        $("select#<%=nombre%>").html(opciones);
+        <% if action_name == "mapas" %>
+          $("#jurisdiccion_id").multiselect("refresh");
+          $("#jurisdiccion_id").multiselect("uncheckAll");
+          $('#jurisdicciones_seleccionadas').val('');
+        <% end %>
+      })
+    }) //change
+  }) //ready
+  
+</script>

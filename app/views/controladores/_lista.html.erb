@@ -1,0 +1,28 @@
+<% if controladores.present? %>
+
+  <% controladores.each do |c| %>
+
+    <tr>
+
+      <td style="width:100px;"><%= c.id %></td>
+      <td><%= c.descripcion %></td>
+      <td></td>
+      <td style="text-align:center;">
+        <%= link_to_acciones(c) %>
+        <%= link_to_editar_controlador(c) %>
+        <%= link_to icon_eliminar, controladores_eliminar_path(id: c.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el controlador', data: { confirm: "Esta seguro de eliminar el controlador ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="4"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

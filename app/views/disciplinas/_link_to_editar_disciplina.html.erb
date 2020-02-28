@@ -1,0 +1,4 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-disciplina-#{disciplina.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar la disciplina.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-editar-disciplina", link_to_id: "#link-to-editar-disciplina-#{disciplina.id}", url: disciplinas_editar_path( window_id: "modal-window-editar-disciplina", id: disciplina.id) )%>
+

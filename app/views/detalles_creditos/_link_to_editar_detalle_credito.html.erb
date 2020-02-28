@@ -1,0 +1,5 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-detalle-credito-#{detalle_credito.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el detalle de crédito.', onclick: "$('.modal').html('');return false;" %>
+
+
+<%= modal_window( window_id: "modal-window-editar-detalle-credito", link_to_id: "#link-to-editar-detalle-credito-#{detalle_credito.id}", url: detalles_creditos_editar_path( window_id: "modal-window-editar-detalle-credito", id: detalle_credito.id) )%>
+

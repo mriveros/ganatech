@@ -1,0 +1,4 @@
+<%= link_to "<i class='glyphicon glyphicon-edit'></i>".html_safe, "#", id: "link-to-editar-controlador-#{controlador.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el controlador.' %>
+
+<%= modal_window( window_id: "modal-window-editar-controlador", link_to_id: "#link-to-editar-controlador-#{controlador.id}", url: controladores_editar_path( window_id: "modal-window-editar-controlador", id: controlador.id) )%>
+

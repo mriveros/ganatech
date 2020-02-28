@@ -1,0 +1,34 @@
+<% if usuarios.present? %>
+
+  <% usuarios.each do |u| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= u.id %></td>
+      <td><%= u.persona.nacionalidad.descripcion if u.persona && u.persona.nacionalidad %></td>
+      <td><%= u.persona.tipo_documento.descripcion if u.persona && u.persona.tipo_documento %></td>
+      <td style="width:120px;"><%= u.persona.documento_persona if u.persona %></td>
+      <td><%= u.persona.nombre_persona if u.persona %></td>
+      <td><%= u.persona.apellido_persona if u.persona %></td>
+      <td><%= u.email %></td>
+      <td style="text-align:center;font-size:14px;font-weight:bold;background:<%= u.active ? '#d6ffd6' : '#f8dfdf' %>;"><%= u.active ? 'SI' : "NO" %></td>
+      <td style="text-align:center;width:150px;">
+        <%= link_to_perfiles(u) %>
+        <%= link_to_reset_password(u) %>
+        <%= link_to_editar_usuario(u) %>
+        <%= link_to icon_eliminar, usuarios_eliminar_path(id: u.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el usuario', data: { confirm: "Está seguro de eliminar el usuario ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

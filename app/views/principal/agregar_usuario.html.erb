@@ -1,0 +1,91 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<%= notificaciones %>
+
+<div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:35px;">
+  <h3>Crear mi Cuenta</h3>
+</div>
+
+<div class="col-sm-6" style="margin:auto;">
+ 
+  <%= form_for Usuario.new, remote: true, url: principal_guardar_usuario_path, html: { id: "form-crear-cuenta"} do |f| -%>
+
+    <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
+    <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id, TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
+    <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Nombre #{attr_requerido}".html_safe, id: "lbl-nombre" %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_nombre, nil, class: 'form-control input-sm', readonly: true %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Apellido #{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= f.label :email, "Correo #{attr_requerido}".html_safe, id: "lbl-email" %></div>
+    <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Perfil #{attr_requerido}".html_safe %></div>
+    <div class="col-sm-7"><%= collection_select :perfil, :rol_id, Rol.ordenado_descripcion.where('id in (5,7)'), :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-7"><%#= recaptcha_tags( ajax: true) %>
+
+      <br />
+      <br />
+      <div class="g-recaptcha" data-sitekey="6Lc-0PcSAAAAAEgTs-_EdpQU-LHIPx0bpRjnkMbR"></div>
+
+    </div>
+    <div class="col-sm-1"></div><br /><br />
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+      <%= f.submit "Registrarme", class: 'btn btn-primary', id: "btn-guardar-cuenta" %>
+      <%= link_to "Cancelar", root_path, class: "btn btn-warning" %>
+    </div><br />
+
+  <% end %>
+  
+</div>
+<div class="col-sm-4"></div>
+
+<style type="text/css">
+
+  #form-crear-cuenta{ background-color: #fff; border: 1px solid #b6b6b6; padding:10px 0px 10px 10px; border-radius: 5px;}
+  #form-crear-cuenta label, #form-crear-cuenta input[type='text'], #form-crear-cuenta input[type='password'], #form-crear-cuenta select { margin-top: 15px; }
+  #form-crear-cuenta br { clear:both;}
+  #form-crear-cuenta label { font-size:12px;}
+  #form-crear-cuenta #persona_tipo_documento_persona_id { width:60%;}
+  #form-crear-cuenta #persona_nacionalidad_id { width:60%;}
+  #form-crear-cuenta #persona_documento { width:50%;}
+  #form-crear-cuenta #usuario_password { width:60%;}
+  #form-crear-cuenta #usuario_password_confirmation { width:60%;}
+
+</style>
+
+<script type="text/javascript">
+
+  $("#persona_tipo_documento_id").focus();
+  $("#persona_tipo_documento_id").val(1);
+  $("#persona_nacionalidad_id").val(1);
+
+  $("#persona_documento").bind("keydown", function(e){
+      
+    if(e.keyCode == 13 || e.keyCode == 9){
+      buscar_persona($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>");
+      return false;
+    }
+ 
+  })
+
+</script>

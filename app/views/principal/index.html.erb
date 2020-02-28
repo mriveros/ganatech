@@ -1,0 +1,115 @@
+<%= notificaciones %>
+
+<!--
+<div class="pull-right btn-lg hidden-xs" id="start-tour"><a title="Ir a la ayuda"><i class="icon-py-ayuda"></i> Ayuda</a></div>
+-->
+  <br />
+  <br />
+<%if current_usuario.present?%>
+
+  <div class="row">
+
+  <div class="col-sm-6 mb-3 mb-md-0" style="background:#faf3c3">
+    <div class="card" >
+      <div class="card-body" >
+        <h4 class="card-title">Producciones Cobradas (mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @producciones_cobrados.count %> </p>
+        <p class="card-text">Monto: <%#=@producciones_cobrados.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%> </p>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6" style="background:#7aa01c">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Producciones Sin Cobrar (mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @producciones_sin_cobrar.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_sin_cobrar.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+       
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="row">
+    
+  <div class="col-sm-6 mb-3 mb-md-0" style="background:#66d86d">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Producciones Pertenece (mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @producciones_pertenece.count %> </p>
+
+        <p class="card-text">Monto: <%#= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6" style="background:#8af0e8">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Producciones que no Pertenece (mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @producciones_no_pertenece.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_no_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %> </p>
+        
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+  <div class="row">
+    
+  <div class="col-sm-6 mb-3 mb-md-0" style="background:#dea5cc">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title"> Total Gastos(mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @producciones_pertenece.count %> </p>
+        <p class="card-text">Monto: <%#= @gastos_producciones.sum(:monto).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6" style="background:#b09aa0">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Cantidad Producciones (mes actual)</h4>
+        <p class="card-text">Cantidad: <%#= @cantidad_producciones.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+<%end%>
+
+
+
+
+
+<!-- Script para el tutorial interactivo -->
+<script>
+
+</script>
+    <!-- Estilo para el tutorial interactivo -->
+<style>
+      .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+      }
+      #start-tour{
+        cursor: pointer;
+      }
+</style>

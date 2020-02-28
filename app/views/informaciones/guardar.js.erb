@@ -1,0 +1,13 @@
+ 
+<% if @informacion_ok.present? %>
+
+alert('<%= @msg %>');
+$('#<%= params[:window_id] %>').modal('hide');
+$("#form_buscar_informacion_id").val("<%= @informacion.id %>");
+$("#form-buscar-informaciones").submit();
+
+<% else %>
+
+alert('<%= @msg.gsub('.','\n') %>');
+
+<% end %>

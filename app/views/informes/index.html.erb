@@ -1,0 +1,291 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Generar Informes</h3>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+
+<%= form_for "informes", remote: true, url: informes_indexa_url, html: { id: "form-informes-produccion" }, method: 'GET' do |f| %>
+
+  <div class="modal-body">    
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+      <div class="panel-body" style="background:#e6e6e6; ">
+        
+        <div class="col-sm-4"><%= label_tag nil, "Flota #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= hidden_field_tag :flota_id, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :flota_produccion, nil, rows: 3 ,class: 'form-control input-sm'%></div>
+        <br style="clear: both;"/>
+
+        <div class="col-sm-4"><%= label_tag :nil, "Chofer #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= hidden_field_tag :chofer_id, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :chofer_produccion, nil ,rows: 3,class: 'form-control input-sm'%></div>
+        <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-4"><%= label_tag :nil, "Cliente #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= hidden_field_tag :cliente_id, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cliente_produccion, nil ,rows: 3,class: 'form-control input-sm' %></div>
+        <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_desde, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+        </div>    
+        <div class="col-sm-1"></div><br /> 
+
+         <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Hasta Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_hasta, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+        </div>    
+        <div class="col-sm-1"></div><br />  
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Cobrado?".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :cobrado, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-1"></div><br />
+       
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Pertenece?".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :pertenece, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-1"></div><br />
+
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Informe General".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :general, nil ,class: 'form-control input-sm' %></div>
+        <div class="col-sm-1"></div><br />
+
+       
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Estado".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoProduccion.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+         <div class="col-sm-1"></div><br />
+
+
+      </div>
+      <div class="modal-footer" style="background:#e6e6e6; text-align: center">
+
+        <%= submit_tag  "Generar Informe", class: "btn btn-primary", id: "btn-guardar-produccion" %>
+          
+      </div>
+
+    </div>  
+
+  </div>  
+
+<%end%>
+
+
+
+
+
+<script type="text/javascript">
+
+
+   //Obtener Flota
+  $("#flota_produccion").bind('focus', function(){   
+
+    var flotas = [];
+    $("#flota_produccion").val('');
+    $("#flota_id").val('');
+    $("#flota_produccion").attr('readonly', false);
+
+    $.getJSON("<%= url_for(flotas_buscar_flota_path) %>", { flota_produccion: $("#flota_produccion").val()}, function(j){
+        
+      var nombre_flota = "";
+      var options = "<option value=''> -- Seleccione una Flota -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_flota != nombre_flota ){
+          
+          flotas.push( {value: j[i].id +" - Código Camión: "+ j[i].codigo_flota + "| Marca: "+ j[i].marca+"| Chapa: "+j[i].chapa +"| Descripción: "+j[i].descripcion });
+          nombre_flota =j[i].id +" - "+ j[i].marca+" "+j[i].chapa ;
+
+          options += "<option value="+ j[i].id +" - Código Camión: "+ j[i].codigo_flota + "| Marca: "+ j[i].marca+"| Chapa: "+j[i].chapa +"| Descripción: "+j[i].descripcion+ "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#flota_produccion").autocomplete({
+
+      minLength: 1,
+      source: flotas,
+      focus: function( event, ui ) {
+      
+        $("#flota_produccion" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#flota_produccion").val( ui.item.label );
+        $("#flota_id").val(datos[0]);
+        return false;
+      }
+    })
+
+  });
+
+  //Obtener chofer
+  $("#chofer_produccion").bind('focus', function(){   
+
+    var personas = [];
+    $("#chofer_produccion").val('');
+    $("#chofer_id").val('');
+    $("#chofer_produccion").attr('readonly', false);
+
+    $.getJSON("<%= url_for(personas_buscar_chofer_path) %>", { chofer_produccion: $("#chofer_produccion").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Chofer -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          personas.push( {value: j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#chofer_produccion").autocomplete({
+
+      minLength: 1,
+      source: personas,
+      focus: function( event, ui ) {
+      
+        $("#chofer_produccion" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#chofer_produccion").val( ui.item.label );
+        $("#chofer_id").val(datos[0]);
+        return false;
+      }
+    })
+
+  });
+
+  //Obtener cliente
+  $("#cliente_produccion").bind('focus', function(){   
+
+    var clientes = [];
+    $("#cliente_produccion").val('');
+    $("#cliente_id").val('');
+    $("#cliente_produccion").attr('readonly', false);
+
+    $.getJSON("<%= url_for(clientes_buscar_cliente_path) %>", { cliente_produccion: $("#cliente_produccion").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Cliente -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          clientes.push( {value: j[i].id +" - Razon Social: "+ j[i].razon_social+" Cliente: "+ j[i].cliente_nombre+" "+j[i].cliente_apellido });
+          nombre_persona =j[i].id +" - "+ j[i].razon_social+" "+ j[i].cliente_nombre+" "+j[i].cliente_apellido ;
+
+          options += "<option value="+ j[i].id +" -Razon Social:"+ j[i].razon_social+" Cliente: "+ j[i].cliente_nombre+" "+j[i].cliente_apellido + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#cliente_produccion").autocomplete({
+
+      minLength: 1,
+      source: clientes,
+      focus: function( event, ui ) {
+      
+        $("#cliente_produccion" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#cliente_produccion").val( ui.item.label );
+        $("#cliente_id").val(datos[0]);
+        return false;
+      }
+    })
+
+  });
+  
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+
+  $("#general").prop("checked", false);
+
+  $("#general").bind('change', function(){   
+
+    if ($("#general").prop("checked") == true)
+    {
+
+      $("#pertenece").prop("checked", false);
+      $("#cobrado").prop("checked", false);
+      $("#pertenece").prop("disabled", true);
+      $("#cobrado").prop("disabled", true);
+
+    }else
+    {
+      $("#pertenece").prop("checked", true);
+      $("#cobrado").prop("checked", true);
+      $("#pertenece").prop("disabled", false);
+      $("#cobrado").prop("disabled", false);
+
+    }
+   
+
+  });
+
+  
+  //----------------------------------------------------------------------------//
+
+
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-informes table th { background:#e6e6e6;}
+    #form-buscar-informes table th span.limpiar { background:#fff;}
+
+</style>

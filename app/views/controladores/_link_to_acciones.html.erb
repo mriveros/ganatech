@@ -1,0 +1,30 @@
+<%= link_to "<i class='glyphicon glyphicon-th-list'></i>".html_safe, "#", id: "link-to-acciones-#{controlador.id}", class: 'btn btn-info btn-xs', title: 'Haga click para ver las acciones.' %>
+
+<script type="text/javascript">
+
+  $("#link-to-acciones-<%= controlador.id %>").bind('click', function(){
+
+    var contenido = $.trim($("#acciones-<%= controlador.id %>").html());
+
+    $(".acciones").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='acciones-<%= controlador.id %>' class='acciones'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(controladores_acciones_path) %>',  
+        data: { controlador_id: <%= controlador.id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>
+

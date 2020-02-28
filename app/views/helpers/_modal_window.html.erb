@@ -1,0 +1,17 @@
+<div class="modal face" id="<%= window_id%>"></div>
+
+<script type="text/javascript">
+
+  $("<%= link_to_id %>").bind("click", function(){
+
+    $.ajax({
+      type: 'GET',
+      url: "<%= url %>",  
+      dataType: 'script'
+    })
+    
+    return false;      
+      
+  })
+
+</script>

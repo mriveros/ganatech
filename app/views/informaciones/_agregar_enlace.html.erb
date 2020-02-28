@@ -1,0 +1,75 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+<div class="modal-dialog" style = "width:60%; align-content: center;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+      
+    </div>
+
+    <%= form_for @enlace, remote: true, url: informaciones_guardar_enlace_url, html: { id: "form-agregar-enlace" }, method: 'POST' do |f| %>
+
+      
+	  <%= hidden_field_tag :usuario_id, params[:usuario_id] %>
+	  <%= hidden_field_tag :informacion_id, params[:informacion_id] %>
+	  <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+			
+		  <div class="col-sm-4"><%= label_tag nil, "Titulo #{attr_requerido}".html_safe, id: "lbl-titulo" %></div>
+          <div class="col-sm-7"><%= text_field_tag :titulo, nil, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /><br />
+		  
+		  <div class="col-sm-4"><%= label_tag nil, "Enlace #{attr_requerido}".html_safe, id: "lbl-enlace" %></div>
+          <div class="col-sm-7"><%= text_field_tag :enlace, nil, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /><br />
+		  
+		  
+        </div>        
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-enlace" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+  
+</div>
+
+<style type="text/css">
+
+  #form-agregar-enlace label, #form-agregar-enlace input[type='text'], #form-agregar-enlace input[type='password'], #form-agregar-enlace select , #form-agregar-enlace input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-enlace br {clear:both; }
+  #form-agregar-enlace label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-enlace #persona_tipo_documento_persona_id { width:60%;}
+  #form-agregar-enlace #persona_nacionalidad_id { width:60%;}
+  #form-agregar-enlace #persona_documento { width:50%;}
+  #form-agregar-enlace #usuario_password { width:60%;}
+  #form-agregar-enlace #usuario_password_confirmation { width:60%;}
+  #form-agregar-enlace #notificar_usuario { width:10%;}
+
+
+</style>
+
+<script type="text/javascript">
+  aplicar_datepicker();
+
+  setTimeout(function(){ 
+    $("#titulo").focus();
+    $("#persona_tipo_documento_id").val(1);
+    $("#persona_nacionalidad_id").val(1);
+  }, 1000);
+
+ 
+</script>

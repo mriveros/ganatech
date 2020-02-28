@@ -1,0 +1,14 @@
+<% if @eliminado %>
+alert('Rol Eliminado Exitosamente');
+
+  setTimeout(function(){ 
+    $("#link-to-perfiles-<%= @informacion_id %>").trigger('click');
+    $("#link-to-perfiles-<%= @informacion_id %>").trigger('click');
+   }, 3000);
+
+<% else %>
+
+alert('Ha ocurrido un error al intentar eliminar el rol.')
+<% end %>
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Datos</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag "mapa_matriculaciones" %>
+  <%= stylesheet_link_tag "leaflet" %>  
+  <%= stylesheet_link_tag "slider" %>  
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "leaflet" %>  
+  <%= javascript_include_tag "bootstrap-slider" %>  
+  <%= javascript_include_tag "matriculados" %>
+  <%= javascript_include_tag "ie10-viewport-bug-workaround" %>
+  <%= javascript_include_tag "mapa_matriculaciones" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div id="main_container">
+      
+      <div id="header">
+        <%= render :partial => "layouts/header" %>
+      </div>
+
+      <div id="main_content">
+      
+        <%= yield %>
+        
+        <div id="footer">
+          <%= render :partial => "layouts/footer" %>
+        </div>
+    
+      </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<table class="table table-small-font table-bordered table-striped" style="font-size:10px;">
+   
+  <thead>
+
+    <tr>
+
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Departamento</span></th>
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Distrito</span></th>
+      <th class="td-nivel-5"><span>C&oacute;digo Establecimiento</span></th>
+      <th class="td-nivel-5"><span>C&oacute;digo Instituci&oacute;n</span></th>
+      <th class="td-nivel-5"><span>C&oacute;digo Nivel</span></th>
+      <th style="width:22%;" class="td-nivel-5" colspan=2><span>Nombre Instituci&oacute;n</span></th>
+      <th style="width:8%;" class="td-nivel-5"><span>Tipo Gesti&oacute;n</span></th>
+      <th class="td-nivel-1"></th>
+
+    </tr>
+
+  </thead> 
+
+  <tbody id="ofertas-educativas-lista">
+
+    <% if ofertas_educativas.present? %>
+ 
+      <% ofertas_educativas.each do |oe| %>
+
+        <tr>
+
+          <td><%= oe.departamento %></td>
+          <td><%= oe.distrito %></td>
+          <td><%= oe.codigo_establecimiento %></td>
+          <td><%= oe.codigo_institucion %></td>
+          <td><%= oe.codigo_nivel %></td>
+          <td colspan=2><%= "#{oe.nombre_institucion} --- #{oe.codigo_modalidad_nivel}" %></td>
+          <td> <%= oe.tipo_gestion %> </td>
+          <td>
+          
+            <% if PARAMETRO[:modalidades_educacion_inclusiva_noformal].include?(oe.modalidad_nivel_id) %>
+
+            <%= link_to '<span class="glyphicon glyphicon-print"></span>'.html_safe, "#", class: 'btn btn-info btn-xs', id: "link-informe-matriculados-inclusiva-#{oe.oferta_educativa_id}" %>
+            <%= modal_window( window_id: "modal-window-informe-matriculados-inclusiva-#{oe.oferta_educativa_id}", link_to_id: "#link-informe-matriculados-inclusiva-#{oe.oferta_educativa_id}", url: informes_directores_abrir_informe_matriculados_path( window_id: "modal-window-informe-matriculados-inclusiva-#{oe.oferta_educativa_id}", oferta_educativa_id: "#{oe.oferta_educativa_id}", inclusiva: "si" ) )  %>
+
+        <% else %>
+
+            <%= link_to '<span class="glyphicon glyphicon-print"></span>'.html_safe, "#", class: 'btn btn-info btn-xs', id: "link-informe-matriculados-#{oe.oferta_educativa_id}"  %>
+            <%= modal_window( window_id: "modal-window-informe-matriculados-#{oe.oferta_educativa_id}", link_to_id: "#link-informe-matriculados-#{oe.oferta_educativa_id}", url: informes_directores_abrir_informe_matriculados_path( window_id: "modal-window-informe-matriculados-#{oe.oferta_educativa_id}", oferta_educativa_id: "#{oe.oferta_educativa_id}", inclusiva: "no" ) ) %>
+
+        <% end %>
+          
+          </td>
+          
+        </tr>
+          
+      <% end %>
+
+    <% else %>
+
+      <tr>
+
+        <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+      </tr>
+
+    <% end %>
+
+  </tbody>
+  
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />

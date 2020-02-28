@@ -1,0 +1,4 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-enlace-#{usuario.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-editar-enlace", link_to_id: "#link-to-editar-enlace-#{usuario.id}", url: informaciones_editar_enlace_path( window_id: "modal-window-editar-informacion", id: usuario.id, informacion_id: usuario.informacion_id) )%>
+

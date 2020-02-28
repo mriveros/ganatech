@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <h1> Hola <%= "#{@usuario.persona.nombre_persona}" %></h1>
+    
+    <p>
+
+      <h2> Para poder utilizar su cuenta de RUE ingrese al siguiente enlace:<br />
+        <%= link_to "Activar Mi Cuenta", "#{Rails.env == 'production' ? 'https://rue.mec.gov.py/rue_superior/' : 'http://localhost:3000/'}principal/activar_cuenta/?a=#{@usuario.token}" %>
+      </h2>
+
+      <b> Una vez activada la cuenta, puede acceder al sistema con los siguientes datos: </b><br />
+
+      <b>Nacionalidad: </b><%= @usuario.persona.nacionalidad.descripcion if @usuario.persona && @usuario.persona.nacionalidad %><br />
+      <b>Tipo de Documento: </b><%= @usuario.persona.tipo_documento.descripcion if @usuario.persona && @usuario.persona.tipo_documento %><br />
+      <b>N° Documento: </b><%= @usuario.persona.documento_persona if @usuario.persona %><br />
+      <% if @password.present? %>
+        
+        <b>Contrase&ntilde;a: </b><%= @password %><br />
+
+      <% else %>
+
+        <b>La persona ya cuenta con un usuario previamente habilitado.</b><br />
+
+      <% end %>
+
+      <b>Si desea cambiar su contraseña puede realizar desde la opcón "Mi cuenta".</b> <br />
+
+    </p>
+
+    <em style="font-size: 11px;">Para consultas puede enviar su correo a rue@mec.gov.py</em>
+
+  </body>
+</html>

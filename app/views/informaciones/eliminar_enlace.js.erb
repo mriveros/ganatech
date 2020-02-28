@@ -1,0 +1,14 @@
+<% if @eliminado %>
+alert('Enlace Eliminado Exitosamente');
+
+  setTimeout(function(){ 
+    $("#link-to-enlaces-<%= @informacion_id %>").trigger('click');
+    $("#link-to-enlaces-<%= @informacion_id %>").trigger('click');
+   }, 3000);
+
+<% else %>
+
+alert('Ha ocurrido un error al intentar eliminar el enlace.')
+<% end %>
+
+

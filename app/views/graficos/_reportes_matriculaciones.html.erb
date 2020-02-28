@@ -1,0 +1,104 @@
+<table class="table table-small-font table-bordered table-striped" style="font-size:10px;">
+   
+  <thead>
+
+    <tr>
+
+      <th class="td-nivel-1" data-priority="1"><span data-titulo="true">Departamento</span></th>
+      <th class="td-nivel-1" data-priority="1"><span data-titulo="true">Distrito</span></th>
+      <th class="td-nivel-1"><span>C&oacute;digo Establecimiento</span></th>
+      <th class="td-nivel-1"><span>C&oacute;digo Instituci&oacute;n</span></th>
+      <th class="td-nivel-1"><span>C&oacute;digo Nivel</span></th>
+      <th style="width:22%;" class="td-nivel-1" colspan=2><span>Nombre Instituci&oacute;n</span></th>
+      <th style="width:8%;" class="td-nivel-1"><span>Tipo Gesti&oacute;n</span></th>
+      <th class="td-nivel-1"></th>
+
+    </tr>
+
+    <tr>
+
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Periodo</span></th>
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Nivel Educativo</span></th>
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Modalidad</span></th>
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Curso</span></th>
+      <th class="td-nivel-5" data-priority="1"><span data-titulo="true">Turno</span></th>
+      <th class="td-nivel-5" colspan=2><span>Especialidad</span></th>
+      <th class="td-nivel-5"><span>Sección</span></th>
+      <th class="td-nivel-5"></th>
+    
+    </tr>
+
+  </thead> 
+
+  <tbody id="matriculaciones-lista">
+
+    <% if matriculaciones.present? %>
+
+      <% codiniv = "" %>
+      
+      <% matriculaciones.each do |m| %>
+
+        <% if codiniv != m.codiniv %>
+
+          <tr>
+
+            <td class="td-nivel-1"><%= m.departamento %></td>
+            <td class="td-nivel-1"><%= m.distrito %></td>
+            <td class="td-nivel-1"><%= m.codigo_establecimiento %></td>
+            <td class="td-nivel-1"><%= m.codigo_institucion %></td>
+            <td class="td-nivel-1"><%= m.codigo_oferta_educativa %></td>
+            <td colspan=2 class="td-nivel-1"><%= "#{m.nombre_institucion} --- #{m.codigo_modalidad_nivel}" %></td>
+            <td class="td-nivel-1"> <%= m.tipo_gestion %> </td>
+            <td class="td-nivel-1"></td>
+          
+          </tr>
+          
+          <% codiniv = m.codiniv %>
+
+        <% end %>
+
+        <tr>
+
+          <td><%= m.periodo %></td>
+          <td><%= m.nivel_educativo %></td>
+          <td><%= m.modalidad_educativa %></td>
+          <td><%= m.curso %></td>
+          <td><%= m.turno %></td>
+          <td colspan=2><%= m.especialidad %></td>
+          <td style="text-align:center;"><%= m.seccion_letra %></td> 
+          <td style="text-align:center;width:100px;">
+
+            <% if PARAMETRO[:modalidades_educacion_inicial_eeb].include?(m.modalidad_nivel_id) || PARAMETRO[:modalidades_educacion_inclusiva_formal].include?(m.modalidad_nivel_id)  %>
+
+              <%= link_to "<i class='glyphicon glyphicon-print'></i>".html_safe, informes_emitir_informe_servidor_v2_path(:nombre_reporte => "rptInformeFrecuenciaEebPrimeraEtapa.rptdesign", :formato=> "pdf", :parametros => "&parametros0=#{m.matriculacion_id}"), class: "btn btn-primary btn-xs", title: "Haga click para ver el reporte de frecuencia.", target: "_blank" %>
+
+            <% elsif PARAMETRO[:modalidades_educacion_media].include?(m.modalidad_nivel_id) %>
+
+              <%= link_to "<i class='glyphicon glyphicon-print'></i>".html_safe, informes_emitir_informe_servidor_v2_path(:nombre_reporte => "rptResultadoEvaluacionesMedia.rptdesign", :formato=> "pdf", :parametros => "&parametros0=#{m.matriculacion_id}"), class: "btn btn-primary btn-xs", title: "Haga click para ver el reporte de frecuencia.", target: "_blank" %>
+
+            <% end %>
+
+          </td>
+
+        </tr>
+
+      <% end %>
+
+    <% else %>
+
+      <tr>
+
+        <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+      </tr>
+
+    <% end %>
+
+  </tbody>
+  
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />

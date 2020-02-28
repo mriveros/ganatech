@@ -1,0 +1,54 @@
+<%= javascript_include_tag "modulos/controladores.js" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Acci&oacute;n</h4>
+      
+    </div>
+
+    <%= form_for @accion, remote: true, url: controladores_guardar_accion_url, html: { id: "form-agregar-accion" } do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= f.hidden_field :controlador_id, :value => params[:controlador_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <div class="col-sm-4"><%= label_tag nil, "Descripci&oacute;n #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+  
+        </div>
+        
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-accion" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-agregar-accion label, #form-agregar-accion input[type='text'] { float:left; margin-top:5px;}
+  #form-agregar-accion br {clear:both; }
+  #form-agregar-accion label { width:200px;font-size:12px;}
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ $("#accion_descripcion").focus(); }, 1000);
+
+</script>

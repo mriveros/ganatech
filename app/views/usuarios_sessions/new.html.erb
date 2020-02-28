@@ -1,0 +1,59 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+<%= notificaciones %>
+
+<div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:35px;">
+  <h3>Acceso al Sistema</h3>
+</div>
+
+<div class="col-sm-4"></div>
+<div class="col-sm-5" style="margin:auto;">
+ 
+  <%= form_for @usuario_session, url: usuarios_sessions_create_path, html: { id: "login-form"} do |f| -%>
+
+    <div class="col-sm-5"><%= label_tag nil, "Tipo de Documento".html_safe, id: "lbl-tipo-documento-persona" %></div>
+    <div class="col-sm-6"><%= collection_select :persona, :tipo_documento_id, TipoDocumento.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-5"><%= label_tag nil, "Nacionalidad".html_safe, id: "lbl-nacionalidad" %></div>
+    <div class="col-sm-6"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-5"><%= label_tag nil, "N° Documento".html_safe, id: "lbl-documento" %></div>
+    <div class="col-sm-6"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+    
+    <div class="col-sm-5"><%= f.label :password, "Contrase&ntilde;a".html_safe, id: "lbl-password" %></div>
+    <div class="col-sm-6"><%= f.password_field :password, :size => 40, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-5"><%= label_tag nil, "Ingresar como <span style='font-size:10px;'>(opcional)</span>".html_safe %></div>
+    <div class="col-sm-6"><%= collection_select :perfil, :rol_id, Rol.ordenado_descripcion.where('id in (?)', [PARAMETRO[:rol_administrador],PARAMETRO[:rol_operador], PARAMETRO[:rol_super] ] ), :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br /><br />
+
+    <div class="col-sm-5"></div>
+    <div class="col-sm-7"><%= f.submit "Ingresar", class: 'btn btn-primary', id: "btn-ingresar" %></div><br />
+
+    <br /> 
+    <div class="col-sm-5"></div>
+    <div class="col-sm-7"><%= link_to "Recuperar Contrase&ntilde;a".html_safe, principal_recuperar_password_path, style: "color:#0078d7;" %></div><br />
+
+  <% end %>
+  
+</div>
+<div class="col-sm-4"></div>
+
+<style type="text/css">
+
+  #login-form{ background-color: #fff; border: 1px solid #b6b6b6; padding:10px 0px 10px 10px;border-radius:5px;}
+  #login-form label, #login-form input[type='text'], #login-form input[type='password'], #login-form select { margin-top: 10px; }
+  #login-form br { clear:both;}
+
+</style>
+
+<script type="text/javascript">
+
+  $("#persona_documento").focus();
+  $("#persona_tipo_documento_id").val(1);
+  $("#persona_nacionalidad_id").val(1);
+
+</script>

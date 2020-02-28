@@ -1,0 +1,75 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Agregar Adelantos</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar adelanto".html_safe, "#", id: "link-to-agregar-detalle-credito", class: "btn btn-primary btn-xs", style: "float:right;" %>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-produccion-detalle-credito">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>id</th>
+              <th>Detalle Crédito</th>
+              <th>Monto</th>
+              <th>Fecha creación</th>
+              <th>Fecha modificación</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="produccion-detalle-credito-lista">
+
+            <% if @produccion_detalle_credito.present? %>
+            
+              <% @produccion_detalle_credito.each do |a|%>
+
+                <tr>
+                  <td><%= a.produccion_detalle_credito_id %></td>
+                  <td><%= a.detalle_credito %></td>
+                  <td><%= a.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+                  <td><%= a.created_at %></td>
+                   <td><%= a.updated_at %></td>
+                  <td style="width: 50px;text-align:right;">
+                    <%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, produccion_eliminar_produccion_detalle_credito_path(:id => a.produccion_detalle_credito_id), remote: true, class: 'btn btn-danger btn-xs', title: "Haga click para eliminar el detalle de crédito", data: {confirm: 'Esta seguro de eliminar este detalle de crédito?'} %>
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-detalle-credito", link_to_id: "#link-to-agregar-detalle-credito", url: produccion_agregar_detalle_credito_path( window_id: "modal-window-agregar-detalle-credito", produccion_id: params[:produccion_id]) )%>
+
+</td>

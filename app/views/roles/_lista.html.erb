@@ -1,0 +1,29 @@
+<% if roles.present? %>
+
+  <% roles.each do |r| %>
+
+    <tr>
+
+      <td style="width:100px;"><%= r.id %></td>
+      <td><%= r.descripcion %></td>
+      <td><%= r.descripcion_sistema %></td>
+      <td></td>
+      <td style="text-align:center;">
+        <%= link_to_accesos(r) %>
+        <%= link_to_editar_rol(r) %>
+        <%= link_to icon_eliminar, roles_eliminar_path(id: r.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el rol', data: { confirm: "Esta seguro de eliminar el rol ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="4"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

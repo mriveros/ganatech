@@ -1,0 +1,12 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-controlador' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-controladores");
+   $("#form-buscar-controladores").submit();
+    setTimeout(function(){ $("#msg-eliminar-controlador").remove(); }, 3000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-controlador' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>No se ha podido eliminar el controlador.</div>").insertBefore("#table-controladores");
+  setTimeout(function(){ $("#msg-eliminar-controlador").remove(); }, 3000);
+
+<% end %>

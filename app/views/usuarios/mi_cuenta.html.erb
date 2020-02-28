@@ -1,0 +1,110 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+
+<div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:35px;">
+  <h3>Mi Cuenta</h3>
+</div>
+
+<div class="col-sm-6" style="margin:auto;">
+ 
+  <%= form_for current_usuario, remote: true, url: usuarios_actualizar_mi_cuenta_path, html: { id: "form-mi-cuenta", method: 'POST'} do |f| -%>
+
+    <div class="col-sm-4"><%= f.label :email, "Correo Electr&oacute;nico #{attr_requerido}".html_safe, id: "lbl-email" %></div>
+    <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Departamento Residencia".html_safe %></div>
+    <div class="col-sm-7"><%= collection_select :persona_departamento, :id, Departamento.paraguay.order("id"), :id, :descripcion, { include_blank: true, selected: (@persona.jurisdiccion ? @persona.jurisdiccion.departamento_id : nil)}, { class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Distrito Residencia".html_safe %></div>
+    <div class="col-sm-7"><%= collection_select :persona_jurisdiccion, :id, (@persona.jurisdiccion ? Jurisdiccion.where("departamento_id = ?", @persona.jurisdiccion.departamento_id ) : {}), :id, :descripcion, { include_blank: true, selected: (@persona.jurisdiccion ? @persona.jurisdiccion_id : nil)}, { class: 'form-control input-sm'} %></div>
+    <div class="col-sm-1"></div><br />
+
+    <%= linked_combo "persona_jurisdiccion_id", 
+        :linked =>"persona_departamento_id" ,
+        :url => url_for( jurisdicciones_index_path(format: :json)), 
+        :param => "departamento_id",
+        :clase => "jurisdiccion" %>
+
+    <div class="col-sm-4"><%= label_tag nil, "Direcci&oacute;n Residencia".html_safe %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_direccion, @persona.direccion, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Tel&eacute;fono Residencia".html_safe %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_telefono, @persona.telefono, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-4"><%= label_tag nil, "Tel&eacute;fono Celular".html_safe %></div>
+    <div class="col-sm-7"><%= text_field_tag :persona_celular, @persona.celular, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br /><br />
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+      <%= f.submit "Actualizar", class: 'btn btn-primary', id: "btn-actualizar-mi-cuenta" %>
+      <%= link_to "Cancelar", root_path, class: "btn btn-warning" %>
+    </div><br />
+
+  <% end %>
+  
+</div>
+
+<div class="col-sm-1"></div>
+
+<div class="col-sm-5" style="margin:auto;">
+ 
+  <%= form_for current_usuario, remote: true, url: usuarios_actualizar_mi_password_path, html: { id: "form-reset-password", method: 'POST'} do |f| -%>
+
+    <div class="col-sm-5"><%= label_tag nil, "Contrase&ntilde;a Anterior #{attr_requerido}".html_safe, id: "lbl-password" %></div>
+    <div class="col-sm-6"><%= password_field :usuario_session, :password, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-5"><%= label_tag nil, "Contrase&ntilde;a Nueva #{attr_requerido}".html_safe, id: "lbl-password" %></div>
+    <div class="col-sm-6"><%= f.password_field :password, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br />
+
+    <div class="col-sm-5"><%= label_tag nil, "Confirmar Contrase&ntilde;a #{attr_requerido}".html_safe, id: "lbl-password-confirmation" %></div>
+    <div class="col-sm-6"><%= f.password_field :password_confirmation, class: 'form-control input-sm' %></div>
+    <div class="col-sm-1"></div><br /><br />
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8">
+      <%= f.submit "Actualizar Contrase&ntilde;a".html_safe, class: 'btn btn-primary', id: "btn-actualizar-mi-password" %>
+      <%= link_to "Cancelar", root_path, class: "btn btn-warning" %>
+    </div><br />
+
+  <% end %>
+
+</div>
+
+<style type="text/css">
+
+  #form-mi-cuenta, #form-reset-password{ background-color: #fff; border: 1px solid #b6b6b6; padding:10px 0px 10px 10px; border-radius: 5px;}
+
+  #form-mi-cuenta label, #form-mi-cuenta input[type='text'], #form-mi-cuenta select { margin-top: 15px; }
+  #form-mi-cuenta br { clear:both;}
+  #form-mi-cuenta label { font-size:11px;margin-top:25px;}
+
+  #form-reset-password label, #form-reset-password input[type='password'], #form-reset-password select { margin-top: 15px; }
+  #form-reset-password br { clear:both;}
+  #form-reset-password label { font-size:11px;margin-top:25px;}
+
+</style>
+
+<script type="text/javascript">
+
+  //----------------- INICIO ------------------//
+  $("#usuario_email").focus();
+
+  $(function(){
+
+    <% if @persona.jurisdiccion %>
+
+      setTimeout(function(){$("#persona_jurisdiccion_id").val(<%= @persona.jurisdiccion_id %>)},3000);
+
+    <% end %>
+
+  })
+    
+  //-------------------------------------------//
+
+</script>

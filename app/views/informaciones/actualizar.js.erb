@@ -1,0 +1,17 @@
+<% if @informacion_ok.present? %>
+
+  $("<div class='col-sm-12' id='msg-editar-informacion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-informacion");
+   
+  $("#form_buscar_informaciones_id").val('<%= @informacion.id %>');
+  
+  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); $("#form-buscar-informaciones").submit(); }, 3000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-editar-informacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg.html_safe %></div>").insertBefore("#form-editar-informacion");
+
+<% end %>
+  
+  
+  
+  

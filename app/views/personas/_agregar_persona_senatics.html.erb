@@ -1,0 +1,97 @@
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Persona Senatics</h4>
+      
+    </div>
+
+    <%= hidden_field_tag :window_id, params[:window_id]%>
+
+    <div class="modal-body">
+
+      <div class="panel-body">
+  
+        <div class="col-sm-4"><%= label_tag :documento_persona, "N° Documento #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= text_field_tag :documento_persona_senatics, nil, class: 'form-control input-sm'%></div>
+        <div class="col-sm-4"></div><br />
+
+        <div class="col-sm-12" id="datos-personales" style="display:none;">
+
+          <div class="col-sm-4" id="buscar-senatics"></div>
+
+          <div class="col-sm-4">Nombre</div>
+          <div class="col-sm-4" id="nombre-senatics"></div>
+          <div class="col-sm-4"></div><br />
+
+        </div>
+
+      </div>
+
+    </div>
+  
+  </div>
+
+</div>
+
+<style type="text/css">
+
+  #persona_documento_persona_senatics { width:50%;}
+
+</style>
+
+<script type="text/javascript">
+
+  //----------------------- INICIO ------------------//
+  setTimeout(function(){ 
+    $("#documento_persona_senatics").focus();
+  }, 200);
+  //------------------------------------------------//
+  //---------------- KEYDOWN DOCUMENTO PERSONA -----------------//
+  $("#documento_persona_senatics").bind("keydown", function(e){
+      
+    if(e.keyCode == 13 || e.keyCode == 9){
+      
+      buscar_persona_senatics($("#documento_persona_senatics").val() );
+      return false;
+    }
+ 
+  })
+  //-----------------------------------------------------------//
+  //-------------- BUSCAR PERSONA SENATICS -------------------//
+  function buscar_persona_senatics( documento_persona ){
+
+    $("#datos-personales").show();
+    $("#buscar-senatics").html("Buscando persona...");
+
+    $.ajax({
+      type: 'GET',
+      url: "<%= url_for(personas_buscar_persona_senatics_path(format: 'json')) %>",
+      data: { documento_persona: documento_persona},
+      success: function(data){
+
+        $("#buscar-senatics").html("");
+
+        if(data != null){
+
+          if(data[0] == 0){
+
+            swal("Ingrese el N° C.I.", "", "error")
+          
+          }else if(data[0] == 1){
+
+            $("#nombre-senatics").html(data[2]);
+          
+          }           
+          
+        }
+      },
+      typeData: 'json'     
+    })
+  }
+  //--------------------------------------------------------//
+
+</script>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <h1> Hola <%= "#{@usuario.persona.nombre_persona}" %></h1>
+    <p>
+      Se ha creado exitosamente su cuenta.<br />
+      <b>Nacionalidad: </b><%= @usuario.persona.nacionalidad.descripcion if @usuario.persona && @usuario.persona.nacionalidad %><br />
+      <b>Tipo de Documento: </b><%= @usuario.persona.tipo_documento.descripcion if @usuario.persona && @usuario.persona.tipo_documento %><br />
+      <b>N° Documento: </b><%= @usuario.persona.documento_persona if @usuario.persona %><br />
+      <b>Contrase&ntilde;a: </b><%= @password %><br />
+    </p>
+    <p>
+      Para acceder al sistema ingrese en el enlace de abajo.<br />
+      <a href='http://www.mec.gov.py/rue/login' target='_blank'>http://www.mec.gov.py/rue/login</a>
+    </p>
+    <em>Para consultas puede enviar su correo a rue@mec.gov.py</em>
+  </body>
+</html>

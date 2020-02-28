@@ -1,0 +1,107 @@
+<td colspan="12" align="lefth" style="background: #e6e6e6; ">
+  <%= form_tag personas_unificar_persona_path, remote: true, :id => 'form-confirmar-datos'  do %>
+    <%= hidden_field_tag :persona_id, params[:persona_id]%>
+<!-- DATOS PARA CONFIRMAR O EDITAR -->
+<div class="panel panel-default" >
+          <div class="panel-heading" align="center"><h4>  Unificar Datos de Personas</h4> </div>
+          <table class="table">
+              <tr>
+                <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:25px;margin-top:5px;">
+                <h5>Ingrese ID de persona que desea reemplazar</h5>
+                </div>
+              <div class="col-sm-10" id="id_persona">
+                <div class="col-sm-2">ID Persona</div>
+                 <div class="col-sm-3"><%= text_field :id, :persona_id,class: 'form-control input-sm',style:"text-transform:uppercase;", onkeypress: "ir_a()"%></div>
+                <div class="col-sm-1"></div><br/><br /> <br />  
+              </div>
+              </tr>
+             
+              <tr>
+                <div class="col-sm-10" id="nombre_persona" hidden="true">
+                  <div class="col-sm-2">Nombre</div>
+                  <div class="col-sm-3"><%= text_field :id, :persona_nombre,class: 'form-control input-sm',style:"text-transform:uppercase;",readonly: true %></div>   
+                  <div class="col-sm-1"></div><br/><br /> <br /> 
+                </div>
+              </tr>
+              <tr>
+                <div class="col-sm-10" id="apellido_persona" hidden="true">
+                  <div class="col-sm-2">Apellido</div>
+                   <div class="col-sm-3"><%= text_field :id, :persona_apellido,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>    
+                  <div class="col-sm-1"></div><br/><br /> <br /> 
+                </div>  
+              </tr>
+              <tr>
+               <div class="col-sm-10" id="documento_persona" hidden="true">
+                  <div class="col-sm-2">Documento</div>
+                   <div class="col-sm-3"><%= text_field :id, :persona_documento,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                  <div class="col-sm-1"></div><br/><br /> <br /> 
+                </div>  
+              </tr>
+              <tr>
+                  <div class="col-sm-10" >
+                      <div class="col-sm-8"><font color="red"> <big><strong>(**)OBS:</strong></font><i> La persona ID (<label id="id_persona_seleccionada" hidden="true"></label>) será reempazada por  (<%=@persona_unificar.id%>, <%=@persona_unificar.tipo_documento.descripcion%>, <%=@persona_unificar.documento_persona%>, <%=@persona_unificar.nombre_persona%>, <%=@persona_unificar.apellido_persona%>) y se unificará el registro.</i></big></div>
+                  <div class="col-sm-1"></div><br/><br /> <br /> 
+                </div>  
+              </tr>
+              
+              <div class="btn-options-abajo" style="width:10%;margin: 0 auto;clear:both; align: left">
+                  <br /><br />
+                <%= link_to "Unificar Persona", "#", class: "btn btn-success", id: "btn-confirmar-datos", onclick: "confirmar_datos();" %>
+              <br /><br />
+              </div>
+              <tr></tr>
+          </table>
+          
+</div>
+<% end %>
+ 
+<script type="text/javascript">
+  //---------------------- INICIO -------------------------------//
+  aplicar_datepicker2();
+  $("input").attr('checked', false);
+  //------------------------------------------------------------//
+$("#id_persona_id").bind('change', function(){   
+    $.getJSON("<%= url_for(personas_obtener_datos_path) %>", { persona_id: $(id_persona_id).val()}, function(j){
+      $("#id_persona_nombre").val(j.nombre_persona);
+      $("#id_persona_apellido").val(j.apellido_persona);
+      $("#id_persona_documento").val(j.documento_persona);
+       $("#id_persona_documento")
+      $("#nombre_persona").show();
+      $("#apellido_persona").show();
+      $("#documento_persona").show();
+      $("#id_persona_seleccionada").text($(id_persona_id).val());
+      $("#id_persona_seleccionada").show();
+      
+    });
+
+});
+
+
+function confirmar_datos(){
+      swal({
+        title: "¿Está seguro de unificar ésta Persona?",
+        text: "Los datos de la persona ingresada serán reemplazados y unificados.",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#4cae4c",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        html: false
+      }, function(){
+
+        $("#form-confirmar-datos").submit();
+
+        return false;
+
+      });
+
+    //})
+  
+  }
+
+
+
+</script>
+
+

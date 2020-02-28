@@ -1,0 +1,112 @@
+<div style="width: 100%; text-align: center; margin-top:10px;">
+ 
+    <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
+  
+    <p style="font-size: 14px; text-align: center; font-family: times new roman">
+    
+      Sistema de Control de Producción - Ultrón<br />
+      <label style="font-size: 18px;">RESUMEN DE PRODUCCIÓN</label>
+      <br />
+      <label style="font-size: 15px;">Transporte de Cargas y Servicio de Logística Kanty</label>
+      <br />
+      <label style="font-size: 15px;"></label>
+    </p>
+    </br>
+    </br>
+    
+</div>
+
+<div id="cont" style="width:80%;">
+
+  <table style="text-align: left; font-size: 12px; margin-left: 10%;" width="80%">
+    
+    <%if params[:fecha_desde].present?%>
+    <tr>
+    
+      <th width="20%">FECHA DESDE: </th>
+      <td width="40%"><%=params[:fecha_desde] %></td>
+
+    <%end%>
+    
+    <%if params[:fecha_hasta].present?%>
+
+      <th width="20%">FECHA HASTA:</th>
+      <td width="40%"><%=params[:fecha_hasta] %></td>
+    
+    <%end%>
+
+    </tr>
+    
+    <%if params[:cliente_id].present?%>
+      <% @cliente = Cliente.where("id = ?", params[:cliente_id]).first %>
+      <tr>
+        
+        <th width="20%">CLIENTE:</th>
+        <td width="40%"><%=@cliente.cliente_nombre%> <%=@cliente.cliente_apellido%></td>
+
+        <th width="20%">RAZON SOCIAL:</th>
+        <td width="40%"><%=@cliente.razon_social%></td>
+
+      </tr>
+
+    <%end%>
+
+     <%if params[:chofer_id].present?%>
+      <% @chofer = Persona.where("id = ?", params[:chofer_id]).first %>
+      <tr>
+        
+        <th width="20%">CHOFER:</th>
+        <td width="40%"><%=@chofer.nombre_persona%> <%=@chofer.apellido_persona%></td>
+
+        
+
+      </tr>
+
+    <%end%>
+    
+    <%if params[:flota_id].present?%>
+      <% @flota = VFlota.where("id = ?", params[:flota_id]).first %>
+      <tr>
+        
+          <th width="20%">FLOTA:</th>
+          <td width="40%"><%=@flota.codigo_flota%> - <%=@flota.marca%>-<%=@flota.modelo%></td>
+
+          
+
+
+      </tr>
+
+    <%end%>
+
+    <tr>
+    
+        <th width="20%">ESTADO COBRO:</th>
+
+        <%if params[:cobrado].present?%>
+        
+          <td width="40%">Cobrado</td>
+        
+        <%else%>
+        
+          <td width="40%">Falta Cobro</td>
+        
+        <%end%>
+
+        <th width="20%">PERTENECE:</th>
+        <%if params[:pertenece].present?%>
+        
+          <td width="40%">Propio</td>
+        
+        <%else%>
+        
+          <td width="40%">Particular</td>
+        
+        <%end%>
+
+    </tr>
+    
+  </table>
+<br/>
+<br/>
+<br/>
+</div>

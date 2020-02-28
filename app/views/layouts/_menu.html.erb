@@ -1,0 +1,262 @@
+<!-- Navigation -->
+<nav class="navbar-principal">
+	
+	<!-- BEGIN MENU NEW -->
+
+<div class="navbar-principal">
+	
+
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Menu</span>
+						<span class="fa fa-lg fa-bars"></span>
+                        
+                    </button>
+					<!--<a class="navbar-brand" href="#">RUE</a>-->
+					<%= link_to "Fonoware", index_url, :title => "Ir al Inicio", :class => 'navbar-brand' %>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+						
+					<% if current_usuario.present? %>
+						<li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
+
+                            <ul class="dropdown-menu">
+                                <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
+                                <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
+                                <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+                                <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
+								<li><%= link_to "Tipos Caracteristicas", tipos_caracteristicas_index_path if acceso_permitido("tipos_caracteristicas.index") %></li>
+								<li><%#= link_to "Disciplinas", disciplinas_index_path if acceso_permitido("disciplinas.index") %></li>
+								<li><%= link_to "Informaciones", informaciones_index_path if acceso_permitido("informaciones.index")%></li>
+
+                            </ul>
+                        </li>
+				  <li>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Módulos <b class="caret"></b></a>
+
+							<ul class="dropdown-menu">
+
+							 <li>
+
+								<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+								  <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+								  <li><%= link_to "Pacientes", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+								  <li><%= link_to "Tutores", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+								  <li><%= link_to "Profesionales", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+								  <li><%= link_to "Precios", flotas_index_path if acceso_permitido("flotas.index") %></li> 
+								  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li> 
+								  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
+								</ul>
+							 
+							 </li>
+ 	
+								<li><%= link_to "Citas", produccion_index_path if acceso_permitido("produccion.index") %></li> 
+								<li><%= link_to "Historiales", produccion_index_path if acceso_permitido("produccion.index") %></li> 
+							
+							<li>
+								
+								<a class="dropdown-toggle " href="#" data-toggle="dropdown">Informes<b class="caret"></b></a>
+								
+								<ul class="dropdown-menu">
+
+									<li><%= link_to "Generar Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
+								
+								</ul>
+
+							</li>
+
+							<li>
+							
+								<ul class="dropdown-menu">
+								
+								  	<li>
+								   
+									   <ul class="dropdown-menu">
+									   
+									   </ul>
+								
+									</li>
+								
+								
+							      
+							  	</ul>
+				 		
+				 			</li>
+
+				
+					 
+			</ul> 				
+		</li>
+					<li> <%= link_to "Informaciones", index_url %> </li>
+					
+	  		      <% end %>
+
+				<li><%= link_to "Contactos", contactos_url, :id => "tab-contacto", :class => ('active current' if current_page?(contactos_path)), :title => "Ir al Formulario de Contactos" %></li>
+			
+                    </ul>
+					
+					<!-- BEGIN MENU RIGTH-->
+					<ul class="nav navbar-nav navbar-right">
+
+					  <% if current_usuario.present? %>
+
+						<li>
+
+						 <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Conectado como <%= "<span style='font-size:10px;'>(#{current_usuario.perfil_actual.rol.descripcion})</span>".html_safe %><b class="caret"></b></a>
+
+						 <% if current_usuario_perfiles.present? %>
+
+						   <ul class="dropdown-menu">
+
+							<% current_usuario_perfiles.each do |p| %>
+
+							  <li><%= link_to "Cambiar a #{p.rol.descripcion}", usuarios_cambiar_perfil_actual_path( perfil_id: p.id ), remote: true %></li>
+
+							<% end %>
+
+						   </ul>
+
+						 <% end %>
+
+						</li>
+						<li><%= link_to "Mi Cuenta <em style='color:silver;font-size:12px;'></em> <span class='glyphicon glyphicon-edit'></span>".html_safe, usuarios_mi_cuenta_path, :title => "Ver mi Perfil", id: "tab-mi-cuenta" %></li>
+						<li><%= link_to "Salir <span class='glyphicon glyphicon-off'></span>".html_safe, logout_url, :title => "Cerrar Sesión", id: "tab-cerrar-sesion" %></li>
+					  <% else %>
+
+						<li><%= link_to "Crear mi Cuenta <span class='glyphicon glyphicon-pencil'></span>".html_safe, principal_agregar_usuario_path, :title => "Crear mi Cuenta", id: "tab-registrarme" %></li>
+						<li><%= link_to "Iniciar Sesi&oacute;n <span class='glyphicon glyphicon-user'></span>".html_safe, login_url, :title => "Iniciar Sesión", id: "tab-iniciar-sesion" %></li>
+					  <% end %>
+						
+						<!-- BEGIN SUBMENU PRUEBA-->
+					 <!--
+					 	<li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ayuda<b class="caret"></b></a>
+
+                            <ul class="dropdown-menu">
+								
+								<li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Formularios<b
+                                            class="caret"></b></a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="//www.smarthub.design" target="_blank" title= "Página Principal 1">Página Principal</a></li>
+										<li><a href="//www.smarthub.design" title ="Pagina Principal 2" target ="_blank" >Página Principal 2</a></li>
+										
+                                    </ul>
+                                </li>
+								
+								<li>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manuales<b
+                                            class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+									 <li><a href="//www.smarthub.design" target="_blank" title= "Manual 1">Manual 1</a></li>
+										<li><a href="//www.smarthub.design" title ="Manual 2" target ="_blank" >Manual 2</a></li>
+									 </ul>
+									
+									
+								</li>
+								
+                                
+                            </ul>
+                        </li>
+					 -->
+					 <!-- END SUBMENU PRUEBA -->
+
+					  <li>
+
+					 
+					
+ 
+                </div>
+            </div>
+        </div>
+
+<!-- END MENU NEW -->
+
+
+</nav>
+
+<style type="text/css">
+ 
+.container {
+    width: 100%;
+}
+/*.navbar-nav .dropdown-menu .caret {
+    transform: rotate(-90deg);
+}*/
+
+header nav.navbar-principal a:not(.navbar-brand):hover, header nav.navbar-principal a:not(.navbar-brand):focus, header nav.navbar-principal a:not(.navbar-brand).active{
+    color: #000;
+    background: #eee;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #eee;
+    border-color: #465f6e;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #eee;    border-color: #465f6e;
+    color: #000;
+}
+header nav.navbar-principal a {
+    color: #fff;
+    font-family: Arial, ​sans-serif;
+    font-size: 1.1em;
+}
+
+.navbar-right .dropdown-menu li a .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-bottom: 4px dashed;
+    border-top: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+@media (min-width: 767px) {
+    .navbar-nav .dropdown-menu .caret {
+        transform: rotate(-90deg);
+    }
+
+	/*.navbar-nav .navbar-right .dropdown-menu .caret {
+        transform: rotate(-180deg);
+    }*/
+	
+	
+}
+
+
+
+</style>
+
+<script>
+$(document).ready(function () {
+    $('.navbar-principal a.dropdown-toggle').on('click', function (e) {
+        var $el = $(this);
+        var $parent = $(this).offsetParent(".dropdown-menu");
+        $(this).parent("li").toggleClass('open');
+
+        console.log(45, $parent.closest('.nav'));
+        if (!$parent.parent().hasClass('nav')) {
+            if ($parent.closest('.nav').hasClass('navbar-right')) {
+                console.log('aaa');
+                $el.next().css({"top": $el[0].offsetTop, "right": $parent.outerWidth() - 4});
+            } else {
+                console.log('bbb');
+                $el.next().css({"top": $el[0].offsetTop, "left": $parent.outerWidth() - 4});
+            }
+        }
+
+        $('.nav li.open').not($(this).parents("li")).removeClass("open");
+
+        return false;
+    });
+});
+</script>

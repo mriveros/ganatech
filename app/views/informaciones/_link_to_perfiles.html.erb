@@ -1,0 +1,42 @@
+<%= link_to "<i class='glyphicon glyphicon-th-list'></i>".html_safe, "#", id: "link-to-perfiles-#{usuario.id}", class: 'btn btn-info btn-xs', title: 'Haga click para ver los roles.', onclick: "return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-perfiles-<%= usuario.id %>").bind('click', function(){
+
+    var contenido = $.trim($("#perfiles-<%= usuario.id %>").html());
+
+   //$(".perfiles").html('');
+   
+	$('.perfiles').remove();
+	$('.enlaces').remove();
+    
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='perfiles-<%= usuario.id %>' class='perfiles'><td colspan='9' style='text-align:center;'>\n\
+<i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(informaciones_perfiles_path) %>',  
+        data: {usuario_id: <%= usuario.usuario_id %>, 
+		informacion_id: <%= usuario.id %> },
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>
+
+
+
+
+
+
+

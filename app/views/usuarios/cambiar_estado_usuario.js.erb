@@ -1,0 +1,4 @@
+alert('<%= @msg %>');
+$("#form_buscar_usuarios_usuario").val("<%= @usuario.login %>");
+$("#form_buscar_usuarios_estado").val('<%= @usuario.active %>');
+$("#form-buscar-usuarios").submit();

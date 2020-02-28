@@ -1,0 +1,27 @@
+<% if disciplinas.present? %>
+
+  <% disciplinas.each do |d| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= d.id %></td>
+      <td><%= d.descripcion %></td>
+      <td><%= d.descripcion_guarani %></td>
+      <td style="text-align:center;width:150px;">
+        <%= link_to_editar_disciplina(d) %>
+        <%= link_to icon_eliminar, disciplinas_eliminar_path(id: d.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la disciplina', data: { confirm: "Está seguro de eliminar la disciplina ?"} %> 
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<% else %>
+
+  <tr>
+
+    <td colspan="9"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+<% end %>

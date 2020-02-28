@@ -1,0 +1,105 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
+      
+    </div>
+
+    <%= form_tag usuarios_agregar_perfil_path, remote: true, id: "form-buscar-roles", method: 'GET' do  %>
+
+      <%= hidden_field_tag :usuario_id, params[:usuario_id] %>
+      <%= hidden_field_tag :window_id, params[:window_id] %>
+
+      <div style='float:left;width:40%;'>
+        <%= label_tag nil, "Rol".html_safe %>
+        <%= text_field_tag :form_buscar_roles_descripcion, params[:form_buscar_roles_descripcion], class: "form-control input-sm" %><br /><br />
+
+      </div>
+
+      <div style='clear:both;'></div>
+
+      <%= submit_tag "Buscar", :class => "btn btn-primary btn-xs", id: "btn-buscar-roles" %>
+      <%= link_to "Limpiar", "#", :id => 'link-to-limpiar-form-buscar-roles', :class => 'btn btn-warning btn-xs' %>
+
+    <% end %>
+    
+    <div class="panel-body">
+      <div class="table-responsive" id="table-roles">
+        <div role="grid" class="dataTables_wrapper" id="example_wrapper">
+          
+          <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+            <thead>
+              
+              <tr role="row">
+              
+                <th>Id</th>
+                <th>Rol</th>
+              
+              </tr>
+            
+            </thead>
+       
+            <tbody id="roles-lista">
+              
+              <% @roles.each do |r|%>
+
+                <tr>
+                  <% ruta = usuarios_guardar_perfil_path(:usuario_id => params[:usuario_id], :window_id => params[:window_id], :rol_id => r.id)%>
+                  <td><%= link_to r.id, ruta, remote: true %></td>
+                  <td><%= link_to r.descripcion, ruta, remote: true %></td>
+
+                </tr>
+
+              <% end %>
+
+              <tr>
+                <th colspan="2">
+                  <div class="apple_pagination" style="padding:0px;">
+                    <%= ajax_will_paginate @roles, :params => params %>
+                    </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+      
+        </div>
+      
+      </div>
+       
+    </div>
+  
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+  //--------------------------- LIMPIAR FORM BUSCAR ROLES ----------------//
+  $("#link-to-limpiar-form-buscar-roles").bind('click', function(){
+    $("#form_buscar_roles_descripcion").val('');
+    $("#form-buscar-roles").submit();
+
+    return false;    
+  })
+  //------------------------------------------------------------------------//
+  //------------------------------ INICIO ----------------------------------//
+  $("#form_buscar_roles_descripcion").focus();
+  //------------------------------------------------------------------------//
+</script>
+
+<style type="text/css">
+
+  #form-buscar-roles {margin: 10px 0 0 20px;}
+  #form-buscar-roles input[type="text"], #form-buscar-roles label {float:left; margin-top:5px;}
+  #form-buscar-roles label {width:150px;}
+  #form-buscar-roles br {clear:both;}
+
+  #table-roles .pagination { margin: 5px 0 0 0;}
+
+</style>

@@ -1,0 +1,91 @@
+
+
+<br/>
+<br/>
+<% @detalles_creditos = VProduccionDetalleCredito.where("produccion_id = ?", @produccion.produccion_id )%>
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+      <th>Descripción</th>
+        <th>Adelantos</th>
+       
+    
+  </tr>
+  
+  <% @total_credito = 0 %>
+  
+  <% @total_general_a_cobrar = 0 %>
+ 
+  <% if @detalles_creditos.present? %>
+
+    <% @detalles_creditos.each do |dc|%>
+      <tr>
+
+      <td>  
+   
+            <%= dc.detalle_credito %>
+          </td>
+
+          <td>  
+   
+            <%= dc.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %>
+            <%@total_credito = @total_credito + dc.monto%>
+          </td>
+
+         
+    </tr>
+      
+    <% end%>
+
+  <%end%>
+
+
+    <tr>
+
+      <td style="font-weight:bold">SUBTOTAL</td>
+
+        <td style="font-weight:bold"><%=@total_credito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+
+          
+
+  </tr>
+
+  
+</table>
+</br>
+</br>
+</br>
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+  <tr>
+
+      <th style="text-align: left;">COSTO DE LA PRODUCCIÓN</th>
+
+        <th><%=@produccion.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></th>
+
+  </tr>
+
+  <tr>
+
+      <th style="text-align: left;">ADELANTOS</th>
+
+          <th><%=@total_credito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></th>
+
+  </tr>
+  
+
+  <tr>
+
+      <th style="text-align: left;">MONTO A COBRAR</th>
+      <%@total_general_a_cobrar = @produccion.costo - @total_credito%>
+          <th><%= @total_general_a_cobrar.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></th>
+
+  </tr>
+  
+</table>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>

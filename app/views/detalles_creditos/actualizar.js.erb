@@ -1,0 +1,13 @@
+<% if @detalle_credito_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-editar-detalle-credito' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-detalle-credito");
+   
+  $("#form_buscar_detalles_creditos_id").val('<%= @detalle_credito.id %>');
+  $("#form_buscar_detalles_creditos_descripcion").val('');
+  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); $("#form-buscar-detalles-creditos").submit(); }, 3000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-editar-detalle-credito' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-detalle-credito");
+
+<% end %>

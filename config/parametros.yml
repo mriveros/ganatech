@@ -1,0 +1,67 @@
+development:
+
+  #ROLES 
+  rol_administrador: 1
+  rol_operador: 3
+  rol_super: 6
+
+  #ESTADOS PRODUCCIONES
+  estado_produccion_solicitado: 1
+  estado_produccion_en_progreso: 2
+  estado_produccion_finalizado: 3
+  estado_produccion_anulado: 4
+
+   
+  #sistemas
+  sistema_RUE: 1
+  
+  #TIPOS ELEMENTOS INTERFAZ
+  radio_button: 1
+  check_box: 2
+  text: 3
+  combo_box: 4
+  
+  #TIPOS DATO
+  tipo_dato_numerico: 1
+  tipo_dato_texto: 2
+ 
+  #TIPOS DOCUMENTOS
+  certificado_nacimiento: 6
+  sin_documento: 5
+  cedula_identidad: 1
+  
+
+production:
+  
+
+  #ROLES 
+  rol_administrador: 1
+  rol_operador: 3
+  rol_super: 6
+
+  #ESTADOS PRODUCCIONES
+  estado_produccion_solicitado: 1
+  estado_produccion_en_progreso: 2
+  estado_produccion_finalizado: 3
+  estado_produccion_anulado: 4
+
+   
+  #sistemas
+  sistema_RUE: 1
+  
+  #TIPOS ELEMENTOS INTERFAZ
+  radio_button: 1
+  check_box: 2
+  text: 3
+  combo_box: 4
+  
+  #TIPOS DATO
+  tipo_dato_numerico: 1
+  tipo_dato_texto: 2
+ 
+  #TIPOS DOCUMENTOS
+  certificado_nacimiento: 6
+  sin_documento: 5
+  cedula_identidad: 1
+  
+  

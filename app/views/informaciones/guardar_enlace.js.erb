@@ -1,0 +1,13 @@
+
+<% if @enlace_ok.present? %>
+
+alert('<%= @msg %>');
+$('#<%= params[:window_id] %>').modal('hide');
+$("#link-to-enlaces-<%= params[:informacion_id] %>").trigger('click');
+$("#link-to-enlaces-<%= params[:informacion_id] %>").trigger('click');
+
+<% else %>
+
+alert('<%= @msg.gsub('.','\n') %>');
+
+<% end %>

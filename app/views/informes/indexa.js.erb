@@ -1,0 +1,10 @@
+<%if @produccion.present?%>
+
+ 	swal("Datos Procesados!", "", "success");
+ 	window.open("<%= url_for(informes_generar_pdf_path(@parametros))%>", '_blank')
+
+<%else%>
+
+	swal("No hay datos que mostrar. Intente nuevamente", "","warning")
+
+<%end%>

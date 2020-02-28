@@ -1,0 +1,14 @@
+<% if @guardado_ok.present? %>
+  swal("Persona Unificada Exitosamente.", "", "success");
+  setTimeout(function(){  
+    $("#link-to-mostrar-formulario-<%=params[:persona_id] %>").trigger('click');
+  }, 3000);
+
+<% else %>
+  
+  swal("No se ha podido unificar la Persona: <%= j(@msg)%>", "", "error");
+   setTimeout(function(){  
+    $("#link-to-mostrar-formulario-<%=params[:persona_id] %>").trigger('click');
+  
+  }, 3000);
+<% end %>

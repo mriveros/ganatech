@@ -1,0 +1,113 @@
+<% if produccion.present? %>
+
+  <% produccion.each do |pr| %>
+
+    <tr>
+
+      <td ><%= pr.produccion_id %></td>
+      <td><%= pr.codigo_produccion%></td>
+      <td><%= pr.cliente_nombre + ' ' + pr.cliente_apellido%></td>
+      <td><%= pr.fecha_produccion.strftime('%d/%m/%Y')%></td>
+      <td><%= pr.nombre_chofer + ' ' + pr.apellido_chofer%></td>
+      <td><%= pr.codigo_flota %></td>
+      <td><%= pr.marca + ' / ' + pr.modelo %></td>
+      <td><%= pr.origen %></td>
+       <td><%= pr.destino %></td>
+        <td><%= pr.destino_final %></td>
+      <td><%= pr.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+
+      <%if pr.cobrado==false%>
+        
+        <td><%= 'Falta Cobro'%></td>
+      
+      <%else%>
+      
+        <td><%= 'Cobrado - ' + pr.fecha_cobro.strftime('%d/%m/%Y') %></td>
+      
+      <%end%>
+      
+      <%if pr.pertenece==false%>
+      
+        <td><%= 'Particular'%></td>
+      
+      <%else%>
+      
+        <td><%= 'Propio'%></td>
+      
+      <%end%>
+
+      <td><%= pr.estado_produccion %></td>
+      <td style="width:120px;"> 
+      
+      <%if pr.estado_produccion_id == PARAMETRO[:estado_produccion_solicitado]%>
+        <%= link_to icon_confirmar_aprobar, produccion_cambiar_estado_solicitado_a_en_progreso_path(id: pr.produccion_id), remote: true, class: "btn btn-success btn-xs", title: 'Haga click para cambiar el estado de Solicitado a En Progreso', data: { confirm: "Está seguro de cambiar el estado de la Producción de Solicitado a En Progreso?"} %>
+
+        <%= link_to icon_eliminar, produccion_eliminar_path(id: pr.produccion_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la producción', data: { confirm: "Está seguro de eliminar la Producción ?"} %>
+
+      <%end%>
+
+      <%if pr.estado_produccion_id == PARAMETRO[:estado_produccion_en_progreso]%>
+
+        <%= link_to icon_confirmar_finalizar, produccion_cambiar_estado_en_progreso_a_finalizado_path(id: pr.produccion_id), remote: true, class: "btn btn-success btn-xs", title: 'Haga click para cambiar el estado de En Progreso a Finalizado', data: { confirm: "Está seguro de cambiar el estado de la Producción de En Progreso a Finalizado?. Una vez cambiado el estado a Finalizado no se podrá agregar valores de Débito o Crédito."} %>
+
+        <%= link_to_produccion_detalle_credito(pr) %>
+       
+        <%= link_to_produccion_detalle_debito(pr) %>
+        
+      <%end%>
+
+      <%if pr.estado_produccion_id == PARAMETRO[:estado_produccion_finalizado]%>
+        
+        <%if pr.cobrado == false%>
+
+          <%= link_to icon_confirmar_cobro, produccion_cambiar_estado_cobro_path(id: pr.produccion_id), remote: true, class: "btn btn-success btn-xs", title: 'Haga click para marcar esta Producción como Cobrado', data: { confirm: "Está seguro de marcar esta Producción como Cobrado?"} %>
+
+        <% end %>
+
+        <%if pr.cobrado == true%>
+
+          <%= link_to icon_desconfirmar_cobro, produccion_cambiar_estado_cobro_desconfirmar_path(id: pr.produccion_id), remote: true, class: "btn btn-warning btn-xs", title: 'Haga click para marcar esta Producción como No Cobrado', data: { confirm: "Está seguro de marcar esta Producción como No Cobrado?. Estos datos serán guardados en Auditoría."} %>
+
+        <% end %>
+        
+        <%= link_to_produccion_planilla_resumen_produccion(pr)%> 
+
+        <%= link_to_produccion_planilla_resumen_produccion_cliente(pr)%>   
+       
+      <%end%>
+
+         
+      </td>
+
+     
+     
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate produccion, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>

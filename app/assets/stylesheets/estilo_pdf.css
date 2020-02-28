@@ -1,0 +1,45 @@
+body {
+	font-family: Tahoma, sans;
+	font-size: 11px;
+}
+
+@page {
+	margin: 50pt 50pt 70pt 50pt;
+	@top {
+		margin-top: 50px;
+	}
+}
+
+.table {
+  text-align: center;
+  font-family: 'Verdana';
+	border-collapse: collapse;
+	border: 1px solid #C0C0C0;
+  table-layout: fixed;
+}
+
+
+.table td {
+	border: 1px solid #dcdcdc;
+}
+
+.table#head {
+	border: none;
+}
+
+.table#head td {
+	border: none;
+}
+
+#titulo { font-family: 'Verdana';
+          font-size: 12pt;
+          font-weight: bold;
+        }
+
+.titulo_celdas { background-color: #dcdcdc;
+                 font-size: 8pt;
+                 padding: 5px;
+                 text-align: left;
+                 font-family: 'Arial';
+                 font-weight: bold;
+                }

@@ -1,0 +1,13 @@
+defaults: &defaults
+  perform_authentication: true
+  username: "mecpy"
+  password: "mecpy2015"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

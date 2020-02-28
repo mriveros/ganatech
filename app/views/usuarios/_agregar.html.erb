@@ -1,0 +1,110 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Usuario</h4>
+      
+    </div>
+
+    <%= form_for @usuario, remote: true, url: usuarios_guardar_url, html: { id: "form-agregar-usuario" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nombre #{attr_requerido}".html_safe, id: "lbl-nombre" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_nombre, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Apellido #{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :email, "Correo #{attr_requerido}".html_safe, id: "lbl-email" %></div>
+          <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :password, "Contrase&ntilde;a #{attr_requerido}".html_safe, id: "lbl-password" %></div>
+          <div class="col-sm-7"><%= f.password_field :password, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :password_confirmation, "Confirmar Contrase&ntilde;a #{attr_requerido}".html_safe, id: "lbl-password-confirmation" %></div>
+          <div class="col-sm-7"><%= f.password_field :password_confirmation, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Rol #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :agregar_usuario, :rol_id, Rol.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil,"Enviar email al usuario ?".html_safe %></div>
+          <div class="col-sm-7" style="text-align:left;"><%= check_box_tag :notificar_usuario, nil, false, { class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+          <div id="buscar_perso">                                       
+          </div>
+        </div>        
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-usuario" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+  
+</div>
+
+<style type="text/css">
+
+  #form-agregar-usuario label, #form-agregar-usuario input[type='text'], #form-agregar-usuario input[type='password'], #form-agregar-usuario select , #form-agregar-usuario input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-usuario br {clear:both; }
+  #form-agregar-usuario label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-usuario #persona_tipo_documento_persona_id { width:60%;}
+  #form-agregar-usuario #persona_nacionalidad_id { width:60%;}
+  #form-agregar-usuario #persona_documento { width:50%;}
+  #form-agregar-usuario #usuario_password { width:60%;}
+  #form-agregar-usuario #usuario_password_confirmation { width:60%;}
+  #form-agregar-usuario #notificar_usuario { width:10%;}
+
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    $("#persona_documento").focus();
+    $("#persona_tipo_documento_id").val(1);
+    $("#persona_nacionalidad_id").val(1);
+  }, 1000);
+
+  $("#persona_documento").bind("keydown", function(e){
+      
+    if(e.keyCode == 13 || e.keyCode == 9){
+    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
+      return false;
+    }
+ 
+  })
+</script>

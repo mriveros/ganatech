@@ -1,0 +1,229 @@
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+   		<th>ID Producción</th>
+      <th>Fecha</th>
+      <th>Chofer</th>
+      <th>Flota</th>
+      <th>Gasoil</th>
+      <th>Cliente</th>
+      <th>Razon Social</th>
+      <th>Origen</th>
+      <th>Destino</th>
+      <th>Destino Final</th>
+      <th>Costo Flete</th>
+      <th>Adelantos</th>
+      <th>Gastos</th>
+      <th>Monto Cobrado</th>
+      <th>Pertenece</th>
+      <th>Cobrado</th>
+      <th>Estado Produccion</th>
+
+  </tr>
+
+  <% @produccion.each do |prod|%>
+    
+    <% @total_produccion = 0 %>
+    <% @total_credito = 0 %>
+    <% @total_debito = 0 %>
+  
+  	<tr>
+
+ 		 	<td><%= prod.produccion_id%></td>
+      <td><%= prod.fecha_produccion.strftime('%m/%d/%Y') %></td>
+      <td><%= prod.nombre_chofer + ' ' + prod.apellido_chofer%></td>
+      <td><%= prod.codigo_flota + '-' + prod.marca + '-' + prod.modelo%></td>
+      <td><%= prod.gasoil_actual%></td>
+      <td> <%= prod.cliente_nombre + ' ' + prod.cliente_apellido%> </td>
+      <td><%= prod.razon_social%></td>
+      <td><%= prod.origen%></td>
+      <td><%= prod.destino%></td>
+      <td><%= prod.destino_final%></td>
+      <td><%= prod.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+          
+      <% @detalles_creditos = VProduccionDetalleCredito.where("produccion_id = ?", prod.produccion_id )%>
+          
+      <% if @detalles_creditos.present?%>
+           
+        <% @detalles_creditos.each do |dc|%>
+              
+          <% @total_credito = @total_credito + dc.monto %>
+        
+        <% end %>
+
+        <td><%= @total_credito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+
+      <% else %>
+
+        <td> 0 </td>
+
+      <%end%>
+
+      <% @detalles_debitos = VProduccionDetalleDebito.where("produccion_id = ?", prod.produccion_id )%>
+          
+
+      <% if @detalles_debitos.present?%>
+          
+        <% @detalles_debitos.each do |dd|%>
+              
+          <% @total_debito = @total_debito + dd.monto %>
+          
+        <% end %>
+
+        <td><%= @total_debito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+
+        
+
+      <% else %>
+             
+        <td> 0 </td>
+
+      <% end %>  
+
+      <%@total_produccion = prod.costo - @total_credito - @total_debito%>
+
+      <td><%= @total_produccion.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+
+      <% if prod.pertenece == true %>
+        
+        <td>Propio</td>
+      
+      <%else%>
+        
+        <td>Particular</td>
+
+      <% end %>
+
+       <% if prod.cobrado == true %>
+
+        <td>Cobrado</td>
+
+      <%else%>
+
+        <td align="center">Falta Cobrar</td>
+
+      <%end%>
+        
+        <td align="center"><%= prod.estado_produccion%></td>
+
+		</tr>
+  		
+  	
+<%end%>
+
+</table>
+<br/>
+<br/>
+<br/>
+<table align="center" class="cual" style="width: 50%; border: 1px solid #000 !important;">
+  <tr>
+    <th>ID PRODUCCION</th>
+    <th>DETALLES GASTOS</th>
+    <th>MONTO</th>
+    <th>FECHA</th>
+  </tr>
+  
+  <% @produccion.each do |prod|%>
+
+    <tr>
+
+    <% @detalles_debitos = VProduccionDetalleDebito.where("produccion_id = ?", prod.produccion_id )%>
+    <% if @detalles_debitos.present? %>
+    
+      <% @detalles_debitos.each do |dd|%>
+
+        <td><%= dd.produccion_id %></td>
+        <td><%= dd.detalle_debito %></td>
+        <td><%= dd.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+        <td><%= dd.fecha.strftime('%d/%m/%Y') %></td>
+
+      </tr>
+
+      <%end%>
+
+    <%end%>
+    
+  <%end%>
+
+</table> 
+<br/>
+<br/>
+<br/>
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+  <% @total_general_gasoil = 0 %>
+  <% @total_general_credito = 0 %>
+  <% @total_general_debito = 0 %>
+  <% @total_general_costo_flete = 0 %>
+  <% @total_general_monto_cobrado = 0 %>
+
+
+  <% @produccion.each do |prod|%>
+    
+    <%if prod.gasoil_actual.present?%>
+
+    <% @total_general_gasoil =  @total_general_gasoil + prod.gasoil_actual %>
+    
+    <%end%>
+   
+    <% @detalles_creditos = VProduccionDetalleCredito.where("produccion_id = ?", prod.produccion_id )%>
+    
+    <% if @detalles_creditos.present?%>
+           
+      <% @detalles_creditos.each do |dc|%>
+        
+        <% @total_general_credito = @total_general_credito + dc.monto %>
+
+      <%end%>
+
+    <%end%>  
+    
+
+    <% @detalles_debitos = VProduccionDetalleDebito.where("produccion_id = ?", prod.produccion_id )%>
+          
+      <% if @detalles_debitos.present?%>
+          
+        <% @detalles_debitos.each do |dd|%>
+              
+          <% @total_general_debito = @total_general_debito + dd.monto %>
+          
+        <% end %>
+
+      <%end%>
+    
+    
+    <% @total_general_costo_flete = @total_general_costo_flete +  prod.costo %>
+    
+    <% @total_general_monto_cobrado = @total_general_costo_flete - @total_general_credito - @total_general_debito%>
+
+  <%end%>
+
+  <tr>
+
+    <th>TOTAL GENERAL</th>
+    <th>GASOIL UTILIZADO</th>
+    <th>TOTAL FLETE</th>
+    <th>ADELANTOS</th>
+    <th>GASTOS</th>
+    <th>MONTO COBRADO</th>
+    
+  </tr>
+  <tr>
+
+    <th>TOTAL GENERAL</th>
+    <th><%=@total_general_gasoil.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+    <th><%=@total_general_costo_flete.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%> </th>
+    <th><%=@total_general_credito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+    <th><%=@total_general_debito.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+    <th><%=@total_general_monto_cobrado.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+    
+  </tr>
+  <tr>
+
+  </tr> 
+
+</table> 
+<br/>
+<br/>
+<br/>

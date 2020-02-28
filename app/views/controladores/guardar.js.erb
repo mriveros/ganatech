@@ -1,0 +1,14 @@
+<% if @controlador_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-agregar-controlador' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-controlador");
+   
+  $("#form_buscar_controladores_id").val('<%= @controlador.id %>');
+  $("#form_buscar_controladores_descripcion").val('');
+  $("#form-buscar-controladores").submit();
+  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); }, 3000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-agregar-controlador' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg.html_safe %></div>").insertBefore("#form-agregar-controlador");
+
+<% end %>

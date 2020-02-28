@@ -1,0 +1,20 @@
+<div class="row" style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+<div class="col-md-4 col-md-offset-4 ">
+  <div class="error-page" style="text-align:center;">
+
+    <% if @activado %>
+
+		  <i class="fa fa-smile-o" style="font-size:100px;color:green;"></i>
+      <h1 style="color:green;"><%= @msg %></h1>
+      <p><strong><%= link_to "Ingresar al sistema", login_path %></p>
+
+    <% else %>
+
+		  <i class="fa fa-meh-o" style="font-size:100px;color:red;"></i>
+      <h1 style="color:red;"><%= @msg %></h1>
+
+    <% end %>
+
+	</div>
+	</div>
+</div>
