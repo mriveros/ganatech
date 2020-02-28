@@ -23,7 +23,7 @@ development:
 
 DB_AUDITORIAS:
   <<: *default
-  database: fonoware_auditoria
+  database: ganatec_auditoria
   username: postgres
   password: postgres
   host: localhost
@@ -35,17 +35,17 @@ DB_AUDITORIAS:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: fonoware
+  database: ganatec
   username: postgres
-  password: fonoware
+  password: Ganatec
   port: 5433
   host: localhost
 
 production:
   <<: *default
-  database: fonoware
+  database: ganatec
   username: postgres
-  password: fonoware
+  password: postgres
   port: 5433
   host: localhost
 
