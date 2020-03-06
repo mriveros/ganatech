@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
 
-  database: ganatec
+  database: ganatech
   username: postgres
   password: postgres
   host:  localhost
@@ -23,7 +23,7 @@ development:
 
 DB_AUDITORIAS:
   <<: *default
-  database: ganatec_auditoria
+  database: ganatech_auditoria
   username: postgres
   password: postgres
   host: localhost

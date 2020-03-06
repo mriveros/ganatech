@@ -162,9 +162,8 @@ GEM
       sass (~> 3.2.2)
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
-    scrypt (1.2.1)
-      ffi-compiler (>= 0.0.2)
-      rake
+    scrypt (3.0.7)
+      ffi-compiler (>= 1.0, < 2.0)
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -237,7 +236,7 @@ DEPENDENCIES
   roo (~> 2.3.2)
   rubyXL (= 3.3.17)
   sass-rails (~> 4.0.3)
-  scrypt (= 1.2.1)
+  scrypt (= 3.0.7)
   sdoc (~> 0.4.0)
   spreadsheet (= 1.1.2)
   spring
@@ -255,4 +254,4 @@ RUBY VERSION
    ruby 2.1.1p76
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
