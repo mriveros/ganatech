@@ -41,7 +41,7 @@ gem 'spring',        group: :development
 gem 'pg', '0.15.0'
 gem 'thin', '1.5.1'
 gem 'jquery-ui-rails', '4.1.2'
-gem 'will_paginate', '3.0.4'
+gem 'will_paginate', '3.0.5'
 gem 'authlogic', '3.4.2'
 gem "ransack", "1.2.3"
 gem 'thinreports-rails', '0.1.3'
