@@ -1,0 +1,25 @@
+<% if @guardado_ok %>
+
+   $("<div class='col-sm-12' id='msg-marcar-precio' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Marcado exitosamente.</div>").insertBefore("#table-precios");
+   $("#form_buscar_precios_id").val("<%=@precio.id%>")
+   $("#form-buscar-precios").submit();
+    setTimeout(function(){ 
+      
+      $("#msg-marcar-precio").remove();
+      swal("Marcado Exitosamente como precio predeterminado.");
+
+    }, 1000);
+      
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-marcar-precio' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-precios");
+  
+  setTimeout(function(){ 
+    
+    $("#msg-marcar-precio").remove(); 
+    swal("No se pudo marcar el precio como predeterminado. Intente más tarde");
+
+  }, 2000);
+    
+    
+<% end %>

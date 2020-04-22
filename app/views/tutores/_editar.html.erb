@@ -1,0 +1,130 @@
+<%= javascript_include_tag "modulos/personas.js" %>
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Tutor</h4>
+      
+    </div>
+
+    <%= form_for @tutor, remote: true, url: tutores_actualizar_url, html: { id: "form-editar-tutor" }, method: 'POST' do |f| %>
+
+      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          <div class="col-sm-4"><%= f.label :tipo_documento_id, "Tipo de Documento #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_documento_id, TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', :onclick => "validarcerti()",:onchange=>"validarcerti()"} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :nacionalidad_id, "Nacionalidad #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', :onclick => "validarcerti()",:onchange=>"validarcerti()"} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div id="iddoc">
+          <div class="col-sm-4"><%= f.label :documento_persona, "N° Documento #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :documento_persona, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+          </div>
+          <div class="certi" style="display:none">
+          <div class="col-sm-4"><%= f.label :fecha_inscripcion, "Fecha de Inscripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"> 
+            <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
+              <%= f.text_field :fecha_inscripcion, class: 'form-control input-sm', style: "margin-top:0px;" %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </div>
+          <div class="col-sm-1"></div><br />          
+          <div class="col-sm-4"><%= f.label :numero_oficina, "Oficina N° #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.text_field :numero_oficina, class: 'form-control input-sm' %></div>          
+          <div class="col-sm-1"></div><br />          
+          <div class="col-sm-4"><%= f.label :folio, "Folio #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.text_field :folio, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />          
+          <div class="col-sm-4"><%= f.label :libro, "Libro #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.text_field :libro, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-4"><%= f.label :acta, "Acta #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.text_field :acta, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />          
+        </div> 
+          
+          <div class="col-sm-4"><%= f.label :nombre_persona, "Nombre #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :nombre_persona, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :apellido_persona, "Apellido #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :apellido_persona, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :fecha_nacimiento, "Fecha de Nacimiento #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"> 
+            <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
+              <%= f.text_field :fecha_nacimiento, class: 'form-control input-sm', style: "margin-top:0px;" %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :direccion, "Dirección #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :direccion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :telefono, "Teléfono ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :celular, "Celular ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :celular, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :correo_electronico, "Correo Electrónico ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :correo_electronico, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :genero_id, "Genero #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :genero_id, Genero.order('id'), :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:150px;"} %></div>
+          <div class="col-sm-1"></div><br />
+          
+        </div>
+        
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Actualizar", class: "btn btn-primary", id: "btn-actualizar-tutor" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-tutor label, #form-editar-tutor input[type='text'], #form-editar-tutor select { float:left; margin-top:5px;}
+  #form-editar-tutor br {clear:both; }
+  #form-editar-tutor label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-tutor #persona_tipo_documento_id { width:60%;}
+  #form-editar-tutor #persona_nacionalidad_id { width:60%;}
+  #form-editar-tutor #persona_documento_persona { width:50%;}
+  #form-editar-tutor #persona_sexo { width:60%;}
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    $("#persona_documento_persona").focus();
+  }, 1000);
+  aplicar_datepicker2();
+  
+</script>

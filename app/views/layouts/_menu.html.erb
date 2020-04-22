@@ -44,18 +44,22 @@
 								<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 								  <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-								  <li><%= link_to "Pacientes", clientes_index_path if acceso_permitido("clientes.index") %></li> 
-								  <li><%= link_to "Tutores", clientes_index_path if acceso_permitido("clientes.index") %></li> 
-								  <li><%= link_to "Profesionales", clientes_index_path if acceso_permitido("clientes.index") %></li> 
-								  <li><%= link_to "Precios", flotas_index_path if acceso_permitido("flotas.index") %></li> 
+								  <li><%= link_to "Haciendas", precios_index_path if acceso_permitido("precios.index") %></li> 
+								  <li><%= link_to "Potreros", precios_index_path if acceso_permitido("precios.index") %></li> 
+								  <li><%= link_to "Razas", precios_index_path if acceso_permitido("precios.index") %></li> 
+								  <li><%= link_to "Medicamentos", precios_index_path if acceso_permitido("precios.index") %></li> 
 								  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li> 
 								  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
 								</ul>
 							 
 							 </li>
  	
-								<li><%= link_to "Citas", produccion_index_path if acceso_permitido("produccion.index") %></li> 
-								<li><%= link_to "Historiales", produccion_index_path if acceso_permitido("produccion.index") %></li> 
+								<li><%= link_to "Ganados", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+                <li><%= link_to "Reproducciones", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+								<li><%= link_to "Ganado Entrada", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+                <li><%= link_to "Ganado Salida", clientes_index_path if acceso_permitido("clientes.index") %></li> 
+                <li><%= link_to "Sanitaciones", clientes_index_path if acceso_permitido("clientes.index") %></li>
+                <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li> 
 							
 							<li>
 								

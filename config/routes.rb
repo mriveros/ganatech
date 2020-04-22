@@ -8,23 +8,102 @@ Rails.application.routes.draw do
       resources :usuarios
   
     end
-  end  
-    
-    #CRONTAB
-  get "crontab_ultron/index"
+  end
+#-------------------------BLOQUE TAREAS AUTOMATICAS------------------------
+#CRONTAB
+get "crontab_ultron/index"
+#--------------------------------------------------------------------------
 
-    #JURISDICCIONES
+
+#----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+
+
+
+
+
+
+#----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
+
+
+#----------------------------INICIO EJEMPLOS DE FONOWARE----------------------------
+
+#PACIENTES
+  post "pacientes/lista"
+  get "pacientes/lista"
+  get "pacientes/agregar"
+  post "pacientes/guardar"
+  get "pacientes/eliminar"
+  get "pacientes/editar"
+  post "pacientes/actualizar"
+  get "pacientes/index"
+  get "pacientes/buscar_paciente"
+  get "pacientes/buscar_persona"
+  get "pacientes/buscar_paciente_cita"
+
+  #PACIENTES DETALLES FONO
+  get "pacientes_detalles_fono/paciente_detalle_fono"
+  post "pacientes_detalles_fono/guardar_detalle_fono"
+
+#TUTORES
+  post "tutores/lista"
+  get "tutores/lista"
+  get "tutores/agregar"
+  post "tutores/guardar"
+  get "tutores/eliminar"
+  get "tutores/editar"
+  post "tutores/actualizar"
+  get "tutores/index"
+  get "tutores/buscar_tutor"
+  get "tutores/buscar_persona"
+  get "tutores/tutor_detalle"
+  get "tutores/agregar_tutor_detalle"
+  post "tutores/guardar_tutor_detalle"
+  get "tutores/eliminar_tutor_detalle" 
+  
+#PRECIOS
+  post "precios/lista"
+  get "precios/lista"
+  get "precios/agregar"
+  post "precios/guardar"
+  get "precios/eliminar"
+  get "precios/editar"
+  post "precios/actualizar"
+  get "precios/index"
+  get "precios/obtener_datos"
+  get "precios/buscar_precio"
+  get "precios/marcar_predeterminado"
+
+  #JURISDICCIONES
   get "jurisdicciones/index"
   get "jurisdicciones/buscar_juridisccion_oferta" 
 
   #JURISDICCIONES
   get "informes/index"
-   get "informes/indexa"
+  get "informes/indexa"
   get "informes/generar_pdf"
   
-  
+   #INFORMACIONES
+  get "informaciones/index"
+  get "informaciones/lista"
+  post "informaciones/lista"
+  get "informaciones/perfiles"
+  get "informaciones/enlaces"
+  get "informaciones/agregar"
+  post "informaciones/guardar"
+  get "informaciones/agregar_enlace"
+  get "informaciones/guardar_enlace"
+  post "informaciones/guardar_enlace"
+  get "informaciones/agregar_perfil"
+  get "informaciones/guardar_perfil"
+  get "informaciones/eliminar"
+  get "informaciones/editar"
+  post "informaciones/actualizar"
+  get "informaciones/editar_enlace"
+  post "informaciones/actualizar_enlace"
+  get "informaciones/eliminar_enlace"
+  get "informaciones/eliminar_rol"
 
-    #DETALLES DEBITOS
+  #DETALLES DEBITOS
   post "detalles_debitos/lista"
   get "detalles_debitos/lista"
   get "detalles_debitos/agregar"
@@ -34,7 +113,7 @@ Rails.application.routes.draw do
   post "detalles_debitos/actualizar"
   get "detalles_debitos/index"
  
-    #DETALLES CREDITOS
+  #DETALLES CREDITOS
   post "detalles_creditos/lista"
   get "detalles_creditos/lista"
   get "detalles_creditos/agregar"
@@ -44,33 +123,8 @@ Rails.application.routes.draw do
   post "detalles_creditos/actualizar"
   get "detalles_creditos/index"
 
-    #PRODUCCION
-  get "produccion/index"
-  get "produccion/lista"
-  post "produccion/lista"
-  get "produccion/agregar"
-  post "produccion/guardar"
-  get "produccion/eliminar"
-  get "produccion/editar"
-  post "produccion/actualizar"
-  get "produccion/produccion_detalle_credito"
-  get "produccion/produccion_detalle_debito"
-  get "produccion/agregar_detalle_credito"
-  get "produccion/agregar_detalle_debito"
-  post "produccion/guardar_detalle_credito"
-  post "produccion/guardar_detalle_debito"
-  get "produccion/eliminar_produccion_detalle_credito"
-  get "produccion/eliminar_produccion_detalle_debito"
-  get "produccion/cambiar_estado_solicitado_a_en_progreso"
-  get "produccion/cambiar_estado_en_progreso_a_finalizado"
-  get "produccion/cambiar_estado_cobro"
-  get "produccion/cambiar_estado_cobro_desconfirmar"
-  get "produccion/planilla_resumen_produccion"
-  get "produccion/planilla_resumen_produccion_pdf"
-  get "produccion/planilla_resumen_produccion_cliente"
-  get "produccion/planilla_resumen_produccion_cliente_pdf"
-
-    #CLIENTES
+  
+  #CLIENTES
   post "clientes/lista"
   get "clientes/lista"
   get "clientes/agregar"
@@ -81,20 +135,14 @@ Rails.application.routes.draw do
   get "clientes/index"
   get "clientes/buscar_cliente"
 
-    #FLOTAS
-  post "flotas/lista"
-  get "flotas/lista"
-  get "flotas/agregar"
-  post "flotas/guardar"
-  get "flotas/eliminar"
-  get "flotas/editar"
-  post "flotas/actualizar"
-  get "flotas/index"
-  get "flotas/obtener_datos"
-  get "flotas/buscar_flota"
-  
+#----------------------------FIN EJEMPLOS DE FONOWARE---------------------------------
 
-    #PERSONAS
+
+
+#-----------------------INICIO BLOQUE DE RUTAS KERNEL DEL SISTEMA(NO TOCAR)---------------
+
+  
+  #PERSONAS
   post "personas/lista"
   get "personas/lista"
   get "personas/agregar"
@@ -110,6 +158,7 @@ Rails.application.routes.draw do
   get "personas/obtener_datos"
   get "personas/buscar_persona_senatics"
   get "personas/buscar_chofer"
+  
   #ROLES
   post "roles/lista"
   get "roles/lista"
@@ -183,32 +232,10 @@ Rails.application.routes.draw do
   get "legal" => "principal#legal", :as => :legal
   get "index" => "principal#index", :as => :indexv
 	
-	
-
   root 'principal#index'
   
   get "application/autocompletar" => 'application#autocompletar', :as => :autocompletar
 
-    #INFORMACIONES
- 
-  get "informaciones/index"
-  get "informaciones/lista"
-  post "informaciones/lista"
-	get "informaciones/perfiles"
-	get "informaciones/enlaces"
-  get "informaciones/agregar"
-  post "informaciones/guardar"
-	get "informaciones/agregar_enlace"
-	get "informaciones/guardar_enlace"
-	post "informaciones/guardar_enlace"
-	get "informaciones/agregar_perfil"
-  get "informaciones/guardar_perfil"
-  get "informaciones/eliminar"
-  get "informaciones/editar"
-  post "informaciones/actualizar"
-	get "informaciones/editar_enlace"
-	post "informaciones/actualizar_enlace"
-  get "informaciones/eliminar_enlace"
-  get "informaciones/eliminar_rol"
+ #------------------------------------------------------------
 
 end

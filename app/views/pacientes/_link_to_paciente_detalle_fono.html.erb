@@ -1,0 +1,29 @@
+<%= link_to icon_detalles_fono, "#", id: "link-to-paciente-detalle-fono-#{paciente_id}", class: 'btn btn-detalle-fono btn-xs', title: 'Haga click para ver los detalles de pacientes.', onclick: "$('.modal').html('');return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-paciente-detalle-fono-<%= paciente_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#paciente-detalle-fono-<%= paciente_id %>").html());
+
+    $(".paciente-detalle-fono").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='paciente-detalle-fono-<%= paciente_id %>' class='paciente-detalle-fono'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(pacientes_detalles_fono_paciente_detalle_fono_path) %>',  
+        data: { paciente_id: <%= paciente_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>

@@ -1,0 +1,17 @@
+  <% if @guardado_ok %>
+
+  
+ setTimeout(function(){ 
+    
+  $("#link-to-paciente-detalle-fono-<%= params[:paciente_id]%>").trigger('click');
+  $("#link-to-paciente-detalle-fono-<%=params[:paciente_id]%>").trigger('click');
+  swal("Los detalles fonoaudiológicos se guardaron exitosamente!");
+
+  }, 1000);
+    
+ 
+<% else %>
+
+  swal('Error al guardar los detalles fonoaudiológicos. Intente más tarde');
+
+<% end %>

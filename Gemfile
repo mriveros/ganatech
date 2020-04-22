@@ -38,7 +38,7 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'pg', '0.15.1'
+gem 'pg', '0.15.0'
 gem 'thin', '1.5.1'
 gem 'jquery-ui-rails', '4.1.2'
 gem 'will_paginate', '3.0.4'

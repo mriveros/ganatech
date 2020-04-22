@@ -1,0 +1,156 @@
+<%= javascript_include_tag "modulos/personas.js" %>
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Tutores</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-tutor", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-tutor", link_to_id: "#link-to-agregar-tutor", url: tutores_agregar_path( window_id: "modal-window-agregar-tutor") )%>
+    
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-tutor">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag tutores_lista_path, remote: true, id: "form-buscar-tutor"  do  %>
+
+        <tr>
+
+          <th >
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_tutor_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th >
+            <span>Documento</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_tutor_documento, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_documento');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Nombre</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_tutor_nombre, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_nombre');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+          
+          <th >
+            <span>Apellido</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_tutor_apellido, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_apellido');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th >
+            <span>Dirección</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_tutor_direccion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_direccion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Teléfono - Celular</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_tutor_telefono, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_telefono');"><i class="fa fa-times"></i></span>
+            </div>
+            
+          </th>
+
+
+          <th ></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="tutores-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  $("#form-buscar-tutor").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-tutor").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_tutor_nombre").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_tutor_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_tutor_apellido").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#tutores-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-tutor input, #table-tutor select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-tutor").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-tutor table th { background:#e6e6e6;}
+    #form-buscar-tutor table th span.limpiar { background:#fff;}
+
+</style>

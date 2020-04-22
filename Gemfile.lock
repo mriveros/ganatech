@@ -106,7 +106,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pg (0.15.1)
+    pg (0.15.0)
     polyamorous (1.0.0)
       activerecord (>= 3.0)
     polyglot (0.3.5)
@@ -227,7 +227,7 @@ DEPENDENCIES
   mac-address (= 1.6.3)
   magic_encoding (= 0.0.2)
   paperclip
-  pg (= 0.15.1)
+  pg (= 0.15.0)
   protected_attributes
   rails (= 4.1.0)
   ransack (= 1.2.3)
