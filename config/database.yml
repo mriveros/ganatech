@@ -12,6 +12,7 @@ default: &default
 development:
   <<: *default
 
+ 
   database: ganatech
   username: postgres
   password: postgres
