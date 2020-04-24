@@ -11,11 +11,7 @@ default: &default
 
 development:
   <<: *default
-  database: dbganatech
-  username: postgres
-  password: Y%TJWdg7sMO4E5HD6e@1
-  host: 74.207.234.251
-  port: 6551
+  
   
 #---------------------------------------
 
