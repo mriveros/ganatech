@@ -16,7 +16,17 @@ get "crontab_ultron/index"
 
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
-
+  #RAZAS
+  post "razas/lista"
+  get "razas/lista"
+  get "razas/agregar"
+  post "razas/guardar"
+  get "razas/eliminar"
+  get "razas/editar"
+  post "razas/actualizar"
+  get "razas/index"
+  get "razas/buscar_raza"
+  
 
 
 
@@ -27,7 +37,7 @@ get "crontab_ultron/index"
 
 #----------------------------INICIO EJEMPLOS DE FONOWARE----------------------------
 
-#PACIENTES
+  #PACIENTES
   post "pacientes/lista"
   get "pacientes/lista"
   get "pacientes/agregar"
@@ -44,7 +54,7 @@ get "crontab_ultron/index"
   get "pacientes_detalles_fono/paciente_detalle_fono"
   post "pacientes_detalles_fono/guardar_detalle_fono"
 
-#TUTORES
+  #TUTORES
   post "tutores/lista"
   get "tutores/lista"
   get "tutores/agregar"
@@ -60,7 +70,7 @@ get "crontab_ultron/index"
   post "tutores/guardar_tutor_detalle"
   get "tutores/eliminar_tutor_detalle" 
   
-#PRECIOS
+  #PRECIOS
   post "precios/lista"
   get "precios/lista"
   get "precios/agregar"
