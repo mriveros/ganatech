@@ -1,0 +1,21 @@
+<% if @raza_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-editar-raza' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-raza");
+   
+  $("#form_buscar_razas_id").val('<%= @raza.id %>');
+  $("#form_buscar_razas_descripcion").val('');
+  
+  setTimeout(function(){ 
+
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#form-buscar-razas").submit();
+
+    swal("La raza ha sido actualizada Exitosamente.");
+
+  }, 2000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-editar-raza' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-raza");
+
+<% end %>
