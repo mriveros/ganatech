@@ -27,6 +27,16 @@ get "crontab_ultron/index"
   get "razas/index"
   get "razas/buscar_raza"
   
+  #HACIENDAS
+  post "haciendas/lista"
+  get "haciendas/lista"
+  get "haciendas/agregar"
+  post "haciendas/guardar"
+  get "haciendas/eliminar"
+  get "haciendas/editar"
+  post "haciendas/actualizar"
+  get "haciendas/index"
+  get "haciendas/buscar_hacienda"
 
 
 

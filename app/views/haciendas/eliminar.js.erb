@@ -1,0 +1,24 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-hacienda' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-haciendas");
+   $("#form_buscar_haciendas_id").val("<%=@hacienda_elim.id%>")
+   $("#form-buscar-haciendas").submit();
+    setTimeout(function(){ 
+      
+      $("#msg-eliminar-hacienda").remove();
+      swal("Hacienda eliminada Exitosamente.");
+
+    }, 1000);
+      
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-hacienda' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-haciendas");
+  setTimeout(function(){ 
+
+    $("#msg-eliminar-hacienda").remove(); 
+    swal("No se pudo Eliminar. Intente más tarde. ")
+  
+  }, 2000);
+  
+    
+<% end %>

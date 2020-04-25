@@ -48,7 +48,7 @@
 						<ul class="dropdown-menu">
 						
               <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-						  <li><%= link_to "Haciendas", precios_index_path if acceso_permitido("precios.index") %></li> 
+						  <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li> 
 						  <li><%= link_to "Potreros", precios_index_path if acceso_permitido("precios.index") %></li> 
 						  <li><%= link_to "Razas", razas_index_path if acceso_permitido("razas.index") %></li> 
 						  <li><%= link_to "Medicamentos", precios_index_path if acceso_permitido("precios.index") %></li> 

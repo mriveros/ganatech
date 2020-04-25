@@ -1,0 +1,65 @@
+
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Hacienda</h4>
+      
+    </div>
+
+    <%= form_for @hacienda, remote: true, url: haciendas_actualizar_url, html: { id: "form-editar-hacienda" }, method: 'POST' do |f| %>
+
+      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          
+          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br /> 
+          
+         <div class="col-sm-4"><%= label_tag nil, "Departamento".html_safe, id: "lbl-departamento" %></div><br />
+          <div class="col-sm-7"><%= collection_select :hacienda, :departamento_id,  Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+           <div class="col-sm-4"><%= label_tag nil, "Localidad".html_safe, id: "lbl-localidad" %></div><br />
+          <div class="col-sm-7"><%= collection_select :hacienda, :jurisdiccion_id,  Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div><br />
+          <div class="col-sm-12">
+            <%= f.text_area :observacion,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "510" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+          
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+        <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-hacienda" %>          
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-hacienda label, #form-editar-hacienda input[type='text'], #form-editar-hacienda select { float:left; margin-top:5px;}
+  #form-editar-hacienda br {clear:both; }
+  #form-editar-hacienda label { width:200px;font-size:12px;margin-top:10px;}
+
+
+</style>
+
+<script type="text/javascript">
+  aplicar_datepicker2();
+</script>

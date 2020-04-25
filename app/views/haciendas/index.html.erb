@@ -1,0 +1,131 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Haciendas</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-hacienda", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-hacienda", link_to_id: "#link-to-agregar-hacienda", url: haciendas_agregar_path( window_id: "modal-window-agregar-hacienda") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-haciendas">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag haciendas_lista_path, remote: true, id: "form-buscar-haciendas"  do  %>
+
+        <tr>
+
+          <th style="width:15%;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_haciendas_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Descripción</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_haciendas_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_haciendas_id').val('');quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+
+          </th>
+
+          <th style="width:130px;">
+              <span>Departamento</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_haciendas, :departamento_id, Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_departamento_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th style="width:130px;">
+            <span>Localidad</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_haciendas, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_jurisdiccion_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th style="width:15%;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="haciendas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-haciendas").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_haciendas_descripcion").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_haciendas_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_haciendas_descripcion").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+               
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#haciendas-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+  
+  })
+ 
+  
+  $("#table-haciendas input, #table-haciendas select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-haciendas").submit();
+
+  })
+ 
+  aplicar_datepicker();
+  $("#form-buscar-haciendas").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-haciendas").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-haciendas table th { background:#e6e6e6;}
+    #form-buscar-haciendas table th span.limpiar { background:#fff;}
+
+</style>
