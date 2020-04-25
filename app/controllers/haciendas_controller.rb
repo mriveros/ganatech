@@ -311,5 +311,130 @@ before_filter :require_usuario
   end
 
 
+ def haciendas_detalles
+
+    @haciendas_detalles = VPotrero.where("hacienda_id = ?", params[:hacienda_id]).first
+   
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
+
+
+  def agregar_hacienda_detalle
+    
+    @hacienda_detalle = Potrero.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+   def guardar_hacienda_detalle
+    
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+
+    unless params[:descripcion].present?
+
+      @valido = false
+      @msg += " Debe Completar el campo descripción. \n"
+
+    end
+
+    unless params[:hectarea].present?
+
+      @valido = false
+      @msg += " Debe agregar una cantidad aproximada de hectareas. \n"
+
+    end
+
+    
+
+    if @valido
+      
+      @hacienda_detalle = Potrero.new()
+      @hacienda_detalle.descripcion = params[:descripcion]
+      @hacienda_detalle.hectarea = params[:hectarea]
+      @hacienda_detalle.hacienda_id = params[:hacienda_id]
+      @hacienda_detalle.observacion = params[:observacion]
+
+        if @hacienda_detalle.save
+
+          auditoria_nueva("registrar potrero asignado a hacienda", "potreros", @hacienda_detalle)
+          @guardado_ok = true
+         
+        end 
+
+    end
+  
+    rescue Exception => exc  
+    # dispone el mensaje de error 
+    #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat(" "+@excep[4].to_s)
+      
+      end                
+
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def eliminar_hacienda_detalle
+
+    @valido = true
+    @msg = ""
+
+    @hacienda_detalle = Potrero.find(params[:potrero_id])
+
+    if @valido
+
+      if @hacienda_detalle.destroy
+
+        auditoria_nueva("eliminar potrero de la hacienda", "potreros", @hacienda_detalle)
+
+        @eliminado = true
+
+      else
+
+        @msg = "ERROR: No se ha podido eliminar el Potrero de la Hacienda. Intente más tarde."
+
+      end
+
+    end
+
+        rescue Exception => exc  
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+          
+          @excep = exc.message.split(':')    
+          @msg = @excep[3].concat(" "+@excep[4])
+          @eliminado = false
+        
+        end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
 
 end

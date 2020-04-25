@@ -1,0 +1,17 @@
+<% if @guardado_ok %>
+
+ 
+setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-hacienda-detalle-<%= params[:hacienda_id]%>").trigger('click');
+    $("#link-to-hacienda-detalle-<%= params[:hacienda_id]%>").trigger('click');
+    swal("El Potrero se agregó a la Hacienda exitosamente!");
+
+    }, 1000);
+ 
+<% else %>
+
+  swal('No se pudo guardar el Potrero en la Hacienda. Intente más tarde');
+
+<% end %>

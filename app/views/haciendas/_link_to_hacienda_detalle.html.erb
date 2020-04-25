@@ -1,0 +1,29 @@
+<%= link_to icon_detalles, "#", id: "link-to-hacienda-detalle-#{hacienda_id}", class: 'btn btn-success btn-hacienda-detalle btn-xs', title: 'Haga click aquí para ver los potreros de la Hacienda.', onclick: "$('.modal').html('');return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-hacienda-detalle-<%= hacienda_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#hacienda-detalle-<%= hacienda_id %>").html());
+
+    $(".hacienda-detalle").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='hacienda-detalle-<%= hacienda_id %>' class='hacienda-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(haciendas_haciendas_detalles_path) %>',  
+        data: { hacienda_id: <%= hacienda_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>

@@ -37,6 +37,10 @@ get "crontab_ultron/index"
   post "haciendas/actualizar"
   get "haciendas/index"
   get "haciendas/buscar_jurisdiccion"
+  get "haciendas/haciendas_detalles"
+  get "haciendas/agregar_hacienda_detalle"
+  post "haciendas/guardar_hacienda_detalle"
+  get "haciendas/eliminar_hacienda_detalle" 
 
 
 

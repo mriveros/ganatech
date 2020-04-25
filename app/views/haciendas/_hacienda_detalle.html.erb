@@ -1,0 +1,115 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Potreros</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar potrero".html_safe, "#", id: "link-to-agregar-hacienda-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-tutor-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Potrero</th>
+              <th>Hectareas</th>
+              <th>Hacienda</th>
+              <th>Departamento</th>
+              <th>Distrito</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="hacienda-detalle-lista">
+
+            <% if @hacienda_detalle.present? %>
+            
+              <% @hacienda_detalle.each do |hd|%>
+
+                <tr>
+                  <td><%= hd.potrero_id %></td>
+                  <td><%= hd.potrero %></td>
+                  <td><%= hd.hectareas %></td>
+                  <td><%= hd.hacienda %></td>
+                  <td><%= hd.departamento %></td>
+                  <td><%= hd.distrito %></td>
+                  <td style="width: 50px;text-align:right;">
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{td.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero", title: 'Haga click para eliminar el potrero de esta Hacienda'  %>
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-hacienda-detalle", link_to_id: "#link-to-agregar-hacienda-detalle", url: haciendas_agregar_hacienda_detalle_path( window_id: "modal-window-agregar-hacienda-detalle", hacienda_id: params[:hacienda_id]) )%>
+
+</td>
+
+
+  <script type="text/javascript">
+
+    function eliminar_registro(tutor_detalle_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el Potrero será eliminado de la Hacienda.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(haciendas_eliminar_hacienda_detalle_path) %>", 
+                data: {potrero_id: potrero_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+  </script>
