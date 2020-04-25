@@ -1,5 +1,0 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-flota-#{flota.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el camión.', onclick: "$('.modal').html('');return false;" %>
-
-
-<%= modal_window( window_id: "modal-window-editar-flota", link_to_id: "#link-to-editar-flota-#{flota.id}", url: flotas_editar_path( window_id: "modal-window-editar-flota", id: flota.id) )%>
-
