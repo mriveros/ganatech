@@ -82,25 +82,49 @@ before_filter :require_usuario
     @msg = ""
     @hacienda_ok = false
 
-    @hacienda = Hacienda.new()
-    @hacienda.descripcion = params[:hacienda][:descripcion].upcase
-    @hacienda.departamento_id = params[:hacienda][:departamento_id]
-    @hacienda.jurisdiccion_id = params[:hacienda][:jurisdiccion_id]
-    @hacienda.observacion = params[:observacion] 
+    
+    unless params[:hacienda][:descripcion].present?
+
+      valido = false
+      @msg += "Es necesario asignar una descripción. "
+
+    end
+
+    unless params[:hacienda][:departamento_id].present?
+
+      valido = false
+      @msg += "Debe seleccionar un departamento. "
+
+    end
+
+    unless params[:hacienda][:jurisdiccion_id].present?
+
+      valido = false
+      @msg += "Debe seleccionar un distrito. "
+
+    end
+    
+    if valido
+    
+      @hacienda = Hacienda.new()
+      @hacienda.descripcion = params[:hacienda][:descripcion].upcase
+      @hacienda.departamento_id = params[:hacienda][:departamento_id]
+      @hacienda.jurisdiccion_id = params[:hacienda][:jurisdiccion_id]
+      @hacienda.observacion = params[:observacion] 
 
       if @hacienda.save
 
         auditoria_nueva("registrar hacienda", "haciendas", @hacienda)
-       
-        @hacienda_ok = true
-       
+        @hacienda_ok = true   
 
       end 
+
+    end
   
-      rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
+    rescue Exception => exc  
+      # dispone el mensaje de error 
+      #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
         @excep = exc.message.split(':')    
         @msg = @excep[3].concat(" "+@excep[4].to_s)
       
@@ -174,6 +198,28 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
+
+    unless params[:hacienda][:descripcion].present?
+
+      valido = false
+      @msg += "Es necesario asignar una descripción. "
+
+    end
+
+    unless params[:hacienda][:departamento_id].present?
+
+      valido = false
+      @msg += "Debe seleccionar un departamento. "
+
+    end
+
+    unless params[:hacienda][:jurisdiccion_id].present?
+
+      valido = false
+      @msg += "Debe seleccionar un distrito. "
+
+    end
+
     @hacienda = Hacienda.find(params[:hacienda][:id])
     auditoria_id = auditoria_antes("actualizar hacienda", "haciendas", @hacienda)
 
@@ -212,17 +258,20 @@ before_filter :require_usuario
   end
   
 
-  def buscar_hacienda
+  def buscar_jurisdiccion
 
-     @haciendas = Hacienda.where("descripcion ilike ?", "%#{params[:descripcion]}%")
-
-    respond_to do |f|
+    if params[:hacienda_departamento_id]
       
-      f.html
-      f.json { render :json => @haciendas }
+      @jurisdicciones = Jurisdiccion.where("departamento_id = ? and estado = true", params[:hacienda_departamento_id])
     
     end
 
+    respond_to do |f|
+      
+      f.json { render :json => @jurisdicciones }
+    
+    end
+  
   end
 
   def marcar_predeterminado

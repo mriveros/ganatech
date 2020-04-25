@@ -1,8 +1,10 @@
 <% if @eliminado %>
 
   alert('<%= @msg %>');
+
     $('#<%= params[:window_id] %>').modal('hide');
     $("#form-buscar-disciplinas").submit();
+
 <% else %>
 
   alert('<%= @msg.gsub('.','\n') %>');
