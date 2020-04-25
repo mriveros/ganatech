@@ -86,7 +86,7 @@ before_filter :require_usuario
     @hacienda.descripcion = params[:hacienda][:descripcion].upcase
     @hacienda.departamento_id = params[:hacienda][:departamento_id]
     @hacienda.jurisdiccion_id = params[:hacienda][:jurisdiccion_id]
-    @hacienda.observacion = params[:observacion]
+    @hacienda.observacion = params[:observacion] 
 
       if @hacienda.save
 

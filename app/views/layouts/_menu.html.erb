@@ -54,7 +54,21 @@
 						  <li><%= link_to "Medicamentos", precios_index_path if acceso_permitido("precios.index") %></li> 
 						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li> 
 						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
+
+              <li>
+               <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  
+                  <li><%= link_to "Estado Ganado", razas_index_path if acceso_permitido("razas.index") %></li> 
+                  <li><%= link_to "Tipo Concepciones", razas_index_path if acceso_permitido("razas.index") %></li> 
+                  <li><%= link_to "Tipo Ganado", razas_index_path if acceso_permitido("razas.index") %></li> 
+                  <li><%= link_to "Pajuelas Procedencia", razas_index_path if acceso_permitido("razas.index") %></li> 
+
+                </ul>
+                <li>
 						</ul>
+
+            
 							 
 					</li>
  	
