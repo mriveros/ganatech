@@ -6,7 +6,7 @@ class Hacienda < ActiveRecord::Base
   attr_accessible :id, :descripcion, :posicion_x, :posicion_y , :departamento_id, :jurisdiccion_id, :created_at, :updated_at, :observacion
  
   scope :orden_01, -> { order("id")}
-  scope :ordenado_descripcion, -> { order("descripcion")}
+  scope :orden_descripcion, -> { order("descripcion")}
 
   
 end

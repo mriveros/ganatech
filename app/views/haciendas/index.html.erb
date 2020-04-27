@@ -49,7 +49,7 @@
           </th> 
 
           <th style="width:130px;">
-            <span>Localidad</span>
+            <span>Distrito</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_haciendas, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_jurisdiccion_id');"><i class="fa fa-times"></i></span>

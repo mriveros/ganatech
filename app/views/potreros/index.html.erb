@@ -42,8 +42,9 @@
           <th >
             <span>Hectáreas</span>
             <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_potrero_hectareas, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_hectareas');"><i class="fa fa-times"></i></span>
             </div>
-            <em class="nmb"></em>
           </th>
           
             <th style="width:130px;">
@@ -62,8 +63,12 @@
             </div>
           </th> 
 
-            <th style="width:130px;">
-              <span>Distrito</span>
+          <th style="width:130px;">
+            <span>Distrito</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_haciendas, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_jurisdiccion_id');"><i class="fa fa-times"></i></span>
+            </div>
           </th> 
 
 

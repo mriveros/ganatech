@@ -51,7 +51,7 @@ get "crontab_ultron/index"
   get "potreros/editar"
   post "potreros/actualizar"
   get "potreros/index" 
-  get "potreros/tutor_detalle"
+  get "potreros/potrero_detalle"
 
 
 
