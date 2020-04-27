@@ -313,7 +313,7 @@ before_filter :require_usuario
 
  def haciendas_detalles
 
-    @haciendas_detalles = VPotrero.where("hacienda_id = ?", params[:hacienda_id]).first
+    @haciendas_detalles = VPotrero.where("hacienda_id = ?", params[:hacienda_id])
    
     respond_to do |f|
 
@@ -344,14 +344,14 @@ before_filter :require_usuario
     @msg = ""
     @guardado_ok = false
 
-    unless params[:descripcion].present?
+    unless params[:potrero][:descripcion].present?
 
       @valido = false
       @msg += " Debe Completar el campo descripción. \n"
 
     end
 
-    unless params[:hectarea].present?
+    unless params[:potrero][:hectareas].present?
 
       @valido = false
       @msg += " Debe agregar una cantidad aproximada de hectareas. \n"
@@ -363,8 +363,8 @@ before_filter :require_usuario
     if @valido
       
       @hacienda_detalle = Potrero.new()
-      @hacienda_detalle.descripcion = params[:descripcion]
-      @hacienda_detalle.hectarea = params[:hectarea]
+      @hacienda_detalle.descripcion = params[:potrero][:descripcion].upcase
+      @hacienda_detalle.hectareas = params[:potrero][:hectareas]
       @hacienda_detalle.hacienda_id = params[:hacienda_id]
       @hacienda_detalle.observacion = params[:observacion]
 
@@ -382,7 +382,7 @@ before_filter :require_usuario
     #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?        
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
+        @msg = @excep
       
       end                
 
@@ -423,7 +423,7 @@ before_filter :require_usuario
         if exc.present?        
           
           @excep = exc.message.split(':')    
-          @msg = @excep[3].concat(" "+@excep[4])
+          @msg = @excep
           @eliminado = false
         
         end

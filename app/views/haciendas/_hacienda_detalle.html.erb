@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Potreros</h3>
+        <h3 style="float:left;margin-top:5px;">Potreros en la Hacienda</h3>
         <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar potrero".html_safe, "#", id: "link-to-agregar-hacienda-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
       </div>
 
@@ -37,9 +37,9 @@
        
           <tbody id="hacienda-detalle-lista">
 
-            <% if @hacienda_detalle.present? %>
+            <% if @haciendas_detalles.present? %>
             
-              <% @hacienda_detalle.each do |hd|%>
+              <% @haciendas_detalles.each do |hd|%>
 
                 <tr>
                   <td><%= hd.potrero_id %></td>
@@ -47,9 +47,9 @@
                   <td><%= hd.hectareas %></td>
                   <td><%= hd.hacienda %></td>
                   <td><%= hd.departamento %></td>
-                  <td><%= hd.distrito %></td>
+                  <td><%= hd.jurisdiccion %></td>
                   <td style="width: 50px;text-align:right;">
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{td.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero", title: 'Haga click para eliminar el potrero de esta Hacienda'  %>
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{hd.potrero_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero", title: 'Haga click para eliminar el potrero de esta Hacienda'  %>
                   </td>
 
                 </tr>
@@ -79,7 +79,7 @@
 
   <script type="text/javascript">
 
-    function eliminar_registro(tutor_detalle_id) {
+    function eliminar_registro(potrero_id) {
 
         swal({
           title: "Confirmar",
