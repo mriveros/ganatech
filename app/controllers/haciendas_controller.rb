@@ -168,7 +168,7 @@ before_filter :require_usuario
       if exc.present?        
       
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
+        @msg = "Esta Hacienda contiene Potreros relacionados."
         @eliminado = false
       
       end
@@ -313,7 +313,7 @@ before_filter :require_usuario
 
  def haciendas_detalles
 
-    @haciendas_detalles = VPotrero.where("hacienda_id = ?", params[:hacienda_id])
+    @haciendas_detalles = VPotrero.where("hacienda_id = ?", params[:hacienda_id]).paginate(per_page: 10, page: params[:page])
    
     respond_to do |f|
 

@@ -9,7 +9,7 @@
         <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar potrero".html_safe, "#", id: "link-to-agregar-hacienda-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
       </div>
 
-    </div>
+    </div> 
 
     <div style="clear:both;"></div>
    
@@ -55,6 +55,11 @@
                 </tr>
 
               <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @haciendas_detalles, :params => params %></div></td>
+              </tr>
 
             <% else %>
 
