@@ -5,8 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Pacientes asignados al Tutor</h3>
-        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar detalle".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+        <h3 style="float:left;margin-top:5px;">OBSERVACION</h3>
       </div>
 
     </div>
@@ -23,11 +22,7 @@
               
             <tr role="row">
               
-              <th>ID</th>
-              <th>Nombre Paciente</th>
-              <th>Apellido Paciente</th>
-              <th>Parentezco del Tutor</th>
-              <th style='text-align:right;'></th>
+              <th>Observación</th>
               
             </tr>
             
@@ -35,19 +30,12 @@
        
           <tbody id="tutor-detalle-lista">
 
-            <% if @tutor_detalle.present? %>
+            <% if @potrero_detalle.present? %>
             
-              <% @tutor_detalle.each do |td|%>
+              <% @potrero_detalle.each do |pd|%>
 
                 <tr>
-                  <td><%= td.tutor_detalle_id %></td>
-                  <td><%= td.nombre_paciente %></td>
-                  <td><%= td.apellido_paciente %></td>
-                  <td><%= td.parentezco %></td>
-                  <td style="width: 50px;text-align:right;">
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{td.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-tutor", title: 'Haga click para eliminar el tutor'  %>
-                  </td>
-
+                  <td><%= pd.observacion %></td>
                 </tr>
 
               <% end %>
@@ -68,44 +56,9 @@
     
   </div>
 
-  <%= modal_window( window_id: "modal-window-agregar-tutor-detalle", link_to_id: "#link-to-agregar-tutor-detalle", url: tutores_agregar_tutor_detalle_path( window_id: "modal-window-agregar-tutor-detalle", tutor_id: params[:tutor_id]) )%>
-
 </td>
 
 
   <script type="text/javascript">
-
-    function eliminar_registro(tutor_detalle_id) {
-
-        swal({
-          title: "Confirmar",
-          text: "Al confirmar el paciente será eliminado de la lista del tutor y no se podrá visualizar los avances del mismo.",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-              $.ajax({
-                url: "<%= url_for(tutores_eliminar_tutor_detalle_path) %>", 
-                data: {tutor_detalle_id: tutor_detalle_id},
-                dataType: 'script'
-              });
-            
-          } else{
-
-            return false;
-
-          }
-
-        });
-
-    
-    }
 
   </script>

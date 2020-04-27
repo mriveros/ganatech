@@ -1,12 +1,11 @@
-<%= javascript_include_tag "modulos/personas.js" %>
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Tutores</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-tutor", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-tutor", link_to_id: "#link-to-agregar-tutor", url: tutores_agregar_path( window_id: "modal-window-agregar-tutor") )%>
+    <h3 style="float:left;margin-top:5px;">Potreros</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-potrero", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-potrero", link_to_id: "#link-to-agregar-potrero", url: potreros_agregar_path( window_id: "modal-window-agregar-potrero") )%>
     
   </div>
   
@@ -14,66 +13,58 @@
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-tutor">
+<div class="table-responsive" id="table-potrero">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag tutores_lista_path, remote: true, id: "form-buscar-tutor"  do  %>
+      <%= form_tag potreros_lista_path, remote: true, id: "form-buscar-potrero"  do  %>
 
         <tr>
 
           <th >
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_tutor_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_potrero_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th >
-            <span>Documento</span>
+            <span>Potrero</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_tutor_documento, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_documento');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_potrero_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_descripcion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Nombre</span>
+            <span>Hectáreas</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_tutor_nombre, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_nombre');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
           
-          <th >
-            <span>Apellido</span>
+            <th style="width:130px;">
+              <span>Hacienda</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_tutor_apellido, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_apellido');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_potreros, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potreros', '#form_buscar_potreros_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
-            <em class="nmb"></em>
-          </th>
+          </th> 
 
-          <th >
-            <span>Dirección</span>
+           <th style="width:130px;">
+              <span>Departamento</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_tutor_direccion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_direccion');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_haciendas, :departamento_id, Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_departamento_id');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+          </th> 
 
-          <th >
-            <span>Teléfono - Celular</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_tutor_telefono, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-tutor', '#form_buscar_tutor_telefono');"><i class="fa fa-times"></i></span>
-            </div>
-            
-          </th>
+            <th style="width:130px;">
+              <span>Distrito</span>
+          </th> 
 
 
           <th ></th>
@@ -84,7 +75,7 @@
 
       </thead> 
 
-    <tbody id="tutores-lista"></tbody>
+    <tbody id="potreros-lista"></tbody>
   
   </table>
 
@@ -95,15 +86,15 @@
 
 <script type="text/javascript">
 
-  $("#form-buscar-tutor").submit();
+  $("#form-buscar-potrero").submit();
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-tutor").bind("submit", function () {
+  $("#form-buscar-potrero").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_tutor_nombre").val().length !== 0 ){
+    if($("#form_buscar_potrero_nombre").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_tutor_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_tutor_apellido").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_potrero_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_potrero_apellido").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -116,7 +107,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#tutores-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#potreroes-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -125,9 +116,9 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-tutor input, #table-tutor select").bind('change', function () {
+  $("#table-potrero input, #table-potrero select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-tutor").submit();
+      $("#form-buscar-potrero").submit();
 
   })
   //----------------------------------------------------------------------------//
@@ -150,7 +141,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-tutor table th { background:#e6e6e6;}
-    #form-buscar-tutor table th span.limpiar { background:#fff;}
+    #form-buscar-potrero table th { background:#e6e6e6;}
+    #form-buscar-potrero table th span.limpiar { background:#fff;}
 
 </style>
