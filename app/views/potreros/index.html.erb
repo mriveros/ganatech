@@ -47,27 +47,27 @@
             </div>
           </th>
           
-            <th style="width:130px;">
+            <th>
               <span>Hacienda</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_potreros, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potreros', '#form_buscar_potreros_hacienda_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_potrero, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
-           <th style="width:130px;">
+           <th >
               <span>Departamento</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_haciendas, :departamento_id, Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_departamento_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_potrero, :departamento_id, Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_departamento_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
-          <th style="width:130px;">
+          <th >
             <span>Distrito</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_haciendas, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_haciendas_jurisdiccion_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_potrero, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-potrero', '#form_buscar_potrero_jurisdiccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
@@ -97,9 +97,9 @@
   $("#form-buscar-potrero").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_potrero_nombre").val().length !== 0 ){
+    if($("#form_buscar_potrero_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_potrero_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_potrero_apellido").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_potrero_descripcion").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -112,7 +112,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#potreroes-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#potreros-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     

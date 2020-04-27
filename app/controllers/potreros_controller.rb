@@ -27,17 +27,31 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_potrero_hacienda].present?
+    if params[:form_buscar_potrero_hectareas].present?
 
-      cond << "hacienda ilike ?"
-      args << "%#{params[:form_buscar_potrero_hacienda]}%"
+      cond << "hectareas  = ?"
+      args << params[:form_buscar_potrero_hectareas]
 
     end
 
-    if params[:form_buscar_potrero_departamento_id].present?
+    if params[:form_buscar_potrero][:hacienda_id].present?
+
+      cond << "hacienda_id = ?"
+      args << params[:form_buscar_potrero][:hacienda_id]
+
+    end
+
+    if params[:form_buscar_potrero][:departamento_id].present?
 
       cond << "departamento_id = ?"
-      args << "#{params[:form_buscar_potrero_departamento_id]}"
+      args << params[:form_buscar_potrero][:departamento_id]
+
+    end
+
+    if params[:form_buscar_potrero][:jurisdiccion_id].present?
+
+      cond << "jurisdiccion_id = ?"
+      args << params[:form_buscar_potrero][:jurisdiccion_id]
 
     end
 
