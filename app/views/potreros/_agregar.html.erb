@@ -20,7 +20,7 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
@@ -33,7 +33,7 @@
 
             <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
-            <%= text_area_tag :observacion, nil,  class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
+            <%= text_area_tag :observacion,  class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
           </div>
           <div class="col-sm-1"></div><br />
           
@@ -56,9 +56,10 @@
 
 <style type="text/css">
 
-  #form-agregar-potrero label, #form-agregar-potrero input[type='text'], #form-agregar-potrero , #form-agregar-potrero select , #form-agregar-potrero input[type='checkbox']{ float:left; margin-top:5px;}
+   #form-agregar-potrero label, #form-agregar-potrero input[type='text'], #form-agregar-potrero select { float:left; margin-top:5px;}
   #form-agregar-potrero br {clear:both; }
   #form-agregar-potrero label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-potrero #descripcion { width:60%;}
 
 </style>
 
