@@ -8,48 +8,39 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Tutor</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Potrero</h4>
       
     </div>
 
-    <%= form_for @tutor, remote: true, url: tutores_guardar_url, html: { id: "form-agregar-tutor" }, method: 'POST' do |f| %>
+    <%= form_for @potrero, remote: true, url: potreros_guardar_url, html: { id: "form-agregar-potrero" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :persona_id%>
+      
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
+         
 
-          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-
+          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Hacienda.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
+          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br /><br />  
 
-          <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
-          <div class="col-sm-7"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br />
+           <div class="col-sm-4"><%= f.label :hectarea, "Hectáreas #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :hectareas, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+          <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Nombre #{attr_requerido}".html_safe, id: "lbl-nombre" %></div>
-          <div class="col-sm-7"><%= text_field_tag :persona_nombre, nil, class: 'form-control input-sm', readonly: true %></div>
-          <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= label_tag nil, "Apellido #{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
-          <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
-          <div class="col-sm-1"></div><br />
-          <div class="col-sm-1"></div><br />
-
-
-
-          
-          <div class="col-sm-1"></div><br />
-          <div id="buscar_perso">                                       
+            <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+            <%= text_area_tag :observacion, nil,  class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
           </div>
+          <div class="col-sm-1"></div><br />
+          
         </div>        
        
       </div>
@@ -57,7 +48,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-tutor" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-potrero" %>
           
       </div>
  
@@ -69,57 +60,49 @@
 
 <style type="text/css">
 
-  #form-agregar-tutor label, #form-agregar-tutor input[type='text'], #form-agregar-tutor input[type='password'], #form-agregar-tutor select , #form-agregar-tutor input[type='checkbox']{ float:left; margin-top:5px;}
-  #form-agregar-tutor br {clear:both; }
-  #form-agregar-tutor label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-tutor #persona_tipo_documento_persona_id { width:60%;}
-  #form-agregar-tutor #persona_nacionalidad_id { width:60%;}
-  #form-agregar-tutor #persona_documento { width:50%;}
- 
-
+  #form-agregar-potrero label, #form-agregar-potrero input[type='text'], #form-agregar-potrero , #form-agregar-potrero select , #form-agregar-potrero input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-potrero br {clear:both; }
+  #form-agregar-potrero label { width:200px;font-size:12px;margin-top:10px;}
 
 </style>
 
 <script type="text/javascript">
 
-  setTimeout(function(){ 
-    $("#persona_documento").focus();
-    $("#persona_tipo_documento_id").val(1);
-    $("#persona_nacionalidad_id").val(1);
-  }, 1000);
+  aplicar_datepicker2();
 
-  $("#persona_documento").bind("keydown", function(e){
-      
-    if(e.keyCode == 13 || e.keyCode == 9){
-    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(tutores_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
-      return false;
-    }
- 
-  })
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
 
+     return true;
+  }
 
-  $("#btn-guardar-tutor").bind('click', function () {
+  $("#btn-guardar-potrero").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#persona_documento").val().length == 0){
+      if($("#hacienda_id").val().length == 0){
+
+        msg +="Debe seleccionar la Hacienda.\n"
+        valido = false
+      
+      }
+
+       if($("#potrero_descripcion").val().length == 0){
 
         msg +="Ingrese número de documento.\n"
         valido = false
       
       }
 
-      if($("#persona_nombre").val().length == 0){
+      if($("#potrero_hectareas").val().length == 0){
 
         msg +="Nombre de persona no puede estar vacío.\n"
-        valido = false
-      
-      }
-
-      if($("#persona_apellido").val().length == 0){
-
-        msg +="Apellido de persona no puede estar vacío.\n"
         valido = false
       
       }
@@ -127,8 +110,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar",
-          text: "Al confirmar se podrá visualizar en la lista de tutores",
+          title: "Confirmar Potrero",
+          text: "Al confirmar el Potrero estará relacionado con la Hacienda.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -140,7 +123,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-tutor").submit();
+            $("#form-agregar-potrero").submit();
             
           } 
 
@@ -155,5 +138,6 @@
       return false;
     
     })
+
 
 </script>
