@@ -12,7 +12,7 @@
 
     <%= form_for @potrero, remote: true, url: potreros_actualizar_url, html: { id: "form-editar-potrero" }, method: 'POST' do |f| %>
 
-      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :id, @potrero.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="panel-body">

@@ -150,7 +150,7 @@ before_filter :require_usuario
 
   def editar
     
-    @potrero = Potrero.find(params[:id])
+    @potrero = Potrero.find(params[:potrero_id])
 
     respond_to do |f|
       
@@ -190,7 +190,7 @@ before_filter :require_usuario
       @potrero.descripcion = params[:potrero][:descripcion].upcase
       @potrero.hectareas = params[:potrero][:hectareas]
       @potrero.hacienda_id = params[:potrero][:hacienda_id]
-      @potrero.observacion = params[:observacion]
+      @potrero.observacion = params[:potrero][:observacion]
 
         if @potrero.save
 
