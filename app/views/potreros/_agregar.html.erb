@@ -16,12 +16,9 @@
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       
-
       <div class="modal-body">
 
         <div class="panel-body">
-
-         
 
           <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
           <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
