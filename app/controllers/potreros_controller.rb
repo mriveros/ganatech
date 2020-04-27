@@ -180,7 +180,7 @@ before_filter :require_usuario
 
     end
 
-    @potrero = Potrero.where("id = ?", params[:potrero_id]).first
+    @potrero = Potrero.where("id = ?", params[:id]).first
     auditoria_id = auditoria_antes("actualizar potrero", "potreros", @potrero)
     
 
