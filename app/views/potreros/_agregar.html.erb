@@ -24,7 +24,7 @@
          
 
           <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Hacienda.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
@@ -86,7 +86,7 @@
       valido = true
       msg = ""
 
-      if($("#hacienda_id").val().length == 0){
+      if($("#potrero_hacienda_id").val().length == 0){
 
         msg +="Debe seleccionar la Hacienda.\n"
         valido = false

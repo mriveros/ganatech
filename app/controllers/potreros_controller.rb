@@ -105,7 +105,7 @@ before_filter :require_usuario
       @potrero = Potrero.new()
       @potrero.descripcion = params[:potrero][:descripcion].upcase
       @potrero.hectareas = params[:potrero][:hectareas]
-      @potrero.hacienda_id = params[:hacienda_id]
+      @potrero.hacienda_id = params[:potrero][:hacienda_id]
       @potrero.observacion = params[:observacion]
 
         if @potrero.save
@@ -175,7 +175,7 @@ before_filter :require_usuario
       
       @potrero.descripcion = params[:potrero][:descripcion].upcase
       @potrero.hectareas = params[:potrero][:hectareas]
-      @potrero.hacienda_id = params[:hacienda_id]
+      @potrero.hacienda_id = params[:potrero][:hacienda_id]
       @potrero.observacion = params[:observacion]
 
         if @potrero.save
