@@ -8,8 +8,8 @@
       <td><%= u.persona.nacionalidad.descripcion if u.persona && u.persona.nacionalidad %></td>
       <td><%= u.persona.tipo_documento.descripcion if u.persona && u.persona.tipo_documento %></td>
       <td style="width:120px;"><%= u.persona.documento_persona if u.persona %></td>
-      <td><%= u.persona.nombre_persona if u.persona %></td>
-      <td><%= u.persona.apellido_persona if u.persona %></td>
+      <td><%= u.persona.nombre_persona.upcase if u.persona %></td>
+      <td><%= u.persona.apellido_persona.upcase if u.persona %></td>
       <td><%= u.email %></td>
       <td style="text-align:center;font-size:14px;font-weight:bold;background:<%= u.active ? '#d6ffd6' : '#f8dfdf' %>;"><%= u.active ? 'SI' : "NO" %></td>
       <td style="text-align:center;width:150px;">

@@ -234,6 +234,8 @@ before_filter :require_usuario
 
         auditoria_nueva("eliminar potrero", "potreros", @potrero_elim)
         @eliminado = true
+        
+      end
 
     end
     

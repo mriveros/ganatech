@@ -8,8 +8,8 @@
       <td><%= p.nacionalidad.descripcion if p.nacionalidad %></td>
       <td><%= p.tipo_documento.descripcion if p.tipo_documento %></td>
       <td style="width:120px;"><%= p.documento_persona %></td>
-      <td><%= p.nombre_persona %></td>
-      <td><%= p.apellido_persona %></td>
+      <td><%= p.nombre_persona.upcase %></td>
+      <td><%= p.apellido_persona.upcase %></td>
       <td style="text-align:center;"><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present? %></td>
       <td><%= p.genero.descripcion if p.genero %></td>
       <td><%= p.libro if p.libro %></td>
