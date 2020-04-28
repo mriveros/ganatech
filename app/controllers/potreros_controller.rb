@@ -235,12 +235,6 @@ before_filter :require_usuario
         auditoria_nueva("eliminar potrero", "potreros", @potrero_elim)
         @eliminado = true
 
-      else
-
-        @msg = "ERROR: No se ha podido eliminar El Potrero. Compruebe si contiene datos relacionados. "
-
-      end
-
     end
     
     rescue Exception => exc  

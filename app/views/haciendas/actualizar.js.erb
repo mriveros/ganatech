@@ -10,13 +10,13 @@
 
     $("#<%= params[:window_id]%>").modal('hide'); 
     $("#form-buscar-haciendas").submit();
-    swal("Guardado Exitosamente.");
+    swal("Hacienda guardada Exitosamente.");
 
   }, 3000);
 
 <% else %>
 
   $("<div class='col-sm-12' id='msg-editar-hacienda' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-hacienda");
-   swal('<%= @msg.gsub('.','\n') %>');
+  swal('Error al actualizar la Hacienda. Intente más tarde.');
 
 <% end %>
