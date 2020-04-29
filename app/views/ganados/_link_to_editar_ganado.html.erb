@@ -1,0 +1,2 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-ganado-#{ganado_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del ganado.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-editar-ganado", link_to_id: "#link-to-editar-ganado-#{ganado_id}", url: ganados_editar_path( window_id: "modal-window-editar-ganado", id: ganado_id) )%>

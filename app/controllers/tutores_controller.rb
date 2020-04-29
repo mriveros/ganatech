@@ -1,7 +1,7 @@
 class TutoresController < ApplicationController
 
 before_filter :require_usuario
-skip_before_action :verify_authenticity_token
+
 
   def index
   
@@ -390,7 +390,6 @@ skip_before_action :verify_authenticity_token
     end
   
   end
-
 
 
 end

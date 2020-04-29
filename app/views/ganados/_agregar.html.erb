@@ -1,0 +1,108 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Ganado</h4>
+      
+    </div>
+
+    <%= form_for @ganado, remote: true, url: ganados_guardar_url, html: { id: "form-agregar-ganado" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= hidden_field_tag :persona_id%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+         
+
+
+
+          
+          <div class="col-sm-1"></div><br />
+          
+        </div>        
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
+          
+      </div>
+ 
+    <%end %>
+
+  </div>
+  
+
+
+<style type="text/css">
+
+  #form-agregar-ganado label, #form-agregar-ganado input[type='text'], #form-agregar-ganado select , #form-agregar-ganado input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-ganado br {clear:both; }
+  #form-agregar-ganado label { width:200px;font-size:12px;margin-top:10px;}
+ 
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    //$("#persona_documento").focus();
+    //$("#persona_tipo_documento_id").val(1);
+    //$("#persona_nacionalidad_id").val(1);
+  }, 1000);
+
+  $("#btn-guardar-ganado").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+      if($("#ganado_raza_id").val().length == 0){
+
+        msg +="Ingrese la raza del animal.\n"
+        valido = false
+      
+      }
+
+
+      if (valido){
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se podrá visualizar el Ganado en la Lista de Ganados",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-agregar-ganado").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+</script>

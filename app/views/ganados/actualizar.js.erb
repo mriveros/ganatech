@@ -1,0 +1,23 @@
+<% if @ganado_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-editar-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-ganado");
+   
+  $("#form_buscar_ganado_id").val('<%= @ganado.id %>');
+  $("#form_buscar_ganado_documento").val('');
+  $("#form_buscar_ganado_nombre").val('');
+  $("#form_buscar_ganado_apellido").val('');
+  $("#form_buscar_ganado_direccion").val('');
+  $("#form_buscar_ganado_telefono").val('');
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#form-buscar-ganado").submit(); 
+    swal("Guardado Exitosamente.");
+    
+  }, 2000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-editar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-ganado");
+
+<% end %>

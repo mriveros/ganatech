@@ -1,0 +1,88 @@
+<% if ganados.present? %>
+
+  <% ganados.each do |gan| %>
+
+    <tr>
+
+      <td><%= gan.ganado_id %></td>
+      <td style="text-transform:uppercase;"><%= gan.nombre%></td>
+      <td ><%= gan.rp%></td>
+      <td ><%= gan.rp_padre %></td>
+      <td ><%= gan.r_madre %></td>
+      <td ><%= gan.fecha_nacimiento %></td>
+      <td ><%= gan.raza %></td>
+      <td ><%= gan.clase_ganado %></td>
+      
+      <td >
+        
+        
+        <%= link_to_ganado_detalle(gan.ganado_id) %>
+        <%= link_to_editar_ganado(gan.ganado_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
+      
+       </td>
+
+    </tr>
+s
+  <% end %>
+
+  <tr id="tab-paginacion">
+
+      <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados, :params => params %></div></td>
+  </tr>
+
+  <tr>
+      <td colspan="12">
+        Cantidad de registros encontrados: <%= @total_encontrados %> 
+      </td>
+  </tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+<script type="text/javascript">
+
+  function eliminar_registro(ganado_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de Ganados. Si el Ganado cuenta con detalles no podrá ser eliminado.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_eliminar_path) %>", 
+                data: {id: ganado_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>

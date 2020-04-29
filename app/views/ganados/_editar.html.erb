@@ -1,0 +1,108 @@
+<%= javascript_include_tag "modulos/personas.js" %>
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Ganado</h4>
+      
+    </div>
+
+    <%= form_for @ganado, remote: true, url: ganados_actualizar_url, html: { id: "form-editar-ganado" }, method: 'POST' do |f| %>
+
+      <%= hidden_field :ganado_id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          
+          <div class="col-sm-1"></div><br />
+          
+        </div>
+        
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+       <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-tutor label, #form-editar-tutor input[type='text'], #form-editar-tutor select { float:left; margin-top:5px;}
+  #form-editar-tutor br {clear:both; }
+  #form-editar-tutor label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-tutor #persona_tipo_documento_id { width:60%;}
+  #form-editar-tutor #persona_nacionalidad_id { width:60%;}
+  #form-editar-tutor #persona_documento_persona { width:50%;}
+  #form-editar-tutor #persona_sexo { width:60%;}
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    
+    //$("#persona_documento_persona").focus();
+  
+  }, 1000);
+
+  aplicar_datepicker2();
+  
+
+   $("#btn-guardar-ganado").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+      if($("#ganado_raza_id").val().length == 0){
+
+        msg +="Ingrese la raza del animal.\n"
+        valido = false
+      
+      }
+
+      if (valido){
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se podrá visualizar los cambios del Ganado en la Lista de Ganados",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-agregar-ganado").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+</script>

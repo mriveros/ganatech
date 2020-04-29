@@ -109,7 +109,7 @@ before_filter :require_usuario
 
       if @raza.destroy
 
-        auditoria_nueva("eliminar raza", "razas", @raza)
+        auditoria_nueva("eliminar raza", "razas", @raza_elim)
 
         @eliminado = true
 

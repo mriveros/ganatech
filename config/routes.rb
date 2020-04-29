@@ -17,25 +17,25 @@ get "crontab_ultron/index"
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
   #RAZAS
+  get "razas/index"
   post "razas/lista"
   get "razas/lista"
   get "razas/agregar"
   post "razas/guardar"
-  get "razas/eliminar"
   get "razas/editar"
   post "razas/actualizar"
-  get "razas/index"
+  get "razas/eliminar"
   get "razas/buscar_raza"
   
   #HACIENDAS
+  get "haciendas/index"
   post "haciendas/lista"
   get "haciendas/lista"
   get "haciendas/agregar"
   post "haciendas/guardar"
-  get "haciendas/eliminar"
   get "haciendas/editar"
   post "haciendas/actualizar"
-  get "haciendas/index"
+  get "haciendas/eliminar"
   get "haciendas/buscar_jurisdiccion"
   get "haciendas/haciendas_detalles"
   get "haciendas/agregar_hacienda_detalle"
@@ -43,18 +43,26 @@ get "crontab_ultron/index"
   get "haciendas/eliminar_hacienda_detalle" 
 
   #POTREROS
+  get "potreros/index" 
   post "potreros/lista"
   get "potreros/lista"
   get "potreros/agregar"
   post "potreros/guardar"
-  get "potreros/eliminar"
   get "potreros/editar"
   post "potreros/actualizar"
-  get "potreros/index" 
+  get "potreros/eliminar"
   get "potreros/potrero_detalle"
 
-
-
+  #GANADOS
+  get "ganados/index" 
+  post "ganados/lista"
+  get "ganados/lista"
+  get "ganados/agregar"
+  post "ganados/guardar"
+  get "ganados/editar"
+  post "ganados/actualizar"
+  get "ganados/eliminar"
+  get "ganados/ganado_detalle"
 
 
 

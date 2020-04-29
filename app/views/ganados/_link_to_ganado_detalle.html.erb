@@ -1,0 +1,29 @@
+<%= link_to icon_detalles, "#", id: "link-to-ganado-detalle-#{ganado_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del ganado y asignar a sus tutelados correspondientes', onclick: "$('.modal').html('');return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-ganado-detalle-<%= ganado_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#ganado-detalle-<%= ganado_id %>").html());
+
+    $(".ganado-detalle").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='ganado-detalle-<%= ganado_id %>' class='ganado-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(ganados_ganado_detalle_path) %>',  
+        data: { ganado_id: <%= ganado_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>
