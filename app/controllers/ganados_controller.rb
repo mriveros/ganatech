@@ -298,5 +298,31 @@ class GanadosController < ApplicationController
 
   end
 
+  def buscar_rp_padre
+    
+    @ganados = Ganado.where("nombre ilike ? and sexo_ganado_id = ?", "%#{params[:rp_pad]}%", PARAMETRO[:sexo_ganado_macho])
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
+    
+    end
+    
+  end
+
+  def buscar_rp_madre
+    
+    @ganados =  Ganado.where("nombre ilike ? and sexo_ganado_id = ?", "%#{params[:rp_mad]}%", PARAMETRO[:sexo_ganado_hembra])
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
+    
+    end
+    
+  end
+
 
 end

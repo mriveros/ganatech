@@ -65,6 +65,8 @@ get "crontab_ultron/index"
   get "ganados/eliminar"
   get "ganados/ganado_detalle"
   get "ganados/obtener_etapa_ganado"
+  get "ganados/buscar_rp_padre"
+  get "ganados/buscar_rp_madre"
 
 
 

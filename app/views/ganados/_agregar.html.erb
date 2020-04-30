@@ -28,11 +28,13 @@
           <div class="col-sm-7"><%= text_field_tag :rp ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
+         <%= hidden_field_tag :rp_padre_rp %>
+
         <div class="col-sm-4"><%= label_tag :nil, "RP Padre".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :rp_padre ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
-
+        <%= hidden_field_tag :rp_madre_rp %>
         <div class="col-sm-4"><%= label_tag :nil, "RP Madre".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :rp_madre ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
@@ -108,10 +110,11 @@
 
 
 <style type="text/css">
-
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
   #form-agregar-ganado label, #form-agregar-ganado input[type='text'], #form-agregar-ganado select , #form-agregar-ganado input[type='checkbox']{ float:left; margin-top:5px;}
   #form-agregar-ganado br {clear:both; }
   #form-agregar-ganado label { width:200px;font-size:12px;margin-top:10px;}
+   
  
 </style>
 
@@ -178,5 +181,105 @@
       return false;
     
     })
+
+  //buscar RP Padre
+  $("#rp_padre").bind('focus', function(){   
+
+    var ganados = [];
+
+    $("#rp_padre").val('');
+    $("#rp_padre_rp").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_rp_padre_path) %>", { rp_pad: $(this).val()}, function(j){
+        
+      var rp_padre = "";
+      var options = "<option value=''> -- Seleccione un RP Padre -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].rp != rp_padre ){
+          
+          ganados.push( {value: j[i].id +" - "+ j[i].nombre+" - "+j[i].rp });
+          rp_padre =j[i].id +" - "+ j[i].nombre+" "+j[i].rp ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].rp + "</option>"
+
+        }
+
+      }
+
+      $("#rp_padre_rp").html(options);
+
+    })
+
+    $("#rp_padre").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#rp_padre" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#rp_padre").val( datos[2]);
+        $("#rp_padre_rp").val(datos[2]);
+        return false;
+
+      }
+
+    })
+
+  });
+
+  //buscar RP Madre
+  $("#rp_madre").bind('focus', function(){   
+
+    var ganados = [];
+    $("#rp_madre").val('');
+    $("#rp_madre_rp").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_rp_madre_path) %>", { rp_mad: $(this).val()}, function(j){
+        
+      var rp_padre = "";
+      var options = "<option value=''> -- Seleccione un RP Madre -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].rp != rp_padre ){
+          
+          ganados.push( {value: j[i].id +" - "+ j[i].nombre+" - "+j[i].rp });
+          rp_padre =j[i].id +" - "+ j[i].nombre+" "+j[i].rp ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].rp + "</option>"
+
+        }
+
+      }
+
+      $("#rp_madre_rp").html(options);
+
+    })
+
+    $("#rp_madre").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#rp_madre" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#rp_madre").val( datos[2] );
+        $("#rp_madre_rp").val(datos[2]);
+        return false;
+      }
+    })
+
+  });
 
 </script>
