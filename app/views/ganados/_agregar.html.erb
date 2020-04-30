@@ -14,18 +14,23 @@
     <%= form_for @ganado, remote: true, url: ganados_guardar_url, html: { id: "form-agregar-ganado" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :persona_id%>
 
       <div class="modal-body">
 
         <div class="panel-body">
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Fecha Nacimiento".html_safe %></div>
+        <div class="col-sm-5"><%= date_field_tag :fecha_nacimiento, nil, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+        </div>    
+        <div class="col-sm-1"></div><br />  
 
         <div class="col-sm-4"><%= label_tag :nil, "Nombre #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :nombre ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
         <div class="col-sm-4"><%= label_tag :nil, "RP #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp ,@nuevo_autoincremento.to_s,class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
          <%= hidden_field_tag :rp_padre_rp %>
@@ -44,7 +49,7 @@
           <div class="col-sm-1"></div><br />
 
         <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
         <%= linked_combo "potrero_id", 
@@ -58,11 +63,11 @@
         <div class="col-sm-1"></div><br/>
 
         <div class="col-sm-4"><%= f.label :hectarea, "Peso Promedio #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= f.text_field :peso_promedio, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-        <div class="col-sm-1"></div><br /><br />
+        <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+        <div class="col-sm-1"></div><br />
 
         <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_id, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
         <%= linked_combo "etapa_ganado_id", 
@@ -75,22 +80,28 @@
         <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
+        <div class="col-sm-4"><%= label_tag nil, "Tipo Ganado #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :tipo_ganado, :id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
         <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, Raza.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-7"><%= collection_select :raza_ganado, :id, Raza.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
         <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, TipoConcepcion.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
         <div class="col-sm-4"><%= label_tag nil, "Estado Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, EstadoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-7"><%= collection_select :estado_ganado, :id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: false}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
-
-
-          
+        <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+            <%= text_area_tag :observacion, nil, class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
+          </div>
           <div class="col-sm-1"></div><br />
+      
           
         </div>        
        
@@ -120,6 +131,15 @@
 
 <script type="text/javascript">
 
+   $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
    function isNumberKey(evt)
   {
      var charCode = (evt.which) ? evt.which : event.keyCode
@@ -142,13 +162,68 @@
       valido = true
       msg = ""
 
-      if($("#ganado_raza_id").val().length == 0){
+      if($("#nombre").val().length == 0){
 
-        msg +="Ingrese la raza del animal.\n"
+        msg += "Ingrese el nombre del animal.\n"
         valido = false
       
       }
 
+      if($("#rp").val().length == 0){
+
+        msg +="El RP no puede estar vacío. Contacte con el proveedor\n"
+        valido = false
+      
+      }
+
+      if($("#hacienda_id").val().length == 0){
+
+        msg +="Seleccione la Hacienda donde se encuentra el animal.\n"
+        valido = false
+      
+      }
+
+      if($("#potrero_id").val().length == 0){
+
+        msg +="Seleccione el Potrero donde se encuentra el animal.\n"
+        valido = false
+      
+      }
+
+      if($("#peso_promedio").val().length == 0){
+
+        msg +="Ingrese un peso aproximado del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#sexo_ganado_id").val().length == 0){
+
+        msg +="Seleccione el sexo del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#etapa_ganado_id").val().length == 0){
+
+        msg +="Seleccione la clasificación del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#raza_ganado_id").val().length == 0){
+
+        msg +="Seleccione la raza del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#tipo_concepcion_id").val().length == 0){
+
+        msg +="Seleccione el tipo de concepción del animal.\n"
+        valido = false
+      
+      }
 
       if (valido){
 
@@ -269,15 +344,19 @@
       focus: function( event, ui ) {
       
         $("#rp_madre" ).val( ui.item.label );
+        var datos = ui.item.value.split(" - ");
         return false;
       },
       select: function( event, ui ) {
 
         var datos = ui.item.value.split(" - ");
-        $("#rp_madre").val( datos[2] );
+        $("#rp_madre").val(datos[2]);
         $("#rp_madre_rp").val(datos[2]);
         return false;
+
       }
+      
+      
     })
 
   });

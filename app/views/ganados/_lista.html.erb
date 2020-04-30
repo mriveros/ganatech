@@ -8,10 +8,10 @@
       <td style="text-transform:uppercase;"><%= gan.nombre%></td>
       <td ><%= gan.rp%></td>
       <td ><%= gan.rp_padre %></td>
-      <td ><%= gan.r_madre %></td>
-      <td ><%= gan.fecha_nacimiento %></td>
+      <td ><%= gan.rp_madre %></td>
+      <td ><%= (gan.fecha_nacimiento.present?)? gan.fecha_nacimiento.strftime('%d/%m/%Y') : "Sin Especificar" %></td>
       <td ><%= gan.raza %></td>
-      <td ><%= gan.clase_ganado %></td>
+      <td ><%= gan.etapa_ganado %></td>
       
       <td >
         

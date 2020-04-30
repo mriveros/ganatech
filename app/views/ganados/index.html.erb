@@ -66,7 +66,7 @@
             <em class="nmb"></em>
           </th>
 
-          <th style="width:130px;">
+          <th>
             <div><%= label_tag nil, "Fecha Nacimiento".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_ganado_fecha_nacimiento, nil, class: 'form-control input-sm' %>
@@ -74,6 +74,22 @@
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_fecha_nacimiento');"><i class="fa fa-times"></i></span>
               </div>
          </th>
+
+         <th>
+              <span>Raza</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :raza_ganado_id, Raza.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+         <th>
+              <span>Clasificacion</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :etapa_ganado_id, EtapaGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estapa_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
 
 
           <th ></th>

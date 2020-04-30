@@ -15,7 +15,7 @@
 
 <% else %>
 	
-  $("<div class='col-sm-12' id='msg-agregar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-agregar-ganado");
+  $("<div class='col-sm-12' id='msg-agregar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-ganado");
   swal("Error al guardar guardar el Ganado. Intente más tarde")
 
 <% end %>

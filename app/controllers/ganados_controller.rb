@@ -125,6 +125,26 @@ class GanadosController < ApplicationController
 
     @ganado = Ganado.new
 
+    ultima_produccion = Ganado.order("created_at").last
+
+    if ultima_produccion.present?
+
+      if ultima_produccion.created_at.month != Time.now.month
+
+        @nuevo_autoincremento = "RP-0" + 1.to_s
+
+      else
+
+         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+
+      end 
+
+    else
+      
+      @nuevo_autoincremento = 1
+
+    end
+
     respond_to do |f|
       
         f.js
@@ -139,17 +159,45 @@ class GanadosController < ApplicationController
     @msg = ""
     @guardado_ok = false
 
-    unless params[:persona_documento].present?
-
-      @valido = false
-      @msg += " Debe Completar el campo Documento. \n"
-
-    end
-
     if @valido
       
       @ganado = Ganado.new()
-      @ganado.raza_id = params[:raza_id]
+      @ganado.fecha_nacimiento = params[:fecha_nacimiento]
+      @ganado.nombre = params[:nombre]
+      @ganado.rp = params[:rp]
+
+      if params[:rp_padre_rp].present?
+        
+        @ganado.rp_padre = params[:rp_padre_rp]
+      
+      else
+
+        @ganado.rp_padre = "No Especificado"
+
+      end
+
+      if params[:rp_madre_rp].present?
+        
+        @ganado.rp_madre = params[:rp_madre_rp]
+      
+      else
+
+        @ganado.rp_madre = "No Especificado"
+
+      end
+      
+      @ganado.codigo_rfid = params[:codigo_rfid]
+      @ganado.potrero_id = params[:potrero][:id]
+      @ganado.peso_promedio = params[:peso_promedio]
+      @ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+      @ganado.tipo_ganado_id = params[:tipo_ganado][:id]
+      @ganado.etapa_ganado_id = params[:etapa_ganado][:id]
+      @ganado.raza_id = params[:raza_ganado][:id]
+      @ganado.tipo_concepcion_id = params[:tipo_concepcion][:id]
+      @ganado.estado_ganado_id = params[:estado_ganado][:id]
+      @ganado.observacion = params[:observacion]
+      
+
 
         if @ganado.save
 
