@@ -14,7 +14,7 @@
     
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-ganado");
+  $("<div class='col-sm-12' id='msg-eliminar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-ganado");
   setTimeout(function(){ 
     
     $("#msg-eliminar-ganado").remove();

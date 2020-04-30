@@ -197,7 +197,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-actualizar-ganado" %>
           
       </div>
 
@@ -208,6 +208,7 @@
 
 <style type="text/css">
 
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
   #form-editar-ganado label, #form-editar-ganado input[type='text'], #form-editar-ganado select { float:left; margin-top:5px;}
   #form-editar-ganado br {clear:both; }
   #form-editar-ganado label { width:200px;font-size:12px;margin-top:10px;}
@@ -216,6 +217,27 @@
 </style>
 
 <script type="text/javascript">
+
+  function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
+
+
+  $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
 
   setTimeout(function(){ 
     
@@ -269,14 +291,70 @@
   <%end%>
   
 
-   $("#btn-guardar-ganado").bind('click', function () {
+   $("#btn-actualizar-ganado").bind('click', function () {
 
       valido = true
       msg = ""
 
+      if($("#ganado_nombre").val().length == 0){
+
+        msg += "Ingrese el nombre del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#ganado_rp").val().length == 0){
+
+        msg +="El RP no puede estar vacío. Contacte con el proveedor\n"
+        valido = false
+      
+      }
+
+      if($("#hacienda_id").val().length == 0){
+
+        msg +="Seleccione la Hacienda donde se encuentra el animal.\n"
+        valido = false
+      
+      }
+
+      if($("#potrero_id").val().length == 0){
+
+        msg +="Seleccione el Potrero donde se encuentra el animal.\n"
+        valido = false
+      
+      }
+
+      if($("#ganado_peso_promedio").val().length == 0){
+
+        msg +="Ingrese un peso aproximado del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#sexo_ganado_id").val().length == 0){
+
+        msg +="Seleccione el sexo del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#etapa_ganado_id").val().length == 0){
+
+        msg +="Seleccione la clasificación del animal.\n"
+        valido = false
+      
+      }
+
       if($("#ganado_raza_id").val().length == 0){
 
-        msg +="Ingrese la raza del animal.\n"
+        msg +="Seleccione la raza del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#ganado_tipo_concepcion_id").val().length == 0){
+
+        msg +="Seleccione el tipo de concepción del animal.\n"
         valido = false
       
       }
@@ -297,7 +375,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-ganado").submit();
+            $("#form-editar-ganado").submit();
             
           } 
 
@@ -312,5 +390,109 @@
       return false;
     
     })
+
+  //buscar RP Padre
+  $("#ganado_rp_padre").bind('focus', function(){   
+
+    var ganados = [];
+
+    $("#ganado_rp_padre").val('');
+    $("#rp_padre_rp").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_rp_padre_path) %>", { rp_pad: $(this).val()}, function(j){
+        
+      var rp_padre = "";
+      var options = "<option value=''> -- Seleccione un RP Padre -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].rp != rp_padre ){
+          
+          ganados.push( {value: j[i].id +" - "+ j[i].nombre+" - "+j[i].rp });
+          rp_padre =j[i].id +" - "+ j[i].nombre+" "+j[i].rp ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].rp + "</option>"
+
+        }
+
+      }
+
+      $("#rp_padre_rp").html(options);
+
+    })
+
+    $("#ganado_rp_padre").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#rp_padre" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#ganado_rp_padre").val( datos[2]);
+        $("#rp_padre_rp").val(datos[2]);
+        return false;
+
+      }
+
+    })
+
+  });
+
+  //buscar RP Madre
+  $("#ganado_rp_madre").bind('focus', function(){   
+
+    var ganados = [];
+    $("#ganado_rp_madre").val('');
+    $("#rp_madre_rp").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_rp_madre_path) %>", { rp_mad: $(this).val()}, function(j){
+        
+      var rp_padre = "";
+      var options = "<option value=''> -- Seleccione un RP Madre -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].rp != rp_padre ){
+          
+          ganados.push( {value: j[i].id +" - "+ j[i].nombre+" - "+j[i].rp });
+          rp_padre =j[i].id +" - "+ j[i].nombre+" "+j[i].rp ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].rp + "</option>"
+
+        }
+
+      }
+
+      $("#rp_madre_rp").html(options);
+
+    })
+
+    $("#ganado_rp_madre").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#ganado_rp_madre" ).val( ui.item.label );
+        var datos = ui.item.value.split(" - ");
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#ganado_rp_madre").val(datos[2]);
+        $("#rp_madre_rp").val(datos[2]);
+        return false;
+
+      }
+      
+      
+    })
+
+  });
 
 </script>

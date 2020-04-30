@@ -247,17 +247,52 @@ class GanadosController < ApplicationController
     @msg = ""
 
     @ganado = Ganado.find(params[:ganado_id])
-   
     auditoria_id = auditoria_antes("actualizar ganado", "ganados", @ganado)
+    raza = Raza.where("id = ?", params[:ganado][:raza_id]).first
 
     if valido
+      
 
-      @ganado.raza_id = params[:raza_id]
-      auditoria_despues(@ganado, auditoria_id)
+      @ganado.fecha_nacimiento = params[:ganado][:fecha_nacimiento]
+      @ganado.nombre = params[:ganado][:nombre]
+      @ganado.rp = params[:ganado][:rp]
+
+      if params[:rp_padre_rp].present?
+        
+        @ganado.rp_padre = params[:rp_padre_rp]
+      
+      else
+
+        @ganado.rp_padre = "No Especificado"
+
+      end
+
+      if params[:rp_madre_rp].present?
+        
+        @ganado.rp_madre = params[:rp_madre_rp]
+      
+      else
+
+        @ganado.rp_madre = "No Especificado"
+
+      end
+      
+      @ganado.codigo_rfid = params[:ganado][:codigo_rfid]
+      @ganado.potrero_id = params[:potrero][:id]
+      @ganado.peso_promedio = params[:ganado][:peso_promedio]
+      @ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+      @ganado.tipo_ganado_id = raza.tipo_ganado_id
+      @ganado.etapa_ganado_id = params[:etapa_ganado][:id]
+      @ganado.raza_id = params[:ganado][:raza_id]
+      @ganado.tipo_concepcion_id = params[:ganado][:tipo_concepcion_id]
+      @ganado.estado_ganado_id = params[:ganado][:estado_ganado_id]
+      @ganado.observacion = params[:ganado][:observacion]
+      
 
       if @ganado.save
 
         @ganado_ok = true
+        auditoria_despues(@ganado, auditoria_id)
 
       end
     
@@ -327,7 +362,7 @@ class GanadosController < ApplicationController
 
   def ganado_detalle
 
-    @ganado = Ganado.find(params[:ganado_id])
+    @ganado_detalle = Ganado.where("id =?", params[:ganado_id])
 
     respond_to do |f|
 

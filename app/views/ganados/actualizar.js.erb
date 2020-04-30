@@ -12,12 +12,13 @@
     
     $("#<%= params[:window_id]%>").modal('hide'); 
     $("#form-buscar-ganado").submit(); 
-    swal("Guardado Exitosamente.");
+    swal("Ganado modificado Exitosamente.");
     
   }, 2000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-editar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-ganado");
+  $("<div class='col-sm-12' id='msg-editar-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-editar-ganado");
+  swal("Error al modificar el Ganado. Intente más tarde.");
 
 <% end %>
