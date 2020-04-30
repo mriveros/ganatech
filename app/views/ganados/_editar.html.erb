@@ -1,4 +1,4 @@
-<%= javascript_include_tag "modulos/personas.js" %>
+
 <div class="modal-dialog" style="text-align:left;">
       
   <div class="modal-content">
@@ -12,89 +12,192 @@
 
     <%= form_for @ganado, remote: true, url: ganados_actualizar_url, html: { id: "form-editar-ganado" }, method: 'POST' do |f| %>
 
-      <%= hidden_field :ganado_id %>
+      <%= hidden_field_tag :ganado_id, params[:id] %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          
-          <div class="col-sm-4"><%= label_tag :nil, "Nombre #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :nombre ,nil,class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br />
+        <div class="table-responsive" id="table-ganado">
 
-        <div class="col-sm-4"><%= label_tag :nil, "RP #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp ,@nuevo_autoincremento.to_s,class: 'form-control input-sm', readonly: true %></div>
-          <div class="col-sm-1"></div><br />
+            <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+               <tbody>
 
-         <%= hidden_field_tag :rp_padre_rp %>
+              <tr>
 
-        <div class="col-sm-4"><%= label_tag :nil, "RP Padre".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp_padre ,nil,class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br />
+                <td>
 
-        <%= hidden_field_tag :rp_madre_rp %>
-        <div class="col-sm-4"><%= label_tag :nil, "RP Madre".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp_madre ,nil,class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br />
+                  <div class="col-sm-4"><%= label_tag :nil, "Fecha Nacimiento #{attr_requerido}".html_safe %></div><br/>
+                    <div class="col-sm-7"><%= f.date_field :fecha_nacimiento, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+                    </div>    
+                  <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-4"><%= label_tag :nil, "Código RFID".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :codigo_rfid ,nil,class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br />
+                </td>
 
-        <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+                <td>
+                  <div class="col-sm-4"><%= label_tag :nil, "Nombre #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.text_field :nombre ,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
 
-        <%= linked_combo "potrero_id", 
-        :linked =>"hacienda_id" ,
-        :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
-        :param => "hacienda_id",
-        :clase => "hacienda" %>
+              </tr>
 
-        <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+              <tr>
 
-        <div class="col-sm-4"><%= f.label :hectarea, "Peso Promedio #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= f.text_field :peso_promedio, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-        <div class="col-sm-1"></div><br /><br />
+                <td>
+                   <div class="col-sm-4"><%= label_tag :nil, "RP #{attr_requerido}".html_safe %></div><br/>
+                    <div class="col-sm-7"><%= f.text_field :rp ,class: 'form-control input-sm', readonly: true %></div>
+                    <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+                </td>
 
-        <%= linked_combo "etapa_ganado_id", 
-        :linked =>"sexo_ganado_id" ,
-        :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
-        :param => "sexo_ganado_id",
-        :clase => "etapa_ganado" %>
+                <td>
+                  <div class="col-sm-4"><%= label_tag :nil, "Código RFID".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.text_field :codigo_rfid ,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
 
-        <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+              </tr>
 
-        <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, Raza.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+              <tr>
+                
+                <td>
+                  
+                  <%= hidden_field_tag :rp_padre_rp %>
+                  <div class="col-sm-4"><%= label_tag :nil, "RP Padre".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.text_field :rp_padre ,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br />
+                
+                </td>
 
-        <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, TipoConcepcion.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
+                <td>
 
-        <div class="col-sm-4"><%= label_tag nil, "Estado Ganado #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, EstadoGanado.all, :id, :descripcion, { include_blank: false}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-        <div class="col-sm-1"></div><br/>
-          
-        </div>
+                  <%= hidden_field_tag :rp_madre_rp %>
+                  <div class="col-sm-4"><%= label_tag :nil, "RP Madre".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.text_field :rp_madre,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br />
+
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+                  <%= linked_combo "potrero_id", 
+                  :linked =>"hacienda_id" ,
+                  :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
+                  :param => "hacienda_id",
+                  :clase => "hacienda" %>
+
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+                  
+                  <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.text_field :peso_promedio,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+                  <div class="col-sm-1"></div><br />
+                
+                </td>
+
+
+                <td>
+                  
+                  <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+              </tr>
+
+              <%= linked_combo "etapa_ganado_id", 
+              :linked =>"sexo_ganado_id" ,
+              :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
+              :param => "sexo_ganado_id",
+              :clase => "etapa_ganado" %>
+
+               <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+
+                <td>
+
+                   <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.collection_select :raza_id, Raza.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.collection_select :tipo_concepcion_id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Estado Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.collection_select :estado_ganado_id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: false}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
+
+              </tr>
+
+               </tbody>
+
+            </table>
+
+          </div>
         
+        <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+            <%= f.text_area :observacion, class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          
+        </div>        
+       
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-       <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
           
       </div>
 
@@ -105,13 +208,10 @@
 
 <style type="text/css">
 
-  #form-editar-tutor label, #form-editar-tutor input[type='text'], #form-editar-tutor select { float:left; margin-top:5px;}
-  #form-editar-tutor br {clear:both; }
-  #form-editar-tutor label { width:200px;font-size:12px;margin-top:10px;}
-  #form-editar-tutor #persona_tipo_documento_id { width:60%;}
-  #form-editar-tutor #persona_nacionalidad_id { width:60%;}
-  #form-editar-tutor #persona_documento_persona { width:50%;}
-  #form-editar-tutor #persona_sexo { width:60%;}
+  #form-editar-ganado label, #form-editar-ganado input[type='text'], #form-editar-ganado select { float:left; margin-top:5px;}
+  #form-editar-ganado br {clear:both; }
+  #form-editar-ganado label { width:200px;font-size:12px;margin-top:10px;}
+
 
 </style>
 
@@ -124,6 +224,49 @@
   }, 1000);
 
   aplicar_datepicker2();
+
+  <%if @ganado.present?%>
+  
+    <%if @ganado.potrero_id.present?%>
+
+      <% hacienda = Potrero.where("id = ?", @ganado.potrero_id).first%>
+      $("#hacienda_id").val('<%=hacienda.hacienda_id%>');
+      <%potreros = Potrero.where("hacienda_id = ?", hacienda.hacienda_id)%>
+
+      <%potreros.each do |p|%>
+
+        var id = "<%=p.id%>";
+        var texto = "<%=p.descripcion%>";
+
+        $("#potrero_id").append(new Option(texto, id));
+
+      <%end%>
+
+      $("#potrero_id").val("<%=@ganado.potrero_id%>");
+
+    <%end%>
+
+    <%if @ganado.sexo_ganado_id.present?%>
+
+      
+      $("#sexo_ganado_id").val('<%=@ganado.sexo_ganado_id%>');
+      <% etapa_ganado = EtapaGanado.where("sexo_ganado_id = ?", @ganado.sexo_ganado_id)%>
+
+      <%etapa_ganado.each do |eg|%>
+
+        var id = "<%=eg.id%>";
+        var texto = "<%=eg.descripcion%>";
+
+        $("#etapa_ganado_id").append(new Option(texto, id));
+
+      <%end%>
+
+      $("#etapa_ganado_id").val("<%=@ganado.etapa_ganado_id%>");
+
+    <%end%>
+
+
+  <%end%>
   
 
    $("#btn-guardar-ganado").bind('click', function () {
