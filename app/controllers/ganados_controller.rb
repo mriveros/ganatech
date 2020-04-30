@@ -159,6 +159,9 @@ class GanadosController < ApplicationController
     @msg = ""
     @guardado_ok = false
 
+
+    raza = Raza.where("id = ?", params[:raza_ganado][:id]).first
+
     if @valido
       
       @ganado = Ganado.new()
@@ -190,7 +193,7 @@ class GanadosController < ApplicationController
       @ganado.potrero_id = params[:potrero][:id]
       @ganado.peso_promedio = params[:peso_promedio]
       @ganado.sexo_ganado_id = params[:sexo_ganado][:id]
-      @ganado.tipo_ganado_id = params[:tipo_ganado][:id]
+      @ganado.tipo_ganado_id = raza.tipo_ganado_id
       @ganado.etapa_ganado_id = params[:etapa_ganado][:id]
       @ganado.raza_id = params[:raza_ganado][:id]
       @ganado.tipo_concepcion_id = params[:tipo_concepcion][:id]
