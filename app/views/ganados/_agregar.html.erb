@@ -20,7 +20,30 @@
 
         <div class="panel-body">
 
-         
+        <div class="col-sm-4"><%= label_tag :nil, "Nombre #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :nombre ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-4"><%= label_tag :nil, "RP #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-4"><%= label_tag :nil, "RP Padre".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp_padre ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+
+        <div class="col-sm-4"><%= label_tag :nil, "RP Madre".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp_madre ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-4"><%= label_tag :nil, "Código RFID".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :codigo_rfid ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-12"><%= label_tag nil, "Potrero".html_safe %></div>
+        <div class="col-sm-5"><%= collection_select :potrero, :id, Potrero.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
+        <div class="col-sm-1"></div><br/><br/>
 
 
 
