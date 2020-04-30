@@ -437,4 +437,18 @@ before_filter :require_usuario
   end
 
 
+  def obtener_potreros
+
+    @potreros = Potrero.where("hacienda_id = ?", params[:hacienda_id])
+    
+    respond_to do |f|
+      
+      f.json { render :json => @potreros }
+    
+    end
+
+  end
+
+
+
 end

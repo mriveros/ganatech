@@ -41,6 +41,7 @@ get "crontab_ultron/index"
   get "haciendas/agregar_hacienda_detalle"
   post "haciendas/guardar_hacienda_detalle"
   get "haciendas/eliminar_hacienda_detalle" 
+  get "haciendas/obtener_potreros"
 
   #POTREROS
   get "potreros/index" 

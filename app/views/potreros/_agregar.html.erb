@@ -27,7 +27,7 @@
           <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br /><br />  
 
-           <div class="col-sm-4"><%= f.label :hectarea, "Hectáreas #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :hectarea, "Hectáreas #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :hectareas, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
           <div class="col-sm-1"></div><br /><br />
 

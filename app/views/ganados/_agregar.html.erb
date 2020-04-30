@@ -41,9 +41,27 @@
           <div class="col-sm-7"><%= text_field_tag :codigo_rfid ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-12"><%= label_tag nil, "Potrero".html_safe %></div>
-        <div class="col-sm-5"><%= collection_select :potrero, :id, Potrero.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
-        <div class="col-sm-1"></div><br/><br/>
+        <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
+        <%= linked_combo "potrero_id", 
+        :linked =>"hacienda_id" ,
+        :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
+        :param => "hacienda_id",
+        :clase => "hacienda" %>
+
+        <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
+        <div class="col-sm-4"><%= f.label :hectarea, "Peso Promedio #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= f.text_field :peso_promedio, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+        <div class="col-sm-1"></div><br /><br />
+
+        <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
 
 
 
@@ -76,6 +94,17 @@
 </style>
 
 <script type="text/javascript">
+
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
 
   setTimeout(function(){ 
     //$("#persona_documento").focus();
