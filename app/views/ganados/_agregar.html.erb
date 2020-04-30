@@ -73,6 +73,18 @@
         <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
+        <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, Raza.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
+        <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, TipoConcepcion.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
+        <div class="col-sm-4"><%= label_tag nil, "Estado Ganado #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, EstadoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
 
 
           
