@@ -63,6 +63,16 @@
         <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.all, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
         <div class="col-sm-1"></div><br/>
 
+        <%= linked_combo "etapa_ganado_id", 
+        :linked =>"sexo_ganado_id" ,
+        :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
+        :param => "sexo_ganado_id",
+        :clase => "etapa_ganado" %>
+
+        <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+        <div class="col-sm-1"></div><br/>
+
 
 
           

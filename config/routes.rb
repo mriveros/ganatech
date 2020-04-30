@@ -64,6 +64,7 @@ get "crontab_ultron/index"
   post "ganados/actualizar"
   get "ganados/eliminar"
   get "ganados/ganado_detalle"
+  get "ganados/obtener_etapa_ganado"
 
 
 

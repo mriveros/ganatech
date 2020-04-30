@@ -286,5 +286,17 @@ class GanadosController < ApplicationController
 
   end
 
+  def obtener_etapa_ganado
+
+    @etapas_ganados = EtapaGanado.where("sexo_ganado_id = ?", params[:sexo_ganado_id])
+    
+    respond_to do |f|
+      
+      f.json { render :json => @etapas_ganados }
+    
+    end
+
+  end
+
 
 end
