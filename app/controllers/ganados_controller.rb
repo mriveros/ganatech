@@ -6,7 +6,8 @@ class GanadosController < ApplicationController
   
 
   end
- 
+
+
   def lista
 
     cond = []
@@ -95,7 +96,6 @@ class GanadosController < ApplicationController
       args << params[:form_buscar_ganado_clase_ganado_id]
 
     end
-
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
@@ -212,8 +212,7 @@ class GanadosController < ApplicationController
     end
   
     rescue Exception => exc  
-    # dispone el mensaje de error 
-    #puts "Aqui si muestra el error ".concat(exc.message)
+
       if exc.present?        
         
         @excep = exc.message.split(':')    
@@ -299,8 +298,7 @@ class GanadosController < ApplicationController
     end
     
     rescue Exception => exc  
-      # dispone el mensaje de error 
-      #puts "Aqui si muestra el error ".concat(exc.message)
+      
       if exc.present?        
         
         @excep = exc.message.split(':')    
@@ -342,8 +340,7 @@ class GanadosController < ApplicationController
     end
 
     rescue Exception => exc  
-      # dispone el mensaje de error 
-      #puts "Aqui si muestra el error ".concat(exc.message)
+     
       if exc.present?        
           
         @excep = exc.message.split(':')    
