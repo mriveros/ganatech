@@ -7,11 +7,30 @@
       <td><%= gan.ganado_id %></td>
       <td style="text-transform:uppercase;"><%= gan.nombre%></td>
       <td ><%= gan.rp%></td>
+      <td ><%= gan.codigo_rfid %></td>
       <td ><%= gan.rp_padre %></td>
       <td ><%= gan.rp_madre %></td>
       <td ><%= (gan.fecha_nacimiento.present?)? gan.fecha_nacimiento.strftime('%d/%m/%Y') : "Sin Especificar" %></td>
-      <td ><%= gan.raza %></td>
-      <td ><%= gan.etapa_ganado %></td>
+      <td ><%= gan.peso_promedio %></td>
+      
+      
+      <td >
+        
+      
+       </td>
+
+    </tr>
+
+     <tr >
+
+      <td class="td-nivel-2"><%= gan.hacienda %></td>
+      <td class="td-nivel-2"><%= gan.potrero%></td>
+      <td class="td-nivel-2"><%= gan.tipo_ganado%></td>
+      <td class="td-nivel-2"><%= gan.raza %></td>
+      <td class="td-nivel-2"><%= gan.etapa_ganado %></td>
+      <td class="td-nivel-2"><%= gan.sexo_ganado %></td>
+      <td class="td-nivel-2"><%= gan.tipo_concepcion %></td>
+      <td class="td-nivel-2"><%= gan.estado_ganado %></td>
       
       <td >
         
@@ -23,7 +42,8 @@
        </td>
 
     </tr>
-s
+
+
   <% end %>
 
   <tr id="tab-paginacion">

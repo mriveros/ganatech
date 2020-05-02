@@ -27,13 +27,6 @@ class GanadosController < ApplicationController
 
     end
 
-    if params[:form_buscar_ganado_codigo_rfid].present?
-
-      cond << "codigo_rfid = ?"
-      args << params[:form_buscar_ganado_codigo_rfid]
-
-    end
-
     if params[:form_buscar_ganado_rp].present?
 
       cond << "rp = ?"
@@ -41,17 +34,25 @@ class GanadosController < ApplicationController
 
     end
 
+    if params[:form_buscar_ganado_codigo_rfid].present?
+
+      cond << "codigo_rfid = ?"
+      args << params[:form_buscar_ganado_codigo_rfid]
+
+    end
+
+
     if params[:form_buscar_ganado_rp_padre].present?
 
       cond << "rp_padre = ?"
-      args << "%#{params[:form_buscar_ganado_rp_padre]}%"
+      args << params[:form_buscar_ganado_rp_padre]
 
     end
 
     if params[:form_buscar_ganado_rp_madre].present?
 
       cond << "rp_madre = ?"
-      args << "%#{params[:form_buscar_ganado_rp_madre]}%"
+      args << params[:form_buscar_ganado_rp_madre]
 
     end
 
@@ -59,6 +60,13 @@ class GanadosController < ApplicationController
 
       cond << "fecha_nacimiento = ?"
       args << params[:form_buscar_ganado_fecha_nacimiento]
+
+    end
+
+    if params[:form_buscar_ganado_peso_promedio].present?
+
+      cond << "peso_promedio = ?"
+      args << params[:form_buscar_ganado_peso_promedio]
 
     end
 

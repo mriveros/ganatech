@@ -21,9 +21,9 @@
 
       <%= form_tag ganados_lista_path, remote: true, id: "form-buscar-ganado"  do  %>
 
-        <tr>
+        <tr class= "td-nivel-1">
 
-          <th>
+          <th >
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -48,6 +48,14 @@
             <em class="nmb"></em>
           </th>
           
+          <th>
+              <span>Codigo RFID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_ganado_codigo_rfid, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_codigo_rfid');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
          <th >
             <span>RP Padre</span>
             <div class="input-group input-group-sm">
@@ -78,25 +86,19 @@
          <th>
               <span>Peso Promedio</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, Raza.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+             <%= text_field_tag :form_buscar_ganado_peso_promedio, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_peso_promedio');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
-         <th>
-              <span>Codigo RFID</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :etapa_ganado_id, EtapaGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estapa_ganado_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th> 
+        
 
 
           <th ></th>
 
         </tr>
 
-        <tr>
+        <tr class="td-nivel-2">
 
           <th>
               <span>Hacienda</span>
@@ -178,6 +180,13 @@
 
 </div>
 
+<style type="text/css">
+
+  .td-nivel-1 {background: #e6e6e6 !important;color:#000 !important;font-weight:bold;}
+  .td-nivel-2 {background: #BFFCE1 !important;color:#000 !important;font-weight:normal;}
+  .td-nivel-1 span.limpiar { background: #fff !important;}
+
+</style>
 
 <script type="text/javascript">
 
