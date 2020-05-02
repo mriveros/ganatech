@@ -70,38 +70,60 @@ class GanadosController < ApplicationController
 
     end
 
-    if params[:form_buscar_ganado_potrero_id].present?
+    if params[:form_buscar_ganado][:hacienda_id].present?
+
+      cond << "hacienda_id = ?"
+      args << params[:form_buscar_ganado][:hacienda_id]
+
+    end
+
+
+    if params[:form_buscar_ganado][:potrero_id].present?
 
       cond << "potrero_id = ?"
-      args << params[:form_buscar_ganado_potrero_id]
+      args << params[:form_buscar_ganado][:potrero_id]
 
     end
 
-    if params[:form_buscar_ganado_raza_id].present?
+    if params[:form_buscar_ganado][:tipo_ganado_id].present?
+
+      cond << "tipo_ganado_id = ?"
+      args << params[:form_buscar_ganado][:tipo_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado][:raza_ganado_id].present?
 
       cond << "raza_id = ?"
-      args << params[:form_buscar_ganado_raza_id]
+      args << params[:form_buscar_ganado][:raza_ganado_id]
 
     end
 
-    if params[:form_buscar_ganado_tipo_concepcion_id].present?
+    if params[:form_buscar_ganado][:etapa_ganado_id].present?
+
+      cond << "etapa_ganado_id = ?"
+      args << params[:form_buscar_ganado][:etapa_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado][:sexo_ganado_id].present?
+
+      cond << "sexo_ganado_id = ?"
+      args << params[:form_buscar_ganado][:sexo_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado][:tipo_concepcion_id].present?
 
       cond << "tipo_concepcion_id = ?"
-      args << params[:form_buscar_ganado_tipo_concepcion_id]
+      args << params[:form_buscar_ganado][:tipo_concepcion_id]
 
     end
 
-    if params[:form_buscar_ganado_estado_ganado_id].present?
+    if params[:form_buscar_ganado][:estado_ganado_id].present?
 
       cond << "estado_ganado_id = ?"
-      args << params[:form_buscar_ganado_estado_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado_clase_ganado_id].present?
-
-      cond << "clase_ganado_id = ?"
-      args << params[:form_buscar_ganado_clase_ganado_id]
+      args << params[:form_buscar_ganado][:estado_ganado_id]
 
     end
 

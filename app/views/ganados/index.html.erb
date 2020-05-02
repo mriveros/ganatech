@@ -103,24 +103,24 @@
           <th>
               <span>Hacienda</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, Hacienda.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :hacienda_id, Hacienda.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
             <th>
               <span>Potrero</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, Potrero.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :potrero_id, Potrero.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_potrero_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
          <th>
               <span>Tipo Ganado</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :tipo_ganado_id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_tipo_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
@@ -135,32 +135,32 @@
           <th>
               <span>Clasificacion</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, EtapaGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :etapa_ganado_id, EtapaGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_etapa_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
               <span>Sexo</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :sexo_ganado_id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_sexo_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
          <th>
               <span>Tipo Concepcion</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :raza_ganado_id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :tipo_concepcion_id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_tipo_concepcion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
          <th>
               <span>Estado</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :etapa_ganado_id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estapa_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado, :estado_ganado_id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
