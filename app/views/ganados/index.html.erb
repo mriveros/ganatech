@@ -99,7 +99,7 @@
         <tr>
 
           <th>
-            <span>ID</span>
+            <span>Tipo Ganado</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_id, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_id');"><i class="fa fa-times"></i></span>
@@ -107,7 +107,7 @@
           </th>
           
            <th >
-            <span>Nombre</span>
+            <span>Hacienda</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_nombre');"><i class="fa fa-times"></i></span>
@@ -115,7 +115,7 @@
           </th>
 
           <th >
-            <span>RP</span>
+            <span>Potrero</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_rp');"><i class="fa fa-times"></i></span>
@@ -124,7 +124,7 @@
           </th>
           
          <th >
-            <span>RP Padre</span>
+            <span>Clasificacion</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_ganado_rp_padre, nil, :class => 'form-control', :placeholder => "" %>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_rp_padre');"><i class="fa fa-times"></i></span>
@@ -133,7 +133,7 @@
           </th>
 
           <th >
-            <span>RP Madre</span>
+            <span>Peso</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_ganado_rp_madre, nil, :class => 'form-control', :placeholder => "" %>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_rp_madre');"><i class="fa fa-times"></i></span>
@@ -142,7 +142,7 @@
           </th>
 
           <th>
-            <div><%= label_tag nil, "Fecha Nacimiento".html_safe %></div>
+            <div><%= label_tag nil, "Sexo".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_ganado_fecha_nacimiento, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -151,7 +151,7 @@
          </th>
 
          <th>
-              <span>Raza</span>
+              <span>Tipo COncepcion</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_ganado, :raza_ganado_id, Raza.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
@@ -170,7 +170,7 @@
           <th ></th>
 
         </tr>
-        
+
 
         <% end %>
 
