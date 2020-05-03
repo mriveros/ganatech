@@ -7,6 +7,33 @@
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Ganados Detalles</h3>
       </div>
+        <div>
+      
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar observación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+      
+        </div>
+      
+        <div>
+        
+          <%if @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra]%>
+          
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> marcar celo".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          
+          <%end%>
+        
+        </div>
+
+        <div>
+          
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar alimentación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          
+        </div>
+
+        <div>
+
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>control sanitario".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          
+        </div>
 
     </div>
 
@@ -32,14 +59,14 @@
 
             <% if @ganado_detalle.present? %>
             
-              <% @ganado_detalle.each do |gd|%>
+              <%# @ganado_detalle.each do |gd|%>
 
                 <tr>
-                  <td><%= gd.observacion %></td>
+                  <td><%= @ganado_detalle.observacion %></td>
 
                 </tr>
 
-              <% end %>
+              <%#end %>
 
             <% else %>
 

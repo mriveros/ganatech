@@ -387,17 +387,6 @@ class GanadosController < ApplicationController
 
   end
 
-  def ganado_detalle
-
-    @ganado_detalle = Ganado.where("id =?", params[:ganado_id])
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
 
   def obtener_etapa_ganado
 
@@ -410,6 +399,7 @@ class GanadosController < ApplicationController
     end
 
   end
+
 
   def buscar_rp_padre
     
@@ -424,6 +414,7 @@ class GanadosController < ApplicationController
     
   end
 
+
   def buscar_rp_madre
     
     @ganados =  Ganado.where("nombre ilike ? and sexo_ganado_id = ?", "%#{params[:rp_mad]}%", PARAMETRO[:sexo_ganado_hembra])
@@ -435,6 +426,19 @@ class GanadosController < ApplicationController
     
     end
     
+  end
+
+
+  def ganado_detalle
+
+    @ganado_detalle = Ganado.where("id =?", params[:ganado_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
   end
 
 
