@@ -21,20 +21,23 @@
 
           <div class="col-sm-4"><%= label_tag nil, "Control #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
           <div class="col-sm-7"><%= collection_select :control, :id, Control.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br /><br />
           
-          <div id= "control_otro" hidden="true">
+          <div id= "control_otro" hidden>
 
+            <%= hidden_field_tag :medicamento_id %>
+            <div class="col-sm-4"><%= label_tag :nil, "Medicamento #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
+            <div class="col-sm-1"></div><br />
 
-                  <%= hidden_field_tag :medicamento_id %>
-                  <div class="col-sm-4"><%= label_tag :nil, "Medicamento".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= text_field_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
-                  <div class="col-sm-1"></div><br />
+            <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+            <div class="col-sm-1"></div><br />
 
 
           </div>
 
-          <div id= "control_peso" hidden="true">
+          <div id= "control_peso" hidden>
 
 
 
@@ -63,6 +66,7 @@
   #form-agregar-control-sanitario label, #form-agregar-control-sanitario input[type='text'] { float:left; margin-top:5px;}
   #form-agregar-control-sanitario br {clear:both; }
   #form-agregar-control-sanitario label { width:200px; font-size:12px;}
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
 
@@ -77,18 +81,39 @@
   }, 1000);
 
 
+   $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
+
+
   $("#control_id").bind('change', function () {
 
     if ($("#control_id").val() === "<%=PARAMETRO[:control_peso]%>")
     {
 
-      $("#control_peso").hide(false)
-      $("#control_otro").hide(true)
+      $("#control_peso").show();
+      $("#control_otro").hide();
 
     }else{
 
-      $("#control_otro").hide(false)
-      $("#control_peso").hide(true)
+      $("#control_otro").show();
+      $("#control_peso").hide();
 
     }
 
@@ -123,7 +148,7 @@
 
     })
 
-    $("#rp_padre").autocomplete({
+    $("#medicamento").autocomplete({
 
       minLength: 1,
       source: medicamentos,

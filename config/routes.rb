@@ -71,6 +71,18 @@ get "crontab_ultron/index"
   post "ganados/guardar_control_sanitario"
 
 
+  #MEDICAMENTOS
+  get "medicamentos/index" 
+  post "medicamentos/lista"
+  get "medicamentos/lista"
+  get "medicamentos/agregar"
+  post "medicamentos/guardar"
+  get "medicamentos/editar"
+  post "medicamentos/actualizar"
+  get "medicamentos/eliminar"
+  get "medicamentos/buscar_medicamento"
+
+
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 
