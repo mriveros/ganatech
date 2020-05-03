@@ -67,6 +67,8 @@ get "crontab_ultron/index"
   get "ganados/obtener_etapa_ganado"
   get "ganados/buscar_rp_padre"
   get "ganados/buscar_rp_madre"
+  get "ganados/agregar_control_sanitario"
+  post "ganados/guardar_control_sanitario"
 
 
 

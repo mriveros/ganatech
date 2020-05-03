@@ -32,6 +32,15 @@ development:
   #SEXOS GANADOS
   sexo_ganado_macho: 1
   sexo_ganado_hembra: 2
+
+  #controles
+  control_vacunacion: 1
+  control_sales: 2
+  control_reconstituyente: 3
+  control_interno: 4
+  control_externo: 5
+  control_antibiotico: 6
+  control_peso: 7
   
 
 production:
@@ -69,5 +78,14 @@ production:
   #SEXOS GANADOS
   sexo_ganado_macho: 1
   sexo_ganado_hembra: 2
+
+  #controles
+  control_vacunacion: 1
+  control_sales: 2
+  control_reconstituyente: 3
+  control_interno: 4
+  control_externo: 5
+  control_antibiotico: 6
+  control_peso: 7
   
   

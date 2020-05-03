@@ -31,7 +31,9 @@
 
         <div>
 
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>control sanitario".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>control sanitario".html_safe, "#", id: "link-to-agregar-control-sanitario", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+          <%= modal_window( window_id: "modal-window-agregar-control-sanitario", link_to_id: "#link-to-agregar-control-sanitario", url: ganados_agregar_control_sanitario_path( window_id: "modal-window-agregar-control-sanitario", ganado_id: params[:ganado_id]) )%>
           
         </div>
 
@@ -81,6 +83,111 @@
       </div>
       
     </div>
+
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Control Sanitario</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-ganado-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Observación</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="ganado-detalle-lista">
+
+            <% if @ganado_detalle.present? %>
+            
+              <%# @ganado_detalle.each do |gd|%>
+
+                <tr>
+                  <td><%= @ganado_detalle.observacion %></td>
+
+                </tr>
+
+              <%#end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Alimentación</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-ganado-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Observación</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="ganado-detalle-lista">
+
+            <% if @ganado_detalle.present? %>
+            
+              <%# @ganado_detalle.each do |gd|%>
+
+                <tr>
+                  <td><%= @ganado_detalle.observacion %></td>
+
+                </tr>
+
+              <%#end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+
     
   </div>
 
