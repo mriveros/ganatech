@@ -25,7 +25,11 @@
           
           <div id= "control_otro" hidden="true">
 
-            
+
+                  <%= hidden_field_tag :medicamento_id %>
+                  <div class="col-sm-4"><%= label_tag :nil, "Medicamento".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br />
 
 
           </div>
@@ -89,6 +93,57 @@
     }
 
   })
+
+
+  $("#medicamento").bind('focus', function(){   
+
+    var medicamentos = [];
+
+    $("#medicamento").val('');
+    $("#medicamento_id").val('');
+
+    $.getJSON("<%= url_for(medicamentos_buscar_medicamento_path) %>", { medicamento: $(this).val()}, function(j){
+        
+      var medicamento = "";
+      var options = "<option value=''> -- Seleccione un Medicamento -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_medicamento != medicamento ){
+          
+          medicamentos.push( {value: j[i].id +" - "+ j[i].nombre_medicamento+" - "+j[i].descripcion });
+          medicamento =j[i].id +" - "+ j[i].nombre_medicamento+" "+j[i].descripcion ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].descripcion + "</option>"
+
+        }
+
+      }
+
+      $("#medicamento_id").html(options);
+
+    })
+
+    $("#rp_padre").autocomplete({
+
+      minLength: 1,
+      source: medicamentos,
+      focus: function( event, ui ) {
+      
+        $("#medicamento" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#medicamento").val( ui.item.label);
+        $("#medicamento_id").val(datos[0]);
+        return false;
+
+      }
+
+    })
+
+  });
 
  
 
