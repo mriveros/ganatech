@@ -433,7 +433,9 @@ class GanadosController < ApplicationController
 
     @ganado_detalle = Ganado.where("id =?", params[:ganado_id]).first
 
-    @control_ganado = VControlGanado.where("ganado_id =?", params[:ganado_id])
+    @control_sanitario = VControlGanado.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
+
+    @control_alimentacion = VControlAlimentacion.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
 
     respond_to do |f|
 
@@ -464,17 +466,15 @@ class GanadosController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
-    puts params[:control][:id]
-    puts PARAMETRO[:control_peso]
 
     if params[:control][:id].to_i != PARAMETRO[:control_peso]
 
-      medicamento = Medicamento.where("id =?", params[:medicamento_id]).first
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
       
-      if medicamento.cantidad_stock < params[:cantidad_suministrada]
+      if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
 
         @valido = false
-        @msg = "No hay suficiente stock del medicamento"
+        @msg = "No hay suficiente stock del Medicamento"
 
       end
 
@@ -504,7 +504,7 @@ class GanadosController < ApplicationController
 
         if @control_ganado.save
 
-          auditoria_nueva("agregar control de ganado", "controles_ganados", @control_ganado)
+          auditoria_nueva("agregar control sanitario de ganado", "controles_ganados", @control_ganado)
           @guardado_ok = true
          
         end 
@@ -542,6 +542,115 @@ class GanadosController < ApplicationController
       if @control_sanitario.destroy
 
         auditoria_nueva("eliminar control sanitario", "controles_ganados", @control_sanitario_elim)
+
+        @eliminado = true
+
+      end
+
+    end
+
+    rescue Exception => exc  
+     
+      if exc.present?        
+          
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        @eliminado = false
+        
+      end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def agregar_control_alimentacion
+
+    @fecha = Date.today
+    
+    @control_ganado = ControlAlimentacion.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+   def guardar_control_alimentacion
+    
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+   
+
+   
+
+    alimentacion = Alimentacion.where("id = ?", params[:alimento_id]).first
+      
+    if alimentacion.cantidad_stock < params[:cantidad_suministrada].to_i
+
+      @valido = false
+      @msg = "No hay suficiente stock del Alimento"
+
+    end
+  
+
+    if @valido
+      
+      @control_alimentacion = ControlAlimentacion.new()
+      @control_alimentacion.fecha_control = params[:fecha_control]
+      @control_alimentacion.ganado_id = params[:ganado_id]
+      @control_alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+      @control_alimentacion.alimentacion_id = params[:alimentacion][:id]
+      @control_alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
+      @control_alimentacion.observacion = params[:observacion]
+
+        if @control_alimentacion.save
+
+          auditoria_nueva("agregar control de alimentacion al ganado", "controles_alimentaciones", @control_alimentacion)
+          @guardado_ok = true
+         
+        end 
+
+    end
+  
+    rescue Exception => exc  
+    
+      if exc.present?
+
+        @excep = exc.message.split(':')    
+        @msg = @excep
+      
+      end                
+
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def eliminar_control_alimentacion
+
+    @valido = true
+    @msg = ""
+
+    @control_alimentacion = ControlAlimentacion.where("id = ?", params[:control_alimentacion_id]).first
+
+    @control_alimentacion_elim = @control_alimentacion  
+
+    if @valido
+
+      if @control_alimentacion.destroy
+
+        auditoria_nueva("eliminar control de alimentacion de ganado", "controles_alimentaciones", @control_alimentacion_elim)
 
         @eliminado = true
 

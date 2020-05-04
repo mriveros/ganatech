@@ -70,6 +70,9 @@ get "crontab_ultron/index"
   get "ganados/agregar_control_sanitario"
   post "ganados/guardar_control_sanitario"
   get "ganados/eliminar_control_sanitario"
+  get "ganados/agregar_control_alimentacion"
+  post "ganados/guardar_control_alimentacion"
+  get "ganados/eliminar_control_alimentacion"
 
 
   #MEDICAMENTOS

@@ -95,7 +95,7 @@
    
     <div class="panel-body">
       
-      <div class="table-responsive" id="table-ganado-detalle">
+      <div class="table-responsive" id="table-ganado-detalle-control-sanitario">
           
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
             
@@ -116,11 +116,11 @@
             
           </thead>
        
-          <tbody id="ganado-detalle-lista">
+          <tbody id="ganado-detalle-lista-control-sanitario">
 
-            <% if @control_ganado.present? %>
+            <% if @control_sanitario.present? %>
             
-              <% @control_ganado.each do |cg|%>
+              <% @control_sanitario.each do |cg|%>
 
                 <tr>
                   
@@ -136,6 +136,12 @@
                 </tr>
 
               <%end %>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_sanitario, :params => params %></div></td>
+                
+            </tr>
 
             <% else %>
 
@@ -162,7 +168,7 @@
    
     <div class="panel-body">
       
-      <div class="table-responsive" id="table-ganado-detalle">
+      <div class="table-responsive" id="table-ganado-detalle-control-alimentacion">
           
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
             
@@ -176,7 +182,7 @@
             
           </thead>
        
-          <tbody id="ganado-detalle-lista">
+          <tbody id="ganado-detalle-lista-control-alimentacion">
 
             <% if @ganado_detalle.present? %>
             

@@ -1,7 +1,7 @@
 class VControlGanado < ActiveRecord::Base
 
   self.table_name="v_controles_ganados"
-  self.primary_key="id"
+  self.primary_key="control_ganado_id"
   
   attr_accessible :control_ganado_id, :ganado_id, :ganado_nombre, :ganado_rp , 
   :control_id, :control, :medicamento_id, :medicamento, :peso, 

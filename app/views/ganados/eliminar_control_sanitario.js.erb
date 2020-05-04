@@ -1,6 +1,6 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganado-detalle");
+   $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganado-detalle-control-sanitario");
    
     setTimeout(
 
@@ -16,7 +16,7 @@
     
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-ganado-detalle");
+  $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-ganado-detalle-control-sanitario");
   setTimeout(function(){ 
     
     $("#msg-eliminar-control-sanitario").remove();
