@@ -1,4 +1,4 @@
-class MedicamentosController < ApplicationController
+class AlimentosController < ApplicationController
 
 before_filter :require_usuario
 
@@ -20,7 +20,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @medicamento = Medicamento.new
+    @alimento = Alimentacion.new
 
     respond_to do |f|
       f.js
@@ -32,7 +32,7 @@ before_filter :require_usuario
 
     valido = true
     @msg = ""
-    @medicamento_ok = false
+    @alimento_ok = false
           
                
     respond_to do |f|
@@ -48,7 +48,7 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @medicamento = Medicamento.find(params[:id])
+    @alimento = Alimentacion.find(params[:id])
 
     
         
@@ -62,7 +62,7 @@ before_filter :require_usuario
 
   def editar
 
-    @medicamento = Medicamento.find(params[:id])
+    @alimento = Alimentacion.find(params[:id])
 
     respond_to do |f|
 
@@ -77,8 +77,8 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @medicamento = Medicamento.find(params[:medicamento][:id])
-    auditoria_id = auditoria_antes("actualizar medicamento", "medicamentos", @medicamento)
+    @alimento = Alimentacion.find(params[:alimento][:id])
+    auditoria_id = auditoria_antes("actualizar alimento", "alimentos", @alimento)
 
 
      respond_to do |f|
@@ -90,14 +90,14 @@ before_filter :require_usuario
   end
 
 
-  def buscar_medicamento
+  def buscar_alimentacion
 
-    @medicamentos = Medicamento.where("nombre_medicamento ilike ?", "%#{params[:medicamento]}%")
+    @alimentaciones = Alimentacion.where("nombre_alimento ilike ?", "%#{params[:alimento]}%")
 
     respond_to do |f|
       
       f.html
-      f.json { render :json => @medicamentos }
+      f.json { render :json => @alimentaciones }
     
     end
 
