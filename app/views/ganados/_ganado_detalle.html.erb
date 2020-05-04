@@ -141,7 +141,7 @@
 
                 <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_sanitario, :params => params %></div></td>
                 
-            </tr>
+              </tr>
 
             <% else %>
 
@@ -175,8 +175,13 @@
           <thead>
               
             <tr role="row">
-              
+
+              <th>Fecha</th>
+              <th>Tipo Alimento</th>
+              <th>Alimento</th>
+              <th>Cantidad Suministrada</th>
               <th>Observación</th>
+              <th></th>
               
             </tr>
             
@@ -184,16 +189,29 @@
        
           <tbody id="ganado-detalle-lista-control-alimentacion">
 
-            <% if @ganado_detalle.present? %>
+            <% if @control_alimentacion.present? %>
             
-              <%# @ganado_detalle.each do |gd|%>
+              <% @control_alimentacion.each do |ca|%>
 
                 <tr>
-                  <td><%= @ganado_detalle.observacion %></td>
+                  
+                  <td><%= ca.fecha_control.strftime('%d/%m/%Y') %></td>
+                  <td><%= ca.tipo_alimentacion %></td>
+                  <td><%= ca.alimento%></td>
+                  <td><%= ca.cantidad_suministrada%></td>
+                  <td><%= ca.observacion %></td>
+                  <td> <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_alimentacion(#{ca.control_alimentacion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%></td>
+
 
                 </tr>
 
-              <%#end %>
+              <%end %>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_alimentacion, :params => params %></div></td>
+                
+              </tr>
 
             <% else %>
 
@@ -235,6 +253,39 @@
               $.ajax({
                 url: "<%= url_for(ganados_eliminar_control_sanitario_path) %>", 
                 data: {control_ganado_id: control_ganado_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+    function eliminar_registro_control_alimentacion(control_alimentacion_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de Controles de Alimentación.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_eliminar_control_alimentacion_path) %>", 
+                data: {control_alimentacion_id: control_alimentacion_id},
                 dataType: 'script'
               });
             
