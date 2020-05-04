@@ -103,7 +103,13 @@
               
             <tr role="row">
               
+              <th>Fecha</th>
+              <th>Control</th>
+              <th>Medicamento</th>
+              <th>Cantidad Suministrada</th>
+              <th>Peso</th>
               <th>Observación</th>
+
               
             </tr>
             
@@ -111,16 +117,22 @@
        
           <tbody id="ganado-detalle-lista">
 
-            <% if @ganado_detalle.present? %>
+            <% if @control_ganado.present? %>
             
-              <%# @ganado_detalle.each do |gd|%>
+              <% @control_ganado.each do |cg|%>
 
                 <tr>
-                  <td><%= @ganado_detalle.observacion %></td>
+                  
+                  <td><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
+                  <td><%= cg.control %></td>
+                  <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
+                  <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
+                  <td><%= cg.peso %></td>
+                  <td><%= cg.observacion %></td>
 
                 </tr>
 
-              <%#end %>
+              <%end %>
 
             <% else %>
 

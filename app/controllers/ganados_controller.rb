@@ -433,6 +433,8 @@ class GanadosController < ApplicationController
 
     @ganado_detalle = Ganado.where("id =?", params[:ganado_id]).first
 
+    @control_ganado = VControlGanado.where("ganado_id =?", params[:ganado_id])
+
     respond_to do |f|
 
       f.js
@@ -443,6 +445,8 @@ class GanadosController < ApplicationController
 
 
   def agregar_control_sanitario
+
+    @fecha = Date.today
     
     @control_ganado = ControlGanado.new
 
@@ -460,38 +464,47 @@ class GanadosController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
+    puts params[:control][:id]
+    puts PARAMETRO[:control_peso]
 
-    unless params[:persona_documento].present?
+    if params[:control][:id].to_i != PARAMETRO[:control_peso]
 
-      @valido = false
-      @msg += " Debe Completar el campo Documento. \n"
+      medicamento = Medicamento.where("id =?", params[:medicamento_id]).first
+      
+      if medicamento.cantidad_stock < params[:cantidad_suministrada]
 
-    end
+        @valido = false
+        @msg = "No hay suficiente stock del medicamento"
 
-    unless params[:persona_nombre].present?
-
-      @valido = false
-      @msg += " El nombre del Paciente no puede estar vacío. \n"
-
-    end
-
-    unless params[:parentezco][:id].present?
-
-      @valido = false
-      @msg += " El apellido del Paciente no puede estar vacío. \n"
+      end
 
     end
+   
 
     if @valido
       
-      @tutor_Detalle = TutorDetalle.new()
-      @tutor_Detalle.tutor_id = params[:tutor_id]
-      @tutor_Detalle.paciente_id = params[:paciente_id]
-      @tutor_Detalle.parentezco_id = params[:parentezco][:id]
+      @control_ganado = ControlGanado.new()
+      @control_ganado.fecha_control = params[:fecha_control]
+      @control_ganado.ganado_id = params[:ganado_id]
+      @control_ganado.control_id = params[:control][:id]
 
-        if @tutor_Detalle.save
+      if params[:control_id] == PARAMETRO[:control_peso]
 
-          auditoria_nueva("registrar paciente asignado a tutor", "tutores_detalles", @tutor_Detalle)
+        @control_ganado.peso = params[:peso_promedio_control]
+      
+      else
+
+        @control_ganado.peso = params[:peso_promedio]
+        @control_ganado.medicamento_id = params[:medicamento_id]
+        @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+
+      end
+
+      @control_ganado.observacion = params[:observacion]
+
+        if @control_ganado.save
+
+          auditoria_nueva("agregar control de ganado", "controles_ganados", @control_ganado)
           @guardado_ok = true
          
         end 
@@ -499,11 +512,10 @@ class GanadosController < ApplicationController
     end
   
     rescue Exception => exc  
-    # dispone el mensaje de error 
-    #puts "Aqui si muestra el error ".concat(exc.message)
+    
       if exc.present?        
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
+        @msg = @excep
       
       end                
 
