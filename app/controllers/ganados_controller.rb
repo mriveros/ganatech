@@ -513,7 +513,8 @@ class GanadosController < ApplicationController
   
     rescue Exception => exc  
     
-      if exc.present?        
+      if exc.present?
+
         @excep = exc.message.split(':')    
         @msg = @excep
       
@@ -525,6 +526,45 @@ class GanadosController < ApplicationController
 
     end
   
+  end
+
+  def eliminar_control_sanitario
+
+    @valido = true
+    @msg = ""
+
+    @control_sanitario = ControlGanado.where("id = ?", params[:control_ganado_id]).first
+
+    @control_sanitario_elim = @control_sanitario  
+
+    if @valido
+
+      if @control_sanitario.destroy
+
+        auditoria_nueva("eliminar control sanitario", "controles_ganados", @control_sanitario_elim)
+
+        @eliminado = true
+
+      end
+
+    end
+
+    rescue Exception => exc  
+     
+      if exc.present?        
+          
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        @eliminado = false
+        
+      end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
   end
 
 

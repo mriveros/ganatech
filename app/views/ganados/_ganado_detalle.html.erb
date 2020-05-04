@@ -105,10 +105,11 @@
               
               <th>Fecha</th>
               <th>Control</th>
+              <th>Peso</th>
               <th>Medicamento</th>
               <th>Cantidad Suministrada</th>
-              <th>Peso</th>
               <th>Observación</th>
+              <th></th>
 
               
             </tr>
@@ -125,10 +126,12 @@
                   
                   <td><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
                   <td><%= cg.control %></td>
+                  <td><%= cg.peso %></td>
                   <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
-                  <td><%= cg.peso %></td>
                   <td><%= cg.observacion %></td>
+                  <td> <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%></td>
+
 
                 </tr>
 
@@ -205,9 +208,39 @@
 
 </td>
 
+<script type="text/javascript">
 
-  <script type="text/javascript">
+  function eliminar_registro(control_ganado_id) {
 
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de Controles Sanitarios.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
 
+              $.ajax({
+                url: "<%= url_for(ganados_eliminar_control_sanitario_path) %>", 
+                data: {control_ganado_id: control_ganado_id},
+                dataType: 'script'
+              });
+            
+          } else{
 
-  </script>
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>
