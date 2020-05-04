@@ -588,7 +588,7 @@ class GanadosController < ApplicationController
     @msg = ""
     @guardado_ok = false
    
-    alimentacion = Alimentacion.where("id = ?", params[:alimento_id]).first
+    alimentacion = Alimentacion.where("id = ?", params[:alimentacion_id]).first
       
     if alimentacion.cantidad_stock < params[:cantidad_suministrada].to_i
 
@@ -604,7 +604,7 @@ class GanadosController < ApplicationController
       @control_alimentacion.fecha_control = params[:fecha_control]
       @control_alimentacion.ganado_id = params[:ganado_id]
       @control_alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-      @control_alimentacion.alimentacion_id = params[:alimentacion][:id]
+      @control_alimentacion.alimentacion_id = params[:alimentacion_id]
       @control_alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
       @control_alimentacion.observacion = params[:observacion]
 

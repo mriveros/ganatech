@@ -1,4 +1,4 @@
-class AlimentosController < ApplicationController
+class AlimentacionesController < ApplicationController
 
 before_filter :require_usuario
 
@@ -92,7 +92,11 @@ before_filter :require_usuario
 
   def buscar_alimentacion
 
-    @alimentaciones = Alimentacion.where("nombre_alimento ilike ?", "%#{params[:alimentacion]}%")
+    if params[:tipo_alimentacion].present?
+      
+      @alimentaciones = Alimentacion.where("nombre_alimento ilike ? and tipo_alimentacion_id = ?", "%#{params[:alimentacion]}%", params[:tipo_alimentacion])
+
+    end
 
     respond_to do |f|
       

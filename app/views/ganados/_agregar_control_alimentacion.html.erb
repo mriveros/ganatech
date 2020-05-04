@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @control_alimentacion, remote: true, url: ganados_guardar_control_alimentacion_url, html: { id: "form-agregar-control-sanitario" } do |f| %>
+    <%= form_for @control_alimentacion, remote: true, url: ganados_guardar_control_alimentacion_url, html: { id: "form-agregar-control-alimentacion" } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -26,7 +26,7 @@
           <div class="col-sm-1"></div><br /> <br />  
 
           <div class="col-sm-4"><%= label_tag nil, "Tipo Alimentación #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :control, :id, TipoAlimentacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :tipo_alimentacion, :id, TipoAlimentacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
             <%= hidden_field_tag :alimentacion_id %>
@@ -108,7 +108,7 @@
     $("#alimentacion").val('');
     $("#alimentacion_id").val('');
 
-    $.getJSON("<%= url_for(alimentaciones_buscar_alimentacion_path) %>", { alimentacion: $(this).val()}, function(j){
+    $.getJSON("<%= url_for(alimentaciones_buscar_alimentacion_path) %>", { alimentacion: $(this).val(), tipo_alimentacion: $("#tipo_alimentacion_id").val()}, function(j){
         
       var alimentacion = "";
       var options = "<option value=''> -- Seleccione una Alimentación -- </option>"
@@ -167,22 +167,22 @@
 
       if($("#tipo_alimentacion_id").val().length == 0){
 
-        msg +="Seleccione el tipo de Alimentación realizado.\n"
+        msg +="Seleccione el tipo de Alimentación.\n"
         valido = false
       
       }
       
 
-      if($("#medicamento_id").val().length == 0){
+      if($("#alimentacion_id").val().length == 0){
 
-            msg +="Debe ingresar el medicamento utilizado en el control.\n"
+            msg +="Debe ingresar el alimento utilizado en el control.\n"
             valido = false
           
         }
 
       if($("#cantidad_suministrada").val().length == 0){
 
-            msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
+            msg +="Debe ingresar la cantidad de alimento suministrado.\n"
             valido = false
           
         }
@@ -203,7 +203,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-control-sanitario").submit();
+            $("#form-agregar-control-alimentacion").submit();
             
           } 
 
