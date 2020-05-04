@@ -25,7 +25,8 @@
 
         <div>
           
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar alimentación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar alimentación".html_safe, "#", id: "link-to-agregar-control-alimentacion", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= modal_window( window_id: "modal-window-agregar-control-alimentacion", link_to_id: "#link-to-agregar-control-alimentacion", url: ganados_agregar_control_alimentacion_path( window_id: "modal-window-agregar-control-alimentacion", ganado_id: params[:ganado_id]) )%>
           
         </div>
 
@@ -65,6 +66,7 @@
 
                 <tr>
                   <td><%= @ganado_detalle.observacion %></td>
+                   <td>EN ESTA SECCION SE VISUALIZARA LOS CAMBIOS DE ESTADOS DE CLASIFICACION ANIMAL</td>
 
                 </tr>
 

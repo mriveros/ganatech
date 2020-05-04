@@ -588,9 +588,6 @@ class GanadosController < ApplicationController
     @msg = ""
     @guardado_ok = false
    
-
-   
-
     alimentacion = Alimentacion.where("id = ?", params[:alimento_id]).first
       
     if alimentacion.cantidad_stock < params[:cantidad_suministrada].to_i
