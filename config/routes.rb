@@ -86,6 +86,17 @@ get "crontab_ultron/index"
   get "medicamentos/eliminar"
   get "medicamentos/buscar_medicamento"
 
+  #ALIMENTACIONES
+  get "alimentaciones/index" 
+  post "alimentaciones/lista"
+  get "alimentaciones/lista"
+  get "alimentaciones/agregar"
+  post "alimentaciones/guardar"
+  get "alimentaciones/editar"
+  post "alimentaciones/actualizar"
+  get "alimentaciones/eliminar"
+  get "alimentaciones/buscar_alimentacion"
+
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------

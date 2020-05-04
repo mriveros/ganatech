@@ -92,7 +92,7 @@ before_filter :require_usuario
 
   def buscar_alimentacion
 
-    @alimentaciones = Alimentacion.where("nombre_alimento ilike ?", "%#{params[:alimento]}%")
+    @alimentaciones = Alimentacion.where("nombre_alimento ilike ?", "%#{params[:alimentacion]}%")
 
     respond_to do |f|
       

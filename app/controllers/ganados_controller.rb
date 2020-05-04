@@ -435,7 +435,7 @@ class GanadosController < ApplicationController
 
     @control_sanitario = VControlGanado.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
 
-    @control_alimentacion = VControlAlimentacion.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
+    @control_alimentacion = VControlAlimentacion.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
 
     respond_to do |f|
 
@@ -571,7 +571,7 @@ class GanadosController < ApplicationController
 
     @fecha = Date.today
     
-    @control_ganado = ControlAlimentacion.new
+    @control_alimentacion = ControlAlimentacion.new
 
    respond_to do |f|
 

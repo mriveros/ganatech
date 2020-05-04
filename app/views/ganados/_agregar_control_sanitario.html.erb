@@ -158,7 +158,7 @@
           medicamentos.push( {value: j[i].id +" - "+ j[i].nombre_medicamento+" - "+j[i].descripcion });
           medicamento =j[i].id +" - "+ j[i].nombre_medicamento+" "+j[i].descripcion ;
 
-          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" - "+j[i].descripcion + "</option>"
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre_medicamento+" - "+j[i].descripcion + "</option>"
 
         }
 
@@ -244,7 +244,7 @@
 
         swal({
           title: "Confirmar Control",
-          text: "Al confirmar el Control Sanitario éste podrá visualizarse en el historial del Ganado.",
+          text: "Al confirmar el Control Sanitario éste podrá visualizarse en el detalle del Ganado.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
