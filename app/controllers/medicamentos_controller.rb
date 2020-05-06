@@ -6,9 +6,8 @@ before_filter :require_usuario
 
   end
 
-  def lista
 
-    
+  def lista
 
     respond_to do |f|
 
@@ -17,6 +16,7 @@ before_filter :require_usuario
     end
 
   end
+
 
   def agregar
 
@@ -33,8 +33,7 @@ before_filter :require_usuario
     valido = true
     @msg = ""
     @medicamento_ok = false
-          
-               
+                  
     respond_to do |f|
 
       f.js
@@ -49,8 +48,6 @@ before_filter :require_usuario
     @msg = ""
 
     @medicamento = Medicamento.find(params[:id])
-
-    
         
     respond_to do |f|
 
@@ -80,7 +77,6 @@ before_filter :require_usuario
     @medicamento = Medicamento.find(params[:medicamento][:id])
     auditoria_id = auditoria_antes("actualizar medicamento", "medicamentos", @medicamento)
 
-
      respond_to do |f|
 
       f.js
@@ -102,6 +98,5 @@ before_filter :require_usuario
     end
 
   end
-
 
 end
