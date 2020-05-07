@@ -1,0 +1,3 @@
+<%= link_to "<span class='glyphicon glyphicon-file'></span>".html_safe, "#", id: "link-to-adjuntar-archivo-#{control_ganado_id}", class: 'btn btn-primary btn-xs', title: 'Haga click para adjuntar un archivo con su descripción correspondiente.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-adjuntar-archivo", link_to_id: "#link-to-adjuntar-archivo-#{control_ganado_id}", url: ganados_adjuntar_archivo_path( window_id: "modal-window-adjuntar-archivo", control_ganado_id: control_ganado_id) )%>

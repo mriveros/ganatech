@@ -137,7 +137,21 @@
                   <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
                   <td><%= cg.observacion %></td>
-                  <td> <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%></td>
+                  <td> 
+                    <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                    <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
+                        <%if @documento_ganatec.present?%> 
+                          
+                          <%if @documento_ganatec.habilitado == true || rol_administrador %>
+
+                            <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite descargar el archivo adjunto."%>
+                          <%end%>
+
+                        <%end%>
+
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
+                  
+                  </td>
 
 
                 </tr>
