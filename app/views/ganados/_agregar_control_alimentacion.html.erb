@@ -9,6 +9,7 @@
       
     </div>
 
+
     <%= form_for @control_alimentacion, remote: true, url: ganados_guardar_control_alimentacion_url, html: { id: "form-agregar-control-alimentacion" } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
@@ -29,10 +30,12 @@
           <div class="col-sm-7"><%= collection_select :tipo_alimentacion, :id, TipoAlimentacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
+
             <%= hidden_field_tag :alimentacion_id %>
             <div class="col-sm-4"><%= label_tag :nil, "Alimento #{attr_requerido}".html_safe %></div>
             <div class="col-sm-7"><%= text_area_tag :alimentacion ,nil,class: 'form-control input-sm' %></div>
             <div class="col-sm-1"></div><br /><br />
+
 
             <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
             <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
