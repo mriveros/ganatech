@@ -708,11 +708,14 @@ class GanadosController < ApplicationController
 
         if @documento_ganatec.save
 
+          auditoria_nueva("agregar documento nuevo en ganatec", "documentos_ganatec", @documento_ganatec)
+
           @control_ganado.documento_ganatec_id = @documento_ganatec.id
           
           if  @control_ganado.save
 
             @valido = true
+            auditoria_nueva("agregar documento adjunto al control de ganado", "ganados_controles", @control_ganado)
 
           end
 
@@ -762,7 +765,8 @@ class GanadosController < ApplicationController
     @msg = ""
 
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
-    
+    auditoria_id = auditoria_antes("cambiar estado de ganado en celo", "ganados", @ganado)
+
     Ganado.transaction do
 
       if @valido 
@@ -777,13 +781,15 @@ class GanadosController < ApplicationController
 
         if @celo.save
 
-          
+          auditoria_nueva("agregar nuevo celo", "celos", @celo)
+
           #cambiamos el estado del ganado a En Celo
           @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
           
           if @ganado.save
 
             @guardado_ok = true
+            auditoria_despues(@ganado, auditoria_id)
 
           end
 
