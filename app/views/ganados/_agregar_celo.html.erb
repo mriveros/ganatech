@@ -21,14 +21,20 @@
         <div class="panel-body">
 
           <div class="col-sm-1"></div><br />
-            <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= date_field_tag :fecha_control, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
-            </div>    
-          <div class="col-sm-1"></div><br /> <br />  
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_inicio, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+          </div>    
+          <div class="col-sm-1"></div><br /> <br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Peso #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :peso_promedio_control, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_fin, nil, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+          </div>    
+          <div class="col-sm-1"></div><br /> <br />
+
+          <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :descripcion ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /> <br />  
 
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
@@ -66,7 +72,7 @@
 
   setTimeout(function(){ 
 
-    //$("#control_id").focus();
+    $("#fecha_inicio").focus();
    
   }, 1000);
 
@@ -96,45 +102,31 @@
       valido = true
       msg = ""
 
-      if($("#fecha_control").val().length == 0){
+      if($("#fecha_inicio").val().length == 0){
 
-        msg +="Ingrese la fecha del control.\n"
+        msg +="Debe ingresar una fecha aproximada del inicio del celo.\n"
         valido = false
       
       }
 
-      if($("#control_id").val().length == 0){
+      if($("#fecha_fin").val().length == 0){
 
-        msg +="Seleccione el control realizado.\n"
+        msg +="Debe ingresar una fecha aproximada del fin del celo.\n"
         valido = false
       
       }
-       if ($("#control_id").val() === "<%=PARAMETRO[:control_peso]%>")
-      {
 
-         if($("#peso_promedio_control").val().length == 0){
+      if($("#descripcion").val().length == 0){
 
-            msg +="Debe ingresar el Peso del ganado.\n"
-            valido = false
+        msg +="Debe ingresar una descripción del proceso.\n"
+        valido = false
           
-          }
+      }
 
-      }else{
+      if ($("#fecha_inicio").val() >= $("#fecha_fin").val()) {
 
-        if($("#medicamento_id").val().length == 0){
-
-            msg +="Debe ingresar el medicamento utilizado en el control.\n"
-            valido = false
-          
-          }
-
-        if($("#cantidad_suministrada").val().length == 0){
-
-            msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
-            valido = false
-          
-          }
-
+        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
+        valido = false
 
       }
     

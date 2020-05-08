@@ -745,9 +745,6 @@ class GanadosController < ApplicationController
 
   def agregar_celo
 
-    @valido = true
-    @msg = ""
-
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
 
     respond_to do |f|
@@ -760,10 +757,33 @@ class GanadosController < ApplicationController
 
   def guardar_celo
 
-    @valido = true
+    @valido = false
+    @guardado_ok = false
     @msg = ""
 
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+    
+    if @valido 
+
+      @celo = Celo.new
+      @celo.ganado_id = params[:ganado_id]
+      @celo.descripcion = params[:descripcion]
+      @celo.observacion = params[:observacion]
+      @celo.fecha_inicio = params[:fecha_inicio]
+      @celo.fecha_fin = params[:fecha_fin]
+
+      if @celo.save
+
+        @guardado_ok = true
+        #cambiamos el estado del ganado a En Celo
+
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
+
+
+      end
+
+
+    end
 
     respond_to do |f|
 

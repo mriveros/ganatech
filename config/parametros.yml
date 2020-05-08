@@ -45,11 +45,16 @@ development:
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
 
-
   #ESTADOS CELOS
   en_celo: 1
   en_proceso: 2
   en_reproduccion: 3
+
+  #ESTADOS GANADOS
+  estado_ganado_activo: 1
+  estado_ganado_inactivo: 2
+  estado_ganado_en_celo: 3
+  estado_ganado_en_reproduccion: 4
   
 
 production:
@@ -104,5 +109,11 @@ production:
   en_celo: 1
   en_proceso: 2
   en_reproduccion: 3
+
+  #ESTADOS GANADOS
+  estado_ganado_activo: 1
+  estado_ganado_inactivo: 2
+  estado_ganado_en_celo: 3
+  estado_ganado_en_reproduccion: 4
   
   
