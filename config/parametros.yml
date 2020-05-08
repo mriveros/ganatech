@@ -44,6 +44,12 @@ development:
 
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
+
+
+  #ESTADOS CELOS
+  en_celo: 1
+  en_proceso: 2
+  en_reproduccion: 3
   
 
 production:
@@ -93,5 +99,10 @@ production:
 
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
+
+  #ESTADOS CELOS
+  en_celo: 1
+  en_proceso: 2
+  en_reproduccion: 3
   
   

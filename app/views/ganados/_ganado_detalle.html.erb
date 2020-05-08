@@ -18,8 +18,10 @@
         
           <%if @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra]%>
           
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> marcar celo".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> marcar celo".html_safe, "#", id: "link-to-agregar-celo", class: "btn btn-primary btn-xs", style: "float:right;" %>
           
+          <%= modal_window( window_id: "modal-window-agregar-celo", link_to_id: "#link-to-agregar-celo", url: ganados_agregar_celo_path( window_id: "modal-window-agregar-celo", ganado_id: params[:ganado_id]) )%>
+
           <%end%>
         
         </div>

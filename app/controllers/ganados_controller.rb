@@ -742,4 +742,37 @@ class GanadosController < ApplicationController
 
   end
 
+
+  def agregar_celo
+
+    @valido = true
+    @msg = ""
+
+    @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_celo
+
+    @valido = true
+    @msg = ""
+
+    @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+
 end
