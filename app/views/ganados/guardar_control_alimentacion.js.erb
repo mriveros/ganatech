@@ -7,13 +7,13 @@ setTimeout( function(){
     $("#link-to-ganado-detalle-<%= params[:ganado_id]%>").trigger('click');
     $("#link-to-ganado-detalle-<%= params[:ganado_id]%>").trigger('click');
 
-    swal("Control Sanitario","Control de Alimentación agregado exitosamente!", "success");
+    swal("Alimentación","Control de Alimentación agregado exitosamente!", "success");
 
     }, 1000);
 
  
 <% else %>
 
-    swal("Control Sanitario", "Error al guardar el Control Alimentación: <%=@msg%>. Intente más tarde","error");
+    swal("Alimentación", "Error al guardar el Control Alimentación: <%=@msg%>. Intente más tarde","error");
 
 <% end %>

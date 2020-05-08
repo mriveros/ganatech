@@ -46,9 +46,9 @@ development:
   tipo_resolucion_control_ganado: 1
 
   #ESTADOS CELOS
-  en_celo: 1
-  en_proceso: 2
-  en_reproduccion: 3
+  estado_celo_en_celo_activo: 1
+  estado_celo_en_proceso: 2
+  estado_celo_en_reproduccion: 3
 
   #ESTADOS GANADOS
   estado_ganado_activo: 1
@@ -106,9 +106,9 @@ production:
   tipo_resolucion_control_ganado: 1
 
   #ESTADOS CELOS
-  en_celo: 1
-  en_proceso: 2
-  en_reproduccion: 3
+  estado_celo_en_celo_activo: 1
+  estado_celo_en_proceso: 2
+  estado_celo_en_reproduccion: 3
 
   #ESTADOS GANADOS
   estado_ganado_activo: 1

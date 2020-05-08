@@ -757,33 +757,52 @@ class GanadosController < ApplicationController
 
   def guardar_celo
 
-    @valido = false
+    @valido = true
     @guardado_ok = false
     @msg = ""
 
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
     
-    if @valido 
+    Ganado.transaction do
 
-      @celo = Celo.new
-      @celo.ganado_id = params[:ganado_id]
-      @celo.descripcion = params[:descripcion]
-      @celo.observacion = params[:observacion]
-      @celo.fecha_inicio = params[:fecha_inicio]
-      @celo.fecha_fin = params[:fecha_fin]
+      if @valido 
 
-      if @celo.save
+        @celo = Celo.new
+        @celo.ganado_id = params[:ganado_id]
+        @celo.descripcion = params[:descripcion]
+        @celo.observacion = params[:observacion]
+        @celo.fecha_inicio = params[:fecha_inicio]
+        @celo.fecha_fin = params[:fecha_fin]
+        @celo.estado_celo_id = PARAMETRO[:estado_celo_en_celo_activo]
 
-        @guardado_ok = true
-        #cambiamos el estado del ganado a En Celo
+        if @celo.save
 
-        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
+          
+          #cambiamos el estado del ganado a En Celo
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
+          
+          if @ganado.save
+
+            @guardado_ok = true
+
+          end
+
+
+        end
 
 
       end
 
+    end #end transaction
 
-    end
+    rescue Exception => exc  
+     
+      if exc.present?        
+          
+        @excep = exc.message.split(':')    
+        @msg = @excep.to_s
+        
+      end
 
     respond_to do |f|
 

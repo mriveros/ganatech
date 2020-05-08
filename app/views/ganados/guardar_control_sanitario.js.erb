@@ -1,7 +1,6 @@
 <% if @guardado_ok %>
-
  
-setTimeout( function(){ 
+  setTimeout( function(){ 
   
     $("#<%= params[:window_id]%>").modal('hide');
     $("#link-to-ganado-detalle-<%= params[:ganado_id]%>").trigger('click');

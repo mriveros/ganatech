@@ -1,0 +1,19 @@
+<% if @guardado_ok %>
+
+ 
+setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#form_buscar_ganado_id").val('<%= @ganado.id %>');
+    $("#form-buscar-ganado").submit();
+
+    swal("Celo","Ganado marcado en estado Celo exitosamente!", "success");
+
+    }, 1000);
+
+ 
+<% else %>
+
+    swal("Celo", "Error al marcar como celo: <%=@msg%>. Intente más tarde","error");
+    
+<% end %>
