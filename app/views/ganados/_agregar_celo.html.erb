@@ -13,7 +13,6 @@
     <%= form_for @ganado, remote: true, url: ganados_guardar_celo_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-
       <%= hidden_field_tag :ganado_id, params[:ganado_id]%>
 
       <div class="modal-body">
