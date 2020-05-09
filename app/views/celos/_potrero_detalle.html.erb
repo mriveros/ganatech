@@ -1,0 +1,64 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Observación</h3>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-tutor-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Observación</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="tutor-detalle-lista">
+
+            <% if @potrero_detalle.present? %>
+            
+              <% @potrero_detalle.each do |pd|%>
+
+                <tr>
+                  <td><%= pd.observacion %></td>
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+</td>
+
+
+  <script type="text/javascript">
+
+  </script>

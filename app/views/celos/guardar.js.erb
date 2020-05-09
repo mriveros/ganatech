@@ -1,0 +1,22 @@
+<% if @guardado_ok %>
+
+   $("<div class='col-sm-12' id='msg-agregar-potrero' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-potrero");
+   
+  $("#form_buscar_potrero_id").val('<%= @potrero.id %>');
+  $("#form_buscar_potrero_descripcion").val('');
+  $("#form_buscar_potrero_departamento_id").val('');
+  $("#form_buscar_potrero_localidad_id").val('');
+  $("#form-buscar-potrero").submit();
+  
+  setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    swal("Potrero guardado Exitosamente.");
+  }, 2000);
+
+
+<% else %>
+  
+    $("<div class='col-sm-12' id='msg-agregar-potrero' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-agregar-potrero");
+    swal('Error al guardar el Potrero. Intente más tarde.');
+
+<% end %>

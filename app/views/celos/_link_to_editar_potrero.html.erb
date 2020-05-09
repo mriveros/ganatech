@@ -1,0 +1,2 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-potrero-#{potrero_id}", class: 'btn btn-warning btn-xs', title: 'Haga click aquí para editar datos del Potrero.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-editar-potrero", link_to_id: "#link-to-editar-potrero-#{potrero_id}", url: potreros_editar_path( window_id: "modal-window-editar-potrero", potrero_id: potrero_id) )%>
