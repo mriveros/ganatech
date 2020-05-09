@@ -687,7 +687,6 @@ class GanadosController < ApplicationController
 
   end
 
-
   def guardar_archivo_adjunto
 
     @valido = true
@@ -745,7 +744,6 @@ class GanadosController < ApplicationController
 
   end
 
-
   def agregar_celo
 
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
@@ -782,7 +780,6 @@ class GanadosController < ApplicationController
         if @celo.save
 
           auditoria_nueva("agregar nuevo celo", "celos", @celo)
-
           #cambiamos el estado del ganado a En Celo
           @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
           
@@ -817,7 +814,6 @@ class GanadosController < ApplicationController
     end
 
   end
-
 
 
 end
