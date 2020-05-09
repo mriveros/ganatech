@@ -13,45 +13,73 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_potrero_id].present?
+    if params[:form_buscar_celo_id].present?
 
-      cond << "potrero_id = ?"
-      args << params[:form_buscar_potrero_id]
-
-    end
-
-    if params[:form_buscar_potrero_descripcion].present?
-
-      cond << "potrero  ilike ?"
-      args << "%#{params[:form_buscar_potrero_descripcion]}%"
+      cond << "celo_id = ?"
+      args << params[:form_buscar_celo_id]
 
     end
 
-    if params[:form_buscar_potrero_hectareas].present?
+    if params[:form_buscar_celo_ganado_rfid].present?
 
-      cond << "hectareas  = ?"
-      args << params[:form_buscar_potrero_hectareas]
+      cond << "ganado_rfid = ?"
+      args << params[:form_buscar_celo_ganado_rfid]
 
     end
 
-    if params[:form_buscar_potrero][:hacienda_id].present?
+    if params[:form_buscar_celo_ganado_nombre].present?
+
+      cond << "hectareas  ilike ?"
+      args << "%#{params[:form_buscar_celo_ganado_nombre]}%"
+
+    end
+
+    if params[:form_buscar_celo_ganado_rp].present?
+
+      cond << "ganado_rp = ?"
+      args << params[:form_buscar_celo_ganado_rp]
+
+    end
+
+    if params[:form_buscar_ganado_fecha_inicio].present?
+
+      cond << "fecha_inicio = ?"
+      args << params[:form_buscar_ganado_fecha_inicio]
+
+    end
+
+    if params[:form_buscar_celo_fecha_fin].present?
+
+      cond << "fecha_fin = ?"
+      args << params[:form_buscar_celo_fecha_fin]
+
+    end
+
+    if params[:form_buscar_celo_descripcion].present?
+
+      cond << "celo_descripcion = ?"
+      args << params[:form_buscar_celo_descripcion]
+
+    end
+
+    if params[:form_buscar_celo][:hacienda_id].present?
 
       cond << "hacienda_id = ?"
-      args << params[:form_buscar_potrero][:hacienda_id]
+      args << params[:form_buscar_celo][:hacienda_id]
 
     end
 
-    if params[:form_buscar_potrero][:departamento_id].present?
+    if params[:form_buscar_celo][:hacienda_id].present?
 
-      cond << "departamento_id = ?"
-      args << params[:form_buscar_potrero][:departamento_id]
+      cond << "hacienda_id = ?"
+      args << params[:form_buscar_celo][:hacienda_id]
 
     end
 
-    if params[:form_buscar_potrero][:jurisdiccion_id].present?
+    if params[:form_buscar_celo][:estado_celo_id].present?
 
-      cond << "jurisdiccion_id = ?"
-      args << params[:form_buscar_potrero][:jurisdiccion_id]
+      cond << "estado_celo_id = ?"
+      args << params[:form_buscar_celo][:estado_celo_id]
 
     end
 
@@ -60,17 +88,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @potreros =  VPotrero.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPotrero.where(cond).count
+      @potreros =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCelo.where(cond).count
 
     else
      
-      @potreros = VPotrero.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPotrero.count
+      @potreros = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCelo.count
 
     end
 
-    @total_registros = VPotrero.count
+    @total_registros = VCelo.count
 
     respond_to do |f|
       
@@ -82,7 +110,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @potrero = Potrero.new
+    @potrero = Celo.new
 
     respond_to do |f|
       

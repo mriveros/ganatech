@@ -101,6 +101,17 @@ get "crontab_ultron/index"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
 
+  #CELOS
+  get "celos/index" 
+  post "celos/lista"
+  get "celos/lista"
+  get "celos/agregar"
+  post "celos/guardar"
+  get "celos/editar"
+  post "celos/actualizar"
+  get "celos/eliminar"
+  get "celos/celo_detalle"
+
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------

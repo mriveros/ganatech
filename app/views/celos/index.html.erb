@@ -4,7 +4,7 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Celos Ganados</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-celo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar nuevo Celo".html_safe, "#", id: "link-to-agregar-celo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-celo", link_to_id: "#link-to-agregar-celo", url: celos_agregar_path( window_id: "modal-window-agregar-celo") )%>
     
   </div>
@@ -56,7 +56,7 @@
           </th>
 
           <th>
-            <div><%= label_tag nil, "Inicio Celo".html_safe %></div>
+            <div><%= label_tag nil, "Fecha Inicio Celo".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_ganado_fecha_inicio, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -65,7 +65,7 @@
          </th>
 
          <th>
-            <div><%= label_tag nil, "Fin Celo".html_safe %></div>
+            <div><%= label_tag nil, "Fecha Fin Aprox.".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_celo_fecha_fin, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -92,7 +92,7 @@
            <th >
               <span>Estado Celo</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_celo, :estado_ganado_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_celo, :estado_celo_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_estado_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
@@ -129,7 +129,7 @@
         valido = true;
       }else{
         valido = false;
-        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+                 
         $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
         $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
       }      
