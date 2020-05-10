@@ -88,12 +88,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @potreros =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @celos =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCelo.where(cond).count
 
     else
      
-      @potreros = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
+      @celos = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCelo.count
 
     end
@@ -110,7 +110,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @potrero = Celo.new
+    @celo = Celo.new
 
     respond_to do |f|
       
@@ -125,37 +125,24 @@ before_filter :require_usuario
     @valido = true
     @msg = ""
     @guardado_ok = false
-
-    unless params[:potrero][:descripcion].present?
-
-      @valido = false
-      @msg += " Debe Completar el campo descripción. \n"
-
-    end
-
-    unless params[:potrero][:hectareas].present?
-
-      @valido = false
-      @msg += " Debe agregar una cantidad aproximada de hectareas. \n"
-
-    end
-
     
 
     if @valido
       
-      @potrero = Potrero.new()
-      @potrero.descripcion = params[:potrero][:descripcion].upcase
-      @potrero.hectareas = params[:potrero][:hectareas]
-      @potrero.hacienda_id = params[:potrero][:hacienda_id]
-      @potrero.observacion = params[:observacion]
+      @celo = Celo.new()
+      @celo.ganado_id = params[:ganado_id]
+      @celo.descripcion = params[:descripcion]
+      @celo.observacion = params[:observacion]
+      @celo.fecha_inicio = params[:fecha_inicio]
+      @celo.fecha_fin = params[:fecha_fin]
+      @celo.estado_celo_id = params[:estado_celo][:id]
 
-        if @potrero.save
+      if @celo.save
 
-          auditoria_nueva("registrar potrero nuevo", "potreros", @potrero)
-          @guardado_ok = true
+        auditoria_nueva("registrar nuevo celo", "celos", @celo)
+        @guardado_ok = true
          
-        end 
+      end 
 
     end
   
@@ -178,7 +165,7 @@ before_filter :require_usuario
 
   def editar
     
-    @potrero = Potrero.find(params[:potrero_id])
+    @celo = Celo.find(params[:celo_id])
 
     respond_to do |f|
       
@@ -194,44 +181,31 @@ before_filter :require_usuario
     @msg = ""
     @guardado_ok = false
 
-    unless params[:potrero][:descripcion].present?
-
-      @valido = false
-      @msg += " Debe Completar el campo descripción. \n"
-
-    end
-
-    unless params[:potrero][:hectareas].present?
-
-      @valido = false
-      @msg += " Debe agregar una cantidad aproximada de hectareas. \n"
-
-    end
-
-    @potrero = Potrero.where("id = ?", params[:id]).first
-    auditoria_id = auditoria_antes("actualizar potrero", "potreros", @potrero)
+    @celo = Celo.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("actualizar celo ganado", "celos", @celo)
     
 
     if @valido
       
       
-      @potrero.descripcion = params[:potrero][:descripcion].upcase
-      @potrero.hectareas = params[:potrero][:hectareas]
-      @potrero.hacienda_id = params[:potrero][:hacienda_id]
-      @potrero.observacion = params[:potrero][:observacion]
+      @celo.ganado_id = params[:ganado_id]
+      @celo.descripcion = params[:descripcion]
+      @celo.observacion = params[:observacion]
+      @celo.fecha_inicio = params[:fecha_inicio]
+      @celo.fecha_fin = params[:fecha_fin]
+      @celo.estado_celo_id = params[:estado_celo][:id]
 
-        if @potrero.save
+        if @celo.save
 
-          auditoria_despues(@potrero, auditoria_id)
-          @potrero_ok = true
+          auditoria_despues(@celo, auditoria_id)
+          @celo_ok = true
          
         end 
 
     end
   
     rescue Exception => exc  
-    # dispone el mensaje de error 
-    #puts "Aqui si muestra el error ".concat(exc.message)
+    
       if exc.present?        
         @excep = exc.message.split(':')    
         @msg = @excep
@@ -252,28 +226,38 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @potrero = Potrero.find(params[:id])
+    Celo.transaction do
 
-    @potrero_elim = @potrero
+      @celo = Celo.find(params[:id])
 
-    if valido
+      @celo_elim = @celo
 
-      if @potrero.destroy
+      if valido
 
-        auditoria_nueva("eliminar potrero", "potreros", @potrero_elim)
-        @eliminado = true
-        
+        if @celo.destroy
+
+          auditoria_nueva("eliminar celo", "celos", @celo_elim)
+          @ganado = Ganado.where("id = ?", @ganado_elim.ganado_id).first
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+          
+          if @ganado.save
+
+            @eliminado = true
+
+          end
+          
+        end
+
       end
 
-    end
+    end #end transaction
     
     rescue Exception => exc  
-      # dispone el mensaje de error 
-      #puts "Aqui si muestra el error ".concat(exc.message)
+      
       if exc.present?        
       
         @excep = exc.message.split(':')    
-        @msg = "Este Potrero contiene datos relacionados."
+        @msg = "El celo contiene datos relacionados."
         @eliminado = false
       
       end
@@ -287,9 +271,9 @@ before_filter :require_usuario
   end
 
 
-  def potrero_detalle
+  def celo_detalle
     
-    @potrero_detalle = VPotrero.where("potrero_id = ?", params[:potrero_id])
+    @celo_detalle = VCelo.where("celo_id = ?", params[:celo_id])
 
 
      respond_to do |f|
