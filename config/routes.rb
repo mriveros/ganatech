@@ -110,7 +110,7 @@ get "crontab_ultron/index"
   get "celos/editar"
   post "celos/actualizar"
   get "celos/eliminar"
-  get "celos/celo_detalle"
+  get "celos/celos_detalles"
 
 
 
