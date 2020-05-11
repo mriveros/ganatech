@@ -58,7 +58,7 @@
           <th>
             <div><%= label_tag nil, "Fecha Inicio Celo".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_ganado_fecha_inicio, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_celo_fecha_inicio, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_fecha_inicio');"><i class="fa fa-times"></i></span>
               </div>
@@ -84,7 +84,7 @@
           <th>
               <span>Hacienda</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_celo_hacienda, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_celo, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
@@ -93,7 +93,7 @@
               <span>Estado Celo</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_celo, :estado_celo_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_estado_ganado_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_estado_celo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 

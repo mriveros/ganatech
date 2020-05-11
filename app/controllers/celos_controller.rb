@@ -22,14 +22,14 @@ before_filter :require_usuario
 
     if params[:form_buscar_celo_ganado_rfid].present?
 
-      cond << "ganado_rfid = ?"
+      cond << "codigo_rfid = ?"
       args << params[:form_buscar_celo_ganado_rfid]
 
     end
 
     if params[:form_buscar_celo_ganado_nombre].present?
 
-      cond << "hectareas  ilike ?"
+      cond << "ganado_nombre  ilike ?"
       args << "%#{params[:form_buscar_celo_ganado_nombre]}%"
 
     end
@@ -41,10 +41,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_ganado_fecha_inicio].present?
+    if params[:form_buscar_celo_fecha_inicio].present?
 
       cond << "fecha_inicio = ?"
-      args << params[:form_buscar_ganado_fecha_inicio]
+      args << params[:form_buscar_celo_fecha_inicio]
 
     end
 
@@ -57,8 +57,8 @@ before_filter :require_usuario
 
     if params[:form_buscar_celo_descripcion].present?
 
-      cond << "celo_descripcion = ?"
-      args << params[:form_buscar_celo_descripcion]
+      cond << "descripcion ilike ?"
+      args << "%#{params[:form_buscar_celo_descripcion]}%"
 
     end
 
