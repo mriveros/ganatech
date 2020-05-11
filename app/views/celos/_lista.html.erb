@@ -1,23 +1,25 @@
-<% if potreros.present? %>
+<% if celos.present? %>
 
-  <% potreros.each do |pot| %>
+  <% celos.each do |cel| %>
 
     <tr>
 
-      <td><%= pot.potrero_id %></td>
-      <td><%= pot.potrero%></td>
-      <td><%= pot.hectareas%></td>
-      <td ><%= pot.hacienda%></td>
-      <td ><%= pot.departamento %></td>
-      <td ><%= pot.jurisdiccion %></td>
+      <td><%= cel.celo_id %></td>
+      <td><%= cel.codigo_rfid%></td>
+      <td><%= cel.ganado_nombre%></td>
+      <td ><%= cel.fecha_inicio%></td>
+      <td ><%= cel.fecha_fin %></td>
+      <td ><%= cel.descripcion %></td>
+      <td ><%= cel.hacienda %></td>
+      <td ><%= cel.estado_celo %></td>
       
       
       <td >
         
         
-        <%= link_to_potrero_detalle(pot.potrero_id) %>
-        <%= link_to_editar_potrero(pot.potrero_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pot.potrero_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero", title: 'Haga click para eliminar el potrero'  %>
+        <%= link_to_celos_detalles(cel.celo_id) %>
+        <%= link_to_editar_potrero(cel.celo_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
       
        </td>
@@ -31,7 +33,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate potreros, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate celos, :params => params %></div></td>
 </tr>
 
 <tr>
