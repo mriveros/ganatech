@@ -7,8 +7,9 @@
       <td><%= cel.celo_id %></td>
       <td><%= cel.codigo_rfid%></td>
       <td><%= cel.ganado_nombre%></td>
-      <td ><%= cel.fecha_inicio%></td>
-      <td ><%= cel.fecha_fin %></td>
+      <td><%= cel.ganado_rp%></td>
+      <td ><%= cel.fecha_inicio.strftime('%d/%m/%Y') %></td>
+      <td ><%= cel.fecha_fin.strftime('%d/%m/%Y')  %></td>
       <td ><%= cel.descripcion %></td>
       <td ><%= cel.hacienda %></td>
       <td ><%= cel.estado_celo %></td>
@@ -16,11 +17,9 @@
       
       <td >
         
-        
-        <%= link_to_celos_detalles(cel.celo_id) %>
-        <%= link_to_editar_potrero(cel.celo_id) %>
+        <%= link_to_celo_detalle(cel.celo_id) %>
+        <%= link_to_editar_celo(cel.celo_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
-
       
        </td>
 

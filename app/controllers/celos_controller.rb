@@ -271,7 +271,7 @@ before_filter :require_usuario
   end
 
 
-  def celo_detalle
+  def celos_detalles
     
     @celo_detalle = VCelo.where("celo_id = ?", params[:celo_id])
 
