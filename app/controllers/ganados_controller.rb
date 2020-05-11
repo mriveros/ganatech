@@ -816,4 +816,17 @@ class GanadosController < ApplicationController
   end
 
 
+  def buscar_ganado
+
+    @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ?", "%#{params[:ganado]}%", params[:sexo_ganado_id])
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
+    
+    end
+
+  end
+
 end

@@ -122,7 +122,7 @@ before_filter :require_usuario
 
   def guardar
 
-    @valido = true
+    @valido = false
     @msg = ""
     @guardado_ok = false
     
@@ -135,7 +135,7 @@ before_filter :require_usuario
       @celo.observacion = params[:observacion]
       @celo.fecha_inicio = params[:fecha_inicio]
       @celo.fecha_fin = params[:fecha_fin]
-      @celo.estado_celo_id = params[:estado_celo][:id]
+      @celo.estado_celo_id = PARAMETRO[:estado_celo_en_celo_activo]
 
       if @celo.save
 
@@ -147,8 +147,7 @@ before_filter :require_usuario
     end
   
     rescue Exception => exc  
-    # dispone el mensaje de error 
-    #puts "Aqui si muestra el error ".concat(exc.message)
+  
       if exc.present?        
         @excep = exc.message.split(':')    
         @msg = @excep

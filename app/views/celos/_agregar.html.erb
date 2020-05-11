@@ -20,9 +20,31 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :hacienda, "Hacienda ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :descripcion, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+
+          <%= hidden_field_tag :ganado_id %>
+          <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+          <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
           <div class="col-sm-1"></div><br /><br />  
+          
+
+          <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha_inicio, nil, class: 'form-control input-sm' %>
@@ -66,9 +88,10 @@
    #form-agregar-celo label, #form-agregar-celo input[type='text'], #form-agregar-celo select { float:left; margin-top:5px;}
   #form-agregar-celo br {clear:both; }
   #form-agregar-celo label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-celo #descripcion { width:80%;}
+  #form-agregar-celo #descripcion { width:100%;}
   #form-agregar-celo #fecha_inicio { width:80%;}
   #form-agregar-celo #fecha_fin { width:80%;}
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
 
@@ -86,6 +109,68 @@
 
      return true;
   }
+
+
+  $("#ganado").bind('focus', function(){   
+
+    var ganados = [];
+
+    $("#ganado").val('');
+    $("#ganado_id").val('');
+    $("#nombre_ganado").val('');
+    $("#hacienda").val('');
+    $("#rp").val('');
+    $("#codigo_rfid").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_ganado_path) %>", { ganado: $(this).val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_hembra]%>}, function(j){
+        
+      var ganado = "";
+      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre != ganado ){
+          
+          ganados.push( {value: j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
+          ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
+
+          options += "<option value="+ j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
+
+        }
+
+      }
+
+      $("#ganado_id").html(options);
+
+    })
+
+    $("#ganado").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#ganado" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#ganado").val( ui.item.label);
+        $("#ganado_id").val(datos[0]);
+        $("#nombre_ganado").val(datos[1]);
+        $("#rp").val(datos[2]);
+        $("#codigo_rfid").val(datos[3]);
+        $("#hacienda").val(datos[4]);
+
+        return false;
+
+      }
+
+    })
+
+  });
+
+
 
   $("#btn-guardar-celo  ").bind('click', function () {
 
