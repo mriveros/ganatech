@@ -20,6 +20,10 @@
         <%= link_to_celo_detalle(cel.celo_id) %>
         <%= link_to_editar_celo(cel.celo_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
+
+        <%= link_to_cambiar_estado_celo_a_fecundacion(cel.celo_id) %>
+        <%= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
+        <%= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
       
        </td>
 
@@ -56,11 +60,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(potrero_id) {
+  function eliminar_registro(celo_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de Potreros. Si el Potrero cuenta con detalles no podrá ser eliminado.",
+          text: "Al confirmar se eliminará de la lista del módulo de Celos y el estado del ganado pasará al estado normal Activo (sin celo activo).",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -73,8 +77,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(potreros_eliminar_path) %>", 
-                data: {id: potrero_id},
+                url: "<%= url_for(celos_eliminar_path) %>", 
+                data: {id: celo_id},
                 dataType: 'script'
               });
             

@@ -112,6 +112,12 @@ get "crontab_ultron/index"
   post "celos/actualizar"
   get "celos/eliminar"
   get "celos/celos_detalles"
+  get "celos/cambiar_estado_a_en_proceso_fecundacion"
+  get "celos/cambiar_estado_a_en_reproduccion"
+  get "celos/cambiar_estado_a_celo_perdido"
+  post "celos/guardar_cambiar_estado_a_en_proceso_fecundacion"
+  post "celos/guardar_cambiar_estado_a_en_reproduccion"
+  post "celos/guardar_cambiar_estado_a_celo_perdido"
 
 
 

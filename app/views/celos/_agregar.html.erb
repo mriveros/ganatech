@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @celo, remote: true, url: potreros_guardar_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
+    <%= form_for @celo, remote: true, url: celos_guardar_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -177,32 +177,46 @@
       valido = true
       msg = ""
 
-      if($("#potrero_hacienda_id").val().length == 0){
+      if($("#ganado_id").val().length == 0){
 
-        msg +="Debe seleccionar la Hacienda.\n"
+        msg +="Es necesario seleccionar un ganado.\n"
         valido = false
       
       }
 
-       if($("#potrero_descripcion").val().length == 0){
+       if($("#fecha_inicio").val().length == 0){
 
-        msg +="Ingrese una descripción o nombre del potrero.\n"
+        msg +="Ingrese una fecha de inicio del celo.\n"
         valido = false
       
       }
 
-      if($("#potrero_hectareas").val().length == 0){
+      if($("#fecha_fin").val().length == 0){
 
-        msg +="Debe ingresar una cantidad aproximada de hectáreas.\n"
+        msg +="Debe ingresar una fecha aproximada de fin de celo.\n"
         valido = false
       
+      }
+
+      if($("#descripcion").val().length == 0){
+
+        msg +="Es necesario ingresar una descripción.\n"
+        valido = false
+      
+      }
+
+       if ($("#fecha_inicio").val() >= $("#fecha_fin").val()) {
+
+        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
+        valido = false
+
       }
 
       if (valido){
 
         swal({
-          title: "Confirmar Potrero",
-          text: "Al confirmar el Potrero estará relacionado con la Hacienda.",
+          title: "Confirmar Celo",
+          text: "Al confirmar el Celo el estado del Ganado cambiará a En Celo y podrá ver los datos en el módulo de Celos.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -214,7 +228,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-potrero").submit();
+            $("#form-agregar-celo").submit();
             
           } 
 

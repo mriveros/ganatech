@@ -1,23 +1,23 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-potrero' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-potreros");
-   $("#form_buscar_potrero_id").val("<%=@potrero_elim.id%>")
-   $("#form-buscar-potrero").submit();
+   $("<div class='col-sm-12' id='msg-eliminar-celo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-celo");
+   $("#form_buscar_celo_id").val("<%=@celo_elim.id%>")
+   $("#form-buscar-celo").submit();
     setTimeout(function(){ 
       
-      $("#msg-eliminar-potrero").remove();
-      swal("Potrero eliminado Exitosamente.");
+      $("#msg-eliminar-celo").remove();
+       swal("Celos","Celo eliminado exitosamente! El estado del ganado cambiado a Activo(sin celo marcado).", "success");
 
     }, 1000);
       
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-potrero' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-potreros");
+  $("<div class='col-sm-12' id='msg-eliminar-celo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-celo");
   setTimeout(function(){ 
 
-    $("#msg-eliminar-potrero").remove(); 
+    $("#msg-eliminar-celo").remove(); 
 
-    swal("No se pudo Eliminar. Intente más tarde.")
+    swal("Celos", "No se pudo eliminar el celo. Intente más tarde","error");
   
   }, 2000);
   

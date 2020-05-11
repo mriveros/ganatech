@@ -136,6 +136,17 @@ module ApplicationHelper
      " <span class='glyphicon glyphicon-sort-by-order'></span>".html_safe
   end
 
+  def icon_perdido
+     " <span class='glyphicon glyphicon-minus'></span>".html_safe
+  end
+
+  def icon_fecundacion
+     " <span class='glyphicon glyphicon-plus'></span>".html_safe
+  end
+
+  def icon_reproduccion
+     " <span class='glyphicon glyphicon-plus'></span>".html_safe
+  end
 
   def linked_combo(nombre, args)
     args[:url] ||= ""
