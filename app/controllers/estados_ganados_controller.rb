@@ -1,9 +1,9 @@
 class EstadosGanadosController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
-  ends
+  end
 
   def lista
 
@@ -70,7 +70,7 @@ before_filter :require_usuario
 
     @estado_ganado = EstadoGanado.new()
 
-    @eestado_ganado.descripcion = params[:raza][:descripcion].upcase
+    @estado_ganado.descripcion = params[:estado_ganado][:descripcion].upcase
 
     if @estado_ganado.save
 
@@ -188,7 +188,7 @@ before_filter :require_usuario
   end
 
 
-  def buscar_raza
+  def buscar_estado_ganado
 
      @estados_ganados = EstadoGanado.where("descripcion ilike ?", "%#{params[:descripcion]}%")
 

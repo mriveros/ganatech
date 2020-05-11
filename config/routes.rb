@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  
+
   namespace 'api' do
     namespace 'v1' do
-  
+
       resources :personas
       resources :usuarios
-  
+
     end
   end
 #-------------------------BLOQUE TAREAS AUTOMATICAS------------------------
@@ -26,7 +26,7 @@ get "crontab_ultron/index"
   post "razas/actualizar"
   get "razas/eliminar"
   get "razas/buscar_raza"
-  
+
   #HACIENDAS
   get "haciendas/index"
   post "haciendas/lista"
@@ -40,11 +40,11 @@ get "crontab_ultron/index"
   get "haciendas/haciendas_detalles"
   get "haciendas/agregar_hacienda_detalle"
   post "haciendas/guardar_hacienda_detalle"
-  get "haciendas/eliminar_hacienda_detalle" 
+  get "haciendas/eliminar_hacienda_detalle"
   get "haciendas/obtener_potreros"
 
   #POTREROS
-  get "potreros/index" 
+  get "potreros/index"
   post "potreros/lista"
   get "potreros/lista"
   get "potreros/agregar"
@@ -55,7 +55,7 @@ get "crontab_ultron/index"
   get "potreros/potrero_detalle"
 
   #GANADOS
-  get "ganados/index" 
+  get "ganados/index"
   post "ganados/lista"
   get "ganados/lista"
   get "ganados/agregar"
@@ -76,7 +76,7 @@ get "crontab_ultron/index"
 
 
   #MEDICAMENTOS
-  get "medicamentos/index" 
+  get "medicamentos/index"
   post "medicamentos/lista"
   get "medicamentos/lista"
   get "medicamentos/agregar"
@@ -87,7 +87,7 @@ get "crontab_ultron/index"
   get "medicamentos/buscar_medicamento"
 
   #ALIMENTACIONES
-  get "alimentaciones/index" 
+  get "alimentaciones/index"
   post "alimentaciones/lista"
   get "alimentaciones/lista"
   get "alimentaciones/agregar"
@@ -96,6 +96,17 @@ get "crontab_ultron/index"
   post "alimentaciones/actualizar"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
+
+  #ESTADOS GANADOS
+  get "estados_ganados/index"
+  post "estados_ganados/lista"
+  get "estados_ganados/lista"
+  get "estados_ganados/agregar"
+  post "estados_ganados/guardar"
+  get "estados_ganados/editar"
+  post "estados_ganados/actualizar"
+  get "estados_ganados/eliminar"
+  get "estados_ganados/buscar_estado_ganado"
 
 
 
@@ -135,8 +146,8 @@ get "crontab_ultron/index"
   get "tutores/tutor_detalle"
   get "tutores/agregar_tutor_detalle"
   post "tutores/guardar_tutor_detalle"
-  get "tutores/eliminar_tutor_detalle" 
-  
+  get "tutores/eliminar_tutor_detalle"
+
   #PRECIOS
   post "precios/lista"
   get "precios/lista"
@@ -152,13 +163,13 @@ get "crontab_ultron/index"
 
   #JURISDICCIONES
   get "jurisdicciones/index"
-  get "jurisdicciones/buscar_juridisccion_oferta" 
+  get "jurisdicciones/buscar_juridisccion_oferta"
 
   #JURISDICCIONES
   get "informes/index"
   get "informes/indexa"
   get "informes/generar_pdf"
-  
+
    #INFORMACIONES
   get "informaciones/index"
   get "informaciones/lista"
@@ -189,7 +200,7 @@ get "crontab_ultron/index"
   get "detalles_debitos/editar"
   post "detalles_debitos/actualizar"
   get "detalles_debitos/index"
- 
+
   #DETALLES CREDITOS
   post "detalles_creditos/lista"
   get "detalles_creditos/lista"
@@ -200,7 +211,7 @@ get "crontab_ultron/index"
   post "detalles_creditos/actualizar"
   get "detalles_creditos/index"
 
-  
+
   #CLIENTES
   post "clientes/lista"
   get "clientes/lista"
@@ -218,7 +229,7 @@ get "crontab_ultron/index"
 
 #-----------------------INICIO BLOQUE DE RUTAS KERNEL DEL SISTEMA(NO TOCAR)---------------
 
-  
+
   #PERSONAS
   post "personas/lista"
   get "personas/lista"
@@ -235,7 +246,7 @@ get "crontab_ultron/index"
   get "personas/obtener_datos"
   get "personas/buscar_persona_senatics"
   get "personas/buscar_chofer"
-  
+
   #ROLES
   post "roles/lista"
   get "roles/lista"
@@ -292,8 +303,8 @@ get "crontab_ultron/index"
   get 'logout' => "usuarios_sessions#destroy", :as => :logout
   post "usuarios_sessions/create"
   get "usuarios_sessions/acceso_denegado"
-  get "usuarios_sessions/new"  
-  get "usuarios_sessions/mantenimiento"  
+  get "usuarios_sessions/new"
+  get "usuarios_sessions/mantenimiento"
 
   get "principal/buscar_institucion"
   get "principal/buscar_persona"
@@ -308,9 +319,9 @@ get "crontab_ultron/index"
   get "about" => "principal#about", :as => :about
   get "legal" => "principal#legal", :as => :legal
   get "index" => "principal#index", :as => :indexv
-	
+
   root 'principal#index'
-  
+
   get "application/autocompletar" => 'application#autocompletar', :as => :autocompletar
 
  #------------------------------------------------------------
