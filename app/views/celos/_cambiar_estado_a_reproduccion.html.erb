@@ -292,11 +292,44 @@
       valido = true
       msg = ""
 
-     
+      if($("#tipo_concepcion_id").val().length == 0){
 
-      if($("#observacion").val().length == 0){
+        msg +="Debe seleccionar un tipo de Concepción.\n"
+        valido = false
+          
+      }
 
-        msg +="Debe agregar una observación.\n"
+     if($("#tipo_concepcion_id").val() == <%=PARAMETRO[:tipo_concepcion_monta_natural]%>){
+
+      if($("#ganado_reproductor_id").val().length == 0){
+
+        msg +="Debe seleccionar un Ganado como Reproductor.\n"
+        valido = false
+          
+      }
+
+     }
+      else{
+
+        if($("#esperma_id").val().length == 0){
+
+          msg +="Debe seleccionar una Muestra para la Reproducción.\n"
+          valido = false
+          
+        }
+          
+      }
+      
+      if($("#fecha_reproduccion").val().length == 0){
+
+        msg +="Debe agregar una fecha de Reproducción.\n"
+        valido = false
+          
+      }
+
+      if($("#descripcion").val().length == 0){
+
+        msg +="Debe agregar una Descripción.\n"
         valido = false
           
       }
@@ -305,7 +338,7 @@
       if (valido){
 
         swal({
-          title: "Cambiar Estado Celo",
+          title: "Confirmar Reproducción",
           text: "Al confirmar el estado del Celo a Reproducción éste podrá ser visualizado en el módulo de Reproducciones para su seguimiento durante el proceso de preñez.",
           type: "warning",
           showCancelButton: true,
@@ -337,7 +370,7 @@
 
   $("#tipo_concepcion_id").bind('change', function(){ 
 
-  if ($(this).val() == 1){
+  if ($(this).val() == <%=PARAMETRO[:tipo_concepcion_monta_natural]%>){
 
     $("#monta_natural").show();
     $("#inseminacion_artificial").hide();

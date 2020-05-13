@@ -5,12 +5,11 @@ development:
   rol_operador: 3
   rol_super: 6
 
-  #ESTADOS PRODUCCIONES
-  estado_produccion_solicitado: 1
-  estado_produccion_en_progreso: 2
-  estado_produccion_finalizado: 3
-  estado_produccion_anulado: 4
-
+  #ESTADOS REPRODUCCIONES
+  estado_reproduccion_prenhez: 1
+  estado_reproduccion_finalizado: 2
+  estado_reproduccion_perdido: 3
+  
   #sistemas
   sistema_RUE: 1
   
@@ -59,6 +58,10 @@ development:
   #ETAPAS GANADOS
   etapa_ganado_torito: 4
   etapa_ganado_toro: 7
+
+  #TIPOS CONCEPCIONES
+  tipo_concepcion_monta_natural: 1
+  tipo_concepcion_inseminacion_artificial: 2
  
   
 
@@ -69,11 +72,10 @@ production:
   rol_operador: 3
   rol_super: 6
 
-  #ESTADOS PRODUCCIONES
-  estado_produccion_solicitado: 1
-  estado_produccion_en_progreso: 2
-  estado_produccion_finalizado: 3
-  estado_produccion_anulado: 4
+  #ESTADOS REPRODUCCIONES
+  estado_reproduccion_prenhez: 1
+  estado_reproduccion_finalizado: 2
+  estado_reproduccion_perdido: 3
    
   #sistemas
   sistema_RUE: 1
@@ -123,5 +125,9 @@ production:
   #ETAPAS GANADOS
   etapa_ganado_torito: 4
   etapa_ganado_toro: 7
+
+  #TIPOS CONCEPCIONES
+  tipo_concepcion_monta_natural: 1
+  tipo_concepcion_inseminacion_artificial: 2
   
   

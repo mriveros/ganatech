@@ -323,15 +323,28 @@ before_filter :require_usuario
 
   def guardar_cambiar_estado_a_en_reproduccion
 
+    @guardado_ok = false
+
     @celo = Celo.where("id = ?", params[:celo_id]).first
+    
+    Reproduccion.transaction do
 
+      @reproduccion = Reproduccion.new
+      @reproduccion.celo_id = params[:celo_id]
+      @reproduccion.tipo_concepcion_id = params[:tipo_concepcion_id]
+      if params[:tipo_concepcion_id] == PARAMETRO[:tipo_concepcion_monta_natural]
 
-     @guardado_ok = false
+        @reproduccion.ganado_reproductor_id = params[:ganado_reproductor_id]
 
-      @celo = Celo.where("id = ?", params[:celo_id]).first
+      else
 
-      @celo.observacion = params[:observacion] 
-      @celo.estado_celo_id = PARAMETRO[:estado_celo_en_proceso]
+        @reproduccion.esperma_id = params[:esperma_id]
+
+      end
+
+      @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
+      @reproduccion.fecha_concepcion = params[:fecha_concepcion]
+      @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_prenhez]
 
       if @celo.save
 
@@ -339,7 +352,8 @@ before_filter :require_usuario
 
       end
 
-  
+    end # end transaction
+
     respond_to do |f|
 
       f.js
