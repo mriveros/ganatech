@@ -18,15 +18,18 @@
       <td >
         
         <%= link_to_celo_detalle(cel.celo_id) %>
-        <%= link_to_editar_celo(cel.celo_id) %>
-        <%if cel.estado_celo_id != PARAMETRO[:estado_celo_reproduccion] || cel.estado_celo_id != PARAMETRO[:estado_celo_perdido]%>
-
-          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
+       
+        <%if cel.estado_celo_id == PARAMETRO[:estado_celo_en_celo_activo] %>
+          
+          <%= link_to_editar_celo(cel.celo_id) %>   
           <%= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
           <%= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
 
-        <%end%>
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
+         
+
+        <%end%>
 
        </td>
 
