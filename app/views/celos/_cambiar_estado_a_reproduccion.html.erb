@@ -10,11 +10,11 @@
     </div>
 
 
-    <%= form_for @celo, remote: true, url: celos_guardar_cambiar_estado_a_en_proceso_fecundacion_url, html: { id: "form-cambiar-estado-celo" }, method: 'POST' do |f| %>
+    <%= form_for @celo, remote: true, url: celos_guardar_cambiar_estado_a_en_reproduccion_url, html: { id: "form-cambiar-estado-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :celo_id, @celo.id%>
-      <%= hidden_field_tag :ganado_id, @celo.ganado_id%>
+      
 
       <div class="modal-body">
 

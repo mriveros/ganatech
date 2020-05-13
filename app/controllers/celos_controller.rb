@@ -326,8 +326,9 @@ before_filter :require_usuario
     @guardado_ok = false
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
-    
-    Reproduccion.transaction do
+    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
+
+    Ganado.transaction do
 
       @reproduccion = Reproduccion.new
       @reproduccion.celo_id = params[:celo_id]
@@ -346,10 +347,22 @@ before_filter :require_usuario
       @reproduccion.fecha_concepcion = params[:fecha_concepcion]
       @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_prenhez]
 
-      if @celo.save
+      if @reproduccion.save
 
-        @guardado_ok = true
+        @celo.estado_celo_id = PARAMETRO[:estado_celo_en_reproduccion]
+        
+        if @celo.save
+         
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_reproduccion]
+          
+          if @ganado.save
 
+            @guardado_ok = true
+
+          end
+
+        end
+        
       end
 
     end # end transaction
