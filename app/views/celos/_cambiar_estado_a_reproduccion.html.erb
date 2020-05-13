@@ -5,7 +5,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Cambiar Estado Celo</h4>
+      <h4 class="modal-title" id="myModalLabel">Enviar a Reproducción</h4>
       
     </div>
 
@@ -172,10 +172,10 @@
         
         if(j[i].nombre != ganado ){
           
-          ganados.push( {value: j[i].ganado_id +" - "+j[i].procedencia+" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
-          ganado =j[i].ganado_id +" - "+j[i].procedencia+" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
+          ganados.push( {value: j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
+          ganado =j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
 
-          options += "<option value="+ j[i].ganado_id +" - "+j[i].procedencia+" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
+          options += "<option value="+ j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
 
         }
 
@@ -222,9 +222,11 @@
 
     $("#esperma").val('');
     $("#esperma_id").val('');
+    $("#procedencia_muestra").val('');
     $("#nombre_ganado_muestra").val('');
     $("#raza_muestra").val('');
     $("#cantidad_muestra").val('');
+    $("#numero_muestra").val('');
     
 
     $.getJSON("<%= url_for(celos_buscar_esperma_reproductor_path) %>", { esperma: $(this).val()}, function(j){
@@ -235,10 +237,10 @@
         
         if(j[i].descripcion != muestra ){
           
-          muestras.push( {value: j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado+" - "+j[i].raza_ganado+" - "+j[i].cantidad_muestra});
-          ganado =j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado +" - "+j[i].raza_ganado+" - "+j[i].cantidad_muestra ;
+          muestras.push( {value: j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre+" - "+j[i].raza_ganado+" - "+j[i].numero_pajuela+" - "+j[i].cantidad});
+          ganado =j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre +" - "+j[i].raza_ganado+" - "+j[i].numero_pajuela+" - "+j[i].cantidad ;
 
-          options += "<option value="+ j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado+" - "+j[i].raza_ganado +" - "+j[i].cantidad_muestra + "</option>"
+          options += "<option value="+ j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre+" - "+j[i].raza_ganado +" - "+j[i].numero_pajuela+" - "+j[i].cantidad + "</option>"
 
         }
 
@@ -262,10 +264,19 @@
         var datos = ui.item.value.split(" - ");
         $("#esperma").val( ui.item.label);
         $("#esperma_id").val(datos[0]);
-        $("#procedencia_muestra").val(datos[1]);
-        $("#nombre_ganado_muestra").val(datos[1]);
-        $("#raza_muestra").val(datos[2]);
-        $("#cantidad_muestra").val(datos[3]);
+        $("#procedencia_muestra").val(datos[2]);
+        if (datos[3]==='null'){
+
+           $("#nombre_ganado_muestra").val("Muestra Comprada");
+
+        }else{
+
+          $("#nombre_ganado_muestra").val(datos[3]);
+
+        }
+        $("#raza_muestra").val(datos[4]);
+        $("#numero_muestra").val(datos[5]);
+        $("#cantidad_muestra").val(datos[6]);
 
         return false;
 
