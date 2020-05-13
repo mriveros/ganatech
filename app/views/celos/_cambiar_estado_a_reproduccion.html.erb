@@ -50,9 +50,47 @@
 
           <div id = "inseminacion_artificial" hidden="true">
 
+            <%= hidden_field_tag :esperma_id %>
+            <div class="col-sm-4"><%= label_tag :nil, "Muestra(Esperma)#{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= text_area_tag :esperma ,nil,class: 'form-control input-sm' %></div>
+            <div class="col-sm-1"></div><br /><br />
+
+            <div class="col-sm-4"><%= f.label :procedencia_lbl, "Procedencia ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :procedencia_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />  
+
+            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :nombre_ganado_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />  
+            
+            <div class="col-sm-4"><%= f.label :raza_lbl, "Raza ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :raza_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
+
+            <div class="col-sm-4"><%= f.label :numero_muestra_lbl, "Número Muestra".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :numero_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
+
+            <div class="col-sm-4"><%= f.label :cantidad_muestra_lbl, "Cantidad".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :cantidad_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
+
+
           </div>
 
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Reproducción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_reproduccion, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-xs' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br />  
 
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Estimada".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_concepcion, nil, class: 'form-control input-xs' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br /> 
+
+          <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :descripcion ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /><br />
 
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
@@ -134,10 +172,10 @@
         
         if(j[i].nombre != ganado ){
           
-          ganados.push( {value: j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
-          ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
+          ganados.push( {value: j[i].ganado_id +" - "+j[i].procedencia+" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
+          ganado =j[i].ganado_id +" - "+j[i].procedencia+" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
 
-          options += "<option value="+ j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
+          options += "<option value="+ j[i].ganado_id +" - "+j[i].procedencia+" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
 
         }
 
@@ -161,6 +199,7 @@
         var datos = ui.item.value.split(" - ");
         $("#ganado").val( ui.item.label);
         $("#ganado_reproductor_id").val(datos[0]);
+        $("#procedencia_muestra").val(datos[1]);
         $("#nombre_ganado").val(datos[1]);
         $("#rp").val(datos[2]);
         $("#codigo_rfid").val(datos[3]);
@@ -173,6 +212,69 @@
     })
 
   });
+
+
+
+  //OBTENER MUESTRAS DEL MODULO DE ESPERMAS
+  $("#esperma").bind('focus', function(){   
+
+    var muestras = [];
+
+    $("#esperma").val('');
+    $("#esperma_id").val('');
+    $("#nombre_ganado_muestra").val('');
+    $("#raza_muestra").val('');
+    $("#cantidad_muestra").val('');
+    
+
+    $.getJSON("<%= url_for(celos_buscar_esperma_reproductor_path) %>", { esperma: $(this).val()}, function(j){
+        
+      var muestra = "";
+      var options = "<option value=''> -- Seleccione una Muestra -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].descripcion != muestra ){
+          
+          muestras.push( {value: j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado+" - "+j[i].raza_ganado+" - "+j[i].cantidad_muestra});
+          ganado =j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado +" - "+j[i].raza_ganado+" - "+j[i].cantidad_muestra ;
+
+          options += "<option value="+ j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].nombre_ganado+" - "+j[i].raza_ganado +" - "+j[i].cantidad_muestra + "</option>"
+
+        }
+
+      }
+
+      $("#esperma_id").html(options);
+
+    })
+
+    $("#esperma").autocomplete({
+
+      minLength: 1,
+      source: muestras,
+      focus: function( event, ui ) {
+      
+        $("#esperma" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#esperma").val( ui.item.label);
+        $("#esperma_id").val(datos[0]);
+        $("#procedencia_muestra").val(datos[1]);
+        $("#nombre_ganado_muestra").val(datos[1]);
+        $("#raza_muestra").val(datos[2]);
+        $("#cantidad_muestra").val(datos[3]);
+
+        return false;
+
+      }
+
+    })
+
+  });
+
 
   $("#btn-guardar-cambiar-estado").bind('click', function () {
 

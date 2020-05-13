@@ -118,6 +118,8 @@ get "crontab_ultron/index"
   post "celos/guardar_cambiar_estado_a_en_proceso_fecundacion"
   post "celos/guardar_cambiar_estado_a_en_reproduccion"
   post "celos/guardar_cambiar_estado_a_celo_perdido"
+  get "celos/buscar_ganado_reproductor"
+  get "celos/buscar_esperma_reproductor"
 
 
 
