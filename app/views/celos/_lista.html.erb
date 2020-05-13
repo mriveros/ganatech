@@ -21,7 +21,6 @@
         <%= link_to_editar_celo(cel.celo_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
-        <%= link_to_cambiar_estado_celo_a_fecundacion(cel.celo_id) %>
         <%= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
         <%= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
       

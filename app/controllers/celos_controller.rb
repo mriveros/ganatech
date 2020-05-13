@@ -306,34 +306,6 @@ before_filter :require_usuario
   end
 
 
-  def cambiar_estado_a_en_proceso_fecundacion
-
-      @celo = Celo.where("id = ?", params[:celo_id]).first
-
-
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
-
-  def guardar_cambiar_estado_a_en_proceso_fecundacion
-
-      @celo = Celo.where("id = ?", params[:celo_id]).first
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
-
-
-
   def cambiar_estado_a_en_reproduccion
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
@@ -354,7 +326,20 @@ before_filter :require_usuario
     @celo = Celo.where("id = ?", params[:celo_id]).first
 
 
+     @guardado_ok = false
 
+      @celo = Celo.where("id = ?", params[:celo_id]).first
+
+      @celo.observacion = params[:observacion] 
+      @celo.estado_celo_id = PARAMETRO[:estado_celo_en_proceso]
+
+      if @celo.save
+
+        @guardado_ok = true
+
+      end
+
+  
     respond_to do |f|
 
       f.js
