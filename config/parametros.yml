@@ -55,6 +55,11 @@ development:
   estado_ganado_inactivo: 2
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
+
+  #ETAPAS GANADOS
+  etapa_ganado_torito: 4
+  etapa_ganado_toro: 7
+ 
   
 
 production:
@@ -104,7 +109,7 @@ production:
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
 
- #ESTADOS CELOS
+  #ESTADOS CELOS
   estado_celo_en_celo_activo: 1
   estado_celo_en_reproduccion: 2
   estado_celo_en_perdido: 3
@@ -114,5 +119,9 @@ production:
   estado_ganado_inactivo: 2
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
+
+  #ETAPAS GANADOS
+  etapa_ganado_torito: 4
+  etapa_ganado_toro: 7
   
   
