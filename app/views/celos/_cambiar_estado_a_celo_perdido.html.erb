@@ -13,13 +13,13 @@
     <%= form_for @celo, remote: true, url: celos_guardar_cambiar_estado_a_celo_perdido_url, html: { id: "form-cambiar-estado-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :ganado_id, @celo.ganado_id%>
+      <%= hidden_field_tag :celo_id, @celo.id%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Observación #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_area_tag :observacion ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
                  
@@ -97,7 +97,7 @@
 
         swal({
           title: "Cambiar Estado Celo",
-          text: "Al confirmar el estado del Celo este guardará una observación acerca del proceso de fecundacion del ganado.",
+          text: "Al confirmar el estado del Celo este guardará una observación acerca del proceso de celos del ganado.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",

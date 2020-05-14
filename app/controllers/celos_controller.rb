@@ -347,7 +347,7 @@ before_filter :require_usuario
 
       @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
       @reproduccion.fecha_concepcion = params[:fecha_concepcion]
-      @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_prenhez]
+      @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_proceso_fecundacion]
       @reproduccion.descripcion = params[:descripcion]
       @reproduccion.observacion = params[:observacion]
 
@@ -398,9 +398,32 @@ before_filter :require_usuario
 
   def guardar_cambiar_estado_a_celo_perdido
 
+    @guardado_ok = false
+    @valido = true
+
     @celo = Celo.where("id = ?", params[:celo_id]).first
+    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
 
+    
+    if @valido
+      
+      @celo.estado_celo_id = PARAMETRO[:estado_celo_en_perdido]
+      @celo.observacion = params[:observacion]
 
+      if @celo.save
+
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+        
+        if @ganado.save
+          
+          @guardado_ok = true
+
+        end
+        
+
+      end
+
+    end
 
     respond_to do |f|
 

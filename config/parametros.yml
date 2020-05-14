@@ -6,9 +6,10 @@ development:
   rol_super: 6
 
   #ESTADOS REPRODUCCIONES
-  estado_reproduccion_prenhez: 1
-  estado_reproduccion_finalizado: 2
-  estado_reproduccion_perdido: 3
+  estado_reproduccion_proceso_fecundacion: 1
+  estado_reproduccion_prenhez: 2
+  estado_reproduccion_finalizado: 3
+  estado_reproduccion_perdido: 4
   
   #sistemas
   sistema_RUE: 1
@@ -73,9 +74,10 @@ production:
   rol_super: 6
 
   #ESTADOS REPRODUCCIONES
-  estado_reproduccion_prenhez: 1
-  estado_reproduccion_finalizado: 2
-  estado_reproduccion_perdido: 3
+  estado_reproduccion_proceso_fecundacion: 1
+  estado_reproduccion_prenhez: 2
+  estado_reproduccion_finalizado: 3
+  estado_reproduccion_perdido: 4
    
   #sistemas
   sistema_RUE: 1
