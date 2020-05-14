@@ -327,7 +327,10 @@ before_filter :require_usuario
     @valido = true
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
+    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
     @ganado = Ganado.where('id = ?', @celo.ganado_id).first
+    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
+    
     if @valido
 
     Ganado.transaction do
@@ -353,14 +356,17 @@ before_filter :require_usuario
 
       if @reproduccion.save
 
+        auditoria_nueva("agregar reproduccion en modulo de celos", "reproducciones", @reproduccion)
         @celo.estado_celo_id = PARAMETRO[:estado_celo_en_reproduccion]
         
         if @celo.save
          
+          auditoria_despues(@celo, auditoria_id_celo)
           @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_reproduccion]
           
           if @ganado.save
 
+            auditoria_despues(@ganado, auditoria_id_ganado)
             @guardado_ok = true
 
           end
@@ -402,8 +408,9 @@ before_filter :require_usuario
     @valido = true
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
+    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo a perdido", "celos", @celo)
     @ganado = Ganado.where('id = ?', @celo.ganado_id).first
-
+    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo a perdido", "ganados", @ganado)
     
     if @valido
       
@@ -411,11 +418,13 @@ before_filter :require_usuario
       @celo.observacion = params[:observacion]
 
       if @celo.save
-
+        
+        auditoria_despues(@celo, auditoria_id_celo)
         @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
         
         if @ganado.save
           
+          auditoria_despues(@ganado, auditoria_id_ganado)
           @guardado_ok = true
 
         end
