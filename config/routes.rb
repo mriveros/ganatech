@@ -121,6 +121,25 @@ get "crontab_ultron/index"
   get "celos/buscar_ganado_reproductor"
   get "celos/buscar_esperma_reproductor"
 
+  #REPRODUCCIONES
+  get "reproducciones/index" 
+  post "reproducciones/lista"
+  get "reproducciones/lista"
+  get "reproducciones/agregar"
+  post "reproducciones/guardar"
+  get "reproducciones/editar"
+  post "reproducciones/actualizar"
+  get "reproducciones/eliminar"
+  get "reproducciones/reproducciones_detalles"
+  get "reproducciones/cambiar_estado_a_en_proceso_fecundacion"
+  get "reproducciones/cambiar_estado_a_en_reproduccion"
+  get "reproducciones/cambiar_estado_a_celo_perdido"
+  post "reproducciones/guardar_cambiar_estado_a_en_proceso_fecundacion"
+  post "reproducciones/guardar_cambiar_estado_a_en_reproduccion"
+  post "reproducciones/guardar_cambiar_estado_a_celo_perdido"
+  get "reproducciones/buscar_ganado_reproductor"
+  get "reproducciones/buscar_esperma_reproductor"
+
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
