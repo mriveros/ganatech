@@ -1,0 +1,2 @@
+<%= link_to icon_perdido, "#", id: "link-to-cambiar-estado-celo-a-perdido-#{celo_id}", class: 'btn btn-danger btn-xs', title: 'Haga click aquí cambiar el estado de Celo a Celo Perdido.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-cambiar-estado-celo-a-perdido-#{celo_id}", link_to_id: "#link-to-cambiar-estado-celo-a-perdido-#{celo_id}", url: celos_cambiar_estado_a_celo_perdido_path( window_id: "modal-window-cambiar-estado-celo-a-perdido-#{celo_id}", celo_id: celo_id) )%>

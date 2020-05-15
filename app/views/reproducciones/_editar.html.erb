@@ -1,0 +1,70 @@
+<div class="modal-dialog" style="text-align:left;">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Editar Potrero</h4>
+      
+    </div>
+
+    <%= form_for @potrero, remote: true, url: potreros_actualizar_url, html: { id: "form-editar-potrero" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :id, @potrero.id %>
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="panel-body">
+
+          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-hacienda" %></div>
+          <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br /><br />  
+
+           <div class="col-sm-4"><%= f.label :hectarea, "Hectáreas #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :hectareas, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+          <%= f.text_area :observacion,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "510" %>
+          </div>
+         <div class="col-sm-1"></div><br /><br />
+
+
+        
+        
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Actualizar", class: "btn btn-primary", id: "btn-actualizar-potrero" %>
+          
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style type="text/css">
+
+  #form-editar-potrero label, #form-editar-potrero input[type='text'], #form-editar-potrero select { float:left; margin-top:5px;}
+  #form-editar-potrero br {clear:both; }
+  #form-editar-potrero label { width:200px;font-size:12px;margin-top:10px;}
+ 
+
+</style>
+
+<script type="text/javascript">
+
+  setTimeout(function(){ 
+    $("#persona_documento_persona").focus();
+  }, 1000);
+  aplicar_datepicker2();
+  
+</script>
