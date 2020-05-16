@@ -204,17 +204,13 @@ before_filter :require_usuario
 
     @celo = Celo.where("id = ?", params[:id]).first
     auditoria_id = auditoria_antes("actualizar celo ganado", "celos", @celo)
-    
 
     if @valido
-      
-      
-      @celo.ganado_id = params[:ganado_id]
-      @celo.descripcion = params[:descripcion]
-      @celo.observacion = params[:observacion]
-      @celo.fecha_inicio = params[:fecha_inicio]
-      @celo.fecha_fin = params[:fecha_fin]
-      @celo.estado_celo_id = params[:estado_celo][:id]
+     
+      @celo.fecha_inicio = params[:celo][:fecha_inicio]
+      @celo.fecha_fin = params[:celo][:fecha_fin]
+      @celo.descripcion = params[:celo][:descripcion]
+      @celo.observacion = params[:celo][:observacion]
 
         if @celo.save
 

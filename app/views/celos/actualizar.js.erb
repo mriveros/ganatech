@@ -1,22 +1,23 @@
-<% if @potrero_ok.present? %>
+<% if @celo_ok.present? %>
 
-   $("<div class='col-sm-12' id='msg-editar-potrero' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-potrero");
+    $("<div class='col-sm-12' id='msg-editar-celo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-celo");
    
-  $("#form_buscar_potrero_id").val('<%= @potrero.id %>');
-  $("#form_buscar_potrero_descripcion").val('');
-  $("#form_buscar_potrero_hectareas").val('');
+    $("#form_buscar_celo_id").val('<%= @celo.id %>');
+    $("#form_buscar_celo_ganado_rfid").val('');
+    $("#form_buscar_celo_ganado_nombre").val('');
+    $("#form_buscar_celo_ganado_rp").val('');
   
-  setTimeout(function(){ 
+    setTimeout(function(){ 
 
-    $("#<%= params[:window_id]%>").modal('hide'); 
-    $("#form-buscar-potrero").submit();
-    swal("Potrero actualizado Exitosamente.");
+      $("#<%= params[:window_id]%>").modal('hide'); 
+      $("#form-buscar-celo").submit();
+      swal("Celos","Celo modificado exitosamente!", "success");
 
   }, 3000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-editar-potrero' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-editar-potrero");
-   swal('Error al actualizar el Potrero. Intente más tarde.');
+  $("<div class='col-sm-12' id='msg-editar-celo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-editar-celo");
+  swal("Celos", "Error al modificar el Celo.<%=@msg%> Intente más tarde","error");
 
 <% end %>
