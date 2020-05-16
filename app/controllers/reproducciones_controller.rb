@@ -13,73 +13,73 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_celo_id].present?
+    if params[:form_buscar_reproduccion_id].present?
 
-      cond << "celo_id = ?"
-      args << params[:form_buscar_celo_id]
+      cond << "reproduccion_id = ?"
+      args << params[:form_buscar_reproduccion_id]
 
     end
 
-    if params[:form_buscar_celo_ganado_rfid].present?
+    if params[:form_buscar_reproduccion_ganado_rfid].present?
 
       cond << "codigo_rfid = ?"
-      args << params[:form_buscar_celo_ganado_rfid]
+      args << params[:form_buscar_reproduccion_ganado_rfid]
 
     end
 
-    if params[:form_buscar_celo_ganado_nombre].present?
+    if params[:form_buscar_reproduccion_ganado_nombre].present?
 
       cond << "ganado_nombre  ilike ?"
-      args << "%#{params[:form_buscar_celo_ganado_nombre]}%"
+      args << "%#{params[:form_buscar_reproduccion_ganado_nombre]}%"
 
     end
 
-    if params[:form_buscar_celo_ganado_rp].present?
+    if params[:form_buscar_reproduccion_ganado_rp].present?
 
       cond << "ganado_rp = ?"
-      args << params[:form_buscar_celo_ganado_rp]
+      args << params[:form_buscar_reproduccion_ganado_rp]
 
     end
 
-    if params[:form_buscar_celo_fecha_inicio].present?
+    if params[:form_buscar_reproduccion_fecha_inicio].present?
 
       cond << "fecha_inicio = ?"
-      args << params[:form_buscar_celo_fecha_inicio]
+      args << params[:form_buscar_reproduccion_fecha_inicio]
 
     end
 
-    if params[:form_buscar_celo_fecha_fin].present?
+    if params[:form_buscar_reproduccion_fecha_fin].present?
 
       cond << "fecha_fin = ?"
-      args << params[:form_buscar_celo_fecha_fin]
+      args << params[:form_buscar_reproduccion_fecha_fin]
 
     end
 
-    if params[:form_buscar_celo_descripcion].present?
+    if params[:form_buscar_reproduccion_descripcion].present?
 
       cond << "descripcion ilike ?"
-      args << "%#{params[:form_buscar_celo_descripcion]}%"
+      args << "%#{params[:form_buscar_reproduccion_descripcion]}%"
 
     end
 
-    if params[:form_buscar_celo][:hacienda_id].present?
+    if params[:form_buscar_reproduccion][:hacienda_id].present?
 
       cond << "hacienda_id = ?"
-      args << params[:form_buscar_celo][:hacienda_id]
+      args << params[:form_buscar_reproduccion][:hacienda_id]
 
     end
 
-    if params[:form_buscar_celo][:hacienda_id].present?
+    if params[:form_buscar_reproduccion][:hacienda_id].present?
 
       cond << "hacienda_id = ?"
-      args << params[:form_buscar_celo][:hacienda_id]
+      args << params[:form_buscar_reproduccion][:hacienda_id]
 
     end
 
-    if params[:form_buscar_celo][:estado_celo_id].present?
+    if params[:form_buscar_reproduccion][:estado_reproduccion_id].present?
 
-      cond << "estado_celo_id = ?"
-      args << params[:form_buscar_celo][:estado_celo_id]
+      cond << "estado_reproduccion_id = ?"
+      args << params[:form_buscar_reproduccion][:estado_celo_id]
 
     end
 
@@ -88,17 +88,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @celos =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VCelo.where(cond).count
+      @reproducciones =  VReproduccion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VReproduccion.where(cond).count
 
     else
      
-      @celos = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VCelo.count
+      @reproducciones = VReproduccion.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VReproduccion.count
 
     end
 
-    @total_registros = VCelo.count
+    @total_registros = VReproduccion.count
 
     respond_to do |f|
       
@@ -110,7 +110,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @celo = Celo.new
+    @reproduccion = Reproduccion.new
 
     respond_to do |f|
       
@@ -127,40 +127,57 @@ before_filter :require_usuario
     @guardado_ok = false
 
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
-    auditoria_id = auditoria_antes("cambiar estado de ganado en celo", "ganados", @ganado)
-    @celo = Celo.where("ganado_id = ? and estado_celo_id = ?", params[:ganado_id], PARAMETRO[:estado_celo_en_celo_activo]).first
-    if @celo.present?
+    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar reproduccion", "ganados", @ganado)
 
-      @msg = " El ganado ya se encuentra actualmente en Celo. Verifique en el buscador del módulo de Celos."
-      @valido = false
+    @celo = Celo.where("id = ? ", params[:celo_id]).first
+    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar reproduccion", "celos", @celo)
 
-    end
     
-    Celo.transaction do
+    Reproduccion.transaction do
 
       if @valido
         
-        @celo = Celo.new()
-        @celo.ganado_id = params[:ganado_id]
-        @celo.descripcion = params[:descripcion]
-        @celo.observacion = params[:observacion]
-        @celo.fecha_inicio = params[:fecha_inicio]
-        @celo.fecha_fin = params[:fecha_fin]
-        @celo.estado_celo_id = PARAMETRO[:estado_celo_en_celo_activo]
+        @reproduccion = Reproduccion.new()
+        @reproduccion.celo_id = params[:celo_id]
+        @reproduccion.descripcion = params[:descripcion]
+        @reproduccion.observacion = params[:observacion]
+        @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
+        @reproduccion.fecha_concepcion = params[:fecha_concepcion]
+        
+        if params[:tipo_concepcion_id] == PARAMETRO[:tipo_concepcion_monta_natural]
 
-        if @celo.save
+          @reproduccion.tipo_concepcion_id = params[:tipo_concepcion_id]
+          @reproduccion.ganado_reproductor_id = params[:ganado_reproductor_id]
 
-            auditoria_nueva("agregar nuevo celo", "celos", @celo)
-            #cambiamos el estado del ganado a En Celo
-            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
+        else
+           
+          @reproduccion.tipo_concepcion_id = params[:tipo_concepcion_id]
+          @reproduccion.esperma_id = params[:esperma_id]
+
+        end
+        
+        @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_proceso_fecundacion]
+
+        if @reproduccion.save
+
+            auditoria_nueva("agregar nueva reproduccion", "reproducciones", @reproduccion)
+            #cambiamos el estado del celo
+            @celo.estado_celo_id = PARAMETRO[:estado_celo_en_reproduccion]  
             
-            if @ganado.save
+            if @celo.save
 
-              @guardado_ok = true
-              auditoria_despues(@ganado, auditoria_id)
+              auditoria_despues(@ganado, auditoria_id_celo)
+              #cambiamos el estado del ganado
+              @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_reproduccion]
+              
+              if @ganado.save
+
+                @guardado_ok = true
+                auditoria_despues(@ganado, auditoria_id_ganado)
+
+              end
 
             end
-
 
           end
 

@@ -2,7 +2,6 @@ class CelosController < ApplicationController
 
 before_filter :require_usuario
 
-
   def index
   
  
