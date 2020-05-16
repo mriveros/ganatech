@@ -203,7 +203,7 @@ before_filter :require_usuario
 
   def editar
     
-    @celo = Celo.find(params[:celo_id])
+    @reproduccion = Reproduccion.find(params[:reproduccion_id])
 
     respond_to do |f|
       
@@ -225,20 +225,6 @@ before_filter :require_usuario
 
     if @valido
       
-      
-      @celo.ganado_id = params[:ganado_id]
-      @celo.descripcion = params[:descripcion]
-      @celo.observacion = params[:observacion]
-      @celo.fecha_inicio = params[:fecha_inicio]
-      @celo.fecha_fin = params[:fecha_fin]
-      @celo.estado_celo_id = params[:estado_celo][:id]
-
-        if @celo.save
-
-          auditoria_despues(@celo, auditoria_id)
-          @celo_ok = true
-         
-        end 
 
     end
   
