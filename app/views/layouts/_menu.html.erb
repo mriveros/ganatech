@@ -1,30 +1,31 @@
 <!-- Navigation -->
 <nav class="navbar-principal">
+
 	
 	<!-- BEGIN MENU NEW -->  
 <div class="navbar-principal">
 
   <div class="container">
-    
+
     <div class="navbar-header">
-      
+
       <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
       <span class="sr-only">Menu</span>
-  		<span class="fa fa-lg fa-bars"></span>              
+  		<span class="fa fa-lg fa-bars"></span>
       </button>
-	
+
 	   <%= link_to "Ganatec", index_url, :title => "Ir al Inicio", :class => 'navbar-brand' %>
   </div>
-  
+
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
-						
+
 			<% if current_usuario.present? %>
 			<li>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
 
         <ul class="dropdown-menu">
-    
+
           <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
           <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
           <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
@@ -33,9 +34,9 @@
 
         </ul>
       </li>
-				  
+
       <li>
-			
+
       	<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Módulos <b class="caret"></b></a>
 
 				<ul class="dropdown-menu">
@@ -44,31 +45,32 @@
 
 			 		  <a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-						
+
               <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-						  <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li> 
-						  <li><%= link_to "Potreros", potreros_index_path if acceso_permitido("potreros.index") %></li> 
-						  <li><%= link_to "Razas", razas_index_path if acceso_permitido("razas.index") %></li> 
-						  <li><%= link_to "Medicamentos", precios_index_path if acceso_permitido("precios.index") %></li> 
-						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li> 
-						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
+						  <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li>
+						  <li><%= link_to "Potreros", potreros_index_path if acceso_permitido("potreros.index") %></li>
+						  <li><%= link_to "Razas", razas_index_path if acceso_permitido("razas.index") %></li>
+						  <li><%= link_to "Medicamentos", precios_index_path if acceso_permitido("precios.index") %></li>
+						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
+						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
 
               <li>
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  
-                  <li><%= link_to "Estado Ganado", razas_index_path if acceso_permitido("razas.index") %></li> 
-                  <li><%= link_to "Tipo Concepciones", razas_index_path if acceso_permitido("razas.index") %></li> 
-                  <li><%= link_to "Tipo Ganado", razas_index_path if acceso_permitido("razas.index") %></li> 
-                  <li><%= link_to "Pajuelas Procedencia", razas_index_path if acceso_permitido("razas.index") %></li> 
+
+                  <li><%= link_to "Estado Ganado", estados_ganados_index_path if acceso_permitido("estados_ganados.index") %></li> 
+                  <li><%= link_to "Tipo Concepciones", razas_index_path if acceso_permitido("razas.index") %></li>
+                  <li><%= link_to "Tipo Ganado", razas_index_path if acceso_permitido("razas.index") %></li>
+                  <li><%= link_to "Pajuelas Procedencia", razas_index_path if acceso_permitido("razas.index") %></li>
 
                 </ul>
                 <li>
 						</ul>
 
-            
-							 
+
+
 					</li>
+
  	
 					<li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li> 
           <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li> 
@@ -76,50 +78,50 @@
 					<li><%= link_to "Ganado Entrada", clientes_index_path if acceso_permitido("clientes.index") %></li> 
           <li><%= link_to "Ganado Salida", clientes_index_path if acceso_permitido("clientes.index") %></li> 
           <li><%= link_to "Sanitaciones", clientes_index_path if acceso_permitido("clientes.index") %></li>
-          <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li> 
-							
+          <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
+
 					<li>
-								
+
 					   <a class="dropdown-toggle " href="#" data-toggle="dropdown">Informes<b class="caret"></b></a>
-								
+
 						<ul class="dropdown-menu">
 
 						  <li><%= link_to "Generar Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
-								
+
 						</ul>
 
 					</li>
 
 					<li>
-							
+
 						<ul class="dropdown-menu">
-								
+
 					  	<li>
-								   
+
 					 	     <ul class="dropdown-menu">
-									   
+
 								 </ul>
-								
+
 							</li>
-								
-								
-							      
+
+
+
 						</ul>
-				 		
+
 				 	</li>
-					 
-			</ul> 	
+
+			</ul>
 
 		</li>
-		
+
     <li> <%= link_to "Informaciones", index_url %> </li>
-					
+
 	<% end %>
 
 	<li><%= link_to "Contactos", contactos_url, :id => "tab-contacto", :class => ('active current' if current_page?(contactos_path)), :title => "Ir al Formulario de Contactos" %></li>
-			
+
   </ul>
-					
+
 					<!-- BEGIN MENU RIGTH-->
 		<ul class="nav navbar-nav navbar-right">
 
@@ -144,7 +146,7 @@
 				<% end %>
 
 				</li>
-				
+
         <li><%= link_to "Mi Cuenta <em style='color:silver;font-size:12px;'></em> <span class='glyphicon glyphicon-edit'></span>".html_safe, usuarios_mi_cuenta_path, :title => "Ver mi Perfil", id: "tab-mi-cuenta" %></li>
 				<li><%= link_to "Salir <span class='glyphicon glyphicon-off'></span>".html_safe, logout_url, :title => "Cerrar Sesión", id: "tab-cerrar-sesion" %></li>
 					  <% else %>
@@ -152,8 +154,8 @@
 				<li><%= link_to "Crear mi Cuenta <span class='glyphicon glyphicon-pencil'></span>".html_safe, principal_agregar_usuario_path, :title => "Crear mi Cuenta", id: "tab-registrarme" %></li>
 				<li><%= link_to "Iniciar Sesi&oacute;n <span class='glyphicon glyphicon-user'></span>".html_safe, login_url, :title => "Iniciar Sesión", id: "tab-iniciar-sesion" %></li>
 			<% end %>
-									
- 
+
+
         </div>
 
     </div>
@@ -166,7 +168,7 @@
 </nav>
 
 <style type="text/css">
- 
+
 .container {
     width: 100%;
 }
@@ -213,8 +215,8 @@ header nav.navbar-principal a {
 	/*.navbar-nav .navbar-right .dropdown-menu .caret {
         transform: rotate(-180deg);
     }*/
-	
-	
+
+
 }
 
 
