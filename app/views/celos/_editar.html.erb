@@ -5,34 +5,63 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Potrero</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Celo</h4>
       
     </div>
 
-    <%= form_for @potrero, remote: true, url: potreros_actualizar_url, html: { id: "form-editar-potrero" }, method: 'POST' do |f| %>
+    <%= form_for @celo, remote: true, url:celos_actualizar_url, html: { id: "form-editar-celo" }, method: 'POST' do |f| %>
 
-      <%= hidden_field_tag :id, @potrero.id %>
+      <%= hidden_field_tag :id, @celo.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-hacienda" %></div>
-          <div class="col-sm-7"><%= collection_select :potrero, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br /><br />  
-
-           <div class="col-sm-4"><%= f.label :hectarea, "Hectáreas #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :hectareas, :onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+          <%= f.hidden_field :ganado_id%>
+          <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br /><br />
 
-           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />  
+          
+
+          <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.date_field :fecha_inicio, class: 'form-control input-sm' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br />  
+
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin Aprox. #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.date_field :fecha_fin, class: 'form-control input-sm' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br />  
+
+          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion,  class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br /><br />  
+
+          <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
-          <%= f.text_area :observacion,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "510" %>
+            <%= f.text_area :observacion,class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
           </div>
-         <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
+          
+         
 
 
         
@@ -53,9 +82,9 @@
 
 <style type="text/css">
 
-  #form-editar-potrero label, #form-editar-potrero input[type='text'], #form-editar-potrero select { float:left; margin-top:5px;}
-  #form-editar-potrero br {clear:both; }
-  #form-editar-potrero label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-celo label, #form-editar-celo input[type='text'], #form-editar-celo select { float:left; margin-top:5px;}
+  #form-editar-celo br {clear:both; }
+  #form-editar-celo label { width:200px;font-size:12px;margin-top:10px;}
  
 
 </style>
@@ -63,8 +92,41 @@
 <script type="text/javascript">
 
   setTimeout(function(){ 
-    $("#persona_documento_persona").focus();
+    
+    $("#fecha_inicio").focus();
+    cargar_ganado();
+
   }, 1000);
+  
+  
   aplicar_datepicker2();
+
+  function cargar_ganado(){   
+
+    $("#ganado").val('');
+    $("#ganado_id").val('');
+    $("#nombre_ganado").val('');
+    $("#hacienda").val('');
+    $("#rp").val('');
+    $("#codigo_rfid").val('');
+
+    $.getJSON("<%= url_for(ganados_buscar_ganado_path) %>", { ganado_id: $("#celo_ganado_id").val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_hembra]%>}, function(j){
+        
+      var ganado = "";
+      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
+      var i = 0;
+      
+      ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
+
+        $("#ganado").val(ganado);
+        $("#ganado_id").val(j[i].ganado_id);
+        $("#nombre_ganado").val(j[i].nombre);
+        $("#rp").val(j[i].rp);
+        $("#codigo_rfid").val(j[i].codigo_rfid);
+        $("#hacienda").val(j[i].hacienda);
+
+    })
+
+  }
   
 </script>

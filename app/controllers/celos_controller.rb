@@ -5,7 +5,7 @@ before_filter :require_usuario
 
   def index
   
-
+ 
   end 
  
   def lista
@@ -198,7 +198,7 @@ before_filter :require_usuario
 
   def actualizar
 
-     @valido = true
+    @valido = true
     @msg = ""
     @guardado_ok = false
 

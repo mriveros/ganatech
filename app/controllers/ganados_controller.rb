@@ -818,8 +818,15 @@ class GanadosController < ApplicationController
 
   def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ?", "%#{params[:ganado]}%", params[:sexo_ganado_id])
+    if params[:ganado_id].present?
 
+      @ganados = VGanado.where("ganado_id = ?", params[:ganado_id])
+    
+    else
+
+      @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ? and estado_ganado_id = ?", "%#{params[:ganado]}%", params[:sexo_ganado_id], PARAMETRO[:estado_ganado_activo])
+    
+    end
     respond_to do |f|
       
       f.html
