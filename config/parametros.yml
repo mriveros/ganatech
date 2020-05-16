@@ -4,12 +4,6 @@ development:
   rol_administrador: 1
   rol_operador: 3
   rol_super: 6
-
-  #ESTADOS REPRODUCCIONES
-  estado_reproduccion_proceso_fecundacion: 1
-  estado_reproduccion_prenhez: 2
-  estado_reproduccion_finalizado: 3
-  estado_reproduccion_perdido: 4
   
   #sistemas
   sistema_RUE: 1
@@ -63,6 +57,12 @@ development:
   #TIPOS CONCEPCIONES
   tipo_concepcion_monta_natural: 1
   tipo_concepcion_inseminacion_artificial: 2
+
+  #ESTADOS REPRODUCCIONES
+  estado_reproduccion_proceso_fecundacion: 1
+  estado_reproduccion_prenhez: 2
+  estado_reproduccion_finalizado: 3
+  estado_reproduccion_perdido: 4
  
   
 
@@ -72,12 +72,6 @@ production:
   rol_administrador: 1
   rol_operador: 3
   rol_super: 6
-
-  #ESTADOS REPRODUCCIONES
-  estado_reproduccion_proceso_fecundacion: 1
-  estado_reproduccion_prenhez: 2
-  estado_reproduccion_finalizado: 3
-  estado_reproduccion_perdido: 4
    
   #sistemas
   sistema_RUE: 1
@@ -131,5 +125,11 @@ production:
   #TIPOS CONCEPCIONES
   tipo_concepcion_monta_natural: 1
   tipo_concepcion_inseminacion_artificial: 2
+
+  #ESTADOS REPRODUCCIONES
+  estado_reproduccion_proceso_fecundacion: 1
+  estado_reproduccion_prenhez: 2
+  estado_reproduccion_finalizado: 3
+  estado_reproduccion_perdido: 4
   
   

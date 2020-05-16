@@ -1,33 +1,33 @@
 module ReproduccionesHelper
 
-  def link_to_editar_celo(celo_id)
+  def link_to_editar_reproduccion(reproduccion_id)
 
-      render partial: 'link_to_editar_celo', locals: { celo_id: celo_id }
+      render partial: 'link_to_editar_reproduccion', locals: { reproduccion_id: reproduccion_id }
       
   end
 
-  def link_to_celo_detalle(celo_id)
+  def link_to_reproduccion_detalle(reproduccion_id)
 
-    render partial: 'link_to_celo_detalle', locals: { celo_id: celo_id}
-
-  end
-
-  def link_to_cambiar_estado_celo_a_fecundacion(celo_id)
-
-    render partial: 'link_to_cambiar_estado_celo_a_fecundacion', locals: {celo_id: celo_id}
+    render partial: 'link_to_reproduccion_detalle', locals: { reproduccion_id: reproduccion_id}
 
   end
 
-  def link_to_cambiar_estado_a_en_reproduccion(celo_id)
+  def link_to_cambiar_estado_reproduccion_a_reproduccion_prenhada(reproduccion_id)
 
-    render partial: 'link_to_cambiar_estado_a_en_reproduccion', locals: {celo_id: celo_id}
+    render partial: 'link_to_cambiar_estado_reproduccion_a_reproduccion_prenhada', locals: {reproduccion_id: reproduccion_id}
+
+  end
+
+  def link_to_cambiar_estado_reproduccion_a_reproduccion_finalizada(reproduccion_id)
+
+    render partial: 'link_to_cambiar_estado_reproduccion_a_reproduccion_finalizada', locals: {reproduccion_id: reproduccion_id}
 
   end
 
 
-  def link_to_cambiar_estado_a_celo_perdido(celo_id)
+  def link_to_cambiar_estado_reproduccion_a_reproduccion_perdido(reproduccion_id)
 
-    render partial: 'link_to_cambiar_estado_a_celo_perdido', locals: {celo_id: celo_id}
+    render partial: 'link_to_cambiar_estado_reproduccion_a_reproduccion_perdido', locals: {reproduccion_id: reproduccion_id}
 
   end
   
