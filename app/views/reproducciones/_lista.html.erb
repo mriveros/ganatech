@@ -1,35 +1,33 @@
-<% if celos.present? %>
+<% if reproducciones.present? %>
 
-  <% celos.each do |cel| %>
+  <% reproducciones.each do |rep| %>
 
     <tr>
 
-      <td><%= cel.celo_id %></td>
-      <td><%= cel.codigo_rfid%></td>
-      <td><%= cel.ganado_nombre%></td>
-      <td><%= cel.ganado_rp%></td>
-      <td ><%= cel.fecha_inicio.strftime('%d/%m/%Y') %></td>
-      <td ><%= cel.fecha_fin.strftime('%d/%m/%Y')  %></td>
-      <td ><%= cel.descripcion %></td>
-      <td ><%= cel.hacienda %></td>
-      <td ><%= cel.estado_celo %></td>
+      <td><%= rep.reproduccion_id %></td>
+      <td><%= rep.celo_ganado_rfid%></td>
+      <td><%= rep.celo_ganado_nombre%></td>
+      <td><%= rep.celo_ganado_rp%></td>
+      <td ><%= rep.fecha_reproduccion.strftime('%d/%m/%Y') %></td>
+      <td ><%= rep.fecha_concepcion.strftime('%d/%m/%Y')  %></td>
+      <td ><%= rep.descripcion %></td>
+      <td ><%= rep.hacienda %></td>
+      <td ><%= rep.estado_reproduccion %></td>
       
       
       <td >
         
-        <%= link_to_celo_detalle(cel.celo_id) %>
+        <%#= link_to_celo_detalle(cel.celo_id) %>
        
-        <%if cel.estado_celo_id == PARAMETRO[:estado_celo_en_celo_activo] %>
+        <%#if cel.estado_celo_id == PARAMETRO[:estado_celo_en_celo_activo] %>
           
-          <%= link_to_editar_celo(cel.celo_id) %>   
-          <%= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
-          <%= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
+          <%#= link_to_editar_celo(cel.celo_id) %>   
+          <%#= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
+          <%#= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
 
-          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
+          <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
-         
-
-        <%end%>
+        <%#end%>
 
        </td>
 
@@ -42,7 +40,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate celos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate reproducciones, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -66,11 +64,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(celo_id) {
+  function eliminar_registro(reproduccion_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará de la lista del módulo de Celos y el estado del ganado pasará al estado normal Activo (sin celo activo).",
+          text: "Al confirmar se eliminará de la lista del módulo de Reproducciones y el Celo volverá al estado anterior, además el estado del ganado pasará al estado normal Activo (Celo Activo).",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -83,8 +81,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(celos_eliminar_path) %>", 
-                data: {id: celo_id},
+                url: "<%= url_for(reproducciones_eliminar_path) %>", 
+                data: {id: reproduccion_id},
                 dataType: 'script'
               });
             
