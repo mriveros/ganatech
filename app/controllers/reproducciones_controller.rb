@@ -79,7 +79,7 @@ before_filter :require_usuario
     if params[:form_buscar_reproduccion][:estado_reproduccion_id].present?
 
       cond << "estado_reproduccion_id = ?"
-      args << params[:form_buscar_reproduccion][:estado_celo_id]
+      args << params[:form_buscar_reproduccion][:estado_reproduccion_id]
 
     end
 
