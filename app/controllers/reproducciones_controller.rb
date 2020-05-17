@@ -22,21 +22,21 @@ before_filter :require_usuario
 
     if params[:form_buscar_reproduccion_ganado_rfid].present?
 
-      cond << "codigo_rfid = ?"
+      cond << "celo_ganado_rfid = ?"
       args << params[:form_buscar_reproduccion_ganado_rfid]
 
     end
 
     if params[:form_buscar_reproduccion_ganado_nombre].present?
 
-      cond << "ganado_nombre  ilike ?"
+      cond << "celo_ganado_nombre  ilike ?"
       args << "%#{params[:form_buscar_reproduccion_ganado_nombre]}%"
 
     end
 
     if params[:form_buscar_reproduccion_ganado_rp].present?
 
-      cond << "ganado_rp = ?"
+      cond << "celo_ganado_rp = ?"
       args << params[:form_buscar_reproduccion_ganado_rp]
 
     end

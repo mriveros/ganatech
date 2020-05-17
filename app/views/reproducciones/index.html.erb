@@ -32,6 +32,14 @@
           </th>
 
           <th >
+            <span>Celo Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_reproduccion_celo_ganado, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_celo_ganado');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
             <span>Ganado RFID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_reproduccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
@@ -58,18 +66,18 @@
           <th>
             <div><%= label_tag nil, "Fecha Inicio Celo".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_reproduccion_fecha_inicio, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_reproduccion_fecha_reproduccion, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_fecha_inicio');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_fecha_reproduccion');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
          <th>
-            <div><%= label_tag nil, "Fecha Fin Aprox.".html_safe %></div>
+            <div><%= label_tag nil, "Fecha Concepcion".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_reproduccion_fecha_fin, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_reproduccion_fecha_concepcion, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_fecha_fin');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_fecha_concepcion');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
