@@ -41,9 +41,9 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_reproduccion_fecha_inicio].present?
+    if params[:form_buscar_reproduccion_fecha_reproduccion].present?
 
-      cond << "fecha_inicio = ?"
+      cond << "fecha_reproduccion = ?"
       args << params[:form_buscar_reproduccion_fecha_inicio]
 
     end
