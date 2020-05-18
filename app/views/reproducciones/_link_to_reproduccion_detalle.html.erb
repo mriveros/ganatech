@@ -1,21 +1,21 @@
-<%= link_to icon_detalles, "#", id: "link-to-celo-detalle-#{celo_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Celo', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_detalles, "#", id: "link-to-reproduccion-detalle-#{reproduccion_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del reproduccion', onclick: "$('.modal').html('');return false;" %>
 
 <script type="text/javascript">
 
-  $("#link-to-celo-detalle-<%= celo_id %>").bind('click', function(){
+  $("#link-to-reproduccion-detalle-<%= reproduccion_id %>").bind('click', function(){
 
-    var contenido = $.trim($("#celo-detalle-<%= celo_id %>").html());
+    var contenido = $.trim($("#reproduccion-detalle-<%= reproduccion_id %>").html());
 
-    $(".celo-detalle").html('');
+    $(".reproduccion-detalle").html('');
 
     if(contenido.length == 0){
 
-    $(this).parent().parent().after("<tr id='celo-detalle-<%= celo_id %>' class='celo-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+    $(this).parent().parent().after("<tr id='reproduccion-detalle-<%= reproduccion_id %>' class='reproduccion-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
 
       $.ajax({
 
         type: 'GET',
-        url: '<%= url_for(celos_celos_detalles_path) %>',  
+        url: '<%= url_for(reproduccions_reproduccions_detalles_path) %>',  
         data: { celo_id: <%= celo_id %>},
         dataType: 'script'
         
