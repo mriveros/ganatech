@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Observación</h3>
+        <h3 style="float:left;margin-top:5px;">Detalles Reproducción</h3>
       </div>
 
     </div>
@@ -30,15 +30,13 @@
        
           <tbody id="tutor-detalle-lista">
 
-            <% if @celo_detalle.present? %>
-            
-              <% @celo_detalle.each do |cd|%>
+            <% if @reproduccion_detalle.present? %>
 
                 <tr>
-                  <td><%= cd.observacion %></td>
+                
+                  <td><%= @reproduccion_detalle.observacion %></td>
+                
                 </tr>
-
-              <% end %>
 
             <% else %>
 
@@ -49,6 +47,85 @@
           </tbody>
               
         </table>
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Reproductor ID</th>
+              <th>Reproductor RFID</th>
+              <th>Reproductor Nombre</th>
+              <th>Reproductor RP</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="tutor-detalle-lista">
+
+            <% if @reproduccion_detalle.present? %>
+
+                <tr>
+                  
+                  <td><%= @reproduccion_detalle.ganado_reproductor_id %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_nombre %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+
+                </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Muestra ID</th>
+              <th>Descripcion</th>
+              <th>Número</th>
+              <th>Procedencia</th>
+              <%if %>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="tutor-detalle-lista">
+
+            <% if @reproduccion_detalle.present? %>
+            
+                <tr>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_id %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_nombre %></td>
+                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+
+                </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+
+
         
       </div>
       
