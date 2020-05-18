@@ -48,6 +48,8 @@
               
         </table>
 
+
+  <%if @reproduccion_detalle.tipo_concepcion_id == PARAMETRO[:tipo_concepcion_monta_natural]%>
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
             
           <thead>
@@ -58,6 +60,7 @@
               <th>Reproductor RFID</th>
               <th>Reproductor Nombre</th>
               <th>Reproductor RP</th>
+              <th>Tipo Concepción</th>
               
             </tr>
             
@@ -68,11 +71,12 @@
             <% if @reproduccion_detalle.present? %>
 
                 <tr>
-                  
+
                   <td><%= @reproduccion_detalle.ganado_reproductor_id %></td>
                   <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
                   <td><%= @reproduccion_detalle.ganado_reproductor_nombre %></td>
                   <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+                  <td><%= @reproduccion_detalle.tipo_concepcion %></td>
 
                 </tr>
 
@@ -86,6 +90,7 @@
               
         </table>
 
+<%else%>
 
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
             
@@ -97,7 +102,14 @@
               <th>Descripcion</th>
               <th>Número</th>
               <th>Procedencia</th>
-              <%if %>
+              
+              <%if @reproduccion_detalle.esperma_procedencia_id == PARAMETRO[:esperma_local]%>
+                
+                <th>Muestra Ganado RFID</th>
+                <th>Muestra Nombre</th>
+                <th>Muestra RP</th>
+
+              <%end%>
               
             </tr>
             
@@ -108,10 +120,18 @@
             <% if @reproduccion_detalle.present? %>
             
                 <tr>
-                  <td><%= @reproduccion_detalle.ganado_reproductor_id %></td>
-                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
-                  <td><%= @reproduccion_detalle.ganado_reproductor_nombre %></td>
-                  <td><%= @reproduccion_detalle.ganado_reproductor_rfid %></td>
+                  <td><%= @reproduccion_detalle.esperma_id %></td>
+                  <td><%= @reproduccion_detalle.esperma_descripcion %></td>
+                  <td><%= @reproduccion_detalle.numero_pajuela %></td>
+                  <td><%= @reproduccion_detalle.esperma_procedencia %></td>
+
+                  <%if @reproduccion_detalle.esperma_procedencia_id == PARAMETRO[:esperma_local]%>
+                
+                  <td><%= @reproduccion_detalle.ganado_esperma_rfid %></td>
+                  <td><%= @reproduccion_detalle.ganado_esperma_nombre %></td>
+                  <td><%= @reproduccion_detalle.ganado_esperma_rp %></td>
+
+                  <%end%>
 
                 </tr>
 
@@ -125,7 +145,7 @@
               
         </table>
 
-
+      <%end%>
         
       </div>
       

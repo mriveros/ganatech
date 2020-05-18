@@ -63,6 +63,10 @@ development:
   estado_reproduccion_prenhez: 2
   estado_reproduccion_finalizado: 3
   estado_reproduccion_perdido: 4
+
+  #ESPERMAS PROCEDENCIAS
+  esperma_local: 1
+  esperma_comprada: 2
  
   
 
@@ -131,5 +135,9 @@ production:
   estado_reproduccion_prenhez: 2
   estado_reproduccion_finalizado: 3
   estado_reproduccion_perdido: 4
+
+  #ESPERMAS PROCEDENCIAS
+  esperma_local: 1
+  esperma_comprada: 2
   
   
