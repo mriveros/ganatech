@@ -295,9 +295,9 @@ before_filter :require_usuario
   end
 
 
-  def celos_detalles
+  def reproducciones_detalles
     
-    @celo_detalle = VCelo.where("celo_id = ?", params[:celo_id])
+    @reproduccion_detalle = VReproduccion.where("reproduccion_id = ?", params[:reproduccion_id])
 
 
      respond_to do |f|

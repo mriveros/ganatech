@@ -1,4 +1,4 @@
-<%= link_to icon_detalles, "#", id: "link-to-reproduccion-detalle-#{reproduccion_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del reproduccion', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_detalles, "#", id: "link-to-reproduccion-detalle-#{reproduccion_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles de la Reproducción', onclick: "$('.modal').html('');return false;" %>
 
 <script type="text/javascript">
 
@@ -15,8 +15,8 @@
       $.ajax({
 
         type: 'GET',
-        url: '<%= url_for(reproduccions_reproduccions_detalles_path) %>',  
-        data: { celo_id: <%= celo_id %>},
+        url: '<%= url_for(reproducciones_reproducciones_detalles_path) %>',  
+        data: { reproduccion_id: <%= reproduccion_id %>},
         dataType: 'script'
         
       })
