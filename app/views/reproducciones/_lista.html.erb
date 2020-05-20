@@ -19,15 +19,16 @@
         
         <%= link_to_reproduccion_detalle(rep.reproduccion_id ) %>
        
-        <%#if cel.estado_celo_id == PARAMETRO[:estado_celo_en_celo_activo] %>
+        <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_proceso_fecundacion] %>
           
-          <%#= link_to_editar_celo(cel.celo_id) %>   
-          <%#= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
-          <%#= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
+          
+          <%#= link_to_cambiar_estado_reproduccion_a_reproduccion_prenhada(rep.reproduccion_id)%>
+          <%= link_to_cambiar_estado_reproduccion_a_reproduccion_finalizada(rep.reproduccion_id)%>
+          <%= link_to_cambiar_estado_reproduccion_a_reproduccion_perdido(rep.reproduccion_id)%>
 
-          <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{rep.reproduccion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
-        <%#end%>
+        <%end%>
 
        </td>
 
@@ -68,7 +69,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará de la lista del módulo de Reproducciones y el Celo volverá al estado anterior, además el estado del ganado pasará al estado normal Activo (Celo Activo).",
+          text: "Al confirmar se eliminará de la lista del módulo de Reproducciones y el Celo volverá al estado anterior, además el estado del ganado pasará al estado En Celo (Celo Activo).",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
