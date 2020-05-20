@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_cambiar_estado_a_reproduccion_perdido_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
+    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_estado_reproduccion_a_reproduccion_perdido_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :reproduccion_id, @reproduccion.id%>
