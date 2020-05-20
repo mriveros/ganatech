@@ -464,28 +464,34 @@ before_filter :require_usuario
     @guardado_ok = false
     @valido = true
 
-    @celo = Celo.where("id = ?", params[:celo_id]).first
-    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo a perdido", "celos", @celo)
-    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
-    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo a perdido", "ganados", @ganado)
-    
-    if @valido
-      
-      @celo.estado_celo_id = PARAMETRO[:estado_celo_en_perdido]
-      @celo.observacion = params[:observacion]
+   Ganado.transaction do 
 
-      if @celo.save
+      if @valido
+
+        @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
+        auditoria_id_reproduccion = auditoria_antes("actualizar estado de reproduccion a reproduccion perdido", "reproducciones", @Reproducción)
+        celo = Celo.where("id = ?", @reproduccion.celo_id).first
+        @ganado = Ganado.where('id = ?', celo.ganado_id).first
+        auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar reproduccion a perdido", "ganados", @ganado)
+      
         
-        auditoria_despues(@celo, auditoria_id_celo)
-        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
-        
-        if @ganado.save
+        @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_perdido]
+        @reproduccion.observacion = params[:observacion]
+
+        if @reproduccion.save
           
-          auditoria_despues(@ganado, auditoria_id_ganado)
-          @guardado_ok = true
+          auditoria_despues(@reproduccion, auditoria_id_reproduccion)
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+          
+          if @ganado.save
+            
+            auditoria_despues(@ganado, auditoria_id_ganado)
+            @guardado_ok = true
+
+          end
+          
 
         end
-        
 
       end
 
