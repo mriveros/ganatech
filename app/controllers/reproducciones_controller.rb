@@ -247,7 +247,7 @@ before_filter :require_usuario
 
  def eliminar
 
-    valido = false
+    valido = true
     @msg = ""
 
     Reproduccion.transaction do
