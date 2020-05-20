@@ -352,9 +352,9 @@ before_filter :require_usuario
   end
 
 
-  def cambiar_estado_a_en_reproduccion
+  def cambiar_estado_a_reproduccion_finalizada
 
-    @celo = Celo.where("id = ?", params[:celo_id]).first
+    @reproduccion = Reproduccion.where("id = ?", params[:reproducion_id]).first
 
 
 
@@ -367,7 +367,7 @@ before_filter :require_usuario
   end
 
 
-  def guardar_cambiar_estado_a_en_reproduccion
+  def guardar_cambiar_estado_a_reproduccion_finalizada
 
     @guardado_ok = false
     @valido = true
