@@ -446,7 +446,7 @@ before_filter :require_usuario
 
   def cambiar_estado_reproduccion_a_reproduccion_perdido
 
-    @celo = Celo.where("id = ?", params[:celo_id]).first
+    @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
 
 
 
