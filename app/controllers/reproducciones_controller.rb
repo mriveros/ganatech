@@ -352,7 +352,7 @@ before_filter :require_usuario
   end
 
 
-  def cambiar_estado_a_reproduccion_finalizada
+  def cambiar_estado_reproduccion_a_reproduccion_finalizada
 
     @reproduccion = Reproduccion.where("id = ?", params[:reproducion_id]).first
 
@@ -367,7 +367,7 @@ before_filter :require_usuario
   end
 
 
-  def guardar_cambiar_estado_a_reproduccion_finalizada
+  def guardar_estado_reproduccion_a_reproduccion_finalizada
 
     @guardado_ok = false
     @valido = true
@@ -433,7 +433,7 @@ before_filter :require_usuario
 
   end
 
-  def cambiar_estado_a_celo_perdido
+  def cambiar_estado_reproduccion_a_reproduccion_perdido
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
 
@@ -448,7 +448,7 @@ before_filter :require_usuario
   end
 
 
-  def guardar_cambiar_estado_a_celo_perdido
+  def guardar_estado_reproduccion_a_reproduccion_perdido
 
     @guardado_ok = false
     @valido = true
