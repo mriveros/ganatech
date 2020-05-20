@@ -308,6 +308,49 @@ before_filter :require_usuario
   end
 
 
+  def cambiar_estado_reproduccion
+
+    @guardado_ok= false
+    @valido= false
+
+    if @valido
+
+      Ganado.transaction do
+
+        @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
+        auditoria_id_reproduccion = auditoria_antes("cambiar estado reproduccion", "reproducciones", @reproduccion)
+
+        @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_prenhez]
+        
+        if @reproduccion.save
+
+          auditoria_despues(@reproduccion, auditoria_id_reproduccion)
+          celo = Celo.where("id = ?", @reproduccion.celo_id).first
+          @ganado = Ganado.where("id = ?", celo.ganado_id).first
+          auditoria_id_ganado = auditoria_antes("cambiar estado ganado", "ganados", @ganado)
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_prenhado]
+          if @ganado.save
+
+            auditoria_despues(@ganado, auditoria_id_ganado)
+            @guardado_ok= true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
   def cambiar_estado_a_en_reproduccion
 
     @celo = Celo.where("id = ?", params[:celo_id]).first

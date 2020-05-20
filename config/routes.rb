@@ -140,6 +140,7 @@ get "crontab_ultron/index"
   post "reproducciones/guardar_cambiar_estado_a_celo_perdido"
   get "reproducciones/buscar_ganado_reproductor"
   get "reproducciones/buscar_esperma_reproductor"
+  get "reproducciones/cambiar_estado_reproduccion"
 
   #ESTADOS GANADOS
   get "estados_ganados/index"

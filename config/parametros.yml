@@ -49,6 +49,7 @@ development:
   estado_ganado_inactivo: 2
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
+  estado_ganado_prenhado: 5
 
   #ETAPAS GANADOS
   etapa_ganado_torito: 4
@@ -121,6 +122,7 @@ production:
   estado_ganado_inactivo: 2
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
+  estado_ganado_prenhado: 5
 
   #ETAPAS GANADOS
   etapa_ganado_torito: 4
