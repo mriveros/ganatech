@@ -310,8 +310,8 @@ before_filter :require_usuario
 
   def cambiar_estado_reproduccion
 
-    @guardado_ok= false
-    @valido= false
+    @guardado_ok = false
+    @valido = true
 
     if @valido
 
@@ -329,10 +329,11 @@ before_filter :require_usuario
           @ganado = Ganado.where("id = ?", celo.ganado_id).first
           auditoria_id_ganado = auditoria_antes("cambiar estado ganado", "ganados", @ganado)
           @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_prenhado]
+          
           if @ganado.save
 
             auditoria_despues(@ganado, auditoria_id_ganado)
-            @guardado_ok= true
+            @guardado_ok = true
 
           end
 

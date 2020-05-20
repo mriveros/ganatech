@@ -18,14 +18,17 @@
       <td >
         
         <%= link_to_reproduccion_detalle(rep.reproduccion_id ) %>
+
+        <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_proceso_fecundacion]%>
+           
+          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_reproduccion(#{rep.reproduccion_id});return false;", class: "btn btn-info btn-xs", id: "btn-cambiar-estado-reproduccion", title: 'Haga click para cambiar el estado de la Reproducción'  %>
+
+        <%end%>
        
-        <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_proceso_fecundacion] %>
-          
-          
-          <%#= link_to_cambiar_estado_reproduccion_a_reproduccion_prenhada(rep.reproduccion_id)%>
+        <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_proceso_fecundacion] || rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_prenhez] %>
+
           <%= link_to_cambiar_estado_reproduccion_a_reproduccion_finalizada(rep.reproduccion_id)%>
           <%= link_to_cambiar_estado_reproduccion_a_reproduccion_perdido(rep.reproduccion_id)%>
-
           <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{rep.reproduccion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
 
         <%end%>
@@ -115,8 +118,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(reproducciones_eliminar_path) %>", 
-                data: {id: reproduccion_id},
+                url: "<%= url_for(reproducciones_cambiar_estado_reproduccion_path) %>", 
+                data: {reproduccion_id: reproduccion_id},
                 dataType: 'script'
               });
             
