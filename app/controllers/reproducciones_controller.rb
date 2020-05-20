@@ -247,29 +247,40 @@ before_filter :require_usuario
 
  def eliminar
 
-    valido = true
+    valido = false
     @msg = ""
 
-    Celo.transaction do
+    Reproduccion.transaction do
 
-      @celo = Celo.find(params[:id])
+      @reproduccion = Reproduccion.find(params[:id])
 
-      @celo_elim = @celo
+      @reproduccion_elim = @reproduccion
 
       if valido
 
-        if @celo.destroy
+        if @reproduccion.destroy
 
-          auditoria_nueva("eliminar celo", "celos", @celo_elim)
-          @ganado = Ganado.where("id = ?", @celo_elim.ganado_id).first
-          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+          auditoria_nueva("eliminar reproduccion", "reproducciones", @reproduccion_elim)
+          @celo = Celo.where("id = ?", @reproduccion.celo_id).first
+          auditoria_id_celo = auditoria_antes("cambiar estado celo", "celos", @celo)
+          @celo.estado_celo_id = PARAMETRO[:estado_celo_en_celo_activo]
           
-          if @ganado.save
+          if @celo.save
 
-            @eliminado = true
+            auditoria_despues(@celo, auditoria_id_celo)
+            @ganado = Ganado.where("id = ?", @celo.ganado_id).first
+            auditoria_id_ganado = auditoria_antes("cambiar estado ganado", "ganados", @ganado)
+            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_celo]
+          
+            if @ganado.save
+
+              auditoria_despues(@celo, auditoria_id_ganado)
+              @eliminado = true
+
+            end
 
           end
-          
+
         end
 
       end
