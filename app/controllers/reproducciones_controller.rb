@@ -48,6 +48,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_reproduccion_fecha_concepcion].present?
+
+      cond << "fecha_concepcion = ?"
+      args << params[:form_buscar_reproduccion_fecha_concepcion]
+
+    end
+
     if params[:form_buscar_reproduccion_fecha_fin].present?
 
       cond << "fecha_fin = ?"
