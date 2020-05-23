@@ -137,7 +137,7 @@ get "crontab_ultron/index"
   get "reproducciones/cambiar_estado_reproduccion_a_reproduccion_perdido"
   post "reproducciones/guardar_estado_reproduccion_a_reproduccion_perdido"
 
-  get "reproducciones/cambiar_estado_a_reproduccion_finalizada"
+  get "reproducciones/cambiar_estado_reproduccion_a_reproduccion_finalizada"
   post "reproducciones/guardar_cambiar_estado_a_reproduccion_finalizada"
 
   get "reproducciones/buscar_ganado_reproductor"

@@ -5,12 +5,12 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Enviar a Reproducción</h4>
+      <h4 class="modal-title" id="myModalLabel">Finalizar Reproducción</h4>
       
     </div>
 
 
-    <%= form_for @reproduccion, remote: true, url: celos_guardar_cambiar_estado_a_en_reproduccion_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
+    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_cambiar_estado_a_reproduccion_finalizada_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :celo_id, @reproduccion.celo_id%>
@@ -22,7 +22,7 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoConcepcion.tipo_concepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_concepcion_id, TipoConcepcion.tipo_concepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;", disabled: true }%></div>
           <div class="col-sm-1"></div><br/><br/>
           
           <div id = "monta_natural" hidden="true">
@@ -79,15 +79,11 @@
 
           </div>
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Reproducción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Concepción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha_reproduccion, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-xs' %>
           </div>    
           <div class="col-sm-1"></div><br /><br />  
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Estimada".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_concepcion, nil, class: 'form-control input-xs' %>
-          </div>    
-          <div class="col-sm-1"></div><br /><br /> 
 
           <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :descripcion ,nil,class: 'form-control input-sm' %></div>
@@ -104,8 +100,9 @@
 
       <div class="modal-footer" style="background:#e6e6e6;">
 
-        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-cambiar-estado" %>
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
+        
+        <%= link_to "Finalizar","#", class: "btn btn-primary", id: "btn-guardar-cambiar-estado" %>
           
       </div>
     
