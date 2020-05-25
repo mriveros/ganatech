@@ -24,16 +24,25 @@
           <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :tipo_concepcion_id, TipoConcepcion.tipo_concepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;", disabled: true }%></div>
           <div class="col-sm-1"></div><br/><br/>
-          
-          <div id = "monta_natural" hidden="true">
-
-            <%= hidden_field_tag :ganado_reproductor_id %>
-            <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm' %></div>
-            <div class="col-sm-1"></div><br /><br />
 
             <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-7"><%= f.text_field :celo_ganado_nombre,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />  
+            
+
+            <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+            <div class="col-sm-7"><%= f.text_field :celo_ganado_rp,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
+
+
+            <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+            <div class="col-sm-7"><%= f.text_field :celo_ganado_rfid, class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
+          
+          <div id = "monta_natural" hidden="true">
+            
+            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Reproductor ".html_safe %></div>
+            <div class="col-sm-7"><%=text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
             <div class="col-sm-1"></div><br /><br />  
             
 
@@ -101,7 +110,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
-        
+
         <%= link_to "Finalizar","#", class: "btn btn-primary", id: "btn-guardar-cambiar-estado" %>
           
       </div>
@@ -122,6 +131,8 @@
 
 <script type="text/javascript">
 
+
+
   aplicar_datepicker2();
 
   setTimeout(function(){ 
@@ -129,6 +140,18 @@
     $("#fecha_inicio").focus();
    
   }, 1000);
+
+  if ($("#v_reproduccion_tipo_concepcion_id").val() == <%=PARAMETRO[:tipo_concepcion_monta_natural]%>){
+
+    $("#monta_natural").show();
+    $("#inseminacion_artificial").hide();
+
+  } else{
+    alert("sd")
+    $("#inseminacion_artificial").show();
+    $("#monta_natural").hide();
+
+  } 
 
 
    $("textarea").keydown(function(e){
@@ -150,140 +173,6 @@
 
      return true;
   }
-
-  $("#ganado").bind('focus', function(){   
-
-    var ganados = [];
-
-    $("#ganado").val('');
-    $("#ganado_reproductor_id").val('');
-    $("#nombre_ganado").val('');
-    $("#hacienda").val('');
-    $("#rp").val('');
-    $("#codigo_rfid").val('');
-
-    $.getJSON("<%= url_for(celos_buscar_ganado_reproductor_path) %>", { ganado: $(this).val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_macho]%>}, function(j){
-        
-      var ganado = "";
-      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
-      for (var i = 0; i < j.length; i++) {
-        
-        if(j[i].nombre != ganado ){
-          
-          ganados.push( {value: j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
-          ganado =j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
-
-          options += "<option value="+ j[i].ganado_id +" - "+j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
-
-        }
-
-      }
-
-      $("#ganado_reproductor_id").html(options);
-
-    })
-
-    $("#ganado").autocomplete({
-
-      minLength: 1,
-      source: ganados,
-      focus: function( event, ui ) {
-      
-        $("#ganado" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-
-        var datos = ui.item.value.split(" - ");
-        $("#ganado").val( ui.item.label);
-        $("#ganado_reproductor_id").val(datos[0]);
-        $("#procedencia_muestra").val(datos[1]);
-        $("#nombre_ganado").val(datos[1]);
-        $("#rp").val(datos[2]);
-        $("#codigo_rfid").val(datos[3]);
-        $("#hacienda").val(datos[4]);
-
-        return false;
-
-      }
-
-    })
-
-  });
-
-
-
-  //OBTENER MUESTRAS DEL MODULO DE ESPERMAS
-  $("#esperma").bind('focus', function(){   
-
-    var muestras = [];
-
-    $("#esperma").val('');
-    $("#esperma_id").val('');
-    $("#procedencia_muestra").val('');
-    $("#nombre_ganado_muestra").val('');
-    $("#raza_muestra").val('');
-    $("#cantidad_muestra").val('');
-    $("#numero_muestra").val('');
-    
-
-    $.getJSON("<%= url_for(celos_buscar_esperma_reproductor_path) %>", { esperma: $(this).val()}, function(j){
-        
-      var muestra = "";
-      var options = "<option value=''> -- Seleccione una Muestra -- </option>"
-      for (var i = 0; i < j.length; i++) {
-        
-        if(j[i].descripcion != muestra ){
-          
-          muestras.push( {value: j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre+" - "+j[i].raza_ganado+" - "+j[i].numero_pajuela+" - "+j[i].cantidad});
-          ganado =j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre +" - "+j[i].raza_ganado+" - "+j[i].numero_pajuela+" - "+j[i].cantidad ;
-
-          options += "<option value="+ j[i].esperma_id +" - "+ j[i].descripcion+" - "+j[i].esperma_procedencia+" - "+j[i].ganado_nombre+" - "+j[i].raza_ganado +" - "+j[i].numero_pajuela+" - "+j[i].cantidad + "</option>"
-
-        }
-
-      }
-
-      $("#esperma_id").html(options);
-
-    })
-
-    $("#esperma").autocomplete({
-
-      minLength: 1,
-      source: muestras,
-      focus: function( event, ui ) {
-      
-        $("#esperma" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-
-        var datos = ui.item.value.split(" - ");
-        $("#esperma").val( ui.item.label);
-        $("#esperma_id").val(datos[0]);
-        $("#procedencia_muestra").val(datos[2]);
-        if (datos[3]==='null'){
-
-           $("#nombre_ganado_muestra").val("Muestra Comprada");
-
-        }else{
-
-          $("#nombre_ganado_muestra").val(datos[3]);
-
-        }
-        $("#raza_muestra").val(datos[4]);
-        $("#numero_muestra").val(datos[5]);
-        $("#cantidad_muestra").val(datos[6]);
-
-        return false;
-
-      }
-
-    })
-
-  });
-
 
   $("#btn-guardar-cambiar-estado").bind('click', function () {
 
@@ -366,23 +255,6 @@
     })
 
 
-  $("#tipo_concepcion_id").bind('change', function(){ 
-
-  if ($(this).val() == <%=PARAMETRO[:tipo_concepcion_monta_natural]%>){
-
-    $("#monta_natural").show();
-    $("#inseminacion_artificial").hide();
-
-  } else{
-
-    $("#inseminacion_artificial").show();
-    $("#monta_natural").hide();
-
-  } 
-
-
-
-  })
 
 
 </script>
