@@ -25,7 +25,11 @@
           <div class="col-sm-7"><%= f.collection_select :tipo_concepcion_id, TipoConcepcion.tipo_concepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;", disabled: true }%></div>
           <div class="col-sm-1"></div><br/><br/>
 
-            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Datos Ganado</div>
+            <div class="panel-body">
+
+              <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
             <div class="col-sm-7"><%= f.text_field :celo_ganado_nombre,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
             <div class="col-sm-1"></div><br /><br />  
             
@@ -38,52 +42,76 @@
             <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
             <div class="col-sm-7"><%= f.text_field :celo_ganado_rfid, class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
             <div class="col-sm-1"></div><br /><br />
+              
+            </div>
+
+          </div>
           
           <div id = "monta_natural" hidden="true">
-            
-            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Reproductor ".html_safe %></div>
-            <div class="col-sm-7"><%=text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />  
-            
 
-            <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />
+          <div class="panel panel-default">
+
+            <div class="panel-heading">Datos Reproductor</div>
+              
+              <div class="panel-body">
+
+                <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre".html_safe %></div>
+                <div class="col-sm-7"><%=f.text_field :ganado_reproductor_nombre,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                <div class="col-sm-1"></div><br /><br />  
+                
+
+                <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+                <div class="col-sm-7"><%= f.text_field :ganado_reproductor_rp,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                <div class="col-sm-1"></div><br /><br />
 
 
-            <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />
+                <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+                <div class="col-sm-7"><%= f.text_field :ganado_reproductor_rfid, class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                <div class="col-sm-1"></div><br /><br />
+
+              </div>
+
+           </div>
           
           </div>
 
 
           <div id = "inseminacion_artificial" hidden="true">
 
-            <%= hidden_field_tag :esperma_id %>
-            <div class="col-sm-4"><%= label_tag :nil, "Muestra(Esperma)#{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_area_tag :esperma ,nil,class: 'form-control input-sm' %></div>
-            <div class="col-sm-1"></div><br /><br />
+            <div class="panel panel-default">
 
-            <div class="col-sm-4"><%= f.label :procedencia_lbl, "Procedencia ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :procedencia_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />  
+            <div class="panel-heading">Datos de la Muestra</div>
+              
+                <div class="panel-body">
 
-            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :nombre_ganado_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />  
-            
-            <div class="col-sm-4"><%= f.label :raza_lbl, "Raza ".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :raza_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />
+                  
+                  <div class="col-sm-4"><%= label_tag :nil, "Muestra(Esperma)#{attr_requerido}".html_safe %></div>
+                  <div class="col-sm-7"><%= text_area_tag :esperma ,nil,class: 'form-control input-sm' %></div>
+                  <div class="col-sm-1"></div><br /><br />
 
-            <div class="col-sm-4"><%= f.label :numero_muestra_lbl, "Número Muestra".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :numero_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />
+                  <div class="col-sm-4"><%= f.label :procedencia_lbl, "Procedencia ".html_safe %></div>
+                  <div class="col-sm-7"><%= text_field_tag :procedencia_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                  <div class="col-sm-1"></div><br /><br />  
 
-            <div class="col-sm-4"><%= f.label :cantidad_muestra_lbl, "Cantidad".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :cantidad_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
-            <div class="col-sm-1"></div><br /><br />
+                  <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+                  <div class="col-sm-7"><%= text_field_tag :nombre_ganado_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                  <div class="col-sm-1"></div><br /><br />  
+                  
+                  <div class="col-sm-4"><%= f.label :raza_lbl, "Raza ".html_safe %></div>
+                  <div class="col-sm-7"><%= text_field_tag :raza_muestra, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+                  <div class="col-sm-1"></div><br /><br />
+
+                  <div class="col-sm-4"><%= f.label :numero_muestra_lbl, "Número Muestra".html_safe %></div>
+                  <div class="col-sm-7"><%= text_field_tag :numero_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
+                  <div class="col-sm-1"></div><br /><br />
+
+                  <div class="col-sm-4"><%= f.label :cantidad_muestra_lbl, "Cantidad".html_safe %></div>
+                  <div class="col-sm-7"><%= text_field_tag :cantidad_muestra, nil,class: 'form-control input-sm', readonly: true %></div>
+                  <div class="col-sm-1"></div><br /><br />
+              
+              </div>
+
+            </div>
 
 
           </div>
