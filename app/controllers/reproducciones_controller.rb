@@ -374,8 +374,6 @@ before_filter :require_usuario
 
     @reproduccion = VReproduccion.where("reproduccion_id = ?", params[:reproduccion_id]).first
 
-
-
     respond_to do |f|
 
       f.js
