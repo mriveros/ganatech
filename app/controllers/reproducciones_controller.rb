@@ -397,7 +397,6 @@ before_filter :require_usuario
     Ganado.transaction do
 
       
-
     end # end transaction
 
     end
@@ -413,8 +412,6 @@ before_filter :require_usuario
   def cambiar_estado_reproduccion_a_reproduccion_perdido
 
     @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
-
-
 
     respond_to do |f|
 
