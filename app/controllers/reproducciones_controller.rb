@@ -410,8 +410,9 @@ before_filter :require_usuario
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
     @ganado_madre = Ganado.where('id = ?', @celo.ganado_id).first
+    auditoria_id_ganado_madre = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado_madre)
     @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
-    #auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
+    auditoria_id_reproduccion = auditoria_antes("finalizar reproduccion", "reproducciones", @reproduccion)
     
     if @valido
 
@@ -420,21 +421,70 @@ before_filter :require_usuario
         ganado = Ganado.new
         ganado.nombre = params[:nombre_ganado]
         ganado.rp = params[:ganado_rp]
-        ganado.rp_padre =
+
+        if @reproduccion.tipo_concepcion_id == PARAMETRO[:tipo_concepcion_monta_natural]
+
+          @ganado_padre = Ganado.where("id = ?", @reproduccion.ganado_reproductor_id).first
+          ganado.rp_padre = @ganado_padre.rp
+        
+        else
+          # INSEMINACION ARTIFICIAL
+          @esperma = Esperma.where("id = ?", @reproduccion.esperma_id).first
+
+          if @esperma.esperma_procedencia_id == PARAMETRO[:esperma_local]
+
+            @ganado_padre = Ganado.where("id = ?", @esperma.ganado_id).first
+            ganado.rp_padre = @ganado_padre.rp
+
+          end
+
+
+        end
+        
         ganado.rp_madre = @ganado_madre.rp
-        ganado.codigo_rfid = 
+        ganado.codigo_rfid = params[:codigo_rfid]
         ganado.potrero_id = @ganado_madre.potrero_id
-        ganado.peso_promedio =
-        ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+        ganado.peso_promedio = params[:peso_promedio]
         ganado.tipo_ganado_id = @ganado_madre.tipo_ganado_id
         ganado.raza_id = params[:celo_ganado_raza_id]
         ganado.tipo_concepcion_id = @reproduccion.tipo_concepcion_id
         ganado.reproduccion_id = @reproduccion.id
         ganado.observacion = params[:observacion]
         ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
-        ganado.etapa_ganado_id = 
-        ganado.fecha_nacimiento = 
+        ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+
+        if params[:sexo_ganado][:id] == PARAMETRO[:sexo_ganado_macho]
+        
+          ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_ternero]
+
+        else
+
+          ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_ternero]
+
+        end
+
+        ganado.fecha_nacimiento = params[:fecha_concepcion]
+
         if ganado.save
+
+          auditoria_nueva("agregar nuevo ganado de modulo reproduccion", "ganados", ganado)
+          @ganado_madre.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+          
+          if @ganado_madre.save
+
+            auditoria_despues(@ganado_madre, auditoria_id_ganado_madre)
+            @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_finalizado]
+            @reproduccion.fecha_concepcion = params[:fecha_concepcion]
+
+            if @reproduccion.save
+
+              auditoria_despues(@reproduccion, auditoria_id_reproduccion)
+              @guardado_ok = true
+
+            end
+
+          end
+
 
         end
 
