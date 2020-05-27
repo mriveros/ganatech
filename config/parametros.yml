@@ -52,7 +52,12 @@ development:
   estado_ganado_prenhado: 5
 
   #ETAPAS GANADOS
+  etapa_ganado_vaca: 1
+  etapa_ganado_vaquilla: 2
+  etapa_ganado_novillo: 3
   etapa_ganado_torito: 4
+  etapa_ganado_ternero: 5
+  etapa_ganado_ternera: 6
   etapa_ganado_toro: 7
 
   #TIPOS CONCEPCIONES
@@ -125,7 +130,12 @@ production:
   estado_ganado_prenhado: 5
 
   #ETAPAS GANADOS
+  etapa_ganado_vaca: 1
+  etapa_ganado_vaquilla: 2
+  etapa_ganado_novillo: 3
   etapa_ganado_torito: 4
+  etapa_ganado_ternero: 5
+  etapa_ganado_ternera: 6
   etapa_ganado_toro: 7
 
   #TIPOS CONCEPCIONES

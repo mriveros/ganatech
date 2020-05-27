@@ -393,7 +393,7 @@ before_filter :require_usuario
       @nuevo_autoincremento = 1
 
     end
-    
+
     respond_to do |f|
 
       f.js
@@ -406,18 +406,41 @@ before_filter :require_usuario
   def guardar_estado_reproduccion_a_reproduccion_finalizada
 
     @guardado_ok = false
-    @valido = true
+    @valido = false
 
     @celo = Celo.where("id = ?", params[:celo_id]).first
-    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
-    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
+    @ganado_madre = Ganado.where('id = ?', @celo.ganado_id).first
+    @reproduccion = Reproduccion.where("id = ?", params[:reproduccion_id]).first
+    #auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
     
     if @valido
 
-    Ganado.transaction do
+      Ganado.transaction do
+
+        ganado = Ganado.new
+        ganado.nombre = params[:nombre_ganado]
+        ganado.rp = params[:ganado_rp]
+        ganado.rp_padre =
+        ganado.rp_madre = @ganado_madre.rp
+        ganado.codigo_rfid = 
+        ganado.potrero_id = @ganado_madre.potrero_id
+        ganado.peso_promedio =
+        ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+        ganado.tipo_ganado_id = @ganado_madre.tipo_ganado_id
+        ganado.raza_id = params[:celo_ganado_raza_id]
+        ganado.tipo_concepcion_id = @reproduccion.tipo_concepcion_id
+        ganado.reproduccion_id = @reproduccion.id
+        ganado.observacion = params[:observacion]
+        ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+        ganado.etapa_ganado_id = 
+        ganado.fecha_nacimiento = 
+        if ganado.save
+
+        end
+
 
       
-    end # end transaction
+      end # end transaction
 
     end
 
