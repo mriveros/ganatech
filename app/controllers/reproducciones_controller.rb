@@ -454,7 +454,7 @@ before_filter :require_usuario
           ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
           ganado.sexo_ganado_id = params[:sexo_ganado][:id]
 
-          if params[:sexo_ganado][:id] == PARAMETRO[:sexo_ganado_macho]
+          if params[:sexo_ganado][:id].to_i == PARAMETRO[:sexo_ganado_macho]
           
             ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_ternero]
 

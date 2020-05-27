@@ -488,7 +488,7 @@ class GanadosController < ApplicationController
       @control_ganado.ganado_id = params[:ganado_id]
       @control_ganado.control_id = params[:control][:id]
 
-      if params[:control_id] == PARAMETRO[:control_peso]
+      if params[:control][:id].to_i == PARAMETRO[:control_peso]
 
         @control_ganado.peso = params[:peso_promedio_control]
       
