@@ -159,7 +159,7 @@ class GanadosController < ApplicationController
 
     if ultima_produccion.present?
 
-      if ultima_produccion.created_at.month != Time.now.month
+      if ultima_produccion.created_at.year != Time.now.year
 
         @nuevo_autoincremento = "RP-0" + 1.to_s
 

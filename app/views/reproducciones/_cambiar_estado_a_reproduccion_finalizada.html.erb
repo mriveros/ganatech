@@ -10,7 +10,7 @@
     </div>
 
 
-    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_cambiar_estado_a_reproduccion_finalizada_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
+    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_estado_reproduccion_a_reproduccion_finalizada_url, html: { id: "form-finalizar-reproduccion" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :celo_id, @reproduccion.celo_id%>
@@ -139,17 +139,31 @@
           <div class="col-sm-7"><%= date_field_tag :fecha_reproduccion, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-xs' %>
           </div>    
           <div class="col-sm-1"></div><br /><br />  
-          
 
+          
           <div class="col-sm-4"><%= label_tag :nil, "Nombre ganado #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :descripcion ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_field_tag :nombre_ganado ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br /><br />
+          
+          
+          <div class="col-sm-4"><%= label_tag :nil, "RP #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :ganado_rp ,@nuevo_autoincremento.to_s,class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br />
+
+
+          <div class="col-sm-4"><%= label_tag :nil, "Código RFID".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :codigo_rfid ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br /><br/>
 
 
           <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :celo_ganado_raza_id, Raza.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br/><br/>
 
+
+          <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br/><br/>
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
           <div class="col-sm-7"><%= text_area_tag :observacion ,nil,class: 'form-control input-sm' %></div>
@@ -163,7 +177,7 @@
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
 
-        <%= link_to "Finalizar","#", class: "btn btn-primary", id: "btn-guardar-cambiar-estado" %>
+        <%= link_to "Finalizar","#", class: "btn btn-primary", id: "btn-finalizar-reproduccion" %>
           
       </div>
     
@@ -174,10 +188,9 @@
 
 <style type="text/css">
 
-  #form-cambiar-estado-reproduccion label, #form-cambiar-estado-reproduccion input[type='text'] { float:left; margin-top:5px;}
-  #form-cambiar-estado-reproduccion br {clear:both; }
-  #form-cambiar-estado-reproduccion label { width:200px; font-size:12px;}
-  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
+  #form-finalizar-reproduccion label, #form-finalizar-reproduccion input[type='text'] { float:left; margin-top:5px;}
+  #form-finalizar-reproduccion br {clear:both; }
+  #form-finalizar-reproduccion label { width:200px; font-size:12px;}
 
 </style>
 
@@ -226,59 +239,51 @@
      return true;
   }
 
-  $("#btn-guardar-cambiar-estado").bind('click', function () {
+  $("#btn-finalizar-reproduccion").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#tipo_concepcion_id").val().length == 0){
+      if($("#fecha_reproduccion").val().length == 0){
 
-        msg +="Debe seleccionar un tipo de Concepción.\n"
+        msg +="Debe seleccionar una fecha de nacimiento.\n"
         valido = false
           
       }
 
-     if($("#tipo_concepcion_id").val() == <%=PARAMETRO[:tipo_concepcion_monta_natural]%>){
+      if($("#nombre_ganado").val().length == 0){
 
-      if($("#ganado_reproductor_id").val().length == 0){
-
-        msg +="Debe seleccionar un Ganado como Reproductor.\n"
+        msg +="Debe agregar un nombre.\n"
         valido = false
           
       }
 
-     }
-      else{
+      if($("#ganado_rp").val().length == 0){
 
-        if($("#esperma_id").val().length == 0){
-
-          msg +="Debe seleccionar una Muestra para la Reproducción.\n"
-          valido = false
-          
-        }
+        msg +="RP no puede estar vacío. Contacte con el administrador\n"
+        valido = false
           
       }
       
-      if($("#fecha_reproduccion").val().length == 0){
+      if($("#v_reproduccion_celo_ganado_raza_id").val().length == 0){
 
-        msg +="Debe agregar una fecha de Reproducción.\n"
+        msg +="Es necesario seleccionar una Raza.\n"
         valido = false
           
       }
 
-      if($("#descripcion").val().length == 0){
+      if($("#sexo_ganado_id").val().length == 0){
 
-        msg +="Debe agregar una Descripción.\n"
+        msg +="Es necesario seleccionar el sexo del Ganado.\n"
         valido = false
           
       }
-    
 
       if (valido){
 
         swal({
-          title: "Confirmar Reproducción",
-          text: "Al confirmar el estado del Celo a Reproducción éste podrá ser visualizado en el módulo de Reproducciones para su seguimiento durante el proceso de preñez.",
+          title: "Finalizar Reproducción",
+          text: "Al Finalizar la reproducción se creará un nuevo ejemplar del ganado y podrá visualizar en el módulo principal de Ganados.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -290,7 +295,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-cambiar-estado-reproduccion").submit();
+            $("#form-finalizar-reproduccion").submit();
             
           } 
 

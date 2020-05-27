@@ -374,6 +374,26 @@ before_filter :require_usuario
 
     @reproduccion = VReproduccion.where("reproduccion_id = ?", params[:reproduccion_id]).first
 
+    ultima_produccion = Ganado.order("created_at").last
+
+    if ultima_produccion.present?
+
+      if ultima_produccion.created_at.year != Time.now.year
+
+        @nuevo_autoincremento = "RP-0" + 1.to_s
+
+      else
+
+         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+
+      end 
+
+    else
+      
+      @nuevo_autoincremento = 1
+
+    end
+    
     respond_to do |f|
 
       f.js
