@@ -1,0 +1,22 @@
+<% if @guardado_ok %>
+   
+  $("#form_buscar_reproduccion_id").val('<%= @reproduccion.id %>');
+  $("#form_buscar_reproduccion_ganado_rfid").val('');
+  $("#form_buscar_reproduccion_ganado_nombre").val('');
+  $("#form_buscar_reproduccion_ganado_rp").val('');
+ 
+  
+  setTimeout(function(){ 
+
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    swal("Reproducción","Reproducción Finalizada exitosamente!", "success");
+    $("#form-buscar-reproduccion").submit();
+    
+  }, 2000);
+
+
+<% else %>
+  
+    swal("Reproducción", "Error al finalizar la Reproducción.<%=@msg%> Intente más tarde","error");
+
+<% end %>
