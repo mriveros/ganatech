@@ -129,84 +129,70 @@ before_filter :require_usuario
 
   def guardar
 
-    @valido = true
-    @msg = ""
     @guardado_ok = false
+    @valido = false
 
-    @ganado = Ganado.where("id = ?", params[:ganado_id]).first
-    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar reproduccion", "ganados", @ganado)
-
-    @celo = Celo.where("id = ? ", params[:celo_id]).first
-    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar reproduccion", "celos", @celo)
-
+    @celo = Celo.where("id = ?", params[:celo_id]).first
+    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
+    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
+    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
     
-    Reproduccion.transaction do
+    if @valido
 
-      if @valido
-        
-        @reproduccion = Reproduccion.new()
-        @reproduccion.celo_id = params[:celo_id]
-        @reproduccion.descripcion = params[:descripcion]
-        @reproduccion.observacion = params[:observacion]
-        @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
-        @reproduccion.fecha_concepcion = params[:fecha_concepcion]
-        
-        if params[:tipo_concepcion_id] == PARAMETRO[:tipo_concepcion_monta_natural]
+    Ganado.transaction do
 
-          @reproduccion.tipo_concepcion_id = params[:tipo_concepcion_id]
-          @reproduccion.ganado_reproductor_id = params[:ganado_reproductor_id]
+      @reproduccion = Reproduccion.new
+      @reproduccion.celo_id = params[:celo_id]
+      @reproduccion.tipo_concepcion_id = params[:tipo_concepcion][:id]
+      if params[:tipo_concepcion][:id].to_i == PARAMETRO[:tipo_concepcion_monta_natural].to_i
 
-        else
-           
-          @reproduccion.tipo_concepcion_id = params[:tipo_concepcion_id]
-          @reproduccion.esperma_id = params[:esperma_id]
+        @reproduccion.ganado_reproductor_id = params[:ganado_reproductor_id]
 
-        end
-        
-        @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_proceso_fecundacion]
+      else
 
-        if @reproduccion.save
-
-            auditoria_nueva("agregar nueva reproduccion", "reproducciones", @reproduccion)
-            #cambiamos el estado del celo
-            @celo.estado_celo_id = PARAMETRO[:estado_celo_en_reproduccion]  
-            
-            if @celo.save
-
-              auditoria_despues(@ganado, auditoria_id_celo)
-              #cambiamos el estado del ganado
-              @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_reproduccion]
-              
-              if @ganado.save
-
-                @guardado_ok = true
-                auditoria_despues(@ganado, auditoria_id_ganado)
-
-              end
-
-            end
-
-          end
+        @reproduccion.esperma_id = params[:esperma_id]
 
       end
 
-    end #end transaction
-  
-    rescue Exception => exc  
-  
-      if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep.to_s
-      
-      end                
+      @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
+      @reproduccion.fecha_concepcion = params[:fecha_concepcion]
+      @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_proceso_fecundacion]
+      @reproduccion.descripcion = params[:descripcion]
+      @reproduccion.observacion = params[:observacion]
+
+      if @reproduccion.save
+
+        auditoria_nueva("agregar reproduccion en modulo de celos", "reproducciones", @reproduccion)
+        @celo.estado_celo_id = PARAMETRO[:estado_celo_en_reproduccion]
+        
+        if @celo.save
+         
+          auditoria_despues(@celo, auditoria_id_celo)
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_reproduccion]
+          
+          if @ganado.save
+
+            auditoria_despues(@ganado, auditoria_id_ganado)
+            @guardado_ok = true
+
+          end
+
+        end
+        
+      end
+
+    end # end transaction
+
+    end
 
     respond_to do |f|
 
       f.js
 
     end
-  
-  end
+
+  end          
+
 
   def editar
     
@@ -581,6 +567,19 @@ before_filter :require_usuario
       
       f.html
       f.json { render :json => @espermas }
+    
+    end
+
+  end
+
+  def buscar_ganado_estado_celo
+
+    @ganados = VGanado.where("nombre ilike ? and estado_ganado_id = ?", "%#{params[:ganado]}%", PARAMETRO[:estado_ganado_en_celo])
+    
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
     
     end
 
