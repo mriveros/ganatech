@@ -1,8 +1,11 @@
 class MedicamentosController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
+
+
+    
 
   end
 
@@ -23,7 +26,9 @@ before_filter :require_usuario
     @medicamento = Medicamento.new
 
     respond_to do |f|
+
       f.js
+
     end
 
   end
