@@ -21,6 +21,6 @@
 <% else %>
 
     $("<div class='col-sm-12' id='msg-agregar-reproduccion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-reproduccion");
-    swal("Reproducción", "Error al finalizar la Reproducción.<%=@msg%> Intente más tarde","error");
+    swal("Reproducción", "Error al agregar la Reproducción.<%=@msg%> Intente más tarde","error");
 
 <% end %>

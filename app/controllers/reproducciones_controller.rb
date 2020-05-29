@@ -132,10 +132,11 @@ before_filter :require_usuario
     @guardado_ok = false
     @valido = false
 
-    @celo = Celo.where("id = ?", params[:celo_id]).first
-    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
-    @ganado = Ganado.where('id = ?', @celo.ganado_id).first
-    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
+    @ganado = Ganado.where('id = ?',params[:ganado_id]).first
+    @celo = Celo.where("ganado_id = ? and estado_celo_id = ?", @ganado.id, PARAMETRO[:estado_celo_activo]).first
+    #auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
+    
+    #auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
     
     if @valido
 
