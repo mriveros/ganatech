@@ -130,20 +130,24 @@ before_filter :require_usuario
   def guardar
 
     @guardado_ok = false
-    @valido = false
+    @valido = true
 
     @ganado = Ganado.where('id = ?',params[:ganado_id]).first
-    @celo = Celo.where("ganado_id = ? and estado_celo_id = ?", @ganado.id, PARAMETRO[:estado_celo_activo]).first
-    #auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
-    
-    #auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
-    
+    auditoria_id_ganado = auditoria_antes("actualizar estado del ganado en guardar celo en reproduccion", "ganados", @ganado)
+    @celo = Celo.where("ganado_id = ? and estado_celo_id = ?", @ganado.id, PARAMETRO[:estado_celo_en_celo_activo]).first
+    auditoria_id_celo = auditoria_antes("actualizar estado del celo en guardar celo en reproduccion", "celos", @celo)
+    unless @celo.present?
+
+      @msg = " El Ganado no está en Celo. Debe marcar este ganado en Celo para agregar en Reproducción."
+
+    end
+
     if @valido
 
     Ganado.transaction do
 
       @reproduccion = Reproduccion.new
-      @reproduccion.celo_id = params[:celo_id]
+      @reproduccion.celo_id = @celo.id
       @reproduccion.tipo_concepcion_id = params[:tipo_concepcion][:id]
       if params[:tipo_concepcion][:id].to_i == PARAMETRO[:tipo_concepcion_monta_natural].to_i
 
@@ -193,50 +197,6 @@ before_filter :require_usuario
     end
 
   end          
-
-
-  def editar
-    
-    @reproduccion = Reproduccion.find(params[:reproduccion_id])
-
-    respond_to do |f|
-      
-        f.js
-      
-    end
-
-  end
-
-  def actualizar
-
-     @valido = true
-    @msg = ""
-    @guardado_ok = false
-
-    @celo = Celo.where("id = ?", params[:id]).first
-    auditoria_id = auditoria_antes("actualizar celo ganado", "celos", @celo)
-    
-
-    if @valido
-      
-
-    end
-  
-    rescue Exception => exc  
-    
-      if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep
-      
-      end                
-
-    respond_to do |f|
-
-      f.js
-
-    end
-  
-  end
 
 
  def eliminar
