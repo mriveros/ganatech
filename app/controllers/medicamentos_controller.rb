@@ -97,17 +97,17 @@ class MedicamentosController < ApplicationController
 
     if cond.size > 0
 
-      @potreros =  VPotrero.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPotrero.where(cond).count
+      @medicamentos =  VMedicamento.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VMedicamento.where(cond).count
 
     else
      
-      @potreros = VPotrero.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPotrero.count
+      @medicamentos = VMedicamento.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VMedicamento.count
 
     end
 
-    @total_registros = VPotrero.count
+    @total_registros = VMedicamento.count
 
     respond_to do |f|
       
