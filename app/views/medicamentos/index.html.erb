@@ -4,8 +4,8 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Medicamentos</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar nuevo medicamento".html_safe, "#", id: "link-to-agregar-celo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-celo", link_to_id: "#link-to-agregar-celo", url: celos_agregar_path( window_id: "modal-window-agregar-celo") )%>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar nuevo medicamento".html_safe, "#", id: "link-to-agregar-medicamento", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-medicamento", link_to_id: "#link-to-agregar-medicamento", url: medicamentos_agregar_path( window_id: "modal-window-agregar-medicamento") )%>
     
   </div>
   
@@ -13,87 +13,93 @@
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-celo">
+<div class="table-responsive" id="table-medicamento">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag celos_lista_path, remote: true, id: "form-buscar-celo"  do  %>
+      <%= form_tag medicamentos_lista_path, remote: true, id: "form-buscar-medicamento"  do  %>
 
         <tr>
 
           <th >
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_celo_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_medicamento_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Ganado RFID</span>
+            <span>Medicamento</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_celo_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_ganado_rfid');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_medicamento_nombre_medicamento, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_medicamento_nombre_medicamento');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th >
-            <span>Ganado Nombre</span>
+            <span>Descripción</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_celo_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_ganado_nombre');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_medicamento_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_medicamento_descripcion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Ganado RP</span>
+            <span>Stock</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_celo_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_ganado_rp');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_medicamento_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_cantidad_stock');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-          <th>
-            <div><%= label_tag nil, "Fecha Inicio Celo".html_safe %></div>
-              <div class='input-group date'>
-                <%= text_field_tag :form_buscar_celo_fecha_inicio, nil, class: 'form-control input-sm' %>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_fecha_inicio');"><i class="fa fa-times"></i></span>
-              </div>
-         </th>
+          <th >
+            <span>Cantidad Aplicación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_medicamento_cantidad_aplicacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_cantidad_aplicacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
 
-         <th>
-            <div><%= label_tag nil, "Fecha Fin Aprox.".html_safe %></div>
-              <div class='input-group date'>
-                <%= text_field_tag :form_buscar_celo_fecha_fin, nil, class: 'form-control input-sm' %>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_fecha_fin');"><i class="fa fa-times"></i></span>
-              </div>
-         </th>
+         <th >
+            <span>Ciclo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_medicamento_ciclo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_ciclo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
 
           <th >
-            <span>Celo Descripcion</span>
+            <span>Intervalo</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_celo_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_descripcion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_medicamento_intervalo_tiempo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_intervalo_tiempo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
           <th>
-              <span>Hacienda</span>
+              <span>Estado Medicamento</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_celo, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_hacienda_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_medicamento, :estado_medicamento_id, EstadoMedicamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_estado_medicamento_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
            <th >
-              <span>Estado Celo</span>
+              <span>Tipo Presentación</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_celo, :estado_celo_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_estado_celo_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_medicamento, :tipo_presentacion_id, TipoPresentacion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_tipo_presentacion_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th >
+              <span>Tipo Administración</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_medicamento, :tipo_administracion_id, TipoAdministracion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_tipo_administracion_id);"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
@@ -106,7 +112,7 @@
 
       </thead> 
 
-    <tbody id="celos-lista"></tbody>
+    <tbody id="medicamentos-lista"></tbody>
   
   </table>
 
@@ -117,15 +123,15 @@
 
 <script type="text/javascript">
 
-  $("#form-buscar-celo").submit();
+  $("#form-buscar-medicamento").submit();
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-celo").bind("submit", function () {
+  $("#form-buscar-medicamento").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_celo_descripcion").val().length !== 0 ){
+    if($("#form_buscar_medicamento_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_celo_descripcion").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_medicamento_descripcion").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -147,9 +153,9 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-celo input, #table-celo select").bind('change', function () {
+  $("#table-medicamento input, #table-medicamento select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-celo").submit();
+      $("#form-buscar-medicamento").submit();
 
   })
   //----------------------------------------------------------------------------//
@@ -172,7 +178,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-celo table th { background:#e6e6e6;}
-    #form-buscar-celo table th span.limpiar { background:#fff;}
+    #form-buscar-medicamento table th { background:#e6e6e6;}
+    #form-buscar-medicamento table th span.limpiar { background:#fff;}
 
 </style>
