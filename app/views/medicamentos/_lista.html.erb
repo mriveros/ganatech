@@ -1,35 +1,25 @@
-<% if celos.present? %>
+<% if medicamentos.present? %>
 
-  <% celos.each do |cel| %>
+  <% medicamentos.each do |med| %>
 
     <tr>
 
-      <td><%= cel.celo_id %></td>
-      <td><%= cel.codigo_rfid%></td>
-      <td><%= cel.ganado_nombre%></td>
-      <td><%= cel.ganado_rp%></td>
-      <td ><%= cel.fecha_inicio.strftime('%d/%m/%Y') %></td>
-      <td ><%= cel.fecha_fin.strftime('%d/%m/%Y')  %></td>
-      <td ><%= cel.descripcion %></td>
-      <td ><%= cel.hacienda %></td>
-      <td ><%= cel.estado_celo %></td>
+      <td><%= med.medicamento_id %></td>
+      <td><%= med.nombre_medicamento%></td>
+      <td><%= med.medicamento%></td>
+      <td><%= med.cantidad_stock%></td>
+      <td><%= med.cantidad_aplicacion%></td>
+      <td ><%= med.ciclo %></td>
+      <td ><%= med.intervalo_tiempo %></td>
+      <td ><%= med.estado_medicamento %></td>
+      <td ><%= med.tipo_presentacion %></td>
+      <td ><%= med.tipo_administracion %></td>
+      <td ><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
       
       
       <td >
         
-        <%= link_to_celo_detalle(cel.celo_id) %>
-       
-        <%if cel.estado_celo_id == PARAMETRO[:estado_celo_en_celo_activo] %>
-          
-          <%= link_to_editar_celo(cel.celo_id) %>   
-          <%= link_to_cambiar_estado_a_en_reproduccion(cel.celo_id)%>
-          <%= link_to_cambiar_estado_a_celo_perdido(cel.celo_id)%>
-
-          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cel.celo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-celo", title: 'Haga click para eliminar el celo'  %>
-
-         
-
-        <%end%>
+        <%#= link_to_medicamento_detalle(med.medicamento_id) %>
 
        </td>
 
@@ -42,7 +32,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate celos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate medicamentos, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -66,7 +56,7 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(celo_id) {
+  function eliminar_registro(medicamento) {
 
         swal({
           title: "Confirmar",
@@ -84,7 +74,7 @@
 
               $.ajax({
                 url: "<%= url_for(celos_eliminar_path) %>", 
-                data: {id: celo_id},
+                data: {id: medicamento},
                 dataType: 'script'
               });
             

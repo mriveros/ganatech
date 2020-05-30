@@ -4,6 +4,12 @@ class MedicamentosController < ApplicationController
 
   def index
     
+    
+
+  end
+
+
+  def lista
     cond = []
     args = []
 
@@ -78,13 +84,6 @@ class MedicamentosController < ApplicationController
 
     end
 
-    if params[:form_buscar_potrero][:departamento_id].present?
-
-      cond << "departamento_id = ?"
-      args << params[:form_buscar_potrero][:departamento_id]
-
-    end
-
     if params[:form_buscar_medicamento_fecha_vencimiento].present?
 
       cond << "fecha_vencimiento = ?"
@@ -113,17 +112,6 @@ class MedicamentosController < ApplicationController
       
      f.js
       
-    end
-
-  end
-
-
-  def lista
-
-    respond_to do |f|
-
-      f.js
-
     end
 
   end

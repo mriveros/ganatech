@@ -82,7 +82,7 @@
           <th>
               <span>Estado Medicamento</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_medicamento, :estado_medicamento_id, EstadoMedicamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_medicamento,:estado_medicamento_id, EstadoMedicamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_estado_medicamento_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
@@ -90,7 +90,7 @@
            <th >
               <span>Tipo Presentación</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_medicamento, :tipo_presentacion_id, TipoPresentacion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_medicamento,:tipo_presentacion_id, TipoPresentacion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_tipo_presentacion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 

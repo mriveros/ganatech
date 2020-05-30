@@ -1,21 +1,21 @@
-<%= link_to icon_detalles, "#", id: "link-to-celo-detalle-#{celo_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Celo', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_detalles, "#", id: "link-to-medicamento-detalle-#{medicamento_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Medicamento', onclick: "$('.modal').html('');return false;" %>
 
 <script type="text/javascript">
 
-  $("#link-to-celo-detalle-<%= celo_id %>").bind('click', function(){
+  $("#link-to-medicamento-detalle-<%= medicamento_id %>").bind('click', function(){
 
-    var contenido = $.trim($("#celo-detalle-<%= celo_id %>").html());
+    var contenido = $.trim($("#medicamento-detalle-<%= medicamento_id %>").html());
 
-    $(".celo-detalle").html('');
+    $(".medicamento-detalle").html('');
 
     if(contenido.length == 0){
 
-    $(this).parent().parent().after("<tr id='celo-detalle-<%= celo_id %>' class='celo-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+    $(this).parent().parent().after("<tr id='medicamento-detalle-<%=medicamento_id%>' class='medicamento-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
 
       $.ajax({
 
         type: 'GET',
-        url: '<%= url_for(celos_celos_detalles_path) %>',  
+        url: '<%= url_for(medicamentos_medicamentos_detalles_path) %>',  
         data: { celo_id: <%= celo_id %>},
         dataType: 'script'
         
