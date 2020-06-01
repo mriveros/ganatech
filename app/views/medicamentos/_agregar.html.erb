@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @celo, remote: true, url: medicamentos_guardar_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
+    <%= form_for @medicamento, remote: true, url: medicamentos_guardar_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
