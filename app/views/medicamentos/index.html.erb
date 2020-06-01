@@ -34,16 +34,16 @@
           <th >
             <span>Medicamento</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_medicamento_nombre_medicamento, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_medicamento_nombre_medicamento');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_medicamento_nombre_medicamento, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_nombre_medicamento');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th >
             <span>Descripción</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_medicamento_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_medicamento_descripcion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_medicamento_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_descripcion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -95,14 +95,23 @@
             </div>
           </th> 
 
-          <th >
-              <span>Tipo Administración</span>
+          <th>
+            <span>Tipo Administración</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_medicamento, :tipo_administracion_id, TipoAdministracion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_medicamento,:tipo_administracion_id, TipoAdministracion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_tipo_administracion_id);"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
+          <th>
+            <div><%= label_tag nil, "Fecha Vencimiento".html_safe%></div>
+            <div class='input-group date'>
+              <%= text_field_tag :form_buscar_medicamento_fecha_vencimiento, nil, class: 'form-control input-sm' %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_fecha_vencimiento');"><i class="fa fa-times"></i></span>
+            </div>
+            
+         </th>
 
           <th ></th>
 
@@ -144,7 +153,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#celos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#medicamentos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     

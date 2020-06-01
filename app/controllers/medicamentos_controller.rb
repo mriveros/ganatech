@@ -20,17 +20,17 @@ class MedicamentosController < ApplicationController
 
     end
 
-    if params[:form_medicamento_nombre_medicamento].present?
+    if params[:form_buscar_medicamento_nombre_medicamento].present?
 
       cond << "nombre_medicamento  ilike ?"
-      args << "%#{params[:form_medicamento_nombre_medicamento]}%"
+      args << "%#{params[:form_buscar_medicamento_nombre_medicamento]}%"
 
     end
 
-    if params[:form_medicamento_descripcion].present?
+    if params[:form_buscar_medicamento_descripcion].present?
 
       cond << "medicamento  ilike ?"
-      args << "%#{params[:form_medicamento_descripcion]}%"
+      args << "%#{params[:form_buscar_medicamento_descripcion]}%"
 
     end
 
@@ -80,7 +80,7 @@ class MedicamentosController < ApplicationController
     if params[:form_buscar_medicamento][:tipo_administracion_id].present?
 
       cond << "tipo_administracion_id = ?"
-      args <<params[:form_buscar_medicamento][:tipo_administracion_id]
+      args << params[:form_buscar_medicamento][:tipo_administracion_id]
 
     end
 
