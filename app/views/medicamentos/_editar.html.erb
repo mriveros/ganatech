@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @celo, remote: true, url:celos_actualizar_url, html: { id: "form-editar-celo" }, method: 'POST' do |f| %>
+    <%= form_for @medicamento, remote: true, url:medicamentos_actualizar_url, html: { id: "form-editar-celo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :id, @celo.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
