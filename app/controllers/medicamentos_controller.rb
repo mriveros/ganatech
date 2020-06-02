@@ -149,7 +149,25 @@ class MedicamentosController < ApplicationController
     @msg = ""
 
     @medicamento = Medicamento.find(params[:id])
-        
+    
+    controles_ganado = ControlGanado.where("medicamento_id = ?", @medicamento.id)
+
+    if controles_ganado.present?
+
+      @msg = "El medicamento ya ha sido utilizado en controles de ganados."
+      valido = false
+
+    end
+
+    if @valido
+
+      @medicamento_elim = @medicamento
+      auditoria_nueva("eliminar medicamento", "medicamentos", @medicamento)
+      @medicamento.destroy
+
+    end
+
+
     respond_to do |f|
 
       f.js
