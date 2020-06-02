@@ -133,8 +133,28 @@ class MedicamentosController < ApplicationController
 
     valido = true
     @msg = ""
-    @medicamento_ok = false
-                  
+    @guardado_ok = false
+    
+    @medicamento = Medicamento.new
+    @medicamento.descripcion = params[:descripcion]
+    @medicamento.nombre_medicamento = params[:nombre_medicamento]
+    @medicamento.cantidad_stock = params[:cantidad_stock]
+    @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
+    @medicamento.ciclo = params[:ciclo]
+    @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
+    @medicamento.observacion = params[:observacion]
+    @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
+    @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
+    @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
+    @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
+
+    if @medicamento.save
+
+      auditoria_nueva("agregar nuevo medicamento", "medicamentos", @medicamento)
+      @guardado_ok = true
+
+    end
+
     respond_to do |f|
 
       f.js
