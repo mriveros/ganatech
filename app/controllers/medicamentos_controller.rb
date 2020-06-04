@@ -215,13 +215,36 @@ class MedicamentosController < ApplicationController
 
   def actualizar
 
-    valido = true
+    @valido = true
     @msg = ""
 
     @medicamento = Medicamento.find(params[:medicamento][:id])
     auditoria_id = auditoria_antes("actualizar medicamento", "medicamentos", @medicamento)
 
-     respond_to do |f|
+    if @valido
+
+      @medicamento.descripcion = params[:descripcion].upcase
+      @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
+      @medicamento.cantidad_stock = params[:cantidad_stock]
+      @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
+      @medicamento.ciclo = params[:ciclo]
+      @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
+      @medicamento.observacion = params[:observacion]
+      @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
+      @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
+      @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
+      @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
+
+      if @medicamento.save
+
+        auditoria_despues(@medicamento, auditoria_id)
+        @medicamento_ok = true
+
+      end
+
+    end
+    
+    respond_to do |f|
 
       f.js
 
