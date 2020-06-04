@@ -90,6 +90,7 @@ get "crontab_ultron/index"
   post "medicamentos/actualizar"
   get "medicamentos/eliminar"
   get "medicamentos/buscar_medicamento"
+  get "medicamentos/medicamento_detalle"
 
   #ALIMENTACIONES
   get "alimentaciones/index"
@@ -101,6 +102,8 @@ get "crontab_ultron/index"
   post "alimentaciones/actualizar"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
+
+
 
 
   #CELOS
