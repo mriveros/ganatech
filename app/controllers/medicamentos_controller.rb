@@ -4,7 +4,6 @@ class MedicamentosController < ApplicationController
 
   def index
     
-    
 
   end
 
@@ -265,5 +264,19 @@ class MedicamentosController < ApplicationController
     end
 
   end
+
+  def medicamento_detalle
+
+    @medicamento_detalle = Medicamento.where("id = ?", params[:medicamento_detalle]).first
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end
