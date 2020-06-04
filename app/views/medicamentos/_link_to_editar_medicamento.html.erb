@@ -1,2 +1,2 @@
 <%= link_to icon_editar, "#", id: "link-to-editar-medicamento-#{medicamento_id}", class: 'btn btn-warning btn-xs', title: 'Haga click aquí para editar datos del medicamento.', onclick: "$('.modal').html('');return false;" %>
-<%= modal_window( window_id: "modal-window-editar-medicamento", link_to_id: "#link-to-editar-medicamento-#{medicamento_id}", url: medicamentos_editar_path( window_id: "modal-window-editar-celo", celo_id: celo_id) )%>
+<%= modal_window( window_id: "modal-window-editar-medicamento", link_to_id: "#link-to-editar-medicamento-#{medicamento_id}", url: medicamentos_editar_path( window_id: "modal-window-editar-medicamento", medicamento_id: medicamento_id) )%>

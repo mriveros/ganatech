@@ -11,7 +11,7 @@
 
     <%= form_for @medicamento, remote: true, url:medicamentos_actualizar_url, html: { id: "form-editar-celo" }, method: 'POST' do |f| %>
 
-      <%= hidden_field_tag :id, @celo.id %>
+      <%= hidden_field_tag :id, @medicamento.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="panel-body">
@@ -88,89 +88,71 @@
 
 <script type="text/javascript">
 
-  setTimeout(function(){ 
-    
-    $("#fecha_inicio").focus();
-    cargar_ganado();
-
-  }, 1000);
-  
-  
   aplicar_datepicker2();
 
-  function cargar_ganado(){   
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
 
-    $("#ganado").val('');
-    $("#ganado_id").val('');
-    $("#nombre_ganado").val('');
-    $("#hacienda").val('');
-    $("#rp").val('');
-    $("#codigo_rfid").val('');
-
-    $.getJSON("<%= url_for(ganados_buscar_ganado_path) %>", { ganado_id: $("#celo_ganado_id").val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_hembra]%>}, function(j){
-        
-      var ganado = "";
-      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
-      var i = 0;
-      
-      ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
-
-        $("#ganado").val(ganado);
-        $("#ganado_id").val(j[i].ganado_id);
-        $("#nombre_ganado").val(j[i].nombre);
-        $("#rp").val(j[i].rp);
-        $("#codigo_rfid").val(j[i].codigo_rfid);
-        $("#hacienda").val(j[i].hacienda);
-
-    })
-
+     return true;
   }
 
-  $("#btn-actualizar-celo").bind('click', function () {
+  $("#btn-guardar-medicamento  ").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#celo_ganado_id").val().length == 0){
+      if($("#nombre_medicamento").val().length == 0){
 
-        msg +="Es necesario seleccionar un ganado.\n"
+        msg +="Es necesario agregar un nombre.\n"
         valido = false
       
       }
 
-       if($("#celo_fecha_inicio").val().length == 0){
+      if($("#descripcion").val().length == 0){
 
-        msg +="Ingrese una fecha de inicio del celo.\n"
+        msg +="Es necesario agregar una descripción.\n"
         valido = false
       
       }
 
-      if($("#celo_fecha_fin").val().length == 0){
+      if($("#cantidad_stock").val().length == 0){
 
-        msg +="Debe ingresar una fecha aproximada de fin de celo.\n"
+        msg +="Es necesario agregar la cantidad en almacén.\n"
         valido = false
       
       }
 
-      if($("#celo_descripcion").val().length == 0){
+      if($("#tipo_administracion_id").val().length == 0){
 
-        msg +="Es necesario ingresar una descripción.\n"
+        msg +="Es necesario seleccionar el tipo de Administración.\n"
         valido = false
       
       }
 
-       if ($("#celo_fecha_inicio").val() >= $("#celo_fecha_fin").val()) {
+      if($("#tipo_presentacion_id").val().length == 0){
 
-        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
+        msg +="Es necesario seleccionar el tipo de Presentación.\n"
         valido = false
+      
+      }
 
+      if($("#estado_medicamento_id").val().length == 0){
+
+        msg +="Es necesario seleccionar el estado del Medicamento.\n"
+        valido = false
+      
       }
 
       if (valido){
 
         swal({
-          title: "Confirmar Celo",
-          text: "Al confirmar el Celo el estado del Ganado estará a En Celo y podrá ver los datos modificados en el módulo de Celos.",
+          title: "Confirmar Medicamento",
+          text: "Al confirmar el medicamento estará disponible para su utilización en los controles de Ganado.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -182,7 +164,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-editar-celo").submit();
+            $("#form-agregar-medicamento").submit();
             
           } 
 
@@ -197,5 +179,6 @@
       return false;
     
     })
-  
+
+
 </script>

@@ -136,8 +136,8 @@ class MedicamentosController < ApplicationController
     @guardado_ok = false
     
     @medicamento = Medicamento.new
-    @medicamento.descripcion = params[:descripcion]
-    @medicamento.nombre_medicamento = params[:nombre_medicamento]
+    @medicamento.descripcion = params[:descripcion].upcase
+    @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
     @medicamento.cantidad_stock = params[:cantidad_stock]
     @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
     @medicamento.ciclo = params[:ciclo]
@@ -165,7 +165,8 @@ class MedicamentosController < ApplicationController
 
   def eliminar
 
-    valido = true
+    @eliminado = false
+    @valido = true
     @msg = ""
 
     @medicamento = Medicamento.find(params[:id])
@@ -175,7 +176,7 @@ class MedicamentosController < ApplicationController
     if controles_ganado.present?
 
       @msg = "El medicamento ya ha sido utilizado en controles de ganados."
-      valido = false
+      @valido = false
 
     end
 
@@ -183,7 +184,11 @@ class MedicamentosController < ApplicationController
 
       @medicamento_elim = @medicamento
       auditoria_nueva("eliminar medicamento", "medicamentos", @medicamento)
-      @medicamento.destroy
+      if @medicamento.destroy
+        
+        @eliminado = true
+
+      end
 
     end
 
@@ -198,7 +203,7 @@ class MedicamentosController < ApplicationController
 
   def editar
 
-    @medicamento = Medicamento.find(params[:id])
+    @medicamento = Medicamento.find(params[:medicamento_id])
 
     respond_to do |f|
 
