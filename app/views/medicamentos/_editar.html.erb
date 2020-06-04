@@ -11,7 +11,7 @@
 
     <%= form_for @medicamento, remote: true, url:medicamentos_actualizar_url, html: { id: "form-editar-medicamento" }, method: 'POST' do |f| %>
 
-      <%= hidden_field_tag :id, @medicamento.id %>
+      <%= hidden_field_tag :medicamento_id, @medicamento.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="panel-body">

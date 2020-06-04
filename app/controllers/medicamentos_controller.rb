@@ -218,22 +218,22 @@ class MedicamentosController < ApplicationController
     @valido = true
     @msg = ""
 
-    @medicamento = Medicamento.find(params[:medicamento][:id])
+    @medicamento = Medicamento.find(params[:medicamento_id])
     auditoria_id = auditoria_antes("actualizar medicamento", "medicamentos", @medicamento)
 
     if @valido
 
-      @medicamento.descripcion = params[:descripcion].upcase
-      @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
-      @medicamento.cantidad_stock = params[:cantidad_stock]
-      @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
-      @medicamento.ciclo = params[:ciclo]
-      @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
-      @medicamento.observacion = params[:observacion]
-      @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
-      @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
-      @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
-      @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
+      @medicamento.descripcion = params[:medicamento][:descripcion].upcase
+      @medicamento.nombre_medicamento = params[:medicamento][:nombre_medicamento].upcase
+      @medicamento.cantidad_stock = params[:medicamento][:cantidad_stock]
+      @medicamento.cantidad_aplicacion = params[:medicamento][:cantidad_aplicacion]
+      @medicamento.ciclo = params[:medicamento][:ciclo]
+      @medicamento.intervalo_tiempo = params[:medicamento][:intervalo_tiempo]
+      @medicamento.observacion = params[:medicamento][:observacion]
+      @medicamento.estado_medicamento_id = params[:medicamento][:estado_medicamento_id]
+      @medicamento.tipo_presentacion_id = params[:medicamento][:tipo_presentacion_id]
+      @medicamento.tipo_administracion_id = params[:medicamento][:tipo_administracion_id]
+      @medicamento.fecha_vencimiento = params[:medicamento][:fecha_vencimiento]
 
       if @medicamento.save
 
