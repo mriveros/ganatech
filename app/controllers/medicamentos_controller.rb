@@ -279,4 +279,39 @@ class MedicamentosController < ApplicationController
   end
 
 
+  def agregar_medicamento_detalle
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+   def guardar_medicamento_detalle
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def eliminar_medicamento_detalle
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
+
 end
