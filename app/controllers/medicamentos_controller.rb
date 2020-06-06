@@ -282,7 +282,9 @@ class MedicamentosController < ApplicationController
   def agregar_medicamento_detalle
 
 
-     respond_to do |f|
+    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+    respond_to do |f|
 
       f.js
 

@@ -1,4 +1,3 @@
-<%= javascript_include_tag "modulos/pacientes.js" %>
 <div class="modal-dialog">
       
   <div class="modal-content">
@@ -10,37 +9,46 @@
       
     </div>
 
-    <%= form_for @medicamento_detalle, remote: true, url: medicamentos_guardar_medicamento_detalle_url, html: { id: "form-agregar-medicamento-detalle" } do |f| %>
+    <%= form_for @medicamento, remote: true, url: medicamentos_guardar_medicamento_detalle_url, html: { id: "form-agregar-medicamento-detalle" } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
-      <%= hidden_field_tag :tutor_id, params[:tutor_id]%>
-
-      <%= hidden_field_tag :paciente_id%>
+      <%= hidden_field_tag :medicamento_id, params[:medicamento_id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
+          <div class="col-sm-4"><%= label_tag nil, "Descripción#{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
+          <div class="col-sm-7"><%= text_field_tag :descripcion, nil, class: 'form-control input-sm', style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br /><br />
           
 
-         
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_suministro, nil, class: 'form-control input-sm' %>
+          </div>    
+          <div class="col-sm-1"></div><br/><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Apellido Paciente#{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
-          <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
-          <div class="col-sm-1"></div><br />
-          <div class="col-sm-1"></div><br />
+          <div class="col-sm-4"><%= label_tag :nil, "Numero Lote".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :numero_lote, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>5 %></div>
+          <div class="col-sm-1"></div><br/><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Parentezco del Tutor #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :parentezco, :id, Parentezco.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
+          <div class="col-sm-4"><%= label_tag :nil, "Cantidad Suministro".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
+          <div class="col-sm-1"></div><br/><br />
 
-
-
-          
-          <div class="col-sm-1"></div><br />
-          <div id="buscar_perso">                                       
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
           </div>
+          <div class="col-sm-1"></div><br/><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+          <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
+          </div>
+          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
+
         </div>        
        
       </div>
@@ -59,15 +67,26 @@
 
 <style type="text/css">
 
-  #form-agregar-tutor-detalle label, #form-agregar-tutor-detalle input[type='text'] { float:left; margin-top:5px;}
-  #form-agregar-tutor-detalle br {clear:both; }
-  #form-agregar-tutor-detalle label { width:200px; font-size:12px;}
+  #form-agregar-medicamento-detalle label, #form-agregar-medicamento-detalle input[type='text'] { float:left; margin-top:5px;}
+  #form-agregar-medicamento-detalle br {clear:both; }
+  #form-agregar-medicamento-detalle label { width:200px; font-size:12px;}
 
 </style>
 
 <script type="text/javascript">
 
   aplicar_datepicker2();
+
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
 
   $("#btn-guardar-medicamento-detalle").bind('click', function () {
 
