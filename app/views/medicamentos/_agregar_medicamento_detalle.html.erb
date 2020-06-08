@@ -29,18 +29,22 @@
           </div>    
           <div class="col-sm-1"></div><br/><br />
 
+
           <div class="col-sm-4"><%= label_tag :nil, "Numero Lote".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :numero_lote, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>5 %></div>
           <div class="col-sm-1"></div><br/><br />
+
 
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Suministro".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
           <div class="col-sm-1"></div><br/><br />
 
+
           <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
           </div>
           <div class="col-sm-1"></div><br/><br />
+
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
@@ -93,19 +97,6 @@
       valido = true
       msg = ""
 
-      if($("#persona_documento").val().length == 0){
-
-        msg +="Ingrese número de documento.\n"
-        valido = false
-      
-      }
-
-      if($("#persona_nombre").val().length == 0){
-
-        msg +="Nombre de persona no puede estar vacío.\n"
-        valido = false
-      
-      }
 
       if($("#persona_apellido").val().length == 0){
 
