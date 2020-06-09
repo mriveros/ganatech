@@ -1,0 +1,194 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Alimentacion</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-alimentacion", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-alimentacion", link_to_id: "#link-to-agregar-alimentacion", url: alimentaciones_agregar_path( window_id: "modal-window-agregar-alimentacion") )%>
+
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div class="table-responsive" id="table-alimentaciones">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+
+    <thead>
+
+      <%= form_tag alimentaciones_lista_path, remote: true, id: "form-buscar-alimentaciones"  do  %>
+
+        <tr>
+
+          <th style="width:15%;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th >
+            <span>Alimentacion</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_nombre_alimento, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_nombre_alimento');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
+            <span>Descripción</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Stock</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_cantidad_stock');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Cantidad Aplicación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_cantidad_aplicacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_cantidad_aplicacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+         <th >
+            <span>Ciclo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_ciclo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_ciclo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Intervalo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_intervalo_tiempo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_intervalo_tiempo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+              <span>Estado Alimentacion</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_alimentaciones,:estado_alimentacion_id, EstadoMedicamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_estado_medicamento_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
+              <span>Tipo Presentación</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_alimentaciones,:tipo_presentacion_id, TipoPresentacion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_tipo_presentacion_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Tipo Administración</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_alimentaciones,:tipo_administracion_id, TipoAdministracion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_alimentaciones_tipo_administracion_id);"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <div><%= label_tag nil, "Fecha Vencimiento".html_safe%></div>
+            <div class='input-group date'>
+              <%= text_field_tag :form_buscar_alimentaciones_fecha_vencimiento, nil, class: 'form-control input-sm' %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_fecha_vencimiento');"><i class="fa fa-times"></i></span>
+            </div>
+
+         </th>
+
+
+
+          <th style="width:15%;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead>
+
+    <tbody id="alimentaciones-lista"></tbody>
+
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-alimentaciones").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_alimentaciones_descripcion").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_alimentaciones_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_alimentaciones_descripcion").val().replace(/\s/g,'')).length > 2){
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});
+      }
+    }
+
+    if(valido){
+    $(".nmb").html('');
+    $("#alimentaciones-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    }
+
+
+
+  })
+
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-alimentaciones input, #table-alimentaciones select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-alimentaciones").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-alimentaciones").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-alimentacion").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-alimentaciones table th { background:#e6e6e6;}
+    #form-buscar-alimentaciones table th span.limpiar { background:#fff;}
+
+</style>

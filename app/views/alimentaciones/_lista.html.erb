@@ -1,0 +1,98 @@
+<% if alimentaciones.present? %>
+
+  <% alimentaciones.each do |alimentacion| %>
+
+    <tr>
+
+      <td><%= alimentacion.alimento_id %></td>
+      <td><%= alimentacion.nombre_alimento%></td>
+      <td><%= alimentacion.alimento%></td>
+      <td><%= alimentacion.cantidad_stock%></td>
+      <td><%= alimentacion.cantidad_aplicacion%></td>
+      <td ><%= alimentacion.ciclo %></td>
+      <td ><%= alimentacion.intervalo_tiempo %></td>
+      <td ><%= alimentacion.estado_medicamento %></td>
+      <td ><%= alimentacion.tipo_presentacion %></td>
+      <td ><%= alimentacion.tipo_administracion %></td>
+      <td ><%= alimentacion.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+
+    </td>
+
+      <td style="width:120px;">
+
+        <%= link_to_editar_alimentacion(alimentacion) %>
+
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{alimentacion.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion", title: 'Haga click para eliminar la alimentacion'  %>
+
+       </td>
+
+
+
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate alimentaciones, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %>
+    </td>
+</tr>
+
+
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+
+<script type="text/javascript">
+
+  function eliminar_registro(alimentacion_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de alimentaciones",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(alimentaciones_eliminar_path) %>",
+                data: {id: alimentacion_id},
+                dataType: 'script'
+              });
+
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+
+    }
+
+</script>
