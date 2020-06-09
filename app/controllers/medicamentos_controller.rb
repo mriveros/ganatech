@@ -169,12 +169,21 @@ class MedicamentosController < ApplicationController
     @msg = ""
 
     @medicamento = Medicamento.find(params[:id])
+
+    @medicamento_detalle = MedicamentoDetalle.where("medicamento_id = ?", params[:id])
     
     controles_ganado = ControlGanado.where("medicamento_id = ?", @medicamento.id)
 
     if controles_ganado.present?
 
       @msg = "El medicamento ya ha sido utilizado en controles de ganados."
+      @valido = false
+
+    end
+
+    if @medicamento_detalle.present?
+
+      @msg += "El medicamento ya cuenta con suministros."
       @valido = false
 
     end
