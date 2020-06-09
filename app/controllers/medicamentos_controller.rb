@@ -297,9 +297,11 @@ class MedicamentosController < ApplicationController
     @guardado_ok = false
     @valido = false
 
+    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+
     if @valido
 
-      
+
 
     end
 
