@@ -140,27 +140,45 @@ class MedicamentosController < ApplicationController
     valido = true
     @msg = ""
     @guardado_ok = false
+
+    MedicamentoDetalle.transaction do
     
-    @medicamento = Medicamento.new
-    @medicamento.descripcion = params[:descripcion].upcase
-    @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
-    @medicamento.costo = params[:costo]
-    @medicamento.cantidad_stock = params[:cantidad_stock]
-    @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
-    @medicamento.ciclo = params[:ciclo]
-    @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
-    @medicamento.observacion = params[:observacion]
-    @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
-    @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
-    @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
-    @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
+      @medicamento = Medicamento.new
+      @medicamento.descripcion = params[:descripcion].upcase
+      @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
+      @medicamento.costo = params[:costo]
+      @medicamento.cantidad_stock = params[:cantidad_stock]
+      @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
+      @medicamento.ciclo = params[:ciclo]
+      @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
+      @medicamento.observacion = params[:observacion]
+      @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
+      @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
+      @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
+      @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
 
-    if @medicamento.save
+      if @medicamento.save
 
-      auditoria_nueva("agregar nuevo medicamento", "medicamentos", @medicamento)
-      @guardado_ok = true
+        auditoria_nueva("agregar nuevo medicamento", "medicamentos", @medicamento)
+        @medicamento_detalle = MedicamentoDetalle.new
+        @medicamento_detalle.medicamento_id = @medicamento.id
+        @medicamento_detalle.descripcion = @medicamento.descripcion
+        @medicamento_detalle.fecha_suministro = Date.today
+        @medicamento_detalle.numero_lote = 0
+        @medicamento_detalle.cantidad_suministro = @medicamento.cantidad_stock
+        @medicamento_detalle.costo_suministro = @medicamento.costo
+        @medicamento_detalle.observacion = @medicamento.observacion
+        @medicamento_detalle.fecha_vencimiento = @medicamento.fecha_vencimiento 
 
-    end
+        if @medicamento_detalle.save
+          
+          @guardado_ok = true
+
+        end
+
+      end
+
+    end #transaction
 
     respond_to do |f|
 
