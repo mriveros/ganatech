@@ -48,6 +48,14 @@
           </th>
 
           <th >
+            <span>Costo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_medicamento_costo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_costo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
             <span>Stock</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_medicamento_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
@@ -103,15 +111,7 @@
             </div>
           </th> 
 
-          <th>
-            <div><%= label_tag nil, "Fecha Vencimiento".html_safe%></div>
-            <div class='input-group date'>
-              <%= text_field_tag :form_buscar_medicamento_fecha_vencimiento, nil, class: 'form-control input-sm' %>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_medicamento_fecha_vencimiento');"><i class="fa fa-times"></i></span>
-            </div>
-            
-         </th>
+         
 
           <th ></th>
 

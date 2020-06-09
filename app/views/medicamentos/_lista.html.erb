@@ -7,6 +7,7 @@
       <td><%= med.medicamento_id %></td>
       <td><%= med.nombre_medicamento%></td>
       <td><%= med.medicamento%></td>
+      <td><%= med.costo%></td>
       <td><%= med.cantidad_stock%></td>
       <td><%= med.cantidad_aplicacion%></td>
       <td ><%= med.ciclo %></td>
@@ -14,12 +15,11 @@
       <td ><%= med.estado_medicamento %></td>
       <td ><%= med.tipo_presentacion %></td>
       <td ><%= med.tipo_administracion %></td>
-      <td ><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
-      
+           
       
       <td >
         
-        <%#= link_to_medicamento_detalle(med.medicamento_id) %>
+        <%= link_to_medicamento_detalle(med.medicamento_id) %>
         <%= link_to_editar_medicamento(med.medicamento_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{med.medicamento_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-medicamento", title: 'Haga click para eliminar el medicamento'  %>
 

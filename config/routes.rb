@@ -90,6 +90,10 @@ get "crontab_ultron/index"
   post "medicamentos/actualizar"
   get "medicamentos/eliminar"
   get "medicamentos/buscar_medicamento"
+  get "medicamentos/medicamento_detalle"
+  get "medicamentos/agregar_medicamento_detalle"
+  post "medicamentos/guardar_medicamento_detalle"
+  get "medicamentos/eliminar_medicamento_detalle"
 
   #ALIMENTACIONES
   get "alimentaciones/index"
@@ -101,7 +105,6 @@ get "crontab_ultron/index"
   post "alimentaciones/actualizar"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
-
 
   #CELOS
   get "celos/index" 
@@ -150,6 +153,17 @@ get "crontab_ultron/index"
   post "estados_ganados/actualizar"
   get "estados_ganados/eliminar"
   get "estados_ganados/buscar_estado_ganado"
+
+  #ESPERMAS
+  get "espermas/index"
+  post "espermas/lista"
+  get "espermas/lista"
+  get "espermas/agregar"
+  post "espermas/guardar"
+  get "espermas/editar"
+  post "espermas/actualizar"
+  get "espermas/eliminar"
+  get "espermas/esperma_detalle"
 
 
 

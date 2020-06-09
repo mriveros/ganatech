@@ -1,0 +1,184 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Muestras</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar esperma".html_safe, "#", id: "link-to-agregar-esperma", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-esperma", link_to_id: "#link-to-agregar-esperma", url: espermas_agregar_path( window_id: "modal-window-agregar-esperma"))%>
+    
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-esperma">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag espermas_lista_path, remote: true, id: "form-buscar-esperma"  do  %>
+
+        <tr>
+
+          <th >
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Descripción</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th >
+            <span>Número Pajuela</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_numero_pajuela, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_numero_pajuela');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Raza</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_raza_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_raza_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+              <span>Procedencia</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_esperma, :esperma_procedencia_id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_esperma_procedencia_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th >
+            <span>Cantidad</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_cantidad, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_cantidad');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Costo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_costo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_costo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Costo Total</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_costo_total, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_costo_total');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Observación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+          <th>
+              <span>Estado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_esperma, :estado_esperma_id, EstadoEsperma.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_estado_esperma_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+
+          <th ></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="espermas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  $("#form-buscar-esperma").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-esperma").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_esperma_descripcion").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_esperma_descripcion").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+                 
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#espermas-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-esperma input, #table-esperma select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-esperma").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-esperma table th { background:#e6e6e6;}
+    #form-buscar-esperma table th span.limpiar { background:#fff;}
+
+</style>

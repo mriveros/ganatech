@@ -4,7 +4,6 @@ class MedicamentosController < ApplicationController
 
   def index
     
-    
 
   end
 
@@ -31,6 +30,13 @@ class MedicamentosController < ApplicationController
 
       cond << "medicamento  ilike ?"
       args << "%#{params[:form_buscar_medicamento_descripcion]}%"
+
+    end
+
+    if params[:form_buscar_medicamento_costo].present?
+
+      cond << "costo  = ?"
+      args << params[:form_buscar_medicamento_costo]
 
     end
 
@@ -134,26 +140,45 @@ class MedicamentosController < ApplicationController
     valido = true
     @msg = ""
     @guardado_ok = false
+
+    MedicamentoDetalle.transaction do
     
-    @medicamento = Medicamento.new
-    @medicamento.descripcion = params[:descripcion].upcase
-    @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
-    @medicamento.cantidad_stock = params[:cantidad_stock]
-    @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
-    @medicamento.ciclo = params[:ciclo]
-    @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
-    @medicamento.observacion = params[:observacion]
-    @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
-    @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
-    @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
-    @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
+      @medicamento = Medicamento.new
+      @medicamento.descripcion = params[:descripcion].upcase
+      @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
+      @medicamento.costo = params[:costo]
+      @medicamento.cantidad_stock = params[:cantidad_stock]
+      @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
+      @medicamento.ciclo = params[:ciclo]
+      @medicamento.intervalo_tiempo = params[:intervalo_tiempo]
+      @medicamento.observacion = params[:observacion]
+      @medicamento.estado_medicamento_id = params[:estado_medicamento][:id]
+      @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
+      @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
+      @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
 
-    if @medicamento.save
+      if @medicamento.save
 
-      auditoria_nueva("agregar nuevo medicamento", "medicamentos", @medicamento)
-      @guardado_ok = true
+        auditoria_nueva("agregar nuevo medicamento", "medicamentos", @medicamento)
+        @medicamento_detalle = MedicamentoDetalle.new
+        @medicamento_detalle.medicamento_id = @medicamento.id
+        @medicamento_detalle.descripcion = @medicamento.descripcion
+        @medicamento_detalle.fecha_suministro = Date.today
+        @medicamento_detalle.numero_lote = 0
+        @medicamento_detalle.cantidad_suministro = @medicamento.cantidad_stock
+        @medicamento_detalle.costo_suministro = @medicamento.costo
+        @medicamento_detalle.observacion = @medicamento.observacion
+        @medicamento_detalle.fecha_vencimiento = @medicamento.fecha_vencimiento 
 
-    end
+        if @medicamento_detalle.save
+          
+          @guardado_ok = true
+
+        end
+
+      end
+
+    end #transaction
 
     respond_to do |f|
 
@@ -170,12 +195,21 @@ class MedicamentosController < ApplicationController
     @msg = ""
 
     @medicamento = Medicamento.find(params[:id])
+
+    @medicamento_detalle = MedicamentoDetalle.where("medicamento_id = ?", params[:id])
     
     controles_ganado = ControlGanado.where("medicamento_id = ?", @medicamento.id)
 
     if controles_ganado.present?
 
       @msg = "El medicamento ya ha sido utilizado en controles de ganados."
+      @valido = false
+
+    end
+
+    if @medicamento_detalle.present?
+
+      @msg += "El medicamento ya cuenta con suministros."
       @valido = false
 
     end
@@ -225,6 +259,7 @@ class MedicamentosController < ApplicationController
 
       @medicamento.descripcion = params[:medicamento][:descripcion].upcase
       @medicamento.nombre_medicamento = params[:medicamento][:nombre_medicamento].upcase
+      @medicamento.costo = params[:medicamento][:costo]
       @medicamento.cantidad_stock = params[:medicamento][:cantidad_stock]
       @medicamento.cantidad_aplicacion = params[:medicamento][:cantidad_aplicacion]
       @medicamento.ciclo = params[:medicamento][:ciclo]
@@ -265,5 +300,129 @@ class MedicamentosController < ApplicationController
     end
 
   end
+
+  def medicamento_detalle
+
+    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+    @medicamento_detalle = MedicamentoDetalle.orden_01.where("medicamento_id = ?", params[:medicamento_id]).paginate(per_page: 5, page: params[:page])
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def agregar_medicamento_detalle
+
+
+    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+   def guardar_medicamento_detalle
+
+    @guardado_ok = false
+    @valido = true
+
+    Medicamento.transaction do
+
+      @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+      auditoria_id = auditoria_antes("guardar suministro medicamento detalle", "medicamentos", @medicamento)
+
+      if @valido
+
+        @medicamento_detalle = MedicamentoDetalle.new
+        @medicamento_detalle.medicamento_id = params[:medicamento_id]
+        @medicamento_detalle.descripcion = params[:descripcion].upcase
+        @medicamento_detalle.fecha_suministro = params[:fecha_suministro]
+        @medicamento_detalle.numero_lote = params[:numero_lote]
+        @medicamento_detalle.cantidad_suministro = params[:cantidad_suministro]
+        @medicamento_detalle.costo_suministro = params[:costo_suministro]
+        @medicamento_detalle.observacion = params[:observacion]
+        @medicamento_detalle.fecha_vencimiento = params[:fecha_vencimiento]
+
+        if @medicamento_detalle.save
+
+          
+          auditoria_nueva("agregar medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
+
+          @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro
+          if @medicamento.save
+
+            auditoria_despues(@medicamento, auditoria_id)
+            @guardado_ok = true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def eliminar_medicamento_detalle
+
+    @eliminado_ok = false
+    @valido = true
+
+    Medicamento.transaction do
+
+      @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+      auditoria_id = auditoria_antes("eliminar suministro medicamento detalle", "medicamentos", @medicamento)
+
+      @medicamento_detalle = MedicamentoDetalle.where("id = ?", params[:medicamento_detalle_id]).first 
+      auditoria_id = auditoria_antes("eliminar suministro medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
+
+
+      if @valido
+
+        @medicamento_detalle_elim = @medicamento_detalle
+
+        if @medicamento_detalle.destroy
+
+          auditoria_nueva("eliminar medicamento detalle", "medicamentos_detalles", @medicamento_detalle_elim )
+
+          @medicamento.cantidad_stock = @medicamento.cantidad_stock - @medicamento_detalle.cantidad_suministro
+          
+          if @medicamento.save
+
+            @eliminado_ok = true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
 
 end

@@ -15,8 +15,8 @@
       $.ajax({
 
         type: 'GET',
-        url: '<%= url_for(medicamentos_medicamentos_detalles_path) %>',  
-        data: { celo_id: <%= celo_id %>},
+        url: '<%= url_for(medicamentos_medicamento_detalle_path) %>',  
+        data: { medicamento_id: <%= medicamento_id %>},
         dataType: 'script'
         
       })
