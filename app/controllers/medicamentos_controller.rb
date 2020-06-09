@@ -360,6 +360,7 @@ class MedicamentosController < ApplicationController
           @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro
           if @medicamento.save
 
+            auditoria_despues(@medicamento, auditoria_id)
             @guardado_ok = true
 
           end
