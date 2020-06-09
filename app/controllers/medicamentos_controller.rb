@@ -267,7 +267,9 @@ class MedicamentosController < ApplicationController
 
   def medicamento_detalle
 
-    @medicamento_detalle = Medicamento.where("id = ?", params[:medicamento_detalle]).first
+    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+    @medicamento_detalle = Medicamento.where("id = ?", params[:medicamento_id])
 
 
      respond_to do |f|
@@ -295,13 +297,40 @@ class MedicamentosController < ApplicationController
    def guardar_medicamento_detalle
 
     @guardado_ok = false
-    @valido = false
+    @valido = true
 
-    @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+    Medicamento.transaction do
 
-    if @valido
+      @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+      auditoria_id = auditoria_antes("guardar suministro medicamento detalle", "medicamentos", @medicamento)
 
+      if @valido
 
+        @medicamento_detalle = MedicamentoDetalle.new
+        @medicamento_detalle.medicamento_id = params[:medicamento_id]
+        @medicamento_detalle.descripcion = params[:descripcion]
+        @medicamento_detalle.fecha_suministro = params[:fecha_suministro]
+        @medicamento_detalle.numero_lote = params[:numero_lote]
+        @medicamento_detalle.cantidad_suministro = params[:cantidad_suministro]
+        @medicamento_detalle.observacion = params[:observacion]
+        @medicamento_detalle.fecha_vencimiento = params[:fecha_vencimiento]
+
+        if @medicamento_detalle.save
+
+          
+          auditoria_nueva("agregar medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
+
+          @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro
+          @medicamento.fecha_vencimiento = @medicamento_detalle.fecha_vencimiento
+          if @medicamento.save
+
+            @guardado_ok = true
+
+          end
+
+        end
+
+      end
 
     end
 

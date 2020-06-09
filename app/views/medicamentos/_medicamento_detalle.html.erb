@@ -30,17 +30,13 @@
             
           </thead>
        
-          <tbody id="celo-detalle-lista">
+          <tbody id="medicamento-detalle-lista">
 
-            <% if @medicamento_detalle.present? %>
-            
-              <% @medicamento_detalle.each do |cd|%>
+            <% if @medicamento.present? %>
 
                 <tr>
-                  <td><%= cd.observacion %></td>
+                  <td><%= @medicamento.observacion %></td>
                 </tr>
-
-              <% end %>
 
             <% else %>
 
