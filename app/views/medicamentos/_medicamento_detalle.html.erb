@@ -59,6 +59,7 @@
               
               <th>id</th>
               <th>Descripción</th>
+              <th>Costo</th>
               <th>Fecha Suministro</th>
               <th>Fecha Vencimiento</th>
               <th>Lote</th>
@@ -82,6 +83,7 @@
 
                   <td><%= med.id %></td>
                   <td><%= med.descripcion %></td>
+                  <td><%= med.costo_suministro %></td>
                   <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
                   <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
                   <td><%= med.numero_lote %></td>

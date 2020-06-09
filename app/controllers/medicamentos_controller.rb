@@ -330,6 +330,7 @@ class MedicamentosController < ApplicationController
         @medicamento_detalle.fecha_suministro = params[:fecha_suministro]
         @medicamento_detalle.numero_lote = params[:numero_lote]
         @medicamento_detalle.cantidad_suministro = params[:cantidad_suministro]
+        @medicamento_detalle.costo_suministro = params[:costo_suministro]
         @medicamento_detalle.observacion = params[:observacion]
         @medicamento_detalle.fecha_vencimiento = params[:fecha_vencimiento]
 
