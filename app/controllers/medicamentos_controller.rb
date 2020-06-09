@@ -269,7 +269,7 @@ class MedicamentosController < ApplicationController
 
     @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-    @medicamento_detalle = Medicamento.where("id = ?", params[:medicamento_id])
+    @medicamento_detalle = MedicamentoDetalle.orden_01.where("medicamento_id = ?", params[:medicamento_id]).paginate(per_page: 5, page: params[:page])
 
 
      respond_to do |f|

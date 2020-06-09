@@ -47,6 +47,64 @@
           </tbody>
               
         </table>
+
+        <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Suministros</h3>
+      </div>
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>id</th>
+              <th>Descripción</th>
+              <th>Fecha Suministro</th>
+              <th>Fecha Vencimiento</th>
+              <th>Lote</th>
+              <th>Cantidad Suministro</th>
+              <th>Observación</th>
+
+            </tr>
+            
+          </thead>
+
+
+       
+          <tbody id="medicamento-detalle-lista">
+
+            <% if @medicamento_detalle.present? %>
+
+              <% @medicamento_detalle.each do |med| %>
+                
+                <tr>
+
+                  <td><%= med.id %></td>
+                  <td><%= med.descripcion %></td>
+                  <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
+                  <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+                  <td><%= med.numero_lote %></td>
+                  <td><%= med.cantidad_suministro %></td>
+                  <td><%= med.observacion %></td>
+
+                </tr>
+
+              <%end%>
+
+            <% else %>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate medicamento_detalle, :params => params %></div></td>
+            </tr>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
         
       </div>
       
