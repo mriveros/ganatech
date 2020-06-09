@@ -106,9 +106,6 @@ get "crontab_ultron/index"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
 
-
-
-
   #CELOS
   get "celos/index" 
   post "celos/lista"
@@ -156,6 +153,17 @@ get "crontab_ultron/index"
   post "estados_ganados/actualizar"
   get "estados_ganados/eliminar"
   get "estados_ganados/buscar_estado_ganado"
+
+  #ESPERMAS
+  get "espermas/index"
+  post "espermas/lista"
+  get "espermas/lista"
+  get "espermas/agregar"
+  post "espermas/guardar"
+  get "espermas/editar"
+  post "espermas/actualizar"
+  get "espermas/eliminar"
+  get "espermas/esperma_detalle"
 
 
 
