@@ -1,0 +1,19 @@
+<% if @eliminado_ok %>
+
+ 
+setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
+    $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
+    swal("Sumnistro Eliminado exitosamente!");
+    $("#form_buscar_medicamento_id").val('<%=params[:medicamento_id] %>');
+    $("#form-buscar-medicamento").submit();
+
+    }, 1000);
+ 
+<% else %>
+
+  swal('Error al eliminar el suministro. Intente más tarde');
+
+<% end %>
