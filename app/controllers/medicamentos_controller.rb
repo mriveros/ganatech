@@ -33,6 +33,13 @@ class MedicamentosController < ApplicationController
 
     end
 
+    if params[:form_buscar_medicamento_costo].present?
+
+      cond << "costo  = ?"
+      args << params[:form_buscar_medicamento_costo]
+
+    end
+
     if params[:form_buscar_medicamento_cantidad_stock].present?
 
       cond << "cantidad_stock  = ?"
@@ -137,6 +144,7 @@ class MedicamentosController < ApplicationController
     @medicamento = Medicamento.new
     @medicamento.descripcion = params[:descripcion].upcase
     @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
+    @medicamento.costo = params[:costo]
     @medicamento.cantidad_stock = params[:cantidad_stock]
     @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
     @medicamento.ciclo = params[:ciclo]
@@ -233,6 +241,7 @@ class MedicamentosController < ApplicationController
 
       @medicamento.descripcion = params[:medicamento][:descripcion].upcase
       @medicamento.nombre_medicamento = params[:medicamento][:nombre_medicamento].upcase
+      @medicamento.costo = params[:medicamento][:costo]
       @medicamento.cantidad_stock = params[:medicamento][:cantidad_stock]
       @medicamento.cantidad_aplicacion = params[:medicamento][:cantidad_aplicacion]
       @medicamento.ciclo = params[:medicamento][:ciclo]
