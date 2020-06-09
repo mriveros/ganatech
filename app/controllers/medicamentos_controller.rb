@@ -308,7 +308,7 @@ class MedicamentosController < ApplicationController
 
         @medicamento_detalle = MedicamentoDetalle.new
         @medicamento_detalle.medicamento_id = params[:medicamento_id]
-        @medicamento_detalle.descripcion = params[:descripcion]
+        @medicamento_detalle.descripcion = params[:descripcion].upcase
         @medicamento_detalle.fecha_suministro = params[:fecha_suministro]
         @medicamento_detalle.numero_lote = params[:numero_lote]
         @medicamento_detalle.cantidad_suministro = params[:cantidad_suministro]
@@ -321,7 +321,6 @@ class MedicamentosController < ApplicationController
           auditoria_nueva("agregar medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
 
           @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro
-          @medicamento.fecha_vencimiento = @medicamento_detalle.fecha_vencimiento
           if @medicamento.save
 
             @guardado_ok = true
@@ -345,8 +344,41 @@ class MedicamentosController < ApplicationController
 
   def eliminar_medicamento_detalle
 
+    @eliminado_ok = false
+    @valido = true
 
-     respond_to do |f|
+    Medicamento.transaction do
+
+      @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first 
+      auditoria_id = auditoria_antes("eliminar suministro medicamento detalle", "medicamentos", @medicamento)
+
+      @medicamento_detalle = MedicamentoDetalle.where("id = ?", params[:medicamento_detalle_id]).first 
+      auditoria_id = auditoria_antes("eliminar suministro medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
+
+
+      if @valido
+
+        @medicamento_detalle_elim = @medicamento_detalle
+
+        if @medicamento_detalle.destroy
+
+          auditoria_nueva("eliminar medicamento detalle", "medicamentos_detalles", @medicamento_detalle_elim )
+
+          @medicamento.cantidad_stock = @medicamento.cantidad_stock - @medicamento_detalle.cantidad_suministro
+          
+          if @medicamento.save
+
+            @eliminado_ok = true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
 
       f.js
 
