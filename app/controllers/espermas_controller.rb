@@ -41,10 +41,10 @@ before_filter :require_usuario
     end
 
 
-    if params[:form_buscar_esperma_procedencia_id].present?
+    if params[:form_buscar_esperma_esperma_procedencia_id].present?
 
       cond << "esperma_procedencia_id = ?"
-      args << params[:form_buscar_esperma_procedencia_id]
+      args << params[:form_buscar_esperma_esperma_procedencia_id]
 
     end
 
@@ -76,10 +76,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_estado_id].present?
+    if params[:form_buscar_esperma_esperma_estado_id].present?
 
       cond << "estado_esperma_id = ?"
-      args << params[:form_buscar_esperma_estado_id]
+      args << params[:form_buscar_esperma_esperma_estado_id]
 
     end
 
