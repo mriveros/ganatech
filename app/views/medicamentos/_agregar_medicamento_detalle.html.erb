@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @medicamento, remote: true, url: medicamentos_guardar_medicamento_detalle_url, html: { id: "form-agregar-medicamento-detalle" } do |f| %>
+    <%= form_for @medicamento, remote: true, url: medicamentos_guardar_medicamento_detalle_url, html: { id: "form-agregar-medicamento-detalle" }, method: 'POST' do |f|%>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -25,7 +25,7 @@
           
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_suministro, nil, class: 'form-control input-sm' %>
+          <div class="col-sm-7"><%= date_field_tag :fecha_suministro, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm' %>
           </div>    
           <div class="col-sm-1"></div><br/><br />
 
@@ -35,12 +35,12 @@
           <div class="col-sm-1"></div><br/><br />
 
 
-          <div class="col-sm-4"><%= label_tag :nil, "Cantidad Suministro".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Cantidad Suministro #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
           <div class="col-sm-1"></div><br/><br />
 
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
           </div>
           <div class="col-sm-1"></div><br/><br />
@@ -98,19 +98,27 @@
       msg = ""
 
 
-      if($("#persona_apellido").val().length == 0){
+      if($("#descripcion").val().length == 0){
 
-        msg +="Apellido de persona no puede estar vacío.\n"
+        msg +="Es necesario ingresar una descripción.\n"
         valido = false
       
       }
 
-      if($("#parentezco_id").val().length == 0){
+      if($("#fecha_suministro").val().length == 0){
 
-        msg +="La relación de parentezco debe ser seleccionada.\n"
+        msg +="Es necesario ingresar una fecha del suministro.\n"
         valido = false
       
       }
+
+      if($("#cantidad_suministro").val().length == 0){
+
+        msg +="Es necesario ingresar una cantidad.\n"
+        valido = false
+      
+      }
+
 
       if (valido){
 

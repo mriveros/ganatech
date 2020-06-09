@@ -294,8 +294,16 @@ class MedicamentosController < ApplicationController
 
    def guardar_medicamento_detalle
 
+    @guardado_ok = false
+    @valido = false
 
-     respond_to do |f|
+    if @valido
+
+      
+
+    end
+
+    respond_to do |f|
 
       f.js
 
