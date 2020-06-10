@@ -7,7 +7,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Celo</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Muestra(Esperma)</h4>
       
     </div>
 
@@ -20,45 +20,56 @@
 
         <div class="panel-body">
 
+          <div class="col-sm-4"><%= label_tag nil, "Procedencia #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :esperma_procedencia, :id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br/><br/>
+          <div id="esperma_local" hidden="true">
 
-          <%= hidden_field_tag :ganado_id %>
-          <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm' %></div>
-          <div class="col-sm-1"></div><br /><br />
+            <%= hidden_field_tag :ganado_id %>
+            <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm' %></div>
+            <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />  
-          
+            <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />  
+            
 
-          <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-
-          <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-
-          <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
+            <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
 
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_inicio, nil, class: 'form-control input-sm' %>
-          </div>    
-          <div class="col-sm-1"></div><br /><br />  
+            <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+            <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin Aprox. #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_fin, nil, class: 'form-control input-sm' %>
-          </div>    
-          <div class="col-sm-1"></div><br /><br />  
+            <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+           <div class="col-sm-1"></div><br /><br />
+
+          </div>
+
+          <div class="col-sm-4"><%= label_tag :nil, "Número Muestra#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :numero_pajuela, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br/><br/>
 
           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :descripcion, nil, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br /><br />  
+
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Registro #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_registro, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br /> 
+
+          <div class="col-sm-4"><%= label_tag :nil, "Costo".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :costo, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br/><br/>
+
+          <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :cantidad, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br/><br/>
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
@@ -243,6 +254,20 @@
       return false;
     
     })
+
+  $("#esperma_procedencia_id").bind('change', function(){ 
+
+    if ($(this).val() == <%=PARAMETRO[:esperma_local]%>){
+
+      $("#esperma_local").show();
+     
+    } else{
+
+      $("#esperma_local").hide();
+
+    } 
+
+  })
 
 
 </script>
