@@ -164,6 +164,7 @@ get "crontab_ultron/index"
   post "espermas/actualizar"
   get "espermas/eliminar"
   get "espermas/esperma_detalle"
+  get "espermas/buscar_ganado"
 
 
 

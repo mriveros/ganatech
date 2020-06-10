@@ -59,7 +59,7 @@
           </div>
 
           <div class="col-sm-4"><%= label_tag :nil, "Número Muestra#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :numero_pajuela, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-7"><%= text_field_tag :numero_pajuela, @nuevo_numero_pajuela ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', readonly: true%></div>
           <div class="col-sm-1"></div><br/><br/>
 
           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
@@ -141,7 +141,7 @@
     $("#rp").val('');
     $("#codigo_rfid").val('');
 
-    $.getJSON("<%= url_for(ganados_buscar_ganado_path) %>", { ganado: $(this).val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_hembra]%>}, function(j){
+    $.getJSON("<%= url_for(espermas_buscar_ganado_path) %>", { ganado: $(this).val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_macho]%>}, function(j){
         
       var ganado = "";
       var options = "<option value=''> -- Seleccione un Ganado -- </option>"
@@ -196,46 +196,80 @@
       valido = true
       msg = ""
 
-      if($("#ganado_id").val().length == 0){
+      if ($("#esperma_procedencia_id").val() == <%=PARAMETRO[:esperma_local]%>)
+      {
 
+      if($("#ganado_id").val().length == 0){
+      
         msg +="Es necesario seleccionar un ganado.\n"
         valido = false
       
       }
+      
+    }  
+    if ($("#esperma_procedencia_id").val() == <%=PARAMETRO[:esperma_comprada]%>)
+    {
 
-       if($("#fecha_inicio").val().length == 0){
-
-        msg +="Ingrese una fecha de inicio del celo.\n"
+      if($("#raza_id").val().length == 0){
+      
+        msg +="Es necesario seleccionar una raza.\n"
         valido = false
       
       }
 
-      if($("#fecha_fin").val().length == 0){
+    } 
 
-        msg +="Debe ingresar una fecha aproximada de fin de celo.\n"
-        valido = false
+    if($("#esperma_procedencia_id").val().length == 0){
+
+      msg +="Es necesario seleccionar la Procedencia de la muestra.\n"
+      valido = false
       
-      }
+    }
 
-      if($("#descripcion").val().length == 0){
+    if($("#numero_pajuela").val().length == 0){
 
-        msg +="Es necesario ingresar una descripción.\n"
-        valido = false
+      msg +="Es necesario ingresar el número de la muestra.\n"
+      valido = false
       
-      }
+    }
 
-       if ($("#fecha_inicio").val() >= $("#fecha_fin").val()) {
+    if($("#descripcion").val().length == 0){
 
-        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
-        valido = false
+      msg +="Es necesario ingresar una descripción.\n"
+      valido = false
+      
+    }
 
-      }
+    if($("#fecha_registro").val().length == 0){
+
+      msg +="Es necesario ingresar una fecha.\n"
+      valido = false
+      
+    }
+
+     if($("#fecha_registro").val().length == 0){
+
+      msg +="Es necesario ingresar una fecha.\n"
+      valido = false
+      
+    }
+
+     if($("#cantidad").val().length == 0){
+
+      msg +="Es necesario ingresar la cantidad de muestras.\n"
+      valido = false
+      
+    }
+
+     
+
+    
 
       if (valido){
 
         swal({
-          title: "Confirmar Celo",
-          text: "Al confirmar el Celo el estado del Ganado cambiará a En Celo y podrá ver los datos en el módulo de Celos.",
+          title: "Confirmar Muestra",
+          text: "Al confirmar la muestra se guardará y estará disponible para el módulo de Reproducción.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -247,7 +281,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-celo").submit();
+            $("#form-agregar-esperma").submit();
             
           } 
 
