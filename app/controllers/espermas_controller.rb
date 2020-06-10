@@ -21,7 +21,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_esperma_descripcion].present?
 
-      cond << "descripcion = ?"
+      cond << "descripcion ilike ?"
       args << "%#{params[:form_buscar_esperma_descripcion]}%"
 
     end
@@ -33,18 +33,18 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_raza_id].present?
+    if params[:form_buscar_esperma][:raza_id].present?
 
       cond << "raza_id = ?"
-      args << params[:form_buscar_esperma_raza_id]
+      args << params[:form_buscar_esperma][:raza_id]
 
     end
 
 
-    if params[:form_buscar_esperma_esperma_procedencia_id].present?
+    if params[:form_buscar_esperma][:esperma_procedencia_id].present?
 
       cond << "esperma_procedencia_id = ?"
-      args << params[:form_buscar_esperma_esperma_procedencia_id]
+      args << params[:form_buscar_esperma][:esperma_procedencia_id]
 
     end
 
@@ -55,10 +55,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_costo_esperma].present?
+    if params[:form_buscar_esperma_costo].present?
 
       cond << "costo_esperma = ?"
-      args << params[:form_buscar_esperma_costo_esperma]
+      args << params[:form_buscar_esperma_costo]
 
     end
 
@@ -69,17 +69,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_observacion].present?
-
-      cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_esperma_observacion]}%"
-
-    end
-
-    if params[:form_buscar_esperma_esperma_estado_id].present?
+    if params[:form_buscar_esperma][:estado_esperma_id].present?
 
       cond << "estado_esperma_id = ?"
-      args << params[:form_buscar_esperma_esperma_estado_id]
+      args << params[:form_buscar_esperma][:estado_esperma_id]
 
     end
 
@@ -109,7 +102,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @celo = Esperma.new
+    @esperma = Esperma.new
 
     respond_to do |f|
       
@@ -203,14 +196,23 @@ before_filter :require_usuario
 
  def eliminar
 
-    valido = true
+    @valido = true
     @msg = ""
 
     Esperma.transaction do
 
       @esperma = Esperma.find(params[:id])
-
       @esperma_elim = @esperma
+      reproduccion = Reproduccion.where("esperma_id = ?",@esperma.id)
+      
+      if reproduccion.present?
+
+        @valido = false
+        @msg = "La muestra ya ha sido utilizada en una reproducción"
+
+      end
+
+      
 
       if valido
 
@@ -229,7 +231,6 @@ before_filter :require_usuario
       if exc.present?        
       
         @excep = exc.message.split(':')    
-        @msg = "El celo contiene datos relacionados."
         @eliminado = false
       
       end

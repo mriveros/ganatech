@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Observación</h3>
+        <h3 style="float:left;margin-top:5px;">Detalles</h3>
       </div>
 
     </div>
@@ -17,38 +17,78 @@
       <div class="table-responsive" id="table-celo-detalle">
           
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
-            
-          <thead>
-              
-            <tr role="row">
-              
-              <th>Observación</th>
-              
-            </tr>
-            
-          </thead>
-       
-          <tbody id="celo-detalle-lista">
+          <%if @esperma_detalle.esperma_procedencia_id == PARAMETRO[:esperma_local]%>
 
-            <% if @celo_detalle.present? %>
-            
-              <% @celo_detalle.each do |cd|%>
+            <thead>
+                
+              <tr role="row">
+                
+                <th>Procedencia</th>
+                <th>Ganado</th>
+                <th>RP</th>
+                <th>Observación</th>
+                
+                
+              </tr>
+              
+            </thead>
+         
+            <tbody id="celo-detalle-lista">
 
-                <tr>
-                  <td><%= cd.observacion %></td>
-                </tr>
+              <% if @esperma_detalle.present? %>
+            
+                  <tr>
+                    <td><%= @esperma_detalle.esperma_procedencia %></td>
+                    <td><%= @esperma_detalle.ganado_nombre.upcase %></td>
+                    <td><%= @esperma_detalle.ganado_rp %></td>
+                     <td><%= @esperma_detalle.observacion %></td>
+                  </tr>
+
+              <% else %>
+
+                <tr><td colspan=3>No se han encontrado datos.</td></tr>
 
               <% end %>
+                  
+            </tbody>
 
-            <% else %>
+          <%else%>
 
-              <tr><td colspan=3>No se han encontrado datos.</td></tr>
-
-            <% end %>
+            <thead>
                 
-          </tbody>
+              <tr role="row">
+                
+                <th>Procedencia</th>
+                <th>Fecha</th>
+                <th>Observación</th>
+                
+                
+              </tr>
+              
+            </thead>
+         
+            <tbody id="celo-detalle-lista">
+
+              <% if @esperma_detalle.present? %>
+            
+                  <tr>
+                    <td><%= @esperma_detalle.esperma_procedencia %></td>
+                    <td><%= @esperma_detalle.fecha_registro.strftime('%d/%m/%Y') %></td>
+                    <td><%= @esperma_detalle.observacion %></td>
+                  </tr>
+
+              <% else %>
+
+                <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+              <% end %>
+                  
+            </tbody>
+
+          <% end %>
               
         </table>
+
         
       </div>
       

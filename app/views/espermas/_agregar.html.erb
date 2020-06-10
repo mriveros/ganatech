@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @celo, remote: true, url: celos_guardar_url, html: { id: "form-agregar-celo" }, method: 'POST' do |f| %>
+    <%= form_for @esperma, remote: true, url: espermas_guardar_url, html: { id: "form-agregar-esperma" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -73,7 +73,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-celo" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-esperma" %>
           
       </div>
  
@@ -85,12 +85,12 @@
 
 <style type="text/css">
 
-   #form-agregar-celo label, #form-agregar-celo input[type='text'], #form-agregar-celo select { float:left; margin-top:5px;}
-  #form-agregar-celo br {clear:both; }
-  #form-agregar-celo label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-celo #descripcion { width:100%;}
-  #form-agregar-celo #fecha_inicio { width:80%;}
-  #form-agregar-celo #fecha_fin { width:80%;}
+   #form-agregar-esperma label, #form-agregar-esperma input[type='text'], #form-agregar-esperma select { float:left; margin-top:5px;}
+  #form-agregar-esperma br {clear:both; }
+  #form-agregar-esperma label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-esperma #descripcion { width:100%;}
+  #form-agregar-esperma #fecha_inicio { width:80%;}
+  #form-agregar-esperma #fecha_fin { width:80%;}
   .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
@@ -172,7 +172,7 @@
 
 
 
-  $("#btn-guardar-celo  ").bind('click', function () {
+  $("#btn-guardar-esperma").bind('click', function () {
 
       valido = true
       msg = ""
