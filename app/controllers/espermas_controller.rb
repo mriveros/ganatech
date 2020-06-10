@@ -178,7 +178,7 @@ class EspermasController < ApplicationController
 
   def editar
     
-    @celo = Esperma.find(params[:esperma_id])
+    @esperma = Esperma.find(params[:esperma_id])
 
     respond_to do |f|
       
@@ -198,7 +198,16 @@ class EspermasController < ApplicationController
     auditoria_id = auditoria_antes("actualizar esperma", "espermas", @esperma)
 
     if @valido
-     
+      
+      @esperma.estado_esperma_id = params[:esperma][:estado_esperma_id]
+      @esperma.observacion = params[:esperma][:observacion]
+      
+      if @esperma.save
+
+        auditoria_despues(@esperma, auditoria_id)        
+        @guardado_ok = true
+
+      end
 
     end
   
