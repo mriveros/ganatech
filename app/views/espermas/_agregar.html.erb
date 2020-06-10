@@ -14,7 +14,7 @@
     <%= form_for @esperma, remote: true, url: espermas_guardar_url, html: { id: "form-agregar-esperma" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-
+ 
       
       <div class="modal-body">
 
@@ -47,6 +47,14 @@
             <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
             <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
            <div class="col-sm-1"></div><br /><br />
+          
+          </div>
+
+          <div id="esperma_comprada" hidden="true">
+
+            <div class="col-sm-4"><%= label_tag nil, "Raza #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= collection_select :raza, :id, Raza.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+            <div class="col-sm-1"></div><br/><br/>
 
           </div>
 
@@ -260,10 +268,12 @@
     if ($(this).val() == <%=PARAMETRO[:esperma_local]%>){
 
       $("#esperma_local").show();
+      $("#esperma_comprada").hide();
      
     } else{
 
       $("#esperma_local").hide();
+      $("#esperma_comprada").show();
 
     } 
 

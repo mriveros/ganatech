@@ -1,6 +1,6 @@
 class EspermasController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
   
