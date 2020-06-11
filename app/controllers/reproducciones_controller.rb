@@ -162,7 +162,7 @@ before_filter :require_usuario
       @reproduccion.fecha_reproduccion = params[:fecha_reproduccion]
       @reproduccion.fecha_concepcion = params[:fecha_concepcion]
       @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_proceso_fecundacion]
-      @reproduccion.descripcion = params[:descripcion]
+      @reproduccion.descripcion = params[:descripcion].upcase
       @reproduccion.observacion = params[:observacion]
 
       if @reproduccion.save

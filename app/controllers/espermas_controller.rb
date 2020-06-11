@@ -140,7 +140,7 @@ class EspermasController < ApplicationController
       end
 
       @esperma.numero_pajuela = params[:numero_pajuela]
-      @esperma.descripcion = params[:descripcion]
+      @esperma.descripcion = params[:descripcion].upcase
       @esperma.observacion = params[:observacion]
       @esperma.estado_esperma_id = PARAMETRO[:estado_esperma_activo]
       @esperma.esperma_procedencia_id = params[:esperma_procedencia][:id]

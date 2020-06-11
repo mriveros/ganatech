@@ -141,7 +141,7 @@ before_filter :require_usuario
         
         @celo = Celo.new()
         @celo.ganado_id = params[:ganado_id]
-        @celo.descripcion = params[:descripcion]
+        @celo.descripcion = params[:descripcion].upcase
         @celo.observacion = params[:observacion]
         @celo.fecha_inicio = params[:fecha_inicio]
         @celo.fecha_fin = params[:fecha_fin]
@@ -208,7 +208,7 @@ before_filter :require_usuario
      
       @celo.fecha_inicio = params[:celo][:fecha_inicio]
       @celo.fecha_fin = params[:celo][:fecha_fin]
-      @celo.descripcion = params[:celo][:descripcion]
+      @celo.descripcion = params[:celo][:descripcion].upcase
       @celo.observacion = params[:celo][:observacion]
 
         if @celo.save
