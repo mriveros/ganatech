@@ -83,7 +83,7 @@
 
                   <td><%= med.id %></td>
                   <td><%= med.descripcion %></td>
-                  <td><%= med.costo_suministro %></td>
+                  <td><%= med.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
                   <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
                   <td><%= med.numero_lote %></td>
