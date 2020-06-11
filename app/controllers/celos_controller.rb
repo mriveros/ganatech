@@ -453,7 +453,7 @@ before_filter :require_usuario
 
    def buscar_esperma_reproductor
 
-    @espermas = VEsperma.where("descripcion ilike ? and cantidad > 0", "%#{params[:ganado]}%")
+    @espermas = VEsperma.where("descripcion ilike ? and cantidad > 0 and estado_esperma_id = ?", "%#{params[:ganado]}%", PARAMETRO[:estado_esperma_activo])
 
     respond_to do |f|
       
