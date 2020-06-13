@@ -74,6 +74,13 @@ development:
   esperma_local: 1
   esperma_comprada: 2
  
+  #ESTADOS ESPERMAS
+  estado_esperma_activo: 1
+  estado_esperma_inactivo: 2
+
+  #TIPO GANADO
+  tipo_ganado_vacuno: 1
+ 
   
 
 production:
@@ -151,5 +158,8 @@ production:
   #ESPERMAS PROCEDENCIAS
   esperma_local: 1
   esperma_comprada: 2
+
+  #TIPO GANADO
+  tipo_ganado_vacuno: 1
   
   

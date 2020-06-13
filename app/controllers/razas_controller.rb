@@ -71,7 +71,8 @@ before_filter :require_usuario
     @raza = Raza.new()
 
     @raza.descripcion = params[:raza][:descripcion].upcase
-    
+    @raza.tipo_ganado_id = PARAMETRO[:tipo_ganado_vacuno]
+
     if @raza.save
 
       auditoria_nueva("registrar raza", "razas", @raza) 

@@ -1,4 +1,4 @@
-class CelosController < ApplicationController
+class SanidadesController < ApplicationController
 
 before_filter :require_usuario
 

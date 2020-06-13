@@ -5,58 +5,20 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Celo</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Muestra</h4>
       
     </div>
 
-    <%= form_for @celo, remote: true, url:celos_actualizar_url, html: { id: "form-editar-celo" }, method: 'POST' do |f| %>
+    <%= form_for @esperma, remote: true, url:espermas_actualizar_url, html: { id: "form-editar-esperma" }, method: 'POST' do |f| %>
 
-      <%= hidden_field_tag :id, @celo.id %>
+      <%= hidden_field_tag :id, @esperma.id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="panel-body">
 
-          <%= f.hidden_field :ganado_id%>
-          <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm', readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-          <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />  
-          
-
-          <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-
-          <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-
-          <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
-          <div class="col-sm-1"></div><br /><br />
-
-
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.date_field :fecha_inicio, class: 'form-control input-sm' %>
-          </div>    
-          <div class="col-sm-1"></div><br /><br />  
-          
-
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin Aprox. #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.date_field :fecha_fin, class: 'form-control input-sm' %>
-          </div>    
-          <div class="col-sm-1"></div><br /><br />  
-
-
-          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion,  class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br /><br />  
-
+          <div class="col-sm-4"><%= label_tag nil, "Estado Muestra #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :estado_esperma_id, EstadoEsperma.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br/><br/>
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
@@ -69,7 +31,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-       <%= link_to "Actualizar","#" ,class: "btn btn-primary", id: "btn-actualizar-celo" %>
+       <%= link_to "Actualizar","#" ,class: "btn btn-primary", id: "btn-actualizar-esperma" %>
           
       </div>
 
@@ -80,9 +42,9 @@
 
 <style type="text/css">
 
-  #form-editar-celo label, #form-editar-celo input[type='text'], #form-editar-celo select { float:left; margin-top:5px;}
-  #form-editar-celo br {clear:both; }
-  #form-editar-celo label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-esperma label, #form-editar-esperma input[type='text'], #form-editar-esperma select { float:left; margin-top:5px;}
+  #form-editar-esperma br {clear:both; }
+  #form-editar-esperma label { width:200px;font-size:12px;margin-top:10px;}
  
 
 </style>
@@ -91,7 +53,7 @@
 
   setTimeout(function(){ 
     
-    $("#fecha_inicio").focus();
+    $("#esperma_estado_esperma_id").focus();
     cargar_ganado();
 
   }, 1000);
@@ -99,79 +61,24 @@
   
   aplicar_datepicker2();
 
-  function cargar_ganado(){   
-
-    $("#ganado").val('');
-    $("#ganado_id").val('');
-    $("#nombre_ganado").val('');
-    $("#hacienda").val('');
-    $("#rp").val('');
-    $("#codigo_rfid").val('');
-
-    $.getJSON("<%= url_for(ganados_buscar_ganado_path) %>", { ganado_id: $("#celo_ganado_id").val(), sexo_ganado_id: <%=PARAMETRO[:sexo_ganado_hembra]%>}, function(j){
-        
-      var ganado = "";
-      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
-      var i = 0;
-      
-      ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
-
-        $("#ganado").val(ganado);
-        $("#ganado_id").val(j[i].ganado_id);
-        $("#nombre_ganado").val(j[i].nombre);
-        $("#rp").val(j[i].rp);
-        $("#codigo_rfid").val(j[i].codigo_rfid);
-        $("#hacienda").val(j[i].hacienda);
-
-    })
-
-  }
-
-  $("#btn-actualizar-celo").bind('click', function () {
+  
+  $("#btn-actualizar-esperma").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#celo_ganado_id").val().length == 0){
+      if($("#esperma_estado_esperma_id").val().length == 0){
 
-        msg +="Es necesario seleccionar un ganado.\n"
+        msg +="Es necesario seleccionar un Estado de la Muestra.\n"
         valido = false
       
-      }
-
-       if($("#celo_fecha_inicio").val().length == 0){
-
-        msg +="Ingrese una fecha de inicio del celo.\n"
-        valido = false
-      
-      }
-
-      if($("#celo_fecha_fin").val().length == 0){
-
-        msg +="Debe ingresar una fecha aproximada de fin de celo.\n"
-        valido = false
-      
-      }
-
-      if($("#celo_descripcion").val().length == 0){
-
-        msg +="Es necesario ingresar una descripción.\n"
-        valido = false
-      
-      }
-
-       if ($("#celo_fecha_inicio").val() >= $("#celo_fecha_fin").val()) {
-
-        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
-        valido = false
-
       }
 
       if (valido){
 
         swal({
-          title: "Confirmar Celo",
-          text: "Al confirmar el Celo el estado del Ganado estará a En Celo y podrá ver los datos modificados en el módulo de Celos.",
+          title: "Confirmar Muestra",
+          text: "Al confirmar la modificación del estado la muestra, ésta estará disponible o no.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -183,7 +90,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-editar-celo").submit();
+            $("#form-editar-esperma").submit();
             
           } 
 

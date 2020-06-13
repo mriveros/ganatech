@@ -1,6 +1,6 @@
 class EspermasController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
   
@@ -21,7 +21,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_esperma_descripcion].present?
 
-      cond << "descripcion = ?"
+      cond << "descripcion ilike ?"
       args << "%#{params[:form_buscar_esperma_descripcion]}%"
 
     end
@@ -33,18 +33,18 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_raza_id].present?
+    if params[:form_buscar_esperma][:raza_id].present?
 
       cond << "raza_id = ?"
-      args << params[:form_buscar_esperma_raza_id]
+      args << params[:form_buscar_esperma][:raza_id]
 
     end
 
 
-    if params[:form_buscar_esperma_esperma_procedencia_id].present?
+    if params[:form_buscar_esperma][:esperma_procedencia_id].present?
 
       cond << "esperma_procedencia_id = ?"
-      args << params[:form_buscar_esperma_esperma_procedencia_id]
+      args << params[:form_buscar_esperma][:esperma_procedencia_id]
 
     end
 
@@ -55,10 +55,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_costo_esperma].present?
+    if params[:form_buscar_esperma_costo].present?
 
       cond << "costo_esperma = ?"
-      args << params[:form_buscar_esperma_costo_esperma]
+      args << params[:form_buscar_esperma_costo]
 
     end
 
@@ -69,17 +69,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_esperma_observacion].present?
-
-      cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_esperma_observacion]}%"
-
-    end
-
-    if params[:form_buscar_esperma_esperma_estado_id].present?
+    if params[:form_buscar_esperma][:estado_esperma_id].present?
 
       cond << "estado_esperma_id = ?"
-      args << params[:form_buscar_esperma_esperma_estado_id]
+      args << params[:form_buscar_esperma][:estado_esperma_id]
 
     end
 
@@ -109,7 +102,10 @@ before_filter :require_usuario
 
   def agregar
 
-    @celo = Esperma.new
+    @esperma = Esperma.new
+
+    ultimo_codigo = Esperma.order("created_at").last
+    @nuevo_numero_pajuela = ultimo_codigo.id + 1
 
     respond_to do |f|
       
@@ -130,7 +126,28 @@ before_filter :require_usuario
     if @valido
         
       @esperma = Esperma.new()
-     
+
+      if params[:esperma_procedencia][:id].to_i == PARAMETRO[:esperma_local].to_i
+          
+        @esperma.ganado_id = params[:ganado_id]
+        ganado = Ganado.where("id = ?", params[:ganado_id]).first
+        @esperma.raza_id = ganado.raza_id
+
+      else
+
+        @esperma.raza_id = params[:raza][:id]
+      
+      end
+
+      @esperma.numero_pajuela = params[:numero_pajuela]
+      @esperma.descripcion = params[:descripcion].upcase
+      @esperma.observacion = params[:observacion]
+      @esperma.estado_esperma_id = PARAMETRO[:estado_esperma_activo]
+      @esperma.esperma_procedencia_id = params[:esperma_procedencia][:id]
+      @esperma.costo_esperma = params[:costo]
+      @esperma.cantidad = params[:cantidad]
+      @esperma.fecha_registro = params[:fecha_registro]
+      @esperma.costo_total = params[:cantidad].to_i * params[:costo].to_i
 
       if @esperma.save
 
@@ -145,6 +162,7 @@ before_filter :require_usuario
   
       if exc.present?
 
+        @guardado_ok = false
         @excep = exc.message.split(':')    
         @msg = @excep.to_s
       
@@ -160,7 +178,7 @@ before_filter :require_usuario
 
   def editar
     
-    @celo = Esperma.find(params[:esperma_id])
+    @esperma = Esperma.find(params[:esperma_id])
 
     respond_to do |f|
       
@@ -180,7 +198,16 @@ before_filter :require_usuario
     auditoria_id = auditoria_antes("actualizar esperma", "espermas", @esperma)
 
     if @valido
-     
+      
+      @esperma.estado_esperma_id = params[:esperma][:estado_esperma_id]
+      @esperma.observacion = params[:esperma][:observacion]
+      
+      if @esperma.save
+
+        auditoria_despues(@esperma, auditoria_id)        
+        @guardado_ok = true
+
+      end
 
     end
   
@@ -203,19 +230,28 @@ before_filter :require_usuario
 
  def eliminar
 
-    valido = true
+    @valido = true
     @msg = ""
+    @eliminado = false
 
     Esperma.transaction do
 
       @esperma = Esperma.find(params[:id])
-
       @esperma_elim = @esperma
+      reproduccion = Reproduccion.where("esperma_id = ?",@esperma.id).first
+      
+      if reproduccion.present?
 
-      if valido
+        @valido = false
+        @msg = "La muestra ya ha sido utilizada en una reproducción"
+
+      end
+
+      if @valido
 
         if @esperma.destroy
 
+          @eliminado = true
           auditoria_nueva("eliminar esperma", "espermas", @esperma_elim)
           
         end
@@ -229,7 +265,6 @@ before_filter :require_usuario
       if exc.present?        
       
         @excep = exc.message.split(':')    
-        @msg = "El celo contiene datos relacionados."
         @eliminado = false
       
       end
@@ -254,6 +289,21 @@ before_filter :require_usuario
 
     end
   
+  end
+
+  def buscar_ganado
+
+  
+    @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ? and estado_ganado_id = ? and etapa_ganado_id in (?)", "%#{params[:ganado]}%", params[:sexo_ganado_id], PARAMETRO[:estado_ganado_activo], [PARAMETRO[:etapa_ganado_torito], 
+      PARAMETRO[:etapa_ganado_toro]])
+    
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
+    
+    end
+
   end
 
 

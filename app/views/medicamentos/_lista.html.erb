@@ -7,15 +7,14 @@
       <td><%= med.medicamento_id %></td>
       <td><%= med.nombre_medicamento%></td>
       <td><%= med.medicamento%></td>
-      <td><%= med.costo%></td>
-      <td><%= med.cantidad_stock%></td>
+      <td><%= med.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td><%= med.cantidad_stock.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td><%= med.cantidad_aplicacion%></td>
       <td ><%= med.ciclo %></td>
       <td ><%= med.intervalo_tiempo %></td>
       <td ><%= med.estado_medicamento %></td>
       <td ><%= med.tipo_presentacion %></td>
       <td ><%= med.tipo_administracion %></td>
-           
       
       <td >
         

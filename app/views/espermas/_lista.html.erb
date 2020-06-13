@@ -7,17 +7,18 @@
       <td><%= esp.esperma_id %></td>
       <td><%= esp.descripcion%></td>
       <td><%= esp.numero_pajuela%></td>
-      <td><%= esp.raza%></td>
-      <td ><%= esp.esperma_procedencia %></td>
+      <td><%= esp.raza_ganado%></td>
       <td ><%= esp.cantidad  %></td>
-      <td ><%= esp.costo %></td>
-      <td ><%= esp.costo_total %></td>
-      <td ><%= esp.observacion %></td>
+      <td ><%= esp.costo_esperma.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= esp.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= esp.esperma_procedencia %></td>
       <td ><%= esp.estado_esperma %></td>
 
       <td >
         
         <%= link_to_esperma_detalle(esp.esperma_id) %>
+        <%= link_to_editar_esperma(esp.esperma_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{esp.esperma_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-esperma", title: 'Haga click para eliminar la muestra'  %>
 
       </td>
 
@@ -55,7 +56,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará de la lista del módulo de Muestras.",
+          text: "Al confirmar se eliminará de la lista del módulo de Muestras. En caso de que la muestra ya ha sido utilizada no se podrá eliminar",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",

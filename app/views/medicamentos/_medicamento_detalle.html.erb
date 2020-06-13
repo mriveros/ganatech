@@ -83,7 +83,7 @@
 
                   <td><%= med.id %></td>
                   <td><%= med.descripcion %></td>
-                  <td><%= med.costo_suministro %></td>
+                  <td><%= med.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
                   <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
                   <td><%= med.numero_lote %></td>
@@ -98,12 +98,12 @@
 
               <%end%>
 
-            <% else %>
-
               <tr id="tab-paginacion">
 
                 <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate medicamento_detalle, :params => params %></div></td>
             </tr>
+
+            <% else %>
 
               <tr><td colspan=3>No se han encontrado datos.</td></tr>
 

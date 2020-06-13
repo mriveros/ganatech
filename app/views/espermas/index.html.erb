@@ -4,7 +4,7 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Muestras</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar esperma".html_safe, "#", id: "link-to-agregar-esperma", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar muestra".html_safe, "#", id: "link-to-agregar-esperma", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-esperma", link_to_id: "#link-to-agregar-esperma", url: espermas_agregar_path( window_id: "modal-window-agregar-esperma"))%>
     
   </div>
@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th >
+          <th style="width:20px;">
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_esperma_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -40,26 +40,18 @@
           </th>
           
            <th >
-            <span>Número Pajuela</span>
+            <span>Número</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_esperma_numero_pajuela, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_numero_pajuela');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-          <th >
+          <th>
             <span>Raza</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_raza_id, nil, :class => 'form-control', :placeholder => "" %>
+              <%= collection_select :form_buscar_esperma, :raza_id, Raza.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_raza_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th>
-              <span>Procedencia</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_esperma, :esperma_procedencia_id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_esperma_procedencia_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
@@ -86,17 +78,17 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_costo_total');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-
-          <th >
-            <span>Observación</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_observacion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_observacion');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
           
           <th>
-              <span>Estado</span>
+              <span>Procedencia</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_esperma, :esperma_procedencia_id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_esperma_procedencia_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th>
+            <span>Estado</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_esperma, :estado_esperma_id, EstadoEsperma.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_estado_esperma_id');"><i class="fa fa-times"></i></span>
@@ -117,8 +109,6 @@
   </table>
 
 </div>
-
-
 
 
 <script type="text/javascript">
