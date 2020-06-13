@@ -1,6 +1,6 @@
-class TipoAlimentacion < ActiveRecord::Base
+class EstadoAlimentacion < ActiveRecord::Base
 
-  self.table_name="tipos_alimentaciones"
+  self.table_name="estados_alimentaciones"
   attr_accessible :id, :descripcion
 
   scope :orden_01, -> {order("id")}

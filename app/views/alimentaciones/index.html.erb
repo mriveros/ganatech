@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th style="width:15%;">
+          <th style="width:10px;">
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alimentaciones_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -80,7 +80,7 @@
             </div>
           </th>
 
-          <th>
+          <th >
               <span>Estado Alimentacion</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alimentaciones,:estado_alimentacion_id, EstadoMedicamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
@@ -89,18 +89,10 @@
           </th>
 
            <th >
-              <span>Tipo Presentación</span>
+              <span>Tipo Alimento</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alimentaciones,:tipo_presentacion_id, TipoPresentacion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_tipo_presentacion_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th>
-            <span>Tipo Administración</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_alimentaciones,:tipo_administracion_id, TipoAdministracion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-medicamento', '#form_buscar_alimentaciones_tipo_administracion_id);"><i class="fa fa-times"></i></span>
             </div>
           </th>
 

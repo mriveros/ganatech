@@ -10,7 +10,7 @@
 
     </div>
 
-    <%= form_for @alimentacion, remote: true, url: alimentaciones_guardar_url, html: { id: "form-agregar-alimentacion" }, method: 'POST' do |f| %>
+    <%= form_for @alimento, remote: true, url: alimentaciones_guardar_url, html: { id: "form-agregar-alimentacion" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -47,16 +47,12 @@
           </div>
           <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag nil, "Tipo Presentación#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :tipo_presentacion, :id, TipoPresentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Tipo Alimentacion#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :tipo_alimentacion, :id, TipoAlimentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag nil, "Tipo Administración#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :tipo_administracion, :id, TipoAdministracion.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-          <div class="col-sm-1"></div><br/>
-
-          <div class="col-sm-4"><%= label_tag nil, "Estado Alimento #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :estado_alimento, :id, EstadoAlimento.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Estado Alimentacion #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :estado_alimento, :id, EstadoAlimentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
@@ -85,7 +81,7 @@
   #form-agregar-alimentacion label, #form-agregar-alimentacion input[type='text'], #form-agregar-alimentacion select { float:left; margin-top:5px;}
   #form-agregar-alimentacion br {clear:both; }
   #form-agregar-alimentacion label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-alimentacion #descripcion { width:50%;}
+  
 
 
 </style>

@@ -95,17 +95,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @alimentaciones =  Alimentacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Alimentacion.where(cond).count
+      @alimentaciones =  VAlimentacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAlimentacion.where(cond).count
 
     else
 
-      @alimentaciones = Alimentacion.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Alimentacion.count
+      @alimentaciones = VAlimentacion.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAlimentacion.count
 
     end
 
-    @total_registros = Alimentacion.count
+    @total_registros = VAlimentacion.count
 
     respond_to do |f|
 
@@ -130,19 +130,18 @@ before_filter :require_usuario
     valido = true
     @msg = ""
     @alimento_ok = false
-
+    if valido
     @alimento = Alimentacion.new()
 
-    @alimento.descripcion = params[:alimentacion][:descripcion].upcase
+    @alimento.descripcion = params[:descripcion].upcase
     @alimento.nombre_alimento = params[:nombre_alimento].upcase
     @alimento.cantidad_stock = params[:cantidad_stock]
     @alimento.cantidad_aplicacion = params[:cantidad_aplicacion]
     @alimento.ciclo = params[:ciclo]
     @alimento.intervalo_tiempo = params[:intervalo_tiempo]
     @alimento.observacion = params[:observacion]
-    @alimento.estado_alimento_id = params[:estado_alimento][:id]
-    @alimento.tipo_presentacion_id = params[:tipo_presentacion][:id]
-    @alimento.tipo_administracion_id = params[:tipo_administracion][:id]
+    @alimento.estado_alimentacion_id = params[:estado_alimentacion][:id]
+    @alimento.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
     @alimento.fecha_vencimiento = params[:fecha_vencimiento]
 
     if @alimento.save
@@ -151,13 +150,14 @@ before_filter :require_usuario
       @alimento_ok = true
 
     end
+  end
 
     rescue Exception => exc
       # dispone el mensaje de error
       #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?
         @excep = exc.message.split(':')
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
+        @msg =@excep
 
       end
 
@@ -240,9 +240,8 @@ before_filter :require_usuario
       @alimento.ciclo = params[:alimento][:ciclo]
       @alimento.intervalo_tiempo = params[:alimento][:intervalo_tiempo]
       @alimento.observacion = params[:alimento][:observacion]
-      @alimento.estado_medicamento_id = params[:alimento][:estado_medicamento_id]
-      @alimento.tipo_presentacion_id = params[:alimento][:tipo_presentacion_id]
-      @alimento.tipo_administracion_id = params[:alimento][:tipo_administracion_id]
+      @alimento.estado_alimentacion_id = params[:alimento][:estado_alimentacion_id]
+      @alimento.tipo_alimentacion_id = params[:alimento][:tipo_alimentacion_id]
       @alimento.fecha_vencimiento = params[:alimento][:fecha_vencimiento]
 
       if @alimento.save

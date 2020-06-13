@@ -4,19 +4,18 @@
 
     <tr>
 
-      <td><%= alimentacion.alimento_id %></td>
+      <td><%= alimentacion.alimentacion_id %></td>
       <td><%= alimentacion.nombre_alimento%></td>
-      <td><%= alimentacion.alimento%></td>
+      <td><%= alimentacion.descripcion_alimento%></td>
       <td><%= alimentacion.cantidad_stock%></td>
       <td><%= alimentacion.cantidad_aplicacion%></td>
       <td ><%= alimentacion.ciclo %></td>
       <td ><%= alimentacion.intervalo_tiempo %></td>
-      <td ><%= alimentacion.estado_medicamento %></td>
-      <td ><%= alimentacion.tipo_presentacion %></td>
-      <td ><%= alimentacion.tipo_administracion %></td>
+      <td ><%= alimentacion.estado_alimento %></td>
+      <td ><%= alimentacion.tipo_alimento %></td>
       <td ><%= alimentacion.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
 
-    </td>
+
 
       <td style="width:120px;">
 
@@ -26,12 +25,9 @@
 
        </td>
 
+     </tr>
 
 
-
-      </td>
-
-    </tr>
 
   <% end %>
 

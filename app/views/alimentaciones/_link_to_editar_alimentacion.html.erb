@@ -1,3 +1,3 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-alimentacion-#{alimentacion.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el alimentacion.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-alimentacion-#{alimentacion_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el alimentacion.', onclick: "$('.modal').html('');return false;" %>
 
-<%= modal_window( window_id: "modal-window-editar-alimentacion", link_to_id: "#link-to-editar-alimentacion-#{alimentacion.id}", url: alimentaciones_editar_path( window_id: "modal-window-editar-alimentacion", id: alimentacion.id) )%>
+<%= modal_window( window_id: "modal-window-editar-alimentacion", link_to_id: "#link-to-editar-alimentacion-#{alimentacion_id}", url: alimentaciones_editar_path( window_id: "modal-window-editar-alimentacion", id: alimentacion_id) )%>
