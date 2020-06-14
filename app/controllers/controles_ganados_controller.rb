@@ -19,66 +19,59 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_celo_ganado_rfid].present?
+    if params[:form_buscar_control_ganado_nombre].present?
 
-      cond << "codigo_rfid = ?"
-      args << params[:form_buscar_celo_ganado_rfid]
-
-    end
-
-    if params[:form_buscar_celo_ganado_nombre].present?
-
-      cond << "ganado_nombre  ilike ?"
-      args << "%#{params[:form_buscar_celo_ganado_nombre]}%"
+      cond << "ganado_nombre ilike ?"
+      args << "%#{params[:form_buscar_control_ganado_nombre]}%"
 
     end
 
-    if params[:form_buscar_celo_ganado_rp].present?
+    if params[:form_buscar_control_ganado_ganado_rp].present?
 
-      cond << "ganado_rp = ?"
-      args << params[:form_buscar_celo_ganado_rp]
-
-    end
-
-    if params[:form_buscar_celo_fecha_inicio].present?
-
-      cond << "fecha_inicio = ?"
-      args << params[:form_buscar_celo_fecha_inicio]
+      cond << "ganado_rp  = ?"
+      args << params[:form_buscar_control_ganado_ganado_rp]
 
     end
 
-    if params[:form_buscar_celo_fecha_fin].present?
+    if params[:form_buscar_control_ganado][:control_id].present?
 
-      cond << "fecha_fin = ?"
-      args << params[:form_buscar_celo_fecha_fin]
-
-    end
-
-    if params[:form_buscar_celo_descripcion].present?
-
-      cond << "descripcion ilike ?"
-      args << "%#{params[:form_buscar_celo_descripcion]}%"
+      cond << "control_id = ?"
+      args << params[:form_buscar_control_ganado][:control_id]
 
     end
 
-    if params[:form_buscar_celo][:hacienda_id].present?
+    if params[:form_buscar_control_ganado][:medicamento_id].present?
 
-      cond << "hacienda_id = ?"
-      args << params[:form_buscar_celo][:hacienda_id]
-
-    end
-
-    if params[:form_buscar_celo][:hacienda_id].present?
-
-      cond << "hacienda_id = ?"
-      args << params[:form_buscar_celo][:hacienda_id]
+      cond << "medicamento_id = ?"
+      args << params[:form_buscar_control_ganado][:medicamento_id]
 
     end
 
-    if params[:form_buscar_celo][:estado_celo_id].present?
+    if params[:form_buscar_control_ganado_cantidad_suministrada].present?
 
-      cond << "estado_celo_id = ?"
-      args << params[:form_buscar_celo][:estado_celo_id]
+      cond << "cantidad_suministrada  = ?"
+      args << params[:form_buscar_control_ganado_cantidad_suministrada]
+
+    end
+
+    if params[:form_buscar_control_ganado_peso].present?
+
+      cond << "peso = ?"
+      args << params[:form_buscar_control_ganado_peso]
+
+    end
+
+    if params[:form_buscar_control_ganado_fecha_control].present?
+
+      cond << "fecha_control = ?"
+      args << params[:form_buscar_control_ganado_fecha_control]
+
+    end
+
+    if params[:form_buscar_control_ganado_observacion].present?
+
+      cond << "observacion ilike ?"
+      args << "%#{params[:form_buscar_control_ganado_observacion]}%"
 
     end
 

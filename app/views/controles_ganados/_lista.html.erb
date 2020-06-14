@@ -5,14 +5,14 @@
     <tr>
 
       <td><%= cg.control_ganado_id %></td>
-      <td><%= cg.descripcion%></td>
-      <td><%= cg.numero_pajuela%></td>
-      <td><%= cg.raza_ganado%></td>
-      <td ><%= cg.cantidad  %></td>
-      <td ><%= cg.costo_cgerma.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-      <td ><%= cg.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-      <td ><%= cg.cgerma_procedencia %></td>
-      <td ><%= cg.estado_esperma %></td>
+      <td><%= cg.ganado_nombre%></td>
+      <td><%= cg.ganado_rp%></td>
+      <td><%= cg.control%></td>
+      <td ><%= cg.medicamento  %></td>
+      <td ><%= cg.cantidad_suministrada  %></td>
+      <td ><%= cg.peso  %></td>
+      <td ><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
+      <td ><%= cg.observacion %></td>
 
       <td >
         
