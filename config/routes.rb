@@ -166,6 +166,17 @@ get "crontab_ultron/index"
   get "espermas/esperma_detalle"
   get "espermas/buscar_ganado"
 
+  #SANIDADES
+  get "controles_ganados/index"
+  post "controles_ganados/lista"
+  get "controles_ganados/lista"
+  get "controles_ganados/agregar"
+  post "controles_ganados/guardar"
+  get "controles_ganados/editar"
+  post "controles_ganados/actualizar"
+  get "controles_ganados/eliminar"
+ 
+
 
 
 

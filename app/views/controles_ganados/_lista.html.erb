@@ -1,0 +1,88 @@
+<% if espermas.present? %>
+
+  <% espermas.each do |esp| %>
+
+    <tr>
+
+      <td><%= esp.esperma_id %></td>
+      <td><%= esp.descripcion%></td>
+      <td><%= esp.numero_pajuela%></td>
+      <td><%= esp.raza_ganado%></td>
+      <td ><%= esp.cantidad  %></td>
+      <td ><%= esp.costo_esperma.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= esp.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= esp.esperma_procedencia %></td>
+      <td ><%= esp.estado_esperma %></td>
+
+      <td >
+        
+        <%= link_to_esperma_detalle(esp.esperma_id) %>
+        <%= link_to_editar_esperma(esp.esperma_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{esp.esperma_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-esperma", title: 'Haga click para eliminar la muestra'  %>
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate espermas, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+<script type="text/javascript">
+
+  function eliminar_registro(esperma_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará de la lista del módulo de Muestras. En caso de que la muestra ya ha sido utilizada no se podrá eliminar",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(espermas_eliminar_path) %>", 
+                data: {id: esperma_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>

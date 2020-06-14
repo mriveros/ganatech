@@ -1,0 +1,24 @@
+<% if @guardado_ok %>
+
+   $("<div class='col-sm-12' id='msg-editar-espermas' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-editar-esperma");
+   
+  $("#form_buscar_esperma_id").val('<%= @esperma.id %>');
+  $("#form_buscar_esperma_descripcion").val('');
+  $("#form_buscar_esperma_numero").val('');
+  $("#form_buscar_esperma_raza_id").val('');
+  $("#form_buscar_esperma_cantidad").val('');
+  
+  
+  setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#form-buscar-esperma").submit();
+    swal("Muestras","Muestra modificada exitosamente!", "success");
+  }, 2000);
+
+
+<% else %>
+  
+    $("<div class='col-sm-12' id='msg-editar-espermas' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-editar-esperma");
+    swal("Muestras", "Error al modificar la muestra.<%=@msg%> Intente más tarde","error");
+
+<% end %>

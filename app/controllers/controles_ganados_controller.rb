@@ -1,4 +1,4 @@
-class SanidadesController < ApplicationController
+class ControlesGanadosController < ApplicationController
 
 before_filter :require_usuario
 
@@ -12,10 +12,10 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_celo_id].present?
+    if params[:form_buscar_control_ganado_id].present?
 
-      cond << "celo_id = ?"
-      args << params[:form_buscar_celo_id]
+      cond << "control_ganado_id = ?"
+      args << params[:form_buscar_control_ganado_id]
 
     end
 
