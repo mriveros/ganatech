@@ -26,72 +26,72 @@
           <th style="width:20px;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
             <span>Descripción</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_descripcion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_descripcion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th >
             <span>Número</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_numero_pajuela, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_numero_pajuela');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_numero_pajuela, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_numero_pajuela');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
             <span>Raza</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_esperma, :raza_id, Raza.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_raza_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_control_ganado, :raza_id, Raza.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_raza_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
           <th >
             <span>Cantidad</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_cantidad, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_cantidad');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_cantidad, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_cantidad');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
             <span>Costo</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_costo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_costo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_costo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_costo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
             <span>Costo Total</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_costo_total, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_costo_total');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_control_ganado_costo_total, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_costo_total');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
           <th>
               <span>Procedencia</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_esperma, :esperma_procedencia_id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_esperma_procedencia_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_control_ganado, :esperma_procedencia_id, EspermaProcedencia.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_esperma_procedencia_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
           <th>
             <span>Estado</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_esperma, :estado_esperma_id, EstadoEsperma.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_esperma_estado_esperma_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_control_ganado, :estado_esperma_id, EstadoEsperma.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_estado_esperma_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
@@ -119,9 +119,9 @@
   $("#form-buscar-control-ganado").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_esperma_descripcion").val().length !== 0 ){
+    if($("#form_buscar_control_ganado_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_esperma_descripcion").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_control_ganado_descripcion").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
