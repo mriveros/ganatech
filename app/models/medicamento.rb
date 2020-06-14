@@ -6,6 +6,7 @@ class Medicamento < ActiveRecord::Base
   :observacion, :estado_medicamento_id, :tipo_presentacion_id, :tipo_administracion_id, :created_at, :updated_at
   
   scope :orden_01, -> {order("id")}
+  scope :orden_descripcion, -> { order("nombre_medicamento")}
 
   
 end

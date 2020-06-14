@@ -87,17 +87,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @celos =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VCelo.where(cond).count
+      @controles_ganados =  VControlGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VControlGanado.where(cond).count
 
     else
      
-      @celos = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VCelo.count
+      @controles_ganados = VControlGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VControlGanado.count
 
     end
 
-    @total_registros = VCelo.count
+    @total_registros = VControlGanado.count
 
     respond_to do |f|
       

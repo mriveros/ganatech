@@ -5,5 +5,7 @@ class Control < ActiveRecord::Base
   
   scope :orden_01, -> {order("id")}
 
+  scope :orden_descripcion, -> { order("descripcion")}
+
   
 end

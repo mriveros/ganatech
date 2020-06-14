@@ -1,24 +1,24 @@
-<% if espermas.present? %>
+<% if controles_ganados.present? %>
 
-  <% espermas.each do |esp| %>
+  <% controles_ganados.each do |cg| %>
 
     <tr>
 
-      <td><%= esp.esperma_id %></td>
-      <td><%= esp.descripcion%></td>
-      <td><%= esp.numero_pajuela%></td>
-      <td><%= esp.raza_ganado%></td>
-      <td ><%= esp.cantidad  %></td>
-      <td ><%= esp.costo_esperma.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-      <td ><%= esp.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-      <td ><%= esp.esperma_procedencia %></td>
-      <td ><%= esp.estado_esperma %></td>
+      <td><%= cg.control_ganado_id %></td>
+      <td><%= cg.descripcion%></td>
+      <td><%= cg.numero_pajuela%></td>
+      <td><%= cg.raza_ganado%></td>
+      <td ><%= cg.cantidad  %></td>
+      <td ><%= cg.costo_cgerma.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= cg.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= cg.cgerma_procedencia %></td>
+      <td ><%= cg.estado_esperma %></td>
 
       <td >
         
-        <%= link_to_esperma_detalle(esp.esperma_id) %>
-        <%= link_to_editar_esperma(esp.esperma_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{esp.esperma_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-esperma", title: 'Haga click para eliminar la muestra'  %>
+        <%#= link_to_esperma_detalle(esp.esperma_id) %>
+        <%#= link_to_editar_esperma(esp.esperma_id) %>
+        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{esp.esperma_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-esperma", title: 'Haga click para eliminar la muestra'  %>
 
       </td>
 
@@ -28,7 +28,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate espermas, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate controles_ganados, :params => params %></div></td>
 </tr>
 
 <tr>
