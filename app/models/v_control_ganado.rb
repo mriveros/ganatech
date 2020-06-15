@@ -8,5 +8,6 @@ class VControlGanado < ActiveRecord::Base
   :observacion, :fecha_control ,:created_at, :updated_at, :documento_ganatec_id
   
   scope :orden_01, -> { order("control_ganado_id")}
+  scope :orden_fecha, -> { order("fecha_control desc")}
   
 end

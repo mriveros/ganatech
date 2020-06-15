@@ -433,9 +433,9 @@ class GanadosController < ApplicationController
 
     @ganado_detalle = Ganado.where("id =?", params[:ganado_id]).first
 
-    @control_sanitario = VControlGanado.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
+    @control_sanitario = VControlGanado.orden_fecha.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
 
-    @control_alimentacion = VControlAlimentacion.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 10, page: params[:page])
+    @control_alimentacion = VControlAlimentacion.orden_fecha.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
 
     respond_to do |f|
 

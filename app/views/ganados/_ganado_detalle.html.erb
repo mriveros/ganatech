@@ -16,7 +16,7 @@
       
         <div>
         
-          <%if @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra] && @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_activo]%>
+          <%if @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra] && @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_activo] && (@ganado_detalle.etapa_ganado_id == PARAMETRO[:etapa_ganado_vaca] or @ganado_detalle.etapa_ganado_id == PARAMETRO[:etapa_ganado_vaquilla])%>
           
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> marcar celo".html_safe, "#", id: "link-to-agregar-celo", class: "btn btn-primary btn-xs", style: "float:right;" %>
           
