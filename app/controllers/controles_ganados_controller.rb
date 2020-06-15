@@ -102,7 +102,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @celo = Celo.new
+    @control_ganado = ControlGanado.new
 
     respond_to do |f|
       
