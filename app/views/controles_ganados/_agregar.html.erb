@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @control_ganado, remote: true, url: controles_ganados_guardar_url, html: { id: "form-agregar-esperma" }, method: 'POST' do |f| %>
+    <%= form_for @control_ganado, remote: true, url: controles_ganados_guardar_url, html: { id: "form-agregar-control-ganado" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  
@@ -39,15 +39,77 @@
             <div class="col-sm-1"></div><br /><br />
 
             <div class="col-sm-4"><%= label_tag nil, "Aplicar a #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :control, :id, Clasificacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-7"><%= collection_select :clasificacion, :id, Clasificacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
+
+            <div id="por_ganado" hidden="true">
+              
+              <%= hidden_field_tag :ganado_id %>
+              <div class="col-sm-4"><%= label_tag :nil, "Ganado #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_area_tag :ganado ,nil,class: 'form-control input-sm' %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+              <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+              <div class="col-sm-1"></div><br /><br />  
+              
+
+              <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+
+              <div class="col-sm-4"><%= f.label :rfid_lbl, "Código RFID ".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :codigo_rfid, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+              <div class="col-sm-4"><%= f.label :hacienda_lbl, "Hacienda ".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
+             <div class="col-sm-1"></div><br /><br />
+
+            </div>
+
+            <div id="por_lote" hidden="true">
+              
+            </div>
+
+            <div id="por_potrero" hidden="true">
+
+              <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
+              <div class="col-sm-1"></div><br/><br/>
+
+                
+              <%= linked_combo "potrero_id", 
+                  :linked =>"hacienda_id" ,
+                  :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
+                  :param => "hacienda_id",
+                  :clase => "hacienda" %>
+
+                
+
+              <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
+              <div class="col-sm-1"></div><br/>
+              
+            </div>
+
+            <div id="por_hacienda" hidden="true">
+              
+              <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
+              <div class="col-sm-1"></div><br/>
+
+            </div>
+
+
        
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-esperma" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-control-sanitario" %>
           
       </div>
  
@@ -59,12 +121,12 @@
 
 <style type="text/css">
 
-   #form-agregar-esperma label, #form-agregar-esperma input[type='text'], #form-agregar-esperma select { float:left; margin-top:5px;}
-  #form-agregar-esperma br {clear:both; }
-  #form-agregar-esperma label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-esperma #descripcion { width:100%;}
-  #form-agregar-esperma #fecha_inicio { width:80%;}
-  #form-agregar-esperma #fecha_fin { width:80%;}
+  #form-agregar-control-ganado label, #form-agregar-control-ganado input[type='text'], #form-agregar-control-ganado select { float:left; margin-top:5px;}
+  #form-agregar-control-ganado br {clear:both; }
+  #form-agregar-control-ganado label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-control-ganado #descripcion { width:100%;}
+  #form-agregar-control-ganado #fecha_inicio { width:80%;}
+  #form-agregar-control-ganado #fecha_fin { width:80%;}
   .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
@@ -72,6 +134,44 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+
+  $("#clasificacion_id").bind('change', function(){ 
+
+    if ($(this).val() == <%=PARAMETRO[:clasificacion_por_ganado]%>){
+
+      $("#por_ganado").show();
+      $("#por_lote").hide();
+      $("#por_potrero").hide();
+      $("#por_hacienda").hide();
+     
+    } else if ($(this).val() == <%=PARAMETRO[:clasificacion_por_lote]%>){
+
+      $("#por_ganado").hide();
+      $("#por_lote").show();
+      $("#por_potrero").hide();
+      $("#por_hacienda").hide();
+
+    } 
+
+    else if ($(this).val() == <%=PARAMETRO[:clasificacion_por_potrero]%>){
+
+      $("#por_ganado").hide();
+      $("#por_lote").hide();
+      $("#por_potrero").show();
+      $("#por_hacienda").hide();
+
+    }
+
+    else if ($(this).val() == <%=PARAMETRO[:clasificacion_por_hacienda]%>){
+
+      $("#por_ganado").hide();
+      $("#por_lote").hide();
+      $("#por_potrero").hide();
+      $("#por_hacienda").show();
+
+    } 
+
+  })
 
    function isNumberKey(evt)
   {
@@ -84,7 +184,7 @@
      return true;
   }
 
-
+  //Buscar Medicamento
   $("#medicamento").bind('focus', function(){   
 
     var medicamentos = [];
@@ -127,6 +227,66 @@
         var datos = ui.item.value.split(" - ");
         $("#medicamento").val( ui.item.label);
         $("#medicamento_id").val(datos[0]);
+        return false;
+
+      }
+
+    })
+
+  });
+
+  //Buscar Ganado
+  $("#ganado").bind('focus', function(){   
+
+    var ganados = [];
+
+    $("#ganado").val('');
+    $("#ganado_id").val('');
+    $("#nombre_ganado").val('');
+    $("#hacienda").val('');
+    $("#rp").val('');
+    $("#codigo_rfid").val('');
+
+    $.getJSON("<%= url_for(controles_ganados_buscar_ganado_path) %>", { ganado: $(this).val()%>}, function(j){
+        
+      var ganado = "";
+      var options = "<option value=''> -- Seleccione un Ganado -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre != ganado ){
+          
+          ganados.push( {value: j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
+          ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
+
+          options += "<option value="+ j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
+
+        }
+
+      }
+
+      $("#ganado_id").html(options);
+
+    })
+
+    $("#ganado").autocomplete({
+
+      minLength: 1,
+      source: ganados,
+      focus: function( event, ui ) {
+      
+        $("#ganado" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#ganado").val( ui.item.label);
+        $("#ganado_id").val(datos[0]);
+        $("#nombre_ganado").val(datos[1]);
+        $("#rp").val(datos[2]);
+        $("#codigo_rfid").val(datos[3]);
+        $("#hacienda").val(datos[4]);
+
         return false;
 
       }

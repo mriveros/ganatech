@@ -430,14 +430,18 @@ before_filter :require_usuario
 
   end
 
-  def buscar_ganado_reproductor
+  def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ? and etapa_ganado_id in (?)", "%#{params[:ganado]}%", params[:sexo_ganado_id], [PARAMETRO[:etapa_ganado_torito], PARAMETRO[:etapa_ganado_toro]])
+    if params[:ganado].present?
+
+      @ganado = VGanado.where("nombre = ? ", params[:ganado])
+    
+    end
 
     respond_to do |f|
       
       f.html
-      f.json { render :json => @ganados }
+      f.json { render :json => @ganado }
     
     end
 

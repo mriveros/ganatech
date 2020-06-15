@@ -80,6 +80,12 @@ development:
 
   #TIPO GANADO
   tipo_ganado_vacuno: 1
+
+  #CLASIFICACIONES APLICACION DE CONTROLES
+  clasificacion_por_ganado: 1
+  clasificacion_por_lote: 2
+  clasificacion_por_potrero: 3
+  clasificacion_por_hacienda: 4
  
   
 
@@ -161,5 +167,11 @@ production:
 
   #TIPO GANADO
   tipo_ganado_vacuno: 1
+
+  #CLASIFICACIONES APLICACION DE CONTROLES
+  clasificacion_por_ganado: 1
+  clasificacion_por_lote: 2
+  clasificacion_por_potrero: 3
+  clasificacion_por_hacienda: 4
   
   
