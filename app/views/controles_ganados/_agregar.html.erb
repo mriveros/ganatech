@@ -19,31 +19,28 @@
 
         <div class="panel-body">
 
-           <div class="col-sm-1"></div><br />
+            <div class="col-sm-1"></div><br />
             <div class="col-sm-4"><%= label_tag :nil, "Fecha Control #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= date_field_tag :fecha_control, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+            <div class="col-sm-7"><%= date_field_tag :fecha_control, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
             </div>    
-          <div class="col-sm-1"></div><br /> <br />  
-          
-          <div class="col-sm-4"><%= label_tag nil, "Control #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :control, :id, Control.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br /><br />
+            <div class="col-sm-1"></div><br /> <br />  
 
+            <div class="col-sm-4"><%= label_tag nil, "Control #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+            <div class="col-sm-7"><%= collection_select :control, :id, Control.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-1"></div><br /><br />
 
             <%= hidden_field_tag :medicamento_id %>
             <div class="col-sm-4"><%= label_tag :nil, "Medicamento #{attr_requerido}".html_safe %></div>
             <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
             <div class="col-sm-1"></div><br /><br />
 
-
             <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
             <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
             <div class="col-sm-1"></div><br /><br />
-            
 
-            <div class="col-sm-4"><%= label_tag :nil, "Peso".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-            <div class="col-sm-1"></div><br /><br />     
+            <div class="col-sm-4"><%= label_tag nil, "Aplicar a #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+            <div class="col-sm-7"><%= collection_select :control, :id, Clasificacion.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-1"></div><br /><br />
        
       </div>
 
