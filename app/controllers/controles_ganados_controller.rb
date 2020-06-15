@@ -432,11 +432,7 @@ before_filter :require_usuario
 
   def buscar_ganado
 
-    if params[:ganado].present?
-
-      @ganado = VGanado.where("nombre = ? ", params[:ganado])
-    
-    end
+    @ganado = VGanado.where("nombre ilike ? ",  "%#{params[:ganado]}%")
 
     respond_to do |f|
       
