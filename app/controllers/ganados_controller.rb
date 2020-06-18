@@ -196,7 +196,17 @@ class GanadosController < ApplicationController
       
       @ganado = Ganado.new()
       @ganado.fecha_nacimiento = params[:fecha_nacimiento]
-      @ganado.nombre = params[:nombre]
+      
+      if params[:nombre].present?
+        
+        @ganado.nombre = params[:nombre]
+
+      else
+
+        @ganado.nombre = params[:rp]
+
+      end
+
       @ganado.rp = params[:rp]
 
       if params[:rp_padre_rp].present?

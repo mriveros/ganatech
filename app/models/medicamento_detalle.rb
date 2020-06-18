@@ -5,6 +5,7 @@ class MedicamentoDetalle < ActiveRecord::Base
   attr_accessible :id, :medicamento_id, :descripcion, :fecha_suministro, :numero_lote,
   :cantidad_suministro, :observacion, :created_at, :updated_at, :fecha_vencimiento
   scope :orden_01, -> {order("id")}
+  scope :orden_date, -> {order("created_at desc")}
 
   
 end

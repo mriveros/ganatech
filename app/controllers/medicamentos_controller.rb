@@ -305,7 +305,7 @@ class MedicamentosController < ApplicationController
 
     @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-    @medicamento_detalle = MedicamentoDetalle.orden_01.where("medicamento_id = ?", params[:medicamento_id]).paginate(per_page: 5, page: params[:page])
+    @medicamento_detalle = MedicamentoDetalle.orden_date.where("medicamento_id = ?", params[:medicamento_id]).paginate(per_page: 5, page: params[:page])
 
 
      respond_to do |f|
@@ -321,6 +321,9 @@ class MedicamentosController < ApplicationController
 
 
     @medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+    ultima_produccion = Medicamento.order("created_at").last
+    @numero_lote = ultima_produccion.id + 1
 
     respond_to do |f|
 

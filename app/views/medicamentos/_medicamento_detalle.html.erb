@@ -77,15 +77,15 @@
 
             <% if @medicamento_detalle.present? %>
 
-              <% @medicamento_detalle.each do |med| %>
+              <% @medicamento_detalle.each_with_index do |med, i| %>
                 
                 <tr>
 
-                  <td><%= med.id %></td>
+                  <td><%= i+1 %></td>
                   <td><%= med.descripcion %></td>
                   <td><%= med.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
-                  <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+                  <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') if med.fecha_vencimiento.present? %></td>
                   <td><%= med.numero_lote %></td>
                   <td><%= med.cantidad_suministro %></td>
                   <td><%= med.observacion %></td>

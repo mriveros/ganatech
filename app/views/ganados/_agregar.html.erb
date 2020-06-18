@@ -29,15 +29,15 @@
 
                 <td>
 
-                  <div class="col-sm-4"><%= label_tag :nil, "Fecha Nacimiento #{attr_requerido}".html_safe %></div><br/>
-                    <div class="col-sm-7"><%= date_field_tag :fecha_nacimiento, nil, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+                  <div class="col-sm-4"><%= label_tag :nil, "Fecha Nacimiento".html_safe %></div><br/>
+                    <div class="col-sm-7"><%= date_field_tag :fecha_nacimiento, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
                     </div>    
                   <div class="col-sm-1"></div><br />
 
                 </td>
 
                 <td>
-                  <div class="col-sm-4"><%= label_tag :nil, "Nombre #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-4"><%= label_tag :nil, "Nombre".html_safe %></div><br/>
                   <div class="col-sm-7"><%= text_field_tag :nombre ,nil,class: 'form-control input-sm' %></div>
                   <div class="col-sm-1"></div><br />
                 </td>
@@ -112,7 +112,7 @@
                 
                 <td>
                   
-                  <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio".html_safe %></div><br/>
                   <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
                   <div class="col-sm-1"></div><br />
                 
@@ -250,12 +250,6 @@
       valido = true
       msg = ""
 
-      if($("#nombre").val().length == 0){
-
-        msg += "Ingrese el nombre del animal.\n"
-        valido = false
-      
-      }
 
       if($("#rp").val().length == 0){
 
@@ -274,13 +268,6 @@
       if($("#potrero_id").val().length == 0){
 
         msg +="Seleccione el Potrero donde se encuentra el animal.\n"
-        valido = false
-      
-      }
-
-      if($("#peso_promedio").val().length == 0){
-
-        msg +="Ingrese un peso aproximado del animal.\n"
         valido = false
       
       }
