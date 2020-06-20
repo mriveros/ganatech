@@ -19,9 +19,9 @@
 
       <td style="width:120px;">
 
-        <%= link_to_editar_alimentacion(alimentacion) %>
+        <%= link_to_editar_alimentacion(alimentacion.alimentacion_id) %>
 
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{alimentacion.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion", title: 'Haga click para eliminar la alimentacion'  %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{alimentacion.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion", title: 'Haga click para eliminar el alimemto'  %>
 
        </td>
 

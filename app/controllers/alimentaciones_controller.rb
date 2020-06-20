@@ -13,7 +13,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_alimentaciones_id].present?
 
-      cond << "id = ?"
+      cond << "alimentacion_id = ?"
       args << params[:form_buscar_alimentaciones_id]
 
     end
@@ -69,24 +69,24 @@ before_filter :require_usuario
 
     if params[:form_buscar_alimentaciones_estado_alimento_id].present?
 
-      cond << "estado_alimento ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_estado_alimento]}%"
+      cond << "estado_alimento_id = ?"
+      args << "#{params[:form_buscar_alimentaciones_estado_alimento]}"
 
     end
 
 
     if params[:form_buscar_alimentaciones_tipo_alimentacion_id].present?
 
-      cond << "tipo_alimento ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_tipo_alimento]}%"
+      cond << "tipo_alimento_id = ?"
+      args << "#{params[:form_buscar_alimentaciones_tipo_alimento]}"
 
     end
 
 
     if params[:form_buscar_alimentaciones_fecha_vencimiento].present?
 
-      cond << "fecha_vencimiento ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_fecha_vencimiento]}%"
+      cond << "fecha_vencimiento = ?"
+      args << "#{params[:form_buscar_alimentaciones_fecha_vencimiento]}"
 
     end
 
@@ -131,33 +131,34 @@ before_filter :require_usuario
     @msg = ""
     @alimento_ok = false
     if valido
-    @alimento = Alimentacion.new()
+      @alimento = Alimentacion.new()
 
-    @alimento.descripcion = params[:descripcion].upcase
-    @alimento.nombre_alimento = params[:nombre_alimento].upcase
-    @alimento.cantidad_stock = params[:cantidad_stock]
-    @alimento.cantidad_aplicacion = params[:cantidad_aplicacion]
-    @alimento.ciclo = params[:ciclo]
-    @alimento.intervalo_tiempo = params[:intervalo_tiempo]
-    @alimento.observacion = params[:observacion]
-    @alimento.estado_alimentacion_id = params[:estado_alimentacion][:id]
-    @alimento.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-    @alimento.fecha_vencimiento = params[:fecha_vencimiento]
+      @alimento.descripcion = params[:descripcion].upcase
+      @alimento.nombre_alimento = params[:nombre_alimento].upcase
+      @alimento.cantidad_stock = params[:cantidad_stock]
+      @alimento.cantidad_aplicacion = params[:cantidad_aplicacion]
+      @alimento.ciclo = params[:ciclo]
+      @alimento.intervalo_tiempo = params[:intervalo_tiempo]
+      @alimento.observacion = params[:observacion]
+      @alimento.estado_alimento_id = params[:estado_alimento][:id]
+      @alimento.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+      @alimento.fecha_vencimiento = params[:fecha_vencimiento]
 
-    if @alimento.save
+      if @alimento.save
 
-      auditoria_nueva("registrar alimentacion", "alimentaciones", @alimento)
-      @alimento_ok = true
+        auditoria_nueva("registrar alimentacion", "alimentaciones", @alimento)
+        @alimento_ok = true
+
+      end
 
     end
-  end
 
     rescue Exception => exc
       # dispone el mensaje de error
       #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?
         @excep = exc.message.split(':')
-        @msg =@excep
+        @msg = @excep
 
       end
 
@@ -172,6 +173,7 @@ before_filter :require_usuario
 
   def eliminar
 
+    @eliminado = false
     valido = true
     @msg = ""
 
@@ -198,8 +200,8 @@ before_filter :require_usuario
       # dispone el mensaje de error
       #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?
-        @excep = exc.message.split(':')
-        @msg = @excep[3].concat(" "+@excep[4])
+        
+        @msg = exc.message.split(':')
         @eliminado = false
       end
 
@@ -228,26 +230,26 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @alimento = Alimentacion.find(params[:alimento][:id])
+    @alimento = Alimentacion.find(params[:alimentacion][:id])
     auditoria_id = auditoria_antes("actualizar alimento", "alimentos", @alimento)
 
     if valido
 
-      @alimento.descripcion = params[:alimento][:descripcion].upcase
-      @alimento.nombre_alimento = params[:alimento][:nombre_alimento].upcase
-      @alimento.cantidad_stock = params[:alimento][:cantidad_stock]
-      @alimento.cantidad_aplicacion = params[:alimento][:cantidad_aplicacion]
-      @alimento.ciclo = params[:alimento][:ciclo]
-      @alimento.intervalo_tiempo = params[:alimento][:intervalo_tiempo]
-      @alimento.observacion = params[:alimento][:observacion]
-      @alimento.estado_alimentacion_id = params[:alimento][:estado_alimentacion_id]
-      @alimento.tipo_alimentacion_id = params[:alimento][:tipo_alimentacion_id]
-      @alimento.fecha_vencimiento = params[:alimento][:fecha_vencimiento]
+      @alimento.descripcion = params[:alimentacion][:descripcion].upcase
+      @alimento.nombre_alimento = params[:alimentacion][:nombre_alimento].upcase
+      @alimento.cantidad_stock = params[:alimentacion][:cantidad_stock]
+      @alimento.cantidad_aplicacion = params[:alimentacion][:cantidad_aplicacion]
+      @alimento.ciclo = params[:alimentacion][:ciclo]
+      @alimento.intervalo_tiempo = params[:alimentacion][:intervalo_tiempo]
+      @alimento.observacion = params[:alimentacion][:observacion]
+      @alimento.estado_alimento_id = params[:alimentacion][:estado_alimento_id]
+      @alimento.tipo_alimentacion_id = params[:alimentacion][:tipo_alimentacion_id]
+      @alimento.fecha_vencimiento = params[:alimentacion][:fecha_vencimiento]
 
       if @alimento.save
 
         auditoria_despues(@alimento, auditoria_id)
-        @alimento_ok = true
+        @alimentacion_ok = true
 
       end
 
@@ -257,8 +259,7 @@ before_filter :require_usuario
       #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?
 
-        @excep = exc.message.split(':')
-        @msg = @excep[3].concat(" "+@excep[4])
+        @msg = exc.message.split(':')
 
       end
 

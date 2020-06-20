@@ -1,0 +1,17 @@
+<% if @guardado_ok %>
+
+
+setTimeout( function(){
+
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
+    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
+    swal("Sumnistro agregado exitosamente!");
+
+    }, 1000);
+
+<% else %>
+
+  swal('Error al guardar el suministro. Intente más tarde');
+
+<% end %>

@@ -15,6 +15,6 @@
 <% else %>
 
 	swal("Error al guardar:" )
-  $("<div class='col-sm-12' id='msg-agregar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-agregar-alimentacion");
+  $("<div class='col-sm-12' id='msg-agregar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-alimentacion");
 
 <% end %>
