@@ -39,7 +39,7 @@
             <div class="col-sm-1"></div><br /><br />
 
             <div class="col-sm-4"><%= label_tag nil, "Aplicar a #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :clasificacion, :id, ClasificacionControl.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-7"><%= collection_select :clasificacion_control, :id, ClasificacionControl.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
 
             <div id="por_ganado" hidden="true">
@@ -52,7 +52,6 @@
               <div class="col-sm-4"><%= f.label :nombre_lbl, "Nombre Ganado ".html_safe %></div>
               <div class="col-sm-7"><%= text_field_tag :nombre_ganado, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
               <div class="col-sm-1"></div><br /><br />  
-              
 
               <div class="col-sm-4"><%= f.label :rp_lbl, "RP ".html_safe %></div>
               <div class="col-sm-7"><%= text_field_tag :rp, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
@@ -76,12 +75,12 @@
             <div id="por_potrero" hidden="true">
 
               <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
-              <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
+              <div class="col-sm-7"><%= collection_select :hacienda_potrero, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
               <div class="col-sm-1"></div><br/><br/>
 
                 
               <%= linked_combo "potrero_id", 
-                  :linked =>"hacienda_id" ,
+                  :linked =>"hacienda_potrero_id" ,
                   :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
                   :param => "hacienda_id",
                   :clase => "hacienda" %>
@@ -135,7 +134,7 @@
 
   aplicar_datepicker2();
 
-  $("#clasificacion_id").bind('change', function(){ 
+  $("#clasificacion_control_id").bind('change', function(){ 
 
     if ($(this).val() == <%=PARAMETRO[:clasificacion_por_ganado]%>){
 
@@ -295,7 +294,6 @@
 
   });
 
- 
 
   $("#btn-guardar-control-sanitario").bind('click', function () {
 
@@ -315,36 +313,68 @@
         valido = false
       
       }
-       if ($("#control_id").val() === "<%=PARAMETRO[:control_peso]%>")
-      {
+      
 
-         if($("#peso_promedio_control").val().length == 0){
+      if($("#medicamento_id").val().length == 0){
 
-            msg +="Debe ingresar el Peso del ganado.\n"
-            valido = false
+        msg +="Debe ingresar el medicamento utilizado en el control.\n"
+        valido = false
           
-          }
+      }
 
+      if($("#cantidad_suministrada").val().length == 0){
+
+        msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
+        valido = false
+          
+      }
+
+      if($("#clasificacion_control_id").val().length == 0){
+
+        msg +="Debe seleccionar la clasificación.\n"
+        valido = false
+          
       }else{
 
-        if($("#medicamento_id").val().length == 0){
+        if ($("#clasificacion_control_id").val() == <%=PARAMETRO[:clasificacion_por_ganado]%>)
+        {
 
-            msg +="Debe ingresar el medicamento utilizado en el control.\n"
+          if($("#ganado_id").val().length == 0){
+
+            msg +="Debe seleccionar un Ganado.\n"
             valido = false
-          
+                
           }
 
-        if($("#cantidad_suministrada").val().length == 0){
+        }
 
-            msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
+        if ($("#clasificacion_control_id").val() == <%=PARAMETRO[:clasificacion_por_potrero]%>)
+        {
+
+          if($("#potrero_id").val().length == 0){
+
+            msg +="Debe seleccionar un Potrero.\n"
             valido = false
-          
+                
           }
+
+        }
+
+        if ($("#clasificacion_control_id").val() == <%=PARAMETRO[:clasificacion_por_hacienda]%>)
+        {
+
+          if($("#hacienda_id").val().length == 0){
+
+            msg +="Debe seleccionar una Hacienda.\n"
+            valido = false
+                
+          }
+
+        }
 
 
       }
     
-
       if (valido){
 
         swal({
