@@ -178,6 +178,29 @@
 
               </tr>
 
+
+               <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Codigo Lote #{attr_requerido}".html_safe %></div><br/>
+                 <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_lote ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+
+                <td>
+
+                 <div class="col-sm-4"><%= label_tag nil, "Finalidad #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :finalidad_ganado, :id, FinalidadGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
+
+              </tr>
+
                </tbody>
 
             </table>
@@ -296,6 +319,20 @@
       if($("#tipo_concepcion_id").val().length == 0){
 
         msg +="Seleccione el tipo de concepción del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#codigo_lote").val().length == 0){
+
+        msg +="El código no puede estar vacío.\n"
+        valido = false
+      
+      }
+
+      if($("#finalidad_ganado_id").val().length == 0){
+
+        msg +="La Finalidad del Ganado no puede estar vacía.\n"
         valido = false
       
       }

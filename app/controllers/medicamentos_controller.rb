@@ -269,6 +269,7 @@ class MedicamentosController < ApplicationController
       @medicamento.tipo_presentacion_id = params[:medicamento][:tipo_presentacion_id]
       @medicamento.tipo_administracion_id = params[:medicamento][:tipo_administracion_id]
       @medicamento.fecha_vencimiento = params[:medicamento][:fecha_vencimiento]
+      
 
       if @medicamento.save
 

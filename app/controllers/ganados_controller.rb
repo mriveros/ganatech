@@ -20,6 +20,13 @@ class GanadosController < ApplicationController
 
     end
 
+    if params[:form_buscar_ganado_codigo_lote].present?
+
+      cond << "codigo = ?"
+      args << params[:form_buscar_ganado_codigo_lote]
+
+    end
+
     if params[:form_buscar_ganado_nombre].present?
 
       cond << "nombre ilike ?"
@@ -175,6 +182,8 @@ class GanadosController < ApplicationController
 
     end
 
+    @codigo_lote = ultima_produccion.id + 1
+
     respond_to do |f|
       
         f.js
@@ -239,8 +248,8 @@ class GanadosController < ApplicationController
       @ganado.tipo_concepcion_id = params[:tipo_concepcion][:id]
       @ganado.estado_ganado_id = params[:estado_ganado][:id]
       @ganado.observacion = params[:observacion]
-      
-
+      @ganado.codigo_lote = params[:codigo_lote]
+      @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
 
         if @ganado.save
 
@@ -290,8 +299,7 @@ class GanadosController < ApplicationController
     raza = Raza.where("id = ?", params[:ganado][:raza_id]).first
 
     if valido
-      
-
+      puts"debug!!!"
       @ganado.fecha_nacimiento = params[:ganado][:fecha_nacimiento]
       @ganado.nombre = params[:ganado][:nombre]
       @ganado.rp = params[:ganado][:rp]
@@ -326,6 +334,8 @@ class GanadosController < ApplicationController
       @ganado.tipo_concepcion_id = params[:ganado][:tipo_concepcion_id]
       @ganado.estado_ganado_id = params[:ganado][:estado_ganado_id]
       @ganado.observacion = params[:ganado][:observacion]
+      @ganado.codigo_lote = params[:ganado][:codigo_lote]
+      @ganado.finalidad_ganado_id = params[:ganado][:finalidad_ganado_id]
       
 
       if @ganado.save

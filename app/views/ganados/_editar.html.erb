@@ -182,6 +182,27 @@
                   
                 </td>
 
+              </tr>
+
+              <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Codigo Lote #{attr_requerido}".html_safe %></div><br/>
+                 <div class="col-sm-7"><%= f.text_field :codigo_lote,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+
+                <td>
+
+                 <div class="col-sm-4"><%= label_tag nil, "Finalidad #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= f.collection_select :finalidad_ganado_id, FinalidadGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
 
               </tr>
 
