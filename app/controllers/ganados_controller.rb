@@ -22,7 +22,7 @@ class GanadosController < ApplicationController
 
     if params[:form_buscar_ganado_codigo_lote].present?
 
-      cond << "codigo = ?"
+      cond << "codigo_lote = ?"
       args << params[:form_buscar_ganado_codigo_lote]
 
     end
@@ -131,6 +131,13 @@ class GanadosController < ApplicationController
 
       cond << "estado_ganado_id = ?"
       args << params[:form_buscar_ganado][:estado_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado][:finalidad_ganado_id].present?
+
+      cond << "finalidad_ganado_id = ?"
+      args << params[:form_buscar_ganado][:finalidad_ganado_id]
 
     end
 

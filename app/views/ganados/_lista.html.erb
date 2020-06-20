@@ -12,7 +12,7 @@
       <td ><%= gan.rp_madre %></td>
       <td ><%= (gan.fecha_nacimiento.present?)? gan.fecha_nacimiento.strftime('%d/%m/%Y') : "Sin Especificar" %></td>
       <td ><%= gan.peso_promedio %></td>
-      
+      <td ><%= gan.codigo_lote %></td>
       
       <td > </td>
 
@@ -28,9 +28,9 @@
       <td class="td-nivel-2"><%= gan.sexo_ganado %></td>
       <td class="td-nivel-2"><%= gan.tipo_concepcion %></td>
       <td class="td-nivel-2"><%= gan.estado_ganado %></td>
+      <td class="td-nivel-2"><%= gan.finalidad_ganado %></td>
       
       <td >
-        
         
         <%= link_to_ganado_detalle(gan.ganado_id) %>
         <%= link_to_editar_ganado(gan.ganado_id) %>

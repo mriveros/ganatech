@@ -91,6 +91,14 @@
             </div>
           </th> 
 
+           <th>
+              <span>Código Lote</span>
+            <div class="input-group input-group-sm">
+             <%= text_field_tag :form_buscar_ganado_codigo_lote, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_codigo_lote');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
         
 
 
@@ -161,6 +169,14 @@
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_ganado, :estado_ganado_id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+         <th>
+              <span>Finalidad Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :finalidad_ganado_id, FinalidadGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_finalidad_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
