@@ -344,7 +344,6 @@ class GanadosController < ApplicationController
       @ganado.codigo_lote = params[:ganado][:codigo_lote]
       @ganado.finalidad_ganado_id = params[:ganado][:finalidad_ganado_id]
       
-
       if @ganado.save
 
         @ganado_ok = true
@@ -531,6 +530,7 @@ class GanadosController < ApplicationController
 
       @control_ganado.observacion = params[:observacion]
       @control_ganado.codigo = codigo_control
+      @control_ganado.clasificacion_control_id = PARAMETRO[:clasificacion_por_ganado]
 
         if @control_ganado.save
 
