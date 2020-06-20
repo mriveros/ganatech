@@ -31,6 +31,23 @@
             </div>
           </th>
 
+           <th>
+            <div><%= label_tag nil, "Fecha Control".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_control_ganado_fecha_control, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_fecha_control');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th style="width:20px;">
+            <span>Código</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_control_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_codigo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
           <th >
             <span>Ganado</span>
             <div class="input-group input-group-sm">
@@ -78,15 +95,15 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_peso');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-          
+
           <th>
-            <div><%= label_tag nil, "Fecha Control".html_safe %></div>
-              <div class='input-group date'>
-                <%= text_field_tag :form_buscar_control_ganado_fecha_control, nil, class: 'form-control input-sm' %>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_fecha_control');"><i class="fa fa-times"></i></span>
-              </div>
-         </th>
+            <span>Clasificación Control</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_control_ganado,:clasificacion_control_id, ClasificacionControl.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_clasificacion_control_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
 
           <th>
             <span>Observación</span>

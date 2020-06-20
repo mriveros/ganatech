@@ -493,6 +493,8 @@ class GanadosController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
+    control_ganado = ControlGanado.order("created_at").last
+    codigo_control = control_ganado.id + 1
 
     if params[:control][:id].to_i != PARAMETRO[:control_peso]
 
@@ -528,6 +530,7 @@ class GanadosController < ApplicationController
       end
 
       @control_ganado.observacion = params[:observacion]
+      @control_ganado.codigo = codigo_control
 
         if @control_ganado.save
 

@@ -19,6 +19,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_control_ganado_codigo].present?
+
+      cond << "codigo = ?"
+      args << params[:form_buscar_control_ganado_codigo]
+
+    end
+
     if params[:form_buscar_control_ganado_nombre].present?
 
       cond << "ganado_nombre ilike ?"
@@ -72,6 +79,13 @@ before_filter :require_usuario
 
       cond << "observacion ilike ?"
       args << "%#{params[:form_buscar_control_ganado_observacion]}%"
+
+    end
+
+    if params[:form_buscar_control_ganado][:clasificacion_control_id].present?
+
+      cond << "clasificacion_control_id = ?"
+      args << params[:form_buscar_control_ganado][:clasificacion_control_id]
 
     end
 
