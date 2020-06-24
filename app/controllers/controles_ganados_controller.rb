@@ -195,4 +195,19 @@ before_filter :require_usuario
   end
 
 
+  def crear_lote_ganado
+
+
+    @ganados = VGanado.orden_01.paginate(per_page: 10, page: params[:page])
+    @total_encontrados = VGanado.count
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
 end

@@ -70,9 +70,11 @@
 
             <div id="por_lote" hidden="true" align="center">
 
-               <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> crear Lote".html_safe, "#", id: "link-to-agregar-lote-ganado", class: "btn btn-primary pull-center", style: "float:center; align:center;", onclick: "$('.modal').html('');return false;" %>
+               <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> crear Lote".html_safe, "#", id: "link-to-agregar-lote-ganado", class: "btn btn-primary pull-center", style: "float:center; align:center;", onclick: "crear_lote()" %>
               
-              <%#= modal_window( window_id: "modal-window-agregar-lote-ganado", link_to_id: "#link-to-agregar-lote-ganado", url: controles_ganados_agregar_lote_ganado_path( window_id: "modal-window-agregar-lote-ganado"))%>
+              <div id="lista-ganado" hidden="true" align="center">
+              
+              </div>
               
             </div>
 
@@ -137,6 +139,19 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+
+
+  function crear_lote(){  
+    
+    alert("DEBUG");
+
+     $.ajax({
+        url: "<%= url_for(controles_ganados_crear_lote_ganado_path) %>", 
+        data: {id: 0},
+        dataType: 'script'
+      });
+
+  }
 
   $("#clasificacion_control_id").bind('change', function(){ 
 
