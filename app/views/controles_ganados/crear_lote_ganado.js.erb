@@ -1,0 +1,2 @@
+$("#lista-ganado").show();
+$("#lista-ganado").html("<%= escape_javascript(render partial: "lista_ganado", locals: { ganados: @ganados }) %>");

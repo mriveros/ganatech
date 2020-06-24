@@ -1,0 +1,111 @@
+<div class="table-responsive" id="table-ganado">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead> 
+
+      <%= form_tag ganados_lista_path, remote: true, id: "form-buscar-ganado"  do  %>
+
+        <tr class= "td-nivel-1">
+        
+           <th >
+            <span>Nombre</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_nombre');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>RP</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_rp');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+          
+          <th>
+              <span>Codigo RFID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_ganado_codigo_rfid, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_codigo_rfid');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th>
+              <span>Potrero</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :potrero_id, Potrero.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_potrero_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+              <span>Hacienda</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :hacienda_id, Hacienda.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_hacienda_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+          <th>
+            <div class="input-group input-group-sm">Agregar</div>
+          </th>
+       
+        </tr>  
+       
+       <thead> 
+
+          <% if ganados.present? %>
+
+            <% ganados.each do |gan| %>
+
+              <tr>
+               
+                <td style="text-transform:uppercase;"><%= gan.nombre%></td>
+                <td ><%= gan.rp%></td>
+                <td ><%= gan.codigo_rfid %></td>
+                <td ><%= gan.potrero %></td>
+                <td ><%= gan.hacienda %></td>
+                <td ><%= check_box_tag :ganado, gan.id ,false,class: 'form-control input-sm' %></td>
+
+              </tr>
+
+            <% end %>
+
+            <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados, :params => params %></div></td>
+            </tr>
+
+            <tr>
+                <td colspan="12">
+                  Cantidad de registros encontrados: <%= @total_encontrados %> 
+                </td>
+            </tr>
+
+           
+
+          <% else %>
+
+            <tr>
+
+              <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+            </tr>
+
+
+          <% end %>
+
+  <% end %>
+
+  </table>
+
+</div>
+
+<script type="text/javascript">
+
+  
+
+</script>
