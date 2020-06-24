@@ -1,13 +1,24 @@
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h5 style="float:left;margin-top:5px;">Ganados</h5>
+    
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
 <div class="table-responsive" id="table-ganado">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead> 
 
-      <%= form_tag controles_ganados_crear_lote_ganado_path, remote: true, id: "form-buscar-ganado"  do  %>
+      <%= form_tag controles_ganados_lista_ganado_path, remote: true, id: "form-buscar-ganado"  do  %>
 
-        <tr class= "td-nivel-1">
-        
+        <tr>
+          
            <th >
             <span>Nombre</span>
             <div class="input-group input-group-sm">
@@ -26,92 +37,124 @@
           </th>
           
           <th>
-              <span>Codigo RFID</span>
+              <span>RFID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_codigo_rfid, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_codigo_rfid');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
-
-          <th>
+          
+            <th>
               <span>Potrero</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_ganado, :potrero_id, Potrero.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_potrero_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-
-          <th>
-              <span>Hacienda</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado, :hacienda_id, Hacienda.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_hacienda_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
           
           <th>
-            <div class="input-group input-group-sm">Agregar</div>
+              <span>Estado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado, :estado_ganado_id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
           </th>
-       
-        </tr>  
-    
-      <% end %>
-    
-    <thead> 
 
-          <% if ganados.present? %>
+          <th>Agregar</th>
 
-            <% ganados.each do |gan| %>
-
-              <tr>
-
-               
-                <td style="text-transform:uppercase;"><%= gan.nombre%></td>
-                <td ><%= gan.rp%></td>
-                <td ><%= gan.codigo_rfid %></td>
-                <td ><%= gan.potrero %></td>
-                <td ><%= gan.hacienda %></td>
-                <td ><%= check_box_tag :ganado, gan.id ,false,class: 'form-control input-sm' %></td>
-
-              </tr>
-
-            <% end %>
-
-            <tr id="tab-paginacion">
-
-                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados, :params => params %></div></td>
-            </tr>
-
-            <tr>
-                <td colspan="12">
-                  Cantidad de registros encontrados: <%= @total_encontrados %> 
-                </td>
-            </tr>
-
-           
-
-          <% else %>
-
-            <tr>
-
-              <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
-
-            </tr>
+        </tr>
 
 
-          <% end %>
+        <% end %>
 
+      </thead> 
+
+    <tbody id="ganados-lista"></tbody>
+  
   </table>
 
 </div>
 
+<style type="text/css">
+
+  .td-nivel-1 {background: #e6e6e6 !important;color:#000 !important;font-weight:bold;}
+  .td-nivel-2 {background: #BFFCE1 !important;color:#000 !important;font-weight:normal;}
+  .td-nivel-1 span.limpiar { background: #fff !important;}
+
+</style>
+
 <script type="text/javascript">
 
- $("#table-ganado input, #table-ganado select").bind('change', function () {
-      $.ajaxQ.abortAll();
-      $("#form-buscar-ganado").submit();
-
-  })
   
 
+  $("#form-buscar-ganado").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-ganado").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_ganado_nombre").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_ganado_nombre").val().replace(/\s/g,'')).length > 2 ){        
+        valido = true;
+
+      }else{
+        valido = false;
+               
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  
+  //---------------------------- BUSCAR GANADO-------- -------------------------//
+  $("#table-ganado input, #table-ganado select").bind('change', function () {
+    $.ajaxQ.abortAll();
+    $.ajax({
+      type: 'GET',
+      url: "<%= url_for(controles_ganados_lista_ganado_path) %>",
+      data: { form_buscar_ganado_nombre: $("#form_buscar_ganado_nombre").val(),
+      form_buscar_ganado_rp: $("#form_buscar_ganado_rp").val(),
+      form_buscar_ganado_codigo_rfid: $("#form_buscar_ganado_codigo_rfid").val(),
+      form_buscar_ganado_hacienda_id: $("#form_buscar_ganado_hacienda_id").val(),
+      form_buscar_ganado_potrero_id: $("#form_buscar_ganado_potrero_id").val(),
+      form_buscar_ganado_estado_ganado_id: $("#form_buscar_ganado_estado_ganado_id").val()
+      },
+      dataType: 'script'    
+    }) 
+
+  })
+  //----------------------------------------------------------------------------//
+
+  aplicar_datepicker();
+  
 </script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+
+        cursor: pointer;
+
+    }
+
+    #form-buscar-ganado table th { background:#e6e6e6;}
+    #form-buscar-ganado table th span.limpiar { background:#fff;}
+
+</style>

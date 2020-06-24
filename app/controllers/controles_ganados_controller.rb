@@ -196,10 +196,21 @@ before_filter :require_usuario
 
 
   def crear_lote_ganado
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def lista_ganado
     
     cond = []
     args = []
-
+    puts "//////////////////DEBUG"
     if params[:form_buscar_ganado_nombre].present?
 
       cond << "nombre ilike ?"
@@ -221,44 +232,48 @@ before_filter :require_usuario
 
     end
 
-=begin
-    if params[:form_buscar_ganado][:hacienda_id].present?
+    if params[:form_buscar_ganado_hacienda_id].present?
 
       cond << "hacienda_id = ?"
-      args << params[:form_buscar_ganado][:hacienda_id]
+      args << params[:form_buscar_ganado_hacienda_id]
 
     end
 
-
-    if params[:form_buscar_ganado][:potrero_id].present?
+    if params[:form_buscar_ganado_potrero_id].present?
 
       cond << "potrero_id = ?"
-      args << params[:form_buscar_ganado][:potrero_id]
+      args << params[:form_buscar_ganado_potrero_id]
 
     end
-=end
 
+    if params[:form_buscar_ganado_estado_ganado_id].present?
+
+      cond << "estado_ganado_id = ?"
+      args << params[:form_buscar_ganado_estado_ganado_id]
+
+    end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
 
-      @ganados =  VGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ganados =  VGanado.orden_01.where(cond).paginate(per_page: 5, page: params[:page])
       @total_encontrados = VGanado.where(cond).count
 
     else
      
-      @ganados = VGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @ganados = VGanado.orden_01.paginate(per_page: 5, page: params[:page])
       @total_encontrados = VGanado.count
 
     end
 
     @total_registros = VGanado.count
 
+
     respond_to do |f|
-      
-     f.js
-      
+
+      f.js
+
     end
 
   end

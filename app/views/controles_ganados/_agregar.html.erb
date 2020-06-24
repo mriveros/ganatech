@@ -1,10 +1,10 @@
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
-<div class="modal-dialog">
+<div class="modal-dialog"  align="center">
       
-  <div class="modal-content">
+  <div class="modal-content"  >
         
-    <div class="modal-header" style="background:#e6e6e6;">
+    <div class="modal-header" style="background:#e6e6e6; ">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h4 class="modal-title" id="myModalLabel">Agregar Sanidad</h4>
@@ -70,10 +70,12 @@
 
             <div id="por_lote" hidden="true" align="center">
 
-               <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> crear Lote".html_safe, "#", id: "link-to-agregar-lote-ganado", class: "btn btn-primary pull-center", style: "float:center; align:center;", onclick: "crear_lote()" %>
-              
-              <div id="ganados-lista"  align="center">
-              
+              <%#= link_to "<i class='glyphicon glyphicon-plus-sign'></i> crear lote".html_safe, "#", id: "link-to-crear-lote-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "crear_lote_ganado()" %>
+
+               <div id="lote-ganado" align="center">
+
+                
+
               </div>
               
             </div>
@@ -140,18 +142,6 @@
 
   aplicar_datepicker2();
 
-
-  function crear_lote(){  
-    
-  
-     $.ajax({
-        url: "<%= url_for(controles_ganados_crear_lote_ganado_path) %>", 
-        data: {id: 0},
-        dataType: 'script'
-      });
-
-  }
-
   $("#clasificacion_control_id").bind('change', function(){ 
 
     if ($(this).val() == <%=PARAMETRO[:clasificacion_por_ganado]%>){
@@ -167,7 +157,8 @@
       $("#por_lote").show();
       $("#por_potrero").hide();
       $("#por_hacienda").hide();
-
+     
+      $("#lote-ganado").html("<%= escape_javascript(render partial: "crear_lote_ganado") %>");
     } 
 
     else if ($(this).val() == <%=PARAMETRO[:clasificacion_por_potrero]%>){

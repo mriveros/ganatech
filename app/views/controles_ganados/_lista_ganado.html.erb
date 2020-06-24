@@ -1,0 +1,50 @@
+<% if ganados.present? %>
+
+  <% ganados.each do |gan| %>
+
+    <tr>
+
+      
+      <td style="text-transform:uppercase;"><%= gan.nombre%></td>
+      <td ><%= gan.rp%></td>
+      <td ><%= gan.codigo_rfid %></td>
+      <td ><%= gan.potrero %></td>
+      <td ><%= gan.estado_ganado %></td>
+      <td ><%= check_box_tag :ganado, gan.ganado_id, false, { class: 'form-control input-sm'} %> </td>
+
+  <% end %>
+
+  <tr id="tab-paginacion">
+
+      <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados, :params => params %></div></td>
+  </tr>
+
+  <tr>
+
+      <td colspan="12">
+        Cantidad de registros encontrados: <%= @total_encontrados %> 
+      </td>
+
+  </tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+<script type="text/javascript">
+
+  function eliminar_registro(ganado_id) {
+
+    
+    }
+
+</script>

@@ -1,6 +1,6 @@
 <% if @guardado_ok %>
 
-   $("<div class='col-sm-12' id='msg-agregar-espermas' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-esperma");
+  $("<div class='col-sm-12' id='msg-agregar-espermas' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-esperma");
    
   $("#form_buscar_esperma_id").val('<%= @esperma.id %>');
   $("#form_buscar_esperma_descripcion").val('');
