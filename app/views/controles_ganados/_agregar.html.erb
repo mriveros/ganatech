@@ -72,7 +72,7 @@
 
                <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> crear Lote".html_safe, "#", id: "link-to-agregar-lote-ganado", class: "btn btn-primary pull-center", style: "float:center; align:center;", onclick: "crear_lote()" %>
               
-              <div id="lista-ganado" hidden="true" align="center">
+              <div id="ganados-lista"  align="center">
               
               </div>
               
@@ -143,8 +143,7 @@
 
   function crear_lote(){  
     
-    alert("DEBUG");
-
+  
      $.ajax({
         url: "<%= url_for(controles_ganados_crear_lote_ganado_path) %>", 
         data: {id: 0},

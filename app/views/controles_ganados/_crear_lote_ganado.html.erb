@@ -4,7 +4,7 @@
    
     <thead> 
 
-      <%= form_tag ganados_lista_path, remote: true, id: "form-buscar-ganado"  do  %>
+      <%= form_tag controles_ganados_crear_lote_ganado_path, remote: true, id: "form-buscar-ganado"  do  %>
 
         <tr class= "td-nivel-1">
         
@@ -54,14 +54,17 @@
           </th>
        
         </tr>  
-       
-       <thead> 
+    
+      <% end %>
+    
+    <thead> 
 
           <% if ganados.present? %>
 
             <% ganados.each do |gan| %>
 
               <tr>
+
                
                 <td style="text-transform:uppercase;"><%= gan.nombre%></td>
                 <td ><%= gan.rp%></td>
@@ -98,14 +101,17 @@
 
           <% end %>
 
-  <% end %>
-
   </table>
 
 </div>
 
 <script type="text/javascript">
 
+ $("#table-ganado input, #table-ganado select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-ganado").submit();
+
+  })
   
 
 </script>
