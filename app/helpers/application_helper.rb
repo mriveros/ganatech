@@ -148,6 +148,14 @@ module ApplicationHelper
      " <span class='glyphicon glyphicon-plus'></span>".html_safe
   end
 
+  def icon_ok_sign
+    "<span class='glyphicon glyphicon-ok-sign'></span>".html_safe
+  end
+
+  def icon_minus_sign
+    "<span class='glyphicon glyphicon-minus-sign'></span>".html_safe
+  end
+
   def linked_combo(nombre, args)
     args[:url] ||= ""
     args[:display] ||= "descripcion"
