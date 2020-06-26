@@ -210,7 +210,7 @@ before_filter :require_usuario
     
     cond = []
     args = []
-    puts "//////////////////DEBUG"
+    
     if params[:form_buscar_ganado_nombre].present?
 
       cond << "nombre ilike ?"
@@ -277,6 +277,46 @@ before_filter :require_usuario
     end
 
   end
+
+
+  def agregar_ganado_lote
+
+    @lote_control_ganado = LoteControlGanado.new
+    @lote_control_ganado.ganado_id = params[:ganado_id]
+    
+    if @lote_control_ganado.save
+
+      auditoria_nueva("Guardar Lote para control de ganado","tmp_ganados_controles_lotes", @lote_control_ganado)
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def eliminar_ganado_lote
+
+    @lote_control_ganado = LoteControlGanado.where("ganado_id = ? ", params[:ganado_id]).first
+    aux = @lote_control_ganado 
+    
+    if @lote_control_ganado.destroy
+    
+      auditoria_nueva("Eliminar Lote para control de ganado","tmp_ganados_controles_lotes", @lote_control_ganado)
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 
 end
