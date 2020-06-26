@@ -180,6 +180,8 @@ get "crontab_ultron/index"
   post "controles_ganados/crear_lote_ganado"
   post "controles_ganados/lista_ganado"
   get "controles_ganados/lista_ganado"
+  get "controles_ganados/agregar_ganado_lote"
+  get "controles_ganados/eliminar_ganado_lote"
   
   
  
