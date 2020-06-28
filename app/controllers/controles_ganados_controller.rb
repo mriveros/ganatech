@@ -128,9 +128,16 @@ before_filter :require_usuario
 
   def guardar
 
-    @valido = true
+    @valido = false
     @msg = ""
     @guardado_ok = false
+
+    if @valido
+
+      
+
+    end
+
 
      respond_to do |f|
 
@@ -315,6 +322,19 @@ before_filter :require_usuario
 
     end
 
+  end
+
+
+  def buscar_ganado
+
+    @ganados = VGanado.where("nombre ilike ? ", "%#{params[:ganado]}%")
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @ganados }
+    
+    end
   end
 
 

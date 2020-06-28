@@ -36,7 +36,7 @@
             <em class="nmb"></em>
           </th>
           
-          <th>
+          <th >
               <span>RFID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_codigo_rfid, nil, :class => 'form-control', :placeholder => "" %>
@@ -59,8 +59,15 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
+          
 
-          <th><%= check_box_tag :seleccionar_todos, nil, false, { class: 'form-control input-sm'} %> </th>
+          <th>
+              <span>Marcar</span>
+            <div class="input-group input-group-sm">
+              <%= check_box_tag :seleccionar_todos, nil, false, { class: 'form-control input-sm'} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
 
         </tr>
 
