@@ -17,7 +17,7 @@
 
 <% else %>
   
-    $("<div class='col-sm-12' id='msg-agregar-espermas' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-control-ganado");
+    $("<div class='col-sm-12' id='msg-agregar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-control-ganado");
     swal("Sanitaciones", "Error al guardar la sanidad.<%=@msg%> Intente más tarde","error");
 
 <% end %>

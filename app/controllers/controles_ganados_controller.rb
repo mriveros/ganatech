@@ -117,6 +117,8 @@ before_filter :require_usuario
   def agregar
 
     @control_ganado = ControlGanado.new
+    nuevo_incremento = ControlGanado.last
+    @codigo_control = nuevo_incremento.id + 1
 
     respond_to do |f|
       
@@ -125,14 +127,32 @@ before_filter :require_usuario
     end
 
   end
-
+ 
   def guardar
 
     @valido = false
-    @msg = ""
+    @msg = " "
     @guardado_ok = false
 
     if @valido
+
+      if params[:clasificacion_control][:id] == PARAMETRO[:clasificacion_por_ganado]
+
+        control_ganado = ControlGanado.new
+        control_ganado.ganado_id = params[:ganado_id]
+        control_ganado.control_id = params[:control][:id]
+        control_ganado.medicamento_id = params[:medicamento_id]
+        control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+        control_ganado.codigo = params[:codigo_lote]
+        control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
+
+        if control_ganado.save
+
+          @guardado_ok = true
+
+        end
+
+      end
 
       
 
@@ -327,7 +347,7 @@ before_filter :require_usuario
 
   def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike ? ", "%#{params[:ganado]}%")
+    @ganados = VGanado.where("nombre ilike (?) ", "%#{params[:ganado]}%")
 
     respond_to do |f|
       
