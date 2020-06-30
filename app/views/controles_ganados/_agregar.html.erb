@@ -84,7 +84,7 @@
 
               <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
               <div class="col-sm-7"><%= collection_select :hacienda_potrero, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
-              <div class="col-sm-1"></div><br/><br/>
+              <div class="col-sm-1"></div><br/>
 
                 
               <%= linked_combo "potrero_id", 
@@ -105,11 +105,12 @@
               
               <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
               <div class="col-sm-7"><%= collection_select :hacienda_select, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
-              <div class="col-sm-1"></div><br/>
+              <div class="col-sm-1"></div><br/><br/>
 
             </div>
 
             <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+
           <div class="col-sm-7">
             <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
           </div>
@@ -376,7 +377,7 @@
         if ($("#clasificacion_control_id").val() == <%=PARAMETRO[:clasificacion_por_hacienda]%>)
         {
 
-          if($("#hacienda_id").val().length == 0){
+          if($("#hacienda_select_id").val().length == 0){
 
             msg +="Debe seleccionar una Hacienda.\n"
             valido = false

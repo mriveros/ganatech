@@ -1,10 +1,18 @@
 <% if @guardado_ok %>
 
   $("<div class='col-sm-12' id='msg-agregar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-control-ganado");
-   
-  $("#form_buscar_control_ganado_id").val('<%= @control_ganado.id %>');
+  
+  <% if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado] %>
+    
+    $("#form_buscar_control_ganado_id").val('<%= @control_ganado.id %>');
+  
+  <%else%>
+
+    $("#form_buscar_control_ganado_codigo").val('<%= params[:codigo_lote]%>');
+
+  <%end%>
+  
   $("#form_buscar_control_ganado_fecha_control").val('');
-  $("#form_buscar_control_ganado_codigo").val('');
   $("#form_buscar_control_ganado_nombre").val('');
   $("#form_buscar_control_ganado_ganado_rp").val('');
   $("#form-buscar-control-ganado").submit();
@@ -18,6 +26,6 @@
 <% else %>
   
     $("<div class='col-sm-12' id='msg-agregar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-control-ganado");
-    swal("Sanitaciones", "Error al guardar la sanidad.<%=@msg%> Intente más tarde","error");
+    swal("Sanitaciones", "Error al guardar la sanidad.<%= @msg %> Intente más tarde","error");
 
 <% end %>

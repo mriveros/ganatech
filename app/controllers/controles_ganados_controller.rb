@@ -118,7 +118,7 @@ before_filter :require_usuario
 
     @control_ganado = ControlGanado.new
     nuevo_incremento = ControlGanado.last
-    @codigo_control = nuevo_incremento.id + 1
+    @codigo_control = nuevo_incremento.codigo + 1
 
     respond_to do |f|
       
@@ -134,13 +134,42 @@ before_filter :require_usuario
     @msg = " "
     @guardado_ok = false
 
-    if params[:clasificacion_control][:id] == PARAMETRO[:clasificacion_por_ganado]
+    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
       
       medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
       if medicamento.cantidad_stock < params[:cantidad_suministrada]
 
         @msg = "No hay suficiente Stock para aplicar este medicamento. "
-        @valido = true
+        @valido = false
+
+      end
+
+    end
+
+    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
+      
+      @ganado_potrero = Ganado.where("potrero_id = ?", params[:potrero][:id])
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_potrero.size.to_i)
+
+        @msg = "No hay suficiente Stock para aplicar este medicamento. "
+        @valido = false
+
+      end
+
+    end
+
+    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
+      
+      @ganado_hacienda =VGanado.where("hacienda_id = ?", params[:hacienda_select][:id])
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_hacienda.size.to_i)
+
+        @msg = "No hay suficiente Stock para aplicar este medicamento. "
+        @valido = false
 
       end
 
@@ -149,7 +178,7 @@ before_filter :require_usuario
     if @valido
 
       if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
-        puts "DEBUG!"
+        
         @control_ganado = ControlGanado.new
         @control_ganado.ganado_id = params[:ganado_id]
         @control_ganado.fecha_control = params[:fecha_control]
@@ -168,7 +197,55 @@ before_filter :require_usuario
 
       end
 
-      
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
+        
+        @ganado_potrero.each do |ganado|
+
+          @control_ganado = ControlGanado.new
+          @control_ganado.ganado_id = ganado.id
+          @control_ganado.fecha_control = params[:fecha_control]
+          @control_ganado.control_id = params[:control][:id]
+          @control_ganado.medicamento_id = params[:medicamento_id]
+          @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+          @control_ganado.codigo = params[:codigo_lote]
+          @control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
+          @control_ganado.observacion = params[:observacion]
+
+          if @control_ganado.save
+
+            @guardado_ok = true
+
+          end
+
+        end
+
+      end
+
+
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
+        
+        @ganado_hacienda.each do |ganado|
+
+          @control_ganado = ControlGanado.new
+          @control_ganado.ganado_id = ganado.id
+          @control_ganado.fecha_control = params[:fecha_control]
+          @control_ganado.control_id = params[:control][:id]
+          @control_ganado.medicamento_id = params[:medicamento_id]
+          @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+          @control_ganado.codigo = params[:codigo_lote]
+          @control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
+          @control_ganado.observacion = params[:observacion]
+
+          if @control_ganado.save
+
+            @guardado_ok = true
+
+          end
+
+        end
+
+      end
+
 
     end
 
