@@ -174,6 +174,23 @@ before_filter :require_usuario
       end
 
     end
+
+
+    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
+      
+      @ganado_lote =LoteControlGanado.all
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_lote.size.to_i)
+
+        @msg = "No hay suficiente Stock para aplicar este medicamento. "
+        @valido = false
+
+      end
+
+    end
+
+
     
     if @valido
 
@@ -243,6 +260,33 @@ before_filter :require_usuario
           end
 
         end
+
+      end
+
+
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
+        
+        @ganado_lote.each do |ganado|
+
+          @control_ganado = ControlGanado.new
+          @control_ganado.ganado_id = ganado.ganado_id
+          @control_ganado.fecha_control = params[:fecha_control]
+          @control_ganado.control_id = params[:control][:id]
+          @control_ganado.medicamento_id = params[:medicamento_id]
+          @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+          @control_ganado.codigo = params[:codigo_lote]
+          @control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
+          @control_ganado.observacion = params[:observacion]
+
+          if @control_ganado.save
+
+            @guardado_ok = true
+
+          end
+
+        end
+        #Borrar toda la tabla
+        LoteControlGanado.destroy_all
 
       end
 
