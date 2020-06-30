@@ -130,23 +130,37 @@ before_filter :require_usuario
  
   def guardar
 
-    @valido = false
+    @valido = true
     @msg = " "
     @guardado_ok = false
 
+    if params[:clasificacion_control][:id] == PARAMETRO[:clasificacion_por_ganado]
+      
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+      if medicamento.cantidad_stock < params[:cantidad_suministrada]
+
+        @msg = "No hay suficiente Stock para aplicar este medicamento. "
+        @valido = true
+
+      end
+
+    end
+    
     if @valido
 
-      if params[:clasificacion_control][:id] == PARAMETRO[:clasificacion_por_ganado]
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
+        puts "DEBUG!"
+        @control_ganado = ControlGanado.new
+        @control_ganado.ganado_id = params[:ganado_id]
+        @control_ganado.fecha_control = params[:fecha_control]
+        @control_ganado.control_id = params[:control][:id]
+        @control_ganado.medicamento_id = params[:medicamento_id]
+        @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+        @control_ganado.codigo = params[:codigo_lote]
+        @control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
+        @control_ganado.observacion = params[:observacion]
 
-        control_ganado = ControlGanado.new
-        control_ganado.ganado_id = params[:ganado_id]
-        control_ganado.control_id = params[:control][:id]
-        control_ganado.medicamento_id = params[:medicamento_id]
-        control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
-        control_ganado.codigo = params[:codigo_lote]
-        control_ganado.clasificacion_control_id = params[:clasificacion_control][:id]
-
-        if control_ganado.save
+        if @control_ganado.save
 
           @guardado_ok = true
 
