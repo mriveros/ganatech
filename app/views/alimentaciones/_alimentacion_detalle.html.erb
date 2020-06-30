@@ -18,7 +18,7 @@
 
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar suministro".html_safe, "#", id: "link-to-agregar-alimentacion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
-          <%= modal_window( window_id: "modal-window-agregar-alimentacion-detalle", link_to_id: "#link-to-agregar-alimentacion-detalle", url: alimentaciones_agregar_alimentacion_detalle_path( window_id: "modal-window-agregar-alimentacion-detalle", alimentacion_id: params[:alimentacion_id]) )%>
+          <%= modal_window( window_id: "modal-window-agregar-alimentacion-detalle", link_to_id: "#link-to-agregar-alimentacion-detalle", url: alimentaciones_agregar_alimentaciones_detalle_path( window_id: "modal-window-agregar-alimentacion-detalle", alimentacion_id: params[:alimentacion_id]) )%>
 
           <thead>
 
@@ -75,9 +75,9 @@
 
           <tbody id="alimentacion-detalle-lista">
 
-            <% if @alimento_detalle.present? %>
+            <% if @alimentacion_detalle.present? %>
 
-              <% @alimento_detalle.each do |ali| %>
+              <% @alimentacion_detalle.each do |ali| %>
 
                 <tr>
 
