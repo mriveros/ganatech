@@ -64,8 +64,8 @@
           <th>
               <span>Marcar</span>
             <div class="input-group input-group-sm">
-              <%= check_box_tag :seleccionar_todos, nil, false, { class: 'form-control input-sm'} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_estado_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= check_box_tag :seleccionar_todo, nil , false, { class: 'form-control input-sm', onclick: "selectAll(this)"} %>
+              <span class="input-group-addon limpiar"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -92,7 +92,6 @@
 
 <script type="text/javascript">
 
-  
 
   $("#form-buscar-ganado").submit();
 
