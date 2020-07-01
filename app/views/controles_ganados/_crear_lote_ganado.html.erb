@@ -64,7 +64,7 @@
           <th>
               <span>Marcar</span>
             <div class="input-group input-group-sm">
-              <%= check_box_tag :seleccionar_todo, nil , false, { class: 'form-control input-sm', onclick: "selectAll(this)"} %>
+              <%= check_box_tag :seleccionar_todo, 0 , false, { class: 'form-control input-sm', onclick: "selectAll(this)"} %>
               <span class="input-group-addon limpiar"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -91,18 +91,6 @@
 </style>
 
 <script type="text/javascript">
-  
-  function selectAll(control){
-
-   $("input:checkbox").each(function() {
-      
-      $(this).prop('checked', true);
-      lote_ganado($(this), $(this).val())
-
-   });
-
-  }
-
 
   $("#form-buscar-ganado").submit();
 
@@ -135,7 +123,8 @@
  
   
   //---------------------------- BUSCAR GANADO-------- -------------------------//
-  $("#table-ganado input, #table-ganado select").bind('change', function () {
+  $("#table-ganado input not(.seleccionar_todo), #table-ganado select").bind('change', function () {
+    
     $.ajaxQ.abortAll();
     $.ajax({
       type: 'GET',
