@@ -302,52 +302,21 @@ before_filter :require_usuario
   
   end
 
-  def editar
-    
-    @control_ganado = ControlGanado.find(params[:celo_id])
-
-    respond_to do |f|
-      
-        f.js
-      
-    end
-
-  end
-
-  def actualizar
-
-    @valido = true
-    @msg = ""
-    @guardado_ok = false
-
-               
-
-    respond_to do |f|
-
-      f.js
-
-    end
-  
-  end
-
-
+ 
  def eliminar
 
-    valido = true
+    @eliminado = false
     @msg = ""
 
-   
+    @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
+    @control_ganado_elim = @control_ganado
     
-    rescue Exception => exc  
-      
-      if exc.present?        
-      
-        @excep = exc.message.split(':')    
-        @msg = "El celo contiene datos relacionados."
-        @eliminado = false
-      
-      end
-        
+    if @control_ganado.destroy
+    
+      @eliminado = true
+
+    end
+    
     respond_to do |f|
 
       f.js

@@ -1,23 +1,26 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-espermas' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-espermas");
-   $("#form_buscar_esperma_id").val("<%=@esperma_elim.id%>")
-   $("#form-buscar-esperma").submit();
+  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-control-ganado");
+  $("#form_buscar_control_ganado_id").val("<%=@control_ganado_elim.id%>");
+  $("#form_buscar_control_ganado_fecha_control").val('');
+  $("#form_buscar_control_ganado_nombre").val('');
+  $("#form_buscar_control_ganado_ganado_rp").val('');
+  $("#form-buscar-control-ganado").submit();
     setTimeout(function(){ 
       
-      $("#msg-eliminar-espermas").remove();
-       swal("Muestras","Muestra eliminada exitosamente!.", "success");
+      $("#msg-eliminar-control-ganado").remove();
+       swal("Sanitaciones","Control Eliminado Exitosamente!.", "success");
 
     }, 1000);
       
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-espermas' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-espermas");
+  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-control-ganado");
   setTimeout(function(){ 
 
-    $("#msg-eliminar-espermas").remove(); 
+    $("#msg-eliminar-control-ganado").remove(); 
 
-    swal("Muestras", "No se pudo eliminar la muestra. <%=@msg%>. Intente más tarde","error");
+    swal("Sanitaciones", "No se pudo eliminar el control. <%=@msg%>. Intente más tarde","error");
   
   }, 1000);
   
