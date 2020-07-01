@@ -250,7 +250,7 @@
 
       def editar
 
-        @alimento = Alimentacion.find(params[:alimentacion_id])
+        @alimento = Alimentacion.find(params[:id])
 
         respond_to do |f|
 
