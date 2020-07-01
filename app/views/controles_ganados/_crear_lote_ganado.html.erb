@@ -91,6 +91,17 @@
 </style>
 
 <script type="text/javascript">
+  
+  function selectAll(control){
+
+   $("input:checkbox").each(function() {
+      
+      $(this).prop('checked', true);
+      lote_ganado($(this), $(this).val())
+
+   });
+
+  }
 
 
   $("#form-buscar-ganado").submit();
@@ -141,7 +152,7 @@
 
   })
   //----------------------------------------------------------------------------//
-
+ 
   aplicar_datepicker();
   
 </script>
