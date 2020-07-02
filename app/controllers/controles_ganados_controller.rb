@@ -459,8 +459,43 @@ before_filter :require_usuario
       f.json { render :json => @ganados }
     
     end
+
   end
 
+
+  def seleccionar_lote
+
+    @lote = LoteControlGanado.new
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def eliminar_lote
+
+    @lote_eliminado = false
+
+    @lote_control_ganado = ControlGanado.where("codigo = ?", params[:codigo_lote])
+
+    if @lote_control_ganado.destroy_all
+
+      @lote_eliminado = true
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+
+  end
 
 
 end

@@ -6,6 +6,8 @@
     <h3 style="float:left;margin-top:5px;">Sanidades</h3>
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Sanidad".html_safe, "#", id: "link-to-agregar-control-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-control-ganado", link_to_id: "#link-to-agregar-control-ganado", url: controles_ganados_agregar_path( window_id: "modal-window-agregar-control-ganado"))%>
+    <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-control-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-eliminar-control-ganado", link_to_id: "#link-to-eliminar-control-ganado", url: controles_ganados_seleccionar_lote_path( window_id: "modal-window-eliminar-control-ganado"))%>
     
   </div>
   

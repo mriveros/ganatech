@@ -8,7 +8,12 @@
 </div>
 
 <div style="clear:both;"></div>
- 
+  
+
+  <div align="center">
+  <div class="col-sm-4"><%= label_tag :nil, "Seleccionar Todo".html_safe %></div>
+  <div class="col-sm-4"> <%= check_box_tag :seleccionar_todo, 0 , false, { class: 'form-control input-sm', onclick: "selectAll(this)"} %></div>
+  </div>
 <div class="table-responsive" id="table-ganado">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
@@ -63,10 +68,7 @@
 
           <th>
               <span>Marcar</span>
-            <div class="input-group input-group-sm">
-              <%= check_box_tag :seleccionar_todo, 0 , false, { class: 'form-control input-sm', onclick: "selectAll(this)"} %>
-              <span class="input-group-addon limpiar"><i class="fa fa-times"></i></span>
-            </div>
+           
           </th>
 
         </tr>
@@ -123,7 +125,7 @@
  
   
   //---------------------------- BUSCAR GANADO-------- -------------------------//
-  $("#table-ganado input not(.seleccionar_todo), #table-ganado select").bind('change', function () {
+  $("#table-ganado input , #table-ganado select").bind('change', function () {
     
     $.ajaxQ.abortAll();
     $.ajax({

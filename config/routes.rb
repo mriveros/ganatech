@@ -182,6 +182,8 @@ get "crontab_ultron/index"
   get "controles_ganados/lista_ganado"
   get "controles_ganados/agregar_ganado_lote"
   get "controles_ganados/eliminar_ganado_lote"
+  get "controles_ganados/seleccionar_lote"
+  post "controles_ganados/eliminar_lote"
   
   
  
