@@ -1,0 +1,20 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-alimentaciones");
+   $("#form_buscar_alimentaciones_id").val("<%=@alimentacion_elim.id%>")
+   $("#form-buscar-alimentaciones").submit();
+    setTimeout(function(){
+
+      $("#msg-eliminar-alimentaciones").remove();
+      swal("El alimento ha sido eliminado Exitosamente.");
+
+    }, 1000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg.html_safe %></div>").insertBefore("#table-alimentaciones");
+  setTimeout(function(){ $("#msg-eliminar-alimentacion").remove(); }, 1000);
+
+    swal("no se pudo Eliminar el alimento. Intente más tarde.")
+
+<% end %>

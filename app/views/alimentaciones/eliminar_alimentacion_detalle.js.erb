@@ -1,0 +1,19 @@
+<% if @eliminado_ok %>
+
+
+setTimeout( function(){
+
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
+    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
+    swal("Sumnistro Eliminado exitosamente!");
+    $("#form_buscar_alimentacion_id").val('<%=params[:alimentacion_id] %>');
+    $("#form-buscar-alimentacion").submit();
+
+    }, 1000);
+
+<% else %>
+
+  swal('Error al eliminar el suministro. Intente más tarde');
+
+<% end %>

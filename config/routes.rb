@@ -105,9 +105,13 @@ get "crontab_ultron/index"
   post "alimentaciones/actualizar"
   get "alimentaciones/eliminar"
   get "alimentaciones/buscar_alimentacion"
+  get "alimentaciones/alimentacion_detalle"
+  get "alimentaciones/agregar_alimentacion_detalle"
+  post "alimentaciones/guardar_alimentacion_detalle"
+  get "alimentaciones/eliminar_alimentacion_detalle"
 
   #CELOS
-  get "celos/index" 
+  get "celos/index"
   post "celos/lista"
   get "celos/lista"
   get "celos/agregar"
@@ -126,7 +130,7 @@ get "crontab_ultron/index"
   get "celos/buscar_esperma_reproductor"
 
   #REPRODUCCIONES
-  get "reproducciones/index" 
+  get "reproducciones/index"
   post "reproducciones/lista"
   get "reproducciones/lista"
   get "reproducciones/agregar"
@@ -141,7 +145,7 @@ get "crontab_ultron/index"
   get "reproducciones/buscar_ganado_reproductor"
   get "reproducciones/buscar_esperma_reproductor"
   get "reproducciones/buscar_ganado_estado_celo"
- 
+
 
   #ESTADOS GANADOS
   get "estados_ganados/index"

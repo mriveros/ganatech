@@ -1,0 +1,160 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Alimentacion Detalle</h3>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div class="panel-body">
+
+      <div class="table-responsive" id="table-alimentacion-detalle">
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar suministro".html_safe, "#", id: "link-to-agregar-alimentacion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= modal_window( window_id: "modal-window-agregar-alimentacion-detalle", link_to_id: "#link-to-agregar-alimentacion-detalle", url: alimentaciones_agregar_alimentacion_detalle_path( window_id: "modal-window-agregar-alimentacion-detalle", alimentacion_id: params[:alimentacion_id]) )%>
+
+          <thead>
+
+            <tr role="row">
+
+              <th>Observación</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="alimentacion-detalle-lista">
+
+            <% if @alimento.present? %>
+
+                <tr>
+                  <td><%= @alimento.observacion %></td>
+                </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+        <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Suministros</h3>
+      </div>
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+
+          <thead>
+
+            <tr role="row">
+
+              <th>id</th>
+              <th>Descripción</th>
+              <th>Costo</th>
+              <th>Fecha Suministro</th>
+              <th>Fecha Vencimiento</th>
+              <th>Lote</th>
+              <th>Cantidad Suministro</th>
+              <th>Observación</th>
+              <th></th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <tbody id="alimentacion-detalle-lista">
+
+            <% if @alimentacion_detalle.present? %>
+
+              <% @alimentacion_detalle.each do |ali| %>
+
+                <tr>
+
+                  <td><%= ali.id %></td>
+                  <td><%= ali.descripcion %></td>
+                  <td><%= ali.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+                  <td><%= ali.fecha_suministro.strftime('%d/%m/%Y') %></td>
+                  <td><%= ali.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+                  <td><%= ali.numero_lote %></td>
+                  <td><%= ali.cantidad_suministro %></td>
+                  <td><%= ali.observacion %></td>
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ali.id}, #{ali.alimentacion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion-detalle", title: 'Haga click para eliminar el suministro del alimento'  %>
+
+                  </td>
+
+
+                </tr>
+
+              <%end%>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate alimentacion_detalle, :params => params %></div></td>
+            </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</td>
+
+
+  <script type="text/javascript">
+
+    function eliminar_registro(id, alimentacion_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el suministro será eliminado y el alimento estará sujeto a cambios como la cantidad de stock disponible.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(alimentaciones_eliminar_alimentacion_detalle_path) %>",
+                data: { alimentacion_detalle_id: id, alimentacion_id: alimentacion_id },
+                dataType: 'script'
+              });
+
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+
+    }
+
+  </script>

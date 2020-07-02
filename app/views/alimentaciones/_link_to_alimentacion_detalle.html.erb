@@ -1,0 +1,29 @@
+<%= link_to icon_detalles, "#", id: "link-to-alimentacion-detalle-#{alimentacion_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles de la Alimnetacion', onclick: "$('.modal').html('');return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-alimentacion-detalle-<%= alimentacion_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#alimentacion-detalle-<%= alimentacion_id %>").html());
+
+    $(".alimentacion-detalle").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='alimentacion-detalle-<%=alimentacion_id%>' class='alimentacion-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(alimentaciones_alimentacion_detalle_path) %>',
+        data: { alimentacion_id: <%= alimentacion_id %>},
+        dataType: 'script'
+
+      })
+
+    }
+
+    return false;
+  })
+
+</script>
