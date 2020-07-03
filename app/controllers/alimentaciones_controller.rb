@@ -194,21 +194,20 @@ class AlimentacionesController < ApplicationController
     @msg = ""
 
     @alimento = Alimentacion.where("id = ?",params[:id]).first
-
     @alimento_elim = @alimento
     
     alimentacion_ganado = ControlAlimentacion.where("alimentacion_id = ?",params[:id])
     if alimentacion_ganado.present?
 
-      @msg =+ "El alimento ya ha sido utilizado en controles de ganados."
+      @msg += "El alimento ya ha sido utilizado en controles de ganados."
       @valido = false
 
     end
     
     alimentacion_detalle = AlimentacionDetalle.where("alimentacion_id = ?",params[:id])
     if alimentacion_detalle.present?
-      puts "/////////////DEBUG"
-      @msg =+ "El alimento ya cuenta con suministros."
+      
+      @msg += " El alimento ya cuenta con suministros."
       @valido = false
 
     end
@@ -220,15 +219,9 @@ class AlimentacionesController < ApplicationController
         auditoria_nueva("eliminar alimento", "alimentaciones", @alimento_elim)
         @eliminado = true
 
-      else
-
-        @msg = "ERROR: No se ha podido eliminar el alimento. Intente más tarde."
-
       end
 
     end
-
-
 
   rescue Exception => exc
     # dispone el mensaje de error

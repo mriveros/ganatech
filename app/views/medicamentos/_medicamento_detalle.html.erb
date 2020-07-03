@@ -89,7 +89,7 @@
                   <td><%= med.numero_lote %></td>
                   <td><%= med.cantidad_suministro %></td>
                   <td><%= med.observacion %></td>
-                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{med.id}, #{med.medicamento_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-medicamento-detalle", title: 'Haga click para eliminar el suministro del medicamento'  %>
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{med.id}, #{med.medicamento_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-medicamento-detalle", title: 'Haga click para eliminar el suministro del medicamento'  %>
                     
                   </td>
                  
@@ -124,7 +124,7 @@
 
   <script type="text/javascript">
 
-    function eliminar_registro(id, medicamento_id) {
+    function eliminar_registro_detalle(id, medicamento_id) {
 
         swal({
           title: "Confirmar",
