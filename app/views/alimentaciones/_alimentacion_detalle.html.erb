@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Alimentacion Detalle</h3>
+        <h3 style="float:left;margin-top:5px;">Alimento Detalle</h3>
       </div>
 
     </div>
@@ -89,7 +89,7 @@
                   <td><%= ali.numero_lote %></td>
                   <td><%= ali.cantidad_suministro %></td>
                   <td><%= ali.observacion %></td>
-                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{ali.id}, #{ali.alimentacion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion-detalle", title: 'Haga click para eliminar el suministro del alimento'  %>
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ali.id}, #{ali.alimentacion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion-detalle", title: 'Haga click para eliminar el suministro del alimento'  %>
 
                   </td>
 
@@ -124,7 +124,7 @@
 
   <script type="text/javascript">
 
-    function eliminar_registro_detalle(id, alimentacion_id) {
+    function eliminar_registro(id, alimentacion_id) {
 
         swal({
           title: "Confirmar",
