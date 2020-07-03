@@ -42,6 +42,13 @@ class AlimentacionesController < ApplicationController
 
     end
 
+    if params[:form_buscar_alimentaciones_costo].present?
+
+      cond << "costo ilike ?"
+      args << "%#{params[:form_buscar_alimentaciones_costo]}%"
+
+    end
+
 
     if params[:form_buscar_alimentaciones_cantidad_aplicacion].present?
 
@@ -138,6 +145,7 @@ class AlimentacionesController < ApplicationController
       @alimento.descripcion = params[:descripcion].upcase
       @alimento.nombre_alimento = params[:nombre_alimento].upcase
       @alimento.cantidad_stock = params[:cantidad_stock]
+      @alimento.costo = params[:costo]
       @alimento.cantidad_aplicacion = params[:cantidad_aplicacion]
       @alimento.ciclo = params[:ciclo]
       @alimento.intervalo_tiempo = params[:intervalo_tiempo]
@@ -195,7 +203,7 @@ class AlimentacionesController < ApplicationController
 
     @alimento = Alimentacion.where("id = ?",params[:id]).first
     @alimento_elim = @alimento
-    
+
     alimentacion_ganado = ControlAlimentacion.where("alimentacion_id = ?",params[:id])
     if alimentacion_ganado.present?
 
@@ -203,10 +211,10 @@ class AlimentacionesController < ApplicationController
       @valido = false
 
     end
-    
+
     alimentacion_detalle = AlimentacionDetalle.where("alimentacion_id = ?",params[:id])
     if alimentacion_detalle.present?
-      
+
       @msg += " El alimento ya cuenta con suministros."
       @valido = false
 
@@ -267,6 +275,7 @@ class AlimentacionesController < ApplicationController
       @alimento.descripcion = params[:alimentacion][:descripcion].upcase
       @alimento.nombre_alimento = params[:alimentacion][:nombre_alimento].upcase
       @alimento.cantidad_stock = params[:alimentacion][:cantidad_stock]
+      @alimento.costo = params[:alimentacion][:costo]
       @alimento.cantidad_aplicacion = params[:alimentacion][:cantidad_aplicacion]
       @alimento.ciclo = params[:alimentacion][:ciclo]
       @alimento.intervalo_tiempo = params[:alimentacion][:intervalo_tiempo]
