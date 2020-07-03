@@ -12,9 +12,13 @@
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg.html_safe %></div>").insertBefore("#table-alimentaciones");
-  setTimeout(function(){ $("#msg-eliminar-alimentacion").remove(); }, 1000);
+  $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-alimentaciones");
+  setTimeout(function(){ 
+    
+    $("#msg-eliminar-alimentacion").remove(); 
+    swal("No se pudo Eliminar el alimento.<%= @msg %>. Intente más tarde.")
 
-    swal("no se pudo Eliminar el alimento. Intente más tarde.")
+  }, 2000);
+
 
 <% end %>

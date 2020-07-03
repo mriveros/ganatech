@@ -150,7 +150,7 @@ class AlimentacionesController < ApplicationController
 
         auditoria_nueva("agregar nueva alimentacion", "alimentaciones", @alimento)
         @alimentacion_detalle = AlimentacionDetalle.new
-        @alimentacion_detalle.medicamento_id = @alimento.id
+        @alimentacion_detalle.alimentacion_id = @alimento.id
         @alimentacion_detalle.descripcion = @alimento.descripcion
         @alimentacion_detalle.fecha_suministro = Date.today
         @alimentacion_detalle.numero_lote = 0
@@ -190,35 +190,34 @@ class AlimentacionesController < ApplicationController
   def eliminar
 
     @eliminado = false
-    valido = true
+    @valido = true
     @msg = ""
 
-    @alimento = Alimentacion.find(params[:id])
-
-    @alimentacion_detalle = AlimentacionDetalle.where("alimentacion_id = ?", params[:id])
+    @alimento = Alimentacion.where("id = ?",params[:id]).first
 
     @alimento_elim = @alimento
+    
+    alimentacion_ganado = ControlAlimentacion.where("alimentacion_id = ?",params[:id])
+    if alimentacion_ganado.present?
 
-    if controles_ganado.present?
+      @msg =+ "El alimento ya ha sido utilizado en controles de ganados."
+      @valido = false
 
-      @msg = "El alimento ya ha sido utilizado en controles de ganados."
+    end
+    
+    alimentacion_detalle = AlimentacionDetalle.where("alimentacion_id = ?",params[:id])
+    if alimentacion_detalle.present?
+      puts "/////////////DEBUG"
+      @msg =+ "El alimento ya cuenta con suministros."
       @valido = false
 
     end
 
-    if @alimentacion_detalle.present?
-
-      @msg += "El alimento ya cuenta con suministros."
-      @valido = false
-
-    end
-
-    if valido
+    if @valido
 
       if @alimento.destroy
 
         auditoria_nueva("eliminar alimento", "alimentaciones", @alimento_elim)
-
         @eliminado = true
 
       else
@@ -236,8 +235,8 @@ class AlimentacionesController < ApplicationController
     #puts "Aqui si muestra el error ".concat(exc.message)
     if exc.present?
 
-      @msg = exc.message.split(':')
       @eliminado = false
+
     end
 
     respond_to do |f|
@@ -247,6 +246,7 @@ class AlimentacionesController < ApplicationController
     end
 
   end
+
 
   def editar
 
@@ -259,6 +259,7 @@ class AlimentacionesController < ApplicationController
     end
 
   end
+
 
   def actualizar
 
