@@ -6,7 +6,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
 
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Alimentacion</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Alimento</h4>
 
     </div>
 
@@ -25,6 +25,10 @@
 
           <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :descripcion ,class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br/>
+
+          <div class="col-sm-4"><%= label_tag :nil, "Costo Alimento".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :costo ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br/>
 
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Stock #{attr_requerido}".html_safe %></div>

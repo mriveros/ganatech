@@ -4,7 +4,7 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Alimentacion</h3>
+    <h3 style="float:left;margin-top:5px;">Alimentos</h3>
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-alimentacion", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-alimentacion", link_to_id: "#link-to-agregar-alimentacion", url: alimentaciones_agregar_path( window_id: "modal-window-agregar-alimentacion") )%>
 
