@@ -146,7 +146,6 @@ class MedicamentosController < ApplicationController
       @medicamento = Medicamento.new
       @medicamento.descripcion = params[:descripcion].upcase
       @medicamento.nombre_medicamento = params[:nombre_medicamento].upcase
-      @medicamento.costo = params[:costo]
       @medicamento.cantidad_stock = params[:cantidad_stock]
       @medicamento.cantidad_aplicacion = params[:cantidad_aplicacion]
       @medicamento.ciclo = params[:ciclo]
@@ -166,7 +165,7 @@ class MedicamentosController < ApplicationController
         @medicamento_detalle.fecha_suministro = Date.today
         @medicamento_detalle.numero_lote = 0
         @medicamento_detalle.cantidad_suministro = @medicamento.cantidad_stock
-        @medicamento_detalle.costo_suministro = @medicamento.costo
+        @medicamento_detalle.costo_suministro = params[:costo]
         @medicamento_detalle.observacion = @medicamento.observacion
         @medicamento_detalle.fecha_vencimiento = @medicamento.fecha_vencimiento 
 
