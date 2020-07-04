@@ -4,9 +4,10 @@
 setTimeout( function(){
 
     $("#<%= params[:window_id]%>").modal('hide');
-    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
-    $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
-    swal("Sumnistro agregado exitosamente!");
+    $("#form_buscar_alimentaciones_id").val('<%= @alimentacion.id %>');
+    $("#form-buscar-alimentaciones").submit();
+    
+    swal("Suministro agregado exitosamente!");
 
     }, 1000);
 

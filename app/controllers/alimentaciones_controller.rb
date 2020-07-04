@@ -267,7 +267,7 @@ class AlimentacionesController < ApplicationController
     valido = true
     @msg = ""
 
-    @alimento = Alimentacion.find(params[:alimentacion_id])
+    @alimento = Alimentacion.find(params[:alimentacion][:id])
     auditoria_id = auditoria_antes("actualizar alimento", "alimentos", @alimento)
 
     if valido
@@ -346,6 +346,8 @@ class AlimentacionesController < ApplicationController
 
 
     @alimentacion = Alimentacion.where("id = ?", params[:alimentacion_id]).first
+    nuevo_codigo = AlimentacionDetalle.last
+    @numero_lote = nuevo_codigo.numero_lote + 1
 
     respond_to do |f|
 
