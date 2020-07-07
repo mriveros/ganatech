@@ -6,6 +6,9 @@
     <h3 style="float:left;margin-top:5px;">Ganados</h3>
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar ganado".html_safe, "#", id: "link-to-agregar-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-ganado", link_to_id: "#link-to-agregar-ganado", url: ganados_agregar_path( window_id: "modal-window-agregar-ganado") )%>
+
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar ganado lote".html_safe, "#", id: "link-to-agregar-ganado-lote", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-ganado-lote", link_to_id: "#link-to-agregar-ganado-lote", url: ganados_agregar_lote_ganado_path( window_id: "modal-window-agregar-ganado-lote") )%>
     
   </div>
   

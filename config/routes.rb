@@ -78,6 +78,8 @@ get "crontab_ultron/index"
   get "ganados/agregar_celo"
   post "ganados/guardar_celo"
   get "ganados/buscar_ganado"
+  get "ganados/agregar_lote_ganado"
+  post "ganados/guardar_lote_ganado"
 
 
   #MEDICAMENTOS

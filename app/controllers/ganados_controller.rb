@@ -189,7 +189,7 @@ class GanadosController < ApplicationController
 
     end
 
-    @codigo_lote = ultima_produccion.id + 1
+    @codigo_lote = ultima_produccion.codigo_lote + 1
 
     respond_to do |f|
       
@@ -865,5 +865,105 @@ class GanadosController < ApplicationController
     end
 
   end
+
+
+  def agregar_lote_ganado
+
+    @ganado = Ganado.new
+
+    ultima_produccion = Ganado.order("created_at").last
+
+    if ultima_produccion.present?
+
+      if ultima_produccion.created_at.year != Time.now.year
+
+        @nuevo_autoincremento = "RP-0" + 1.to_s
+
+      else
+
+         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+
+      end 
+
+    else
+      
+      @nuevo_autoincremento = 1
+
+    end
+
+    @codigo_lote = ultima_produccion.codigo_lote + 1
+
+    respond_to do |f|
+      
+        f.js
+      
+    end
+
+  end
+
+  def guardar_lote_ganado
+
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+    contador = 0
+
+    raza = Raza.where("id = ?", params[:raza_ganado][:id]).first
+
+    if @valido
+      
+      while params[:cantidad_lote].to_i > contador.to_i do
+        
+        @ganado = Ganado.new()
+        
+        ultima_produccion = Ganado.order("created_at").last
+        nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+        @ganado.nombre = nuevo_rp
+        @ganado.rp = nuevo_rp
+        @ganado.rp_padre = "No Especificado"
+        @ganado.rp_madre = "No Especificado"
+        @ganado.codigo_rfid = params[:codigo_rfid]
+        @ganado.potrero_id = params[:potrero][:id]
+        @ganado.peso_promedio = params[:peso_promedio]
+        @ganado.sexo_ganado_id = params[:sexo_ganado][:id]
+        @ganado.tipo_ganado_id = raza.tipo_ganado_id
+        @ganado.etapa_ganado_id = params[:etapa_ganado][:id]
+        @ganado.raza_id = params[:raza_ganado][:id]
+        @ganado.tipo_concepcion_id = params[:tipo_concepcion][:id]
+        @ganado.estado_ganado_id = params[:estado_ganado][:id]
+        @ganado.observacion = params[:observacion]
+        @ganado.codigo_lote = params[:codigo_lote]
+        @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
+
+        if @ganado.save
+
+          auditoria_nueva("registrar ganado", "ganados", @ganado)
+          @guardado_ok = true
+          contador = contador + 1
+         
+        end 
+
+      end
+
+    end
+  
+    rescue Exception => exc  
+
+      if exc.present?        
+        
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        
+      end                
+              
+    respond_to do |f|
+      
+        f.js
+      
+    end
+
+  end
+
+
 
 end
