@@ -89,7 +89,7 @@ class EmpresasTransportesController < ApplicationController
     @msg = ""
     @empresa_transporte_ok = false
 
-    @empresa_transporte = EstadoGanado.new()
+    @empresa_transporte = EmpresaTransporte.new()
 
     @empresa_transporte.nombre = params[:empresa_transporte][:nombre].upcase
     @empresa_transporte.ruc_ci = params[:empresa_transporte][:ruc_ci].upcase
