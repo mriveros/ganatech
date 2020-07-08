@@ -87,16 +87,16 @@ class EmpresasTransportesController < ApplicationController
 
     valido = true
     @msg = ""
-    @estado_ganado_ok = false
+    @empresa_transporte_ok = false
 
-    @estado_ganado = EstadoGanado.new()
+    @empresa_transporte = EstadoGanado.new()
 
-    @estado_ganado.descripcion = params[:estado_ganado][:descripcion].upcase
+    @empresa_transporte.descripcion = params[:empresa_transporte][:descripcion].upcase
 
-    if @estado_ganado.save
+    if @empresa_transporte.save
 
-      auditoria_nueva("registrar estado ganado", "estados_ganados", @estado_ganado)
-      @estado_ganado_ok = true
+      auditoria_nueva("registrar empresa de transporte", "empresas_transportes", @empresa_transporte)
+      @empresa_transporte_ok = true
 
     end
 
@@ -122,21 +122,21 @@ class EmpresasTransportesController < ApplicationController
     valido = true
     @msg = ""
 
-    @estado_ganado = EstadoGanado.find(params[:id])
+    @empresa_transporte = EmpresaTransporte.find(params[:id])
 
-    @estado_ganado_elim = @estado_ganado
+    @empresa_transporte_elim = @empresa_transporte
 
     if valido
 
-      if @estado_ganado.destroy
+      if @empresa_transporte.destroy
 
-        auditoria_nueva("eliminar estado ganado", "estados_ganados", @estado_ganado_elim)
+        auditoria_nueva("eliminar empresa de transporte", "empresas_transportes", @empresa_transporte_elim)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el estado ganado. Intente más tarde."
+        @msg = "ERROR: No se ha podido eliminar la empresa de transporte. Intente más tarde."
 
       end
 
@@ -160,7 +160,7 @@ class EmpresasTransportesController < ApplicationController
 
   def editar
 
-    @estado_ganado = EstadoGanado.find(params[:id])
+    @empresa_transporte = EmpresaTransporte.find(params[:id])
 
     respond_to do |f|
 
@@ -175,17 +175,17 @@ class EmpresasTransportesController < ApplicationController
     valido = true
     @msg = ""
 
-    @estado_ganado = EstadoGanado.find(params[:estado_ganado][:id])
-    auditoria_id = auditoria_antes("actualizar estado ganado", "estados_ganados", @estado_ganado)
+    @empresa_transporte = EmpresaTransporte.find(params[:empresa_transporte][:id])
+    auditoria_id = auditoria_antes("actualizar empresa de transporte", "empresas_transportes", @empresa_transporte)
 
     if valido
 
-      @estado_ganado.descripcion = params[:estado_ganado][:descripcion].upcase
+      @empresa_transporte.nombre = params[:empresa_transporte][:nombre].upcase
 
-      if @estado_ganado.save
+      if @empresa_transporte.save
 
-        auditoria_despues(@estado_ganado, auditoria_id)
-        @estado_ganado_ok = true
+        auditoria_despues(@empresa_transporte, auditoria_id)
+        @empresa_transporte_ok = true
 
       end
 
@@ -209,14 +209,14 @@ class EmpresasTransportesController < ApplicationController
   end
 
 
-  def buscar_estado_ganado
+  def buscar_empresa_transporte
 
-     @estados_ganados = EstadoGanado.where("descripcion ilike ?", "%#{params[:descripcion]}%")
+     @empresas_transportes = EmpresaTransporte.where("nombre ilike ?", "%#{params[:nombre]}%")
 
     respond_to do |f|
 
       f.html
-      f.json { render :json => @estados_ganados }
+      f.json { render :json => @empresas_transportes }
 
     end
 
