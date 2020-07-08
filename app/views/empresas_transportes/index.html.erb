@@ -4,51 +4,77 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Estados Ganados</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-estado-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-estado-ganado", link_to_id: "#link-to-agregar-estado-ganado", url: estados_ganados_agregar_path( window_id: "modal-window-agregar-estado-ganado") )%>
+    <h3 style="float:left;margin-top:5px;">Empresa de Transporte</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-empresa-transporte", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-empresa-transporte", link_to_id: "#link-to-agregar-empresa-transporte", url: empresas_transportes_agregar_path( window_id: "modal-window-agregar-empresa-transporte") )%>
 
   </div>
 </div>
 
 <div style="clear:both;"></div>
 
-<div class="table-responsive" id="table-estados-ganados">
+<div class="table-responsive" id="table-empresas-transportes">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
 
     <thead>
 
-      <%= form_tag estados_ganados_lista_path, remote: true, id: "form-buscar-estados-ganados"  do  %>
+      <%= form_tag empresas_transportes_lista_path, remote: true, id: "form-buscar-empresas-transportes"  do  %>
 
         <tr>
 
           <th style="width:15%;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_estados_ganados_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-estados-ganados', '#form_buscar_estados_ganados_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_empresas_transportes_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-empresas-transportes', '#form_buscar_empresas_transportes_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
 
           <th style="width:25%;">
-            <span>Descripción</span>
+            <span>Nombre</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_estados_ganados_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_estados_ganados_id').val('');quitar_filtro('#form-buscar-estados-ganados', '#form_buscar_estados_ganados_descripcion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_empresas_transportes_nombre, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_empresas_transportes_nombre').val('');quitar_filtro('#form-buscar-empresas-transportes', '#form_buscar_empresas_transportes_nombre');"><i class="fa fa-times"></i></span>
             </div>
+          </th>
 
-            <%= hidden_field_tag :form_buscar_estados_ganados_descripcion %>
+          <th style="width:25%;">
+            <span>RUC/CI</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_empresas_transportes_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_empresas_transportes_ruc_ci').val('');quitar_filtro('#form-buscar-empresas-transportes', '#form_buscar_empresas_transportes_ruc_ci');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Telefono</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_empresas_transportes_telefono, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_empresas_transportes_telefono').val('');quitar_filtro('#form-buscar-empresas-transportes', '#form_buscar_empresas_transportes_telefono');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Direccion</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_empresas_transportes_direccion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_empresas_transportes_direccion').val('');quitar_filtro('#form-buscar-empresas-transportes', '#form_buscar_empresas_transportes_direccion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+            <%= hidden_field_tag :form_buscar_empresas_transportes_nombre %>
             <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
-                  atributo_descripcion: :descripcion,
+                  atributo_descripcion: :nombre,
                   atributo_tipo: :text,
-                  model: :EstadoGanado,
+                  model: :EmpresaTransporte,
                   limit: 10,
-                  cadena_consulta: "upper(quitar_acentos(descripcion))",
+                  cadena_consulta: "upper(quitar_acentos(nombre))",
                   orden: "descripcion"),
-              parametro_id: "form_buscar_estados_ganados_descripcion",
-              resultado_id: "form_buscar_estados_ganados_id",
+              parametro_id: "form_buscar_empresas_transportes_nombre",
+              resultado_id: "form_buscar_empresas_transportes_id",
               min_length: 2
               ) %>
           </th>
@@ -63,7 +89,7 @@
 
       </thead>
 
-    <tbody id="estados-ganados-lista"></tbody>
+    <tbody id="empresas-transportes-lista"></tbody>
 
   </table>
 
@@ -75,11 +101,11 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-estados-ganados").bind("submit", function () {
+  $("#form-buscar-empresas-transportes").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_estados_ganados_descripcion").val().length !== 0 ){
+    if($("#form_buscar_empresas_transportes_nombre").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_estados_ganados_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_estados_ganados_descripcion").val().replace(/\s/g,'')).length > 2){
+      if(($("#form_buscar_empresas_transportes_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_empresas_transportes_nombre").val().replace(/\s/g,'')).length > 2){
         valido = true;
       }else{
         valido = false;
@@ -91,7 +117,7 @@
 
     if(valido){
     $(".nmb").html('');
-    $("#estados-ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    $("#empresas-transportes-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
     }
 
 

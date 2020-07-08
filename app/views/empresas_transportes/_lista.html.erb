@@ -1,50 +1,53 @@
-<% if estados_ganados.present? %>
+<% if empresas_transportes.present? %>
 
-  <% estados_ganados.each do |estado_ganado| %>
+<% empresas_transportes.each do |empresa_transporte| %>
 
-    <tr>
+<tr>
 
-      <td><%= estado_ganado.id %></td>
-      <td><%= estado_ganado.descripcion%></td>
-     </td>
+  <td><%= empresa_transporte.id %></td>
+  <td><%= empresa_transporte.nombre%></td>
+  <td><%= empresa_transporte.ruc_ci%></td>
+  <td><%= empresa_transporte.telefono%></td>
+  <td><%= empresa_transporte.direccion%></td>
+</td>
 
-      <td style="width:120px;">
+<td style="width:120px;">
 
-        <%= link_to_editar_estado_ganado(estado_ganado) %>
+  <%= link_to_editar_empresa_transporte(empresa_transporte) %>
 
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{estado_ganado.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-estado-ganado", title: 'Haga click para eliminar el estado ganado'  %>
+  <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{empresa_transporte.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-empresa-transporte", title: 'Haga click para eliminar la empresa de transporte'  %>
 
-       </td>
-
-
+</td>
 
 
-      </td>
 
-    </tr>
 
-  <% end %>
+</td>
+
+</tr>
+
+<% end %>
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate estados_ganados, :params => params %></div></td>
+  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate empresas_transportes, :params => params %></div></td>
 </tr>
 
 <tr>
-    <td colspan="12">
-      Cantidad de registros encontrados: <%= @total_encontrados %>
-    </td>
+  <td colspan="12">
+    Cantidad de registros encontrados: <%= @total_encontrados %>
+  </td>
 </tr>
 
 
 
 <% else %>
 
-  <tr>
+<tr>
 
-    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+  <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
 
-  </tr>
+</tr>
 
 
 <% end %>
@@ -52,37 +55,37 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(estado_ganado_id) {
+  function eliminar_registro(empresa_transporte_id) {
 
-        swal({
-          title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de estados ganados",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
+    swal({
+      title: "Confirmar",
+      text: "Al confirmar se eliminará permanentemente de la lista de empresa de transporte",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-confirm",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+      closeOnConfirm: true,
+      closeOnCancel: true
+    },
+    function(isConfirm) {
+      if (isConfirm) {
 
-              $.ajax({
-                url: "<%= url_for(estados_ganados_eliminar_path) %>",
-                data: {id: estado_ganado_id},
-                dataType: 'script'
-              });
-
-          } else{
-
-            return false;
-
-          }
-
+        $.ajax({
+          url: "<%= url_for(empresas_transportes_eliminar_path) %>",
+          data: {id: empresa_transporte_id},
+          dataType: 'script'
         });
 
+      } else{
 
-    }
+        return false;
+
+      }
+
+    });
+
+
+  }
 
 </script>
