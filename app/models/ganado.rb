@@ -1,6 +1,6 @@
-class Ganado < ActiveRecord::Base
+class GanadoEntrada < ActiveRecord::Base
 
-  self.table_name="ganados"
+  self.table_name="ganados_entradas"
   self.primary_key="id"
   
   attr_accessible :id, :nombre, :rp, :rp_padre, :rp_madre, 
