@@ -13,131 +13,10 @@ class GanadosEntradasController < ApplicationController
     cond = []
     args = []
 
-    if params[:form_buscar_ganado_id].present?
+    if params[:form_buscar_ganado_entrada_id].present?
 
-      cond << "ganado_id = ?"
-      args << params[:form_buscar_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado_codigo_lote].present?
-
-      cond << "codigo_lote = ?"
-      args << params[:form_buscar_ganado_codigo_lote]
-
-    end
-
-    if params[:form_buscar_ganado_nombre].present?
-
-      cond << "nombre ilike ?"
-      args << "%#{params[:form_buscar_ganado_nombre]}%"
-
-    end
-
-    if params[:form_buscar_ganado_rp].present?
-
-      cond << "rp = ?"
-      args << params[:form_buscar_ganado_rp]
-
-    end
-
-    if params[:form_buscar_ganado_codigo_rfid].present?
-
-      cond << "codigo_rfid = ?"
-      args << params[:form_buscar_ganado_codigo_rfid]
-
-    end
-
-
-    if params[:form_buscar_ganado_rp_padre].present?
-
-      cond << "rp_padre = ?"
-      args << params[:form_buscar_ganado_rp_padre]
-
-    end
-
-    if params[:form_buscar_ganado_rp_madre].present?
-
-      cond << "rp_madre = ?"
-      args << params[:form_buscar_ganado_rp_madre]
-
-    end
-
-    if params[:form_buscar_ganado_fecha_nacimiento].present?
-
-      cond << "fecha_nacimiento = ?"
-      args << params[:form_buscar_ganado_fecha_nacimiento]
-
-    end
-
-    if params[:form_buscar_ganado_peso_promedio].present?
-
-      cond << "peso_promedio = ?"
-      args << params[:form_buscar_ganado_peso_promedio]
-
-    end
-
-    if params[:form_buscar_ganado][:hacienda_id].present?
-
-      cond << "hacienda_id = ?"
-      args << params[:form_buscar_ganado][:hacienda_id]
-
-    end
-
-
-    if params[:form_buscar_ganado][:potrero_id].present?
-
-      cond << "potrero_id = ?"
-      args << params[:form_buscar_ganado][:potrero_id]
-
-    end
-
-    if params[:form_buscar_ganado][:tipo_ganado_id].present?
-
-      cond << "tipo_ganado_id = ?"
-      args << params[:form_buscar_ganado][:tipo_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado][:raza_ganado_id].present?
-
-      cond << "raza_id = ?"
-      args << params[:form_buscar_ganado][:raza_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado][:etapa_ganado_id].present?
-
-      cond << "etapa_ganado_id = ?"
-      args << params[:form_buscar_ganado][:etapa_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado][:sexo_ganado_id].present?
-
-      cond << "sexo_ganado_id = ?"
-      args << params[:form_buscar_ganado][:sexo_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado][:tipo_concepcion_id].present?
-
-      cond << "tipo_concepcion_id = ?"
-      args << params[:form_buscar_ganado][:tipo_concepcion_id]
-
-    end
-
-    if params[:form_buscar_ganado][:estado_ganado_id].present?
-
-      cond << "estado_ganado_id = ?"
-      args << params[:form_buscar_ganado][:estado_ganado_id]
-
-    end
-
-    if params[:form_buscar_ganado][:finalidad_ganado_id].present?
-
-      cond << "finalidad_ganado_id = ?"
-      args << params[:form_buscar_ganado][:finalidad_ganado_id]
+      cond << "ganado_entrada_id = ?"
+      args << params[:form_buscar_ganado_entrada_id]
 
     end
 
@@ -172,8 +51,15 @@ def agregar_entrada_ganado
 
     ultima_produccion = GanadoEntrada.order("created_at").last
 
-    @codigo_lote = ultima_produccion.codigo_lote + 1
+    if ultima_produccion.present?
 
+      @codigo_lote = ultima_produccion.codigo_lote.to_i + 1
+
+    else
+
+      @codigo_lote = 1
+
+    end
     respond_to do |f|
       
         f.js
@@ -195,10 +81,7 @@ def agregar_entrada_ganado
       
       while params[:cantidad_lote].to_i > contador.to_i do
         
-        @ganado = Ganado.new()
-        
-        ultima_produccion = Ganado.order("created_at").last
-        nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+        @ganado = GanadoEntrada.new()
         @ganado.nombre = nuevo_rp
         @ganado.rp = nuevo_rp
         @ganado.rp_padre = "No Especificado"

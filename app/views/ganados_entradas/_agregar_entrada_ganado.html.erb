@@ -41,32 +41,6 @@
 
               </tr>
 
-
-               <tr>
-                
-                <td>
-
-                  <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-                  <div class="col-sm-1"></div><br/>
-
-                </td>
-                  <%= linked_combo "potrero_id", 
-                  :linked =>"hacienda_id" ,
-                  :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
-                  :param => "hacienda_id",
-                  :clase => "hacienda" %>
-
-                <td>
-
-                  <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-                  <div class="col-sm-1"></div><br/>
-                  
-                </td>
-
-              </tr>
-
                <tr>
                 
                 <td>
