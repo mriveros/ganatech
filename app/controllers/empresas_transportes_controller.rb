@@ -91,7 +91,10 @@ class EmpresasTransportesController < ApplicationController
 
     @empresa_transporte = EstadoGanado.new()
 
-    @empresa_transporte.descripcion = params[:empresa_transporte][:descripcion].upcase
+    @empresa_transporte.nombre = params[:empresa_transporte][:nombre].upcase
+    @empresa_transporte.ruc_ci = params[:empresa_transporte][:ruc_ci].upcase
+    @empresa_transporte.telefono = params[:empresa_transporte][:telefono].upcase
+    @empresa_transporte.direccion = params[:empresa_transporte][:direccion].upcase
 
     if @empresa_transporte.save
 
@@ -181,6 +184,9 @@ class EmpresasTransportesController < ApplicationController
     if valido
 
       @empresa_transporte.nombre = params[:empresa_transporte][:nombre].upcase
+      @empresa_transporte.ruc_ci = params[:empresa_transporte][:ruc_ci].upcase
+      @empresa_transporte.telefono = params[:empresa_transporte][:telefono].upcase
+      @empresa_transporte.direccion = params[:empresa_transporte][:direccion].upcase
 
       if @empresa_transporte.save
 
