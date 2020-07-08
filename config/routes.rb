@@ -192,48 +192,20 @@ get "crontab_ultron/index"
   post "controles_ganados/eliminar_lote"
   
   
+  #GANADOS ENTRADAS
+  get "ganados_entradas/index"
+  post "ganados_entradas/lista"
+  get "ganados_entradas/lista"
+  get "ganados_entradas/agregar_entrada_ganado"
+  post "ganados_entradas/guardar_entrada_ganado"
+  get "ganados_entradas/eliminar_entrada_ganado"
+   
  
-
-
-
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 
 
 #----------------------------INICIO EJEMPLOS DE FONOWARE----------------------------
-
-  #PACIENTES
-  post "pacientes/lista"
-  get "pacientes/lista"
-  get "pacientes/agregar"
-  post "pacientes/guardar"
-  get "pacientes/eliminar"
-  get "pacientes/editar"
-  post "pacientes/actualizar"
-  get "pacientes/index"
-  get "pacientes/buscar_paciente"
-  get "pacientes/buscar_persona"
-  get "pacientes/buscar_paciente_cita"
-
-  #PACIENTES DETALLES FONO
-  get "pacientes_detalles_fono/paciente_detalle_fono"
-  post "pacientes_detalles_fono/guardar_detalle_fono"
-
-  #TUTORES
-  post "tutores/lista"
-  get "tutores/lista"
-  get "tutores/agregar"
-  post "tutores/guardar"
-  get "tutores/eliminar"
-  get "tutores/editar"
-  post "tutores/actualizar"
-  get "tutores/index"
-  get "tutores/buscar_tutor"
-  get "tutores/buscar_persona"
-  get "tutores/tutor_detalle"
-  get "tutores/agregar_tutor_detalle"
-  post "tutores/guardar_tutor_detalle"
-  get "tutores/eliminar_tutor_detalle"
 
   #PRECIOS
   post "precios/lista"

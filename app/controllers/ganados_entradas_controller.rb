@@ -246,7 +246,7 @@ def agregar_entrada_ganado
   end
 
 
-  def eliminar
+  def eliminar_entrada_ganado
 
     @valido = true
     @msg = ""
