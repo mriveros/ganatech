@@ -188,9 +188,18 @@ get "crontab_ultron/index"
   get "controles_ganados/eliminar_ganado_lote"
   get "controles_ganados/seleccionar_lote"
   post "controles_ganados/eliminar_lote"
-  
-  
- 
+
+  #EMPRESAS TRANSPORTES
+  get "empresas_transportes/index"
+  post "empresas_transportes/lista"
+  get "empresas_transportes/lista"
+  get "empresas_transportes/agregar"
+  post "empresas_transportes/guardar"
+  get "empresas_transportes/editar"
+  post "empresas_transportes/actualizar"
+  get "empresas_transportes/eliminar"
+  get "empresas_transportes/buscar_empresa_transporte"
+
 
 
 
