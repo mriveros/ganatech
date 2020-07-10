@@ -4,7 +4,7 @@ class GanadosEntradasController < ApplicationController
 
   def index
   
-
+ 
   end
 
 
@@ -174,7 +174,19 @@ def agregar_entrada_ganado
 
   end
 
-  
+
+  def buscar_proveedor
+    
+    @proveedor = ProveedorGanado.where("nombre_razon_social ilike ?", "%#{params[:proveedor]}%")
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @proveedor }
+    
+    end
+    
+  end
 
 
 

@@ -63,7 +63,7 @@
                 
                 <td>
                   <div class="col-sm-4"><%= f.label :nil, "Proveedor#{attr_requerido}".html_safe %></div><br/>
-                  <%= hidden_field_tag :proveedor_id%>
+                  <%= hidden_field_tag :proveedor_id %>
                   <div class="col-sm-7"><%= text_area_tag :proveedor, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
                   <div class="col-sm-1"></div><br />
                 </td>
@@ -216,9 +216,56 @@
      return true;
   }
 
-  setTimeout(function(){ 
-    
-  }, 1000);
+  //buscar RP Padre
+  $("#proveedor").bind('focus', function(){   
+
+    var proveedores = [];
+
+    $("#proveedor_id").val('');
+    $("#proveedor").val('');
+
+    $.getJSON("<%= url_for(ganados_entradas_buscar_proveedor_path) %>", { proveedor: $(this).val()}, function(j){
+        
+      var proveedor = "";
+      var options = "<option value=''> -- Seleccione un Proveedor -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_razon_social != proveedor ){
+          
+          proveedores.push( {value: j[i].id +" - "+ j[i].nombre_razon_social+" - "+j[i].ruc_ci });
+          proveedor =j[i].id +" - "+ j[i].nombre_razon_social+" "+j[i].ruc_ci ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre_razon_social+" - "+j[i].ruc_ci + "</option>"
+
+        }
+
+      }
+
+      $("#proveedor_id").html(options);
+
+    })
+
+    $("#proveedor").autocomplete({
+
+      minLength: 1,
+      source: proveedores,
+      focus: function( event, ui ) {
+      
+        $("#proveedor" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#proveedor_id").val( datos[0]);
+        //$("#proveedor").val(datos[2]);
+        return false;
+
+      }
+
+    })
+
+  });
 
   $("#btn-guardar-ganado").bind('click', function () {
 
