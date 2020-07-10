@@ -75,39 +75,28 @@ def agregar_entrada_ganado
     @guardado_ok = false
     contador = 0
 
-    raza = Raza.where("id = ?", params[:raza_ganado][:id]).first
-
     if @valido
       
-      while params[:cantidad_lote].to_i > contador.to_i do
+      
         
-        @ganado = GanadoEntrada.new()
-        @ganado.nombre = nuevo_rp
-        @ganado.rp = nuevo_rp
-        @ganado.rp_padre = "No Especificado"
-        @ganado.rp_madre = "No Especificado"
-        @ganado.codigo_rfid = params[:codigo_rfid]
-        @ganado.potrero_id = params[:potrero][:id]
-        @ganado.peso_promedio = params[:peso_promedio]
-        @ganado.sexo_ganado_id = params[:sexo_ganado][:id]
-        @ganado.tipo_ganado_id = raza.tipo_ganado_id
-        @ganado.etapa_ganado_id = params[:etapa_ganado][:id]
-        @ganado.raza_id = params[:raza_ganado][:id]
-        @ganado.tipo_concepcion_id = params[:tipo_concepcion][:id]
-        @ganado.estado_ganado_id = params[:estado_ganado][:id]
-        @ganado.observacion = params[:observacion]
-        @ganado.codigo_lote = params[:codigo_lote]
-        @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
+      @ganado_entrada = GanadoEntrada.new()
+      @ganado_entrada.peso_promedio = params[:peso_promedio]
+      @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
+      @ganado_entrada.tipo_ganado_id = raza.tipo_ganado_id
+      @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]
+      @ganado_entrada.raza_id = params[:raza_ganado][:id]
+      @ganado_entrada.tipo_concepcion_id = params[:tipo_concepcion][:id]
+      @ganado_entrada.estado_ganado_id = params[:estado_ganado][:id]
+      @ganado_entrada.observacion = params[:observacion]
+      @ganado_entrada.codigo_lote = params[:codigo_lote]
+      @ganado_entrada.finalidad_ganado_id = params[:finalidad_ganado][:id]
 
-        if @ganado.save
+      if @ganado_entrada.save
 
-          auditoria_nueva("registrar ganado", "ganados", @ganado)
-          @guardado_ok = true
-          contador = contador + 1
+        auditoria_nueva("registrar entrada ganado", "ganados_entradas", @ganado_entrada)
+        @guardado_ok = true
          
-        end 
-
-      end
+      end 
 
     end
   

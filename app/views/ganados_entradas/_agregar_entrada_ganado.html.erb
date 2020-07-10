@@ -7,11 +7,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Ganado Lote</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Ganado Entrada</h4>
       
     </div>
 
-    <%= form_for @ganado, remote: true, url: ganados_guardar_lote_ganado_url, html: { id: "form-agregar-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @ganado, remote: true, url: ganados_entradas_guardar_entrada_ganado_url, html: { id: "form-agregar-ganado" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -28,8 +28,8 @@
               <tr>
 
                 <td>
-                  <div class="col-sm-4"><%= label_tag :nil, "RP Inicial #{attr_requerido}".html_safe %></div><br/>
-                    <div class="col-sm-7"><%= text_field_tag :rp ,@nuevo_autoincremento.to_s,class: 'form-control input-sm', readonly: true %></div>
+                  <div class="col-sm-4"><%= label_tag :nil, "Procedencia".html_safe %></div><br/>
+                    <div class="col-sm-7"><%= text_field_tag :procedencia ,nil ,class: 'form-control input-xs', style: "width:200px;" %></div>
                     <div class="col-sm-1"></div><br />
                 </td>
 
@@ -41,94 +41,113 @@
 
               </tr>
 
-               <tr>
+              <tr>
                 
                 <td>
-                  
                   <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio".html_safe %></div><br/>
                   <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
                   <div class="col-sm-1"></div><br />
-                
                 </td>
 
 
                 <td>
                   
+                  <div class="col-sm-4"><%= f.label :nil, "Precio Compra(Unitario)".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :precio_compra, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Proveedor#{attr_requerido}".html_safe %></div><br/>
+                  <%= hidden_field_tag :proveedor_id%>
+                  <div class="col-sm-7"><%= text_area_tag :proveedor, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Contacto Proveedor".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :contacto_proveedor, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+              </tr>
+
+
+               <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Teléfono Contacto".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :telefono_contacto, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Codigo Lote #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_lote ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
                   <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div><br/>
                   <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
-
                 </td>
-
-              </tr>
-
-              <%= linked_combo "etapa_ganado_id", 
-              :linked =>"sexo_ganado_id" ,
-              :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
-              :param => "sexo_ganado_id",
-              :clase => "etapa_ganado" %>
-
-               <tr>
                 
-                <td>
+                 <%= linked_combo "etapa_ganado_id", 
+                :linked =>"sexo_ganado_id" ,
+                :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
+                :param => "sexo_ganado_id",
+                :clase => "etapa_ganado" %>
 
+                <td>
                   <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div><br/>
                   <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
-
                 </td>
 
 
-                <td>
+              </tr>
 
-                   <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div><br/>
+
+              <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div><br/>
                   <div class="col-sm-7"><%= collection_select :raza_ganado, :id, Raza.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
-                  
                 </td>
 
-              </tr>
 
-               <tr>
-                
                 <td>
-
-                  <div class="col-sm-4"><%= label_tag nil, "Tipo Concepción #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-4"><%= label_tag nil, "Tipo concepción #{attr_requerido}".html_safe %></div><br/>
                   <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
-
-                </td>
-
-
-                <td>
-
-                  <div class="col-sm-4"><%= label_tag nil, "Estado Ganado #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= collection_select :estado_ganado, :id, EstadoGanado.orden_01, :id, :descripcion, { include_blank: false}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-                  <div class="col-sm-1"></div><br/>
-                  
                 </td>
 
 
               </tr>
 
-
                <tr>
                 
                 <td>
-
-                  <div class="col-sm-4"><%= label_tag nil, "Codigo Lote #{attr_requerido}".html_safe %></div><br/>
-                 <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_lote ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                   <div class="col-sm-4"><%= label_tag nil, "Tipo Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
-
                 </td>
 
 
                 <td>
-
-                 <div class="col-sm-4"><%= label_tag nil, "Finalidad #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= collection_select :finalidad_ganado, :id, FinalidadGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-                  <div class="col-sm-1"></div><br/>
-                  
+                 
                 </td>
 
 

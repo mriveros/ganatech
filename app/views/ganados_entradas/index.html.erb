@@ -3,7 +3,7 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Ganados</h3>
+    <h3 style="float:left;margin-top:5px;">Ganados Entradas</h3>
 
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar ganado lote".html_safe, "#", id: "link-to-agregar-ganado-lote", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-ganado-lote", link_to_id: "#link-to-agregar-ganado-lote", url: ganados_entradas_agregar_entrada_ganado_path( window_id: "modal-window-agregar-ganado-lote") )%>
@@ -82,13 +82,13 @@
             </div>
           </th> 
 
-          <th>
-            <span>Estado Movimiento</span>
+         <th>
+            <span>Monto Total Compra</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ganado_entrada, :estado_movimiento_id, EstadoMovimiento.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_entrada_estado_movimiento_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_entrada_precio_total_compra, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_entrada_precio_total_compra');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+          </th> 
 
           <th ></th>
 
@@ -151,6 +151,14 @@
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_entrada_observacion');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
+          </th>
+
+           <th>
+            <span>Estado Movimiento</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado_entrada, :estado_movimiento_id, EstadoMovimiento.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_entrada_estado_movimiento_id');"><i class="fa fa-times"></i></span>
+            </div>
           </th>
 
           <th ></th>
