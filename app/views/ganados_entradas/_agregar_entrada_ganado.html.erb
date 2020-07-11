@@ -273,23 +273,16 @@
       msg = ""
 
 
-      if($("#rp").val().length == 0){
+      if($("#proveedor_id").val().length == 0){
 
-        msg +="El RP no puede estar vacío. Contacte con el proveedor\n"
+        msg +="El Proveedor no puede estar vacío.\n"
         valido = false
       
       }
 
-      if($("#hacienda_id").val().length == 0){
+      if($("#proveedor_id").val().length == 0){
 
-        msg +="Seleccione la Hacienda donde se encuentra el animal.\n"
-        valido = false
-      
-      }
-
-      if($("#potrero_id").val().length == 0){
-
-        msg +="Seleccione el Potrero donde se encuentra el animal.\n"
+        msg +="El Proveedor no puede estar vacío.\n"
         valido = false
       
       }
