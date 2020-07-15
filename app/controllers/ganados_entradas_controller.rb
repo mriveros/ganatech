@@ -70,7 +70,7 @@ def agregar_entrada_ganado
 
   def guardar_entrada_ganado
 
-    @valido = true
+    @valido = false
     @msg = ""
     @guardado_ok = false
     contador = 0

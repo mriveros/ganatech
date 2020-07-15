@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @ganado, remote: true, url: ganados_entradas_guardar_entrada_ganado_url, html: { id: "form-agregar-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @ganado, remote: true, url: ganados_entradas_guardar_entrada_ganado_url, html: { id: "form-agregar-ganado-entrada" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -173,7 +173,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado-entrada" %>
           
       </div>
  
@@ -185,9 +185,9 @@
 
 <style type="text/css">
   .ui-autocomplete{z-index: 1000000; font-size: 10px;}
-  #form-agregar-ganado label, #form-agregar-ganado input[type='text'], #form-agregar-ganado select , #form-agregar-ganado input[type='checkbox']{ float:left; margin-top:5px;}
-  #form-agregar-ganado br {clear:both; }
-  #form-agregar-ganado label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-ganado-entrada label, #form-agregar-ganado-entrada input[type='text'], #form-agregar-ganado-entrada select , #form-agregar-ganado-entrada input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-ganado-entrada br {clear:both; }
+  #form-agregar-ganado-entrada label { width:200px;font-size:12px;margin-top:10px;}
    
  
 </style>
@@ -267,7 +267,7 @@
 
   });
 
-  $("#btn-guardar-ganado").bind('click', function () {
+  $("#btn-guardar-ganado-entrada").bind('click', function () {
 
       valido = true
       msg = ""
@@ -280,13 +280,13 @@
       
       }
 
-      if($("#proveedor_id").val().length == 0){
+      if($("#codigo_lote").val().length == 0){
 
-        msg +="El Proveedor no puede estar vacío.\n"
+        msg +="El lote no puede estar vacío.\n"
         valido = false
       
       }
-
+      
       if($("#sexo_ganado_id").val().length == 0){
 
         msg +="Seleccione el sexo del animal.\n"
@@ -315,25 +315,11 @@
       
       }
 
-      if($("#codigo_lote").val().length == 0){
-
-        msg +="El código no puede estar vacío.\n"
-        valido = false
-      
-      }
-
-      if($("#finalidad_ganado_id").val().length == 0){
-
-        msg +="La Finalidad del Ganado no puede estar vacía.\n"
-        valido = false
-      
-      }
-
       if (valido){
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se podrá visualizar el Lote del Ganado en la Lista de Ganados",
+          text: "Al confirmar se podrá visualizar el Lote del Ganado en la Lista de Entrada de Ganados",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -345,7 +331,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-ganado").submit();
+            $("#form-agregar-ganado-entrada").submit();
             
           } 
 
