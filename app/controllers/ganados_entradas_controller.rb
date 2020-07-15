@@ -86,7 +86,7 @@ def agregar_entrada_ganado
       @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_iniciado]
       @ganado_entrada.observacion = params[:observacion]
       @ganado_entrada.proveedor_ganado_id = params[:proveedor_id]
-      @ganado_entrada.contacto_proceedor = params[:contacto_proceedor]
+      @ganado_entrada.contacto_proveedor = params[:contacto_proceedor]
       @ganado_entrada.telefono_contacto = params[:telefono_contacto]
       @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
       @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]     
