@@ -4,15 +4,15 @@
 
     <tr>
 
-      <td><%= gan.ganado_id %></td>
-      <td style="text-transform:uppercase;"><%= gan.nombre%></td>
-      <td ><%= gan.rp%></td>
-      <td ><%= gan.codigo_rfid %></td>
-      <td ><%= gan.rp_padre %></td>
-      <td ><%= gan.rp_madre %></td>
-      <td ><%= (gan.fecha_nacimiento.present?)? gan.fecha_nacimiento.strftime('%d/%m/%Y') : "Sin Especificar" %></td>
-      <td ><%= gan.peso_promedio %></td>
-      <td ><%= gan.codigo_lote %></td>
+      <td><%= gan.ganado_entrada_id %></td>
+      <td style="text-transform:uppercase;"><%= gan.procedencia%></td>
+      <td ><%= gan.peso_promedio%></td>
+      <td ><%= gan.precio_compra %></td>
+      <td ><%= gan.nombre_razon_social %></td>
+      <td ><%= gan.contacto_proveedor %></td>
+      <td ><%=gan.telefono_contacto  %></td>
+      <td ><%= gan.precio_total_compra %></td>
+     
       
       <td > </td>
 
@@ -20,21 +20,20 @@
 
      <tr >
 
-      <td class="td-nivel-2"><%= gan.hacienda %></td>
-      <td class="td-nivel-2"><%= gan.potrero%></td>
-      <td class="td-nivel-2"><%= gan.tipo_ganado%></td>
-      <td class="td-nivel-2"><%= gan.raza %></td>
-      <td class="td-nivel-2"><%= gan.etapa_ganado %></td>
+      <td class="td-nivel-2"><%= gan.tipo_ganado %></td>
+      <td class="td-nivel-2"><%= gan.raza%></td>
+      <td class="td-nivel-2"><%= gan.etapa_ganado%></td>
       <td class="td-nivel-2"><%= gan.sexo_ganado %></td>
       <td class="td-nivel-2"><%= gan.tipo_concepcion %></td>
-      <td class="td-nivel-2"><%= gan.estado_ganado %></td>
-      <td class="td-nivel-2"><%= gan.finalidad_ganado %></td>
+      <td class="td-nivel-2"><%= gan.codigo_lote %></td>
+      <td class="td-nivel-2"><%= gan.observacion %></td>
+      <td class="td-nivel-2"><%= gan.estado_movimiento %></td>
       
       <td >
         
-        <%= link_to_ganado_detalle(gan.ganado_id) %>
-        <%= link_to_editar_ganado(gan.ganado_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
+        <%#= link_to_ganado_detalle(gan.ganado_id) %>
+        <%#= link_to_editar_ganado(gan.ganado_id) %>
+        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
       
        </td>
 

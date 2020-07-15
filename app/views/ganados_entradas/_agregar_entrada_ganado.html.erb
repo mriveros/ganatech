@@ -141,7 +141,7 @@
                 
                 <td>
                    <div class="col-sm-4"><%= label_tag nil, "Tipo Ganado #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-7"><%= collection_select :tipo_ganado, :id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
                 </td>
 
@@ -311,6 +311,13 @@
       if($("#tipo_concepcion_id").val().length == 0){
 
         msg +="Seleccione el tipo de concepción del animal.\n"
+        valido = false
+      
+      }
+
+       if($("#tipo_ganado_id").val().length == 0){
+
+        msg +="Seleccione el tipo de ganado del animal.\n"
         valido = false
       
       }

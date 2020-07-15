@@ -83,10 +83,10 @@ def agregar_entrada_ganado
       @ganado_entrada.procedencia = params[:procedencia]
       @ganado_entrada.peso_promedio = params[:peso_promedio]
       @ganado_entrada.precio_compra = params[:precio_compra]
-      @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_iniciado]
+      @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
       @ganado_entrada.observacion = params[:observacion]
       @ganado_entrada.proveedor_ganado_id = params[:proveedor_id]
-      @ganado_entrada.contacto_proveedor = params[:contacto_proceedor]
+      @ganado_entrada.contacto_proveedor = params[:contacto_proveedor]
       @ganado_entrada.telefono_contacto = params[:telefono_contacto]
       @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
       @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]     
@@ -94,6 +94,7 @@ def agregar_entrada_ganado
       @ganado_entrada.tipo_concepcion_id = params[:tipo_concepcion][:id]
       @ganado_entrada.codigo_lote = params[:codigo_lote]
       @ganado_entrada.tipo_ganado_id = params[:tipo_ganado][:id]
+      puts "//////////////DEBUG!//////////////////"
       @ganado_entrada.cantidad_lote = params[:cantidad_lote]
       @ganado_entrada.precio_total_compra = (params[:cantidad_lote].to_i * params[:precio_compra].to_i)
 
