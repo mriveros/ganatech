@@ -80,7 +80,7 @@ def agregar_entrada_ganado
       
         
       @ganado_entrada = GanadoEntrada.new()
-      @ganado_entrada.procedencia = params[:peso_promedio]
+      @ganado_entrada.procedencia = params[:procedencia]
       @ganado_entrada.peso_promedio = params[:peso_promedio]
       @ganado_entrada.precio_compra = params[:precio_compra]
       @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_iniciado]
