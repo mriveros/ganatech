@@ -7,11 +7,11 @@
       <td><%= gan.ganado_entrada_id %></td>
       <td style="text-transform:uppercase;"><%= gan.procedencia%></td>
       <td ><%= gan.peso_promedio%></td>
-      <td ><%= gan.precio_compra %></td>
+      <td ><%= gan.precio_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td ><%= gan.nombre_razon_social %></td>
       <td ><%= gan.contacto_proveedor %></td>
       <td ><%=gan.telefono_contacto  %></td>
-      <td ><%= gan.precio_total_compra %></td>
+      <td ><%= gan.precio_total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
      
       
       <td > </td>

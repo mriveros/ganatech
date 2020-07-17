@@ -29,7 +29,7 @@
 
                 <td>
                   <div class="col-sm-4"><%= label_tag :nil, "Procedencia".html_safe %></div><br/>
-                    <div class="col-sm-7"><%= text_field_tag :procedencia ,nil ,class: 'form-control input-xs', style: "width:200px;" %></div>
+                    <div class="col-sm-7"><%= text_field_tag :procedencia ,nil ,class: 'form-control input-xs', style: "width:200px; text-transform:uppercase;" %></div>
                     <div class="col-sm-1"></div><br />
                 </td>
 
@@ -45,15 +45,15 @@
                 
                 <td>
                   <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+                  <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 5 %></div>
                   <div class="col-sm-1"></div><br />
                 </td>
 
 
                 <td>
                   
-                  <div class="col-sm-4"><%= f.label :nil, "Precio Compra(Unitario)".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= text_field_tag :precio_compra, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+                  <div class="col-sm-4"><%= f.label :nil, "Precio Compra(Unitario)#{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :precio_compra, nil ,:onkeypress=> "return isNumberKey(event)",:onkeyup=>' formatear_numero(this)' , class: 'form-control input-sm', :maxlength=> 12 %></div>
                   <div class="col-sm-1"></div><br />
                 </td>
 
@@ -216,6 +216,13 @@
      return true;
   }
 
+  $("#precio_compra").val('0');
+  $("#precio_compra").bind('focus', function(){ 
+
+    $("#precio_compra").val('');
+
+    });
+
   //buscar RP Padre
   $("#proveedor").bind('focus', function(){   
 
@@ -272,6 +279,12 @@
       valido = true
       msg = ""
 
+      if($("#precio_compra").val().length == 0){
+
+        msg +="Debe agregar un monto (0 si no precio).\n"
+        valido = false
+      
+      }
 
       if($("#proveedor_id").val().length == 0){
 

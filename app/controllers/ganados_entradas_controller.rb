@@ -20,6 +20,112 @@ class GanadosEntradasController < ApplicationController
 
     end
 
+    if params[:form_buscar_ganado_entrada_procedencia].present?
+
+      cond << "procedencia ilike ?"
+      args << "%#{params[:form_buscar_ganado_entrada_procedencia]}%"
+
+    end
+
+    if params[:form_buscar_ganado_entrada_peso_promedio].present?
+
+      cond << "peso_promedio = ?"
+      args << params[:form_buscar_ganado_entrada_peso_promedio]
+
+    end
+
+    if params[:form_buscar_ganado_entrada_precio_compra].present?
+
+      cond << "precio_compra = ?"
+      args << params[:form_buscar_ganado_entrada_precio_compra]
+
+    end
+
+    if params[:form_buscar_ganado_entrada_proveedor].present?
+
+      cond << "nombre_razon_social ilike ?"
+      args << "%#{params[:form_buscar_ganado_entrada_proveedor]}%"
+
+    end
+
+    if params[:form_buscar_ganado_entrada_contacto_proveedor].present?
+
+      cond << "contacto_proveedor ilike ?"
+      args << "%#{params[:form_buscar_ganado_entrada_contacto_proveedor]}%"
+
+    end
+
+    if params[:form_buscar_ganado_entrada_telefono_contacto].present?
+
+      cond << "telefono_contacto = ?"
+      args << params[:form_buscar_ganado_entrada_telefono_contacto]
+
+    end
+
+    if params[:form_buscar_ganado_entrada_precio_total_compra].present?
+
+      cond << "precio_total_compra = ?"
+      args << params[:form_buscar_ganado_entrada_precio_total_compra]
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:tipo_ganado_id].present?
+
+      cond << "tipo_ganado_id = ?"
+      args << params[:form_buscar_ganado_entrada][:tipo_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:raza_ganado_id].present?
+
+      cond << "raza_ganado_id = ?"
+      args << params[:form_buscar_ganado_entrada][:raza_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:etapa_ganado_id].present?
+
+      cond << "etapa_ganado_id = ?"
+      args << params[:form_buscar_ganado_entrada][:etapa_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:sexo_ganado_id].present?
+
+      cond << "sexo_ganado_id = ?"
+      args << params[:form_buscar_ganado_entrada][:sexo_ganado_id]
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:tipo_concepcion_id].present?
+
+      cond << "tipo_concepcion_id = ?"
+      args << params[:form_buscar_ganado_entrada][:tipo_concepcion_id]
+
+    end
+
+    if params[:form_buscar_ganado_entrada_codigo_lote].present?
+
+      cond << "codigo_lote = ?"
+      args << params[:form_buscar_ganado_entrada_codigo_lote]
+
+    end
+
+    if params[:form_buscar_ganado_entrada_observacion].present?
+
+      cond << "observacion ilike ?"
+      args << "%#{params[:form_buscar_ganado_entrada_observacion]}%"
+
+    end
+
+    if params[:form_buscar_ganado_entrada][:estado_movimiento_id].present?
+
+      cond << "estado_movimiento_id = ?"
+      args << params[:form_buscar_ganado_entrada][:estado_movimiento_id]
+
+    end
+
+
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
@@ -77,16 +183,14 @@ def agregar_entrada_ganado
 
     if @valido
       
-      
-        
       @ganado_entrada = GanadoEntrada.new()
       @ganado_entrada.procedencia = params[:procedencia]
       @ganado_entrada.peso_promedio = params[:peso_promedio]
-      @ganado_entrada.precio_compra = params[:precio_compra]
+      @ganado_entrada.precio_compra = params[:precio_compra].to_s.gsub(/[$.]/,'').to_i
       @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
       @ganado_entrada.observacion = params[:observacion]
       @ganado_entrada.proveedor_ganado_id = params[:proveedor_id]
-      @ganado_entrada.contacto_proveedor = params[:contacto_proveedor]
+      @ganado_entrada.contacto_proveedor = params[:contacto_proveedor].upcase
       @ganado_entrada.telefono_contacto = params[:telefono_contacto]
       @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
       @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]     
@@ -94,9 +198,8 @@ def agregar_entrada_ganado
       @ganado_entrada.tipo_concepcion_id = params[:tipo_concepcion][:id]
       @ganado_entrada.codigo_lote = params[:codigo_lote]
       @ganado_entrada.tipo_ganado_id = params[:tipo_ganado][:id]
-      puts "//////////////DEBUG!//////////////////"
       @ganado_entrada.cantidad_lote = params[:cantidad_lote]
-      @ganado_entrada.precio_total_compra = (params[:cantidad_lote].to_i * params[:precio_compra].to_i)
+      @ganado_entrada.precio_total_compra = (params[:cantidad_lote].to_i * params[:precio_compra].to_s.gsub(/[$.]/,'').to_i)
 
       if @ganado_entrada.save
 
