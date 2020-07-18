@@ -227,9 +227,9 @@ def agregar_entrada_ganado
 
   end
 
-  def editar_ganado_entrada
+  def editar_entrada_ganado
     
-    @ganado = GanadoEntrada.find(params[:id])
+    @ganado_entrada = GanadoEntrada.find(params[:id])
 
     respond_to do |f|
       
