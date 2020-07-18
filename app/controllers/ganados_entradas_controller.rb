@@ -227,27 +227,92 @@ def agregar_entrada_ganado
 
   end
 
+  def editar_ganado_entrada
+    
+    @ganado = GanadoEntrada.find(params[:id])
+
+    respond_to do |f|
+      
+        f.js
+      
+    end
+
+  end
+
+
+  def actualizar_entrada_ganado
+
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+    contador = 0
+
+    if @valido
+      
+      @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
+      @ganado_entrada.procedencia = params[:procedencia]
+      @ganado_entrada.peso_promedio = params[:peso_promedio]
+      @ganado_entrada.precio_compra = params[:precio_compra].to_s.gsub(/[$.]/,'').to_i
+      @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
+      @ganado_entrada.observacion = params[:observacion]
+      @ganado_entrada.proveedor_ganado_id = params[:proveedor_id]
+      @ganado_entrada.contacto_proveedor = params[:contacto_proveedor].upcase
+      @ganado_entrada.telefono_contacto = params[:telefono_contacto]
+      @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
+      @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]     
+      @ganado_entrada.raza_ganado_id = params[:raza_ganado][:id]
+      @ganado_entrada.tipo_concepcion_id = params[:tipo_concepcion][:id]
+      @ganado_entrada.codigo_lote = params[:codigo_lote]
+      @ganado_entrada.tipo_ganado_id = params[:tipo_ganado][:id]
+      @ganado_entrada.cantidad_lote = params[:cantidad_lote]
+      @ganado_entrada.precio_total_compra = (params[:cantidad_lote].to_i * params[:precio_compra].to_s.gsub(/[$.]/,'').to_i)
+
+      if @ganado_entrada.save
+
+        auditoria_nueva("registrar entrada de ganado", "ganados_entradas", @ganado_entrada)
+        @guardado_ok = true
+         
+      end 
+
+    end
+  
+    rescue Exception => exc  
+
+      if exc.present?        
+        
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        
+      end                
+              
+    respond_to do |f|
+      
+        f.js
+      
+    end
+
+  end
+
 
   def eliminar_entrada_ganado
 
     @valido = true
     @msg = ""
 
-    @ganado = Ganado.find(params[:id])
+    @ganado_entrada = GanadoEntrada.find(params[:id])
 
-    @ganado_elim = @ganado  
+    @ganado_entrada_elim = @ganado_entrada  
 
     if @valido
 
-      if @ganado.destroy
+      if @ganado_entrada.destroy
 
-        auditoria_nueva("eliminar ganado", "ganados", @ganado_elim)
-
+        auditoria_nueva("eliminar entrada de ganado", "ganados_entradas", @ganado_entrada_elim)
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el Ganado."
+        @msg = "ERROR: No se ha podido eliminar la Entrada de Ganado."
 
       end
 

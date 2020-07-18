@@ -1,0 +1,26 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-ganado-entrada' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganado-entrada");
+   $("#form_buscar_ganado_entrada_id").val("<%=@ganado_entrada_elim.id%>")
+   $("#form-buscar-ganado-entrada").submit();
+    setTimeout(
+
+      function(){ $("#msg-eliminar-ganado-entrada").remove(); 
+
+       swal("La entrada de Ganado fue eliminada Exitosamente.");
+
+    }, 1000);
+   
+    
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-ganado-entrada' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-ganado-entrada");
+  setTimeout(function(){ 
+    
+    $("#msg-eliminar-ganado-entrada").remove();
+
+    swal("No se pudo eliminar la entrada de Ganado. Intente más tarde")
+
+     }, 1000);
+  	
+<% end %>

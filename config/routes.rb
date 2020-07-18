@@ -200,6 +200,8 @@ get 'crontab_ultron/index'
   post 'ganados_entradas/guardar_entrada_ganado'
   get 'ganados_entradas/eliminar_entrada_ganado'
   get 'ganados_entradas/buscar_proveedor'
+  get 'ganados_entradas/editar_entrada_ganado'
+  post 'ganados_entradas/actualizar_entrada_ganado'
    
  
 
