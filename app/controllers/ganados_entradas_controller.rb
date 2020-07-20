@@ -179,7 +179,6 @@ def agregar_entrada_ganado
     @valido = true
     @msg = ""
     @guardado_ok = false
-    contador = 0
 
     if @valido
       
@@ -245,31 +244,30 @@ def agregar_entrada_ganado
     @valido = true
     @msg = ""
     @guardado_ok = false
-    contador = 0
 
     if @valido
       
       @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
-      @ganado_entrada.procedencia = params[:procedencia].upcase
-      @ganado_entrada.peso_promedio = params[:peso_promedio]
-      @ganado_entrada.precio_compra = params[:precio_compra].to_s.gsub(/[$.]/,'').to_i
+      @ganado_entrada.procedencia = params[:ganado_entrada][:procedencia].upcase
+      @ganado_entrada.peso_promedio = params[:ganado_entrada][:peso_promedio]
+      @ganado_entrada.precio_compra = params[:ganado_entrada][:precio_compra].to_s.gsub(/[$.]/,'').to_i
       @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
-      @ganado_entrada.observacion = params[:observacion]
+      @ganado_entrada.observacion = params[:ganado_entrada][:observacion]
       @ganado_entrada.proveedor_ganado_id = params[:proveedor_id]
-      @ganado_entrada.contacto_proveedor = params[:contacto_proveedor].upcase
-      @ganado_entrada.telefono_contacto = params[:telefono_contacto]
+      @ganado_entrada.contacto_proveedor = params[:ganado_entrada][:contacto_proveedor].upcase
+      @ganado_entrada.telefono_contacto = params[:ganado_entrada][:telefono_contacto]
       @ganado_entrada.sexo_ganado_id = params[:sexo_ganado][:id]
-      @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]     
-      @ganado_entrada.raza_ganado_id = params[:raza_ganado][:id]
-      @ganado_entrada.tipo_concepcion_id = params[:tipo_concepcion][:id]
-      @ganado_entrada.codigo_lote = params[:codigo_lote]
-      @ganado_entrada.tipo_ganado_id = params[:tipo_ganado][:id]
-      @ganado_entrada.cantidad_lote = params[:cantidad_lote]
-      @ganado_entrada.precio_total_compra = (params[:cantidad_lote].to_i * params[:precio_compra].to_s.gsub(/[$.]/,'').to_i)
+      @ganado_entrada.etapa_ganado_id = params[:etapa_ganado][:id]
+      @ganado_entrada.raza_ganado_id = params[:ganado_entrada][:raza_ganado_id]
+      @ganado_entrada.tipo_concepcion_id = params[:ganado_entrada][:tipo_concepcion_id]
+      @ganado_entrada.codigo_lote = params[:ganado_entrada][:codigo_lote]
+      @ganado_entrada.tipo_ganado_id = params[:ganado_entrada][:tipo_ganado_id]
+      @ganado_entrada.cantidad_lote = params[:ganado_entrada][:cantidad_lote]
+      @ganado_entrada.precio_total_compra = (params[:ganado_entrada][:cantidad_lote].to_i * params[:ganado_entrada][:precio_compra].to_s.gsub(/[$.]/,'').to_i)
 
       if @ganado_entrada.save
 
-        auditoria_nueva("registrar entrada de ganado", "ganados_entradas", @ganado_entrada)
+        auditoria_nueva("actualizar entrada de ganado", "ganados_entradas", @ganado_entrada)
         @guardado_ok = true
          
       end 

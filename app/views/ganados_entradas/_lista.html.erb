@@ -33,7 +33,8 @@
         
         <%= link_to_editar_ganado_entrada(gan.ganado_entrada_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_entrada_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar la Entrada de Ganados'  %>
-      
+        <%= link_to_cambiar_estado_entrada_ganado_a_finalizado(gan.ganado_entrada_id)%>
+
        </td>
 
     </tr>
