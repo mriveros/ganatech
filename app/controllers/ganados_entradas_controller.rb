@@ -361,6 +361,31 @@ def agregar_entrada_ganado
     
   end
 
+  def cambiar_estado_entrada_ganado_a_finalizado
+
+    @ganado_entrada = GanadoEntrada.find(params[:id])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_estado_entrada_ganado_a_finalizado
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
+
+
 
 
 end

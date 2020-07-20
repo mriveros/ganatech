@@ -202,7 +202,8 @@ get 'crontab_ultron/index'
   get 'ganados_entradas/buscar_proveedor'
   get 'ganados_entradas/editar_entrada_ganado'
   post 'ganados_entradas/actualizar_entrada_ganado'
-   
+  get 'ganados_entradas/cambiar_estado_entrada_ganado_a_finalizado'
+  post 'ganados_entradas/guardar_estado_entrada_ganado_a_finalizado'
  
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
