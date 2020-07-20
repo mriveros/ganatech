@@ -159,7 +159,7 @@
         
         <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
-            <%= text_area_tag :observacion, nil, class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
+            <%= f.text_area :observacion, class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
           </div>
           <div class="col-sm-1"></div><br />
 
@@ -235,6 +235,14 @@
 
     <%end%>
 
+    <%if @ganado_entrada.proveedor_ganado_id.present?%>
+
+      $("#proveedor_id").val('<%=@ganado_entrada.proveedor_ganado_id%>');
+      <%@proveedor_ganado = ProveedorGanado.where("id = ?", @ganado_entrada.proveedor_ganado_id).first%>
+      $("#proveedor").val('<%=@proveedor_ganado.id.to_s + '-' +@proveedor_ganado.nombre_razon_social.to_s + '-' + @proveedor_ganado.ruc_ci.to_s %>');
+
+    <%end%>
+
   <%end%>
 
 
@@ -301,7 +309,7 @@
       valido = true
       msg = ""
 
-      if($("#precio_compra").val().length == 0){
+      if($("#ganado_entrada_precio_compra").val().length == 0){
 
         msg +="Debe agregar un monto (0 si no precio).\n"
         valido = false
@@ -315,7 +323,7 @@
       
       }
 
-      if($("#codigo_lote").val().length == 0){
+      if($("#ganado_entrada_codigo_lote").val().length == 0){
 
         msg +="El lote no puede estar vacío.\n"
         valido = false
@@ -336,21 +344,21 @@
       
       }
 
-      if($("#raza_ganado_id").val().length == 0){
+      if($("#ganado_entrada_raza_ganado_id").val().length == 0){
 
         msg +="Seleccione la raza del animal.\n"
         valido = false
       
       }
 
-      if($("#tipo_concepcion_id").val().length == 0){
+      if($("#ganado_entrada_tipo_concepcion_id").val().length == 0){
 
         msg +="Seleccione el tipo de concepción del animal.\n"
         valido = false
       
       }
 
-       if($("#tipo_ganado_id").val().length == 0){
+       if($("#ganado_entrada_tipo_ganado_id").val().length == 0){
 
         msg +="Seleccione el tipo de ganado del animal.\n"
         valido = false
@@ -361,7 +369,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se podrá visualizar el Lote del Ganado en la Lista de Entrada de Ganados",
+          text: "Al confirmar se modificarán los datos y se podrá visualizar el Lote del Ganado en la Lista de Entrada de Ganados",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
