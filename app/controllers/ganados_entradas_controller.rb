@@ -69,6 +69,13 @@ class GanadosEntradasController < ApplicationController
 
     end
 
+    if params[:form_buscar_ganado_entrada_cantidad_lote].present?
+
+      cond << "cantidad_lote = ?"
+      args << params[:form_buscar_ganado_entrada_cantidad_lote]
+
+    end
+
     if params[:form_buscar_ganado_entrada][:tipo_ganado_id].present?
 
       cond << "tipo_ganado_id = ?"
@@ -375,13 +382,68 @@ def agregar_entrada_ganado
 
   def guardar_estado_entrada_ganado_a_finalizado
 
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+    contador = 0
 
-    respond_to do |f|
+    @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
+    @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
+    @ganado_entrada.save
 
-      f.js
+    ultimo_lote = Ganado.order("created_at").last
+
+    if @valido
+      
+      while @ganado_entrada.cantidad_lote.to_i > contador.to_i do
+        
+        @ganado = Ganado.new()
+        
+        ultima_produccion = Ganado.order("created_at").last
+        nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+        @ganado.nombre = nuevo_rp
+        @ganado.rp = nuevo_rp
+        @ganado.rp_padre = "No Especificado"
+        @ganado.rp_madre = "No Especificado"
+        @ganado.potrero_id = params[:potrero][:id]
+        @ganado.peso_promedio = @ganado_entrada.peso_promedio
+        @ganado.sexo_ganado_id = @ganado_entrada.sexo_ganado_id
+        @ganado.tipo_ganado_id = @ganado_entrada.tipo_ganado_id
+        @ganado.etapa_ganado_id = @ganado_entrada.etapa_ganado_id
+        @ganado.raza_id = @ganado_entrada.raza_ganado_id
+        @ganado.tipo_concepcion_id = @ganado_entrada.tipo_concepcion_id
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+        @ganado.observacion = params[:observacion]
+        @ganado.codigo_lote = ultimo_lote.codigo_lote + 1
+        @ganado.finalidad_ganado_id = PARAMETRO[:finalidad_ganado_no_especificado]
+
+        if @ganado.save
+
+          auditoria_nueva("registrar ganado", "ganados", @ganado)
+          @guardado_ok = true
+          contador = contador + 1
+         
+        end 
+
+      end
 
     end
-    
+  
+    rescue Exception => exc  
+
+      if exc.present?        
+        
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        
+      end                
+              
+    respond_to do |f|
+      
+        f.js
+      
+    end
+
   end
 
 

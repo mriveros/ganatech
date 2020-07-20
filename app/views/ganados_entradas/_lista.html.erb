@@ -12,6 +12,7 @@
       <td ><%= gan.contacto_proveedor %></td>
       <td ><%=gan.telefono_contacto  %></td>
       <td ><%= gan.precio_total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= gan.cantidad_lote%></td>
      
       
       <td > </td>
@@ -31,9 +32,18 @@
       
       <td >
         
-        <%= link_to_editar_ganado_entrada(gan.ganado_entrada_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_entrada_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar la Entrada de Ganados'  %>
-        <%= link_to_cambiar_estado_entrada_ganado_a_finalizado(gan.ganado_entrada_id)%>
+        <%if gan.estado_movimiento_id == PARAMETRO[:estado_movimiento_en_proceso]%>
+        
+          <%= link_to_editar_ganado_entrada(gan.ganado_entrada_id) %>
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_entrada_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar la Entrada de Ganados'  %>
+
+        <%end%>
+
+        <%if gan.estado_movimiento_id != PARAMETRO[:estado_movimiento_finalizado]%>
+          
+          <%= link_to_cambiar_estado_entrada_ganado_a_finalizado(gan.ganado_entrada_id)%>
+        
+        <%end%>
 
        </td>
 

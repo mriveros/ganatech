@@ -90,6 +90,14 @@
             </div>
           </th> 
 
+          <th>
+            <span>Cantidad Lote</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_ganado_entrada_cantidad_lote, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_cantidad_lote');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
           <th ></th>
 
         </tr>

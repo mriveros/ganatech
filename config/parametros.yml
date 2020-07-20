@@ -91,6 +91,8 @@ development:
   estado_movimiento_en_proceso: 1
   estado_movimiento_finalizado: 2
  
+  #FINALIDADES GANADOS
+  finalidad_ganado_no_especificado: 4
   
 
 production:
@@ -181,5 +183,8 @@ production:
   #ESTADOS MOVIMIENTOS (ENTRADA DE GANADOS)
   estado_movimiento_en_proceso: 1
   estado_movimiento_finalizado: 2
+
+  #FINALIDADES GANADOS
+  finalidad_ganado_no_especificado: 4
   
   
