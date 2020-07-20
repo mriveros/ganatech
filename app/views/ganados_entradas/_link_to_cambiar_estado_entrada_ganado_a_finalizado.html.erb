@@ -1,0 +1,3 @@
+<%= link_to icon_confirmar, "#", id: "link-to-cambiar-estado-ganado-entrada-a-finalizado-#{ganado_entrada_id}", class: 'btn btn-success btn-xs', title: 'Haga click para agregar el Lote de Ganados a la Lista de Ganados.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-cambiar-estado-ganado-entrada-a-finalizado", link_to_id: "#link-to-cambiar-estado-ganado-entrada-a-finalizado-#{ganado_entrada_id}", url: ganados_entradas_cambiar_estado_entrada_ganado_a_finalizado_path( window_id: "modal-window-cambiar-estado-ganado-entrada-a-finalizado", id: ganado_entrada_id) )%>

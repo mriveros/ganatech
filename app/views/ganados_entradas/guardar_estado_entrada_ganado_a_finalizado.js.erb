@@ -1,0 +1,28 @@
+<% if @guardado_ok %>
+   
+  $("#form_buscar_ganado_entrada_id").val('<%= @ganado_entrada.id %>');
+  $("#form_buscar_ganado_entrada_codigo_lote").val('');
+  
+ 
+  
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#form-buscar-ganado-entrada").submit();
+    swal("Entrada de Ganados Finalizado Exitosamente.")
+    
+}, 1000);
+
+
+<% else %>
+  
+  $("<div class='col-sm-12' id='msg-agregar-ganado-entrada' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-ganado-entrada");
+  
+  setTimeout(function(){ 
+    
+    swal("Error al Finalizar la Entrada de Ganados. Intente más tarde. <%=@msg%>");
+    
+  }, 1000);
+
+
+<% end %>

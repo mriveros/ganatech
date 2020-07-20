@@ -18,7 +18,6 @@ class AlimentacionesController < ApplicationController
 
     end
 
-
     if params[:form_buscar_alimentaciones_nombre_alimento].present?
 
       cond << "nombre_alimento ilike ?"

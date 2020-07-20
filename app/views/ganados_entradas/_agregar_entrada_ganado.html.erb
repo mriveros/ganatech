@@ -1,0 +1,371 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Ganado Entrada</h4>
+      
+    </div>
+
+    <%= form_for @ganado, remote: true, url: ganados_entradas_guardar_entrada_ganado_url, html: { id: "form-agregar-ganado-entrada" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+
+          <div class="table-responsive" id="table-ganado">
+
+            <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+               <tbody>
+
+              <tr>
+
+                <td>
+                  <div class="col-sm-4"><%= label_tag :nil, "Procedencia".html_safe %></div><br/>
+                    <div class="col-sm-7"><%= text_field_tag :procedencia ,nil ,class: 'form-control input-xs', style: "width:200px; text-transform:uppercase;" %></div>
+                    <div class="col-sm-1"></div><br />
+                </td>
+
+                <td>
+                  <div class="col-sm-4"><%= f.label :lbl_cantidad_lote, "Cantidad".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :cantidad_lote, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+              </tr>
+
+              <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= f.label :peso_promedio, "Peso Promedio".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 5 %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+
+                <td>
+                  
+                  <div class="col-sm-4"><%= f.label :nil, "Precio Compra(Unitario)#{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :precio_compra, nil ,:onkeypress=> "return isNumberKey(event)",:onkeyup=>' formatear_numero(this)' , class: 'form-control input-sm', :maxlength=> 12 %></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Proveedor#{attr_requerido}".html_safe %></div><br/>
+                  <%= hidden_field_tag :proveedor_id %>
+                  <div class="col-sm-7"><%= text_area_tag :proveedor, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Contacto Proveedor".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :contacto_proveedor, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+              </tr>
+
+
+               <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= f.label :nil, "Teléfono Contacto".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :telefono_contacto, nil , class: 'form-control input-sm',style:"text-transform:uppercase; width: 200px;"%></div>
+                  <div class="col-sm-1"></div><br />
+                </td>
+
+
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Codigo Lote #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_lote ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+              </tr>
+
+               <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+                
+                 <%= linked_combo "etapa_ganado_id", 
+                :linked =>"sexo_ganado_id" ,
+                :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
+                :param => "sexo_ganado_id",
+                :clase => "etapa_ganado" %>
+
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+
+              </tr>
+
+
+              <tr>
+                
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Raza Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :raza_ganado, :id, Raza.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+
+                <td>
+                  <div class="col-sm-4"><%= label_tag nil, "Tipo concepción #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :tipo_concepcion, :id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+
+              </tr>
+
+               <tr>
+                
+                <td>
+                   <div class="col-sm-4"><%= label_tag nil, "Tipo Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :tipo_ganado, :id, TipoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                </td>
+
+
+                <td>
+                 
+                </td>
+
+
+              </tr>
+
+               </tbody>
+
+            </table>
+
+          </div>
+        
+        <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
+          <div class="col-sm-7">
+            <%= text_area_tag :observacion, nil, class: 'form-control input-sm' , :size =>"10x3", maxlength: "510" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          
+        </div>        
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-ganado-entrada" %>
+          
+      </div>
+ 
+    <%end %>
+
+  </div>
+  
+
+
+<style type="text/css">
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
+  #form-agregar-ganado-entrada label, #form-agregar-ganado-entrada input[type='text'], #form-agregar-ganado-entrada select , #form-agregar-ganado-entrada input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-ganado-entrada br {clear:both; }
+  #form-agregar-ganado-entrada label { width:200px;font-size:12px;margin-top:10px;}
+   
+ 
+</style>
+
+<script type="text/javascript">
+
+  aplicar_datepicker2();
+
+   $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
+
+  $("#precio_compra").val('0');
+  $("#precio_compra").bind('focus', function(){ 
+
+    $("#precio_compra").val('');
+
+    });
+
+  //buscar RP Padre
+  $("#proveedor").bind('focus', function(){   
+
+    var proveedores = [];
+
+    $("#proveedor_id").val('');
+    $("#proveedor").val('');
+
+    $.getJSON("<%= url_for(ganados_entradas_buscar_proveedor_path) %>", { proveedor: $(this).val()}, function(j){
+        
+      var proveedor = "";
+      var options = "<option value=''> -- Seleccione un Proveedor -- </option>"
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_razon_social != proveedor ){
+          
+          proveedores.push( {value: j[i].id +" - "+ j[i].nombre_razon_social+" - "+j[i].ruc_ci });
+          proveedor =j[i].id +" - "+ j[i].nombre_razon_social+" "+j[i].ruc_ci ;
+
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre_razon_social+" - "+j[i].ruc_ci + "</option>"
+
+        }
+
+      }
+
+      $("#proveedor_id").html(options);
+
+    })
+
+    $("#proveedor").autocomplete({
+
+      minLength: 1,
+      source: proveedores,
+      focus: function( event, ui ) {
+      
+        $("#proveedor" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#proveedor_id").val( datos[0]);
+        //$("#proveedor").val(datos[2]);
+        return false;
+
+      }
+
+    })
+
+  });
+
+  $("#btn-guardar-ganado-entrada").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+      if($("#precio_compra").val().length == 0){
+
+        msg +="Debe agregar un monto (0 si no precio).\n"
+        valido = false
+      
+      }
+
+      if($("#proveedor_id").val().length == 0){
+
+        msg +="El Proveedor no puede estar vacío.\n"
+        valido = false
+      
+      }
+
+      if($("#codigo_lote").val().length == 0){
+
+        msg +="El lote no puede estar vacío.\n"
+        valido = false
+      
+      }
+      
+      if($("#sexo_ganado_id").val().length == 0){
+
+        msg +="Seleccione el sexo del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#etapa_ganado_id").val().length == 0){
+
+        msg +="Seleccione la clasificación del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#raza_ganado_id").val().length == 0){
+
+        msg +="Seleccione la raza del animal.\n"
+        valido = false
+      
+      }
+
+      if($("#tipo_concepcion_id").val().length == 0){
+
+        msg +="Seleccione el tipo de concepción del animal.\n"
+        valido = false
+      
+      }
+
+       if($("#tipo_ganado_id").val().length == 0){
+
+        msg +="Seleccione el tipo de ganado del animal.\n"
+        valido = false
+      
+      }
+
+      if (valido){
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se podrá visualizar el Lote del Ganado en la Lista de Entrada de Ganados",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-agregar-ganado-entrada").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+  
+</script>

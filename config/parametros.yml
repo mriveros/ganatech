@@ -86,7 +86,13 @@ development:
   clasificacion_por_lote: 2
   clasificacion_por_potrero: 3
   clasificacion_por_hacienda: 4
+
+  #ESTADOS MOVIMIENTOS (ENTRADA DE GANADOS)
+  estado_movimiento_en_proceso: 1
+  estado_movimiento_finalizado: 2
  
+  #FINALIDADES GANADOS
+  finalidad_ganado_no_especificado: 4
   
 
 production:
@@ -173,5 +179,12 @@ production:
   clasificacion_por_lote: 2
   clasificacion_por_potrero: 3
   clasificacion_por_hacienda: 4
+
+  #ESTADOS MOVIMIENTOS (ENTRADA DE GANADOS)
+  estado_movimiento_en_proceso: 1
+  estado_movimiento_finalizado: 2
+
+  #FINALIDADES GANADOS
+  finalidad_ganado_no_especificado: 4
   
   

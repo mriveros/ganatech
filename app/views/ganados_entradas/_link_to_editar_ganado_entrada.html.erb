@@ -1,0 +1,3 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-ganado-entrada-#{ganado_entrada_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos de la Entrada de Ganados.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-editar-ganado-entrada", link_to_id: "#link-to-editar-ganado-entrada-#{ganado_entrada_id}", url: ganados_entradas_editar_entrada_ganado_path( window_id: "modal-window-editar-ganado-entrada", id: ganado_entrada_id) )%>

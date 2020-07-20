@@ -1,0 +1,3 @@
+$("#<%= params[:window_id]%>").html('');
+$("#<%= params[:window_id]%>").html("<%= escape_javascript(render :partial => 'cambiar_estado_entrada_ganado_a_finalizado')%>");
+$("#<%= params[:window_id]%>").modal('show');
