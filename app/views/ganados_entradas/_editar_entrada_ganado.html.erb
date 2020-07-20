@@ -5,7 +5,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Entrada</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Entrada de Ganados</h4>
       
     </div>
 
@@ -97,19 +97,19 @@
                 
                 <td>
                   <div class="col-sm-4"><%= label_tag nil, "Sexo Ganado #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= f.collection_select :sexo_ganado_id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-7"><%= collection_select :sexo_ganado, :id, SexoGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
                 </td>
                 
-                 <%= linked_combo "ganado_entrada_etapa_ganado_id", 
-                :linked =>"ganado_entrada_sexo_ganado_id" ,
+                 <%= linked_combo "etapa_ganado_id", 
+                :linked =>"sexo_ganado_id" ,
                 :url => url_for( ganados_obtener_etapa_ganado_path(format: :json)), 
-                :param => "ganado_entrada_sexo_ganado_id",
-                :clase => "ganado_entrada_etapa_ganado" %>
+                :param => "sexo_ganado_id",
+                :clase => "etapa_ganado" %>
 
                 <td>
                   <div class="col-sm-4"><%= label_tag nil, "Clasificación #{attr_requerido}".html_safe %></div><br/>
-                  <div class="col-sm-7"><%= f.collection_select :etapa_ganado_id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-7"><%= collection_select :etapa_ganado, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
                   <div class="col-sm-1"></div><br/>
                 </td>
 
@@ -213,6 +213,30 @@
 
      return true;
   }
+
+  <%if @ganado_entrada.present?%>
+
+   <%if @ganado_entrada.sexo_ganado_id.present?%>
+
+      
+      $("#sexo_ganado_id").val('<%=@ganado_entrada.sexo_ganado_id%>');
+      <% etapa_ganado = EtapaGanado.where("sexo_ganado_id = ?", @ganado_entrada.sexo_ganado_id)%>
+
+      <%etapa_ganado.each do |eg|%>
+
+        var id = "<%=eg.id%>";
+        var texto = "<%=eg.descripcion%>";
+
+        $("#etapa_ganado_id").append(new Option(texto, id));
+
+      <%end%>
+
+      $("#etapa_ganado_id").val("<%=@ganado_entrada.etapa_ganado_id%>");
+
+    <%end%>
+
+  <%end%>
+
 
   $("#precio_compra").val('0');
   $("#precio_compra").bind('focus', function(){ 

@@ -250,7 +250,7 @@ def agregar_entrada_ganado
     if @valido
       
       @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
-      @ganado_entrada.procedencia = params[:procedencia]
+      @ganado_entrada.procedencia = params[:procedencia].upcase
       @ganado_entrada.peso_promedio = params[:peso_promedio]
       @ganado_entrada.precio_compra = params[:precio_compra].to_s.gsub(/[$.]/,'').to_i
       @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
