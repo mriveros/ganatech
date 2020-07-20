@@ -142,10 +142,10 @@ class GanadosController < ApplicationController
     end
 
     if params[:form_buscar_ganado_procedencia].present?
-      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL' || params[:form_buscar_ganado_procedencia] == 'LOC'|| params[:form_buscar_ganado_procedencia] == 'loc'
+      
+      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL' || params[:form_buscar_ganado_procedencia] == 'LOC'|| params[:form_buscar_ganado_procedencia] == 'loc' || params[:form_buscar_ganado_procedencia] == 'loca' || params[:form_buscar_ganado_procedencia] == 'LOCA'
         
         cond << "procedencia isnull"
-        #args << "null"
       
       else
         
@@ -842,9 +842,7 @@ class GanadosController < ApplicationController
 
           end
 
-
         end
-
 
       end
 
@@ -959,7 +957,7 @@ class GanadosController < ApplicationController
 
         if @ganado.save
 
-          auditoria_nueva("registrar ganado", "ganados", @ganado)
+          auditoria_nueva("registrar ganado por lote", "ganados", @ganado)
           @guardado_ok = true
           contador = contador + 1
          

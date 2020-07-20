@@ -255,6 +255,7 @@ def agregar_entrada_ganado
     if @valido
       
       @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
+      auditoria_id = auditoria_antes("actualizar entrada de ganado", "ganados_entradas", @ganado_entrada)
       @ganado_entrada.procedencia = params[:ganado_entrada][:procedencia].upcase
       @ganado_entrada.peso_promedio = params[:ganado_entrada][:peso_promedio]
       @ganado_entrada.precio_compra = params[:ganado_entrada][:precio_compra].to_s.gsub(/[$.]/,'').to_i
@@ -274,7 +275,7 @@ def agregar_entrada_ganado
 
       if @ganado_entrada.save
 
-        auditoria_nueva("actualizar entrada de ganado", "ganados_entradas", @ganado_entrada)
+        auditoria_despues(@ganado_entrada, auditoria_id)
         @guardado_ok = true
          
       end 
@@ -421,7 +422,7 @@ def agregar_entrada_ganado
 
           if @ganado.save
 
-            auditoria_nueva("registrar nuevo ganado de entradas ganados", "ganados", @ganado)
+            auditoria_nueva("registrar nuevo ganado del modulo entradas ganados", "ganados", @ganado)
             @guardado_ok = true
             contador = contador + 1
           
