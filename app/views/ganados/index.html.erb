@@ -108,6 +108,7 @@
              <%= text_field_tag :form_buscar_ganado_procedencia, nil, :class => 'form-control', :style=>"text-transform:uppercase;", :placeholder => "" %>
               <span class="input-group-addon limpiar"  onclick="quitar_filtro('#form-buscar-ganado', '#form_buscar_ganado_procedencia');"><i class="fa fa-times"></i></span>
             </div>
+            <em class="nmb"></em>
           </th> 
 
           <th ></th>
@@ -229,6 +230,19 @@
     if($("#form_buscar_ganado_nombre").val().length !== 0 ){
       valido = false;
       if(($("#form_buscar_ganado_nombre").val().replace(/\s/g,'')).length > 2 ){        
+        valido = true;
+
+      }else{
+        valido = false;
+               
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if($("#form_buscar_ganado_procedencia").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_ganado_procedencia").val().replace(/\s/g,'')).length > 2 ){        
         valido = true;
 
       }else{

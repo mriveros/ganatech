@@ -142,7 +142,7 @@ class GanadosController < ApplicationController
     end
 
     if params[:form_buscar_ganado_procedencia].present?
-      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL'
+      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL' || params[:form_buscar_ganado_procedencia] == 'LOC'|| params[:form_buscar_ganado_procedencia] == 'loc'
         
         cond << "procedencia isnull"
         #args << "null"
