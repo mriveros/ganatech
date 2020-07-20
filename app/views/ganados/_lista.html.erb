@@ -14,6 +14,16 @@
       <td ><%= gan.peso_promedio %></td>
       <td ><%= gan.codigo_lote %></td>
       
+      <%if gan.ganado_entrada_id.present?%>
+      
+        <td ><%= gan.procedencia.to_s%></td>
+      
+      <%else%>
+
+        <td > LOCAL </td>
+
+      <%end%>
+      
       <td > </td>
 
     </tr>
@@ -29,7 +39,7 @@
       <td class="td-nivel-2"><%= gan.tipo_concepcion %></td>
       <td class="td-nivel-2"><%= gan.estado_ganado %></td>
       <td class="td-nivel-2"><%= gan.finalidad_ganado %></td>
-      
+      <td ><%= gan.nombre_razon_social%> </td>
       <td >
         
         <%= link_to_ganado_detalle(gan.ganado_id) %>

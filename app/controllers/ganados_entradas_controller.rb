@@ -386,45 +386,48 @@ def agregar_entrada_ganado
     @msg = ""
     @guardado_ok = false
     contador = 0
+    Ganado.transaction do
 
-    @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
-    @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
-    @ganado_entrada.save
+      @ganado_entrada = GanadoEntrada.where("id = ?", params[:ganado_entrada_id]).first
+      @ganado_entrada.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
+      @ganado_entrada.save
 
-    ultimo_lote = Ganado.order("created_at").last
+      ultimo_lote = Ganado.order("created_at").last
 
-    if @valido
-      
-      while @ganado_entrada.cantidad_lote.to_i > contador.to_i do
+      if @valido
         
-        @ganado = Ganado.new()
-        
-        ultima_produccion = Ganado.order("created_at").last
-        nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
-        @ganado.nombre = nuevo_rp
-        @ganado.rp = nuevo_rp
-        @ganado.rp_padre = "No Especificado"
-        @ganado.rp_madre = "No Especificado"
-        @ganado.potrero_id = params[:potrero][:id]
-        @ganado.peso_promedio = @ganado_entrada.peso_promedio
-        @ganado.sexo_ganado_id = @ganado_entrada.sexo_ganado_id
-        @ganado.tipo_ganado_id = @ganado_entrada.tipo_ganado_id
-        @ganado.etapa_ganado_id = @ganado_entrada.etapa_ganado_id
-        @ganado.raza_id = @ganado_entrada.raza_ganado_id
-        @ganado.tipo_concepcion_id = @ganado_entrada.tipo_concepcion_id
-        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
-        @ganado.observacion = params[:observacion]
-        @ganado.codigo_lote = ultimo_lote.codigo_lote + 1
-        @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
-        @ganado.entrada_ganado_id = @ganado_entrada.id
+        while @ganado_entrada.cantidad_lote.to_i > contador.to_i do
+          
+          @ganado = Ganado.new()
+          
+          ultima_produccion = Ganado.order("created_at").last
+          nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+          @ganado.nombre = nuevo_rp
+          @ganado.rp = nuevo_rp
+          @ganado.rp_padre = "No Especificado"
+          @ganado.rp_madre = "No Especificado"
+          @ganado.potrero_id = params[:potrero][:id]
+          @ganado.peso_promedio = @ganado_entrada.peso_promedio
+          @ganado.sexo_ganado_id = @ganado_entrada.sexo_ganado_id
+          @ganado.tipo_ganado_id = @ganado_entrada.tipo_ganado_id
+          @ganado.etapa_ganado_id = @ganado_entrada.etapa_ganado_id
+          @ganado.raza_id = @ganado_entrada.raza_ganado_id
+          @ganado.tipo_concepcion_id = @ganado_entrada.tipo_concepcion_id
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+          @ganado.observacion = params[:observacion]
+          @ganado.codigo_lote = ultimo_lote.codigo_lote + 1
+          @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
+          @ganado.ganado_entrada_id = params[:ganado_entrada_id]
 
-        if @ganado.save
+          if @ganado.save
 
-          auditoria_nueva("registrar nuevo ganado de entradas ganados", "ganados", @ganado)
-          @guardado_ok = true
-          contador = contador + 1
-         
-        end 
+            auditoria_nueva("registrar nuevo ganado de entradas ganados", "ganados", @ganado)
+            @guardado_ok = true
+            contador = contador + 1
+          
+          end 
+
+        end
 
       end
 

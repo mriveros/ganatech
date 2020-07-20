@@ -141,6 +141,28 @@ class GanadosController < ApplicationController
 
     end
 
+    if params[:form_buscar_ganado_procedencia].present?
+      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL'
+        
+        cond << "procedencia isnull"
+        #args << "null"
+      
+      else
+        
+        cond << "procedencia ilike ?"
+        args << "%#{params[:form_buscar_ganado_procedencia]}%"
+
+      end
+
+    end
+
+    if params[:form_buscar_ganado][:proveedor_ganado_id].present?
+
+      cond << "proveedor_ganado_id = ?"
+      args << params[:form_buscar_ganado][:proveedor_ganado_id]
+
+    end
+
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
