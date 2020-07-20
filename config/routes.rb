@@ -204,6 +204,25 @@ get 'crontab_ultron/index'
   post 'ganados_entradas/actualizar_entrada_ganado'
   get 'ganados_entradas/cambiar_estado_entrada_ganado_a_finalizado'
   post 'ganados_entradas/guardar_estado_entrada_ganado_a_finalizado'
+
+  #GANADOS SALIDAS
+  get 'ganados_salidas/index'
+  post 'ganados_salidas/lista'
+  get 'ganados_salidas/lista'
+  get 'ganados_salidas/agregar'
+  post 'ganados_salidas/guardar'
+  get 'ganados_salidas/editar'
+  post 'ganados_salidas/actualizar'
+  get 'ganados_salidas/eliminar'
+  get 'ganados_salidas/buscar_ganado'
+  get 'ganados_salidas/crear_lote_ganado'
+  post 'ganados_salidas/crear_lote_ganado'
+  post 'ganados_salidas/lista_ganado'
+  get 'ganados_salidas/lista_ganado'
+  get 'ganados_salidas/agregar_ganado_lote'
+  get 'ganados_salidas/eliminar_ganado_lote'
+  get 'ganados_salidas/seleccionar_lote'
+  post 'ganados_salidas/eliminar_lote'
  
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------

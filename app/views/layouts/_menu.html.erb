@@ -55,6 +55,7 @@
                <li><%= link_to "Espermas", espermas_index_path if acceso_permitido("espermas.index") %></li>
 						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
 						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
+              <li><%= link_to "Clientes", clientes_index_path if acceso_permitido("clientes.index") %></li>
 
               <li>
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
@@ -78,7 +79,7 @@
           <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
           <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
 					<li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
-          <li><%= link_to "Ganado Salida - Venta", clientes_index_path if acceso_permitido("clientes.index") %></li>
+          <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
           <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>
           <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
 
