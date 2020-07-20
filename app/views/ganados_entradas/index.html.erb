@@ -48,14 +48,6 @@
             </div>
             <em class="nmb"></em>
           </th>
-          
-          <th>
-            <span>Precio Compra</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_ganado_entrada_precio_compra, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_precio_compra');"><i class="fa fa-times"></i></span>
-            </div>
-          </th> 
 
           <th >
             <span>Proveedor</span>
@@ -82,11 +74,11 @@
             </div>
           </th> 
 
-         <th>
-            <span>Monto Total Compra</span>
+          <th>
+            <span>Precio Compra</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_ganado_entrada_precio_total_compra, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_precio_total_compra');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_entrada_precio_compra, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_precio_compra');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
@@ -95,6 +87,14 @@
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_entrada_cantidad_lote, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_cantidad_lote');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th>
+            <span>Monto Total Compra</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_ganado_entrada_precio_total_compra, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-entrada', '#form_buscar_ganado_entrada_precio_total_compra');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 

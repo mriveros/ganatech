@@ -7,14 +7,12 @@
       <td><%= gan.ganado_entrada_id %></td>
       <td style="text-transform:uppercase;"><%= gan.procedencia%></td>
       <td ><%= gan.peso_promedio%></td>
-      <td ><%= gan.precio_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td ><%= gan.nombre_razon_social %></td>
       <td ><%= gan.contacto_proveedor %></td>
       <td ><%=gan.telefono_contacto  %></td>
-      <td ><%= gan.precio_total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= gan.precio_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td ><%= gan.cantidad_lote%></td>
-     
-      
+      <td ><%= gan.precio_total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td > </td>
 
     </tr>
@@ -29,7 +27,7 @@
       <td class="td-nivel-2"><%= gan.codigo_lote %></td>
       <td class="td-nivel-2"><%= gan.observacion %></td>
       <td class="td-nivel-2"><%= gan.estado_movimiento %></td>
-      
+      <td > </td>
       <td >
         
         <%if gan.estado_movimiento_id == PARAMETRO[:estado_movimiento_en_proceso]%>

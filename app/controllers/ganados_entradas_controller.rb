@@ -415,11 +415,12 @@ def agregar_entrada_ganado
         @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
         @ganado.observacion = params[:observacion]
         @ganado.codigo_lote = ultimo_lote.codigo_lote + 1
-        @ganado.finalidad_ganado_id = PARAMETRO[:finalidad_ganado_no_especificado]
+        @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
+        @ganado.entrada_ganado_id = @ganado_entrada.id
 
         if @ganado.save
 
-          auditoria_nueva("registrar ganado", "ganados", @ganado)
+          auditoria_nueva("registrar nuevo ganado de entradas ganados", "ganados", @ganado)
           @guardado_ok = true
           contador = contador + 1
          
