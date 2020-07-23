@@ -1,5 +1,5 @@
 class GanadosSalidasController < ApplicationController
-
+ 
 before_filter :require_usuario
 
   def index
@@ -12,99 +12,50 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_control_ganado_id].present?
+    if params[:form_buscar_salida_ganado_id].present?
 
       cond << "control_ganado_id = ?"
-      args << params[:form_buscar_control_ganado_id]
+      args << params[:form_buscar_salida_ganado_id]
 
     end
 
-    if params[:form_buscar_control_ganado_codigo].present?
+    if params[:form_buscar_salida_ganado_codigo].present?
 
       cond << "codigo = ?"
-      args << params[:form_buscar_control_ganado_codigo]
+      args << params[:form_buscar_salida_ganado_codigo]
 
     end
 
-    if params[:form_buscar_control_ganado_nombre].present?
+    if params[:form_buscar_salida_ganado_nombre].present?
 
       cond << "ganado_nombre ilike ?"
-      args << "%#{params[:form_buscar_control_ganado_nombre]}%"
+      args << "%#{params[:form_buscar_salida_ganado_nombre]}%"
 
     end
 
-    if params[:form_buscar_control_ganado_ganado_rp].present?
+    if params[:form_buscar_salida_ganado_ganado_rp].present?
 
       cond << "ganado_rp  = ?"
-      args << params[:form_buscar_control_ganado_ganado_rp]
+      args << params[:form_buscar_salida_ganado_ganado_rp]
 
     end
 
-    if params[:form_buscar_control_ganado][:control_id].present?
-
-      cond << "control_id = ?"
-      args << params[:form_buscar_control_ganado][:control_id]
-
-    end
-
-    if params[:form_buscar_control_ganado][:medicamento_id].present?
-
-      cond << "medicamento_id = ?"
-      args << params[:form_buscar_control_ganado][:medicamento_id]
-
-    end
-
-    if params[:form_buscar_control_ganado_cantidad_suministrada].present?
-
-      cond << "cantidad_suministrada  = ?"
-      args << params[:form_buscar_control_ganado_cantidad_suministrada]
-
-    end
-
-    if params[:form_buscar_control_ganado_peso].present?
-
-      cond << "peso = ?"
-      args << params[:form_buscar_control_ganado_peso]
-
-    end
-
-    if params[:form_buscar_control_ganado_fecha_control].present?
-
-      cond << "fecha_control = ?"
-      args << params[:form_buscar_control_ganado_fecha_control]
-
-    end
-
-    if params[:form_buscar_control_ganado_observacion].present?
-
-      cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_control_ganado_observacion]}%"
-
-    end
-
-    if params[:form_buscar_control_ganado][:clasificacion_control_id].present?
-
-      cond << "clasificacion_control_id = ?"
-      args << params[:form_buscar_control_ganado][:clasificacion_control_id]
-
-    end
-
-
+    
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
 
-      @controles_ganados =  VControlGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VControlGanado.where(cond).count
+      @ganados_salidas =  VGanadoSalida.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VGanadoSalida.where(cond).count
 
     else
      
-      @controles_ganados = VControlGanado.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VControlGanado.count
+      @ganados_salidas = VGanadoSalida.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VGanadoSalida.count
 
     end
 
-    @total_registros = VControlGanado.count
+    @total_registros = VGanadoSalida.count
 
     respond_to do |f|
       

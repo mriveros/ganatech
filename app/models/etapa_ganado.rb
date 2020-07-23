@@ -4,5 +4,7 @@ class EtapaGanado < ActiveRecord::Base
   attr_accessible :id, :descripcion, :sexo_ganado_id, :tipo_ganado_id, :created_at, :updated_at
   
   scope :orden_01, -> {order("id")}
+  scope :orden_descripcion, -> {order("descripcion")}
+
 
 end
