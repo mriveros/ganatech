@@ -1,0 +1,3 @@
+$("#<%= params[:window_id]%>").html('');
+$("#<%= params[:window_id]%>").html("<%= escape_javascript(render :partial => 'agregar')%>");
+$("#<%= params[:window_id]%>").modal('show'); 

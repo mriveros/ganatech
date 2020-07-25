@@ -160,6 +160,28 @@ get 'crontab_ultron/index'
   get 'estados_ganados/eliminar'
   get 'estados_ganados/buscar_estado_ganado'
 
+  #EMPRESAS TRANSPORTES
+  get 'empresas_transportes/index'
+  post 'empresas_transportes/lista'
+  get 'empresas_transportes/lista'
+  get 'empresas_transportes/agregar'
+  post 'empresas_transportes/guardar'
+  get 'empresas_transportes/editar'
+  post 'empresas_transportes/actualizar'
+  get 'empresas_transportes/eliminar'
+  get 'empresas_transportes/buscar_empresa_transporte'
+
+  #PROVEEDORES GANADOS
+  get 'proveedores_ganados/index'
+  post 'proveedores_ganados/lista'
+  get 'proveedores_ganados/lista'
+  get 'proveedores_ganados/agregar'
+  post 'proveedores_ganados/guardar'
+  get 'proveedores_ganados/editar'
+  post 'proveedores_ganados/actualizar'
+  get 'proveedores_ganados/eliminar'
+  get 'proveedores_ganados/buscar_proveedor_ganado'
+
   #ESPERMAS
   get 'espermas/index'
   post 'espermas/lista'
