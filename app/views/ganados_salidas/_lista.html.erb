@@ -5,7 +5,7 @@
     <tr>
 
       <td><%= gan.ganado_salida_id %></td>
-      <td ><%= gan.fecha_salida%></td>
+      <td ><%= gan.fecha_salida.strftime('%d/%m/%Y')%></td>
       <td ><%= gan.codigo_rfid%></td>
       <td ><%= gan.nombre %></td>
       <td ><%= gan.rp %></td>
@@ -25,7 +25,7 @@
       <td class="td-nivel-2"><%= gan.razon_social %></td>
       <td class="td-nivel-2"><%= gan.estado_movimiento %></td>
       <td class="td-nivel-2"><%= gan.observacion %></td>
-      <td > </td>
+      <td class="td-nivel-2"><%= gan.codigo_lote %> </td>
       <td >
         
         <%if gan.estado_movimiento_id == PARAMETRO[:estado_movimiento_en_proceso]%>

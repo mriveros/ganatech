@@ -6,7 +6,7 @@ before_filter :require_usuario
   
  
   end 
- 
+  
   def lista
 
     cond = []
@@ -67,9 +67,10 @@ before_filter :require_usuario
 
   def agregar
 
-    @control_ganado = ControlGanado.new
-    nuevo_incremento = ControlGanado.last
-    @codigo_control = nuevo_incremento.codigo + 1
+    @ganado_salida = GanadoSalida.new
+    nuevo_incremento = GanadoSalida.last
+    @codigo_salida = nuevo_incremento.codigo_lote + 1
+    @fecha_actual = Date.today.strftime('%d/%m/%Y')
 
     respond_to do |f|
       

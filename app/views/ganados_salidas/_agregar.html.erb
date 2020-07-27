@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @control_ganado, remote: true, url: ganados_salidas_guardar_url, html: { id: "form-agregar-control-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @ganado_salida, remote: true, url: ganados_salidas_guardar_url, html: { id: "form-agregar-control-ganado" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  
@@ -20,30 +20,21 @@
         <div class="panel-body">
 
             <div class="col-sm-1"></div><br />
-            <div class="col-sm-4"><%= label_tag :nil, "Fecha Control #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= date_field_tag :fecha_control, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+            <div class="col-sm-4"><%= label_tag :nil, "Fecha Salida #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= date_field_tag :fecha_salida, @fecha_actual, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
             </div>    
             <div class="col-sm-1"></div><br /> <br />  
 
             <div class="col-sm-4"><%= label_tag :nil, "Código #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_control ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 10, :readonly=> true %></div>
+            <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_salida ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 10, :readonly=> true %></div>
             <div class="col-sm-1"></div><br /><br />
 
-            <div class="col-sm-4"><%= label_tag nil, "Control #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :control, :id, Control.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-4"><%= label_tag nil, "Tipo Salida #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+            <div class="col-sm-7"><%= collection_select :tipo_salida, :id, TipoSalida.orden_01, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
 
-            <%= hidden_field_tag :medicamento_id %>
-            <div class="col-sm-4"><%= label_tag :nil, "Medicamento #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
-            <div class="col-sm-1"></div><br /><br />
-
-            <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-            <div class="col-sm-1"></div><br /><br />
-
-            <div class="col-sm-4"><%= label_tag nil, "Aplicar a #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :clasificacion_control, :id, ClasificacionControl.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-4"><%= label_tag nil, "Salida #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+            <div class="col-sm-7"><%= collection_select :clasificacion_salida, :id, ClasificacionSalida.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
 
             <div id="por_ganado" hidden="true">
@@ -78,35 +69,6 @@
 
               </div>
               
-            </div>
-
-            <div id="por_potrero" hidden="true">
-
-              <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
-              <div class="col-sm-7"><%= collection_select :hacienda_potrero, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
-              <div class="col-sm-1"></div><br/>
-
-                
-              <%= linked_combo "potrero_id", 
-                  :linked =>"hacienda_potrero_id" ,
-                  :url => url_for( haciendas_obtener_potreros_path(format: :json)), 
-                  :param => "hacienda_id",
-                  :clase => "hacienda" %>
-
-                
-
-              <div class="col-sm-4"><%= label_tag nil, "Potrero #{attr_requerido}".html_safe %></div>
-              <div class="col-sm-7"><%= collection_select :potrero, :id, {}, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
-              <div class="col-sm-1"></div><br/>
-              
-            </div>
-
-            <div id="por_hacienda" hidden="true">
-              
-              <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe %></div>
-              <div class="col-sm-7"><%= collection_select :hacienda_select, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm'} %></div>
-              <div class="col-sm-1"></div><br/><br/>
-
             </div>
 
             <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
