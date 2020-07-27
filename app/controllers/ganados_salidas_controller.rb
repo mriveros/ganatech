@@ -450,4 +450,18 @@ before_filter :require_usuario
   end
 
 
+  def buscar_cliente
+    
+    @cliente = Cliente.where("nombre_razon_social ilike ?", "%#{params[:cliente]}%")
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @cliente }
+    
+    end
+    
+  end
+
+
 end
