@@ -117,6 +117,7 @@ before_filter :require_usuario
         @ganado_lote.each do |ganado|
 
           @ganado_salida = GanadoSalida.new
+          
           @ganado_salida.ganado_id = ganado.ganado_id
           @ganado_salida.fecha_control = params[:fecha_control]
           @ganado_salida.control_id = params[:control][:id]
