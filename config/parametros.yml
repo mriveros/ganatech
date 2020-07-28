@@ -93,6 +93,10 @@ development:
  
   #FINALIDADES GANADOS
   finalidad_ganado_no_especificado: 4
+
+  #CLASIFICACION SALIDA GANADO
+  clasificacion_salida_por_ganado: 1
+  clasificacion_salida_por_lote: 2
   
 
 production:
@@ -186,5 +190,9 @@ production:
 
   #FINALIDADES GANADOS
   finalidad_ganado_no_especificado: 4
+
+  #CLASIFICACION SALIDA GANADO
+  clasificacion_salida_por_ganado: 1
+  clasificacion_salida_por_lote: 2
   
   
