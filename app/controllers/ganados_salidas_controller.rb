@@ -83,12 +83,12 @@ before_filter :require_usuario
   def guardar
 
     @valido = false
-    @msg = " "
+    @msg = ""
     @guardado_ok = false
 
     
     if @valido
-
+  
       if params[:clasificacion_salida][:id].to_i == PARAMETRO[:clasificacion_salida_por_ganado]
         
         @ganado_salida = GanadoSalida.new

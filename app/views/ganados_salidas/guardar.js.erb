@@ -4,11 +4,11 @@
   
   <% if params[:clasificacion_salida][:id].to_i == PARAMETRO[:clasificacion_salida_por_ganado] %>
     
-    $("#form_buscar_salida_ganado_id").val('<%= @salida_ganado.id %>');
+    $("#form_buscar_salida_ganado_id").val('<%= @ganado_salida.id %>');
   
   <%else%>
 
-    $("#form_buscar_salida_ganado_codigo_lote").val('<%= @salida_ganado.codigo_lote%>');
+    $("#form_buscar_salida_ganado_codigo_lote").val('<%= @ganado_salida.codigo_lote%>');
 
   <%end%>
   
