@@ -412,6 +412,7 @@ before_filter :require_usuario
           end
 
           ganado.fecha_nacimiento = params[:fecha_concepcion]
+          ganado.finalidad_ganado_id = PARAMETRO[:finalidad_ganado_no_especificado]
 
           if ganado.save
 
