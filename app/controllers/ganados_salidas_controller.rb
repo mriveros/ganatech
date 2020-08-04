@@ -141,7 +141,7 @@ before_filter :require_usuario
 
             @ganado_salida = GanadoSalida.new
             @ganado_salida.peso_promedio = params[:peso_promedio]
-            @ganado_salida.ganado_id = params[:ganado_id]
+            @ganado_salida.ganado_id =  ganado.ganado_id
             @ganado_salida.tipo_salida_id = params[:tipo_salida][:id]
             @ganado_salida.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
             @ganado_salida.observacion = params[:observacion]
@@ -155,7 +155,7 @@ before_filter :require_usuario
 
               auditoria_nueva("Guardar salida de Ganado","ganados_salidas", @ganado_salida)
 
-              @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+              @ganado = Ganado.where("id = ?", ganado.ganado_id).first
               auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
               @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_proceso_venta]
               if @ganado.save
@@ -302,7 +302,7 @@ before_filter :require_usuario
     
     if @lote_control_ganado.save
 
-      auditoria_nueva("Guardar Lote para control de ganado","tmp_ganados_controles_lotes", @lote_control_ganado)
+      auditoria_nueva("Guardar Lote para para salida de ganado","tmp_ganados_salidas_lotes", @lote_control_ganado)
 
     end
 
@@ -321,7 +321,7 @@ before_filter :require_usuario
     
     if @lote_control_ganado.destroy
     
-      auditoria_nueva("Eliminar Lote para control de ganado","tmp_ganados_controles_lotes", @lote_control_ganado)
+      auditoria_nueva("Eliminar Lote para salida de ganado","tmp_ganados_salidas_lotes", @lote_control_ganado)
 
     end
 
