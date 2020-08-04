@@ -217,7 +217,7 @@
     $("#rp").val('');
     $("#codigo_rfid").val('');
 
-    $.getJSON("<%= url_for(controles_ganados_buscar_ganado_path) %>", { ganado: $(this).val()}, function(j){
+    $.getJSON("<%= url_for(ganados_salidas_buscar_ganado_path) %>", { ganado: $(this).val()}, function(j){
         
       var ganado = "";
       var options = "<option value=''> -- Seleccione un Ganado -- </option>"

@@ -106,7 +106,7 @@ before_filter :require_usuario
           @ganado_salida.peso_promedio = params[:peso_promedio]
           @ganado_salida.ganado_id = params[:ganado_id]
           @ganado_salida.tipo_salida_id = params[:tipo_salida][:id]
-          @ganado_salida.precio_venta = params[:precio_venta]
+          @ganado_salida.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
           @ganado_salida.observacion = params[:observacion]
           @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
           @ganado_salida.cliente_id = params[:cliente_id]
@@ -143,7 +143,7 @@ before_filter :require_usuario
             @ganado_salida.peso_promedio = params[:peso_promedio]
             @ganado_salida.ganado_id = params[:ganado_id]
             @ganado_salida.tipo_salida_id = params[:tipo_salida][:id]
-            @ganado_salida.precio_venta = params[:precio_venta]
+            @ganado_salida.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
             @ganado_salida.observacion = params[:observacion]
             @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
             @ganado_salida.cliente_id = params[:cliente_id]
@@ -175,7 +175,7 @@ before_filter :require_usuario
         end
 
       end
-      
+
     end
 
 
@@ -273,17 +273,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @ganados =  VGanado.orden_01.where(cond).paginate(per_page: 5, page: params[:page])
-      @total_encontrados = VGanado.where(cond).count
+      @ganados =  VGanado.modulo_ganado_salida.orden_01.where(cond).paginate(per_page: 5, page: params[:page])
+      @total_encontrados = VGanado.modulo_ganado_salida.where(cond).count
 
     else
      
-      @ganados = VGanado.orden_01.paginate(per_page: 5, page: params[:page])
-      @total_encontrados = VGanado.count
+      @ganados = VGanado.modulo_ganado_salida.orden_01.paginate(per_page: 5, page: params[:page])
+      @total_encontrados = VGanado.modulo_ganado_salida.count
 
     end
 
-    @total_registros = VGanado.count
+    @total_registros = VGanado.modulo_ganado_salida.count
 
 
     respond_to do |f|
@@ -297,7 +297,7 @@ before_filter :require_usuario
 
   def agregar_ganado_lote
 
-    @lote_control_ganado = LoteControlGanado.new
+    @lote_control_ganado = LoteSalidaGanado.new
     @lote_control_ganado.ganado_id = params[:ganado_id]
     
     if @lote_control_ganado.save
@@ -316,7 +316,7 @@ before_filter :require_usuario
 
   def eliminar_ganado_lote
 
-    @lote_control_ganado = LoteControlGanado.where("ganado_id = ? ", params[:ganado_id]).first
+    @lote_control_ganado = LoteSalidaGanado.where("ganado_id = ? ", params[:ganado_id]).first
     aux = @lote_control_ganado 
     
     if @lote_control_ganado.destroy
@@ -336,7 +336,7 @@ before_filter :require_usuario
 
   def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike (?) ", "%#{params[:ganado]}%")
+    @ganados = VGanado.where("nombre ilike (?) and estado_ganado_id not in (?) ", "%#{params[:ganado]}%", [PARAMETRO[:estado_ganado_en_proceso_venta], PARAMETRO[:estado_ganado_vendido]])
 
     respond_to do |f|
       
@@ -350,7 +350,7 @@ before_filter :require_usuario
 
   def seleccionar_lote
 
-    @lote = LoteControlGanado.new
+    @lote = LoteSalidaGanado.new
 
     respond_to do |f|
 
@@ -365,7 +365,7 @@ before_filter :require_usuario
 
     @lote_eliminado = false
 
-    @lote_control_ganado = ControlGanado.where("codigo = ?", params[:codigo_lote])
+    @lote_control_ganado = GanadoSalida.where("codigo = ?", params[:codigo_lote])
 
     if @lote_control_ganado.destroy_all
 

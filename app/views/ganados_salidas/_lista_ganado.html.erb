@@ -109,7 +109,7 @@
 
       $.ajax({
       type: 'GET',
-      url: "<%= url_for(controles_ganados_eliminar_ganado_lote_path) %>",
+      url: "<%= url_for(ganados_salidas_eliminar_ganado_lote_path) %>",
       data: { ganado_id: ganado_id},
       dataType: 'script'    
       }) 
@@ -118,7 +118,7 @@
 
        $.ajax({
         type: 'GET',
-        url: "<%= url_for(controles_ganados_agregar_ganado_lote_path) %>",
+        url: "<%= url_for(ganados_salidas_agregar_ganado_lote_path) %>",
         data: { ganado_id: ganado_id},
         dataType: 'script'    
         }) 
