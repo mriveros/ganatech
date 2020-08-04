@@ -355,7 +355,6 @@ before_filter :require_usuario
     @guardado_ok = false
     @valido = true
 
-
     Ganado.transaction do
 
       @celo = Celo.where("id = ?", params[:celo_id]).first
@@ -376,7 +375,7 @@ before_filter :require_usuario
             ganado.rp_padre = @ganado_padre.rp
           
           else
-            # INSEMINACION ARTIFICIAL
+            #INSEMINACION ARTIFICIAL
             @esperma = Esperma.where("id = ?", @reproduccion.esperma_id).first
 
             if @esperma.esperma_procedencia_id == PARAMETRO[:esperma_local]

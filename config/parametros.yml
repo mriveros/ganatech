@@ -50,6 +50,8 @@ development:
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
   estado_ganado_prenhado: 5
+  estado_ganado_en_proceso_venta: 6
+  estado_ganado_vendido: 7
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
@@ -151,6 +153,8 @@ production:
   estado_ganado_en_celo: 3
   estado_ganado_en_reproduccion: 4
   estado_ganado_prenhado: 5
+  estado_ganado_en_proceso_venta: 6
+  estado_ganado_vendido: 7
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
