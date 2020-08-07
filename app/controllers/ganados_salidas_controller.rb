@@ -119,6 +119,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_salida_ganado_codigo_lote].present?
+
+      cond << "codigo_lote = ?"
+      args << params[:form_buscar_salida_ganado_codigo_lote]
+
+    end
+
     
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
