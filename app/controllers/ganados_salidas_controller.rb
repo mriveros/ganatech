@@ -12,31 +12,110 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_salida_ganado_id].present?
+    if params[:form_buscar_salida_ganado_id].present? 
 
-      cond << "control_ganado_id = ?"
+      cond << "ganado_salida_id = ?"
       args << params[:form_buscar_salida_ganado_id]
+
+    end
+
+    if params[:form_buscar_salida_ganado_fecha_salida].present?
+
+      cond << "fecha_salida = ?"
+      args << params[:form_buscar_salida_ganado_fecha_salida]
 
     end
 
     if params[:form_buscar_salida_ganado_codigo].present?
 
-      cond << "codigo = ?"
+      cond << "codigo_rfid = ?"
       args << params[:form_buscar_salida_ganado_codigo]
 
     end
 
     if params[:form_buscar_salida_ganado_nombre].present?
 
-      cond << "ganado_nombre ilike ?"
+      cond << "nombre ilike ?"
       args << "%#{params[:form_buscar_salida_ganado_nombre]}%"
 
     end
 
-    if params[:form_buscar_salida_ganado_ganado_rp].present?
+    if params[:form_buscar_salida_ganado_rp].present?
 
-      cond << "ganado_rp  = ?"
-      args << params[:form_buscar_salida_ganado_ganado_rp]
+      cond << "rp ilike ?"
+      args << "%#{params[:form_buscar_salida_ganado_rp]}%"
+
+    end
+
+    if params[:form_buscar_salida_ganado][:sexo_ganado_id].present?
+
+      cond << "sexo_ganado_id = ?"
+      args << params[:form_buscar_salida_ganado][:sexo_ganado_id]
+
+    end
+
+    if params[:form_buscar_salida_ganado][:raza_ganado_id].present?
+
+      cond << "raza_ganado_id = ?"
+      args << params[:form_buscar_salida_ganado][:raza_ganado_id]
+
+    end
+
+
+    if params[:form_buscar_salida_ganado][:etapa_ganado_id].present?
+
+      cond << "etapa_ganado_id = ?"
+      args << params[:form_buscar_salida_ganado][:etapa_ganado_id]
+
+    end
+
+
+    if params[:form_buscar_salida_ganado_ganado_peso_promedio].present?
+
+      cond << "ganado_peso_promedio = ?"
+      args << params[:form_buscar_salida_ganado_ganado_peso_promedio]
+
+    end
+
+    if params[:form_buscar_salida_ganado][:tipo_salida_id].present?
+
+      cond << "tipo_salida_id = ?"
+      args << params[:form_buscar_salida_ganado][:tipo_salida_id]
+
+    end
+
+    if params[:form_buscar_salida_ganado_precio_venta].present?
+
+      cond << "precio_venta = ?"
+      args << params[:form_buscar_salida_ganado_precio_venta]
+
+    end
+
+    if params[:form_buscar_salida_ganado_peso_salida].present?
+
+      cond << "peso_promedio = ?"
+      args << params[:form_buscar_salida_ganado_peso_salida]
+
+    end
+
+    if params[:form_buscar_salida_ganado_cliente].present?
+
+      cond << "razon_social ilike ?"
+      args << "%#{params[:form_buscar_salida_ganado_cliente]}%"
+
+    end
+
+    if params[:form_buscar_salida_ganado][:estado_movimiento_id].present?
+
+      cond << "estado_movimiento_id = ?"
+      args << params[:form_buscar_salida_ganado][:estado_movimiento_id]
+
+    end
+
+    if params[:form_buscar_salida_ganado_observacion].present?
+
+      cond << "observacion ilike ?"
+      args << "%#{params[:form_buscar_salida_ganado_observacion]}%"
 
     end
 

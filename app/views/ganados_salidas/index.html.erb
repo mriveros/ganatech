@@ -43,12 +43,12 @@
          </th>
 
           <th>
-            <span>Código RFID/span>
+            <span>Código RFID
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_salida_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_codigo');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+          </th> 
 
           <th >
             <span>Ganado</span>
@@ -61,8 +61,8 @@
            <th>
             <span>RP</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_salida_ganado_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_ganado_rp');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_salida_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_rp');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -70,7 +70,7 @@
             <span>Sexo Ganado</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_salida_ganado, :sexo_ganado_id, SexoGanado.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_sexo_ganado_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -97,8 +97,8 @@
           <th>
             <span>Peso Promedio</span>
             <div class="input-group input-group-sm">
-               <%= text_field_tag :form_buscar_salida_ganado_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_control_id');"><i class="fa fa-times"></i></span>
+               <%= text_field_tag :form_buscar_salida_ganado_ganado_peso_promedio, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_ganado_peso_promedio');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -106,7 +106,7 @@
             <span>Tipo Salida</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_salida_ganado, :tipo_salida_id, TipoSalida.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_etapa_ganado_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_tipo_salida_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -135,7 +135,7 @@
           </th>
 
           <th>
-            <span>Estado</span>
+            <span>Estado Venta</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_salida_ganado,:estado_movimiento_id, EstadoMovimiento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_estado_movimiento_id');"><i class="fa fa-times"></i></span>
