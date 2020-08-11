@@ -518,6 +518,44 @@ before_filter :require_usuario
   end
 
 
+  def cambiar_estado_salida_a_finalizado
+
+    @actualizado = false
+    @msg = ""
+
+    Ganado.transaction do
+
+      @ganado_salida = GanadoSalida.where("id = ?", params[:id]).first
+      @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
+      
+      if @ganado_salida.save
+        
+        auditoria_nueva("Finalizar salida de ganado, venta concretada","ganados_salidas", @ganado_salida)
+        @ganado = Ganado.where("id = ?", @ganado_salida.ganado_id).first
+        auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_vendido]
+        
+        if @ganado.save
+
+          auditoria_despues(@ganado, auditoria_id)
+          @actualizado = true
+
+        end
+        
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
   def buscar_cliente
     
     @cliente = Cliente.where("nombre_razon_social ilike ?", "%#{params[:cliente]}%")
