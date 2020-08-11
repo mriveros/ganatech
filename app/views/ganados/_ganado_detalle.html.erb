@@ -7,6 +7,9 @@
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Ganados Detalles</h3>
       </div>
+      
+      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+
         <div>
       
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar observación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
@@ -25,7 +28,6 @@
           <%end%>
         
         </div>
-
         
         <div>
           
@@ -44,7 +46,7 @@
           
         </div>
 
-        
+      <%end%>  
 
     </div>
 

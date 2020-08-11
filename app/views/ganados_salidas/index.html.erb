@@ -8,6 +8,9 @@
     <%= modal_window( window_id: "modal-window-agregar-salida-ganado", link_to_id: "#link-to-agregar-salida-ganado", url: ganados_salidas_agregar_path( window_id: "modal-window-agregar-salida-ganado"))%>
     <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-salida-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-eliminar-salida-ganado", link_to_id: "#link-to-eliminar-salida-ganado", url: ganados_salidas_seleccionar_lote_path( window_id: "modal-window-eliminar-salida-ganado"))%>
+
+     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Finalizar Lote".html_safe, "#", id: "link-to-finalizar-lote-salida-ganado", class: "btn btn-success pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-finalizar-lote-salida-ganado", link_to_id: "#link-to-finalizar-lote-salida-ganado", url: ganados_salidas_seleccionar_lote_a_finalizar_path( window_id: "modal-window-eliminar-salida-ganado"))%>
     
   </div>
   

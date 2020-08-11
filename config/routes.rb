@@ -224,6 +224,9 @@ get 'crontab_ultron/index'
   get 'ganados_salidas/seleccionar_lote'
   post 'ganados_salidas/eliminar_lote'
   get 'ganados_salidas/buscar_cliente'
+  get 'ganados_salidas/cambiar_estado_salida_a_finalizado'
+  get 'ganados_salidas/seleccionar_lote_a_finalizar'
+  post 'ganados_salidas/finalizar_lote_ganado'
  
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------

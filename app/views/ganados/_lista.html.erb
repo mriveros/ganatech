@@ -43,9 +43,12 @@
       <td >
         
         <%= link_to_ganado_detalle(gan.ganado_id) %>
-        <%= link_to_editar_ganado(gan.ganado_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
-      
+        <%if gan.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+          
+          <%= link_to_editar_ganado(gan.ganado_id) %>
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
+        <%end%>
+        
        </td>
 
     </tr>

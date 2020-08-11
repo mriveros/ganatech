@@ -569,5 +569,30 @@ before_filter :require_usuario
     
   end
 
+  def seleccionar_lote_a_finalizar
+
+    @lote = LoteSalidaGanado.new
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def finalizar_lote_ganado
+
+    
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end
