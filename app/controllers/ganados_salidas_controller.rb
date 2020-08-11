@@ -583,8 +583,49 @@ before_filter :require_usuario
 
 
   def finalizar_lote_ganado
+  
+    @lote_finalizado = false
+    @valido = true
+    @msg = ""
 
-    
+    Ganado.transaction do
+
+      @ganado_salida = GanadoSalida.where("codigo_lote = ? and estado_movimiento_id <> ?", params[:codigo_lote], PARAMETRO[:estado_movimiento_finalizado])
+
+      unless @ganado_salida.present?
+
+        @valido = false
+        @msg = "El lote ingresado no pertenece a un lote a finalizar"
+
+      end
+
+      if @valido
+
+        @ganado_salida.each do |gsl|
+
+          gsl.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
+          
+          if gsl.save
+            
+            auditoria_nueva("Finalizar salida de ganado, venta concretada","ganados_salidas", gsl)
+            @ganado = Ganado.where("id = ?", gsl.ganado_id).first
+            auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
+            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_vendido]
+            
+            if @ganado.save
+
+              auditoria_despues(@ganado, auditoria_id)
+              @lote_finalizado = true
+
+            end
+          
+          end
+
+        end
+
+      end
+
+    end
 
     respond_to do |f|
 
