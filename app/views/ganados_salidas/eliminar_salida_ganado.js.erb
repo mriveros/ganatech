@@ -1,0 +1,28 @@
+<% if @eliminado %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-salida-ganado");
+  $("#form_buscar_salida_ganado_id").val("<%=@ganado_salida_elim.id%>");
+  $("#form_buscar_salida_ganado_fecha_salida").val('');
+  $("#form_buscar_salida_ganado_codigo").val('');
+  $("#form_buscar_salida_ganado_nombre").val('');
+  $("#form-buscar-salida-ganado").submit();
+    setTimeout(function(){ 
+      
+      $("#msg-eliminar-salida-ganado").remove();
+       swal("Salida de Ganados","Salida de Ganado Eliminado Exitosamente!.", "success");
+
+    }, 1000);
+      
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-salida-ganado");
+  setTimeout(function(){ 
+
+    $("#msg-eliminar-salida-ganado").remove(); 
+
+    swal("Salida de Ganados", "No se pudo eliminar la Salida de Ganados. <%=@msg%>. Intente más tarde","error");
+  
+  }, 1000);
+  
+    
+<% end %>

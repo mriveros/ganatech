@@ -274,17 +274,32 @@ before_filter :require_usuario
   end
 
  
- def eliminar
+ def eliminar_salida_ganado
 
     @eliminado = false
     @msg = ""
 
-    @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
-    @control_ganado_elim = @control_ganado
-    
-    if @control_ganado.destroy
-    
-      @eliminado = true
+    Ganado.transaction do
+
+      @ganado_salida = GanadoSalida.where("id = ?", params[:id]).first
+      @ganado_salida_elim = @ganado_salida
+      
+      if @ganado_salida.destroy
+        
+        auditoria_nueva("Eliminar salida de Ganado","ganados_salidas", @ganado_salida_elim)
+        @ganado = Ganado.where("id = ?", @ganado_salida_elim.ganado_id).first
+        auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+        
+        if @ganado.save
+
+          auditoria_despues(@ganado, auditoria_id)
+          @eliminado = true
+
+        end
+        
+
+      end
 
     end
     
