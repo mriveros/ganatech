@@ -1,28 +1,29 @@
 <% if @lote_eliminado %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-control-ganado");
-  $("#form_buscar_control_ganado_id").val("");
-  $("#form_buscar_control_ganado_fecha_control").val('');
-  $("#form_buscar_control_ganado_codigo").val("<%=params[:codigo_lote]%>");
-  $("#form_buscar_control_ganado_nombre").val('');
-  $("#form_buscar_control_ganado_ganado_rp").val('');
-  $("#form-buscar-control-ganado").submit();
+  $("<div class='col-sm-12' id='msg-eliminar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-salida-ganado");
+  $("#form_buscar_salida_ganado_id").val("");
+  $("#form_buscar_salida_ganado_fecha_salida").val('');
+  $("#form_buscar_salida_ganado_codigo_lote").val("<%=params[:codigo_lote]%>");
+  $("#form_buscar_salida_ganado_codigo").val('');
+  $("#form_buscar_salida_ganado_nombre").val('');
+  $("#form_buscar_salida_ganado_rp").val('');
+  $("#form-buscar-salida-ganado").submit();
     setTimeout(function(){ 
       
       $("#<%= params[:window_id]%>").modal('hide');
-      $("#msg-eliminar-control-ganado").remove();
-       swal("Sanitaciones","Control Eliminado Exitosamente!.", "success");
+      $("#msg-eliminar-salida-ganado").remove();
+       swal("Salida de Ganados","Salida de Ganado Eliminado Exitosamente!.", "success");
 
     }, 1000);
       
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-control-ganado");
+  $("<div class='col-sm-12' id='msg-eliminar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-salida-ganado");
   setTimeout(function(){ 
 
-    $("#msg-eliminar-control-ganado").remove(); 
+    $("#msg-eliminar-salida-ganado").remove(); 
 
-    swal("Sanitaciones", "No se pudo eliminar el control. <%=@msg%>. Intente más tarde","error");
+    swal("Salida de Ganados", "No se pudo eliminar el salida. <%=@msg%>. Intente más tarde","error");
   
   }, 1000);
   

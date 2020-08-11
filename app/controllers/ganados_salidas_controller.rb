@@ -465,12 +465,46 @@ before_filter :require_usuario
   def eliminar_lote
 
     @lote_eliminado = false
+    @valido = true
+    @msg = ""
 
-    @lote_control_ganado = GanadoSalida.where("codigo = ?", params[:codigo_lote])
+    @lote_salida_ganado = GanadoSalida.where("codigo_lote = ?", params[:codigo_lote])
+    
+    unless @lote_salida_ganado.present?
+      
+      @valido = false
+      @msg = "No existe el código de lote de salida a Eliminar."
 
-    if @lote_control_ganado.destroy_all
+    end
+    
+    if @valido
 
-      @lote_eliminado = true
+      @lote_salida_ganado_elim = @lote_salida_ganado
+      
+      GanadoSalida.transaction do
+
+        @lote_salida_ganado.each do |lgs|
+
+            @ganado = Ganado.where("id = ?", lgs.ganado_id).first
+            auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida, eliminar lote", "ganados", @ganado)
+            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+            
+            if @ganado.save
+
+              auditoria_despues(@ganado, auditoria_id)
+
+            end
+
+        end
+
+        if @lote_salida_ganado.destroy_all
+
+          auditoria_nueva("Eliminar Lote de salida de ganado","ganados_salidas", @lote_salida_ganado_elim)
+          @lote_eliminado = true
+          
+        end
+
+      end
 
     end
 
