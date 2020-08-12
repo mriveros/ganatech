@@ -167,12 +167,12 @@ class GanadosController < ApplicationController
 
     if cond.size > 0
 
-      @ganados =  VGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ganados =  VGanado.orden_estado.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.where(cond).count
 
     else
      
-      @ganados = VGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @ganados = VGanado.orden_estado.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.count
 
     end
