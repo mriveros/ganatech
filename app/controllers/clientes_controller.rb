@@ -4,7 +4,7 @@ before_filter :require_usuario
 skip_before_action :verify_authenticity_token
 
   def index
-  
+   
 
   end
 
@@ -22,36 +22,22 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_clientes_ruc].present?
 
-      cond << "clientes.ruc = ?"
+      cond << "clientes.ruc_ci = ?"
       args << params[:form_buscar_clientes_ruc]
 
     end
 
      if params[:form_buscar_clientes_razon_social].present?
 
-      cond << "clientes.razon_social = ?"
-      args << params[:form_buscar_clientes_razon_social]
-
-    end
-
-    if params[:form_buscar_clientes_nombre].present?
-
-      cond << "clientes.cliente_nombre ilike ?"
-      args << "%#{params[:form_buscar_clientes_nombre]}%"
-
-    end
-
-    if params[:form_buscar_clientes_apellido].present?
-
-      cond << "clientes.cliente_apellido ilike ?"
-      args << "%#{params[:form_buscar_clientes_apellido]}%"
+      cond << "clientes.nombre_razon_social ilike ?"
+      args << "%#{params[:form_buscar_clientes_razon_social]}%"
 
     end
 
     if params[:form_buscar_clientes_direccion].present?
 
-      cond << "clientes.direccion = ?"
-      args << params[:form_buscar_clientes_direccion]
+      cond << "clientes.direccion ilike ?"
+      args << "%#{params[:form_buscar_clientes_direccion]}%"
 
     end
 
@@ -62,13 +48,20 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    if params[:form_buscar_clientes_observacion].present?
+
+      cond << "clientes.telefono ilike ?"
+      args << "%#{params[:form_buscar_clientes_observacion]}%"
+
+    end
+
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
 
       @clientes =  Cliente.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = Cliente.where(cond).count
-
+      
     else
 
       @clientes = Cliente.orden_01.paginate(per_page: 10, page: params[:page])
@@ -104,43 +97,30 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:cliente][:cliente_nombre].present?
+    unless params[:cliente][:nombre_razon_social].present?
 
       @valido = false
-      @msg += " Debe Completar el campo Nombre. \n"
+      @msg += " Debe Completar el campo Nombre o Razón Social. \n"
 
     end
 
-    unless params[:cliente][:cliente_apellido].present?
+    unless params[:cliente][:ruc_ci].present?
 
       @valido = false
-      @msg += "Debe Completar el campo Apellido. \n"
+      @msg += "Debe Completar el campo con el RUC o CI. \n"
 
     end
 
-    unless params[:cliente][:direccion].present?
-
-      @valido = false
-      @msg += "Debe Completar el campo Dirección. \n"
-
-    end
-
-    unless params[:cliente][:telefono].present?
-
-      @valido = false
-      @msg += "Debe Completar el campo Teléfono. \n"
-
-    end
+    
 
     if @valido
       
       @cliente = Cliente.new()
-      @cliente.razon_social = params[:cliente][:razon_social].upcase
-      @cliente.ruc = params[:cliente][:ruc]
-      @cliente.cliente_nombre = params[:cliente][:cliente_nombre].upcase
-      @cliente.cliente_apellido = params[:cliente][:cliente_apellido].upcase
+      @cliente.nombre_razon_social = params[:cliente][:nombre_razon_social].upcase
+      @cliente.ruc_ci = params[:cliente][:ruc_ci]
       @cliente.direccion = params[:cliente][:direccion].upcase
       @cliente.telefono = params[:cliente][:telefono]
+      @cliente.observacion = params[:cliente][:observacion]
 
         if @cliente.save
 
@@ -185,18 +165,32 @@ skip_before_action :verify_authenticity_token
 
     valido = true
     @msg = ""
+
+    unless params[:cliente][:nombre_razon_social].present?
+
+      @valido = false
+      @msg += " Debe Completar el campo Nombre o Razón Social. \n"
+
+    end
+
+    unless params[:cliente][:ruc_ci].present?
+
+      @valido = false
+      @msg += "Debe Completar el campo con el RUC o CI. \n"
+
+    end
+
     @cliente = Cliente.find(params[:cliente_id])
 
     auditoria_id = auditoria_antes("actualizar cliente", "clientes", @cliente)
 
     if valido
 
-      @cliente.razon_social = params[:cliente][:razon_social].upcase
-      @cliente.ruc = params[:cliente][:ruc]
-      @cliente.cliente_nombre = params[:cliente][:cliente_nombre].upcase
-      @cliente.cliente_apellido =  params[:cliente][:cliente_apellido].upcase
+      @cliente.nombre_razon_social = params[:cliente][:nombre_razon_social].upcase
+      @cliente.ruc_ci = params[:cliente][:ruc_ci]
       @cliente.direccion = params[:cliente][:direccion].upcase
       @cliente.telefono = params[:cliente][:telefono]
+      @cliente.observacion = params[:cliente][:observacion]
 
       if @cliente.save
 

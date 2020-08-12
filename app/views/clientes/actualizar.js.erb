@@ -8,7 +8,13 @@
   $("#form_buscar_clientes_apellido").val('');
   $("#form_buscar_clientes_direccion").val('');
   $("#form_buscar_clientes_telefono").val('');
-  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); $("#form-buscar-clientes").submit(); }, 3000);
+  setTimeout(function(){ 
+  	
+  	swal("Cliente actualizado Exitosamente.");
+  	$("#<%= params[:window_id]%>").modal('hide'); 
+  	$("#form-buscar-clientes").submit(); 
+  
+  }, 3000);
 
 <% else %>
 
