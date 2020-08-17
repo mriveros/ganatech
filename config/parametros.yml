@@ -52,6 +52,7 @@ development:
   estado_ganado_prenhado: 5
   estado_ganado_en_proceso_venta: 6
   estado_ganado_vendido: 7
+  estado_ganado_enfermo: 8
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
@@ -99,6 +100,12 @@ development:
   #CLASIFICACION SALIDA GANADO
   clasificacion_salida_por_ganado: 1
   clasificacion_salida_por_lote: 2
+
+  #ESTADO ENFERMEDAD GANADO
+  estado_enfermedad_estable: 1
+  estado_enfermedad_grave: 2
+  estado_enfermedad_critico: 3
+  estado_enfermedad_curado: 4
   
 
 production:
@@ -155,6 +162,7 @@ production:
   estado_ganado_prenhado: 5
   estado_ganado_en_proceso_venta: 6
   estado_ganado_vendido: 7
+  estado_ganado_enfermo: 8
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
@@ -198,5 +206,11 @@ production:
   #CLASIFICACION SALIDA GANADO
   clasificacion_salida_por_ganado: 1
   clasificacion_salida_por_lote: 2
+
+  #ESTADO ENFERMEDAD GANADO
+  estado_enfermedad_estable: 1
+  estado_enfermedad_grave: 2
+  estado_enfermedad_critico: 3
+  estado_enfermedad_curado: 4
   
   
