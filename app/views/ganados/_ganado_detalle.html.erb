@@ -46,6 +46,16 @@
           
         </div>
 
+
+         <div>
+
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>marcar con enfermedad".html_safe, "#", id: "link-to-marcar-como-enfermo", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+          <%= modal_window( window_id: "modal-window-marcar-enfermedad", link_to_id: "#link-to-marcar-como-enfermo", url: ganados_marcar_con_enfermedad_path( window_id: "modal-window-marcar-enfermedad", ganado_id: params[:ganado_id]) )%>
+          
+        </div>
+
+
       <%end%>  
 
     </div>

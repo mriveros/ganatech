@@ -986,4 +986,20 @@ class GanadosController < ApplicationController
 
 
 
+  def marcar_con_enfermedad
+
+    @fecha = Date.today
+    
+    @ganado_enfermedad = ControlGanado.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+
 end
