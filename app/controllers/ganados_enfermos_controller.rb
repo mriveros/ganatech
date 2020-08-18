@@ -66,12 +66,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @controles_ganados =  VGanadoEnfermo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ganados_enfermos =  VGanadoEnfermo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanadoEnfermo.where(cond).count
 
     else
      
-      @controles_ganados = VGanadoEnfermo.orden_01.paginate(per_page: 10, page: params[:page])
+      @ganados_enfermos = VGanadoEnfermo.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanadoEnfermo.count
 
     end

@@ -3,106 +3,79 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Sanidades</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Sanidad".html_safe, "#", id: "link-to-agregar-control-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-control-ganado", link_to_id: "#link-to-agregar-control-ganado", url: controles_ganados_agregar_path( window_id: "modal-window-agregar-control-ganado"))%>
-    <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-control-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-eliminar-control-ganado", link_to_id: "#link-to-eliminar-control-ganado", url: controles_ganados_seleccionar_lote_path( window_id: "modal-window-eliminar-control-ganado"))%>
     
+    <h3 style="float:left;margin-top:5px;">Ganados Enfermos</h3>
+
   </div>
   
 </div>
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-control-ganado">
+<div class="table-responsive" id="table-ganados-enfermos">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag controles_ganados_lista_path, remote: true, id: "form-buscar-control-ganado"  do  %>
+      <%= form_tag controles_ganados_lista_path, remote: true, id: "form-buscar-ganado-enfermo"  do  %>
 
         <tr>
 
-          <th style="width:20px;">
+          <th>
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_enfermo_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-           <th>
-            <div><%= label_tag nil, "Fecha Control".html_safe %></div>
+           <th >
+            <div><%= label_tag nil, "Fecha ".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_control_ganado_fecha_control, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_ganado_enfermo_fecha_control, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_fecha_control');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_fecha_control');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
-          <th style="width:20px;">
+          <th >
             <span>Código Lote</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_codigo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_enfermo_codigo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_codigo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
             <span>Ganado</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_nombre');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_enfermo_nombre, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_nombre');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th >
             <span>RP</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_ganado_rp');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_enfermo_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_ganado_rp');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
-            <span>Control</span>
+            <span>Enfermedad</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_ganado, :control_id, Control.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_control_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado_enfermo, :enfermedad_id, Enfermedad.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_enfermedad_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
-            <span>Medicamento</span>
+            <span>Estado Enfermedad</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_ganado, :medicamento_id, Medicamento.orden_descripcion, :id, :nombre_medicamento, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_medicamento_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Cantidad Suministrada</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_cantidad_suministrada, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_cantidad_suministrada');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th>
-            <span>Peso</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_peso, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_peso');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th>
-            <span>Clasificación Control</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_ganado,:clasificacion_control_id, ClasificacionControl.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_clasificacion_control_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ganado_enfermo, :estado_enfermedad_id, EstadoEnfermedad.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_estado_enfermedad_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
@@ -110,8 +83,8 @@
           <th>
             <span>Observación</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_observacion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_observacion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ganado_enfermo_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_observacion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -124,7 +97,7 @@
 
       </thead> 
 
-    <tbody id="controles-ganados-lista"></tbody>
+    <tbody id="ganados-enfermos-lista"></tbody>
   
   </table>
 
@@ -133,15 +106,15 @@
 
 <script type="text/javascript">
 
-  $("#form-buscar-control-ganado").submit();
+  $("#form-buscar-ganado-enfermo").submit();
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-control-ganado").bind("submit", function () {
+  $("#form-buscar-ganado-enfermo").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_control_ganado_nombre").val().length !== 0 ){
+    if($("#form_buscar_ganado_enfermo_nombre").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_control_ganado_nombre").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_ganado_enfermo_nombre").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -154,7 +127,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#controles-ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#ganados-enfermos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -163,9 +136,9 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-control-ganado input, #table-control-ganado select").bind('change', function () {
+  $("#table-ganados-enfermos input, #table-ganados-enfermos select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-control-ganado").submit();
+      $("#form-buscar-ganados-enfermos").submit();
 
   })
   //----------------------------------------------------------------------------//
@@ -188,7 +161,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-control-ganado table th { background:#e6e6e6;}
-    #form-buscar-control-ganado table th span.limpiar { background:#fff;}
+    #form-buscar-ganado-enfermo table th { background:#e6e6e6;}
+    #form-buscar-ganado-enfermo table th span.limpiar { background:#fff;}
 
 </style>
