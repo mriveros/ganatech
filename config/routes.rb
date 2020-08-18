@@ -229,6 +229,12 @@ get 'crontab_ultron/index'
   get 'ganados_salidas/cambiar_estado_salida_a_finalizado'
   get 'ganados_salidas/seleccionar_lote_a_finalizar'
   post 'ganados_salidas/finalizar_lote_ganado'
+
+  #GANADOS ENFERMOS
+  get 'ganados_enfermos/index'
+  post 'ganados_enfermos/lista'
+  get 'ganados_enfermos/lista'
+
  
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
