@@ -154,6 +154,55 @@ before_filter :require_usuario
 
   end
 
+  def editar_ganado_enfermo
+
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def actualzar_ganado_enfermo
+
+   @valido = true
+   @msg = ""
+   @actualizado = false
+
+    unless params[:ganado_enfermo][:estado_enfermedad_id]
+
+      @valido = false
+      @msg = "Debe seleccionar el estado de la enfermedad."
+
+    end
+    
+    if @valido
+
+      @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+      @ganado_enfermo.estado_enfermedad_id = params[:ganado_enfermo][:estado_enfermedad_id]
+      @ganado_enfermo.observacion = params[:ganado_enfermo][:observacion]
+      
+      if @ganado_enfermo.save
+
+        @actualizado = true
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
+
+
   def agregar_control_sanitario
 
     @fecha = Date.today

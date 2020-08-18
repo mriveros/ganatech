@@ -14,6 +14,7 @@
       <td ><%= ge.observacion %></td>
 
       <td >
+        <%= link_to_editar_ganado_enfermo(ge.ganado_enfermo_id) %>
         <%= link_to_ganado_enfermo_detalle(ge) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ge.ganado_enfermo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control", title: 'Haga click para eliminar al ganado del modulo de Ganados Enfermos'  %>
 

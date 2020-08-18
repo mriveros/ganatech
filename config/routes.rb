@@ -239,6 +239,8 @@ get 'crontab_ultron/index'
   get 'ganados_enfermos/agregar_control_sanitario'
   post 'ganados_enfermos/guardar_control_sanitario'
   get 'ganados_enfermos/eliminar_control_sanitario'
+  get 'ganados_enfermos/editar_ganado_enfermo'
+  post 'ganados_enfermos/actualizar_ganado_enfermo'
 
  
 

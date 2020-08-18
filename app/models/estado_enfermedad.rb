@@ -6,5 +6,6 @@ class EstadoEnfermedad < ActiveRecord::Base
   attr_accessible :id, :descripcion, :created_at,  :updated_at;
   
   scope :orden_01, -> { order("id")}
+  scope :modulo_ganados_enfermos, -> { where("id in (1,2,3)")}
   
 end
