@@ -28,7 +28,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_ganado_enfermo_codigo].present?
 
-      cond << "codigo = ?"
+      cond << "ganado_rfid = ?"
       args << params[:form_buscar_ganado_enfermo_codigo]
 
     end

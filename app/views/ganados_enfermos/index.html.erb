@@ -18,7 +18,7 @@
    
     <thead>
 
-      <%= form_tag controles_ganados_lista_path, remote: true, id: "form-buscar-ganado-enfermo"  do  %>
+      <%= form_tag ganados_enfermos_lista_path, remote: true, id: "form-buscar-ganado-enfermo"  do  %>
 
         <tr>
 
@@ -40,7 +40,7 @@
          </th>
 
           <th >
-            <span>Código Lote</span>
+            <span>Código RFID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_enfermo_codigo, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_codigo');"><i class="fa fa-times"></i></span>
