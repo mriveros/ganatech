@@ -5,7 +5,7 @@ class VControlGanado < ActiveRecord::Base
   
   attr_accessible :control_ganado_id, :ganado_id, :ganado_nombre, :ganado_rp , 
   :control_id, :control, :medicamento_id, :medicamento, :peso, 
-  :observacion, :fecha_control ,:created_at, :updated_at, :documento_ganatec_id
+  :observacion, :fecha_control ,:created_at, :updated_at, :documento_ganatec_id, :ganado_enfermo_id
   
   scope :orden_01, -> { order("control_ganado_id")}
   scope :orden_fecha, -> { order("fecha_control desc")}

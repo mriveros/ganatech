@@ -42,8 +42,8 @@ before_filter :require_usuario
 
     if params[:form_buscar_ganado_enfermo_ganado_rp].present?
 
-      cond << "ganado_rp  = ?"
-      args << params[:form_buscar_ganado_enfermo_ganado_rp]
+      cond << "ganado_rp  ilike ?"
+      args << "%#{params[:form_buscar_ganado_enfermo_ganado_rp]}%"
 
     end
 
@@ -58,6 +58,13 @@ before_filter :require_usuario
 
       cond << "estado_enfermedad_id = ?"
       args << params[:form_buscar_ganado_enfermo][:estado_enfermedad_id]
+
+    end
+
+    if params[:form_buscar_ganado_enfermo_observacion].present?
+
+      cond << "observacion ilike ?"
+      args << "%#{params[:form_buscar_ganado_enfermo_observacion]}%"
 
     end
 
@@ -86,18 +93,39 @@ before_filter :require_usuario
 
   end
 
+  def  ganado_enfermo_detalle
+
+    @ganado_detalle = Ganado.where("id = ?", params[:ganado_id]).first
+    @control_sanitario = VControlGanado.orden_fecha.where("ganado_enfermo_id =?", params[:ganado_enfermo_id]).paginate(per_page: 5, page: params[:page])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
  
   def eliminar
 
     @eliminado = false
     @msg = ""
 
-    @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
-    @control_ganado_elim = @control_ganado
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+    @ganado_enfermo_elim = @ganado_enfermo
     
-    if @control_ganado.destroy
-    
-      @eliminado = true
+    if @ganado_enfermo.destroy
+      
+      @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
+      auditoria_id = auditoria_antes("Eliminar ganado del modulo de ganados enfermos","ganados",@ganado)
+      @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+
+      if @ganado.save
+
+        auditoria_despues(auditoria_id, @ganado)
+        @eliminado = true
+
+      end
 
     end
     

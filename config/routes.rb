@@ -235,6 +235,7 @@ get 'crontab_ultron/index'
   post 'ganados_enfermos/lista'
   get 'ganados_enfermos/lista'
   get 'ganados_enfermos/eliminar'
+  get 'ganados_enfermos/ganado_enfermo_detalle'
 
  
 

@@ -33,9 +33,9 @@
            <th >
             <div><%= label_tag nil, "Fecha ".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_ganado_enfermo_fecha_control, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_ganado_enfermo_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_fecha_control');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
@@ -138,7 +138,7 @@
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
   $("#table-ganados-enfermos input, #table-ganados-enfermos select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-ganados-enfermos").submit();
+      $("#form-buscar-ganado-enfermo").submit();
 
   })
   //----------------------------------------------------------------------------//
