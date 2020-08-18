@@ -1,0 +1,18 @@
+<% if @guardado_ok %>
+ 
+  setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-ganado-enfermo-detalle-<%= params[:ganado_enfermo_id]%>").trigger('click');
+    $("#link-to-ganado-enfermo-detalle-<%= params[:ganado_enfermo_id]%>").trigger('click');
+
+    swal("Control Sanitario","Control Sanitario agregado exitosamente!", "success");
+
+    }, 1000);
+
+ 
+<% else %>
+
+  swal("Control Sanitario", "Error al guardar el Control Sanitario: <%=@msg%>. Intente más tarde","error");
+
+<% end %>

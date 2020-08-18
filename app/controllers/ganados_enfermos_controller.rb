@@ -110,25 +110,168 @@ before_filter :require_usuario
 
     @eliminado = false
     @msg = ""
+    @valido = true
 
-    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
-    @ganado_enfermo_elim = @ganado_enfermo
+    @control_ganado = ControlGanado.where("ganado_enfermo_id = ?", params[:ganado_enfermo_id])
+    if @control_ganado.present?
+
+      @valido = false
+      @msg = "Este Ganado ya cuenta con detalles de tratamiento."
     
-    if @ganado_enfermo.destroy
+    else
+
+      @valido = true
+
+    end
+
+    if @valido
+
+      @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+      @ganado_enfermo_elim = @ganado_enfermo
       
-      @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
-      auditoria_id = auditoria_antes("Eliminar ganado del modulo de ganados enfermos","ganados",@ganado)
-      @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+      if @ganado_enfermo.destroy
+        
+        @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
+        auditoria_id = auditoria_antes("Eliminar ganado del modulo de ganados enfermos","ganados",@ganado)
+        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
 
-      if @ganado.save
+        if @ganado.save
 
-        auditoria_despues(auditoria_id, @ganado)
-        @eliminado = true
+          auditoria_despues(@ganado,auditoria_id)
+          @eliminado = true
+
+        end
 
       end
 
     end
     
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def agregar_control_sanitario
+
+    @fecha = Date.today
+    
+    @control_ganado = ControlGanado.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+   def guardar_control_sanitario
+    
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+    control_ganado = ControlGanado.order("created_at").last
+    codigo_control = control_ganado.id + 1
+
+    if params[:control][:id].to_i != PARAMETRO[:control_peso]
+
+      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+      
+      if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
+
+        @valido = false
+        @msg = "No hay suficiente stock del Medicamento"
+
+      end
+
+    end
+   
+
+    if @valido
+      
+      @control_ganado = ControlGanado.new()
+      @control_ganado.fecha_control = params[:fecha_control]
+      @control_ganado.ganado_id = params[:ganado_id]
+      @control_ganado.control_id = params[:control][:id]
+
+      if params[:control][:id].to_i == PARAMETRO[:control_peso]
+
+        @control_ganado.peso = params[:peso_promedio_control]
+      
+      else
+
+        @control_ganado.peso = params[:peso_promedio]
+        @control_ganado.medicamento_id = params[:medicamento_id]
+        @control_ganado.cantidad_suministrada = params[:cantidad_suministrada]
+
+      end
+
+      @control_ganado.observacion = params[:observacion]
+      @control_ganado.codigo = codigo_control
+      @control_ganado.clasificacion_control_id = PARAMETRO[:clasificacion_por_ganado]
+      @control_ganado.ganado_enfermo_id = params[:ganado_enfermo_id]
+
+        if @control_ganado.save
+
+          auditoria_nueva("agregar control sanitario en modulo de ganados enfermos", "controles_ganados", @control_ganado)
+          @guardado_ok = true
+         
+        end 
+
+    end
+  
+    rescue Exception => exc  
+    
+      if exc.present?
+
+        @excep = exc.message.split(':')    
+        @msg = @excep
+      
+      end                
+
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def eliminar_control_sanitario
+
+    @valido = true
+    @msg = ""
+
+    @control_sanitario = ControlGanado.where("id = ?", params[:control_ganado_id]).first
+
+    @control_sanitario_elim = @control_sanitario  
+
+    if @valido
+
+      if @control_sanitario.destroy
+
+        auditoria_nueva("eliminar control sanitario", "controles_ganados", @control_sanitario_elim)
+
+        @eliminado = true
+
+      end
+
+    end
+
+    rescue Exception => exc  
+     
+      if exc.present?        
+          
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        @eliminado = false
+        
+      end
+        
     respond_to do |f|
 
       f.js

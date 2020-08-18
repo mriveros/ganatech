@@ -11,7 +11,7 @@
 
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>control sanitario".html_safe, "#", id: "link-to-agregar-control-sanitario", class: "btn btn-primary btn-xs", style: "float:right;" %>
 
-          <%= modal_window( window_id: "modal-window-agregar-control-sanitario", link_to_id: "#link-to-agregar-control-sanitario", url: ganados_agregar_control_sanitario_path( window_id: "modal-window-agregar-control-sanitario", ganado_id: params[:ganado_id]) )%>
+          <%= modal_window( window_id: "modal-window-agregar-control-sanitario", link_to_id: "#link-to-agregar-control-sanitario", url: ganados_enfermos_agregar_control_sanitario_path( window_id: "modal-window-agregar-control-sanitario", ganado_id: params[:ganado_id], ganado_enfermo_id: params[:ganado_enfermo_id]) )%>
           
         </div>
 
@@ -70,7 +70,7 @@
                   <td> 
                   <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
                   
-                      <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                      <%#=link_to_adjuntar_archivo(cg.control_ganado_id)%>
                   <%end%>
 
                     <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
@@ -84,7 +84,7 @@
                         <%end%>
                   <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
                   
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_sanitario(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
                   <%end%>
                   
                   </td>
@@ -118,7 +118,7 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(control_ganado_id) {
+  function eliminar_registro_control_sanitario(control_ganado_id) {
 
         swal({
           title: "Confirmar",
@@ -135,41 +135,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(ganados_eliminar_control_sanitario_path) %>", 
+                url: "<%= url_for(ganados_enfermos_eliminar_control_sanitario_path) %>", 
                 data: {control_ganado_id: control_ganado_id},
-                dataType: 'script'
-              });
-            
-          } else{
-
-            return false;
-
-          }
-
-        });
-
-    
-    }
-
-    function eliminar_registro_control_alimentacion(control_alimentacion_id) {
-
-        swal({
-          title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de Controles de Alimentación.",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-              $.ajax({
-                url: "<%= url_for(ganados_eliminar_control_alimentacion_path) %>", 
-                data: {control_alimentacion_id: control_alimentacion_id},
                 dataType: 'script'
               });
             
