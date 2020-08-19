@@ -229,8 +229,6 @@ get 'crontab_ultron/index'
   get 'ganados_entradas/cambiar_estado_entrada_ganado_a_finalizado'
   post 'ganados_entradas/guardar_estado_entrada_ganado_a_finalizado'
 
-<<<<<<< HEAD
-=======
   #GANADOS SALIDAS
   get 'ganados_salidas/index'
   post 'ganados_salidas/lista'
@@ -269,8 +267,7 @@ get 'crontab_ultron/index'
   get 'ganados_enfermos/cambiar_estado_a_muerto'
   post 'ganados_enfermos/guardar_estado_ganado_muerto'
 
- 
->>>>>>> master
+
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 
