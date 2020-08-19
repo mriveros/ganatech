@@ -7,8 +7,8 @@ setTimeout( function(){
     $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
     $("#link-to-alimentacion-detalle-<%= params[:alimentacion_id]%>").trigger('click');
     swal("Sumnistro Eliminado exitosamente!");
-    $("#form_buscar_alimentacion_id").val('<%=params[:alimentacion_id] %>');
-    $("#form-buscar-alimentacion").submit();
+    $("#form_buscar_alimentaciones_id").val('<%=params[:alimentacion_id] %>');
+    $("#form-buscar-alimentaciones").submit();
 
     }, 1000);
 
