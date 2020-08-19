@@ -113,7 +113,7 @@ before_filter :require_usuario
     @valido = true
 
     @control_ganado = ControlGanado.where("ganado_enfermo_id = ?", params[:ganado_enfermo_id])
-    
+
     if @control_ganado.present?
 
       @valido = false
@@ -359,6 +359,30 @@ before_filter :require_usuario
 
     end
 
+  end
+
+
+  def cambiar_estado_a_muerto
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def guardar_estado_ganado_muerto
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
   end
 
 
