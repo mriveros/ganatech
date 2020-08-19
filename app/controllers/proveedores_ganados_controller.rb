@@ -39,31 +39,17 @@ class ProveedoresGanadosController < ApplicationController
 
     end
 
-    if params[:form_buscar_proveedores_ganados_ruc].present?
+    if params[:form_buscar_proveedores_ganados_ruc_ci].present?
 
-      cond << "ruc ilike ?"
-      args << "%#{params[:form_buscar_proveedores_ganados_ruc]}%"
-
-    end
-
-    if params[:form_buscar_proveedores_ganados_nombre_fantasia].present?
-
-      cond << "nombre_fantasia ilike ?"
-      args << "%#{params[:form_buscar_proveedores_ganados_nombre_fantasia]}%"
+      cond << "ruc_ci ilike ?"
+      args << "%#{params[:form_buscar_proveedores_ganados_ruc_ci]}%"
 
     end
 
-    if params[:form_buscar_proveedores_ganados_correo_electronico].present?
+    if params[:form_buscar_proveedores_ganados_email].present?
 
-      cond << "correo_electronico ilike ?"
-      args << "%#{params[:form_buscar_proveedores_ganados_correo_electronico]}%"
-
-    end
-
-    if params[:form_buscar_proveedores_ganados_correo_electronico].present?
-
-      cond << "correo_electronico ilike ?"
-      args << "%#{params[:form_buscar_proveedores_ganados_correo_electronico]}%"
+      cond << "email ilike ?"
+      args << "%#{params[:form_buscar_proveedores_ganados_email]}%"
 
     end
 
@@ -80,12 +66,12 @@ class ProveedoresGanadosController < ApplicationController
 
     if cond.size > 0
 
-      @proveedores_ganados =  ProveedorGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @proveedores_ganados =  ProveedorGanado.orden_id.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = ProveedorGanado.where(cond).count
 
     else
 
-      @proveedores_ganados = ProveedorGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @proveedores_ganados = ProveedorGanado.orden_id.paginate(per_page: 10, page: params[:page])
       @total_encontrados = ProveedorGanado.count
 
     end
