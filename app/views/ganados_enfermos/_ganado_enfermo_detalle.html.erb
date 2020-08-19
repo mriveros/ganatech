@@ -82,7 +82,7 @@
                           <%end%>
 
                         <%end%>
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] and @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_enfermo] %>
                   
                     <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_sanitario(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
                   <%end%>
