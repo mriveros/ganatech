@@ -7,6 +7,9 @@
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Ganados Detalles</h3>
       </div>
+      
+      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+
         <div>
       
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar observación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
@@ -25,7 +28,6 @@
           <%end%>
         
         </div>
-
         
         <div>
           
@@ -44,7 +46,21 @@
           
         </div>
 
+
+         <div>
         
+          <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_enfermo]%>
+
+            <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>marcar con enfermedad".html_safe, "#", id: "link-to-marcar-como-enfermo", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+            <%= modal_window( window_id: "modal-window-marcar-enfermedad", link_to_id: "#link-to-marcar-como-enfermo", url: ganados_marcar_con_enfermedad_path( window_id: "modal-window-marcar-enfermedad", ganado_id: params[:ganado_id]) )%>
+          
+          <%end%>
+
+        </div>
+
+
+      <%end%>  
 
     </div>
 
@@ -144,7 +160,11 @@
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
                   <td><%= cg.observacion %></td>
                   <td> 
-                    <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  
+                      <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                  <%end%>
+
                     <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
                         <%if @documento_ganatec.present?%> 
                           
@@ -154,8 +174,10 @@
                           <%end%>
 
                         <%end%>
-
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  
                     <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
+                  <%end%>
                   
                   </td>
 

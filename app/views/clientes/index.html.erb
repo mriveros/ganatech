@@ -34,7 +34,7 @@
           </th>
           
            <th style="width:130px;">
-            <span>Razón Social</span>
+            <span>Nonbre o Razón Social</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_clientes_razon_social, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_razon_social');"><i class="fa fa-times"></i></span>
@@ -42,20 +42,10 @@
           </th>
 
           <th style="width:10%;">
-            <span>Nombre</span>
+            <span>RUC O CI</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_clientes_nombre, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_nombre');"><i class="fa fa-times"></i></span>
-            </div>
-            <em class="nmb"></em>
-          </th>
-
-
-          <th style="width:130px;">
-            <span>Apellido</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_clientes_apellido, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_apellido');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_clientes_ruc, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_ruc');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
@@ -74,7 +64,14 @@
               <%= text_field_tag :form_buscar_clientes_telefono, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_telefono');"><i class="fa fa-times"></i></span>
             </div>
-            
+          </th>
+
+          <th style="width:18%;">
+            <span>Observación<br/>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_observacion');"><i class="fa fa-times"></i></span>
+            </div>
           </th>
 
 
@@ -100,9 +97,9 @@
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-clientes").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_clientes_nombre").val().length !== 0 ){
+    if($("#form_buscar_clientes_razon_social").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_clientes_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_clientes_apellido").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_clientes_razon_social").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;

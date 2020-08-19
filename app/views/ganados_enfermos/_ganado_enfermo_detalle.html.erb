@@ -1,0 +1,154 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+      
+      <%if @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_enfermo]%>
+
+
+        <div>
+
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>control sanitario".html_safe, "#", id: "link-to-agregar-control-sanitario", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+          <%= modal_window( window_id: "modal-window-agregar-control-sanitario", link_to_id: "#link-to-agregar-control-sanitario", url: ganados_enfermos_agregar_control_sanitario_path( window_id: "modal-window-agregar-control-sanitario", ganado_id: params[:ganado_id], ganado_enfermo_id: params[:ganado_enfermo_id]) )%>
+          
+        </div>
+
+
+      <%end%>  
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Control Sanitario</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-ganado-detalle-control-sanitario">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Fecha</th>
+              <th>Control</th>
+              <th>Peso</th>
+              <th>Medicamento</th>
+              <th>Cantidad Suministrada</th>
+              <th>Observación</th>
+              <th></th>
+
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="ganado-detalle-lista-control-sanitario">
+
+            <% if @control_sanitario.present? %>
+            
+              <% @control_sanitario.each do |cg|%>
+
+                <tr>
+                  
+                  <td><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
+                  <td><%= cg.control %></td>
+                  <td><%= cg.peso %></td>
+                  <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
+                  <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
+                  <td><%= cg.observacion %></td>
+                  <td> 
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  
+                      <%#=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                  <%end%>
+
+                    <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
+                        <%if @documento_ganatec.present?%> 
+                          
+                          <%if @documento_ganatec.habilitado == true || rol_administrador %>
+
+                            <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite descargar el archivo adjunto."%>
+                          <%end%>
+
+                        <%end%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] and @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_enfermo] %>
+                  
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_sanitario(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
+                  <%end%>
+                  
+                  </td>
+
+
+                </tr>
+
+              <%end %>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_sanitario, :params => params %></div></td>
+                
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+
+</td>
+
+<script type="text/javascript">
+
+  function eliminar_registro_control_sanitario(control_ganado_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de Controles Sanitarios.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_enfermos_eliminar_control_sanitario_path) %>", 
+                data: {control_ganado_id: control_ganado_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>

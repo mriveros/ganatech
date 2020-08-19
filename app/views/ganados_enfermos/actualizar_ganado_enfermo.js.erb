@@ -1,0 +1,23 @@
+<% if @actualizado_ok.present? %>
+
+   $("<div class='col-sm-12' id='msg-editar-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-ganado-enfermo");
+   
+  $("#form_buscar_ganado_enfermo_id").val("<%=@ganado_enfermo.id%>");
+  $("#form_buscar_ganado_enfermo_fecha").val('');
+  $("#form_buscar_ganado_enfermo_nombre").val('');
+  $("#form_buscar_ganado_enfermo_ganado_rp").val('');
+  
+  setTimeout(function(){ 
+
+    $("#<%= params[:window_id]%>").modal('hide');
+  	swal("Ganado Enfermo actualizado Exitosamente.");
+  	$("#form-buscar-ganado-enfermo").submit(); 
+
+  
+  }, 1000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-editar-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-ganado-enfermo");
+
+<% end %>

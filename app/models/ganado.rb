@@ -9,5 +9,7 @@ class Ganado < ActiveRecord::Base
   :observacion, :estado_ganado_id, :etapa_ganado_id, :created_at, :updated_at, :entrada_ganado_id, :finalidad_ganado_id
   
   scope :orden_01, -> { order("id")}
+  scope :orden_estado, -> { order("estado_ganado_id")}
+  
   
 end

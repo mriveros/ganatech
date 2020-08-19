@@ -1,0 +1,245 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Salida de Ganados</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Salida".html_safe, "#", id: "link-to-agregar-salida-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-salida-ganado", link_to_id: "#link-to-agregar-salida-ganado", url: ganados_salidas_agregar_path( window_id: "modal-window-agregar-salida-ganado"))%>
+    <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-salida-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-eliminar-salida-ganado", link_to_id: "#link-to-eliminar-salida-ganado", url: ganados_salidas_seleccionar_lote_path( window_id: "modal-window-eliminar-salida-ganado"))%>
+
+     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Finalizar Lote".html_safe, "#", id: "link-to-finalizar-lote-salida-ganado", class: "btn btn-success pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-finalizar-lote-salida-ganado", link_to_id: "#link-to-finalizar-lote-salida-ganado", url: ganados_salidas_seleccionar_lote_a_finalizar_path( window_id: "modal-window-eliminar-salida-ganado"))%>
+    
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-salida-ganado">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag ganados_salidas_lista_path, remote: true, id: "form-buscar-salida-ganado"  do  %>
+
+        <tr class= "td-nivel-1">
+
+          <th>
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th>
+            <div><%= label_tag nil, "Fecha Salida".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_salida_ganado_fecha_salida, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_fecha_salida');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th>
+            <span>Código RFID
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_codigo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th >
+            <span>Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_nombre');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th>
+            <span>RP</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_rp');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Sexo Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_salida_ganado, :sexo_ganado_id, SexoGanado.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_sexo_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Raza Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_salida_ganado, :raza_ganado_id, Raza.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_raza_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Etapa Ganado</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_salida_ganado, :etapa_ganado_id, EtapaGanado.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_etapa_ganado_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+      </tr>
+
+
+      <tr class="td-nivel-2">
+          <th>
+            <span>Peso Promedio</span>
+            <div class="input-group input-group-sm">
+               <%= text_field_tag :form_buscar_salida_ganado_ganado_peso_promedio, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_ganado_peso_promedio');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Tipo Salida</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_salida_ganado, :tipo_salida_id, TipoSalida.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_tipo_salida_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Precio Venta</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_precio_venta, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_precio_venta');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Peso Salida</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_peso_salida, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_peso_salida');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Cliente</span>
+            <div class="input-group input-group-sm">
+               <%= text_field_tag :form_buscar_salida_ganado_cliente, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_cliente');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Estado Venta</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_salida_ganado,:estado_movimiento_id, EstadoMovimiento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_estado_movimiento_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+
+          <th>
+            <span>Observación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Lote Salida</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_salida_ganado_codigo_lote, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-salida-ganado', '#form_buscar_salida_ganado_codigo_lote');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th ></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="salidas-ganados-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+<script type="text/javascript">
+
+  $("#form-buscar-salida-ganado").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-salida-ganado").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_salida_ganado_nombre").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_salida_ganado_nombre").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+                 
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#controles-ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-salida-ganado input, #table-salida-ganado select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-salida-ganado").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+
+  .td-nivel-1 {background: #e6e6e6 !important;color:#000 !important;font-weight:bold;}
+  .td-nivel-2 {background: #BFFCE1 !important;color:#000 !important;font-weight:normal;}
+  .td-nivel-1 span.limpiar { background: #fff !important;}
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-salida-ganado table th { background:#e6e6e6;}
+    #form-buscar-salida-ganado table th span.limpiar { background:#fff;}
+
+</style>

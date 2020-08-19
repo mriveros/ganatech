@@ -1,0 +1,30 @@
+<%= link_to icon_detalles, "#", id: "link-to-ganado-enfermo-detalle-#{ganado_enfermo.ganado_enfermo_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Ganado Enfermo', onclick: "$('.modal').html('');return false;" %>
+
+
+<script type="text/javascript">
+
+  $("#link-to-ganado-enfermo-detalle-<%= ganado_enfermo.ganado_enfermo_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#ganado-enfermo-detalle-<%= ganado_enfermo.ganado_enfermo_id %>").html());
+
+    $(".ganado-enfermo-detalle").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='ganado-enfermo-detalle-<%= ganado_enfermo.ganado_enfermo_id %>' class='ganado-enfermo-detalle'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(ganados_enfermos_ganado_enfermo_detalle_path) %>',  
+        data: { ganado_enfermo_id: <%= ganado_enfermo.ganado_enfermo_id %>, ganado_id: <%= ganado_enfermo.ganado_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>

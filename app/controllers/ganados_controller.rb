@@ -142,10 +142,10 @@ class GanadosController < ApplicationController
     end
 
     if params[:form_buscar_ganado_procedencia].present?
-      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL' || params[:form_buscar_ganado_procedencia] == 'LOC'|| params[:form_buscar_ganado_procedencia] == 'loc'
+      
+      if params[:form_buscar_ganado_procedencia] == 'local' || params[:form_buscar_ganado_procedencia] == 'LOCAL' || params[:form_buscar_ganado_procedencia] == 'LOC'|| params[:form_buscar_ganado_procedencia] == 'loc' || params[:form_buscar_ganado_procedencia] == 'loca' || params[:form_buscar_ganado_procedencia] == 'LOCA'
         
         cond << "procedencia isnull"
-        #args << "null"
       
       else
         
@@ -167,12 +167,12 @@ class GanadosController < ApplicationController
 
     if cond.size > 0
 
-      @ganados =  VGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ganados =  VGanado.orden_estado.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.where(cond).count
 
     else
      
-      @ganados = VGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @ganados = VGanado.orden_estado.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.count
 
     end
@@ -842,9 +842,7 @@ class GanadosController < ApplicationController
 
           end
 
-
         end
-
 
       end
 
@@ -959,7 +957,7 @@ class GanadosController < ApplicationController
 
         if @ganado.save
 
-          auditoria_nueva("registrar ganado", "ganados", @ganado)
+          auditoria_nueva("registrar ganado por lote", "ganados", @ganado)
           @guardado_ok = true
           contador = contador + 1
          
@@ -984,6 +982,70 @@ class GanadosController < ApplicationController
       
     end
 
+  end
+
+
+
+  def marcar_con_enfermedad
+
+    @fecha = Date.today
+    
+    @ganado_enfermedad = GanadoEnfermo.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def guardar_ganado_enfermedad
+    
+    @guardado_ok = false
+    @msg = ""
+    @valido = true
+
+    GanadoEnfermo.transaction do 
+
+      
+      if @valido
+
+        @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+        auditoria_id = auditoria_antes("guardar ganado con enfermedad", "ganados", @ganado)
+
+        @ganado_enfermedad = GanadoEnfermo.new
+        @ganado_enfermedad.fecha = params[:fecha]
+        @ganado_enfermedad.ganado_id = params[:ganado_id]
+        @ganado_enfermedad.enfermedad_id = params[:enfermedad][:id]
+        @ganado_enfermedad.observacion = params[:observacion]
+        @ganado_enfermedad.estado_enfermedad_id = params[:estado_enfermedad][:id]
+
+        
+        if @ganado_enfermedad.save
+
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_enfermo]
+          
+          if @ganado.save
+            
+            @guardado_ok = true
+            auditoria_despues(@ganado, auditoria_id)
+            
+
+          end
+
+        end
+
+      end
+
+    end #end transaction 
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+  
   end
 
 

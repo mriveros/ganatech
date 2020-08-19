@@ -1,0 +1,2 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-ganado-enfermo-#{ganado_enfermo_id}", class: 'btn btn-warning btn-xs', title: 'Haga click aquí para editar el estado del Ganado.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-editar-ganado-enfermo", link_to_id: "#link-to-editar-ganado-enfermo-#{ganado_enfermo_id}", url: ganados_enfermos_editar_ganado_enfermo_path( window_id: "modal-window-editar-ganado-enfermo", ganado_enfermo_id: ganado_enfermo_id) )%>

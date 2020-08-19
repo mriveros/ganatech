@@ -1,0 +1,129 @@
+<% if ganados_enfermos.present? %>
+
+  <% ganados_enfermos.each do |ge| %>
+
+    <tr>
+
+      <td><%= ge.ganado_enfermo_id %></td>
+      <td ><%= ge.fecha.strftime('%d/%m/%Y') %></td>
+       <td><%= ge.ganado_rfid%></td>
+      <td><%= ge.ganado_nombre%></td>
+      <td><%= ge.ganado_rp%></td>
+      <td><%= ge.enfermedad%></td>
+      <td ><%= ge.estado_enfermedad  %></td>
+      <td ><%= ge.observacion %></td>
+
+      <td >
+        
+        <%= link_to_ganado_enfermo_detalle(ge) %>
+        <%if ge.estado_enfermedad_id != PARAMETRO[:estado_enfermedad_curado]%>
+
+          <%= link_to_editar_ganado_enfermo(ge.ganado_enfermo_id) %>
+          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_a_recuperado(#{ge.ganado_enfermo_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-ganado-a-recuperado", title: 'Haga click para confirmar la Recuperación del Ganado.'%>
+
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ge.ganado_enfermo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control", title: 'Haga click para eliminar al ganado del modulo de Ganados Enfermos'  %>
+
+        <%end%>
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados_enfermos, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+<script type="text/javascript">
+
+  function eliminar_registro(ganado_enfermo_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará de la lista de Ganados Enfermos y volverá al estado activo en el módulo de Ganados.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_enfermos_eliminar_path) %>", 
+                data: {ganado_enfermo_id: ganado_enfermo_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+
+    function cambiar_estado_a_recuperado(ganado_enfermo_id){
+
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el Ganado pasará al estado Recuperado. En el módulo de Ganados se podrá visualizar como ganado con estado Activo.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_enfermos_cambiar_estado_a_recuperado_path) %>", 
+                data: {ganado_enfermo_id: ganado_enfermo_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    }
+
+
+
+</script>

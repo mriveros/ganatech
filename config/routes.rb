@@ -80,6 +80,8 @@ get 'crontab_ultron/index'
   get 'ganados/buscar_ganado'
   get 'ganados/agregar_lote_ganado'
   post 'ganados/guardar_lote_ganado'
+  get 'ganados/marcar_con_enfermedad'
+  post 'ganados/guardar_ganado_enfermedad'
 
 
   #MEDICAMENTOS
@@ -227,6 +229,48 @@ get 'crontab_ultron/index'
   get 'ganados_entradas/cambiar_estado_entrada_ganado_a_finalizado'
   post 'ganados_entradas/guardar_estado_entrada_ganado_a_finalizado'
 
+<<<<<<< HEAD
+=======
+  #GANADOS SALIDAS
+  get 'ganados_salidas/index'
+  post 'ganados_salidas/lista'
+  get 'ganados_salidas/lista'
+  get 'ganados_salidas/agregar'
+  post 'ganados_salidas/guardar'
+  get 'ganados_salidas/editar'
+  post 'ganados_salidas/actualizar'
+  get 'ganados_salidas/eliminar_salida_ganado'
+  get 'ganados_salidas/buscar_ganado'
+  get 'ganados_salidas/crear_lote_ganado'
+  post 'ganados_salidas/crear_lote_ganado'
+  post 'ganados_salidas/lista_ganado'
+  get 'ganados_salidas/lista_ganado'
+  get 'ganados_salidas/agregar_ganado_lote'
+  get 'ganados_salidas/eliminar_ganado_lote'
+  get 'ganados_salidas/seleccionar_lote'
+  post 'ganados_salidas/eliminar_lote'
+  get 'ganados_salidas/buscar_cliente'
+  get 'ganados_salidas/cambiar_estado_salida_a_finalizado'
+  get 'ganados_salidas/seleccionar_lote_a_finalizar'
+  post 'ganados_salidas/finalizar_lote_ganado'
+
+  #GANADOS ENFERMOS
+  get 'ganados_enfermos/index'
+  post 'ganados_enfermos/lista'
+  get 'ganados_enfermos/lista'
+  get 'ganados_enfermos/eliminar'
+  get 'ganados_enfermos/ganado_enfermo_detalle'
+  get 'ganados_enfermos/agregar_control_sanitario'
+  post 'ganados_enfermos/guardar_control_sanitario'
+  get 'ganados_enfermos/eliminar_control_sanitario'
+  get 'ganados_enfermos/editar_ganado_enfermo'
+  post 'ganados_enfermos/actualizar_ganado_enfermo'
+  get 'ganados_enfermos/cambiar_estado_a_recuperado'
+  get 'ganados_enfermos/cambiar_estado_a_muerto'
+  post 'ganados_enfermos/guardar_estado_ganado_muerto'
+
+ 
+>>>>>>> master
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 

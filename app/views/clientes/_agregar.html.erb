@@ -18,35 +18,30 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :razon_social, "Razón Social".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :razon_social, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= f.label :razon_social, "Razón Social #{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :nombre_razon_social, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :ruc, "RUC".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :ruc, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= f.label :ruc, "RUC O CI#{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :ruc_ci, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :nombre, "Nombres #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :cliente_nombre, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />
-           <div class="col-sm-1"></div><br />
-          
-          <div class="col-sm-4"><%= f.label :apellido, "Apellidos #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :cliente_apellido, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />
-           <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :direccion, "Dirección #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :direccion, "Dirección ".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :direccion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
            <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :telefono, "Teléfono #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :telefono, "Teléfono".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br />   
-           <div class="col-sm-1"></div><br /> 
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :observacion, "Observación".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_area :observacion, class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
        
       </div>
 

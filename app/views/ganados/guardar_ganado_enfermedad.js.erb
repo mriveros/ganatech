@@ -1,0 +1,19 @@
+<% if @guardado_ok %>
+
+ 
+setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#form_buscar_ganado_id").val('<%= @ganado.id %>');
+    $("#form-buscar-ganado").submit();
+
+    swal("Marcar Enfermedad","Ganado marcado en estado Enfermo exitosamente!", "success");
+
+    }, 1000);
+
+ 
+<% else %>
+
+    swal("Marcar Enfermedad", "Error al marcar Enfermo. Intente más tarde","error");
+    
+<% end %>
