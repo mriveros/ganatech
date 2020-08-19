@@ -1,6 +1,6 @@
 <% if @eliminado %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-control-ganado");
+  $("<div class='col-sm-12' id='msg-eliminar-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganado-enfermo");
   $("#form_buscar_ganado_enfermo_id").val("<%=@ganado_enfermo_elim.id%>");
   $("#form_buscar_ganado_enfermo_fecha").val('');
   $("#form_buscar_ganado_enfermo_nombre").val('');
@@ -15,12 +15,12 @@
       
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-control-ganado");
+  $("<div class='col-sm-12' id='msg-eliminar-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-ganado-enfermo");
   setTimeout(function(){ 
 
-    $("#msg-eliminar-control-ganado").remove(); 
+    $("#msg-eliminar-ganado-enfermo").remove(); 
 
-    swal("Ganados Enfermos", "No se pudo eliminar el Ganado del módulo de Ganados Enfermos. <%=@msg%> Intente más tarde","error");
+    swal("Ganados Enfermos", "No se pudo eliminar el Ganado Enfermo. <%=@msg%>. Intente más tarde","error");
   
   }, 1000);
   

@@ -113,6 +113,7 @@ before_filter :require_usuario
     @valido = true
 
     @control_ganado = ControlGanado.where("ganado_enfermo_id = ?", params[:ganado_enfermo_id])
+    
     if @control_ganado.present?
 
       @valido = false
@@ -166,13 +167,13 @@ before_filter :require_usuario
 
   end
 
-  def actualzar_ganado_enfermo
+  def actualizar_ganado_enfermo
 
    @valido = true
    @msg = ""
-   @actualizado = false
+   @actualizado_ok = false
 
-    unless params[:ganado_enfermo][:estado_enfermedad_id]
+    unless params[:ganado_enfermo][:estado_enfermedad_id].present?
 
       @valido = false
       @msg = "Debe seleccionar el estado de la enfermedad."
@@ -184,10 +185,10 @@ before_filter :require_usuario
       @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
       @ganado_enfermo.estado_enfermedad_id = params[:ganado_enfermo][:estado_enfermedad_id]
       @ganado_enfermo.observacion = params[:ganado_enfermo][:observacion]
-      
+
       if @ganado_enfermo.save
 
-        @actualizado = true
+        @actualizado_ok = true
 
       end
 
@@ -321,6 +322,37 @@ before_filter :require_usuario
         
       end
         
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def cambiar_estado_a_recuperado
+
+    @actualizado_ok = false
+
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+    @ganado_enfermo.estado_enfermedad_id = PARAMETRO[:estado_enfermedad_curado]
+    
+    if @ganado_enfermo.save
+
+      auditoria_nueva("Cambiar el estado del ganado enfermo a recuperado","ganados_enfermos", @ganado_enfermo )
+      @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
+      auditoria_id = auditoria_antes("Cambiar estado en el modulo de ganados enfermos","ganados", @ganado)
+      @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
+      if @ganado.save
+
+        auditoria_despues(@ganado, auditoria_id )
+        @actualizado_ok = true
+
+      end
+
+    end
+
     respond_to do |f|
 
       f.js

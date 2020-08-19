@@ -14,9 +14,16 @@
       <td ><%= ge.observacion %></td>
 
       <td >
-        <%= link_to_editar_ganado_enfermo(ge.ganado_enfermo_id) %>
+        
         <%= link_to_ganado_enfermo_detalle(ge) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ge.ganado_enfermo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control", title: 'Haga click para eliminar al ganado del modulo de Ganados Enfermos'  %>
+        <%if ge.estado_enfermedad_id != PARAMETRO[:estado_enfermedad_curado]%>
+
+          <%= link_to_editar_ganado_enfermo(ge.ganado_enfermo_id) %>
+          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_a_recuperado(#{ge.ganado_enfermo_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-ganado-a-recuperado", title: 'Haga click para confirmar la Recuperación del Ganado.'%>
+
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ge.ganado_enfermo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control", title: 'Haga click para eliminar al ganado del modulo de Ganados Enfermos'  %>
+
+        <%end%>
 
       </td>
 
@@ -82,5 +89,41 @@
 
     
     }
+
+
+    function cambiar_estado_a_recuperado(ganado_enfermo_id){
+
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el Ganado pasará al estado Recuperado. En el módulo de Ganados se podrá visualizar como ganado con estado Activo.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_enfermos_cambiar_estado_a_recuperado_path) %>", 
+                data: {ganado_enfermo_id: ganado_enfermo_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    }
+
+
 
 </script>
