@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th style="width:15%;">
+          <th >
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -32,15 +32,15 @@
           </th>
 
 
-          <th style="width:25%;">
+          <th >
             <span>Nombre/Razon Social</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_nombre_razon_social, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_nombre_razon_social').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_nombre_razon_social');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_nombre_razon_social');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th >
             <span>RUC/CI</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
@@ -48,7 +48,7 @@
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th >
             <span>Direccion</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_direccion, nil, :class => 'form-control', :placeholder => "" %>
@@ -56,7 +56,7 @@
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th >
             <span>Telefono</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_telefono, nil, :class => 'form-control', :placeholder => "" %>
@@ -64,7 +64,7 @@
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th >
             <span>Email</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_email, nil, :class => 'form-control', :placeholder => "" %>
@@ -72,7 +72,7 @@
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th >
             <span>Observacion</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_observacion, nil, :class => 'form-control', :placeholder => "" %>
@@ -80,24 +80,7 @@
             </div>
           </th>
 
-
-            <%= hidden_field_tag :form_buscar_proveedores_ganados_nombre_razon_social %>
-            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
-                  atributo_descripcion: :nombre_razon_social,
-                  atributo_tipo: :text,
-                  model: :ProveedorGanado,
-                  limit: 10,
-                  cadena_consulta: "upper(quitar_acentos(nombre))",
-                  orden: "descripcion"),
-              parametro_id: "form_buscar_proveedores_ganados_nombre_razon_social",
-              resultado_id: "form_buscar_proveedores_ganados_id",
-              min_length: 2
-              ) %>
-          </th>
-
-
-
-          <th style="width:15%;"></th>
+          <th ></th>
 
         </tr>
 

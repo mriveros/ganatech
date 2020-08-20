@@ -55,7 +55,9 @@
 						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
 						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
               <li><%= link_to "Clientes", clientes_index_path if acceso_permitido("clientes.index") %></li>
-
+              <li><%= link_to "Proveedores de Ganados", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
+              <li><%= link_to "Empresa de Transporte", empresas_transportes_index_path if acceso_permitido("empresas_transportes.index") %></li>
+          
               <li>
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -99,8 +101,7 @@
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
 
           <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
-          <li><%= link_to "Empresa de Transporte", empresas_transportes_index_path if acceso_permitido("empresas_transportes.index") %></li>
-					<li><%= link_to "Proveedor de Ganado", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
+          
 
 					<li>
 
