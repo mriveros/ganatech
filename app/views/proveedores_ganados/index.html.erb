@@ -41,6 +41,14 @@
           </th>
 
           <th style="width:25%;">
+            <span>RUC/CI</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_ruc_ci').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_ruc_ci');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
             <span>Direccion</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_proveedores_ganados_direccion, nil, :class => 'form-control', :placeholder => "" %>
@@ -57,36 +65,20 @@
           </th>
 
           <th style="width:25%;">
-            <span>RUC</span>
+            <span>Email</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_proveedores_ganados_ruc, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_ruc').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_ruc');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_proveedores_ganados_email, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_email').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_email');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th style="width:25%;">
-            <span>Nombre fantasia</span>
+            <span>Observacion</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_proveedores_ganados_nombre_fantasia, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_nombre_fantasia').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_nombre_fantasia');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_proveedores_ganados_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_observacion').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_observacion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-
-          <th style="width:25%;">
-            <span>Correo Electronico</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_proveedores_ganados_correo_electronico, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_correo_electronico').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_correo_electronico');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-             <span>Jurisdiccion</span>
-           <div class="input-group input-group-sm">
-             <%= collection_select :form_buscar_proveedores_ganados, :jurisdiccion_id, Jurisdiccion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-             <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_jurisdiccion_id');"><i class="fa fa-times"></i></span>
-           </div>
-         </th>
 
 
             <%= hidden_field_tag :form_buscar_proveedores_ganados_nombre_razon_social %>

@@ -25,6 +25,13 @@ class ProveedoresGanadosController < ApplicationController
 
     end
 
+    if params[:form_buscar_proveedores_ganados_ruc_ci].present?
+
+      cond << "ruc_ci ilike ?"
+      args << "%#{params[:form_buscar_proveedores_ganados_ruc_ci]}%"
+
+    end
+
     if params[:form_buscar_proveedores_ganados_direccion].present?
 
       cond << "direccion ilike ?"
@@ -39,13 +46,6 @@ class ProveedoresGanadosController < ApplicationController
 
     end
 
-    if params[:form_buscar_proveedores_ganados_ruc_ci].present?
-
-      cond << "ruc_ci ilike ?"
-      args << "%#{params[:form_buscar_proveedores_ganados_ruc_ci]}%"
-
-    end
-
     if params[:form_buscar_proveedores_ganados_email].present?
 
       cond << "email ilike ?"
@@ -53,10 +53,10 @@ class ProveedoresGanadosController < ApplicationController
 
     end
 
-    if params[:form_buscar_proveedores_ganados][:jurisdiccion_id].present?
+    if params[:form_buscar_proveedores_ganados_observacion].present?
 
-      cond << "jurisdiccion_id = ?"
-      args << params[:form_buscar_proveedores_ganados][:jurisdiccion_id]
+      cond << "observacion ilike ?"
+      args << "%#{params[:form_buscar_proveedores_ganados_observacion]}%"
 
     end
 
@@ -106,14 +106,12 @@ class ProveedoresGanadosController < ApplicationController
 
     @proveedor_ganado = ProveedorGanado.new()
 
-    @proveedor_ganado.nombre_razon_social = params[:proveedor_ganado][:nombre].upcase
+    @proveedor_ganado.nombre_razon_social = params[:proveedor_ganado][:nombre_razon_social].upcase
+    @proveedor_ganado.ruc_ci = params[:proveedor_ganado][:ruc_ci].upcase
     @proveedor_ganado.direccion = params[:proveedor_ganado][:direccion].upcase
     @proveedor_ganado.telefono = params[:proveedor_ganado][:telefono].upcase
-    @proveedor_ganado.ruc = params[:proveedor_ganado][:ruc].upcase
-    @proveedor_ganado.nombre_fantasia = params[:proveedor_ganado][:nombre_fantasia].upcase
-    @proveedor_ganado.correo_electronico = params[:proveedor_ganado][:correo_electronico].upcase
-    @proveedor_ganado.jurisdiccion_id = params[:jurisdiccion][:id]
-
+    @proveedor_ganado.email = params[:proveedor_ganado][:email].upcase
+    @proveedor_ganado.observacion = params[:proveedor_ganado][:observacion].upcase
 
 
     if @proveedor_ganado.save
@@ -203,13 +201,12 @@ class ProveedoresGanadosController < ApplicationController
 
     if valido
 
-      @proveedor_ganado.nombre_razon_social = params[:proveedor_ganado][:nombre].upcase
+      @proveedor_ganado.nombre_razon_social = params[:proveedor_ganado][:nombre_razon_social].upcase
+      @proveedor_ganado.ruc_ci = params[:proveedor_ganado][:ruc_ci].upcase
       @proveedor_ganado.direccion = params[:proveedor_ganado][:direccion].upcase
       @proveedor_ganado.telefono = params[:proveedor_ganado][:telefono].upcase
-      @proveedor_ganado.ruc = params[:proveedor_ganado][:ruc].upcase
-      @proveedor_ganado.nombre_fantasia = params[:proveedor_ganado][:nombre_fantasia].upcase
-      @proveedor_ganado.correo_electronico = params[:proveedor_ganado][:correo_electronico].upcase
-      @proveedor_ganado.jurisdiccion_id = params[:jurisdiccion][:jurisdiccion_id]
+      @proveedor_ganado.email = params[:proveedor_ganado][:email].upcase
+      @proveedor_ganado.observacion = params[:proveedor_ganado][:observacion].upcase
 
       if @proveedor_ganado.save
 
@@ -240,7 +237,7 @@ class ProveedoresGanadosController < ApplicationController
 
   def buscar_proveedor_ganado
 
-     @proveedores_ganados = ProveedorGanado.where("nombre ilike ?", "%#{params[:nombre]}%")
+     @proveedores_ganados = ProveedorGanado.where("nombre_razon_social ilike ?", "%#{params[:nombre_razon_social]}%")
 
     respond_to do |f|
 
