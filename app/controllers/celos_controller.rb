@@ -439,7 +439,7 @@ before_filter :require_usuario
 
   def buscar_ganado_reproductor
 
-    @ganados = VGanado.where("nombre ilike ? and sexo_ganado_id = ? and etapa_ganado_id in (?)", "%#{params[:ganado]}%", params[:sexo_ganado_id], [PARAMETRO[:etapa_ganado_torito], PARAMETRO[:etapa_ganado_toro]])
+    @ganados = VGanado.modulo_ganados.where("nombre ilike ? and sexo_ganado_id = ? and etapa_ganado_id in (?)", "%#{params[:ganado]}%", params[:sexo_ganado_id], [PARAMETRO[:etapa_ganado_torito], PARAMETRO[:etapa_ganado_toro]])
 
     respond_to do |f|
       

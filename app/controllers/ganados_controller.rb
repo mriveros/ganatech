@@ -942,7 +942,15 @@ class GanadosController < ApplicationController
         @ganado.rp = nuevo_rp
         @ganado.rp_padre = "No Especificado"
         @ganado.rp_madre = "No Especificado"
-        @ganado.codigo_rfid = params[:codigo_rfid]
+        if params[:codigo_rfid].present?
+
+          @ganado.codigo_rfid = params[:codigo_rfid]
+
+        else
+
+          @ganado.codigo_rfid = ""
+
+        end
         @ganado.potrero_id = params[:potrero][:id]
         @ganado.peso_promedio = params[:peso_promedio]
         @ganado.sexo_ganado_id = params[:sexo_ganado][:id]

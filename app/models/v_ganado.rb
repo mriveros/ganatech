@@ -16,4 +16,9 @@ class VGanado < ActiveRecord::Base
 
   scope :orden_estado, -> { order("estado_ganado_id")}
 
+  scope :modulo_control_ganado, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido]])}
+
+  scope :modulo_ganados, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido]])}
+
+
 end

@@ -325,6 +325,8 @@ before_filter :require_usuario
 
     if ultima_produccion.present?
 
+      @codigo_lote = ultima_produccion.codigo_lote + 1
+
       if ultima_produccion.created_at.year != Time.now.year
 
         @nuevo_autoincremento = "RP-0" + 1.to_s
@@ -336,10 +338,12 @@ before_filter :require_usuario
       end 
 
     else
-      
+      @codigo_lote = 1
       @nuevo_autoincremento = 1
 
     end
+
+
 
     respond_to do |f|
 
@@ -368,6 +372,7 @@ before_filter :require_usuario
           ganado = Ganado.new
           ganado.nombre = params[:nombre_ganado]
           ganado.rp = params[:ganado_rp]
+          ganado.codigo_lote = params[:codigo_lote]
 
           if @reproduccion.tipo_concepcion_id == PARAMETRO[:tipo_concepcion_monta_natural]
 

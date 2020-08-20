@@ -144,6 +144,10 @@
           <div class="col-sm-7"><%= text_field_tag :ganado_rp ,@nuevo_autoincremento.to_s,class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br /><br /> 
 
+          <div class="col-sm-4"><%= label_tag :nil, "Código Lote #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :codigo_lote ,@codigo_lote.to_s,class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br /><br /> 
+
           
           <div class="col-sm-4"><%= label_tag :nil, "Nombre ganado #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :nombre_ganado ,nil,class: 'form-control input-sm' %></div>
