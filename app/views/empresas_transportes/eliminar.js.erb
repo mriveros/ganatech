@@ -1,0 +1,20 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-empresa-transporte' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-empresas-transportes");
+   $("#form_buscar_empresas_transportes_id").val("<%=@empresa_transporte_elim.id%>")
+   $("#form-buscar-empresas_transportes").submit();
+    setTimeout(function(){
+
+      $("#msg-eliminar-empresas-transportes").remove();
+      swal("La empresa de transporte ha sido eliminado Exitosamente.");
+
+    }, 1000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-empresa-transporte' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-empresas-transportes");
+  setTimeout(function(){ $("#msg-eliminar-empresa-transporte").remove(); }, 1000);
+
+    swal("no se pudo Eliminar la empresa de transporte. Intente más tarde.")
+
+<% end %>

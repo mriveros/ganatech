@@ -1,0 +1,175 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Proveedor de Ganado</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-proveedor-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-proveedor-ganado", link_to_id: "#link-to-agregar-proveedor-ganado", url: proveedores_ganados_agregar_path( window_id: "modal-window-agregar-proveedor-ganado") )%>
+
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div class="table-responsive" id="table-proveedores-ganados">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+
+    <thead>
+
+      <%= form_tag proveedores_ganados_lista_path, remote: true, id: "form-buscar-proveedores-ganados"  do  %>
+
+        <tr>
+
+          <th style="width:15%;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th style="width:25%;">
+            <span>Nombre/Razon Social</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_nombre_razon_social, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_nombre_razon_social').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_nombre_razon_social');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>RUC/CI</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_ruc_ci').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_ruc_ci');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Direccion</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_direccion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_direccion').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_direccion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Telefono</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_telefono, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_telefono').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_telefono');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Email</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_email, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_email').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_email');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Observacion</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_proveedores_ganados_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="$('#form_buscar_proveedores_ganados_observacion').val('');quitar_filtro('#form-buscar-proveedores-ganados', '#form_buscar_proveedores_ganados_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+            <%= hidden_field_tag :form_buscar_proveedores_ganados_nombre_razon_social %>
+            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+                  atributo_descripcion: :nombre_razon_social,
+                  atributo_tipo: :text,
+                  model: :ProveedorGanado,
+                  limit: 10,
+                  cadena_consulta: "upper(quitar_acentos(nombre))",
+                  orden: "descripcion"),
+              parametro_id: "form_buscar_proveedores_ganados_nombre_razon_social",
+              resultado_id: "form_buscar_proveedores_ganados_id",
+              min_length: 2
+              ) %>
+          </th>
+
+
+
+          <th style="width:15%;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead>
+
+    <tbody id="proveedores-ganados-lista"></tbody>
+
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-proveedores-ganados").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_proveedores_ganados_nombre_razon_social").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_proveedores_ganados_nombre_razon_social").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_proveedores_ganados_nombre_razon_social").val().replace(/\s/g,'')).length > 2){
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});
+      }
+    }
+
+    if(valido){
+    $(".nmb").html('');
+    $("#proveedores-ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    }
+
+
+
+  })
+
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-proveedores-ganados input, #table-proveedores-ganados select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-proveedores-ganados").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-proveedores-ganados").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-proveedor-ganado").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-proveedores-ganados table th { background:#e6e6e6;}
+    #form-buscar-proveedores-ganados table th span.limpiar { background:#fff;}
+
+</style>

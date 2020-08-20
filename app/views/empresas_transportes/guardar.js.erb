@@ -1,0 +1,23 @@
+<% if @empresa_transporte_ok %>
+
+   $("<div class='col-sm-12' id='msg-agregar-empresa-transporte' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-empresa-transporte");
+
+  $("#form_buscar_empresas_transportes_id").val('<%= @empresa_transporte.id %>');
+  $("#form_buscar_empresas_transportes_nombre").val('');
+  $("#form_buscar_empresas_transportes_ruc_ci").val('');
+  $("#form_buscar_empresas_transportes_telefono").val('');
+  $("#form_buscar_empresas_transportes_direccion").val('');
+  $("#form-buscar-empresas_transportes").submit();
+
+  setTimeout(function(){
+    $("#<%= params[:window_id]%>").modal('hide');
+    swal("La empresa de transporte ha sido guardada Exitosamente.");
+  }, 2000);
+
+
+<% else %>
+
+	swal("Error al guardar:" + "<%=j(@msg)%>")
+  $("<div class='col-sm-12' id='msg-agregar-empresa-transporte' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-agregar-empresa-transporte");
+
+<% end %>

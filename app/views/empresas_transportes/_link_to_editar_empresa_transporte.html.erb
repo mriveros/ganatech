@@ -1,0 +1,4 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-empresa-transporte-#{empresa_transporte.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar la empresa de transportes.', onclick: "$('.modal').html('');return false;" %>
+
+
+<%= modal_window( window_id: "modal-window-editar-empresa-transporte", link_to_id: "#link-to-editar-empresa-transporte-#{empresa_transporte.id}", url: empresas_transportes_editar_path( window_id: "modal-window-editar-empresa-transporte", id: empresa_transporte.id) )%>
