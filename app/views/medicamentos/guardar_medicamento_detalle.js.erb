@@ -7,6 +7,8 @@ setTimeout( function(){
     $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
     $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
     swal("Sumnistro agregado exitosamente!");
+    $("#form_buscar_medicamento_id").val('<%= params[:medicamento_id]%>');
+    $("#form-buscar-medicamento").submit();
 
     }, 1000);
  

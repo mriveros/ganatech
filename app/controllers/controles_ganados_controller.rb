@@ -138,7 +138,7 @@ before_filter :require_usuario
       
       medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-      if medicamento.cantidad_stock < params[:cantidad_suministrada]
+      if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
 
         @msg = "No hay suficiente Stock para aplicar este medicamento. "
         @valido = false
