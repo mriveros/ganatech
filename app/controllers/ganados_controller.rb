@@ -12,6 +12,7 @@ class GanadosController < ApplicationController
 
     cond = []
     args = []
+    
 
     if params[:form_buscar_ganado_id].present?
 

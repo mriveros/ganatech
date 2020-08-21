@@ -16,6 +16,12 @@
       
       <td >
         
+        <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_finalizado]%>
+
+          <a href="<%= url_for(ganados_index_path(visualizar: true, reproduccion_id: rep.id))%>"class="btn btn-primary btn-xs">Ver</a>
+
+        <%end%>
+
         <%= link_to_reproduccion_detalle(rep.reproduccion_id ) %>
 
         <%if rep.estado_reproduccion_id == PARAMETRO[:estado_reproduccion_proceso_fecundacion]%>
