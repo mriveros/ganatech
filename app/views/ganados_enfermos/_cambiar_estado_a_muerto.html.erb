@@ -1,0 +1,129 @@
+<div class="modal-dialog">
+      
+  <div class="modal-content">
+        
+    <div class="modal-header" style="background:#e6e6e6;">
+          
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Marcar Ganado Muerto</h4>
+      
+    </div>
+
+    <%= form_for @ganado_enfermo, remote: true, url: ganados_enfermos_guardar_estado_ganado_muerto_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= hidden_field_tag :ganado_enfermo_id, @ganado_enfermo.id%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+          
+          
+
+          <div class="col-sm-4"><%= label_tag :nil, "Observación #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_area_tag :observacion ,nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+       
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-cambiar-estado" %>
+          
+      </div>
+    
+    <% end %>
+
+  </div>
+
+</div>
+
+<style type="text/css">
+
+  #form-cambiar-estado-reproduccion label, #form-cambiar-estado-reproduccion input[type='text'] { float:left; margin-top:5px;}
+  #form-cambiar-estado-reproduccion br {clear:both; }
+  #form-cambiar-estado-reproduccion label { width:200px; font-size:12px;}
+
+</style>
+
+<script type="text/javascript">
+
+  aplicar_datepicker2();
+
+  setTimeout(function(){ 
+
+    $("#observacion").focus();
+   
+  }, 1000);
+
+
+   $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
+   function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+         
+         return false;
+     }
+
+     return true;
+  }
+
+  $("#btn-guardar-cambiar-estado").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+     
+
+      if($("#observacion").val().length == 0){
+
+        msg +="Debe agregar una observación acerca del Aborto.\n"
+        valido = false
+          
+      }
+
+      if (valido){
+
+        swal({
+          title: "Cambiar Estado Reproducción(Aborto)",
+          text: "El estado de Reproducción estará marcado como aborto y se guardará una observación.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-cambiar-estado-reproduccion").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+
+</script>

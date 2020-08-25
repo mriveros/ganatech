@@ -53,6 +53,7 @@ development:
   estado_ganado_en_proceso_venta: 6
   estado_ganado_vendido: 7
   estado_ganado_enfermo: 8
+  estado_ganado_muerto: 9
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
@@ -106,6 +107,7 @@ development:
   estado_enfermedad_grave: 2
   estado_enfermedad_critico: 3
   estado_enfermedad_curado: 4
+  estado_enfermedad_muerto: 5
   
 
 production:
@@ -163,6 +165,7 @@ production:
   estado_ganado_en_proceso_venta: 6
   estado_ganado_vendido: 7
   estado_ganado_enfermo: 8
+  estado_ganado_muerto: 9
 
   #ETAPAS GANADOS
   etapa_ganado_vaca: 1
@@ -212,5 +215,6 @@ production:
   estado_enfermedad_grave: 2
   estado_enfermedad_critico: 3
   estado_enfermedad_curado: 4
+  estado_enfermedad_muerto: 5
   
   

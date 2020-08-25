@@ -1,0 +1,5 @@
+<%= link_to icon_minus_sign, "#", id: "link-to-cambiar-estado-a-muerto-#{ganado_enfermo_id}", 
+class: 'btn btn-black btn-xs', 
+title: 'Haga click aquí para marcar este Ganado como Muerto.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-cambiar-estado-a-muerto-#{ganado_enfermo_id}", 
+link_to_id: "#link-to-cambiar-estado-a-muerto-#{ganado_enfermo_id}", url: ganados_enfermos_cambiar_estado_a_muerto_path( window_id: "modal-window-cambiar-estado-a-muerto-#{ganado_enfermo_id}", ganado_enfermo_id: ganado_enfermo_id) )%>

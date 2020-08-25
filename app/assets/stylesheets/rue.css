@@ -1588,6 +1588,12 @@ textarea.input-lg, .input-group-lg>textarea.form-control, .input-group-lg>textar
     border-color: #4cae4c;
 }
 
+.btn-black {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
 .btn-success-dos {
     color: #fff;
     background-color: #5564eb;

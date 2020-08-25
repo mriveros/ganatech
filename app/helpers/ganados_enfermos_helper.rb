@@ -12,6 +12,12 @@ module GanadosEnfermosHelper
 
   end
 
+  def link_to_cambiar_estado_a_muerto(ganado_enfermo_id)
+
+  	render partial: 'link_to_cambiar_estado_a_muerto', locals: {ganado_enfermo_id: ganado_enfermo_id}
+
+  end
+  
   def link_to_adjuntar_archivo(control_ganado_id)
 
     render partial: 'link_to_adjuntar_archivo', locals: { control_ganado_id: control_ganado_id}

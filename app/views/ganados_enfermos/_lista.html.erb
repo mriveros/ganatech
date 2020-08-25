@@ -18,6 +18,7 @@
         <%= link_to_ganado_enfermo_detalle(ge) %>
         <%if ge.estado_enfermedad_id != PARAMETRO[:estado_enfermedad_curado]%>
 
+          <%= link_to_cambiar_estado_a_muerto(ge.ganado_enfermo_id) %>
           <%= link_to_editar_ganado_enfermo(ge.ganado_enfermo_id) %>
           <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_a_recuperado(#{ge.ganado_enfermo_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-ganado-a-recuperado", title: 'Haga click para confirmar la Recuperación del Ganado.'%>
 

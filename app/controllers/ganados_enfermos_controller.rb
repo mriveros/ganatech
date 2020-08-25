@@ -364,6 +364,7 @@ before_filter :require_usuario
 
   def cambiar_estado_a_muerto
 
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
 
     respond_to do |f|
 
@@ -376,7 +377,23 @@ before_filter :require_usuario
 
   def guardar_estado_ganado_muerto
 
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
+    @ganado_enfermo.estado_enfermedad_id = PARAMETRO[:estado_enfermedad_muerto]
+    
+    if @ganado_enfermo.save
 
+      @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
+      auditoria_id = auditoria_antes("Marcar Ganado como muerto, modulo ganados_enfermos","ganados", @ganado)
+      @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_muerto]
+      
+      if @ganado.save
+
+        auditoria_despues(@ganado,auditoria_id)
+          
+      end
+
+
+    end
     respond_to do |f|
 
       f.js
