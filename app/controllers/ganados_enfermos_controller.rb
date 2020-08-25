@@ -377,23 +377,43 @@ before_filter :require_usuario
 
   def guardar_estado_ganado_muerto
 
+
     @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
-    @ganado_enfermo.estado_enfermedad_id = PARAMETRO[:estado_enfermedad_muerto]
+
+    DocumentoGanatec.transaction do 
+
+        @documento_ganatec = DocumentoGanatec.new
+        @documento_ganatec.numero = params[:numero]
+        @documento_ganatec.descripcion = params[:descripcion]
+        @documento_ganatec.fecha_emision = params[:fecha_emision]
+        @documento_ganatec.tipo_resolucion_id = PARAMETRO[:tipo_resolucion_ganado_muerto]
+        @documento_ganatec.data = params[:data]
+
+        if @documento_ganatec.save
+
+          auditoria_nueva("agregar documento nuevo en ganatec, modulo de ganados enfermos", "documentos_ganatec", @documento_ganatec)
+
+          @ganado_enfermo.documento_ganatec_id = @documento_ganatec.id
+          @ganado_enfermo.estado_enfermedad_id = PARAMETRO[:estado_enfermedad_muerto]
+
+          if @ganado_enfermo.save
+
+            @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
+            auditoria_id = auditoria_antes("Marcar Ganado como muerto, modulo ganados_enfermos","ganados", @ganado)
+            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_muerto]
+            
+            if @ganado.save
+
+              auditoria_despues(@ganado,auditoria_id)
+                
+            end
+
+         end
+
+        end
+
+      end #end transaction    
     
-    if @ganado_enfermo.save
-
-      @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
-      auditoria_id = auditoria_antes("Marcar Ganado como muerto, modulo ganados_enfermos","ganados", @ganado)
-      @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_muerto]
-      
-      if @ganado.save
-
-        auditoria_despues(@ganado,auditoria_id)
-          
-      end
-
-
-    end
     respond_to do |f|
 
       f.js

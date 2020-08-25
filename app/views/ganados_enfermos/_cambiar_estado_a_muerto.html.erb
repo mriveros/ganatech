@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @ganado_enfermo, remote: true, url: ganados_enfermos_guardar_estado_ganado_muerto_url, html: { id: "form-cambiar-estado-reproduccion" }, method: 'POST' do |f| %>
+    <%= form_for @ganado_enfermo, remote: true, url: ganados_enfermos_guardar_estado_ganado_muerto_url, html: { id: "form-marcar-ganado-muerto" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :ganado_enfermo_id, @ganado_enfermo.id%>
@@ -18,7 +18,26 @@
 
         <div class="panel-body">
 
+          <div class="col-sm-4"><%= f.label :fecha_emision, "Fecha Archivo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"> 
+            <div class='input-group' style="width:150px;float:left;margin-top:5px;">
+              <%= text_field_tag :fecha,nil , class: 'form-control input-sm',value:"#{Date.today.strftime("%d/%m/%Y")}", style: "margin-top:0px;" %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </div>
+          <div class="col-sm-1"></div><br/><br/>
+
+          <div class="col-sm-4"><%= f.label nil, "Código Archivo #{attr_requerido}".html_safe, id: "lbl-numero" %></div>
+          <div class="col-sm-7"><%= text_field_tag  :numero, @ganado_enfermo.id,  class: 'form-control input-sm', style:"text-transform:uppercase;", maxlength: "6"  %></div>
+          <div class="col-sm-1"></div><br/><br/>
           
+          <div class="col-sm-4"><%= f.label :descripcion, "Descripci&oacute;n #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_area_tag  :descripcion, nil, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br/><br/>
+
+          <div class="col-md-4"><%= f.label nil, "Adjuntar Imagen #{attr_requerido}".html_safe, id: "lbl-adjunto" %></div>
+          <div class="col-md-7"><%= file_field_tag :data,:class => "form-control input-sm" %></div>
+          <div class="col-md-1"></div><br /><br />         
           
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación #{attr_requerido}".html_safe %></div>
@@ -42,9 +61,9 @@
 
 <style type="text/css">
 
-  #form-cambiar-estado-reproduccion label, #form-cambiar-estado-reproduccion input[type='text'] { float:left; margin-top:5px;}
-  #form-cambiar-estado-reproduccion br {clear:both; }
-  #form-cambiar-estado-reproduccion label { width:200px; font-size:12px;}
+  #form-marcar-ganado-muerto label, #form-marcar-ganado-muerto input[type='text'] { float:left; margin-top:5px;}
+  #form-marcar-ganado-muerto br {clear:both; }
+  #form-marcar-ganado-muerto label { width:200px; font-size:12px;}
 
 </style>
 
@@ -54,9 +73,9 @@
 
   setTimeout(function(){ 
 
-    $("#observacion").focus();
+    $("#descripcion").focus();
    
-  }, 1000);
+  }, 500);
 
 
    $("textarea").keydown(function(e){
@@ -84,11 +103,37 @@
       valido = true
       msg = ""
 
-     
+     if($("#fecha").val().length == 0){
+
+        msg +="Debe agregar una fecha.\n"
+        valido = false
+          
+      }
+
+      if($("#numero").val().length == 0){
+
+        msg +="Es necesario agregar un codigo al archivo.\n"
+        valido = false
+          
+      }
+
+      if($("#descripcion").val().length == 0){
+
+        msg +="Debe agregar una descripción.\n"
+        valido = false
+          
+      }
+
+      if($("#data").val().length == 0){
+
+        msg +="Debe agregar un adjunto.\n"
+        valido = false
+          
+      }
 
       if($("#observacion").val().length == 0){
 
-        msg +="Debe agregar una observación acerca del Aborto.\n"
+        msg +="Debe agregar una observación.\n"
         valido = false
           
       }
@@ -96,8 +141,8 @@
       if (valido){
 
         swal({
-          title: "Cambiar Estado Reproducción(Aborto)",
-          text: "El estado de Reproducción estará marcado como aborto y se guardará una observación.",
+          title: "Marcar Ganado Muerto",
+          text: "El Ganado estará marcado como muerto, los datos del ganado podran ser visualizados en modo de historial.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -109,7 +154,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-cambiar-estado-reproduccion").submit();
+            $("#form-marcar-ganado-muerto").submit();
             
           } 
 
