@@ -377,6 +377,8 @@ before_filter :require_usuario
 
   def guardar_estado_ganado_muerto
 
+    @actualizado_ok = false
+
 
     @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
 
@@ -385,7 +387,7 @@ before_filter :require_usuario
         @documento_ganatec = DocumentoGanatec.new
         @documento_ganatec.numero = params[:numero]
         @documento_ganatec.descripcion = params[:descripcion]
-        @documento_ganatec.fecha_emision = params[:fecha_emision]
+        @documento_ganatec.fecha_emision = params[:fecha]
         @documento_ganatec.tipo_resolucion_id = PARAMETRO[:tipo_resolucion_ganado_muerto]
         @documento_ganatec.data = params[:data]
 
@@ -404,6 +406,7 @@ before_filter :require_usuario
             
             if @ganado.save
 
+              @actualizado_ok = true
               auditoria_despues(@ganado,auditoria_id)
                 
             end

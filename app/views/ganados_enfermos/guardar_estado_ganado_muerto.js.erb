@@ -1,6 +1,7 @@
 <% if @actualizado_ok %>
 
-  $("<div class='col-sm-12' id='msg-ganado-enfermo-muerto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganados-enfermos");
+  $("#<%= params[:window_id]%>").modal('hide');
+  $("<div class='col-sm-12' id='msg-ganado-enfermo-muerto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Ganado marcado como Muerto exitosamente.</div>").insertBefore("#table-ganados-enfermos");
   $("#form_buscar_ganado_enfermo_id").val("<%=@ganado_enfermo.id%>");
   $("#form_buscar_ganado_enfermo_fecha").val('');
   $("#form_buscar_ganado_enfermo_nombre").val('');
@@ -8,19 +9,20 @@
   $("#form-buscar-ganado-enfermo").submit();
     setTimeout(function(){ 
       
-      $("#msg-eliminar-control-ganado").remove();
+      $("#msg-ganado-enfermo-muerto").remove();
+
        swal("Ganados Enfermos","Ganado marcado como Muerto.", "success");
 
     }, 1000);
       
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-ganado-enfermo-muerto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-ganados-enfermos");
+  $("<div class='col-sm-12' id='msg-ganado-enfermo-muerto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al marcar el Ganado como Muerto. Intente más Tarde.</div>").insertBefore("#table-ganados-enfermos");
   setTimeout(function(){ 
 
     $("#msg-ganado-enfermo-muerto").remove(); 
 
-    swal("Ganados Enfermos", "No se marcar el Ganado como Muerto. <%=@msg%> Intente más tarde","error");
+    swal("Ganados Enfermos", "No se marcar el Ganado como Muerto. Intente más tarde","error");
   
   }, 1000);
   

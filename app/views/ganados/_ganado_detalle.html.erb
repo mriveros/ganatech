@@ -8,7 +8,7 @@
         <h3 style="float:left;margin-top:5px;">Ganados Detalles</h3>
       </div>
       
-      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
 
         <div>
       
@@ -160,9 +160,10 @@
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
                   <td><%= cg.observacion %></td>
                   <td> 
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
                   
                       <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                  
                   <%end%>
 
                     <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
@@ -174,7 +175,7 @@
                           <%end%>
 
                         <%end%>
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
                   
                     <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
                   <%end%>
