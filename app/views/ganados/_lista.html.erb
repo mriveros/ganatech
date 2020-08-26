@@ -43,11 +43,31 @@
       <td >
         
         <%= link_to_ganado_detalle(gan.ganado_id) %>
+
         <%if gan.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]  && gan.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] %>
           
           <%= link_to_editar_ganado(gan.ganado_id) %>
           <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-ganado", title: 'Haga click para eliminar el Ganado'  %>
         <%end%>
+
+        <%@ganado_muerto = GanadoEnfermo.where("ganado_id = ? and estado_enfermedad_id = ?", gan.ganado_id, PARAMETRO[:estado_enfermedad_muerto]).first
+
+        if @ganado_muerto.present?
+
+          @documento_ganatec = DocumentoGanatec.where("id =?", @ganado_muerto.documento_ganatec_id).first
+
+            if @documento_ganatec.present?
+                          
+                if @documento_ganatec.habilitado == true || rol_administrador%>
+
+                  <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
+
+                <%end
+
+            end
+
+        end
+        %>
         
        </td>
 
