@@ -1057,6 +1057,23 @@ class GanadosController < ApplicationController
   
   end
 
+  def marcar_como_produccion
+
+    @guardado_ok = true
+    
+    @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+
+
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 
 end

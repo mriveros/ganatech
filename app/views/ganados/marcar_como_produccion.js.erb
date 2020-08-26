@@ -1,0 +1,18 @@
+<% if @guardado_ok %>
+
+ 
+	setTimeout( function(){ 
+    
+    	$("#form_buscar_ganado_id").val('<%= @ganado.id %>');
+    	$("#form-buscar-ganado").submit();
+
+    swal("Alta Prodcción","Ganado marcado para alta Producción exitosamente!", "success");
+
+    }, 1000);
+
+ 
+<% else %>
+
+    swal("Alta Producción", "Error al enviar al módulo de Producción. Intente más tarde","error");
+    
+<% end %>

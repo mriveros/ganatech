@@ -112,6 +112,10 @@ module ApplicationHelper
       "<span class='glyphicon glyphicon-ok'></span>".html_safe
   end
 
+  def icon_produccion
+      "<span class='glyphicon glyphicon-ok'>alta producción</span>".html_safe
+  end
+
   def icon_confirmar_cobro
       "<span class='glyphicon glyphicon-ok'>Cobrado</span>".html_safe
   end

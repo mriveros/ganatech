@@ -97,7 +97,9 @@ development:
   estado_movimiento_finalizado: 2
  
   #FINALIDADES GANADOS
+  finalidad_ganado_alta_produccion: 3
   finalidad_ganado_no_especificado: 4
+
 
   #CLASIFICACION SALIDA GANADO
   clasificacion_salida_por_ganado: 1
@@ -206,6 +208,7 @@ production:
   estado_movimiento_finalizado: 2
 
   #FINALIDADES GANADOS
+  finalidad_ganado_alta_produccion: 3
   finalidad_ganado_no_especificado: 4
 
   #CLASIFICACION SALIDA GANADO

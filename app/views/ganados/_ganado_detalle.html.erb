@@ -7,6 +7,8 @@
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Ganados Detalles</h3>
       </div>
+
+
       
       <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
 
@@ -59,8 +61,18 @@
 
         </div>
 
+        <div>
+          
+          <%if @ganado_detalle.finalidad_ganado_id == PARAMETRO[:finalidad_ganado_alta_produccion]%>
 
-      <%end%>  
+            <%= link_to icon_produccion,"#", onclick: "enviar_ganado_a_produccion(#{@ganado_detalle.id});return false;", class: "btn btn-success btn-xs",style: "float:right;", id: "btn-enviar-ganado-a-tambo", title: 'Haga click para enviar el Ganado al tambo para Producción de Leche'  %>
+          <%end%>
+
+        </div>
+        
+      
+      <%end%>
+
 
     </div>
 
@@ -177,7 +189,7 @@
                         <%end%>
                   <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
                   
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_sanitario(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
                   <%end%>
                   
                   </td>
@@ -284,7 +296,7 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(control_ganado_id) {
+  function eliminar_registro_control_sanitario(control_ganado_id) {
 
         swal({
           title: "Confirmar",
@@ -336,6 +348,40 @@
               $.ajax({
                 url: "<%= url_for(ganados_eliminar_control_alimentacion_path) %>", 
                 data: {control_alimentacion_id: control_alimentacion_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+
+    function enviar_ganado_a_produccion(ganado_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el Ganado será enviado al módulo de Alta Producción",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(ganados_marcar_como_produccion_path) %>", 
+                data: {ganado_id: ganado_id},
                 dataType: 'script'
               });
             
