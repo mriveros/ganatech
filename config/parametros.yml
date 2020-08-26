@@ -113,6 +113,10 @@ development:
   estado_enfermedad_muerto: 5
   
 
+  #ESTADOS ALTA PRODUCCION
+  estado_alta_produccion_activa: 1
+  estado_alta_produccion_inactiva: 2
+
 production:
 
   #ROLES 
@@ -222,4 +226,6 @@ production:
   estado_enfermedad_curado: 4
   estado_enfermedad_muerto: 5
   
-  
+  #ESTADOS ALTA PRODUCCION
+  estado_alta_produccion_activa: 1
+  estado_alta_produccion_inactiva: 2

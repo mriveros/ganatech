@@ -1059,11 +1059,35 @@ class GanadosController < ApplicationController
 
   def marcar_como_produccion
 
-    @guardado_ok = true
-    
+    @guardado_ok = false
+    @valido = true
+
     @ganado = Ganado.where("id = ?", params[:ganado_id]).first
 
+    ganado_alta_produccion = AltaProduccion.where("ganado_id = ? and periodo = ? and estado_alta_produccion_id = ?", params[:ganado_id], Time.now.year.to_s, PARAMETRO[:estado_alta_produccion_activa]).first
 
+    if ganado_alta_produccion.present?
+
+      @valido = false
+      @msg = "El Ganado ya se encuentra en el modulo de Alta Producción"
+
+    end
+
+
+    if @valido
+
+      ganado_alta_produccion = AltaProduccion.new
+      ganado_alta_produccion.ganado_id = params[:ganado_id]
+      ganado_alta_produccion.periodo = Time.now.year
+      ganado_alta_produccion.estado_alta_produccion_id = PARAMETRO[:estado_alta_produccion_activa]
+      
+      if ganado_alta_produccion.save
+
+        @guardado_ok = true
+
+      end
+
+    end
 
 
     respond_to do |f|
