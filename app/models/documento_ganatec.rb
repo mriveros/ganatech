@@ -9,7 +9,7 @@ class DocumentoGanatec < ActiveRecord::Base
   belongs_to :tipo_resolucion_documento
   scope :orden_id, -> {order("id")}
   has_attached_file :data
-  validates_attachment_content_type :data, :content_type => ['application/pdf', 'application/binary']
+  validates_attachment_content_type :data, :content_type => ['application/pdf', 'application/binary', 'image/jpeg']
  
   
 end

@@ -31,7 +31,7 @@
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Estado Enfermedad #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :estado_enfermedad, :id, EstadoEnfermedad.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :estado_enfermedad, :id, EstadoEnfermedad.modulo_ganados_enfermos, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
