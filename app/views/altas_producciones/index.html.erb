@@ -5,7 +5,7 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
 
-    <h3 style="float:left;margin-top:5px;">Altas Producciones</h3>
+    <h3 style="float:left;margin-top:5px;">Altas Producciones - Leche</h3>
     
   </div>
 
@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th style="width:15%;">
+          <th>
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alta_produccion_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -31,7 +31,7 @@
             </div>
           </th>
           
-           <th style="width:15%;">
+           <th>
             <span>Periodo</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alta_produccion_periodo, nil, :class => 'form-control', :placeholder => "" %>
@@ -39,7 +39,7 @@
             </div>
           </th>
 
-          <th style="width:25%;">
+          <th>
             <span>Ganado</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
@@ -61,7 +61,7 @@
           </th>
 
 
-          <th style="width:25%;">
+          <th>
             <span>Ganado RP</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
@@ -69,7 +69,7 @@
             </div>
           </th>
 
-         <th style="width:25%;">
+         <th >
             <span>Ganado RFID</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
@@ -79,7 +79,7 @@
           <th >
               <span>Estado Alta Producción</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 

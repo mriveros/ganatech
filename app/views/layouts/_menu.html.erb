@@ -79,40 +79,26 @@
 					<li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
           <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
           <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
-
-          
-
-					
           <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>
-          
           <li>
 
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Compra/Venta<b class="caret"></b></a>
-             
               <ul class="dropdown-menu">
 
               <li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
               <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
-
               </ul>
-            
           </li>
 
           <li>
-
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Alta Producción<b class="caret"></b></a>
-             
               <ul class="dropdown-menu">
-
-              <li><%= link_to "Producción Leche", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
+              <li><%= link_to "Producción Leche", altas_producciones_index_path if acceso_permitido("altas_producciones.index") %></li>
               <li><%= link_to "Producción Queso", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
-
               </ul>
-            
           </li>
 
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
-
           <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
           
 

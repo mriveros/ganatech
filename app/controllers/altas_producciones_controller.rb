@@ -13,7 +13,7 @@ before_filter :require_usuario
     if params[:form_buscar_alta_produccion_id].present?
 
       cond << "alta_produccion_id = ?"
-      args << params[:form_buscar_alta_produccion_id]]
+      args << params[:form_buscar_alta_produccion_id]
 
     end
 
