@@ -63,9 +63,15 @@
 
         <div>
           
-          <%if @ganado_detalle.finalidad_ganado_id == PARAMETRO[:finalidad_ganado_alta_produccion]%>
+          <%if @ganado_detalle.finalidad_ganado_id == PARAMETRO[:finalidad_ganado_alta_produccion] && @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra]%>
 
-            <%= link_to icon_produccion,"#", onclick: "enviar_ganado_a_produccion(#{@ganado_detalle.id});return false;", class: "btn btn-success btn-xs",style: "float:right;", id: "btn-enviar-ganado-a-tambo", title: 'Haga click para enviar el Ganado al tambo para Producción de Leche'  %>
+            <%alta_produccion = AltaProduccion.where("ganado_id = ? and periodo = ? and estado_alta_produccion_id = ? ", @ganado_detalle.id, Time.now.month.to_s+'-'+Time.now.year.to_s, PARAMETRO[:estado_alta_produccion_activa])%>
+            <%unless alta_produccion.present?%>
+              
+              <%= link_to icon_produccion,"#", onclick: "enviar_ganado_a_produccion(#{@ganado_detalle.id});return false;", class: "btn btn-success btn-xs",style: "float:right;", id: "btn-enviar-ganado-a-tambo", title: 'Haga click para enviar el Ganado al tambo para Producción de Leche'  %>
+            
+            <%end%>
+
           <%end%>
 
         </div>

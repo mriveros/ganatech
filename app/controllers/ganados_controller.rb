@@ -1078,7 +1078,7 @@ class GanadosController < ApplicationController
 
       ganado_alta_produccion = AltaProduccion.new
       ganado_alta_produccion.ganado_id = params[:ganado_id]
-      ganado_alta_produccion.periodo = Time.now.year
+      ganado_alta_produccion.periodo = Time.now.month.to_s+'-'+Time.now.year.to_s
       ganado_alta_produccion.estado_alta_produccion_id = PARAMETRO[:estado_alta_produccion_activa]
       
       if ganado_alta_produccion.save
