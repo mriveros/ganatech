@@ -1,22 +1,23 @@
-<% if precios.present? %>
+<% if altas_producciones.present? %>
 
-  <% precios.each do |pre| %>
+  <% altas_producciones.each do |ap| %>
 
     <tr>
 
-      <td><%= pre.id %></td>
-      <td><%= pre.codigo%></td>
-      <td><%= pre.descripcion%></td>
-      <td><%= pre.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td> <%= check_box_tag "predeterminado", nil, verificar_predeterminado(pre.id) %></td>
+      <td><%= ap.alta_produccion_id %></td>
+      <td><%= ap.periodo%></td>
+      <td><%= ap.ganado_nombre%></td>
+      <td><%= ap.ganado_rp%></td>
+      <td><%= ap.ganado_rfid%></td>
+      <td><%= ap.estado_alta_produccion %></td>
 
       <td style="width:120px;"> 
 
-        <%= link_to_editar_precio(pre) %>
+        <%#= link_to_editar_precio(pre) %>
         
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pre.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-precio", title: 'Haga click para eliminar el precio'  %>
+        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pre.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-precio", title: 'Haga click para eliminar el precio'  %>
        
-       <%= link_to icon_confirmar,"#", onclick: "marcar_predeterminado(#{pre.id});return false;", class: "btn btn-success btn-xs", id: "btn-marcar-predeterminado", title: 'Haga click para marcar este precio como predeterminado.'  %>
+       <%#= link_to icon_confirmar,"#", onclick: "marcar_predeterminado(#{pre.id});return false;", class: "btn btn-success btn-xs", id: "btn-marcar-predeterminado", title: 'Haga click para marcar este precio como predeterminado.'  %>
          
        </td>
 
@@ -31,7 +32,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate precios, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate altas_producciones, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -56,7 +57,7 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(precio_id) {
+  function eliminar_registro(alta_produccion_id) {
 
         swal({
           title: "Confirmar",

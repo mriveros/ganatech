@@ -47,10 +47,10 @@ before_filter :require_usuario
     end
 
 
-    if params[:form_buscar_alta_produccion_estado_alta_produccion_id].present?
+    if params[:form_buscar_alta_produccion][:estado_alta_produccion_id].present?
 
       cond << "estado_alta_produccion_id = ?"
-      args << params[:form_buscar_alta_produccion_estado_alta_produccion_id]
+      args << params[:form_buscar_alta_produccion][:estado_alta_produccion_id]
 
     end
 
@@ -58,17 +58,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @precios =  Precio.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Precio.where(cond).count
+      @altas_producciones =  VAltaProduccion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAltaProduccion.where(cond).count
 
     else
 
-      @precios = Precio.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Precio.count
+      @altas_producciones = VAltaProduccion.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAltaProduccion.count
 
     end
 
-    @total_registros = Precio.count
+    @total_registros = VAltaProduccion.count
 
     respond_to do |f|
 
@@ -80,7 +80,7 @@ before_filter :require_usuario
 
   def agregar
 
-    @precio = Precio.new
+    @alta_produccion = AltaProduccion.new
 
     respond_to do |f|
 

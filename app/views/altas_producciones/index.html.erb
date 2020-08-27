@@ -4,50 +4,50 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Precios</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-precio", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-precio", link_to_id: "#link-to-agregar-precio", url: precios_agregar_path( window_id: "modal-window-agregar-precio") )%>
+
+    <h3 style="float:left;margin-top:5px;">Altas Producciones</h3>
     
   </div>
+
 </div>
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-precios">
+<div class="table-responsive" id="table-alta-produccion">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag precios_lista_path, remote: true, id: "form-buscar-precios"  do  %>
+      <%= form_tag altas_producciones_lista_path, remote: true, id: "form-buscar-altas-producciones"  do  %>
 
         <tr>
 
           <th style="width:15%;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_precios_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_alta_produccion_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th style="width:15%;">
-            <span>Código Precio</span>
+            <span>Periodo</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_precios_codigo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_codigo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_alta_produccion_periodo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_periodo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th style="width:25%;">
-            <span>Descripción</span>
+            <span>Ganado</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_precios_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-precios', '#form_buscar_precios_descripcion');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_alta_produccion_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
             </div>
 
-            <%= hidden_field_tag :form_buscar_precios_descripcion %>
-            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+            <%#= hidden_field_tag :form_buscar_alta_produccion_ganado_nombre %>
+            <%#= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
                   atributo_descripcion: :descripcion,
                   atributo_tipo: :text, 
                   model: :Precio, 
@@ -61,19 +61,28 @@
           </th>
 
 
-          <th style="width:20%;">
-            <span>Monto</span>
+          <th style="width:25%;">
+            <span>Ganado RP</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_precios_monto, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_monto');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_alta_produccion_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-          <th style="width:15%;">
-            <span>Predeterminado</span>
-          </th>
+         <th style="width:25%;">
+            <span>Ganado RFID</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_alta_produccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
+          </div>
 
-
+          <th >
+              <span>Estado Alta Producción</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoCelo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
 
           <th style="width:15%;"></th>
 
@@ -83,7 +92,7 @@
 
       </thead> 
 
-    <tbody id="precios-lista"></tbody>
+    <tbody id="alta-produccion-lista"></tbody>
   
   </table>
 
@@ -95,11 +104,11 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-precios").bind("submit", function () {
+  $("#form-buscar-altas-producciones").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_precios_descripcion").val().length !== 0 ){
+    if($("#form_buscar_alta_produccion_ganado_nombre").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_precios_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_precios_descripcion").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_alta_produccion_ganado_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_alta_produccion_ganado_nombre").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -111,7 +120,7 @@
       
     if(valido){
     $(".nmb").html('');       
-    $("#precios-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#alta-produccion-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -120,17 +129,17 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-precios input, #table-precios select").bind('change', function () {
+  $("#table-alta-produccion input, #table-alta-produccion select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-precios").submit();
+      $("#form-buscar-altas-producciones").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-precios").submit();
+  $("#form-buscar-altas-producciones").submit();
   <% if params[:agregar] %>
-    $("#link-to-agregar-precio").trigger('click');
+    //$("#link-to-agregar-precio").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
 </script>
@@ -147,7 +156,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-precios table th { background:#e6e6e6;}
-    #form-buscar-precios table th span.limpiar { background:#fff;}
+    #form-buscar-altas-producciones table th { background:#e6e6e6;}
+    #form-buscar-altas-producciones table th span.limpiar { background:#fff;}
 
 </style>

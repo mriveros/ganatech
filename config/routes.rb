@@ -268,6 +268,15 @@ get 'crontab_ultron/index'
   get 'ganados_enfermos/cambiar_estado_a_muerto'
   post 'ganados_enfermos/guardar_estado_ganado_muerto'
 
+  #ALTAS PRODUCCIONES
+  get 'altas_producciones/index'
+  post 'altas_producciones/lista'
+  get 'altas_producciones/lista'
+  get 'altas_producciones/agregar'
+  post 'altas_producciones/guardar'
+  get 'altas_producciones/buscar_alta_produccion'
+  get 'altas_producciones/marcar_desactivado'
+
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
