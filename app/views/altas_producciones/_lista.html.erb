@@ -11,8 +11,9 @@
       <td><%= ap.ganado_rfid%></td>
       <td><%= ap.estado_alta_produccion %></td>
 
-      <td style="width:120px;"> 
+      <td > 
 
+        <%= link_to_alta_produccion_detalle(ap.alta_produccion_id) %>
         <%#= link_to_editar_precio(pre) %>
         
         <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pre.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-precio", title: 'Haga click para eliminar el precio'  %>

@@ -94,31 +94,9 @@ before_filter :require_usuario
 
     valido = true
     @msg = ""
-    @precio_ok = false
+    @guardado_ok = false
 
-    @precio = Precio.new()
-    @precio.codigo = params[:precio][:codigo].upcase
-    @precio.descripcion = params[:precio][:descripcion].upcase
-    @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
-    
-
-      if @precio.save
-
-        auditoria_nueva("registrar precio", "precios", @precio)
-       
-        @precio_ok = true
-       
-
-      end 
-  
-      rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
-      
-      end                
+                
                
     respond_to do |f|
 
@@ -133,33 +111,7 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @precio = Precio.find(params[:id])
-
-    @precio_elim = @precio
-
-    if valido
-
-      if @precio.destroy
-
-        auditoria_nueva("eliminar precio", "precios", @precio)
-
-        @eliminado = true
-
-      else
-
-        @msg = "ERROR: No se ha podido eliminar el precio."
-
-      end
-
-    end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        @eliminado = false
-        end
+   
         
     respond_to do |f|
 
@@ -186,31 +138,7 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @precio = Precio.find(params[:precio][:id])
-    auditoria_id = auditoria_antes("actualizar precio", "precios", @precio)
-
-    if valido
-
-      @precio.codigo = params[:precio][:codigo].upcase
-      @precio.descripcion = params[:precio][:descripcion].upcase
-      @precio.monto =  params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
-     
-
-      if @precio.save
-
-        auditoria_despues(@precio, auditoria_id)
-        @precio_ok = true
-
-      end
-
-    end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        end                
+             
         
     respond_to do |f|
 
@@ -223,45 +151,24 @@ before_filter :require_usuario
 
   def buscar_precio
 
-     @precios = Precio.where("descripcion ilike ?", "%#{params[:descripcion]}%")
+     @alta_produccion = VAltaProduccion.where("ganado_nombre ilike ?", "%#{params[:ganado_nombre]}%")
 
     respond_to do |f|
       
       f.html
-      f.json { render :json => @precios }
+      f.json { render :json => @alta_produccion }
     
     end
 
   end
 
-  def marcar_predeterminado
+  
 
-    @guardado_ok = false    
-    @msg = ""
+  def alta_produccion_detalle
 
-    Precio.update_all(predeterminado: false)
+    @alta_produccion_detalle = AltaProduccionDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id])
 
-    @precio = Precio.where("id = ?", params[:id]).first
-    auditoria_id = auditoria_antes("Marcar precio predeterminado", "precios", @precio)
-    @precio.predeterminado = true
 
-    if @precio.save
-
-        auditoria_despues(@precio, auditoria_id)
-        @guardado_ok = true
-        @msg = "Precio marcado como predeterminado exitosamente."
-
-    end
-    
-    rescue Exception => exc  
-      # dispone el mensaje de error 
-      #puts "Aqui si muestra el error ".concat(exc.message)
-      if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        @eliminado = false
-      end
-        
     respond_to do |f|
 
       f.js
@@ -269,6 +176,7 @@ before_filter :require_usuario
     end
 
   end
+
 
 
 

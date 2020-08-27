@@ -74,7 +74,7 @@
     
   </div>
 
-  <%= modal_window( window_id: "modal-window-agregar-produccion-detalle", link_to_id: "#link-to-agregar-produccion-detalle", url: altas_producciones_agregar_produccion_detalle_path( window_id: "modal-window-agregar-produccion-detalle", alta_produccion_id: params[:alta_produccion_id]) )%>
+  <%= modal_window( window_id: "modal-window-agregar-produccion-detalle", link_to_id: "#link-to-agregar-produccion-detalle", url: altas_producciones_agregar_alta_produccion_detalle_path( window_id: "modal-window-agregar-produccion-detalle", alta_produccion_id: params[:alta_produccion_id]) )%>
 
 </td>
 
@@ -98,8 +98,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(altas_producciones_eliminar_produccion_detalle_path) %>", 
-                data: {alta_produccion_id: alta_produccion_id},
+                url: "<%= url_for(altas_producciones_eliminar_alta_produccion_detalle_path) %>", 
+                data: {alta_produccion_detalle_id: alta_produccion_detalle_id},
                 dataType: 'script'
               });
             
