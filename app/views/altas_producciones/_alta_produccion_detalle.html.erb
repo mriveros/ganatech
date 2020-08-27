@@ -1,0 +1,117 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Producción Detalle</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar producción".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-produccion-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Desde Fecha</th>
+              <th>Hasta Fecha</th>
+              <th>Cantidad Litros</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="hacienda-detalle-lista">
+
+            <% if @alta_produccion_detalle.present? %>
+            
+              <% @alta_produccion_detalle.each do |apd|%>
+
+                <tr>
+                  <td><%= apd.id %></td>
+                  <td><%= apd.desde_fecha %></td>
+                  <td><%= apd.hasta_fecha %></td>
+                  <td><%= apd.cantidad_litros %></td>
+                  
+                  <td style="width: 50px;text-align:right;">
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{apd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-produccion-detalle", title: 'Haga click para eliminar la Producción'  %>
+                  </td> 
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @alta_produccion_detalle, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-produccion-detalle", link_to_id: "#link-to-agregar-produccion-detalle", url: altas_producciones_agregar_produccion_detalle_path( window_id: "modal-window-agregar-produccion-detalle", alta_produccion_id: params[:alta_produccion_id]) )%>
+
+</td>
+
+
+  <script type="text/javascript">
+
+    function eliminar_registro_detalle(alta_produccion_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará esta producción.",
+          type: "warning",
+          showCancelButton: true, 
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(altas_producciones_eliminar_produccion_detalle_path) %>", 
+                data: {alta_produccion_id: alta_produccion_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+  </script>
