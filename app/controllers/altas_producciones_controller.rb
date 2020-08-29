@@ -194,8 +194,14 @@ before_filter :require_usuario
   def guardar_alta_produccion_detalle
 
 
+    respond_to do |f|
+
+      f.js
+      
+    end
+
   end
-  
+
 
 
 
