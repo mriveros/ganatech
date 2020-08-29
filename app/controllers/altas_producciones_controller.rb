@@ -178,6 +178,19 @@ before_filter :require_usuario
   end
 
 
+  def agregar_alta_produccion_detalle
+
+    @alta_produccion_detalle = AltaProduccionDetalle.new
+
+    respond_to do |f|
+
+      f.js
+      
+    end
+
+  end
+
+
 
 
 end
