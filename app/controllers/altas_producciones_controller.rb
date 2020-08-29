@@ -192,6 +192,25 @@ before_filter :require_usuario
 
 
   def guardar_alta_produccion_detalle
+    @msg = ""
+    @valido = true
+    @guardado_ok = false
+
+
+    if @valido
+
+      @alta_produccion_detalle = AltaProduccionDetalle.new
+      @alta_produccion_detalle.alta_produccion_id = params[:alta_produccion_id]
+      @alta_produccion_detalle.desde_fecha = params[:desde_fecha]
+      @alta_produccion_detalle.hasta_fecha = params[:hasta_fecha]
+      @alta_produccion_detalle.cantidad_litros = params[:cantidad_litros]
+      if @alta_produccion_detalle.save
+
+        @guardado_ok = true
+
+      end
+
+    end
 
 
     respond_to do |f|
