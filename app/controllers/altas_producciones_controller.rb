@@ -192,6 +192,7 @@ before_filter :require_usuario
 
 
   def guardar_alta_produccion_detalle
+
     @msg = ""
     @valido = true
     @guardado_ok = false
@@ -222,6 +223,34 @@ before_filter :require_usuario
   end
 
 
+  def eliminar_alta_produccion_detalle
+
+    @valido = true
+    @msg = ""
+
+    @alta_produccion_detalle = AltaProduccionDetalle.where("id = ?", params[:alta_produccion_detalle_id]).first
+
+    @alta_produccion_detalle_elim = @alta_produccion_detalle  
+
+    if @valido
+
+      if @alta_produccion_detalle.destroy
+
+        auditoria_nueva("eliminar alta produccion detalle", "altas_producciones_detalles", @alta_produccion_detalle_elim)
+
+        @eliminado = true
+
+      end
+
+    end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
 
 
 
