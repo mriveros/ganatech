@@ -3,8 +3,8 @@
   setTimeout( function(){ 
   
     $("#<%= params[:window_id]%>").modal('hide');
-    $("#link-to-agregar-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
-    $("#link-to-agregar-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
+    $("#link-to-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
+    $("#link-to-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
 
     swal("Alta Producción","Producción agregado exitosamente!", "success");
 

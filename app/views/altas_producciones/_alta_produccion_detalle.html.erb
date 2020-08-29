@@ -41,8 +41,8 @@
 
                 <tr>
                   <td><%= apd.id %></td>
-                  <td><%= apd.desde_fecha %></td>
-                  <td><%= apd.hasta_fecha %></td>
+                  <td><%= apd.desde_fecha.strftime('%d/%m/%Y')  %></td>
+                  <td><%= apd.hasta_fecha.strftime('%d/%m/%Y')  %></td>
                   <td><%= apd.cantidad_litros %></td>
                   
                   <td style="width: 50px;text-align:right;">

@@ -166,7 +166,7 @@ before_filter :require_usuario
 
   def alta_produccion_detalle
 
-    @alta_produccion_detalle = AltaProduccionDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id])
+    @alta_produccion_detalle = AltaProduccionDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
