@@ -191,6 +191,13 @@ before_filter :require_usuario
   end
 
 
+  def guardar_alta_produccion_detalle
+
+
+  end
+  
+
+
 
 
 end
