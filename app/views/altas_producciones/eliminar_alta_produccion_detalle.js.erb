@@ -1,27 +1,27 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganado-detalle-control-sanitario");
+   $("<div class='col-sm-12' id='msg-eliminar-alta-produccion-detalle' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-alta-produccion");
    
     setTimeout(
 
-      function(){ $("#msg-eliminar-control-sanitario").remove(); 
+      function(){ $("#msg-eliminar-alta-produccion-detalle").remove(); 
      
-      $("#link-to-ganado-detalle-<%=@control_sanitario_elim.ganado_id %>").trigger('click');
-      $("#link-to-ganado-detalle-<%=@control_sanitario_elim.ganado_id%>").trigger('click');
+      $("#link-to-alta-produccion-detalle-<%=@alta_produccion_detalle_elim.alta_produccion_id %>").trigger('click');
+      $("#link-to-alta-produccion-detalle-<%=@alta_produccion_detalle_elim.alta_produccion_id%>").trigger('click');
       
-       swal("Control Sanitario","Control Sanitario eliminado exitosamente.", "success");
+       swal("Alta Producción","Producción eliminado exitosamente.", "success");
 
     }, 1000);
    
     
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-ganado-detalle-control-sanitario");
+  $("<div class='col-sm-12' id='msg-eliminar-alta-produccion-detalle' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-alta-produccion");
   setTimeout(function(){ 
     
-    $("#msg-eliminar-control-sanitario").remove();
+    $("#msg-eliminar-alta-produccion-detalle").remove();
 
-    swal("Control Sanitario","No se pudo eliminar el Control Sanitario. Intente más tarde", "error")
+    swal("Alta Producción","No se pudo eliminar la Producción. Intente más tarde", "error")
 
      }, 2000);
     

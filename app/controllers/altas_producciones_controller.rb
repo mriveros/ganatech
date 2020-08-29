@@ -227,6 +227,7 @@ before_filter :require_usuario
 
     @valido = true
     @msg = ""
+    @eliminado = false
 
     @alta_produccion_detalle = AltaProduccionDetalle.where("id = ?", params[:alta_produccion_detalle_id]).first
 
