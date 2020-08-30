@@ -124,6 +124,10 @@ module ApplicationHelper
       "<span class='glyphicon glyphicon-off'>No Cobrado</span>".html_safe
   end
 
+  def icon_desconfirmar_ap
+      "<span class='glyphicon glyphicon-off'></span>".html_safe
+  end
+
   def icon_confirmar_finalizar
       "<span class='glyphicon glyphicon-ok'>Finalizar</span>".html_safe
   end

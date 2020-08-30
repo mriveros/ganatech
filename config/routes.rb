@@ -272,14 +272,16 @@ get 'crontab_ultron/index'
   get 'altas_producciones/index'
   post 'altas_producciones/lista'
   get 'altas_producciones/lista'
-  get 'altas_producciones/agregar'
-  post 'altas_producciones/guardar'
-  get 'altas_producciones/buscar_alta_produccion'
   get 'altas_producciones/alta_produccion_detalle'
   get 'altas_producciones/agregar_alta_produccion_detalle'
   post 'altas_producciones/guardar_alta_produccion_detalle'
   get 'altas_producciones/eliminar_alta_produccion_detalle'
+  get 'altas_producciones/marcar_desactivado'
 
+  get 'altas_producciones/agregar'
+  post 'altas_producciones/guardar'
+  get 'altas_producciones/buscar_alta_produccion'
+  
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------

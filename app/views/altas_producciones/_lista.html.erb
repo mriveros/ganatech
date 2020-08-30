@@ -14,12 +14,12 @@
       <td > 
 
         <%= link_to_alta_produccion_detalle(ap.alta_produccion_id) %>
-        <%#= link_to_editar_precio(pre) %>
         
-        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pre.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-precio", title: 'Haga click para eliminar el precio'  %>
-       
-       <%#= link_to icon_confirmar,"#", onclick: "marcar_predeterminado(#{pre.id});return false;", class: "btn btn-success btn-xs", id: "btn-marcar-predeterminado", title: 'Haga click para marcar este precio como predeterminado.'  %>
-         
+        <%if ap.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
+
+          <%= link_to icon_desconfirmar_ap,"#", onclick: "desactivar_alta_produccion(#{ap.alta_produccion_id});return false;", class: "btn btn-warning btn-xs", id: "btn-desactivar-alta-produccion", title: 'Haga click para desactivar este ganado de la Alta Produccion por este periodo.'  %>
+        <%end%>
+
        </td>
 
      
@@ -91,11 +91,11 @@
     
     }
 
-    function marcar_predeterminado(precio_id) {
+    function desactivar_alta_produccion(alta_produccion_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar este precio como predeterminado éste quedara como principal al crear una cita.",
+          text: "Al confirmar este ganado estará desactivado en el módulo de Alta Producción.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -108,8 +108,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(precios_marcar_predeterminado_path) %>", 
-                data: {id: precio_id},
+                url: "<%= url_for(altas_producciones_marcar_desactivado_path) %>", 
+                data: {alta_produccion_id: alta_produccion_id},
                 dataType: 'script'
               });
             

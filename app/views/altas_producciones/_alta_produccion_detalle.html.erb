@@ -6,7 +6,11 @@
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Producción Detalle</h3>
-        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar producción".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+        <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
+
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar producción".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+        <%end%>
       </div>
 
     </div> 
@@ -46,7 +50,13 @@
                   <td><%= apd.cantidad_litros %></td>
                   
                   <td style="width: 50px;text-align:right;">
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{apd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-produccion-detalle", title: 'Haga click para eliminar la Producción'  %>
+                    
+                    <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
+
+                      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{apd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-produccion-detalle", title: 'Haga click para eliminar la Producción'  %>
+
+                    <%end%>
+                    
                   </td> 
 
                 </tr>

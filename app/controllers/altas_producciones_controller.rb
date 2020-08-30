@@ -1,6 +1,6 @@
 class AltasProduccionesController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
   end
@@ -166,6 +166,7 @@ before_filter :require_usuario
 
   def alta_produccion_detalle
 
+    @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id] ).first
     @alta_produccion_detalle = AltaProduccionDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
 
 
@@ -253,6 +254,30 @@ before_filter :require_usuario
 
   end
 
+
+  def marcar_desactivado
+
+    @valido = true
+    @msg = ""
+    @actualizado_ok = false
+
+    @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id]).first
+    @alta_produccion.estado_alta_produccion_id = PARAMETRO[:estado_alta_produccion_inactiva]
+    
+
+    if @alta_produccion.save
+
+      @actualizado_ok = true     
+
+    end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
 
 
 end
