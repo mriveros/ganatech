@@ -93,11 +93,25 @@
   
   setInterval('verificar_tabla_temporal()',10000);
 
-    function verificar_tabla_temporal(){
+  function verificar_tabla_temporal(){
     
+    $.getJSON("<%= url_for(altas_producciones_verificar_tabla_temporal_path) %>", { }, function(j){
+        
+      var valor_retorno = "";
+      
+      if (j[0] == 1)
+      {
+
+        
+
+      }
+
+
+    }
     
 
   }
+
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-altas-producciones").bind("submit", function () {
