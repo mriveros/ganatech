@@ -279,6 +279,7 @@ get 'crontab_ultron/index'
   get 'altas_producciones/marcar_desactivado'
   get 'altas_producciones/agregar_produccion_lote'
   get 'altas_producciones/eliminar_produccion_lote'
+  get 'altas_producciones/verificar_tabla_temporal'
 
   get 'altas_producciones/agregar'
   post 'altas_producciones/guardar'

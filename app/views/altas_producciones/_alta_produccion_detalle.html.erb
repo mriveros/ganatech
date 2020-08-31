@@ -31,6 +31,7 @@
               <th>Desde Fecha</th>
               <th>Hasta Fecha</th>
               <th>Cantidad Litros</th>
+              <th>Estado</th>
               <th style='text-align:right;'></th>
               
             </tr>
@@ -44,23 +45,24 @@
               <% @alta_produccion_detalle.each do |apd|%>
 
                 <tr>
-                  <td><%= apd.id %></td>
+                  <td><%= apd.alta_produccion_detalle_id %></td>
                   <td><%= apd.desde_fecha.strftime('%d/%m/%Y')  %></td>
                   <td><%= apd.hasta_fecha.strftime('%d/%m/%Y')  %></td>
                   <td><%= apd.cantidad_litros %></td>
+                   <td><%= apd.estado_alta_produccion_detalle %></td>
                   
                   <td style="width: 50px;text-align:right;">
                     
 
-                    <%= check_box_tag "check_box_#{apd.id}", apd.id, verificar_produccion_lote(apd.id), { class: 'form-control input-xs', onclick: "lote_ganado(this, #{apd.id})"}  %>
+                    <%= check_box_tag "check_box_#{apd.alta_produccion_detalle_id}", apd.alta_produccion_detalle_id, verificar_produccion_lote(apd.alta_produccion_detalle_id), { class: 'form-control input-xs', onclick: "lote_ganado(this, #{apd.alta_produccion_detalle_id})"}  %>
 
-                    <span style="display:none;" title="Item agregado exitosamente." id="si-<%= apd.id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
+                    <span style="display:none;" title="Item agregado exitosamente." id="si-<%= apd.alta_produccion_detalle_id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
                
-                    <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= apd.id%>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>                 
+                    <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= apd.alta_produccion_detalle_id%>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>                 
                     
                     <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
 
-                      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{apd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-produccion-detalle", title: 'Haga click para eliminar la Producción'  %>
+                      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{apd.alta_produccion_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-produccion-detalle", title: 'Haga click para eliminar la Producción'  %>
 
                     <%end%>
                     

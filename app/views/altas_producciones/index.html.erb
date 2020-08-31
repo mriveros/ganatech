@@ -6,6 +6,12 @@
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
 
     <h3 style="float:left;margin-top:5px;">Altas Producciones - Leche</h3>
+      
+      <div id= "enviar_produccion" hidden>
+      
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Enviar a producción de Queso".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+      </div>
 
   </div>
 
@@ -91,24 +97,23 @@
 
 <script type="text/javascript">
   
-  setInterval('verificar_tabla_temporal()',10000);
+  setInterval('verificar_tabla_temporal()',3000);
 
   function verificar_tabla_temporal(){
     
     $.getJSON("<%= url_for(altas_producciones_verificar_tabla_temporal_path) %>", { }, function(j){
         
-      var valor_retorno = "";
-      
-      if (j[0] == 1)
-      {
+      if (j.length > 0){
 
-        
+        $("#enviar_produccion").show();
+
+      }else{
+
+        $("#enviar_produccion").hide();
 
       }
-
-
-    }
-    
+      
+    })
 
   }
 

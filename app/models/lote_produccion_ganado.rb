@@ -1,6 +1,8 @@
 class LoteProduccionGanado < ActiveRecord::Base
 
   self.table_name="tmp_lote_produccion_ganado"
+  self.primary_key = "id"
+  
   attr_accessible :id, :alta_produccion_detalle_id, :created_at, :updated_at
   
   scope :orden_01, -> {order("id")}

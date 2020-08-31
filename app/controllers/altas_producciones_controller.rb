@@ -167,7 +167,7 @@ class AltasProduccionesController < ApplicationController
   def alta_produccion_detalle
 
     @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id] ).first
-    @alta_produccion_detalle = AltaProduccionDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
+    @alta_produccion_detalle = VAltaProduccionDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
@@ -206,6 +206,7 @@ class AltasProduccionesController < ApplicationController
       @alta_produccion_detalle.desde_fecha = params[:desde_fecha]
       @alta_produccion_detalle.hasta_fecha = params[:hasta_fecha]
       @alta_produccion_detalle.cantidad_litros = params[:cantidad_litros]
+      @alta_produccion_detalle.estado_alta_produccion_detalle_id = PARAMETRO[:estado_alta_produccion_detalle_disponible]
       if @alta_produccion_detalle.save
 
         @guardado_ok = true
@@ -279,6 +280,7 @@ class AltasProduccionesController < ApplicationController
 
   end
 
+
   def agregar_produccion_lote
 
     @lote_produccion_ganado = LoteProduccionGanado.new
@@ -312,6 +314,24 @@ class AltasProduccionesController < ApplicationController
     respond_to do |f|
 
       f.js
+
+    end
+
+  end
+
+
+  def verificar_tabla_temporal
+
+    @estado_lote = 0
+
+    lote_produccion_ganado = LoteProduccionGanado.all
+    
+    @estado_lote = lote_produccion_ganado
+    
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @estado_lote }
 
     end
 
