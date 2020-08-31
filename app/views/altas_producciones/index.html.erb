@@ -6,7 +6,7 @@
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
 
     <h3 style="float:left;margin-top:5px;">Altas Producciones - Leche</h3>
-    
+
   </div>
 
 </div>
@@ -46,18 +46,6 @@
                 <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
             </div>
 
-            <%#= hidden_field_tag :form_buscar_alta_produccion_ganado_nombre %>
-            <%#= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
-                  atributo_descripcion: :descripcion,
-                  atributo_tipo: :text, 
-                  model: :Precio, 
-                  limit: 10,
-                  cadena_consulta: "upper(quitar_acentos(descripcion))",
-                  orden: "descripcion"), 
-              parametro_id: "form_buscar_precios_descripcion", 
-              resultado_id: "form_buscar_precios_id",
-              min_length: 2
-              ) %>
           </th>
 
 
@@ -102,6 +90,14 @@
 
 
 <script type="text/javascript">
+  
+  setInterval('verificar_tabla_temporal()',10000);
+
+    function verificar_tabla_temporal(){
+    
+    
+
+  }
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-altas-producciones").bind("submit", function () {

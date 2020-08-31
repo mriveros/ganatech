@@ -301,7 +301,7 @@ class AltasProduccionesController < ApplicationController
   def eliminar_produccion_lote
 
     @lote_produccion_ganado = LoteProduccionGanado.where("alta_produccion_detalle_id = ? ", params[:alta_produccion_detalle_id]).first
-    aux = @lote_produccion_ganado 
+    aux = @lote_produccion_ganado
     
     if @lote_produccion_ganado.destroy
     
