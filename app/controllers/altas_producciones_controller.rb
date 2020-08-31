@@ -338,4 +338,17 @@ class AltasProduccionesController < ApplicationController
   end
 
 
+  def agregar_alta_produccion_queso
+
+    @alta_produccion_queso = AltaProduccionQueso.new
+
+    respond_to do |f|
+
+      f.js
+      
+    end
+
+  end
+
+
 end

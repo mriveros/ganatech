@@ -280,10 +280,8 @@ get 'crontab_ultron/index'
   get 'altas_producciones/agregar_produccion_lote'
   get 'altas_producciones/eliminar_produccion_lote'
   get 'altas_producciones/verificar_tabla_temporal'
+  get 'altas_producciones/agregar_alta_produccion_queso'
 
-  get 'altas_producciones/agregar'
-  post 'altas_producciones/guardar'
-  get 'altas_producciones/buscar_alta_produccion'
   
 
 

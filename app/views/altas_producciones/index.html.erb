@@ -9,7 +9,9 @@
       
       <div id= "enviar_produccion" hidden>
       
-        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Enviar a producción de Queso".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Enviar a producción de Queso".html_safe, "#", id: "link-to-agregar-produccion-queso", class: "btn btn-primary btn-xs", style: "float:right;" %>
+        
+        <%= modal_window( window_id: "modal-window-agregar-produccion-queso", link_to_id: "#link-to-agregar-produccion-queso", url: altas_producciones_agregar_alta_produccion_queso_path( window_id: "modal-window-agregar-produccion-queso") )%>
 
       </div>
 
