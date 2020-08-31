@@ -52,7 +52,11 @@
                   <td style="width: 50px;text-align:right;">
                     
 
-                    <%= check_box_tag "check_box_#{apd.id}", apd.id, verificar_produccion(apd.id), { class: 'form-control input-sm', onclick: "lote_ganado(this, #{apd.id})"}  %>                    
+                    <%= check_box_tag "check_box_#{apd.id}", apd.id, verificar_produccion_lote(apd.id), { class: 'form-control input-xs', onclick: "lote_ganado(this, #{apd.id})"}  %>
+
+                    <span style="display:none;" title="Item agregado exitosamente." id="si-<%= apd.id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
+               
+                    <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= apd.id%>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>                 
                     
                     <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
 
