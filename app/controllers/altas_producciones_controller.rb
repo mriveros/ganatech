@@ -167,7 +167,7 @@ class AltasProduccionesController < ApplicationController
   def alta_produccion_detalle
 
     @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id] ).first
-    @alta_produccion_detalle = AltaProduccionDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
+    @alta_produccion_detalle = AltaProduccionDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
@@ -271,6 +271,44 @@ class AltasProduccionesController < ApplicationController
 
     end
         
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def agregar_produccion_lote
+
+    @lote_produccion_ganado = LoteProduccionGanado.new
+    @lote_produccion_ganado.alta_produccion_detalle_id = params[:alta_produccion_detalle_id]
+    
+    if @lote_produccion_ganado.save
+
+      auditoria_nueva("Guardar Lote para produccion de ganado","tmp_lote_produccion_ganado", @lote_produccion_ganado)
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def eliminar_produccion_lote
+
+    @lote_produccion_ganado = LoteProduccionGanado.where("alta_produccion_detalle_id = ? ", params[:alta_produccion_detalle_id]).first
+    aux = @lote_produccion_ganado 
+    
+    if @lote_produccion_ganado.destroy
+    
+      auditoria_nueva("Eliminar Lote para produccion de ganado","tmp_lote_produccion_ganado", @lote_produccion_ganado)
+
+    end
+
     respond_to do |f|
 
       f.js

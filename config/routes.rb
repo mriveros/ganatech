@@ -277,6 +277,8 @@ get 'crontab_ultron/index'
   post 'altas_producciones/guardar_alta_produccion_detalle'
   get 'altas_producciones/eliminar_alta_produccion_detalle'
   get 'altas_producciones/marcar_desactivado'
+  get 'altas_producciones/agregar_produccion_lote'
+  get 'altas_producciones/eliminar_produccion_lote'
 
   get 'altas_producciones/agregar'
   post 'altas_producciones/guardar'

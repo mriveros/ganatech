@@ -6,5 +6,6 @@ class AltaProduccionDetalle < ActiveRecord::Base
   attr_accessible :id, :alta_produccion_id, :desde_fecha, :hasta_fecha, :cantidad_litros, :created_at, :updated_at
   
   scope :orden_01, -> { order("id")}
+  scope :orden_fecha_creacion, -> { order("created_at desc")}
   
 end

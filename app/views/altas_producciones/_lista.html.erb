@@ -18,6 +18,7 @@
         <%if ap.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
 
           <%= link_to icon_desconfirmar_ap,"#", onclick: "desactivar_alta_produccion(#{ap.alta_produccion_id});return false;", class: "btn btn-warning btn-xs", id: "btn-desactivar-alta-produccion", title: 'Haga click para desactivar este ganado de la Alta Produccion por este periodo.'  %>
+          
         <%end%>
 
        </td>
