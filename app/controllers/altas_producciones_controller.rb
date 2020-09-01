@@ -351,4 +351,27 @@ class AltasProduccionesController < ApplicationController
   end
 
 
+  def guardar_alta_produccion_queso
+
+    @msg = ""
+    @guardado_ok = false
+
+    @alta_produccion_queso = AltaProduccionQueso.new
+    @alta_produccion_queso.fecha_produccion = params[:fecha_produccion]
+    @alta_produccion_queso.periodo = Time.now.month.to_s+'-'+Time.now.year.to_s
+    @alta_produccion_queso.cantidad_obtenida = params[:cantidad_obtenida]
+    @alta_produccion_queso.peso_total = params[:peso_total]
+    @alta_produccion_queso.cantidad_utilizada = 
+    @alta_produccion_queso.estado_alta_produccion_queso_id = PARAMETRO[:estado_alta_produccion_queso_activa]
+
+
+    respond_to do |f|
+
+      f.js
+      
+    end
+
+  end
+
+
 end

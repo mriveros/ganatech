@@ -119,7 +119,12 @@ development:
 
   #ESTADOS ALTA PRODUCCION DETALLE
   estado_alta_produccion_detalle_disponible: 1
-  estado_alta_produccion_detalle_no_disponible: 2
+  estado_alta_produccion_detalle_produccion_queso: 2
+  estado_alta_produccion_detalle_produccion_leche: 3
+
+  #ESTADOS ALTA PRODUCCION QUESO
+  estado_alta_produccion_queso_activa: 1
+  estado_alta_produccion_queso_inactiva: 2
 
 production:
 
@@ -236,5 +241,10 @@ production:
 
   #ESTADOS ALTA PRODUCCION DETALLE
   estado_alta_produccion_detalle_disponible: 1
-  estado_alta_produccion_detalle_no_disponible: 2
+  estado_alta_produccion_detalle_produccion_queso: 2
+  estado_alta_produccion_detalle_produccion_leche: 3
+
+  #ESTADOS ALTA PRODUCCION QUESO
+  estado_alta_produccion_queso_activa: 1
+  estado_alta_produccion_queso_inactiva: 2
 
