@@ -53,12 +53,15 @@
                   
                   <td style="width: 50px;text-align:right;">
                     
+                    <%if apd.estado_alta_produccion_detalle_id == PARAMETRO[:estado_alta_produccion_detalle_disponible]%>
 
-                    <%= check_box_tag "check_box_#{apd.alta_produccion_detalle_id}", apd.alta_produccion_detalle_id, verificar_produccion_lote(apd.alta_produccion_detalle_id), { class: 'form-control input-xs', onclick: "lote_ganado(this, #{apd.alta_produccion_detalle_id})"}  %>
+                      <%= check_box_tag "check_box_#{apd.alta_produccion_detalle_id}", apd.alta_produccion_detalle_id, verificar_produccion_lote(apd.alta_produccion_detalle_id), { class: 'form-control input-xs', onclick: "lote_ganado(this, #{apd.alta_produccion_detalle_id})"}  %>
 
-                    <span style="display:none;" title="Item agregado exitosamente." id="si-<%= apd.alta_produccion_detalle_id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
-               
-                    <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= apd.alta_produccion_detalle_id%>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>                 
+                      <span style="display:none;" title="Item agregado exitosamente." id="si-<%= apd.alta_produccion_detalle_id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
+                 
+                      <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= apd.alta_produccion_detalle_id%>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>
+
+                    <%end%>              
                     
                     <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
 

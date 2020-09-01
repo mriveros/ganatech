@@ -232,8 +232,17 @@ class AltasProduccionesController < ApplicationController
     @eliminado = false
 
     @alta_produccion_detalle = AltaProduccionDetalle.where("id = ?", params[:alta_produccion_detalle_id]).first
-
     @alta_produccion_detalle_elim = @alta_produccion_detalle  
+
+    alta_produccion_queso = AltaProduccionQuesoDetalle.where("alta_produccion_detalle_id = ? ", params[:alta_produccion_detalle_id]).first
+    
+    if alta_produccion_queso.present?
+
+      @valido = false
+      @msg = "Este detalle fue utilizado para la producción de Quesos"
+
+    end
+
 
     if @valido
 
@@ -304,12 +313,14 @@ class AltasProduccionesController < ApplicationController
 
     @lote_produccion_ganado = LoteProduccionGanado.where("alta_produccion_detalle_id = ? ", params[:alta_produccion_detalle_id]).first
     aux = @lote_produccion_ganado
-    
+
     if @lote_produccion_ganado.destroy
     
       auditoria_nueva("Eliminar Lote para produccion de ganado","tmp_lote_produccion_ganado", @lote_produccion_ganado)
 
     end
+
+   
 
     respond_to do |f|
 
@@ -355,15 +366,59 @@ class AltasProduccionesController < ApplicationController
 
     @msg = ""
     @guardado_ok = false
+    @valido = true
+    @cantidad_utilizada = 0
 
-    @alta_produccion_queso = AltaProduccionQueso.new
-    @alta_produccion_queso.fecha_produccion = params[:fecha_produccion]
-    @alta_produccion_queso.periodo = Time.now.month.to_s+'-'+Time.now.year.to_s
-    @alta_produccion_queso.cantidad_obtenida = params[:cantidad_obtenida]
-    @alta_produccion_queso.peso_total = params[:peso_total]
-    @alta_produccion_queso.cantidad_utilizada = 
-    @alta_produccion_queso.estado_alta_produccion_queso_id = PARAMETRO[:estado_alta_produccion_queso_activa]
+    @lote_produccion_ganado = LoteProduccionGanado.all
+    @lote_produccion_ganado.each do |lpg|
+      
+      alta_produccion_detalle = AltaProduccionDetalle.where("id = ?", lpg.alta_produccion_detalle_id).first
+      @cantidad_utilizada = @cantidad_utilizada + alta_produccion_detalle.cantidad_litros
+      
+    end
+    
+      
+    if @valido
 
+      AltaProduccionQuesoDetalle.transaction do
+
+        @alta_produccion_queso = AltaProduccionQueso.new
+        @alta_produccion_queso.fecha_produccion = params[:fecha_produccion]
+        @alta_produccion_queso.periodo = Time.now.month.to_s+'-'+Time.now.year.to_s
+        @alta_produccion_queso.cantidad_obtenida = params[:cantidad_obtenida]
+        @alta_produccion_queso.peso_total = params[:peso_total]
+        @alta_produccion_queso.cantidad_utilizada = @cantidad_utilizada
+        @alta_produccion_queso.estado_alta_produccion_queso_id = PARAMETRO[:estado_alta_produccion_queso_activa]
+        
+        if @alta_produccion_queso.save
+
+          @lote_produccion_ganado.each do |lpg|
+
+            @alta_produccion_queso_detalle = AltaProduccionQuesoDetalle.new
+            @alta_produccion_queso_detalle.alta_produccion_queso_id = @alta_produccion_queso.id
+            @alta_produccion_queso_detalle.alta_produccion_detalle_id = lpg.alta_produccion_detalle_id
+            if @alta_produccion_queso_detalle.save
+
+              alta_produccion_detalle = AltaProduccionDetalle.where("id = ?", lpg.alta_produccion_detalle_id).first
+              alta_produccion_detalle.estado_alta_produccion_detalle_id = PARAMETRO[:estado_alta_produccion_detalle_produccion_queso]
+              
+              if alta_produccion_detalle.save
+
+                @guardado_ok = true
+
+              end
+
+            end
+
+          end #end each
+
+        end
+
+        @lote_produccion_ganado.destroy_all
+
+      end #end Transaction
+
+    end #end valido
 
     respond_to do |f|
 
