@@ -1,0 +1,29 @@
+<%= link_to icon_detalles, "#", id: "link-to-alta-produccion-detalle-#{alta_produccion_queso_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles de la Producción' %>
+
+<script type="text/javascript">
+
+  $("#link-to-alta-produccion-detalle-<%= alta_produccion_queso_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#alta-produccion-detalle-<%= alta_produccion_queso_id %>").html());
+
+    $(".alta-produccion-detalle").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='alta-produccion-detalle-<%= alta_produccion_queso_id %>' class='alta-produccion-detalle'><td colspan='12' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(altas_producciones_alta_produccion_detalle_path) %>',  
+        data: { alta_produccion_queso_id: <%= alta_produccion_queso_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>

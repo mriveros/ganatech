@@ -17,6 +17,41 @@ class AltasProduccionesQuesosController < ApplicationController
 
     end
 
+    if params[:form_buscar_alta_produccion_queso_fecha_produccion].present?
+
+      cond << "fecha_produccion = ?"
+      args << params[:form_buscar_alta_produccion_queso_fecha_produccion]
+
+    end
+
+    if params[:form_buscar_alta_produccion_queso_periodo].present?
+
+      cond << "periodo ilike ?"
+      args << "%#{params[:form_buscar_alta_produccion_queso_periodo]}%"
+
+    end
+
+    if params[:form_buscar_alta_produccion_queso_cantidad_obtenida].present?
+
+      cond << "cantidad_obtenida = ?"
+      args << params[:form_buscar_alta_produccion_queso_cantidad_obtenida]
+
+    end
+
+    if params[:form_buscar_alta_produccion_queso_peso_total].present?
+
+      cond << "peso_total = ?"
+      args << params[:form_buscar_alta_produccion_queso_peso_total]
+
+    end
+
+    if params[:form_buscar_alta_produccion_queso_cantidad_utilizada].present?
+
+      cond << "cantidad_utilizada = ?"
+      args << params[:form_buscar_alta_produccion_queso_cantidad_utilizada]
+
+    end
+
     
     if params[:form_buscar_alta_produccion_queso][:estado_alta_produccion_queso_id].present?
 
