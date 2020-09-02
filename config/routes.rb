@@ -288,7 +288,7 @@ get 'crontab_ultron/index'
   post 'altas_producciones_quesos/lista'
   get 'altas_producciones_quesos/lista'
   get 'altas_producciones_quesos/alta_produccion_detalle_queso'
-  get 'altas_producciones_quesos/enviar_a_productos_lacteos'
+  get 'altas_producciones_quesos/enviar_a_derivados_lacteos'
   
 
 
