@@ -274,7 +274,6 @@ class AltasProduccionesController < ApplicationController
     @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id]).first
     @alta_produccion.estado_alta_produccion_id = PARAMETRO[:estado_alta_produccion_inactiva]
     
-
     if @alta_produccion.save
 
       @actualizado_ok = true     
@@ -392,6 +391,8 @@ class AltasProduccionesController < ApplicationController
         
         if @alta_produccion_queso.save
 
+          auditoria_nueva("Agregar alta produccion queso", "altas_producciones_quesos", @alta_produccion_queso)
+
           @lote_produccion_ganado.each do |lpg|
 
             @alta_produccion_queso_detalle = AltaProduccionQuesoDetalle.new
@@ -427,6 +428,7 @@ class AltasProduccionesController < ApplicationController
     end
 
   end
+
 
 
 end
