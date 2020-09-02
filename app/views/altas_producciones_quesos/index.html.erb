@@ -5,29 +5,21 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
 
-    <h3 style="float:left;margin-top:5px;">Altas Producciones - Leche</h3>
+    <h3 style="float:left;margin-top:5px;">Altas Producciones - Queso</h3>
       
-      <div id= "enviar_produccion" hidden>
-      
-        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Enviar a producción de Queso".html_safe, "#", id: "link-to-agregar-produccion-queso", class: "btn btn-primary btn-xs", style: "float:right;" %>
-        
-        <%= modal_window( window_id: "modal-window-agregar-produccion-queso", link_to_id: "#link-to-agregar-produccion-queso", url: altas_producciones_agregar_alta_produccion_queso_path( window_id: "modal-window-agregar-produccion-queso") )%>
-
-      </div>
-
   </div>
 
 </div>
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-alta-produccion">
+<div class="table-responsive" id="table-alta-produccion-queso">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag altas_producciones_lista_path, remote: true, id: "form-buscar-altas-producciones"  do  %>
+      <%= form_tag altas_producciones_quesos_lista_path, remote: true, id: "form-buscar-altas-producciones-quesos"  do  %>
 
         <tr>
 
@@ -35,7 +27,7 @@
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alta_produccion_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
@@ -43,7 +35,7 @@
             <span>Periodo</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alta_produccion_periodo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_periodo');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_periodo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -51,7 +43,7 @@
             <span>Ganado</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
             </div>
 
           </th>
@@ -61,7 +53,7 @@
             <span>Ganado RP</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -69,7 +61,7 @@
             <span>Ganado RFID</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
           </div>
 
           <th >
@@ -98,30 +90,10 @@
 
 
 <script type="text/javascript">
-  
-  setInterval('verificar_tabla_temporal()',3000);
-
-  function verificar_tabla_temporal(){
-    
-    $.getJSON("<%= url_for(altas_producciones_verificar_tabla_temporal_path) %>", { }, function(j){
-        
-      if (j.length > 0){
-
-        $("#enviar_produccion").show();
-
-      }else{
-
-        $("#enviar_produccion").hide();
-
-      }
-      
-    })
-
-  }
 
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-altas-producciones").bind("submit", function () {
+  $("#form-buscar-altas-producciones-quesos").bind("submit", function () {
     var valido = true;
     if($("#form_buscar_alta_produccion_ganado_nombre").val().length !== 0 ){
       valido = false;
@@ -146,15 +118,15 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-alta-produccion input, #table-alta-produccion select").bind('change', function () {
+  $("#table-alta-produccion-queso input, #table-alta-produccion-queso select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-altas-producciones").submit();
+      $("#form-buscar-altas-producciones-quesos").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-altas-producciones").submit();
+  $("#form-buscar-altas-producciones-quesos").submit();
   <% if params[:agregar] %>
     //$("#link-to-agregar-precio").trigger('click');
   <% end %>
@@ -173,7 +145,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-altas-producciones table th { background:#e6e6e6;}
-    #form-buscar-altas-producciones table th span.limpiar { background:#fff;}
+    #form-buscar-altas-producciones-quesos table th { background:#e6e6e6;}
+    #form-buscar-altas-producciones-quesos table th span.limpiar { background:#fff;}
 
 </style>

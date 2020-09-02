@@ -18,8 +18,6 @@ class AltasProduccionesQuesosController < ApplicationController
     end
 
     
-
-
     if params[:form_buscar_alta_produccion_queso][:estado_alta_produccion_queso_id].present?
 
       cond << "estado_alta_produccion_queso_id = ?"
