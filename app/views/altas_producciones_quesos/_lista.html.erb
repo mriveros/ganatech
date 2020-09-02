@@ -1,23 +1,24 @@
-<% if altas_producciones.present? %>
+<% if altas_producciones_queso.present? %>
 
-  <% altas_producciones.each do |ap| %>
+  <% altas_producciones_queso.each do |apqq| %>
 
     <tr>
 
-      <td><%= ap.alta_produccion_id %></td>
-      <td><%= ap.periodo%></td>
-      <td><%= ap.ganado_nombre%></td>
-      <td><%= ap.ganado_rp%></td>
-      <td><%= ap.ganado_rfid%></td>
-      <td><%= ap.estado_alta_produccion %></td>
+      <td><%= apq.alta_produccion_queso_id %></td>
+      <td><%= apq.fecha_produccion %></td>
+      <td><%= apq.periodo %></td>
+      <td><%= apq.cantidad_obtenida%></td>
+      <td><%= apq.peso_total %></td>
+      <td><%= apq.cantidad_utilizada %></td>
+      <td><%= apq.estado_alta_produccion_queso %></td>
 
       <td > 
 
-        <%= link_to_alta_produccion_detalle(ap.alta_produccion_id) %>
+        <%= link_to_alta_produccion_queso_detalle(apq.alta_produccion_queso_id) %>
         
-        <%if ap.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
+        <%if apq.estado_alta_produccion_queso_id == PARAMETRO[:estado_alta_produccion_activa]%>
 
-          <%= link_to icon_desconfirmar_ap,"#", onclick: "desactivar_alta_produccion(#{ap.alta_produccion_id});return false;", class: "btn btn-warning btn-xs", id: "btn-desactivar-alta-produccion", title: 'Haga click para desactivar este ganado de la Alta Produccion por este periodo.'  %>
+          <%= link_to icon_confirmar,"#", onclick: "enviar_a_derivados_lacteos(#{apq.alta_produccion_queso_id});return false;", class: "btn btn-warning btn-xs", id: "btn-enviar-a-derivados-lacteos", title: 'Haga click para enviar esta producción a productos de derivados Lacteos para su posterior venta o uso.'  %>
           
         <%end%>
 
@@ -34,7 +35,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate altas_producciones, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate altas_producciones_quesos, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -92,7 +93,7 @@
     
     }
 
-    function desactivar_alta_produccion(alta_produccion_id) {
+    function enviar_a_derivados_lacteos(alta_produccion_queso_id) {
 
         swal({
           title: "Confirmar",

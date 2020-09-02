@@ -67,8 +67,8 @@
           <th >
               <span>Estado Alta Producción</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_alta_produccion_queso, :estado_alta_produccion_queso_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_queso_estado_alta_produccion_queso_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
