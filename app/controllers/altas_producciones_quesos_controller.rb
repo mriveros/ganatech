@@ -86,10 +86,10 @@ class AltasProduccionesQuesosController < ApplicationController
 
   
 
-  def alta_produccion_detalle_
+  def alta_produccion_queso_detalle
 
-    @alta_produccion_queso = AltaProduccionQueso.where("id = ?", params[:alta_produccion_id] ).first
-    @alta_produccion_queso_detalle = AltaProduccionQuesoDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
+    @alta_produccion_queso = AltaProduccionQueso.where("id = ?", params[:alta_produccion_queso_id] ).first
+    @alta_produccion_queso_detalle = VAltaProduccionQuesoDetalle.orden_fecha_creacion.where("alta_produccion_queso_id = ?", params[:alta_produccion_queso_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|

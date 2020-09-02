@@ -1,0 +1,78 @@
+<td colspan="12" style="background: #e6e6e6; ">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Producción Quesos Detalle</h3>
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-produccion-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Desde Fecha</th>
+              <th>Hasta Fecha</th>
+              <th>Cantidad Litros</th>
+              <th>Estado</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="alta-produccion-detalle">
+
+            <% if @alta_produccion_queso_detalle.present? %>
+            
+              <% @alta_produccion_queso_detalle.each do |apd|%>
+
+                <tr>
+                  <td><%= apd.alta_produccion_detalle_id %></td>
+                  <td><%= apd.desde_fecha.strftime('%d/%m/%Y')  %></td>
+                  <td><%= apd.hasta_fecha.strftime('%d/%m/%Y')  %></td>
+                  <td><%= apd.cantidad_litros %></td>
+                   <td><%= apd.estado_alta_produccion_detalle %></td>
+                  
+                  <td style="width: 50px;text-align:right;">
+                    
+                  </td> 
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @alta_produccion_queso_detalle, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+</td>
