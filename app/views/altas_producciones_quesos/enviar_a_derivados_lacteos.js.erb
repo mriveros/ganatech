@@ -1,30 +1,32 @@
 <% if @actualizado_ok %>
 
-   $("<div class='col-sm-12' id='msg-actualizar-alta-produccion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Inactivado exitosamente.</div>").insertBefore("#table-alta-produccion");
-   $("#form_buscar_alta_produccion_id").val('<%= @alta_produccion.id %>');
-   $("#form_buscar_alta_produccion_periodo").val('');
-   $("#form_buscar_alta_produccion_ganado_nombre").val('');
-   $("#form_buscar_alta_produccion_ganado_rp").val('');
-   $("#form-buscar-altas-producciones").submit();
+   $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Inactivado exitosamente.</div>").insertBefore("#table-alta-produccion-queso");
+   $("#form_buscar_alta_produccion_queso_id").val('<%= @alta_produccion_queso.id %>');
+   $("#form_buscar_alta_produccion_queso_fecha_produccion").val('');
+   $("#form_buscar_alta_produccion_queso_periodo").val('');
+   $("#form_buscar_alta_produccion_queso_cantidad_obtenida").val('');
+   $("#form_buscar_alta_produccion_queso_peso_total").val('');
+   $("#form_buscar_alta_produccion_queso_cantidad_utilizada").val('');
+   $("#form-buscar-altas-producciones-quesos").submit();
 
     setTimeout(
 
-      function(){ $("#msg-actualizar-alta-produccion").remove(); 
+      function(){ $("#msg-actualizar-alta-produccion-queso").remove(); 
   
       
-       swal("Alta Producción","Producción desactivado exitosamente.", "success");
+       swal("Alta Producción Queso","Producción de queso enviado a Derivados Lácteos exitosamente!.", "success");
 
     }, 1000);
    
     
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-actualizar-alta-produccion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-alta-produccion");
+  $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-alta-produccion-queso");
   setTimeout(function(){ 
     
-    $("#msg-actualizar-alta-produccion").remove();
+    $("#msg-actualizar-alta-produccion-queso").remove();
 
-    swal("Alta Producción","No se pudo desactivar la roducción. Intente más tarde", "error")
+    swal("Alta Producción Queso","No se pudo enviar la Producción. Intente más tarde", "error")
 
      }, 1000);
     

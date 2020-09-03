@@ -71,14 +71,14 @@
             <span>Cantidad Utilizada</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_queso_cantidad_utilizada, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_queso_cantidad_utilizada');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#fform-buscar-altas-producciones-quesos').val('');quitar_filtro('#form-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_queso_cantidad_utilizada');"><i class="fa fa-times"></i></span>
           </div>
 
           <th >
               <span>Estado Producción Queso</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alta_produccion_queso, :estado_alta_produccion_queso_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_queso_estado_alta_produccion_queso_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#fform-buscar-altas-producciones-quesos', '#form_buscar_alta_produccion_queso_estado_alta_produccion_queso_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
