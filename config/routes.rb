@@ -289,7 +289,7 @@ get 'crontab_ultron/index'
   get 'altas_producciones_quesos/lista'
   get 'altas_producciones_quesos/alta_produccion_queso_detalle'
   get 'altas_producciones_quesos/enviar_a_derivados_lacteos'
-  
+  get 'altas_producciones_quesos/eliminar'
 
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
