@@ -1,6 +1,6 @@
 <% if @actualizado_ok %>
 
-   $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Inactivado exitosamente.</div>").insertBefore("#table-alta-produccion-queso");
+   $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Producción enviado exitosamente.</div>").insertBefore("#table-alta-produccion-queso");
    $("#form_buscar_alta_produccion_queso_id").val('<%= @alta_produccion_queso.id %>');
    $("#form_buscar_alta_produccion_queso_fecha_produccion").val('');
    $("#form_buscar_alta_produccion_queso_periodo").val('');
@@ -21,12 +21,12 @@
     
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%=@msg %></div>").insertBefore("#table-alta-produccion-queso");
+  $("<div class='col-sm-12' id='msg-actualizar-alta-produccion-queso' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>No se pudo enviar la Producción</div>").insertBefore("#table-alta-produccion-queso");
   setTimeout(function(){ 
     
     $("#msg-actualizar-alta-produccion-queso").remove();
 
-    swal("Alta Producción Queso","No se pudo enviar la Producción. Intente más tarde", "error")
+    swal("Alta Producción Queso","No se pudo enviar la Producción de Queso. Intente más tarde", "error")
 
      }, 1000);
     
