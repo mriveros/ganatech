@@ -107,14 +107,29 @@ class AltasProduccionesQuesosController < ApplicationController
     @msg = ""
     @actualizado_ok = false
 
-    @alta_produccion = AltaProduccionQueso.where("id = ?", params[:alta_produccion_id]).first
-    @alta_produccion.estado_alta_produccion_id = PARAMETRO[:estado_alta_produccion_inactiva]
+    DerivadoLacteo.transaction do 
+
+      @alta_produccion_queso = AltaProduccionQueso.where("id = ?", params[:alta_produccion_id]).first
+      @alta_produccion_queso.estado_alta_produccion_queso_id = PARAMETRO[:estado_alta_produccion_queso_modulo_derivados_lacteos]
+      
+      if @alta_produccion_queso.save
+
+        @derivados_lacteos = DerivadoLacteo.new
+        @derivados_lacteos.tipo_derivado_id = PARAMETRO[:tipo_derivado_queso]
+        @derivados_lacteos.alta_produccion_queso_id = 
+        @derivados_lacteos.cantidad_inicial = 
+        @derivados_lacteos.cantidad_actual = 
+        @derivados_lacteos.tipo_medicion_id = 
+        @derivados_lacteos.estado_derivado_lacteo_id = 
+        if @derivados_lacteos.save
+
+        end
+
+      end
+
+    end #end transaction
+
     
-    if @alta_produccion.save
-
-      @actualizado_ok = true     
-
-    end
         
     respond_to do |f|
 

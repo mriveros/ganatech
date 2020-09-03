@@ -116,6 +116,7 @@ development:
   #ESTADOS ALTA PRODUCCION
   estado_alta_produccion_activa: 1
   estado_alta_produccion_inactiva: 2
+  
 
   #ESTADOS ALTA PRODUCCION DETALLE
   estado_alta_produccion_detalle_disponible: 1
@@ -125,6 +126,11 @@ development:
   #ESTADOS ALTA PRODUCCION QUESO
   estado_alta_produccion_queso_activa: 1
   estado_alta_produccion_queso_inactiva: 2
+  estado_alta_produccion_queso_modulo_derivados_lacteos: 3
+
+  #TIPOS DERIVADOS
+  tipo_derivado_queso: 1
+  tipo_derivado_leche: 2
 
 production:
 
@@ -247,4 +253,10 @@ production:
   #ESTADOS ALTA PRODUCCION QUESO
   estado_alta_produccion_queso_activa: 1
   estado_alta_produccion_queso_inactiva: 2
+  estado_alta_produccion_queso_modulo_derivados_lacteos: 3
+
+  #TIPOS DERIVADOS
+  tipo_derivado_queso: 1
+  tipo_derivado_leche: 2
+
 
