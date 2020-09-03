@@ -116,11 +116,11 @@ class AltasProduccionesQuesosController < ApplicationController
 
         @derivados_lacteos = DerivadoLacteo.new
         @derivados_lacteos.tipo_derivado_id = PARAMETRO[:tipo_derivado_queso]
-        @derivados_lacteos.alta_produccion_queso_id = 
-        @derivados_lacteos.cantidad_inicial = 
-        @derivados_lacteos.cantidad_actual = 
-        @derivados_lacteos.tipo_medicion_id = 
-        @derivados_lacteos.estado_derivado_lacteo_id = 
+        @derivados_lacteos.alta_produccion_queso_id = @alta_produccion_queso.id
+        @derivados_lacteos.cantidad_inicial = @alta_produccion_queso.peso_total
+        @derivados_lacteos.cantidad_actual = @alta_produccion_queso.peso_total
+        @derivados_lacteos.tipo_medicion_id = PARAMETRO[:tipo_medicion_derivado_queso]
+        @derivados_lacteos.estado_derivado_lacteo_id = PARAMETRO[:estado_derivado_lacteo_disponible]
         if @derivados_lacteos.save
 
         end

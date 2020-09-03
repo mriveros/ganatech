@@ -132,6 +132,11 @@ development:
   tipo_derivado_queso: 1
   tipo_derivado_leche: 2
 
+
+  #ESTADOS DERIVADOS LACTEOS
+  estado_derivado_lacteo_disponible: 1
+  estado_derivado_lacteo_descompuesto: 2
+
 production:
 
   #ROLES 
@@ -259,4 +264,7 @@ production:
   tipo_derivado_queso: 1
   tipo_derivado_leche: 2
 
+  #ESTADOS DERIVADOS LACTEOS
+  estado_derivado_lacteo_disponible: 1
+  estado_derivado_lacteo_descompuesto: 2
 
