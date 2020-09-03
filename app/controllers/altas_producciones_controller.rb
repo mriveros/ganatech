@@ -430,5 +430,52 @@ class AltasProduccionesController < ApplicationController
   end
 
 
+  def enviar_a_derivados_lacteos
+
+    @valido = true
+    @msg = ""
+    @actualizado_ok = false
+    
+
+    if @valido
+
+      DerivadoLacteo.transaction do 
+
+        @alta_produccion_queso = AltaProduccionQueso.where("id = ?", params[:alta_produccion_queso_id]).first
+        auditoria_id = auditoria_antes("Enviar alta produccion queso a derivados lacteos","altas_producciones_quesos", @alta_produccion_queso )
+        @alta_produccion_queso.estado_alta_produccion_queso_id = PARAMETRO[:estado_alta_produccion_queso_modulo_derivados_lacteos]
+        
+        if @alta_produccion_queso.save
+
+          auditoria_despues(@alta_produccion_queso,auditoria_id)
+          @derivados_lacteos_queso = DerivadoLacteo.new
+          @derivados_lacteos_queso.tipo_derivado_id = PARAMETRO[:tipo_derivado_queso]
+          @derivados_lacteos_queso.alta_produccion_queso_id = @alta_produccion_queso.id
+          @derivados_lacteos_queso.alta_produccion_id = nil
+          @derivados_lacteos_queso.cantidad_inicial = @alta_produccion_queso.peso_total
+          @derivados_lacteos_queso.cantidad_actual = @alta_produccion_queso.peso_total
+          @derivados_lacteos_queso.tipo_medicion_id = PARAMETRO[:tipo_medicion_derivado_lacteo_queso]
+          @derivados_lacteos_queso.estado_derivado_lacteo_id = PARAMETRO[:estado_derivado_lacteo_disponible]
+          if @derivados_lacteos_queso.save
+
+            auditoria_nueva("Agregar produccion de queso a derivados lacteos", "derivados_lacteos", @derivados_lacteos_queso )
+            @actualizado_ok = true
+
+          end
+
+        end
+
+      end #end transaction
+
+    end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end

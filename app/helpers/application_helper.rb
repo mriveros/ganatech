@@ -112,6 +112,10 @@ module ApplicationHelper
       "<span class='glyphicon glyphicon-ok'></span>".html_safe
   end
 
+  def icon_confirmar_derivado_lacteo_leche
+      "<span class='glyphicon glyphicon-ok'>Enviar a Derivados Lácteos</span>".html_safe
+  end
+
   def icon_produccion
       "<span class='glyphicon glyphicon-ok'>alta producción</span>".html_safe
   end

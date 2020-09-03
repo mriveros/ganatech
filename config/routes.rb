@@ -282,6 +282,7 @@ get 'crontab_ultron/index'
   get 'altas_producciones/verificar_tabla_temporal'
   get 'altas_producciones/agregar_alta_produccion_queso'
   post 'altas_producciones/guardar_alta_produccion_queso'
+  get 'altas_producciones/enviar_a_derivados_lacteos'
 
   #ALTAS PRODUCCIONES
   get 'altas_producciones_quesos/index'
