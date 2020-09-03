@@ -60,11 +60,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(alta_produccion_id) {
+  function eliminar_registro(alta_produccion_queso_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de precios",
+          text: "Al confirmar esta producción pasará al estado anterior con disponibilidad de los detalles en el módulo de Alta Producción",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -77,8 +77,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(precios_eliminar_path) %>", 
-                data: {id: precio_id},
+                url: "<%= url_for(altas_producciones_quesos_eliminar_path) %>", 
+                data: {alta_produccion_queso_id: alta_produccion_queso_id},
                 dataType: 'script'
               });
             
