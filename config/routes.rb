@@ -292,6 +292,15 @@ get 'crontab_ultron/index'
   get 'altas_producciones_quesos/enviar_a_derivados_lacteos'
   get 'altas_producciones_quesos/eliminar'
 
+  #DERIVADOS LACTEOS
+  get 'derivados_lacteos/index'
+  post 'derivados_lacteos/lista'
+  get 'derivados_lacteos/lista'
+  get 'derivados_lacteos/derivado_lacteo_detalle'
+  get 'derivados_lacteos/agregar_salida_derivado_lacteo'
+  post 'derivados_lacteos/guardar_salida_derivado_lacteo'
+  get 'derivados_lacteos/eliminar_salida_derivado_lacteo'
+
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 

@@ -20,7 +20,7 @@
    
     <thead>
 
-      <%= form_tag altas_producciones_lista_path, remote: true, id: "form-buscar-derivados-lacteos"  do  %>
+      <%= form_tag derivados_lacteos_lista_path, remote: true, id: "form-buscar-derivados-lacteos"  do  %>
 
         <tr>
 
@@ -31,9 +31,18 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
+
+          <th>
+            <span>Fecha Producción</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_derivados_lacteos_fecha_produccion, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_derivados_lacteos_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_fecha_produccion');"><i class="fa fa-times"></i></span>
+            </div>
+
+          </th>
           
            <th>
-            <span>Producto</span>
+            <span>Derivado</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_derivados_lacteos_tipo_derivado, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_tipo_derivado');"><i class="fa fa-times"></i></span>
@@ -58,7 +67,7 @@
             </div>
           </th>
 
-         <th >
+         <th>
             <span>Medición</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_derivados_lacteos, :estado_derivado_lacteo_id, TipoMedicion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
@@ -66,8 +75,8 @@
             </div>
           </th> 
 
-          <th >
-              <span>Estado Alta Producción</span>
+          <th>
+              <span>Estado</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
@@ -82,7 +91,7 @@
 
       </thead> 
 
-    <tbody id="alta-produccion-lista"></tbody>
+    <tbody id="derivados-lacteos-lista"></tbody>
   
   </table>
 
@@ -93,33 +102,13 @@
 
 <script type="text/javascript">
   
-  setInterval('verificar_tabla_temporal()',3000);
-
-  function verificar_tabla_temporal(){
-    
-    $.getJSON("<%= url_for(altas_producciones_verificar_tabla_temporal_path) %>", { }, function(j){
-        
-      if (j.length > 0){
-
-        $("#enviar_produccion").show();
-
-      }else{
-
-        $("#enviar_produccion").hide();
-
-      }
-      
-    })
-
-  }
-
-
+  
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-derivados-lacteos").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_alta_produccion_ganado_nombre").val().length !== 0 ){
+    if($("#form_buscar_derivados_lacteos_tipo_derivado").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_alta_produccion_ganado_nombre").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_alta_produccion_ganado_nombre").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_derivados_lacteos_tipo_derivado").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_derivados_lacteos_tipo_derivado").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -154,38 +143,6 @@
   <% end %>
   //----------------------------------------------------------------------------//
 
-
-  function enviar_a_derivados_lacteos_leche() {
-
-        swal({
-          title: "Confirmar",
-          text: "Al confirmar, la Producción estará disponible en la Opción de Derivados Lácteos para su Consumo o Venta.",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-              $.ajax({
-                url: "<%= url_for(altas_producciones_enviar_a_derivados_lacteos_path) %>", 
-                dataType: 'script'
-              });
-            
-          } else{
-
-            return false;
-
-          }
-
-        });
-
-    
-    }
 
 </script>
 
