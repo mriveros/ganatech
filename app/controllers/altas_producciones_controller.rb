@@ -432,7 +432,7 @@ class AltasProduccionesController < ApplicationController
 
   def enviar_a_derivados_lacteos
 
-    @valido = false
+    @valido = true
     @msg = ""
     @guardado_ok = false
     
@@ -473,6 +473,8 @@ class AltasProduccionesController < ApplicationController
         
 
       end #end transaction
+
+      @produccion_lote_ganado.destroy_all
 
     end
         
