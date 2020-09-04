@@ -55,7 +55,7 @@
             <span>Ganado</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_alta_produccion_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
             </div>
 
           </th>
@@ -65,7 +65,7 @@
             <span>Ganado RP</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_alta_produccion_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -73,14 +73,14 @@
             <span>Ganado RFID</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_alta_produccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_alta_produccion_id').val('');quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
           </div>
 
           <th >
               <span>Estado Alta Producción</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-altas-producciones', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 

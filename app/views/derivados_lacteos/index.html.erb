@@ -27,49 +27,50 @@
           <th>
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_alta_produccion_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_derivados_lacteos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
            <th>
-            <span>Periodo</span>
+            <span>Producto</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_alta_produccion_periodo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_periodo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_derivados_lacteos_tipo_derivado, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_tipo_derivado');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
-            <span>Ganado</span>
+            <span>Cantidad Inicial</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_alta_produccion_ganado_nombre, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_ganado_nombre');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_derivados_lacteos_cantidad_inicial, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_derivados_lacteos_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_cantidad_inicial');"><i class="fa fa-times"></i></span>
             </div>
 
           </th>
 
 
           <th>
-            <span>Ganado RP</span>
+            <span>Cantidad Disponible</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_alta_produccion_ganado_rp, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_ganado_rp');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_derivados_lacteos_cantidad_inicial, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_derivados_lacteos_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_cantidad_inicial');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
          <th >
-            <span>Ganado RFID</span>
+            <span>Medición</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_alta_produccion_ganado_rfid, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_precios_id').val('');quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_ganado_rfid');"><i class="fa fa-times"></i></span>
-          </div>
+              <%= collection_select :form_buscar_derivados_lacteos, :estado_derivado_lacteo_id, TipoMedicion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_derivados_lacteos_estado_derivado_lacteo_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
 
           <th >
               <span>Estado Alta Producción</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_alta_produccion, :estado_alta_produccion_id, EstadoAltaProduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-derivados-lacteos', '#form_buscar_alta_produccion_estado_alta_produccion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
