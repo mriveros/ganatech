@@ -96,7 +96,6 @@ class DerivadosLacteosController < ApplicationController
 
     end
 
-
     respond_to do |f|
 
       f.js
@@ -111,8 +110,6 @@ class DerivadosLacteosController < ApplicationController
     @valido = true
     @msg = ""
     @eliminado = false
-
-    
         
     respond_to do |f|
 
@@ -121,8 +118,6 @@ class DerivadosLacteosController < ApplicationController
     end
 
   end
-
-
  
 
 end
