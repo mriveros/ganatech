@@ -129,8 +129,8 @@ development:
   estado_alta_produccion_queso_modulo_derivados_lacteos: 3
 
   #TIPOS DERIVADOS
-  tipo_derivado_queso: 1
-  tipo_derivado_leche: 2
+  tipo_derivado_leche: 1
+  tipo_derivado_queso: 2
 
 
   #ESTADOS DERIVADOS LACTEOS
@@ -265,8 +265,8 @@ production:
   estado_alta_produccion_queso_modulo_derivados_lacteos: 3
 
   #TIPOS DERIVADOS
-  tipo_derivado_queso: 1
-  tipo_derivado_leche: 2
+  tipo_derivado_leche: 1
+  tipo_derivado_queso: 2
 
   #ESTADOS DERIVADOS LACTEOS
   estado_derivado_lacteo_disponible: 1
