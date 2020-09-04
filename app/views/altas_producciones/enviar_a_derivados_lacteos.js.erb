@@ -1,0 +1,16 @@
+<% if @guardado_ok %>
+ 
+  setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    swal("Alta Producción-Leche","Producción Leche agregado a Derivados Lácteos exitosamente!", "success");
+
+    }, 1000);
+
+  setTimeout(function(){ location.href="<%= url_for(altas_producciones_index_path) %>"; }, 3000);
+ 
+<% else %>
+
+  swal("Alta Producción-Leche", "Error al enviar la Producción. Intente más tarde","error");
+
+<% end %>
