@@ -7,11 +7,11 @@
       <td><%= dl.derivado_lacteo_id %></td>
       <%if dl.tipo_derivado_id == PARAMETRO[:tipo_derivado_leche]%>
 
-        <td><%= dl.fecha_produccion_queso.strftime('%d/%m/%Y') %></td>
+        <td><%= dl.fecha_produccion_leche %></td>
 
       <%else%>
 
-        <td><%= dl.fecha_produccion_queso.strftime('%d/%m/%Y') %></td>
+        <td><%= dl.fecha_produccion_queso %></td>
 
       <%end%>
       
