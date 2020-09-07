@@ -9,6 +9,8 @@
        
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar salida".html_safe, "#", id: "link-to-agregar-salida-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
 
+          <%= modal_window( window_id: "modal-window-agregar-salida-detalle", link_to_id: "#link-to-agregar-salida-detalle", url: derivados_lacteos_agregar_salida_derivado_lacteo_path( window_id: "modal-window-agregar-salida-detalle", derivado_lacteo_id: params[:derivado_lacteo_id]) )%>
+          
       </div>
 
     </div> 
@@ -28,6 +30,7 @@
               <th>ID</th>
               <th>Fecha</th>
               <th>Tipo Salida</th>
+              <th>Cliente</th>
               <th>Cantidad</th>
               <th>Monto</th>
               <th>Estado</th>
@@ -80,6 +83,6 @@
     
   </div>
 
-  <%= modal_window( window_id: "modal-window-agregar-salida-detalle", link_to_id: "#link-to-agregar-salida-detalle", url: derivados_lacteos_agregar_salida_derivado_lacteo_path( window_id: "modal-window-agregar-salida-detalle", derivado_lacteo_id: params[:derivado_lacteo_id]) )%>
+  
 
 </td>
