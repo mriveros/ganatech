@@ -10,10 +10,10 @@ class DerivadosLacteosController < ApplicationController
     cond = []
     args = []
 
-    if params[:form_buscar_derivado_lacteo_id].present?
+    if params[:form_buscar_derivados_lacteos_id].present?
 
       cond << "derivado_lacteo_id = ?"
-      args << params[:form_buscar_derivado_lacteo_id]
+      args << params[:form_buscar_derivados_lacteos_id]
 
     end
 
