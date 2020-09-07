@@ -62,7 +62,7 @@ class DerivadosLacteosController < ApplicationController
 
   def agregar_salida_derivado_lacteo
 
-    @derivado_lacteo_detalle = DerivadolacteoDetalle.new
+    @derivado_lacteo_detalle = DerivadoLacteoDetalle.new
 
     respond_to do |f|
 
