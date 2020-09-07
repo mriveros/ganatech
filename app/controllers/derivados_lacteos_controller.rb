@@ -17,7 +17,40 @@ class DerivadosLacteosController < ApplicationController
 
     end
 
-    
+    if params[:form_buscar_derivados_lacteos_tipo_derivado].present?
+
+      cond << "tipo_derivado ilike ?"
+      args << "%#{params[:form_buscar_derivados_lacteos_tipo_derivado]}%"
+
+    end
+
+    if params[:form_buscar_derivados_lacteos_cantidad_inicial].present?
+
+      cond << "cantidad_inicial = ?"
+      args << params[:form_buscar_derivados_lacteos_cantidad_inicial]
+
+    end
+
+    if params[:form_buscar_derivados_lacteos_cantidad_disponible].present?
+
+      cond << "cantidad_actual = ?"
+      args << params[:form_buscar_derivados_lacteos_cantidad_disponible]
+
+    end
+
+    if params[:form_buscar_derivados_lacteos][:tipo_medicion_id].present?
+
+      cond << "tipo_medicion_id = ?"
+      args << params[:form_buscar_derivados_lacteos][:tipo_medicion_id]
+
+    end
+
+    if params[:form_buscar_derivados_lacteos][:estado_derivado_lacteo_id].present?
+
+      cond << "estado_derivado_lacteo_id = ?"
+      args << params[:form_buscar_derivados_lacteos][:estado_derivado_lacteo_id]
+
+    end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
