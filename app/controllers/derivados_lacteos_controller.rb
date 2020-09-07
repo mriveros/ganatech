@@ -47,8 +47,8 @@ class DerivadosLacteosController < ApplicationController
 
   def derivado_lacteo_detalle
 
-    @derivado_lacteo = Derivadolacteo.where("id = ?", params[:alta_produccion_id] ).first
-    @derivado_lacteo_detalle = DerivadolacteoDetalle.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
+    @derivado_lacteo = DerivadoLacteo.where("id = ?", params[:derivado_lacteo_id] ).first
+    @derivado_lacteo_detalle = DerivadoLacteoDetalle.where("derivado_lacteo_id = ?", params[:derivado_lacteo_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
