@@ -109,47 +109,67 @@ class DerivadosLacteosController < ApplicationController
   def guardar_salida_derivado_lacteo
 
     @msg = ""
-    @valido = false
+    @valido = true
     @guardado_ok = false
 
-    @derivado_lacteo = DerivadoLacteo.where("id = ?", params[:derivado_lacteo_id]).first
-    if @derivado_lacteo.cantidad_actual < params[:cantidad_salida]
+    DerivadoLacteo.transaction do
 
-      @valido = false
-      @msg = "La Cantidad de Salida no puede ser mayor a la cantidad disponible en Stock" 
+      @derivado_lacteo = DerivadoLacteo.where("id = ?", params[:derivado_lacteo_id]).first
 
-    end
+      auditoria_id = auditoria_antes("Guardar salida derivado lacteo", "derivados_lacteos", @derivado_lacteo)
 
-    if @valido
+      if @derivado_lacteo.cantidad_actual < params[:cantidad_salida].to_i
 
-      @derivado_lacteo_detalle = DerivadolacteoDetalle.new
-      @derivado_lacteo_detalle.derivado_lacteo_id = params[:derivado_lacteo_id]
-      @derivado_lacteo_detalle.fecha_salida = params[:fecha_salida]
-      @derivado_lacteo_detalle.tipo_salida_derivado_id = params[:tipo_salida_derivado][:id]
-      @derivado_lacteo_detalle.cantidad_salida = params[:cantidad_salida]
-      @derivado_lacteo_detalle.monto = params[:monto]
-      @derivado_lacteo_detalle.cliente_id = params[:cliente_id]
-      @derivado_lacteo_detalle.cantidad_litros = params[:cantidad_litros]
-
-      if params[:tipo_salida_derivado][:id] == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
-   
-        @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
-
-      else
-
-        @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_venta]
-
-      end 
-      
-      @derivado_lacteo_detalle.observacion = params[:observacion]
-
-      if @derivado_lacteo_detalle.save
-
-        @guardado_ok = true
+        @valido = false
+        @msg = "La Cantidad de Salida no puede ser mayor a la cantidad disponible en Stock" 
 
       end
 
-    end
+      if @valido
+
+        @derivado_lacteo_detalle = DerivadoLacteoDetalle.new
+        @derivado_lacteo_detalle.derivado_lacteo_id = params[:derivado_lacteo_id]
+        @derivado_lacteo_detalle.fecha_salida = params[:fecha_salida]
+        @derivado_lacteo_detalle.tipo_salida_derivado_id = params[:tipo_salida_derivado][:id]
+        @derivado_lacteo_detalle.cantidad_salida = params[:cantidad_salida]
+        @derivado_lacteo_detalle.monto = params[:monto]
+        @derivado_lacteo_detalle.cliente_id = params[:cliente][:id]
+
+        if params[:tipo_salida_derivado][:id] == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
+     
+          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
+
+        else
+
+          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_venta]
+
+        end 
+        
+        @derivado_lacteo_detalle.observacion = params[:observacion]
+
+        if @derivado_lacteo_detalle.save
+
+          auditoria_nueva("Agregar nueva salida de derivados lacteos", "derivados_lacteos_detalles", @derivado_lacteo_detalle)
+          @guardado_ok = true
+
+          if @derivado_lacteo.cantidad_actual == 0
+
+            @derivado_lacteo.estado_derivado_lacteo_id = PARAMETRO[:estado_derivado_lacteo_sin_stock]
+            
+            if @derivado_lacteo.save
+              
+              auditoria_despues(@derivado_lacteo, auditoria_id)
+
+            end
+
+          end
+         
+
+        end
+
+      end
+
+    end #end transaction
 
     respond_to do |f|
 
