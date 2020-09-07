@@ -3,16 +3,16 @@
   setTimeout( function(){ 
   
     $("#<%= params[:window_id]%>").modal('hide');
-    $("#link-to-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
-    $("#link-to-alta-produccion-detalle-<%= params[:alta_produccion_id]%>").trigger('click');
+    $("#link-to-derivado-lacteo-detalle-<%= params[:derivado_lacteo_id]%>").trigger('click');
+    $("#link-to-derivado-lacteo-detalle-<%= params[:derivado_lacteo_id]%>").trigger('click');
 
-    swal("Alta Producción","Producción agregado exitosamente!", "success");
+    swal("Derivados Lacteos","Salida Exitosa!", "success");
 
     }, 1000);
 
  
 <% else %>
 
-  swal("Alta Producción", "Error al guardar la Producción: <%=@msg%>. Intente más tarde","error");
+  swal("Derivados Lacteos", "Error al guardar la Salida: <%=@msg%>. Intente más tarde","error");
 
 <% end %>

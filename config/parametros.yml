@@ -138,9 +138,17 @@ development:
   estado_derivado_lacteo_sin_stock: 2
   estado_derivado_lacteo_descompuesto: 3
 
+  #ESTADOS DERIVADOS LACTEOS DETALLES
+  estado_derivado_lacteo_detalle_vendido: 1
+  estado_derivado_lacteo_detalle_consumido: 2
+
   #TIPO MEDICION DERIVADO LACTEO
   tipo_medicion_derivado_lacteo_queso: 1
   tipo_medicion_derivado_lacteo_leche: 2
+
+  #TIPO SALIDA DERIVADO LACTEO
+  tipo_salida_derivado_lacteo_consumo_local: 1
+  tipo_salida_derivado_lacteo_venta: 2
 
 production:
 
@@ -274,7 +282,15 @@ production:
   estado_derivado_lacteo_sin_stock: 2
   estado_derivado_lacteo_descompuesto: 3
 
+  #ESTADOS DERIVADOS LACTEOS DETALLES
+  estado_derivado_lacteo_detalle_vendido: 1
+  estado_derivado_lacteo_detalle_consumido: 2
+
   #TIPO MEDICION DERIVADO LACTEO
   tipo_medicion_derivado_lacteo_queso: 1
   tipo_medicion_derivado_lacteo_leche: 2
+
+  #TIPO SALIDA DERIVADO LACTEO
+  tipo_salida_derivado_lacteo_consumo_local: 1
+  tipo_salida_derivado_lacteo_venta: 2
 
