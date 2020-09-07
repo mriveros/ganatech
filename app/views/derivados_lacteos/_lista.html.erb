@@ -8,7 +8,7 @@
       
       <%if dl.tipo_derivado_id == PARAMETRO[:tipo_derivado_leche].to_i%>
 
-        <td><%=  dl.fecha_produccion_leche %></td>
+        <td><%=  dl.fecha_produccion_leche_desde.strftime('%d/%m/%Y') %> - <%=  dl.fecha_produccion_leche_hasta.strftime('%d/%m/%Y') %></td>
 
       <%else%>
 
