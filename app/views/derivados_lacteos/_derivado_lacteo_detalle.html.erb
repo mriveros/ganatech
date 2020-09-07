@@ -6,11 +6,9 @@
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
         <h3 style="float:left;margin-top:5px;">Producción Detalle</h3>
-        <%if @alta_produccion.estado_alta_produccion_id == PARAMETRO[:estado_alta_produccion_activa]%>
+       
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar salida".html_safe, "#", id: "link-to-agregar-salida-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
 
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar producción".html_safe, "#", id: "link-to-agregar-produccion-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
-
-        <%end%>
       </div>
 
     </div> 
@@ -28,9 +26,10 @@
             <tr role="row">
               
               <th>ID</th>
-              <th>Desde Fecha</th>
-              <th>Hasta Fecha</th>
-              <th>Cantidad Litros</th>
+              <th>Fecha</th>
+              <th>Tipo Salida</th>
+              <th>Cantidad</th>
+              <th>Monto</th>
               <th>Estado</th>
               <th style='text-align:right;'></th>
               
