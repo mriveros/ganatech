@@ -81,7 +81,7 @@ class DerivadosLacteosController < ApplicationController
   def derivado_lacteo_detalle
 
     @derivado_lacteo = DerivadoLacteo.where("id = ?", params[:derivado_lacteo_id] ).first
-    @derivado_lacteo_detalle = DerivadoLacteoDetalle.where("derivado_lacteo_id = ?", params[:derivado_lacteo_id]).paginate(per_page: 10, page: params[:page])
+    @derivado_lacteo_detalle = VDerivadoLacteoDetalle.where("derivado_lacteo_id = ?", params[:derivado_lacteo_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
@@ -137,11 +137,11 @@ class DerivadosLacteosController < ApplicationController
 
         if params[:tipo_salida_derivado][:id] == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
      
-          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
+          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:estado_derivado_lacteo_detalle_consumido]
 
         else
 
-          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:tipo_salida_derivado_lacteo_venta]
+          @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:estado_derivado_lacteo_detalle_vendido]
 
         end 
         

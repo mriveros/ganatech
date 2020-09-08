@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Producción Detalle</h3>
+        <h3 style="float:left;margin-top:5px;">Salidas Detalles</h3>
        
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar salida".html_safe, "#", id: "link-to-agregar-salida-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
 
@@ -44,14 +44,16 @@
 
             <% if @derivado_lacteo_detalle.present? %>
             
-              <% @derivado_lacteo_detalle.each do |apd|%>
+              <% @derivado_lacteo_detalle.each do |dld|%>
 
                 <tr>
-                  <td><%= %></td>
-                  <td><%=  %></td>
-                  <td><%=  %></td>
-                  <td><%= %></td>
-                   <td><%=  %></td>
+                  <td><%=dld.derivado_lacteo_detalle_id %></td>
+                  <td><%=dld.fecha_salida.strftime("%d/%m/%Y")  %></td>
+                  <td><%=dld.tipo_salida_derivado  %></td>
+                  <td><%=dld.nombre_razon_social %></td>
+                  <td><%=dld.cantidad_salida  %></td>
+                  <td><%=dld.monto  %></td>
+                  <td><%=dld.estado_derivado_lacteo_detalle  %></td>
                   
                   <td style="width: 50px;text-align:right;">
                     
