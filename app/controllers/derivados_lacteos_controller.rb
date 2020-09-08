@@ -132,7 +132,7 @@ class DerivadosLacteosController < ApplicationController
         @derivado_lacteo_detalle.fecha_salida = params[:fecha_salida]
         @derivado_lacteo_detalle.tipo_salida_derivado_id = params[:tipo_salida_derivado][:id]
         @derivado_lacteo_detalle.cantidad_salida = params[:cantidad_salida]
-        @derivado_lacteo_detalle.monto = params[:monto]
+        @derivado_lacteo_detalle.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
         @derivado_lacteo_detalle.cliente_id = params[:cliente][:id]
 
         if params[:tipo_salida_derivado][:id] == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]

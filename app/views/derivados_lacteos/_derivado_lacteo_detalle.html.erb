@@ -52,7 +52,7 @@
                   <td><%=dld.tipo_salida_derivado  %></td>
                   <td><%=dld.nombre_razon_social %></td>
                   <td><%=dld.cantidad_salida  %></td>
-                  <td><%=dld.monto  %></td>
+                  <td><%=dld.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=dld.estado_derivado_lacteo_detalle  %></td>
                   
                   <td style="width: 50px;text-align:right;">
