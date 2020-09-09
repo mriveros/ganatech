@@ -135,7 +135,7 @@ class VentasDerivadosController < ApplicationController
         @derivado_lacteo_detalle.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
         @derivado_lacteo_detalle.cliente_id = params[:cliente][:id]
 
-        if params[:tipo_salida_derivado][:id] == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local]
+        if params[:tipo_salida_derivado][:id].to_i == PARAMETRO[:tipo_salida_derivado_lacteo_consumo_local].to_i
      
           @derivado_lacteo_detalle.estado_derivado_lacteo_detalle_id = PARAMETRO[:estado_derivado_lacteo_detalle_consumido]
 
