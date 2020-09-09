@@ -1,0 +1,67 @@
+<% if derivados_lacteos.present? %>
+
+  <% derivados_lacteos.each do |dl| %>
+
+    <tr>
+
+      <td><%= dl.derivado_lacteo_id %></td>
+      
+      <%if dl.tipo_derivado_id == PARAMETRO[:tipo_derivado_leche].to_i%>
+
+        <td><%=  dl.fecha_produccion_leche_desde.strftime('%d/%m/%Y') %> - <%=  dl.fecha_produccion_leche_hasta.strftime('%d/%m/%Y') %></td>
+
+      <%else%>
+
+        <td><%= dl.fecha_produccion_queso.strftime('%d/%m/%Y') %></td>
+
+      <%end%>
+      
+      <td><%= dl.tipo_derivado %></td>
+      <td><%= dl.cantidad_inicial%></td>
+      <td><%= dl.cantidad_actual %></td>
+      <td><%= dl.tipo_medicion %></td>
+      <td><%= dl.estado_derivado_lacteo %></td>
+
+      <td > 
+
+        <%= link_to_derivado_lacteo_detalle(dl.derivado_lacteo_id) %>
+
+       </td>
+
+     
+     
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate derivados_lacteos, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+
+<script type="text/javascript">
+
+</script>

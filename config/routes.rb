@@ -301,6 +301,15 @@ get 'crontab_ultron/index'
   post 'derivados_lacteos/guardar_salida_derivado_lacteo'
   get 'derivados_lacteos/eliminar_salida_derivado_lacteo'
 
+  #VENTAS DERIVADOS
+  get 'ventas_derivados/index'
+  post 'ventas_derivados/lista'
+  get 'ventas_derivados/lista'
+  get 'ventas_derivados/derivado_lacteo_detalle'
+  get 'ventas_derivados/agregar_salida_derivado_lacteo'
+  post 'ventas_derivados/guardar_salida_derivado_lacteo'
+  get 'ventas_derivados/eliminar_salida_derivado_lacteo'
+
 
 #----------------------------FIN BLOQUE DE RUTAS GANATEC----------------------------
 

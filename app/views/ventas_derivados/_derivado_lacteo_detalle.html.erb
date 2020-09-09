@@ -1,0 +1,90 @@
+<td colspan="12" style="background: #e6e6e6; ">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Salidas Detalles</h3>
+       
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar salida".html_safe, "#", id: "link-to-agregar-salida-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+
+          <%= modal_window( window_id: "modal-window-agregar-salida-detalle", link_to_id: "#link-to-agregar-salida-detalle", url: ventas_derivados_agregar_salida_derivado_lacteo_path( window_id: "modal-window-agregar-salida-detalle", derivado_lacteo_id: params[:derivado_lacteo_id]) )%>
+          
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-produccion-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Tipo Salida</th>
+              <th>Cliente</th>
+              <th>Cantidad</th>
+              <th>Monto</th>
+              <th>Estado</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="derivado-lacteo-detalle">
+
+            <% if @derivado_lacteo_detalle.present? %>
+            
+              <% @derivado_lacteo_detalle.each do |dld|%>
+
+                <tr>
+                  <td><%=dld.derivado_lacteo_detalle_id %></td>
+                  <td><%=dld.fecha_salida.strftime("%d/%m/%Y")  %></td>
+                  <td><%=dld.tipo_salida_derivado  %></td>
+                  <td><%=dld.nombre_razon_social %></td>
+                  <td><%=dld.cantidad_salida  %></td>
+                  <td><%=dld.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=dld.estado_derivado_lacteo_detalle  %></td>
+                  
+                  <td style="width: 50px;text-align:right;">
+                    
+                    
+                  </td> 
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @derivado_lacteo_detalle, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+</td>
