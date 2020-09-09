@@ -116,8 +116,6 @@ class DerivadosLacteosController < ApplicationController
 
       @derivado_lacteo = DerivadoLacteo.where("id = ?", params[:derivado_lacteo_id]).first
 
-      auditoria_id = auditoria_antes("Guardar salida derivado lacteo", "derivados_lacteos", @derivado_lacteo)
-
       if @derivado_lacteo.cantidad_actual < params[:cantidad_salida].to_i
 
         @valido = false
@@ -126,6 +124,8 @@ class DerivadosLacteosController < ApplicationController
       end
 
       if @valido
+
+        auditoria_id = auditoria_antes("Guardar salida derivado lacteo", "derivados_lacteos", @derivado_lacteo)
 
         @derivado_lacteo_detalle = DerivadoLacteoDetalle.new
         @derivado_lacteo_detalle.derivado_lacteo_id = params[:derivado_lacteo_id]
