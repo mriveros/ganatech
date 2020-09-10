@@ -151,7 +151,7 @@ before_filter :require_usuario
 
       if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
         
-        @ganado_potrero = Ganado.where("potrero_id = ?", params[:potrero][:id])
+        @ganado_potrero = Ganado.modulo_control_ganado.where("potrero_id = ?", params[:potrero][:id])
         medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
         if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_potrero.size.to_i)
@@ -165,7 +165,7 @@ before_filter :require_usuario
 
       if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
         
-        @ganado_hacienda =VGanado.where("hacienda_id = ?", params[:hacienda_select][:id])
+        @ganado_hacienda =VGanado.modulo_control_ganado.where("hacienda_id = ?", params[:hacienda_select][:id])
         medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
         if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_hacienda.size.to_i)
