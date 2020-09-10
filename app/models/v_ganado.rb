@@ -14,7 +14,7 @@ class VGanado < ActiveRecord::Base
 	observacion,estado_ganado_id,etapa_ganado_id ,etapa_ganado, created_at , updated_at , finalidad_ganado_id ,finalidad_ganado, codigo_lote, ganado_entrada_id, procedencia,
 	proveedor_ganado_id, nombre_razon_social ")}
 
-  scope :orden_estado, -> { order("estado_ganado_id")}
+  scope :orden_estado, -> { order("estado_ganado_id,codigo_lote DESC")}
 
   scope :modulo_control_ganado, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido]])}
 

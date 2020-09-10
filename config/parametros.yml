@@ -35,6 +35,7 @@ development:
   control_externo: 5
   control_antibiotico: 6
   control_peso: 7
+  control_palpacion: 8
 
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
@@ -187,6 +188,7 @@ production:
   control_externo: 5
   control_antibiotico: 6
   control_peso: 7
+  control_palpacion: 8
 
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1

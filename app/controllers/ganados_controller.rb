@@ -37,8 +37,8 @@ class GanadosController < ApplicationController
 
     if params[:form_buscar_ganado_rp].present?
 
-      cond << "rp = ?"
-      args << params[:form_buscar_ganado_rp]
+      cond << "rp ilike ?"
+      args << "%#{params[:form_buscar_ganado_rp]}%"
 
     end
 
@@ -227,7 +227,6 @@ class GanadosController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
-
 
     raza = Raza.where("id = ?", params[:raza_ganado][:id]).first
 
@@ -518,7 +517,7 @@ class GanadosController < ApplicationController
     control_ganado = ControlGanado.order("created_at").last
     codigo_control = control_ganado.id + 1
 
-    if params[:control][:id].to_i != PARAMETRO[:control_peso]
+    if params[:control][:id].to_i != PARAMETRO[:control_peso] &&  params[:control][:id].to_i != PARAMETRO[:control_palpacion]
 
       medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
       

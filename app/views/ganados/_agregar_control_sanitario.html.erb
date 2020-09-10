@@ -134,7 +134,8 @@
       $("#control_peso").show();
       $("#control_otro").hide();
 
-    }else{
+    }else if ($("#control_id").val() != "<%=PARAMETRO[:control_peso]%>" &&
+      $("#control_id").val() != "<%=PARAMETRO[:control_palpacion]%>") {
 
       $("#control_otro").show();
       $("#control_peso").hide();
@@ -224,7 +225,8 @@
           
           }
 
-      }else{
+      }else if ($("#control_id").val() != "<%=PARAMETRO[:control_peso]%>" &&
+      $("#control_id").val() != "<%=PARAMETRO[:control_palpacion]%>"){
 
         if($("#medicamento_id").val().length == 0){
 
