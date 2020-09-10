@@ -27,7 +27,7 @@
         <%= link_to_derivado_lacteo_detalle(dl.derivado_lacteo_id) %>
         <%if dl.cantidad_actual > 0 %>
           
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>".html_safe, "#", id: "link-to-agregar-salida-derivado-#{dl.derivado_lacteo_id}", class: "btn btn-primary btn-xs", style: "float:lefth;",title: 'Haga click para agregar una Venta' %>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'>vender</i>".html_safe, "#", id: "link-to-agregar-salida-derivado-#{dl.derivado_lacteo_id}", class: "btn btn-primary btn-xs", style: "float:lefth;",title: 'Haga click para agregar una Venta' %>
           <%= modal_window( window_id: "modal-window-agregar-salida-derivado", link_to_id: "#link-to-agregar-salida-derivado-#{dl.derivado_lacteo_id}", url: ventas_derivados_agregar_salida_derivado_lacteo_path( window_id: "modal-window-agregar-salida-derivado", derivado_lacteo_id: dl.derivado_lacteo_id) )%>
 
         <%end%>
