@@ -134,57 +134,61 @@ before_filter :require_usuario
     @msg = " "
     @guardado_ok = false
 
-    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
-      
-      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+    if params[:control][:id].to_i != PARAMETRO[:control_palpacion]
 
-      if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
+        
+        medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-        @msg = "No hay suficiente Stock para aplicar este medicamento. "
-        @valido = false
+        if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
 
-      end
+          @msg = "No hay suficiente Stock para aplicar este medicamento. "
+          @valido = false
 
-    end
-
-    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
-      
-      @ganado_potrero = Ganado.where("potrero_id = ?", params[:potrero][:id])
-      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
-
-      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_potrero.size.to_i)
-
-        @msg = "No hay suficiente Stock para aplicar este medicamento. "
-        @valido = false
+        end
 
       end
 
-    end
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
+        
+        @ganado_potrero = Ganado.where("potrero_id = ?", params[:potrero][:id])
+        medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
-      
-      @ganado_hacienda =VGanado.where("hacienda_id = ?", params[:hacienda_select][:id])
-      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+        if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_potrero.size.to_i)
 
-      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_hacienda.size.to_i)
+          @msg = "No hay suficiente Stock para aplicar este medicamento. "
+          @valido = false
 
-        @msg = "No hay suficiente Stock para aplicar este medicamento. "
-        @valido = false
+        end
 
       end
 
-    end
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
+        
+        @ganado_hacienda =VGanado.where("hacienda_id = ?", params[:hacienda_select][:id])
+        medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+
+        if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_hacienda.size.to_i)
+
+          @msg = "No hay suficiente Stock para aplicar este medicamento. "
+          @valido = false
+
+        end
+
+      end
 
 
-    if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
-      
-      @ganado_lote =LoteControlGanado.all
-      medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
+      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
+        
+        @ganado_lote =LoteControlGanado.all
+        medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
 
-      if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_lote.size.to_i)
+        if medicamento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_lote.size.to_i)
 
-        @msg = "No hay suficiente Stock para aplicar este medicamento. "
-        @valido = false
+          @msg = "No hay suficiente Stock para aplicar este medicamento. "
+          @valido = false
+
+        end
 
       end
 

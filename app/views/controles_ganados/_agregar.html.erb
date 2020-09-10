@@ -32,15 +32,19 @@
             <div class="col-sm-4"><%= label_tag nil, "Control #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
             <div class="col-sm-7"><%= collection_select :control, :id, Control.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
+            
+            <div id = "div_medicamento">
+              
+              <%= hidden_field_tag :medicamento_id %>
+              <div class="col-sm-4"><%= label_tag :nil, "Medicamento #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
+              <div class="col-sm-1"></div><br /><br />
 
-            <%= hidden_field_tag :medicamento_id %>
-            <div class="col-sm-4"><%= label_tag :nil, "Medicamento #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
-            <div class="col-sm-1"></div><br /><br />
-
-            <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-            <div class="col-sm-1"></div><br /><br />
+              <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+              <div class="col-sm-1"></div><br /><br />
+            
+            </div>
 
             <div class="col-sm-4"><%= label_tag nil, "Aplicar a #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
             <div class="col-sm-7"><%= collection_select :clasificacion_control, :id, ClasificacionControl.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
@@ -145,6 +149,22 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+
+  $("#control_id").bind('change', function(){ 
+
+    if ($(this).val() == <%=PARAMETRO[:control_palpacion]%>){
+      
+      $("#div_medicamento").hide();
+
+    }
+    else{
+      
+      $("#div_medicamento").show();
+
+    }
+
+
+  })
 
   $("#clasificacion_control_id").bind('change', function(){ 
 
@@ -327,19 +347,22 @@
       
       }
       
+     if($("#control_id").val() != <%=PARAMETRO[:control_palpacion]%>){
+      
+        if($("#medicamento_id").val().length == 0){
 
-      if($("#medicamento_id").val().length == 0){
+          msg +="Debe ingresar el medicamento utilizado en el control.\n"
+          valido = false
+            
+        }
 
-        msg +="Debe ingresar el medicamento utilizado en el control.\n"
-        valido = false
-          
-      }
+        if($("#cantidad_suministrada").val().length == 0){
 
-      if($("#cantidad_suministrada").val().length == 0){
+          msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
+          valido = false
+            
+        }
 
-        msg +="Debe ingresar la cantidad de medicamento suministrado.\n"
-        valido = false
-          
       }
 
       if($("#clasificacion_control_id").val().length == 0){
