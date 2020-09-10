@@ -56,10 +56,18 @@
           </th> 
 
           <th >
-            <span>Cantidad</span>
+            <span>Cantidad Inicial</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_esperma_cantidad, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_cantidad');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_esperma_cantidad_inicial, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_cantidad_inicial');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
+            <span>Cantidad Disponible</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_esperma_cantidad_disponible, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-esperma', '#form_buscar_esperma_cantidad_disponible');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 

@@ -48,10 +48,17 @@ class EspermasController < ApplicationController
 
     end
 
-    if params[:form_buscar_esperma_cantidad].present?
+    if params[:form_buscar_esperma_cantidad_disponible].present?
 
       cond << "cantidad = ?"
-      args << params[:form_buscar_esperma_cantidad]
+      args << params[:form_buscar_esperma_cantidad_disponible]
+
+    end
+
+    if params[:form_buscar_esperma_cantidad_inicial].present?
+
+      cond << "cantidad_inicial = ?"
+      args << params[:form_buscar_esperma_cantidad_inicial]
 
     end
 
@@ -146,6 +153,7 @@ class EspermasController < ApplicationController
       @esperma.esperma_procedencia_id = params[:esperma_procedencia][:id]
       @esperma.costo_esperma = params[:costo].to_s.gsub(/[$.]/,'').to_i
       @esperma.cantidad = params[:cantidad]
+      @esperma.cantidad_inicial = params[:cantidad]
       @esperma.fecha_registro = params[:fecha_registro]
       @esperma.costo_total = params[:cantidad].to_i * params[:costo].to_i
 
