@@ -137,14 +137,14 @@ class EspermasController < ApplicationController
 
         @esperma.raza_id = params[:raza][:id]
       
-      end
+      end 
 
       @esperma.numero_pajuela = params[:numero_pajuela]
       @esperma.descripcion = params[:descripcion].upcase
       @esperma.observacion = params[:observacion]
       @esperma.estado_esperma_id = PARAMETRO[:estado_esperma_activo]
       @esperma.esperma_procedencia_id = params[:esperma_procedencia][:id]
-      @esperma.costo_esperma = params[:costo]
+      @esperma.costo_esperma = params[:costo].to_s.gsub(/[$.]/,'').to_i
       @esperma.cantidad = params[:cantidad]
       @esperma.fecha_registro = params[:fecha_registro]
       @esperma.costo_total = params[:cantidad].to_i * params[:costo].to_i
