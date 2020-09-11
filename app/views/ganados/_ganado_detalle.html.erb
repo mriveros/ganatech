@@ -94,8 +94,8 @@
             <tr role="row">
               
               <th>Peso Historial</th>
-              <th>Historial Medicamentos</th>
-              <th>Observaciones</th> 
+              <th>Resumen Medicamentos</th>
+              <th>Resumen Alimento</th> 
               
             </tr>
             
@@ -134,7 +134,7 @@
 
                     <div class="container-fluid" style="width: 500px;">
                     
-                      <%= pie_chart @data_set_pie_chart.group("medicamento").count%>
+                      <%= pie_chart @data_set_pie_chart_med.group("medicamento").sum("cantidad_suministrada")%>
 
                     </div>
 
@@ -144,7 +144,7 @@
 
                     <div class="container-fluid" style="width: 500px;">
 
-                    
+                      <%= pie_chart @data_set_pie_chart_food.group("alimento").sum("cantidad_suministrada")%>
 
                     </div>
 

@@ -495,8 +495,8 @@ class GanadosController < ApplicationController
 
     end
     
-    @data_set_pie_chart = VControlGanado.where("ganado_id = ? and control_id <> ?", params[:ganado_id], PARAMETRO[:control_peso])
-    
+    @data_set_pie_chart_med = VControlGanado.where("ganado_id = ? and control_id <> ?", params[:ganado_id], PARAMETRO[:control_peso])
+    @data_set_pie_chart_food = VControlAlimentacion.where("ganado_id = ?", params[:ganado_id])
 
     respond_to do |f|
 
