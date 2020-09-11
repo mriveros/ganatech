@@ -484,6 +484,9 @@ class GanadosController < ApplicationController
     @control_sanitario = VControlGanado.orden_fecha.where("ganado_id =?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
 
     @control_alimentacion = VControlAlimentacion.orden_fecha.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
+    
+    @data_set =  Ganado.all
+
 
     respond_to do |f|
 
@@ -492,7 +495,6 @@ class GanadosController < ApplicationController
     end
 
   end
-
 
   def agregar_control_sanitario
 

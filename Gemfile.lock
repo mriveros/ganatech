@@ -42,6 +42,7 @@ GEM
     builder (3.2.4)
     case_transform (0.2)
       activesupport
+    chartkick (2.0.2)
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -63,12 +64,17 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    groupdate (3.2.1)
+      activesupport (>= 3)
     hashery (2.1.2)
+    highcharts (0.0.3)
+      ice_cube (= 0.7.7)
     hike (1.2.3)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    ice_cube (0.7.7)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
@@ -218,8 +224,11 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   authlogic (= 3.4.2)
+  chartkick (~> 2.0.0)
   coffee-rails (~> 4.0.0)
   csv_builder (= 2.1.1)
+  groupdate
+  highcharts
   httparty
   jbuilder (~> 2.5)
   jquery-rails

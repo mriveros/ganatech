@@ -26,7 +26,8 @@
 //= require master_detail.js
 //= require bootstrap-datepicker.js
 //= require bootstrap-datepicker.es.js
-
+//= require Chart.bundle
+//= require chartkick
 
 /*Funcion que limpia el formulario del Dataset*/
 function resetForm(formId, valor_defecto) {

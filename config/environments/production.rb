@@ -61,7 +61,7 @@ Rails.application.configure do
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
 
-  config.assets.precompile += %w( modulos/usuarios.js modulos/responsables.js modulos/controladores.js modulos/roles.js modulos/personas.js modulos/matriculaciones.js gmaps/gmaps.js gmaps/markerclusterer.js jquery.mask.min.js sweetalert.min.js sweetalert.css AdminLTE.min.css ionicons.min.css morris.css morris.min.js raphael.min.js )
+  config.assets.precompile += %w( modulos/usuarios.js modulos/responsables.js modulos/controladores.js modulos/roles.js modulos/personas.js modulos/matriculaciones.js gmaps/gmaps.js gmaps/markerclusterer.js jquery.mask.min.js sweetalert.min.js sweetalert.css AdminLTE.min.css ionicons.min.css morris.css morris.min.js raphael.min.js jquery.canvasjs.min.js canvasjs.min.js )
 
 
   # Ignore bad email addresses and do not raise email delivery errors.

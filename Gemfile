@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-  
+gem 'chartkick', '~>2.0.0'
+gem 'highcharts'
+gem 'groupdate'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 ruby '2.1.1'

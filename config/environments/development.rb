@@ -27,7 +27,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.assets.precompile += %w( modulos/usuarios.js modulos/controladores.js modulos/roles.js modulos/personas.js modulos/matriculaciones.js modulos/matriculaciones_superior.js gmaps/gmaps.js gmaps/markerclusterer.js jquery.mask.min.js sweetalert.min.js sweetalert.css AdminLTE.min.css ionicons.min.css morris.css morris.min.js raphael.min.js )
+  config.assets.precompile += %w( modulos/usuarios.js modulos/controladores.js modulos/roles.js modulos/personas.js modulos/matriculaciones.js modulos/matriculaciones_superior.js gmaps/gmaps.js gmaps/markerclusterer.js jquery.mask.min.js sweetalert.min.js sweetalert.css AdminLTE.min.css ionicons.min.css morris.css morris.min.js raphael.min.js jquery.canvasjs.min.js canvasjs.min.js )
 
 
   # Adds additional error checking when serving assets at runtime.
