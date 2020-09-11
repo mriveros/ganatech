@@ -485,7 +485,18 @@ class GanadosController < ApplicationController
 
     @control_alimentacion = VControlAlimentacion.orden_fecha.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
     
-    @data_set =  ControlGanado.where("ganado_id = ? and control_id = ?", params[:ganado_id], PARAMETRO[:control_peso]).order("fecha_control")
+    @data_set_line_chart =  ControlGanado.where("ganado_id = ? and peso IS NOT NULL", params[:ganado_id]).order("fecha_control")
+    
+    if @data_set_line_chart.present?
+
+      @peso_maximo = @data_set_line_chart.max().peso
+      @peso_minimo = @data_set_line_chart.min().peso
+      @peso_medio = @data_set_line_chart.average(:peso)
+
+    end
+    
+    @data_set_pie_chart = VControlGanado.where("ganado_id = ? and control_id <> ?", params[:ganado_id], PARAMETRO[:control_peso])
+    
 
     respond_to do |f|
 
@@ -525,7 +536,7 @@ class GanadosController < ApplicationController
       if medicamento.cantidad_stock < params[:cantidad_suministrada].to_i
 
         @valido = false
-        @msg = "No hay suficiente stock del Medicamento"
+        @msg += "No hay suficiente stock del Medicamento."
 
       end
 

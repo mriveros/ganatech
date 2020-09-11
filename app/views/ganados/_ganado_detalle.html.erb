@@ -94,7 +94,7 @@
             <tr role="row">
               
               <th>Peso Historial</th>
-              <th>Observaciones Historial</th>
+              <th>Historial Medicamentos</th>
               <th>Observaciones</th> 
               
             </tr>
@@ -113,17 +113,28 @@
                       
                     <div class="container-fluid" style="width: 500px;">
                     
-                    <%= line_chart @data_set.pluck("fecha_control", "peso")%> 
-
+                      <%= line_chart @data_set_line_chart.pluck("fecha_control", "peso")%> 
+                      
                     </div>
 
+                    <div>
+                      Peso Máximo: <%=@peso_maximo.to_i%>
+                    </div>
+
+                    <div>
+                      Peso Medio: <%=@peso_medio.to_i%>
+                    </div>
+
+                    <div>
+                      Peso Mínimo: <%=@peso_minimo.to_i%>
+                    </div>
                   </td>
 
                   <td>
 
                     <div class="container-fluid" style="width: 500px;">
                     
-                    
+                      <%= pie_chart @data_set_pie_chart.group("medicamento").count%>
 
                     </div>
 
@@ -133,7 +144,7 @@
 
                     <div class="container-fluid" style="width: 500px;">
 
-                    <%#= line_chart @data_set.group('peso_promedio').count, discrete: true %> 
+                    
 
                     </div>
 
