@@ -485,8 +485,7 @@ class GanadosController < ApplicationController
 
     @control_alimentacion = VControlAlimentacion.orden_fecha.where("ganado_id = ?", params[:ganado_id]).paginate(per_page: 5, page: params[:page])
     
-    @data_set =  Ganado.all
-
+    @data_set =  ControlGanado.where("ganado_id = ? and control_id = ?", params[:ganado_id], PARAMETRO[:control_peso]).order("fecha_control")
 
     respond_to do |f|
 

@@ -113,7 +113,7 @@
                       
                     <div class="container-fluid" style="width: 500px;">
                     <%puts "/////////////////////////////"%>
-                    <%= line_chart @data_set.group('peso_promedio').count, discrete: true %> 
+                    <%= line_chart @data_set.pluck("fecha_control", "peso")%> 
 
                     </div>
 
@@ -122,8 +122,8 @@
                   <td>
 
                     <div class="container-fluid" style="width: 500px;">
-
-                    <%#= line_chart @data_set.group('peso_promedio').count, discrete: true %> 
+                    
+                    
 
                     </div>
 
