@@ -12,13 +12,6 @@
       <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
 
         <div>
-      
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar observación".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
-      
-        </div>
-
-      
-        <div>
         
           <%if @ganado_detalle.sexo_ganado_id == PARAMETRO[:sexo_ganado_hembra] && @ganado_detalle.estado_ganado_id == PARAMETRO[:estado_ganado_activo] && (@ganado_detalle.etapa_ganado_id == PARAMETRO[:etapa_ganado_vaca] or @ganado_detalle.etapa_ganado_id == PARAMETRO[:etapa_ganado_vaquilla])%>
           

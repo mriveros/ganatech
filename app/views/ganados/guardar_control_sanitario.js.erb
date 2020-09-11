@@ -14,8 +14,8 @@
 
   
 <% else %>
+ 
  $("<div class='col-sm-12' id='msg-guardar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= (@msg) %></div>").insertBefore("#form-agregar-control-sanitario");
-
   swal("Control Sanitario", "Error al guardar el Control Sanitario: <%=@msg%>. Intente más tarde","error");
 
 <% end %>

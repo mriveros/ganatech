@@ -1,5 +1,6 @@
 <% if @guardado_ok %>
  
+  $("<div class='col-sm-12' id='msg-editar-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Agregado Exitosamente.</div>").insertBefore("#form-agregar-control-sanitario");
   setTimeout( function(){ 
   
     $("#<%= params[:window_id]%>").modal('hide');
@@ -13,6 +14,7 @@
  
 <% else %>
 
-  swal("Control Sanitario", "Error al guardar el Control Sanitario: <%=@msg%>. Intente más tarde","error");
+	$("<div class='col-sm-12' id='msg-guardar-control-sanitario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= (@msg) %></div>").insertBefore("#form-agregar-control-sanitario");
+  	swal("Control Sanitario", "Error al guardar el Control Sanitario: <%=@msg%>. Intente más tarde","error");
 
 <% end %>
