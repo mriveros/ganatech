@@ -8,7 +8,8 @@
   $("#form_buscar_ganado_enfermo_ganado_rp").val('');
   
   setTimeout(function(){ 
-
+    
+    $("#msg-editar-ganado-enfermo").remove();
     $("#<%= params[:window_id]%>").modal('hide');
   	swal("Ganado Enfermo actualizado Exitosamente.");
   	$("#form-buscar-ganado-enfermo").submit(); 

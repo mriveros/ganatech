@@ -1,6 +1,6 @@
 <% if @actualizado_ok %>
 
-  $("<div class='col-sm-12' id='msg-cambiar-estado-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ganados-enfermos");
+  $("<div class='col-sm-12' id='msg-cambiar-estado-ganado-enfermo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Recuperado exitosamente.</div>").insertBefore("#table-ganados-enfermos");
   $("#form_buscar_ganado_enfermo_id").val("<%=@ganado_enfermo.id%>");
   $("#form_buscar_ganado_enfermo_fecha").val('');
   $("#form_buscar_ganado_enfermo_nombre").val('');
@@ -8,10 +8,10 @@
   $("#form-buscar-ganado-enfermo").submit();
     setTimeout(function(){ 
       
-      $("#msg-eliminar-control-ganado").remove();
+      $("#msg-cambiar-estado-ganado-enfermo").remove();
        swal("Ganados Enfermos","Ganado marcado como Recuperado exitosamente!.", "success");
 
-    }, 1000);
+    }, 1500);
       
 <% else %>
 
@@ -22,7 +22,7 @@
 
     swal("Ganados Enfermos", "No se pudo marcar el Ganado como Recuperado. <%=@msg%> Intente más tarde","error");
   
-  }, 1000);
+  }, 1500);
   
     
 <% end %>
