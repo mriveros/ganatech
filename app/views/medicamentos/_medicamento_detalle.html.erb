@@ -59,11 +59,12 @@
               
               <th>Orden</th>
               <th>Descripción</th>
-              <th>Costo</th>
               <th>Fecha Suministro</th>
               <th>Fecha Vencimiento</th>
               <th>Lote</th>
+              <th>Costo</th>
               <th>Cantidad Suministro</th>
+              <th>Costo Total</th>
               <th>Observación</th>
               <th></th>
 
@@ -83,11 +84,12 @@
 
                   <td><%= i+1 %></td>
                   <td><%= med.descripcion %></td>
-                  <td><%= med.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= med.fecha_suministro.strftime('%d/%m/%Y') %></td>
                   <td><%= med.fecha_vencimiento.strftime('%d/%m/%Y') if med.fecha_vencimiento.present? %></td>
                   <td><%= med.numero_lote %></td>
+                  <td><%= med.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= med.cantidad_suministro %></td>
+                  <td><%= med.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
                   <td><%= med.observacion %></td>
                   <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{med.id}, #{med.medicamento_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-medicamento-detalle", title: 'Haga click para eliminar el suministro del medicamento'  %>
                     

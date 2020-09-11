@@ -95,7 +95,7 @@
               
               <th>Peso Historial</th>
               <th>Observaciones Historial</th>
-              <th>Observaciones</th>
+              <th>Observaciones</th> 
               
             </tr>
             
@@ -112,7 +112,7 @@
                   <td>
                       
                     <div class="container-fluid" style="width: 500px;">
-                    <%puts "/////////////////////////////"%>
+                    
                     <%= line_chart @data_set.pluck("fecha_control", "peso")%> 
 
                     </div>

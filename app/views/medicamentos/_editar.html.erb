@@ -28,6 +28,10 @@
         <div class="col-sm-7"><%= f.text_field :cantidad_stock ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br/>
 
+        <div class="col-sm-4"><%= label_tag :nil, "Costo Unitario #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= f.text_field :costo ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+        <div class="col-sm-1"></div><br/>
+
         <div class="col-sm-4"><%= label_tag :nil, "Cantidad Aplicación".html_safe %></div>
         <div class="col-sm-7"><%= f.text_field :cantidad_aplicacion ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>5 %></div>
         <div class="col-sm-1"></div><br/>
