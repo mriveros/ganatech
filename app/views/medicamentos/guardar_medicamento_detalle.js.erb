@@ -1,12 +1,14 @@
 <% if @guardado_ok %>
-
- 
+	
+	
+ 	$("<div class='col-sm-12' id='msg-agregar-medicamento-detalle' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-medicamento-detalle");
 setTimeout( function(){ 
   
     $("#<%= params[:window_id]%>").modal('hide');
     $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
     $("#link-to-medicamento-detalle-<%= params[:medicamento_id]%>").trigger('click');
-    swal("Sumnistro agregado exitosamente!");
+    swal("Suministro agregado exitosamente!");
+
     $("#form_buscar_medicamento_id").val('<%= params[:medicamento_id]%>');
     $("#form-buscar-medicamento").submit();
 
@@ -14,6 +16,7 @@ setTimeout( function(){
  
 <% else %>
 
-  swal('Error al guardar el suministro. Intente más tarde');
+	$("<div class='col-sm-12' id='msg-agregar-medicamento-detalle' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-medicamento-detalle");
+  	swal('Error al guardar el suministro. Intente más tarde');
 
 <% end %>

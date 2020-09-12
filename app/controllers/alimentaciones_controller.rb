@@ -36,39 +36,39 @@ class AlimentacionesController < ApplicationController
 
     if params[:form_buscar_alimentaciones_cantidad_stock].present?
 
-      cond << "cantidad_stock ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_cantidad_stock]}%"
+      cond << "cantidad_stock = ?"
+      args << params[:form_buscar_alimentaciones_cantidad_stock]
 
     end
 
-    if params[:form_buscar_alimentaciones_costo].present?
+    if params[:form_buscar_alimentaciones_costo_unitario].present?
 
-      cond << "costo ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_costo]}%"
+      cond << "costo = ?"
+      args << params[:form_buscar_alimentaciones_costo_unitario]
 
     end
 
 
     if params[:form_buscar_alimentaciones_cantidad_aplicacion].present?
 
-      cond << "cantidad_aplicacion ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_cantidad_aplicacion]}%"
+      cond << "cantidad_aplicacion = ?"
+      args << params[:form_buscar_alimentaciones_cantidad_aplicacion]
 
     end
 
 
     if params[:form_buscar_alimentaciones_ciclo].present?
 
-      cond << "ciclo ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_ciclo]}%"
+      cond << "ciclo = ?"
+      args << params[:form_buscar_alimentaciones_ciclo]
 
     end
 
 
     if params[:form_buscar_alimentaciones_intervalo_tiempo].present?
 
-      cond << "intervalo_tiempo ilike ?"
-      args << "%#{params[:form_buscar_alimentaciones_intervalo_tiempo]}%"
+      cond << "intervalo_tiempo = ?"
+      args << params[:form_buscar_alimentaciones_intervalo_tiempo]
 
     end
 
@@ -76,7 +76,7 @@ class AlimentacionesController < ApplicationController
     if params[:form_buscar_alimentaciones_estado_alimento_id].present?
 
       cond << "estado_alimento_id = ?"
-      args << "#{params[:form_buscar_alimentaciones_estado_alimento]}"
+      args << params[:form_buscar_alimentaciones_estado_alimento]
 
     end
 
@@ -84,7 +84,7 @@ class AlimentacionesController < ApplicationController
     if params[:form_buscar_alimentaciones_tipo_alimentacion_id].present?
 
       cond << "tipo_alimento_id = ?"
-      args << "#{params[:form_buscar_alimentaciones_tipo_alimento]}"
+      args << params[:form_buscar_alimentaciones_tipo_alimento]
 
     end
 
@@ -92,7 +92,7 @@ class AlimentacionesController < ApplicationController
     if params[:form_buscar_alimentaciones_fecha_vencimiento].present?
 
       cond << "fecha_vencimiento = ?"
-      args << "#{params[:form_buscar_alimentaciones_fecha_vencimiento]}"
+      args << params[:form_buscar_alimentaciones_fecha_vencimiento]
 
     end
 
@@ -139,7 +139,7 @@ class AlimentacionesController < ApplicationController
 
     AlimentacionDetalle.transaction do
 
-      @alimento = Alimentacion.new()
+      @alimento = Alimentacion.new() 
 
       @alimento.descripcion = params[:descripcion].upcase
       @alimento.nombre_alimento = params[:nombre_alimento].upcase
@@ -165,6 +165,7 @@ class AlimentacionesController < ApplicationController
         @alimentacion_detalle.costo_suministro = @alimento.costo
         @alimentacion_detalle.observacion = @alimento.observacion
         @alimentacion_detalle.fecha_vencimiento = @alimento.fecha_vencimiento
+        @alimentacion_detalle.costo_total =  (params[:costo].to_i * params[:cantidad_stock].to_i)
 
         if @alimentacion_detalle.save
 
@@ -367,16 +368,17 @@ class AlimentacionesController < ApplicationController
       auditoria_id = auditoria_antes("guardar suministro alimentacion detalle", "alimentaciones", @alimentacion)
 
       if @valido
-
+ 
         @alimentacion_detalle = AlimentacionDetalle.new
         @alimentacion_detalle.alimentacion_id = params[:alimentacion_id]
         @alimentacion_detalle.descripcion = params[:descripcion].upcase
         @alimentacion_detalle.fecha_suministro = params[:fecha_suministro]
         @alimentacion_detalle.numero_lote = params[:numero_lote]
         @alimentacion_detalle.cantidad_suministro = params[:cantidad_suministro]
-        @alimentacion_detalle.costo_suministro = params[:costo_suministro]
+        @alimentacion_detalle.costo_suministro = params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i
         @alimentacion_detalle.observacion = params[:observacion]
         @alimentacion_detalle.fecha_vencimiento = params[:fecha_vencimiento]
+        @alimentacion_detalle.costo_total = (params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_suministro].to_i)
 
         if @alimentacion_detalle.save
 

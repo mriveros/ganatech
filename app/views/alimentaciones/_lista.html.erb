@@ -8,6 +8,7 @@
       <td><%= alimentacion.nombre_alimento%></td>
       <td><%= alimentacion.descripcion_alimento%></td>
       <td><%= alimentacion.cantidad_stock%></td>
+      <td><%= alimentacion.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
       <td><%= alimentacion.cantidad_aplicacion%></td>
       <td ><%= alimentacion.ciclo %></td>
       <td ><%= alimentacion.intervalo_tiempo %></td>

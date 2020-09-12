@@ -64,6 +64,7 @@
               <th>Fecha Vencimiento</th>
               <th>Lote</th>
               <th>Cantidad Suministro</th>
+              <th>Costo Total</th>
               <th>Observación</th>
               <th></th>
 
@@ -88,6 +89,7 @@
                   <td><%= ali.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
                   <td><%= ali.numero_lote %></td>
                   <td><%= ali.cantidad_suministro %></td>
+                  <td><%= ali.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= ali.observacion %></td>
                   <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{ali.id}, #{ali.alimentacion_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion-detalle", title: 'Haga click para eliminar el suministro del alimento'  %>
 
