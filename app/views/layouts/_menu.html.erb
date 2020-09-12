@@ -106,7 +106,7 @@
               <li><%= link_to "Derivados Lacteos", derivados_lacteos_index_path if acceso_permitido("derivados_lacteos.index") %></li>
               <li><%= link_to "Venta Derivados", ventas_derivados_index_path if acceso_permitido("ventas_derivados.index") %></li>
               </ul>
-          </li>
+          </li> 
 
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
           <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
@@ -146,7 +146,17 @@
 
 		</li>
 
-    <li> <%= link_to "Informaciones", index_url %> </li>
+    <li>
+      
+      <a class="dropdown-toggle " href="#" data-toggle="dropdown">Informaciones<b class="caret"></b></a>
+        
+        <ul class="dropdown-menu">
+
+              <li><%= link_to "Balance General", informes_index_path if acceso_permitido("informes.index")%></li>
+
+        </ul>
+
+   </li>
 
 	<% end %>
 
