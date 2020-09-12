@@ -52,11 +52,10 @@
 						  <li><%= link_to "Medicamentos", medicamentos_index_path if acceso_permitido("medicamentos.index") %></li>
               <li><%= link_to "Alimentos", alimentaciones_index_path if acceso_permitido("alimentaciones.index") %></li>
                <li><%= link_to "Espermas", espermas_index_path if acceso_permitido("espermas.index") %></li>
-						  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
-						  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
               <li><%= link_to "Clientes", clientes_index_path if acceso_permitido("clientes.index") %></li>
               <li><%= link_to "Proveedores de Ganados", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
               <li><%= link_to "Empresa de Transporte", empresas_transportes_index_path if acceso_permitido("empresas_transportes.index") %></li>
+
           
               <li>
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
@@ -72,6 +71,18 @@
 
 					</li>
 
+          <li>
+           <a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Personales", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
+              <li><%= link_to "Pagos Salarios", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
+              <li><%= link_to "Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
+              <li><%= link_to "Gastos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
+              <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
+              <li><%= link_to "Puestos de Trabajo", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>           
+
+            </ul>
+          </li>
 
 					<li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
           <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
