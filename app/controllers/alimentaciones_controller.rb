@@ -73,18 +73,18 @@ class AlimentacionesController < ApplicationController
     end
 
 
-    if params[:form_buscar_alimentaciones_estado_alimento_id].present?
+    if params[:form_buscar_alimentaciones][:estado_alimentacion_id].present?
 
       cond << "estado_alimento_id = ?"
-      args << params[:form_buscar_alimentaciones_estado_alimento]
+      args << params[:form_buscar_alimentaciones][:estado_alimentacion_id]
 
     end
 
 
-    if params[:form_buscar_alimentaciones_tipo_alimentacion_id].present?
+    if params[:form_buscar_alimentaciones][:tipo_alimentacion_id].present?
 
-      cond << "tipo_alimento_id = ?"
-      args << params[:form_buscar_alimentaciones_tipo_alimento]
+      cond << "tipo_alimentacion_id = ?"
+      args << params[:form_buscar_alimentaciones][:tipo_alimentacion_id]
 
     end
 
