@@ -155,7 +155,7 @@ class MedicamentosController < ApplicationController
       @medicamento.tipo_presentacion_id = params[:tipo_presentacion][:id]
       @medicamento.tipo_administracion_id = params[:tipo_administracion][:id]
       @medicamento.fecha_vencimiento = params[:fecha_vencimiento]
-      @medicamento.costo = params[:costo]
+      @medicamento.costo = params[:costo].to_s.gsub(/[$.]/,'').to_i
 
       if @medicamento.save
 
@@ -166,10 +166,10 @@ class MedicamentosController < ApplicationController
         @medicamento_detalle.fecha_suministro = Date.today
         @medicamento_detalle.numero_lote = 0
         @medicamento_detalle.cantidad_suministro = @medicamento.cantidad_stock
-        @medicamento_detalle.costo_suministro = 
+        @medicamento_detalle.costo_suministro = params[:costo].to_s.gsub(/[$.]/,'').to_i
         @medicamento_detalle.observacion = @medicamento.observacion
         @medicamento_detalle.fecha_vencimiento = @medicamento.fecha_vencimiento 
-        @medicamento_detalle.costo_total = @medicamento.cantidad_stock * params[:costo]
+        @medicamento_detalle.costo_total = (@medicamento.cantidad_stock.to_i * params[:costo].to_s.gsub(/[$.]/,'').to_i)
 
         if @medicamento_detalle.save
           
@@ -260,7 +260,7 @@ class MedicamentosController < ApplicationController
 
       @medicamento.descripcion = params[:medicamento][:descripcion].upcase
       @medicamento.nombre_medicamento = params[:medicamento][:nombre_medicamento].upcase
-      @medicamento.costo = params[:medicamento][:costo]
+      @medicamento.costo = params[:medicamento][:costo].to_s.gsub(/[$.]/,'').to_i
       @medicamento.cantidad_stock = params[:medicamento][:cantidad_stock]
       @medicamento.cantidad_aplicacion = params[:medicamento][:cantidad_aplicacion]
       @medicamento.ciclo = params[:medicamento][:ciclo]
@@ -353,10 +353,10 @@ class MedicamentosController < ApplicationController
         @medicamento_detalle.fecha_suministro = params[:fecha_suministro]
         @medicamento_detalle.numero_lote = params[:numero_lote]
         @medicamento_detalle.cantidad_suministro = params[:cantidad_suministro]
-        @medicamento_detalle.costo_suministro = params[:costo_suministro]
+        @medicamento_detalle.costo_suministro = params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i
         @medicamento_detalle.observacion = params[:observacion]
         @medicamento_detalle.fecha_vencimiento = params[:fecha_vencimiento]
-        @medicamento_detalle.costo_total = (params[:cantidad_suministro].to_i * params[:costo_suministro].to_i)
+        @medicamento_detalle.costo_total = (params[:cantidad_suministro].to_i * params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i)
 
         if @medicamento_detalle.save
 

@@ -144,7 +144,7 @@ class AlimentacionesController < ApplicationController
       @alimento.descripcion = params[:descripcion].upcase
       @alimento.nombre_alimento = params[:nombre_alimento].upcase
       @alimento.cantidad_stock = params[:cantidad_stock]
-      @alimento.costo = params[:costo]
+      @alimento.costo = params[:costo].to_s.gsub(/[$.]/,'').to_i
       @alimento.cantidad_aplicacion = params[:cantidad_aplicacion]
       @alimento.ciclo = params[:ciclo]
       @alimento.intervalo_tiempo = params[:intervalo_tiempo]
@@ -165,7 +165,7 @@ class AlimentacionesController < ApplicationController
         @alimentacion_detalle.costo_suministro = @alimento.costo
         @alimentacion_detalle.observacion = @alimento.observacion
         @alimentacion_detalle.fecha_vencimiento = @alimento.fecha_vencimiento
-        @alimentacion_detalle.costo_total =  (params[:costo].to_i * params[:cantidad_stock].to_i)
+        @alimentacion_detalle.costo_total =  (params[:costo].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock].to_i)
 
         if @alimentacion_detalle.save
 
@@ -275,7 +275,7 @@ class AlimentacionesController < ApplicationController
       @alimento.descripcion = params[:alimentacion][:descripcion].upcase
       @alimento.nombre_alimento = params[:alimentacion][:nombre_alimento].upcase
       @alimento.cantidad_stock = params[:alimentacion][:cantidad_stock]
-      @alimento.costo = params[:alimentacion][:costo]
+      @alimento.costo = params[:alimentacion][:costo].to_s.gsub(/[$.]/,'').to_i
       @alimento.cantidad_aplicacion = params[:alimentacion][:cantidad_aplicacion]
       @alimento.ciclo = params[:alimentacion][:ciclo]
       @alimento.intervalo_tiempo = params[:alimentacion][:intervalo_tiempo]
@@ -283,6 +283,7 @@ class AlimentacionesController < ApplicationController
       @alimento.estado_alimento_id = params[:alimentacion][:estado_alimento_id]
       @alimento.tipo_alimentacion_id = params[:alimentacion][:tipo_alimentacion_id]
       @alimento.fecha_vencimiento = params[:alimentacion][:fecha_vencimiento]
+      
 
       if @alimento.save
 

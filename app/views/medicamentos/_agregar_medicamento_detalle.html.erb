@@ -24,7 +24,7 @@
           <div class="col-sm-1"></div><br /><br />
           
           <div class="col-sm-4"><%= label_tag :nil, "Costo Suministro".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :costo_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
+          <div class="col-sm-7"><%= text_field_tag :costo_suministro, nil ,:onkeypress=> "return isNumberKey(event)",:onkeyup=>' formatear_numero(this)', class: 'form-control input-sm', :maxlength=>12 %></div>
           <div class="col-sm-1"></div><br/><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>

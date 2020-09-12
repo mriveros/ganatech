@@ -28,7 +28,7 @@
           <div class="col-sm-1"></div><br/>
 
           <div class="col-sm-4"><%= label_tag :nil, "Costo Alimento".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :costo ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-7"><%= f.text_field :costo ,:onkeypress=> "return isNumberKey(event)", :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br/>
 
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Stock #{attr_requerido}".html_safe %></div>
