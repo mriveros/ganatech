@@ -20,10 +20,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_personales_ruc].present?
+    if params[:form_buscar_personales_ruc_ci].present?
 
       cond << "ruc_ci = ?"
-      args << params[:form_buscar_personales_ruc]
+      args << params[:form_buscar_personales_ruc_ci]
 
     end
 
@@ -48,10 +48,45 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    if params[:form_buscar_personales_email].present?
+
+      cond << "email ilike ?"
+      args << "%#{params[:form_buscar_personales_email]}%"
+
+    end
+
     if params[:form_buscar_personales_telefono].present?
 
       cond << "telefono ilike ?"
       args << "%#{params[:form_buscar_personales_telefono]}%"
+
+    end
+
+    if params[:form_buscar_personales][:cargo_id].present?
+
+      cond << "cargo_id = ?"
+      args << params[:form_buscar_personales][:cargo_id]
+
+    end
+
+    if params[:form_buscar_personales][:estado_personal_id].present?
+
+      cond << "estado_personal_id = ?"
+      args << params[:form_buscar_personales][:estado_personal_id]
+
+    end
+
+    if params[:form_buscar_personales][:hacienda_id].present?
+
+      cond << "hacienda_id = ?"
+      args << params[:form_buscar_personales][:hacienda_id]
+
+    end
+
+     if params[:form_buscar_personales_sueldo].present?
+
+      cond << "sueldo = ?"
+      args << params[:form_buscar_personales_sueldo].to_s.gsub(/[$.]/,'').to_i
 
     end
 
@@ -235,7 +270,7 @@ skip_before_action :verify_authenticity_token
 
   def buscar_personal
     
-    @personas = personal.where("personal_nombre ilike ?", "%#{params[:personal_produccion]}%")
+    @personas = Personal.where("nombre ilike ?", "%#{params[:personal]}%")
 
     respond_to do |f|
       
@@ -251,7 +286,7 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @personal = personal.find(params[:id])
+    @personal = Personal.find(params[:id])
 
     @personal_elim = @personal  
 
@@ -270,14 +305,7 @@ skip_before_action :verify_authenticity_token
       end
 
     end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        @eliminado = false
-        end
+
         
     respond_to do |f|
 

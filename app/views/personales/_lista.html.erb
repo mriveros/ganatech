@@ -12,7 +12,7 @@
       <td> <%= p.telefono%> </td>
       <td> <%= p.email%> </td>
       <td> <%= p.cargo%> </td>
-      <td> <%= p.sueldo%> </td>
+      <td> <%= p.sueldo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%> </td>
       <td> <%= p.hacienda%> </td>
       <td> <%= p.estado_personal%></td>
       
@@ -80,7 +80,7 @@
 
               $.ajax({
                 url: "<%= url_for(personales_eliminar_path) %>", 
-                data: {personal_id: personal_id},
+                data: {id: personal_id},
                 dataType: 'script'
               });
             

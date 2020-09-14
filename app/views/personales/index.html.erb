@@ -40,6 +40,7 @@
               <%= text_field_tag :form_buscar_personales_nombre, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_nombre');"><i class="fa fa-times"></i></span>
             </div>
+             <em class="nmb"></em>
           </th>
 
 
@@ -49,6 +50,7 @@
               <%= text_field_tag :form_buscar_personales_apellido, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_apellido');"><i class="fa fa-times"></i></span>
             </div>
+             <em class="nmb"></em>
           </th>
 
           <th >
@@ -57,7 +59,7 @@
                 <%= text_field_tag :form_buscar_personales_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_ruc_ci');"><i class="fa fa-times"></i></span>
             </div>
-            <em class="nmb"></em>
+           
           </th>
 
           <th >
@@ -95,7 +97,7 @@
           <th>
             <span>Sueldo<br/>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_personales_sueldo, nil, :class => 'form-control', :placeholder => "" %>
+              <%= text_field_tag :form_buscar_personales_sueldo, nil, :class => 'form-control', :placeholder => "", :onkeyup=>' formatear_numero(this)' %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_sueldo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -111,8 +113,8 @@
           <th >
               <span>Estado Personal</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_personales, :estado_personal_id, Departamento.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-haciendas', '#form_buscar_personales_estado_personal_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_personales, :estado_personal_id, EstadoPersonal.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_estado_personal_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
 
