@@ -1,0 +1,6 @@
+
+<%= link_to icon_editar, "#", id: "link-to-editar-personal-#{personal.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del Personal.', onclick: "$('.modal').html('');return false;" %>
+
+
+<%= modal_window( window_id: "modal-window-editar-personal", link_to_id: "#link-to-editar-personal-#{personal.id}", url: personales_editar_path( window_id: "modal-window-editar-personal", id: personal.id) )%>
+

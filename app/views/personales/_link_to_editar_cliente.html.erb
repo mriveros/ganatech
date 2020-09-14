@@ -1,6 +1,0 @@
-
-<%= link_to icon_editar, "#", id: "link-to-editar-cliente-#{cliente.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del Cliente.', onclick: "$('.modal').html('');return false;" %>
-
-
-<%= modal_window( window_id: "modal-window-editar-cliente", link_to_id: "#link-to-editar-cliente-#{cliente.id}", url: clientes_editar_path( window_id: "modal-window-editar-cliente", id: cliente.id) )%>
-

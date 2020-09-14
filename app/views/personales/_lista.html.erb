@@ -18,7 +18,7 @@
       
       <td style="width:120px;">
         
-        <%#= link_to_editar_personal(p) %>
+        <%= link_to_editar_personal(p) %>
         
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{p.personal_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-personal", title: 'Haga click para eliminar el Personal'  %>
       

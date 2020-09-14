@@ -1,23 +1,35 @@
-<% if @cliente_ok.present? %>
+<% if @actualizado_ok %>
 
-   $("<div class='col-sm-12' id='msg-editar-cliente' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-cliente");
+  $("<div class='col-sm-12' id='msg-agregar-personales' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-personal");
    
-  $("#form_buscar_clientes_id").val('<%= @cliente.id %>');
-  $("#form_buscar_clientes_razon_social").val('');
-  $("#form_buscar_clientes_nombre").val('');
-  $("#form_buscar_clientes_apellido").val('');
-  $("#form_buscar_clientes_direccion").val('');
-  $("#form_buscar_clientes_telefono").val('');
-  setTimeout(function(){ 
-  	
-  	swal("Cliente actualizado Exitosamente.");
-  	$("#<%= params[:window_id]%>").modal('hide'); 
-  	$("#form-buscar-clientes").submit(); 
+  $("#form_buscar_personales_id").val('<%= @personal.id %>');
+  $("#form_buscar_personales_nombre").val('');
+  $("#form_buscar_personales_apellido").val('');
+  $("#form_buscar_personales_ruc_ci").val('');
+  $("#form_buscar_personales_direccion").val('');
+  $("#form_buscar_personales_telefono").val('');
+  $("#form_buscar_personales_email").val('');
+  $("#form_buscar_personales_cargo_id").val('');
+  $("#form_buscar_personales_sueldo").val('');
+  $("#form_buscar_personales_hacienda_id").val('');
+  $("#form_buscar_personales_estado_personal_id").val('');
   
-  }, 3000);
+  
+
+  
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#form-buscar-personales").submit();
+    swal("Personales","Personal actualizado exitosamente!", "success");
+
+    }, 1500);
+
 
 <% else %>
-
-  $("<div class='col-sm-12' id='msg-editar-cliente' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-cliente");
+  
+  swal("Error al guardar:" + "<%=j(@msg)%>")
+  $("<div class='col-sm-12' id='msg-agregar-personales' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-personal");
 
 <% end %>
+

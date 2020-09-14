@@ -6,26 +6,31 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Cliente</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Personal</h4>
       
     </div>
 
-    <%= form_for @cliente, remote: true, url: clientes_actualizar_url, html: { id: "form-editar-cliente" }, method: 'POST' do |f| %>
+    <%= form_for @personal, remote: true, url: personales_actualizar_url, html: { id: "form-editar-personal" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :cliente_id, params[:id]%>
+      <%= hidden_field_tag :personal_id, params[:id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :razon_social, "Nombre o Razón Social #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :nombre_razon_social, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= f.label :nombre, "Nombre #{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :nombre, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :ruc_ci, "RUC o CI #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :ruc_ci, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+           <div class="col-sm-4"><%= f.label :apellido, "Apellido #{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :apellido, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :ruc, "RUC O CI#{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :ruc_ci, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
@@ -34,8 +39,28 @@
           <div class="col-sm-1"></div><br />
            <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :telefono, "Teléfono ".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= f.label :telefono, "Teléfono".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :email, "Email".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :hacienda, "Hacienda".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :hacienda_id,  Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :cargo, "Cargo".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :cargo_id, Cargo.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :estado_personal, "Estado Personal".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :estado_personal_id,  EstadoPersonal.orden_descripcion, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />   
           <div class="col-sm-1"></div><br /> 
 
@@ -48,7 +73,7 @@
 
       <div class="modal-footer" style="background:#e6e6e6;">
         <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-cliente" %>          
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-personal" %>          
       </div>
 
     <% end %>
@@ -58,9 +83,9 @@
 
 <style type="text/css">
 
-  #form-editar-flota label, #form-editar-flota input[type='text'], #form-editar-flota select { float:left; margin-top:5px;}
-  #form-editar-flota br {clear:both; }
-  #form-editar-flota label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-personal label, #form-editar-personal input[type='text'], #form-editar-personal select { float:left; margin-top:5px;}
+  #form-editar-personal br {clear:both; }
+  #form-editar-personal label { width:200px;font-size:12px;margin-top:10px;}
 
 
 </style>

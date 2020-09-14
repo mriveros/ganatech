@@ -203,7 +203,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
     
-    @personal = personal.find(params[:id])
+    @personal = Personal.find(params[:id])
 
     respond_to do |f|
       
@@ -215,13 +215,21 @@ skip_before_action :verify_authenticity_token
 
   def actualizar
 
-    valido = true
+    @valido = true
     @msg = ""
+    @guardado_ok = false
 
-    unless params[:personal][:nombre_razon_social].present?
+    unless params[:personal][:nombre].present?
 
       @valido = false
-      @msg += " Debe Completar el campo Nombre o Razón Social. \n"
+      @msg += " Debe Completar el campo Nombre. \n"
+
+    end
+
+    unless params[:personal][:apellido].present?
+
+      @valido = false
+      @msg += " Debe Completar el campo Apellido. \n"
 
     end
 
@@ -232,34 +240,33 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    @personal = personal.find(params[:personal_id])
+    if @valido
+      
+      @personal = Personal.where("id = ?", params[:personal_id]).first
 
-    auditoria_id = auditoria_antes("actualizar personal", "personales", @personal)
-
-    if valido
-
-      @personal.nombre_razon_social = params[:personal][:nombre_razon_social].upcase
+      @personal.nombre = params[:personal][:nombre].upcase
+      @personal.apellido = params[:personal][:apellido].upcase
       @personal.ruc_ci = params[:personal][:ruc_ci]
-      @personal.direccion = params[:personal][:direccion].upcase
+      @personal.direccion = params[:personal][:direccion]
       @personal.telefono = params[:personal][:telefono]
+      @personal.email = params[:personal][:email]
+      @personal.hacienda_id = params[:personal][:hacienda_id]
+      @personal.estado_personal_id = params[:personal][:estado_personal_id]
+      @personal.cargo_id = params[:personal][:cargo_id]
       @personal.observacion = params[:personal][:observacion]
 
-      if @personal.save
+        if @personal.save
 
-        auditoria_despues(@personal, auditoria_id)
-        @personal_ok = true
-
-      end
+          auditoria_nueva("registrar personal", "personales", @personal)
+         
+          @actualizado_ok = true
+         
+        end 
 
     end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        end                
-
+  
+                
+              
     respond_to do |f|
       
         f.js
