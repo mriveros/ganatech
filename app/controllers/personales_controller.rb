@@ -97,10 +97,17 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:personal][:nombre_razon_social].present?
+    unless params[:personal][:nombre].present?
 
       @valido = false
-      @msg += " Debe Completar el campo Nombre o Razón Social. \n"
+      @msg += " Debe Completar el campo Nombre. \n"
+
+    end
+
+    unless params[:personal][:apellido].present?
+
+      @valido = false
+      @msg += " Debe Completar el campo Apellido. \n"
 
     end
 
@@ -111,15 +118,18 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    
-
     if @valido
       
       @personal = Personal.new()
-      @personal.nombre_razon_social = params[:personal][:nombre_razon_social].upcase
+      @personal.nombre = params[:personal][:nombre].upcase
+      @personal.apellido = params[:personal][:nombre].upcase
       @personal.ruc_ci = params[:personal][:ruc_ci]
-      @personal.direccion = params[:personal][:direccion].upcase
+      @personal.direccion = params[:personal][:direccion]
       @personal.telefono = params[:personal][:telefono]
+      @personal.email = params[:personal][:email]
+      @personal.hacienda_id = params[:personal][:hacienda_id]
+      @personal.estado_personal_id = params[:personal][:estado_personal_id]
+      @personal.cargo_id = params[:personal][:cargo_id]
       @personal.observacion = params[:personal][:observacion]
 
         if @personal.save
@@ -145,7 +155,7 @@ skip_before_action :verify_authenticity_token
       
         f.js
       
-  end
+    end
 
   end
 

@@ -53,6 +53,11 @@
           <div class="col-sm-1"></div><br />   
           <div class="col-sm-1"></div><br /> 
 
+          <div class="col-sm-4"><%= f.label :cargo, "Cargo".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :cargo_id, Cargo.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
           <div class="col-sm-4"><%= f.label :estado_personal, "Estado Personal".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :estado_personal_id,  EstadoPersonal.orden_descripcion, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />   

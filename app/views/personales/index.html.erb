@@ -54,8 +54,8 @@
           <th >
             <span>RUC o CI</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_personales_ruc, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_ruc');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_personales_ruc_ci, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_ruc_ci');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
@@ -85,10 +85,10 @@
           </th>
 
           <th >
-            <span>Cargo<br/>
+              <span>Cargo</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_personales_cargo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_cargo');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_personales, :cargo_id, Cargo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_cargo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -101,7 +101,7 @@
           </th>
 
           <th >
-              <span>hacienda</span>
+              <span>Hacienda</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_personales, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_hacienda_id');"><i class="fa fa-times"></i></span>
