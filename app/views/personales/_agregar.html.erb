@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Cliente</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Personal</h4>
       
     </div>
 
-    <%= form_for @cliente, remote: true, url: clientes_guardar_url, html: { id: "form-agregar-cliente" }, method: 'POST' do |f| %>
+    <%= form_for @personal, remote: true, url: personales_guardar_url, html: { id: "form-agregar-personal" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -18,8 +18,13 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :razon_social, "Razón Social #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :nombre_razon_social, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= f.label :nombre, "Nombre #{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :nombre, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+           <div class="col-sm-4"><%= f.label :apellido, "Apellido #{attr_requerido}".html_safe %></div>
+           <div class="col-sm-7"><%= f.text_field :apellido, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
@@ -35,6 +40,21 @@
 
           <div class="col-sm-4"><%= f.label :telefono, "Teléfono".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :email, "Email".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :hacienda, "Hacienda".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :hacienda_id,  Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />   
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= f.label :estado_personal, "Estado Personal".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :estado_personal_id,  EstadoPersonal.orden_descripcion, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />   
           <div class="col-sm-1"></div><br /> 
 
@@ -58,14 +78,14 @@
 
 <style type="text/css">
 
-  #form-agregar-cliente label, #form-agregar-cliente input[type='text'], #form-agregar-cliente select { float:left; margin-top:5px;}
-  #form-agregar-cliente br {clear:both; }
-  #form-agregar-cliente label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-cliente #razon_social { width:60%;}
-  #form-agregar-cliente #cliente_nombre { width:60%;}
-  #form-agregar-cliente #cliente_apellido { width:60%;}
-  #form-agregar-cliente #direccion { width:50%;}
-  #form-agregar-cliente #telefono { width:50%;}
+  #form-agregar-personal label, #form-agregar-personal input[type='text'], #form-agregar-personal select { float:left; margin-top:5px;}
+  #form-agregar-personal br {clear:both; }
+  #form-agregar-personal label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-personal #razon_social { width:60%;}
+  #form-agregar-personal #cliente_nombre { width:60%;}
+  #form-agregar-personal #cliente_apellido { width:60%;}
+  #form-agregar-personal #direccion { width:50%;}
+  #form-agregar-personal #telefono { width:50%;}
   
 
 </style>

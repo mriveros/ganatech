@@ -74,10 +74,10 @@
           <li>
            <a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Personales", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
+              <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
               <li><%= link_to "Pagos Salarios", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
               <li><%= link_to "Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
-              <li><%= link_to "Gastos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
+              <li><%= link_to "Registro de Gastos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li>
               <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
               <li><%= link_to "Puestos de Trabajo", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>           
 

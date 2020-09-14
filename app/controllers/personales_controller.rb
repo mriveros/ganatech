@@ -43,14 +43,14 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_personales_telefono].present?
 
-      cond << "personales.telefono ilike ?"
+      cond << "telefono ilike ?"
       args << "%#{params[:form_buscar_personales_telefono]}%"
 
     end
 
     if params[:form_buscar_personales_observacion].present?
 
-      cond << "personales.telefono ilike ?"
+      cond << "observacion ilike ?"
       args << "%#{params[:form_buscar_personales_observacion]}%"
 
     end
@@ -69,7 +69,7 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    @total_registros = personal.count
+    @total_registros = VPersonal.count
 
     respond_to do |f|
       
@@ -81,7 +81,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @personal = personal.new
+    @personal = Personal.new
 
     respond_to do |f|
       

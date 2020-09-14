@@ -50,7 +50,7 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_clientes_observacion].present?
 
-      cond << "clientes.telefono ilike ?"
+      cond << "clientes.observacion ilike ?"
       args << "%#{params[:form_buscar_clientes_observacion]}%"
 
     end

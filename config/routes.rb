@@ -16,6 +16,18 @@ get 'crontab_ultron/index'
 
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+
+#PERSONALES
+  post 'personales/lista'
+  get 'personales/lista'
+  get 'personales/agregar'
+  post 'personales/guardar'
+  get 'personales/eliminar'
+  get 'personales/editar'
+  post 'personales/actualizar'
+  get 'personales/index'
+  get 'personales/buscar_personal'
+
   #RAZAS
   get 'razas/index'
   post 'razas/lista'

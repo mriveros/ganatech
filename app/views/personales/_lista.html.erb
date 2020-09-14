@@ -1,21 +1,26 @@
-<% if cliente.present? %>
+<% if personales.present? %>
 
-  <% cliente.each do |cl| %>
+  <% personales.each do |p| %>
 
     <tr>
 
-      <td style="width:50px;"><%= cl.id %></td>
-      <td><%= cl.nombre_razon_social%></td>
-      <td><%= cl.ruc_ci%></td>
-      <td><%= cl.direccion %></td>
-      <td><%= cl.telefono%></td>
-      <td><%= cl.observacion%></td>
+      <td style="width:50px;"><%= p.personal_id %> </td>
+      <td> <%= p.nombre%> </td>
+      <td> <%= p.apellido%> </td>
+      <td> <%= p.ruc_ci%> </td>
+      <td> <%= p.direccion %> </td>
+      <td> <%= p.telefono%> </td>
+      <td> <%= p.email%> </td>
+      <td> <%= p.cargo%> </td>
+      <td> <%= p.sueldo%> </td>
+      <td> <%= p.hacienda%> </td>
+      <td> <%= p.estado_personal%></td>
       
       <td style="width:120px;">
         
-        <%= link_to_editar_cliente(cl) %>
+        <%#= link_to_editar_personal(p) %>
         
-        <%= link_to icon_eliminar, clientes_eliminar_path(id: cl.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cliente', data: { confirm: "Está seguro de eliminar el Cliente ?"} %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{p.personal_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-personal", title: 'Haga click para eliminar el Personal'  %>
       
        </td>
 
@@ -35,7 +40,9 @@
 
 <tr>
     <td colspan="12">
+
       Cantidad de registros encontrados: <%= @total_encontrados %> 
+
     </td>
 </tr>
 
@@ -51,3 +58,41 @@
 
 
 <% end %>
+
+
+<script type="text/javascript">
+
+  function eliminar_registro(personal_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará de la lista del Personales. En caso de que cuente con registros relacionados no se podrá eliminar.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(personales_eliminar_path) %>", 
+                data: {personal_id: personal_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>
