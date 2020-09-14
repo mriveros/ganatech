@@ -15,28 +15,35 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_personales_id].present?
 
-      cond << "personales.id = ?"
+      cond << "personal_id = ?"
       args << params[:form_buscar_personales_id]
 
     end
 
     if params[:form_buscar_personales_ruc].present?
 
-      cond << "personales.ruc_ci = ?"
+      cond << "ruc_ci = ?"
       args << params[:form_buscar_personales_ruc]
 
     end
 
-     if params[:form_buscar_personales_razon_social].present?
+    if params[:form_buscar_personales_nombre].present?
 
-      cond << "personales.nombre_razon_social ilike ?"
-      args << "%#{params[:form_buscar_personales_razon_social]}%"
+      cond << "nombre ilike ?"
+      args << "%#{params[:form_buscar_personales_nombre]}%"
+
+    end
+
+    if params[:form_buscar_personales_apellido].present?
+
+      cond << "apellido ilike ?"
+      args << "%#{params[:form_buscar_personales_apellido]}%"
 
     end
 
     if params[:form_buscar_personales_direccion].present?
 
-      cond << "personales.direccion ilike ?"
+      cond << "direccion ilike ?"
       args << "%#{params[:form_buscar_personales_direccion]}%"
 
     end
@@ -122,7 +129,7 @@ skip_before_action :verify_authenticity_token
       
       @personal = Personal.new()
       @personal.nombre = params[:personal][:nombre].upcase
-      @personal.apellido = params[:personal][:nombre].upcase
+      @personal.apellido = params[:personal][:apellido].upcase
       @personal.ruc_ci = params[:personal][:ruc_ci]
       @personal.direccion = params[:personal][:direccion]
       @personal.telefono = params[:personal][:telefono]
