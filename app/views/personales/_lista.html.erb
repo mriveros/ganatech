@@ -1,0 +1,53 @@
+<% if cliente.present? %>
+
+  <% cliente.each do |cl| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= cl.id %></td>
+      <td><%= cl.nombre_razon_social%></td>
+      <td><%= cl.ruc_ci%></td>
+      <td><%= cl.direccion %></td>
+      <td><%= cl.telefono%></td>
+      <td><%= cl.observacion%></td>
+      
+      <td style="width:120px;">
+        
+        <%= link_to_editar_cliente(cl) %>
+        
+        <%= link_to icon_eliminar, clientes_eliminar_path(id: cl.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cliente', data: { confirm: "Está seguro de eliminar el Cliente ?"} %>
+      
+       </td>
+
+     
+     
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cliente, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>

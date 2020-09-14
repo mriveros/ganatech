@@ -1,0 +1,154 @@
+ 
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+<!--
+  <div class="pull-right btn-lg hidden-xs" id="start-tour"><a title="Ir a la ayuda"><i class="icon-py-ayuda"></i> Ayuda</a></div>
+-->
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Clientes</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-cliente", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-cliente", link_to_id: "#link-to-agregar-cliente", url: clientes_agregar_path( window_id: "modal-window-agregar-cliente") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-clientes">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag clientes_lista_path, remote: true, id: "form-buscar-clientes"  do  %>
+
+        <tr>
+
+          <th style="width:50px;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th style="width:130px;">
+            <span>Nonbre o Razón Social</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_razon_social, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_razon_social');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:10%;">
+            <span>RUC O CI</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_clientes_ruc, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_ruc');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:130px;">
+            <span>Dirección</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_direccion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_direccion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:18%;">
+            <span>Teléfono<br/>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_telefono, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_telefono');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:18%;">
+            <span>Observación<br/>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_clientes_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-clientes', '#form_buscar_clientes_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th style="width:150px;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="clientes-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-clientes").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_clientes_razon_social").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_clientes_razon_social").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#clientes-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-clientes input, #table-clientes select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-clientes").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-clientes").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-cliente").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-clientes table th { background:#e6e6e6;}
+    #form-buscar-clientes table th span.limpiar { background:#fff;}
+
+</style>
