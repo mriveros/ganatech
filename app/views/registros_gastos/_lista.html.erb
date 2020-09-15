@@ -1,0 +1,49 @@
+<% if detalles_debitos.present? %>
+
+  <% detalles_debitos.each do |dd| %>
+
+    <tr>
+
+      <td style="width:20px;"><%= dd.id %></td>
+      <td style="width:120px;"><%= dd.descripcion%></td>
+      <td style="width:120px;">
+      
+      <%= link_to_editar_detalle_debito(dd) %>
+      
+      <%= link_to icon_eliminar, detalles_debitos_eliminar_path(id: dd.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el detalle de crédito', data: { confirm: "Está seguro de eliminar el detalle de débito ?"} %>
+       
+         
+       </td>
+
+     
+     
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate detalles_debitos, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
