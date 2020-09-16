@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @registro_gasto, remote: true, url: registros_gastos_guardar_url, html: { id: "form-agregar-registro-gasto" }, method: 'POST' do |f| %>
+    <%= form_for @pago_salario, remote: true, url: pagos_salarios_guardar_url, html: { id: "form-agregar-pago-salario" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -43,7 +43,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
         
          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-registro-gasto" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-salario" %> 
 
       </div>
 
@@ -55,9 +55,9 @@
 
 <style type="text/css">
 
-  #form-agregar-registro-gasto label, #form-agregar-registro-gasto input[type='text'], #form-agregar-registro-gasto select { float:left; margin-top:5px;}
-  #form-agregar-registro-gasto br {clear:both; }
-  #form-agregar-registro-gasto label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-pago-salario label, #form-agregar-pago-salario input[type='text'], #form-agregar-pago-salario select { float:left; margin-top:5px;}
+  #form-agregar-pago-salario br {clear:both; }
+  #form-agregar-pago-salario label { width:200px;font-size:12px;margin-top:10px;}
   
   
 
@@ -65,7 +65,7 @@
 
 <script type="text/javascript">
 
- $("#btn-guardar-registro-gasto").bind('click', function () {
+ $("#btn-guardar-pago-salario").bind('click', function () {
 
       valido = true
       msg = ""
@@ -94,8 +94,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Gasto",
-          text: "Al confirmar el Gasto estará registrado como gasto del mes ingresado.",
+          title: "Confirmar Pago de Salario",
+          text: "Al confirmar se Generará el Registro de Pagos de Salarios de todos los empleados de la Estancia seleccionada.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -107,7 +107,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-registro-gasto").submit();
+            $("#form-agregar-pago-salario").submit();
             
           } 
 
