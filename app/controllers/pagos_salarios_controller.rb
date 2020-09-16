@@ -127,6 +127,7 @@ skip_before_action :verify_authenticity_token
     @guardado_ok = false
 
     pago_salario = PagoSalario.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).first
+    
     if pago_salario.present?
 
       @valido = false
@@ -134,7 +135,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    personales_sueldo_total = VPersonal.where("hacienda_id = ?", params[:hacienda_id]).sum(:sueldo)
+    @total_salario = VPersonal.where("hacienda_id = ?", params[:hacienda_id]).sum(:sueldo)
+    @total_adelantos = PagoAdelanto.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
+    @total_descuentos = PagoDescuento.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
+    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
 
     if @valido
       
@@ -144,12 +148,17 @@ skip_before_action :verify_authenticity_token
       @pago_salario.anho_periodo = params[:anho_periodo]
       @pago_salario.hacienda_id = params[:hacienda_id]
       @pago_salario.mes_periodo = params[:mes_periodo]
-      @pago_salario.total_salario = personales_sueldo_total
+      @pago_salario.total_salario = @total_salario
+      @pago_salario.total_adelantos = @total_adelantos
+      @pago_salario.total_descuentos = @total_descuentos
+      @pago_salario.total_remuneraciones_extras = @total_remuneraciones_extras
 
         if @pago_salario.save
 
           auditoria_nueva("registrar pagos de salarios", "pagos_salarios", @pago_salario)
-         
+          #generar pagos de salarios detalles
+
+
           @guardado_ok = true
          
         end 
