@@ -30,12 +30,12 @@ class RegistrosGastosController < ApplicationController
 
 	    if cond.size > 0
 
-	      @registros_gastos =  VRegistroGasto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+	      @registros_gastos =  VRegistroGasto.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = RegistroGasto.where(cond).count
 
 	    else
 
-	      @registros_gastos = VRegistroGasto.orden_01.paginate(per_page: 10, page: params[:page])
+	      @registros_gastos = VRegistroGasto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = RegistroGasto.count
 
 	    end
