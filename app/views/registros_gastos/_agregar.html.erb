@@ -18,9 +18,12 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />    
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Inicio #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_inicio, nil, class: 'form-control input-sm' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br />  
+
+          
        
       </div>
 

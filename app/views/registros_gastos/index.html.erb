@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th style="width:20px;">
+          <th ">
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_registros_gastos_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -31,15 +31,16 @@
             </div>
           </th>
           
-          <th style="width:120px;">
-            <span>Fecha<br/></span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_registros_gastos_fecha, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_fecha');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+          <th>
+            <div><%= label_tag nil, "Fecha Inicio Celo".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_registros_gastos_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_celo_fecha_inicio');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
 
-          <th style="width:120px;">
+          <th>
             <span>Gasto<br/></span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_registros_gastos_gasto, nil, :class => 'form-control', :placeholder => "" %>
@@ -47,15 +48,15 @@
             </div>
           </th>
 
-          <th style="width:120px;">
-            <span>Fecha<br/></span>
+          <th >
+            <span>Monto<br/></span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_registros_gastos_monto, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_monto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-           <th style="width:120px;">
+           <th>
             <span>Observación<br/></span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_registros_gastos_observacion, nil, :class => 'form-control', :placeholder => "" %>
@@ -64,7 +65,7 @@
           </th>
 
 
-          <th style="width:150px;"></th>
+          <th></th>
 
         </tr>
 
