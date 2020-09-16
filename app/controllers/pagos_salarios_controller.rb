@@ -126,12 +126,25 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    
+    pago_salario = PagoSalario.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).first
+    if pago_salario.present?
+
+      @valido = false
+      @msg =+ "El Pago de Salarios del Periodo seleccionado ya fue generado."
+
+    end
+
+    personales_sueldo_total = VPersonal.where("hacienda_id = ?", params[:hacienda_id]).sum(:sueldo)
 
     if @valido
       
       @pago_salario = PagoSalario.new()
-      
+      @pago_salario.fecha = params[:fecha]
+      @pago_salario.mes_periodo = params[:mes_periodo]
+      @pago_salario.anho_periodo = params[:anho_periodo]
+      @pago_salario.hacienda_id = params[:hacienda_id]
+      @pago_salario.mes_periodo = params[:mes_periodo]
+      @pago_salario.total_salario = personales_sueldo_total
 
         if @pago_salario.save
 
