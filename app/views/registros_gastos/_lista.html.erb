@@ -4,13 +4,16 @@
 
     <tr>
 
-      <td style="width:20px;"><%= dd.id %></td>
-      <td style="width:120px;"><%= dd.descripcion%></td>
-      <td style="width:120px;">
+      <td><%= dd.registro_gasto_id %></td>
+      <td><%= dd.fecha%></td>
+      <td><%= dd.gasto%></td>
+      <td><%= dd.monto%></td>
+      <td><%= dd.observacion%></td>
+      <td>
       
       <%= link_to_editar_detalle_debito(dd) %>
       
-      <%= link_to icon_eliminar, detalles_debitos_eliminar_path(id: dd.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el detalle de crédito', data: { confirm: "Está seguro de eliminar el detalle de débito ?"} %>
+      <%= link_to icon_eliminar, registros_gastos_eliminar_path(id: dd.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el detalle de crédito', data: { confirm: "Está seguro de eliminar el detalle de débito ?"} %>
        
          
        </td>
@@ -26,7 +29,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate detalles_debitos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate registros_gastos, :params => params %></div></td>
 </tr>
 
 <tr>

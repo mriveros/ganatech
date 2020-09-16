@@ -14,8 +14,17 @@ Rails.application.routes.draw do
 get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
-
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+#REGISTROS DE GASTOS
+  post 'registros_gastos/lista'
+  get 'registros_gastos/lista'
+  get 'registros_gastos/agregar'
+  post 'registros_gastos/guardar'
+  get 'registros_gastos/eliminar'
+  get 'registros_gastos/editar'
+  post 'registros_gastos/actualizar'
+  get 'registros_gastos/index'
+  
 
 #PERSONALES
   post 'personales/lista'
