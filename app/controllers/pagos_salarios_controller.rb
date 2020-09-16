@@ -15,64 +15,29 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_pagos_salarios_id].present?
 
-      cond << "personal_id = ?"
+      cond << "pago_salario_id = ?"
       args << params[:form_buscar_pagos_salarios_id]
 
     end
 
-    if params[:form_buscar_pagos_salarios_ruc_ci].present?
+    if params[:form_buscar_pagos_salarios_fecha].present?
 
-      cond << "ruc_ci = ?"
-      args << params[:form_buscar_pagos_salarios_ruc_ci]
-
-    end
-
-    if params[:form_buscar_pagos_salarios_nombre].present?
-
-      cond << "nombre ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_nombre]}%"
+      cond << "fecha = ?"
+      args << params[:form_buscar_pagos_salarios_fecha]
 
     end
 
-    if params[:form_buscar_pagos_salarios_apellido].present?
+    if params[:form_buscar_pagos_salarios][:mes_periodo].present?
 
-      cond << "apellido ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_apellido]}%"
-
-    end
-
-    if params[:form_buscar_pagos_salarios_direccion].present?
-
-      cond << "direccion ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_direccion]}%"
+      cond << "mes_periodo = ?"
+      args << params[:form_buscar_pagos_salarios][:mes_periodo]
 
     end
 
-    if params[:form_buscar_pagos_salarios_email].present?
+    if params[:form_buscar_pagos_salarios_anho_periodo].present?
 
-      cond << "email ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_email]}%"
-
-    end
-
-    if params[:form_buscar_pagos_salarios_telefono].present?
-
-      cond << "telefono ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_telefono]}%"
-
-    end
-
-    if params[:form_buscar_pagos_salarios][:cargo_id].present?
-
-      cond << "cargo_id = ?"
-      args << params[:form_buscar_pagos_salarios][:cargo_id]
-
-    end
-
-    if params[:form_buscar_pagos_salarios][:estado_personal_id].present?
-
-      cond << "estado_personal_id = ?"
-      args << params[:form_buscar_pagos_salarios][:estado_personal_id]
+      cond << "anho_periodo ilike ?"
+      args << "%#{params[:form_buscar_pagos_salarios_anho_periodo]}%"
 
     end
 
@@ -83,17 +48,39 @@ skip_before_action :verify_authenticity_token
 
     end
 
-     if params[:form_buscar_pagos_salarios_sueldo].present?
+    if params[:form_buscar_pagos_salarios_total_salario].present?
 
-      cond << "sueldo = ?"
-      args << params[:form_buscar_pagos_salarios_sueldo].to_s.gsub(/[$.]/,'').to_i
+      cond << "total_salario = ?"
+      args << params[:form_buscar_pagos_salarios_total_salario]
 
     end
 
-    if params[:form_buscar_pagos_salarios_observacion].present?
+    if params[:form_buscar_pagos_salarios_total_adelantos].present?
 
-      cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_pagos_salarios_observacion]}%"
+      cond << "total_adelantos = ?"
+      args << params[:form_buscar_pagos_salarios_total_adelantos]
+
+    end
+
+    if params[:form_buscar_pagos_salarios_total_descuentos].present?
+
+      cond << "total_descuentos = ?"
+      args << params[:form_buscar_pagos_salarios_total_descuentos]
+
+    end
+
+    if params[:form_buscar_pagos_salarios_total_remuneraciones_extras].present?
+
+      cond << "total_remuneraciones_extras = ?"
+      args << params[:form_buscar_pagos_salarios_total_remuneraciones_extras]
+
+    end
+
+
+    if params[:form_buscar_pagos_salarios_monto_total_pagado].present?
+
+      cond << "monto_total_pagado = ?"
+      args << params[:form_buscar_pagos_salarios_monto_total_pagado]
 
     end
 
