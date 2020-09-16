@@ -94,22 +94,19 @@ class RegistrosGastosController < ApplicationController
 
 	  def eliminar
 
-	    valido = true
+	    @valido = true
 	    @msg = ""
+	    @eliminado =false
 
 	    @registro_gasto = RegistroGasto.find(params[:id])
+	    @registro_gasto_elim = @registro_gasto
 
-	    if valido
+	    if @valido
 
 	      if @registro_gasto.destroy
 
-	        auditoria_nueva("eliminar detalle debito", "detalles_debitos", @registro_gasto)
-
+	        auditoria_nueva("Eliminar registro de gastos", "registros_gastos", @registro_gasto_elim)
 	        @eliminado = true
-
-	      else
-
-	        @msg = "ERROR: No se ha podido eliminar el detalle de debito."
 
 	      end
 
