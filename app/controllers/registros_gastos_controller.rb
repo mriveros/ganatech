@@ -137,18 +137,19 @@ class RegistrosGastosController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @registro_gasto = RegistroGasto.find(params[:registro_gasto][:id])
-	    auditoria_id = auditoria_antes("actualizar detalle debito", "detalles_debitos", @registro_gasto)
+	    @registro_gasto = RegistroGasto.find(params[:id])
+	    auditoria_id = auditoria_antes("actualizar registro gasto", "registros_gastos", @registro_gasto)
 
 	    if valido
 
-	      
-	      @registro_gasto.descripcion = params[:registro_gasto][:descripcion].upcase
-	      
-	        auditoria_despues(@registro_gasto, auditoria_id)
+	    	@registro_gasto.fecha = params[:registro_gasto][:fecha]
+		  	@registro_gasto.gasto_id = params[:registro_gasto][:gasto_id]
+		    @registro_gasto.monto = params[:registro_gasto][:monto].to_s.gsub(/[$.]/,'').to_i
+		    @registro_gasto.observacion = params[:registro_gasto][:observacion]
 
 	      if @registro_gasto.save
 
+	      	auditoria_despues(@registro_gasto, auditoria_id)
 	        @registro_gasto_ok = true
 
 	      end
