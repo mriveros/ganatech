@@ -30,12 +30,12 @@ class RegistrosGastosController < ApplicationController
 
 	    if cond.size > 0
 
-	      @registro_gastos =  VRegistroGasto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+	      @registros_gastos =  VRegistroGasto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = RegistroGasto.where(cond).count
 
 	    else
 
-	      @registro_gastos = VRegistroGasto.orden_01.paginate(per_page: 10, page: params[:page])
+	      @registros_gastos = VRegistroGasto.orden_01.paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = RegistroGasto.count
 
 	    end
@@ -62,20 +62,27 @@ class RegistrosGastosController < ApplicationController
 
 	  def guardar
 
-	    valido = true
+	    @valido = true
 	    @msg = ""
 
-	    @registro_gasto = RegistroGasto.new()
-	    @registro_gasto.descripcion = params[:detalle_debito][:descripcion].upcase
+	    if @valido
 
-	    if @registro_gasto.save
+		    @registro_gasto = RegistroGasto.new()
+		    @registro_gasto.fecha = params[:fecha]
+		    @registro_gasto.gasto_id = params[:gasto][:id]
+		    @registro_gasto.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
+		    @registro_gasto.observacion = params[:observacion]
 
-	    	auditoria_nueva("registrar detalle debito", "detalles_debitos", @registro_gasto)
-	       
-	        @detalle_debito_ok = true
-	       
+		    if @registro_gasto.save
 
-	    end 
+		    	auditoria_nueva("Registrar nuevo gasto", "registros_gastos", @registro_gasto)
+		       
+		        @guardado_ok = true
+		       
+
+		    end 
+
+		 end
 	         
 	    respond_to do |f|
 

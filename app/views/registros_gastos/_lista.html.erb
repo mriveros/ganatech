@@ -5,13 +5,13 @@
     <tr>
 
       <td><%= dd.registro_gasto_id %></td>
-      <td><%= dd.fecha%></td>
-      <td><%= dd.gasto%></td>
-      <td><%= dd.monto%></td>
+      <td><%= dd.fecha.strftime('%d/%m/%Y')%></td>
+      <td><%= dd.gasto %></td>
+      <td><%= dd.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
       <td><%= dd.observacion%></td>
       <td>
       
-      <%= link_to_editar_detalle_debito(dd) %>
+      <%= link_to_editar_registro_gasto(dd) %>
       
       <%= link_to icon_eliminar, registros_gastos_eliminar_path(id: dd.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el detalle de crédito', data: { confirm: "Está seguro de eliminar el detalle de débito ?"} %>
        
