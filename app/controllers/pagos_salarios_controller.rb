@@ -88,12 +88,12 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @pago_salario =  VPagoSalario.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @pagos_salarios =  VPagoSalario.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VPagoSalario.where(cond).count
       
     else
 
-      @pago_salario = VPagoSalario.orden_01.paginate(per_page: 10, page: params[:page])
+      @pagos_salarios = VPagoSalario.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VPagoSalario.count
 
     end
