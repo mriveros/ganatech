@@ -135,7 +135,7 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    @total_salario = VPersonal.where("hacienda_id = ?", params[:hacienda_id]).sum(:sueldo)
+    @total_salario = VPersonal.where("hacienda_id = ?", params[:hacienda][:id]).sum(:sueldo)
     @total_adelantos = PagoAdelanto.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
     @total_descuentos = PagoDescuento.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
     @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
@@ -146,7 +146,7 @@ skip_before_action :verify_authenticity_token
       @pago_salario.fecha = params[:fecha]
       @pago_salario.mes_periodo = params[:mes_periodo]
       @pago_salario.anho_periodo = params[:anho_periodo]
-      @pago_salario.hacienda_id = params[:hacienda_id]
+      @pago_salario.hacienda_id = params[:hacienda][:id]
       @pago_salario.mes_periodo = params[:mes_periodo]
       @pago_salario.total_salario = @total_salario
       @pago_salario.total_adelantos = @total_adelantos

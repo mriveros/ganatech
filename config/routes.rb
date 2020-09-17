@@ -15,6 +15,19 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+
+#PAGOS DE SALARIOS
+  post 'pagos_salarios/lista'
+  get 'pagos_salarios/lista'
+  get 'pagos_salarios/agregar'
+  post 'pagos_salarios/guardar'
+  get 'pagos_salarios/eliminar'
+  get 'pagos_salarios/editar'
+  post 'pagos_salarios/actualizar'
+  get 'pagos_salarios/index'
+  get 'pagos_salarios/salario_detalle'
+  
+
 #REGISTROS DE GASTOS
   post 'registros_gastos/lista'
   get 'registros_gastos/lista'

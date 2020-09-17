@@ -43,7 +43,7 @@
           <th>
             <span>Mes<br/></span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_pagos_salarios, :mes_periodo, Mes.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_pagos_salarios, :mes_periodo, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_pagos_salarios_mes_periodo');"><i class="fa fa-times"></i></span>
             </div>
           </th>

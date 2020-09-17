@@ -19,25 +19,22 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha,Date.today, class: 'form-control input-sm' %>
+          <div class="col-sm-7"><%= date_field_tag :fecha, Date.today, class: 'form-control input-sm' %>
           </div>    
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Gasto #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :gasto, :id, DetalleDebito.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Monto #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :monto, nil, :onkeyup=>' formatear_numero(this)' ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :mes_periodo, :id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
-          <div class="col-sm-7">
-          <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
-          </div>
-
-          
-       
+          <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.month, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4 %></div>
+          <div class="col-sm-1"></div><br /><br />
+              
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
@@ -77,16 +74,23 @@
       
       }
 
-      if($("#gasto_id").val().length == 0){
+      if($("#hacienda_id").val().length == 0){
 
-        msg +="Debe ingresar un gasto.\n"
+        msg +="Debe ingresar una Hacienda.\n"
         valido = false
       
       }
 
-      if($("#monto").val().length == 0){
+      if($("#mes_periodo").val().length == 0){
 
-        msg +="Debe ingresar el monto del gasto.\n"
+        msg +="Debe ingresar el Mes.\n"
+        valido = false
+      
+      }
+
+      if($("#anho_periodo").val().length == 0){
+
+        msg +="Debe ingresar el Año.\n"
         valido = false
       
       }

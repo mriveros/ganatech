@@ -1,23 +1,28 @@
 <% if @guardado_ok == true %>
  
   $("#<%= params[:window_id]%>").modal('hide');
-  $("#form_buscar_registros_gastos_id").val('<%=@registro_gasto.id%>');
-  $("#form_buscar_registros_gastos_fecha").val('');
-  $("#form_buscar_registros_gastos_gasto").val('');
-  $("#form_buscar_registros_gastos_monto").val('');
-  $("#form_buscar_registros_gastos_observacion").val('');
+  $("#form_buscar_pagos_salarios_id").val('<%=@pago_salario.id%>');
+  $("#form_buscar_pagos_salarios_fecha").val('');
+  $("#form_buscar_pagos_salarios_mes_periodo").val('');
+  $("#form_buscar_pagos_salarios_anho_periodo").val('');
+  $("#form_buscar_pagos_salarios_hacienda_id").val('');
+  $("#form_buscar_pagos_salarios_total_salario").val('');
+  $("#form_buscar_pagos_salarios_total_adelantos").val('');
+  $("#form_buscar_pagos_salarios_total_descuentos").val('');
+  $("#form_buscar_pagos_salarios_total_remuneraciones_extras").val('');
+  $("#form_buscar_pagos_salarios_monto_total_pagado").val('');
 
   setTimeout( function(){ 
 
-    swal("Registros Gastos","Gasto Registrado Exitosamente!", "success");
+    swal("Pagos Salarios","Salario Generado Exitosamente!", "success");
 
     }, 1000);
 
- 	$("#form-buscar-registros-gastos").submit();
+ 	$("#form-buscar-pagos-salarios").submit();
 
 <% else %>
 	
-	$("<div class='col-sm-12' id='msg-guardar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-registro-gasto");
- 	swal("Registros Gastos", "Error al registrar el Gasto. Intente más tarde","error");
+	$("<div class='col-sm-12' id='msg-guardar-pago-salario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-pago-salario");
+ 	swal("Pagos Salarios", "Error al Generar el Pago de Salarios. Intente más tarde","error");
 
 <% end %>
