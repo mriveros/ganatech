@@ -163,17 +163,18 @@ skip_before_action :verify_authenticity_token
             @personales_hacienda = Personal.where("hacienda_id = ?", params[:hacienda][:id])
             @personales_hacienda.each do |ph|
 
-              @personal_salario = VPersonal.where("hacienda_id = ?", params[:hacienda][:id]).pluck(:sueldo)
-              @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto)
-              @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto)
-              @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto)
-              @personal_sueldo_percibido = (@personal_salario + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+              @personal_salario = VPersonal.where("personal_id = ? and hacienda_id = ?", ph.id, params[:hacienda][:id]).first
+              puts @personal_salario.sueldo.to_i
+              @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+              @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+              @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+              @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
 
               @pago_salario_detalle = PagoSalarioDetalle.new
               @pago_salario_detalle.pago_salario_id = @pago_salario.id
               @pago_salario_detalle.personal_id = ph.id
-              @pago_salario_detalle.cargo_id = ph.id
-              @pago_salario_detalle.salario_base = @personal_salario
+              @pago_salario_detalle.cargo_id = ph.cargo_id
+              @pago_salario_detalle.salario_base = @personal_salario.sueldo.to_i
               @pago_salario_detalle.adelantos = @personal_total_adelantos
               @pago_salario_detalle.descuentos = @personal_total_descuentos
               @pago_salario_detalle.otras_remuneraciones = @personal_total_remuneracion_extra
