@@ -1,25 +1,34 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-proveedores-ganados");
-   $("#form_buscar_registros_gastos_id").val("<%=@registro_gasto_elim.id%>")
-   $("#form-buscar-registros-gastos").submit();
-    
+  $("<div class='col-sm-12' id='msg-eliminar-pago-salario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pagos-salario");
+  $("#form_buscar_pagos_salarios_id").val('<%=@pago_salario_elim.id%>');
+  $("#form_buscar_pagos_salarios_fecha").val('');
+  $("#form_buscar_pagos_salarios_mes_periodo").val('');
+  $("#form_buscar_pagos_salarios_anho_periodo").val('');
+  $("#form_buscar_pagos_salarios_hacienda_id").val('');
+  $("#form_buscar_pagos_salarios_total_salario").val('');
+  $("#form_buscar_pagos_salarios_total_adelantos").val('');
+  $("#form_buscar_pagos_salarios_total_descuentos").val('');
+  $("#form_buscar_pagos_salarios_total_remuneraciones_extras").val('');
+  $("#form_buscar_pagos_salarios_monto_total_pagado").val('');
+  $("#form-buscar-pagos-salarios").submit();
+  
     setTimeout(function(){
 
       $("#msg-eliminar-proveedores-ganados").remove();
       
-      swal("Registros de Gastos","Registro de Gastos eliminado exitosamente.", "success");
+      swal("Pago de Salarios","Registro de Pagos de Salarios eliminado exitosamente.", "success");
 
     }, 1000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-registros-gastos");
+  $("<div class='col-sm-12' id='msg-eliminar-pago-salario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-pagos-salario");
   
   setTimeout(function(){ 
 
-  	$("#msg-eliminar-registro-gasto").remove(); 
-	swal("Registros de Gastos", "No se pudo eliminar el Registro de Gasto. Intente más tarde.", "error");
+  	$("#msg-eliminar-pago-salario").remove(); 
+	swal("Pago de Salarios", "No se pudo eliminar el Registro de Pago de Salario. Intente más tarde.", "error");
 
 	}, 1500);
 
