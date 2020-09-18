@@ -16,6 +16,36 @@ get 'crontab_ultron/index'
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
 
+#REMUNERACIONES EXTRAS
+  post 'pagos_remuneraciones_extras/lista'
+  get 'pagos_remuneraciones_extras/lista'
+  get 'pagos_remuneraciones_extras/agregar'
+  post 'pagos_remuneraciones_extras/guardar'
+  get 'pagos_remuneraciones_extras/eliminar'
+  get 'pagos_remuneraciones_extras/editar'
+  post 'pagos_remuneraciones_extras/actualizar'
+  get 'pagos_remuneraciones_extras/index'
+
+#DESCUENTOS
+  post 'pagos_descuentos/lista'
+  get 'pagos_descuentos/lista'
+  get 'pagos_descuentos/agregar'
+  post 'pagos_descuentos/guardar'
+  get 'pagos_descuentos/eliminar'
+  get 'pagos_descuentos/editar'
+  post 'pagos_descuentos/actualizar'
+  get 'pagos_descuentos/index'
+
+#ADELANTOS
+  post 'pagos_adelantos/lista'
+  get 'pagos_adelantos/lista'
+  get 'pagos_adelantos/agregar'
+  post 'pagos_adelantos/guardar'
+  get 'pagos_adelantos/eliminar'
+  get 'pagos_adelantos/editar'
+  post 'pagos_adelantos/actualizar'
+  get 'pagos_adelantos/index'
+
 #PAGOS DE SALARIOS
   get 'pagos_salarios/index'
   post 'pagos_salarios/lista'
