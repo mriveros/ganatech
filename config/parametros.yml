@@ -151,6 +151,11 @@ development:
   tipo_salida_derivado_lacteo_consumo_local: 1
   tipo_salida_derivado_lacteo_venta: 2
 
+  #ESTADOS PERSONALES
+  estado_personal_activo: 1
+  estado_personal_vacaciones: 2
+  estado_personal_baja: 3
+
 production:
 
   #ROLES 
@@ -296,4 +301,7 @@ production:
   tipo_salida_derivado_lacteo_consumo_local: 1
   tipo_salida_derivado_lacteo_venta: 2
 
-
+  #ESTADOS PERSONALES
+  estado_personal_activo: 1
+  estado_personal_vacaciones: 2
+  estado_personal_baja: 3

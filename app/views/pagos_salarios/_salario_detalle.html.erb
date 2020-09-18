@@ -1,0 +1,91 @@
+<td colspan="12" style="background: #e6e6e6; ">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Salarios Detalles</h3>
+       
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-produccion-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Nombre Personal</th>
+              <th>Apellido Personal</th>
+              <th>Cargo</th>
+              <th>Sueldo</th>
+              <th>Adelantos</th>
+              <th>Descuentos</th>
+              <th>Rem. Extras</th>
+              <th>Salario Percibido</th>
+              
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="derivado-lacteo-detalle">
+
+            <% if @pago_salario_detalle.present? %>
+            
+              <% @pago_salario_detalle.each do |psd|%>
+
+                <tr>
+                  <td><%=psd.pago_salario_detalle_id %></td>
+                  <td><%=psd.nombre_personal%></td>
+                  <td><%=psd.apellido_personal %></td>
+                  <td><%=psd.cargo%></td>
+                  <td><%=psd.salario_base.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=psd.adelantos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=psd.descuentos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=psd.otras_remuneraciones.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=psd.salario_percibido.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+
+                  <td style="width: 50px;text-align:right;">
+                    
+                    
+                  </td> 
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @pago_salario_detalle, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+</td>

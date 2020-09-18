@@ -125,6 +125,7 @@ skip_before_action :verify_authenticity_token
     @valido = true
     @msg = ""
     @guardado_ok = false
+    @acumulacion_sueldo_percibido = 0
 
     @pago_salario = PagoSalario.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).first
     
@@ -160,7 +161,7 @@ skip_before_action :verify_authenticity_token
 
             auditoria_nueva("registrar pagos de salarios", "pagos_salarios", @pago_salario)
             #generar pagos de salarios detalles
-            @personales_hacienda = Personal.where("hacienda_id = ?", params[:hacienda][:id])
+            @personales_hacienda = Personal.where("hacienda_id = ? and estado_personal_id = ?", params[:hacienda][:id])
             @personales_hacienda.each do |ph|
 
               @personal_salario = VPersonal.where("personal_id = ? and hacienda_id = ?", ph.id, params[:hacienda][:id]).first
@@ -169,6 +170,7 @@ skip_before_action :verify_authenticity_token
               @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
               @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
               @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+              @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido + @personal_sueldo_percibido
 
               @pago_salario_detalle = PagoSalarioDetalle.new
               @pago_salario_detalle.pago_salario_id = @pago_salario.id
@@ -182,7 +184,7 @@ skip_before_action :verify_authenticity_token
 
               if @pago_salario_detalle.save
 
-                @guardado_ok = true
+                
                 auditoria_nueva("registrar pagos de salarios de personales - detalles", "pagos_salarios_detalles", @pago_salario_detalle)
 
               end
@@ -190,6 +192,14 @@ skip_before_action :verify_authenticity_token
             end
            
           end 
+          #actualizar monto total pago salario
+          @pago_salario.monto_total_pagado = @acumulacion_sueldo_percibido
+          
+          if @pago_salario.save
+
+            @guardado_ok = true
+
+          end
 
       end#end transaction
 
@@ -282,6 +292,20 @@ skip_before_action :verify_authenticity_token
     end
 
         
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def salario_detalle
+
+    @pago_salario = PagoSalario.where("id = ?", params[:pago_salario_id] ).first
+    @pago_salario_detalle = VPagoSalarioDetalle.where("pago_salario_id = ?", params[:pago_salario_id]).paginate(per_page: 10, page: params[:page])
+
+
     respond_to do |f|
 
       f.js
