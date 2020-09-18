@@ -29,8 +29,9 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_pagos_salarios][:mes_periodo].present?
 
+      @mes_periodo = Mes.where("id = ?", params[:form_buscar_pagos_salarios][:mes_periodo]).first
       cond << "mes_periodo = ?"
-      args << params[:form_buscar_pagos_salarios][:mes_periodo]
+      args << @mes_periodo.descripcion
 
     end
 
@@ -213,57 +214,6 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def editar
-    
-    @pago_salario = PagoSalario.find(params[:id])
-
-    respond_to do |f|
-      
-        f.js
-      
-  end
-
-  end
-
-  def actualizar
-
-    @valido = true
-    @msg = ""
-    @guardado_ok = false
-
-    unless params[:personal][:nombre].present?
-
-      @valido = false
-      @msg += " Debe Completar el campo Nombre. \n"
-
-    end
-
-   
-
-    if @valido
-      
-      @pago_salario = PagoSalario.where("id = ?", params[:id]).first
-
-      @pago_salario.fecha = params[:personal][:nombre].upcase
-      
-
-        if @pago_salario.save
-
-          auditoria_nueva("editar datos de pagos de salarios", "pagos_salarios", @pago_salario)
-         
-          @actualizado_ok = true
-         
-        end 
-
-    end  
-              
-    respond_to do |f|
-      
-        f.js
-      
-    end
-
-  end
 
   def eliminar
 
