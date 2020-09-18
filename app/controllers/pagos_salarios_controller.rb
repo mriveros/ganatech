@@ -127,13 +127,14 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
     @acumulacion_sueldo_percibido = 0
+    @mes_periodo = Mes.where("id = ?", params[:mes_periodo][:id]).first
 
-    @pago_salario = PagoSalario.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).first
+    @pago_salario = PagoSalario.where("mes_periodo = ? and anho_periodo = ?", @mes_periodo.descripcion ,params[:anho_periodo]).first
     
     if @pago_salario.present?
 
       @valido = false
-      @msg =+ "El Pago de Salarios del Periodo seleccionado ya fue generado."
+      @msg += "El Pago de Salarios del Periodo seleccionado ya fue generado."
 
     end
 
@@ -141,7 +142,7 @@ skip_before_action :verify_authenticity_token
     @total_adelantos = PagoAdelanto.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto)
     @total_descuentos = PagoDescuento.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto)
     @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo = ? and anho_periodo = ?", params[:mes_periodo],params[:anho_periodo]).sum(:monto)
-    @mes_periodo = Mes.where("id = ?", params[:mes_periodo][:id]).first
+    
 
     if @valido
       

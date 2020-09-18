@@ -1,0 +1,5 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-registro-gasto-#{registro_gasto.registro_gasto_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Gastos.', onclick: "$('.modal').html('');return false;" %>
+
+
+<%= modal_window( window_id: "modal-window-editar-registro-gasto", link_to_id: "#link-to-editar-registro-gasto-#{registro_gasto.registro_gasto_id}", url: registros_gastos_editar_path( window_id: "modal-window-editar-registro-gasto", id: registro_gasto.registro_gasto_id) )%>
+

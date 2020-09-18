@@ -1,0 +1,29 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-proveedores-ganados");
+   $("#form_buscar_registros_gastos_id").val("<%=@registro_gasto_elim.id%>")
+   $("#form-buscar-registros-gastos").submit();
+    
+    setTimeout(function(){
+
+      $("#msg-eliminar-proveedores-ganados").remove();
+      
+      swal("Registros de Gastos","Registro de Gastos eliminado exitosamente.", "success");
+
+    }, 1000);
+
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-registros-gastos");
+  
+  setTimeout(function(){ 
+
+  	$("#msg-eliminar-registro-gasto").remove(); 
+	swal("Registros de Gastos", "No se pudo eliminar el Registro de Gasto. Intente más tarde.", "error");
+
+	}, 1500);
+
+
+    
+
+<% end %>
