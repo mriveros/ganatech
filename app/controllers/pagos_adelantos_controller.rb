@@ -5,7 +5,7 @@ class PagosAdelantosController < ApplicationController
 	  def index
 
 
-	  end
+	  end 
 
 	  def lista
 
@@ -26,18 +26,18 @@ class PagosAdelantosController < ApplicationController
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_personal_nombre].present?
+	    if params[:form_buscar_pagos_adelantos_nombre_personal].present?
 
 	      cond << "personal_nombre ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_personal_nombre]}%"
+	      args << "%#{params[:form_buscar_pagos_adelantos_nombre_personal]}%"
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_personal_apellido].present?
+	    if params[:form_buscar_pagos_adelantos_apellido_personal].present?
 
 	      cond << "personal_apellido ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_personal_apellido]}%"
-
+	      args << "%#{params[:form_buscar_pagos_adelantos_apellido_personal]}%"
+ 
 	    end
 
 	    if params[:form_buscar_pagos_adelantos][:mes_periodo].present?
@@ -79,7 +79,7 @@ class PagosAdelantosController < ApplicationController
 
 	    else
 
-	      @registros_gastos = VPagoAdelanto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
+	      @pagos_adelantos = VPagoAdelanto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = PagoAdelanto.count
 
 	    end
