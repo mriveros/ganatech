@@ -24,7 +24,7 @@
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Personal #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :personal, :id, Personal.orden_01, :id, :nombre + ' ' + :apellido, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :personal, :id, Personal.nombre_apellido, :id, :nombre_apellido, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Monto #{attr_requerido}".html_safe %></div>
@@ -35,7 +35,7 @@
           <div class="col-sm-7">
           <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
           </div>
-
+ 
           
        
       </div>
