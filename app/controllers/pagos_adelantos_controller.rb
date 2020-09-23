@@ -40,11 +40,11 @@ class PagosAdelantosController < ApplicationController
  
 	    end
 
-	    if params[:form_buscar_pagos_adelantos][:mes_periodo].present?
+	    if params[:form_buscar_pagos_adelantos][:mes_periodo_id].present?
 
-      		@mes_periodo = Mes.where("id = ?", params[:form_buscar_pagos_adelantos][:mes_periodo]).first
-      		cond << "mes_periodo = ?"
-      		args << @mes_periodo.descripcion
+      		
+      		cond << "mes_periodo_id = ?"
+      		args << params[:form_buscar_pagos_adelantos][:mes_periodo_id]
 
     	end
 
@@ -186,7 +186,7 @@ class PagosAdelantosController < ApplicationController
 
 	    if valido
 
-	    	@pago_adelanto = PagoAdelanto.new()
+	    	
 		    @pago_adelanto.fecha = params[:pago_adelanto][:fecha]
 		    @pago_adelanto.personal_id = params[:pago_adelanto][:personal_id]
 		    @pago_adelanto.mes_periodo_id = params[:pago_adelanto][:mes_periodo_id]

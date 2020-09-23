@@ -4,47 +4,47 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Adelantos</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-pagos-adelantos", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-pagos-adelantos", link_to_id: "#link-to-agregar-pagos-adelantos", url: pagos_adelantos_agregar_path( window_id: "modal-window-agregar-pagos-adelantos") )%>
+    <h3 style="float:left;margin-top:5px;">Descuentos</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-pagos-descuentos", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-pagos-descuentos", link_to_id: "#link-to-agregar-pagos-descuentos", url: pagos_descuentos_agregar_path( window_id: "modal-window-agregar-pagos-descuentos") )%>
     
   </div>
 </div>
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-pagos-adelantos">
+<div class="table-responsive" id="table-pagos-descuentos">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag pagos_adelantos_lista_path, remote: true, id: "form-buscar-pagos-adelantos"  do  %>
+      <%= form_tag pagos_descuentos_lista_path, remote: true, id: "form-buscar-pagos-descuentos"  do  %>
 
         <tr>
 
           <th>
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-adelantos', '#form_buscar_pagos_adelantos_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
           <th>
             <div><%= label_tag nil, "Fecha".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_pagos_adelantos_fecha, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_pagos_descuentos_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_pagos_adelantos_fecha');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_pagos_descuentos_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
           <th>
             <span>Nombre<br/></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_nombre_personal, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-adelantos', '#form_buscar_pagos_adelantos_nombre_personal');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_nombre_personal, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_nombre_personal');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
@@ -52,8 +52,8 @@
           <th>
             <span>Apellido<br/></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_apellido_personal, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-adelantos', '#form_buscar_pagos_adelantos_apellido_personal');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_apellido_personal, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_apellido_personal');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
@@ -61,16 +61,16 @@
           <th>
             <span>Mes<br/></span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_pagos_adelantos, :mes_periodo, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_pagos_adelantos_mes_periodo');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_pagos_descuentos, :mes_periodo_id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_mes_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
             <span>Año<br/></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_anho_periodo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_pagos_adelantos_anho_periodo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_anho_periodo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_anho_periodo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -78,16 +78,16 @@
           <th >
             <span>Monto<br/></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_monto, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-adelantos', '#form_buscar_pagos_adelantos_monto');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_monto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
            <th>
             <span>Observación<br/></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_pagos_adelantos_observacion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-adelantos', '#form_buscar_pagos_adelantos_observacion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_pagos_descuentos_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-descuentos', '#form_buscar_pagos_descuentos_observacion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -100,7 +100,7 @@
 
       </thead> 
 
-    <tbody id="pagos-adelantos-lista"></tbody>
+    <tbody id="pagos-descuentos-lista"></tbody>
   
   </table>
 
@@ -112,15 +112,15 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-pagos-adelantos").bind("submit", function () {
+  $("#form-buscar-pagos-descuentos").bind("submit", function () {
     
     var valido = true;
     
-    if($("#form_buscar_pagos_adelantos_nombre_personal").val().length !== 0 ){
+    if($("#form_buscar_pagos_descuentos_nombre_personal").val().length !== 0 ){
       
       valido = false;
 
-      if(($("#form_buscar_pagos_adelantos_nombre_personal").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_pagos_adelantos_apellido_personal").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_pagos_descuentos_nombre_personal").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_pagos_descuentos_apellido_personal").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       
       }else{
@@ -133,7 +133,7 @@
       
     if(valido){
     $(".nmb").html('');       
-    $("#pagos-adelantos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#pagos-descuentos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -142,17 +142,17 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-pagos-adelantos input, #table-pagos-adelantos select").bind('change', function () {
+  $("#table-pagos-descuentos input, #table-pagos-descuentos select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-pagos-adelantos").submit();
+      $("#form-buscar-pagos-descuentos").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-pagos-adelantos").submit();
+  $("#form-buscar-pagos-descuentos").submit();
   <% if params[:agregar] %>
-    $("#link-to-agregar-pago-adelanto").trigger('click');
+    $("#link-to-agregar-pago-descuento").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
 </script>
@@ -169,7 +169,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-pagos-adelantos table th { background:#e6e6e6;}
-    #form-buscar-pagos-adelantos table th span.limpiar { background:#fff;}
+    #form-buscar-pagos-descuentos table th { background:#e6e6e6;}
+    #form-buscar-pagos-descuentos table th span.limpiar { background:#fff;}
 
 </style>

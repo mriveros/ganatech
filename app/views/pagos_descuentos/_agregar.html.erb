@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Adelanto</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Descuento</h4>
       
     </div>
 
-    <%= form_for @pago_adelanto, remote: true, url: pagos_adelantos_guardar_url, html: { id: "form-agregar-pago-adelanto" }, method: 'POST' do |f| %>
+    <%= form_for @pago_descuento, remote: true, url: pagos_descuentos_guardar_url, html: { id: "form-agregar-pago-descuento" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -51,7 +51,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
         
          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-adelanto" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-descuento" %> 
 
       </div>
 
@@ -63,9 +63,9 @@
 
 <style type="text/css">
 
-  #form-agregar-pago-adelanto label, #form-agregar-pago-adelanto input[type='text'], #form-agregar-pago-adelanto select { float:left; margin-top:5px;}
-  #form-agregar-pago-adelanto br {clear:both; }
-  #form-agregar-pago-adelanto label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-pago-descuento label, #form-agregar-pago-descuento input[type='text'], #form-agregar-pago-descuento select { float:left; margin-top:5px;}
+  #form-agregar-pago-descuento br {clear:both; }
+  #form-agregar-pago-descuento label { width:200px;font-size:12px;margin-top:10px;}
   
   
 
@@ -73,7 +73,7 @@
 
 <script type="text/javascript">
 
- $("#btn-guardar-pago-adelanto").bind('click', function () {
+ $("#btn-guardar-pago-descuento").bind('click', function () {
 
       valido = true
       msg = ""
@@ -109,7 +109,7 @@
 
       if($("#monto").val().length == 0){
 
-        msg +="Debe ingresar el monto del adelanto.\n"
+        msg +="Debe ingresar el monto del descuento.\n"
         valido = false
       
       }
@@ -117,8 +117,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Adelanto",
-          text: "Al confirmar el Adelanto será restado del Salario por generar.",
+          title: "Confirmar Descuento",
+          text: "Al confirmar el Descuento será restado del Salario por generar.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -130,7 +130,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-pago-adelanto").submit();
+            $("#form-agregar-pago-descuento").submit();
             
           } 
 
