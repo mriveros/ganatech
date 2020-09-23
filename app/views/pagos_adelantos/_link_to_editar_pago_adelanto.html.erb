@@ -1,5 +1,5 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-registro-gasto-#{registro_gasto.registro_gasto_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Gastos.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-pago-adelanto-#{pago_adelanto.pago_adelanto_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Gastos.', onclick: "$('.modal').html('');return false;" %>
 
 
-<%= modal_window( window_id: "modal-window-editar-registro-gasto", link_to_id: "#link-to-editar-registro-gasto-#{registro_gasto.registro_gasto_id}", url: registros_gastos_editar_path( window_id: "modal-window-editar-registro-gasto", id: registro_gasto.registro_gasto_id) )%>
+<%= modal_window( window_id: "modal-window-editar-pago-adelanto", link_to_id: "#link-to-editar-pago-adelanto-#{pago_adelanto.pago_adelanto_id}", url: pagos_adelantos_editar_path( window_id: "modal-window-editar-pago-adelanto", id: pago_adelanto.pago_adelanto_id) )%>
 

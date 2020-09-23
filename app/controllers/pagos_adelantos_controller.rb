@@ -108,22 +108,22 @@ class PagosAdelantosController < ApplicationController
 
 	    @valido = true
 	    @msg = ""
-
+	    mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
 	    if @valido
 
-		    @registro_gasto = RegistroGasto.new()
-		    @registro_gasto.fecha = params[:fecha]
-		    @registro_gasto.gasto_id = params[:gasto][:id]
-		    @registro_gasto.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
-		    @registro_gasto.observacion = params[:observacion]
+		    @pago_adelanto = PagoAdelanto.new()
+		    @pago_adelanto.fecha = params[:fecha]
+		    @pago_adelanto.personal_id = params[:personal][:id]
+		    @pago_adelanto.mes_periodo = mes.descripcion
+		    @pago_adelanto.anho_periodo = params[:anho_periodo]
+		    @pago_adelanto.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
+		    @pago_adelanto.observacion = params[:observacion]
 
-		    if @registro_gasto.save
+		    if @pago_adelanto.save
 
-		    	auditoria_nueva("Registrar nuevo gasto", "registros_gastos", @registro_gasto)
-		       
+		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
 		        @guardado_ok = true
 		       
-
 		    end 
 
 		 end
@@ -142,14 +142,14 @@ class PagosAdelantosController < ApplicationController
 	    @msg = ""
 	    @eliminado =false
 
-	    @registro_gasto = RegistroGasto.find(params[:id])
-	    @registro_gasto_elim = @registro_gasto
+	    @pago_adelanto = PagoAdelanto.find(params[:id])
+	    @pago_adelanto_elim = @pago_adelanto
 
 	    if @valido
 
-	      if @registro_gasto.destroy
+	      if @pago_adelanto.destroy
 
-	        auditoria_nueva("Eliminar registro de gastos", "registros_gastos", @registro_gasto_elim)
+	        auditoria_nueva("Eliminar registro de adelanto", "pagos_adelantos", @pago_adelanto_elim)
 	        @eliminado = true
 
 	      end

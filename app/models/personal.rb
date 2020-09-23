@@ -5,7 +5,7 @@ class Personal < ActiveRecord::Base
   
   attr_accessible :id, :nombre, :apellido, :ruc_ci, :direccion, :telefono, :email, :cargo_id, :hacienda_id, :estado_personal_id, :observacion
   
-  scope :nombre_apellido, -> { select("nombre || ' ' || apellido as nombre_apellido")} 
+  scope :nombre_apellido, -> { select( "id, nombre || ' ' || apellido as nombre_apellido")} 
   scope :orden_01, -> { order("id")}
   
 end

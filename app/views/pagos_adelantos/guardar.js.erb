@@ -1,23 +1,23 @@
 <% if @guardado_ok == true %>
  
   $("#<%= params[:window_id]%>").modal('hide');
-  $("#form_buscar_registros_gastos_id").val('<%=@registro_gasto.id%>');
-  $("#form_buscar_registros_gastos_fecha").val('');
-  $("#form_buscar_registros_gastos_gasto").val('');
-  $("#form_buscar_registros_gastos_monto").val('');
-  $("#form_buscar_registros_gastos_observacion").val('');
+  $("#form_buscar_pagos_adelantos_id").val('<%=@pago_adelanto.id%>');
+  $("#form_buscar_pagos_adelantos_fecha").val('');
+  $("#form_buscar_pagos_adelantos_gasto").val('');
+  $("#form_buscar_pagos_adelantos_monto").val('');
+  $("#form_buscar_pagos_adelantos_observacion").val('');
 
   setTimeout( function(){ 
 
-    swal("Registros Gastos","Gasto Registrado Exitosamente!", "success");
+    swal("Adelantos","Adelanto Registrado Exitosamente!", "success");
 
     }, 1000);
 
- 	$("#form-buscar-registros-gastos").submit();
+ 	$("#form-buscar-pagos-adelantos").submit();
 
 <% else %>
 	
-	$("<div class='col-sm-12' id='msg-guardar-registro-gasto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-registro-gasto");
- 	swal("Registros Gastos", "Error al registrar el Gasto. Intente más tarde","error");
+	$("<div class='col-sm-12' id='msg-guardar-pago-adelanto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>No se pudo registrar el Adelanto</div>").insertBefore("#form-agregar-pago-adelanto");
+ 	swal("Adelantos", "Error al registrar el Adelanto. Intente más tarde","error");
 
 <% end %>
