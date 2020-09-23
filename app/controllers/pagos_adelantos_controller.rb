@@ -108,13 +108,13 @@ class PagosAdelantosController < ApplicationController
 
 	    @valido = true
 	    @msg = ""
-	    mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
+	    
 	    if @valido
 
 		    @pago_adelanto = PagoAdelanto.new()
 		    @pago_adelanto.fecha = params[:fecha]
 		    @pago_adelanto.personal_id = params[:personal][:id]
-		    @pago_adelanto.mes_periodo = mes.descripcion
+		    @pago_adelanto.mes_periodo_id = params[:mes_periodo][:id]
 		    @pago_adelanto.anho_periodo = params[:anho_periodo]
 		    @pago_adelanto.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
 		    @pago_adelanto.observacion = params[:observacion]
@@ -166,7 +166,7 @@ class PagosAdelantosController < ApplicationController
 
 	  def editar
 
-	    @registro_gasto = RegistroGasto.find(params[:id])
+	    @pago_adelanto = PagoAdelanto.find(params[:id])
 
 	    respond_to do |f|
 
@@ -181,26 +181,28 @@ class PagosAdelantosController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @registro_gasto = RegistroGasto.find(params[:id])
-	    auditoria_id = auditoria_antes("actualizar registro gasto", "registros_gastos", @registro_gasto)
+	    @pago_adelanto = PagoAdelanto.find(params[:pago_adelanto_id])
+	    auditoria_id = auditoria_antes("actualizar pago_adelanto", "pagos_adelantos", @pago_adelanto)
 
 	    if valido
 
-	    	@registro_gasto.fecha = params[:registro_gasto][:fecha]
-		  	@registro_gasto.gasto_id = params[:registro_gasto][:gasto_id]
-		    @registro_gasto.monto = params[:registro_gasto][:monto].to_s.gsub(/[$.]/,'').to_i
-		    @registro_gasto.observacion = params[:registro_gasto][:observacion]
+	    	@pago_adelanto = PagoAdelanto.new()
+		    @pago_adelanto.fecha = params[:pago_adelanto][:fecha]
+		    @pago_adelanto.personal_id = params[:pago_adelanto][:personal_id]
+		    @pago_adelanto.mes_periodo_id = params[:pago_adelanto][:mes_periodo_id]
+		    @pago_adelanto.anho_periodo = params[:pago_adelanto][:anho_periodo]
+		    @pago_adelanto.monto = params[:pago_adelanto][:monto].to_s.gsub(/[$.]/,'').to_i
+		    @pago_adelanto.observacion = params[:pago_adelanto][:observacion]
 
-	      if @registro_gasto.save
+		    if @pago_adelanto.save
 
-	      	auditoria_despues(@registro_gasto, auditoria_id)
-	        @registro_gasto_ok = true
+		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
+		        @actualizado_ok = true
+		       
+		    end 
 
-	      end
-
-	    end
-	               
-	        
+		 end
+	         
 	    respond_to do |f|
 
 	      f.js

@@ -5,20 +5,21 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Adelanto</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Adelanto</h4>
       
     </div>
 
     <%= form_for @pago_adelanto, remote: true, url: pagos_adelantos_actualizar_url, html: { id: "form-editar-pago-adelanto" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= hidden_field_tag :pago_adelanto_id, params[:id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha,Date.today, class: 'form-control input-sm' %>
+          <div class="col-sm-7"><%= f.date_field :fecha, class: 'form-control input-sm' %>
           </div>    
           <div class="col-sm-1"></div><br /><br />
 
@@ -27,20 +28,20 @@
           <div class="col-sm-1"></div><br /><br />
 
            <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= f.collection_select :mes_periodo_id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.year, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
+          <div class="col-sm-7"><%= f.text_field :anho_periodo, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Monto #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :monto, nil, :onkeyup=>' formatear_numero(this)' ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
+          <div class="col-sm-7"><%= f.text_field :monto, :onkeyup=>' formatear_numero(this)' ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
-          <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
+          <%= f.text_area :observacion, class: 'form-control input-sm' , maxlength: "510" %>
           </div>
  
           
@@ -77,28 +78,28 @@
       valido = true
       msg = ""
 
-      if($("#fecha").val().length == 0){
+      if($("#pago_adelanto_fecha").val().length == 0){
 
         msg +="Ingrese la fecha del gasto.\n"
         valido = false
       
       }
 
-      if($("#personal_id").val().length == 0){
+      if($("#pago_adelanto_personal_id").val().length == 0){
 
         msg +="Debe seleccionar un Personal.\n"
         valido = false
       
       }
 
-      if($("#mes_periodo_id").val().length == 0){
+      if($("#pago_adelanto_mes_periodo_id").val().length == 0){
 
         msg +="Debe ingresar el mes.\n"
         valido = false
       
       }
 
-      if($("#anho_periodo").val().length == 0){
+      if($("#pago_adelanto_anho_periodo").val().length == 0){
 
         msg +="Debe ingresar el año.\n"
         valido = false
@@ -106,7 +107,7 @@
       }
 
 
-      if($("#monto").val().length == 0){
+      if($("#pago_adelanto_monto").val().length == 0){
 
         msg +="Debe ingresar el monto del adelanto.\n"
         valido = false

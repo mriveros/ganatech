@@ -1,4 +1,4 @@
-<% if @actualizado == true %>
+<% if @actualizado_ok == true %>
  
   $("#<%= params[:window_id]%>").modal('hide');
   $("#form_buscar_pagos_adelantos_id").val('<%=@pago_adelanto.id%>');
@@ -9,7 +9,7 @@
 
   setTimeout( function(){ 
 
-    swal("Adelantos","Adelanto Registrado Exitosamente!", "success");
+    swal("Adelantos","Adelanto modificado Exitosamente!", "success");
 
     }, 1000);
 
