@@ -12,60 +12,59 @@ class PagosRemuneracionesExtrasController < ApplicationController
 	    cond = []
 	    args = []
 
-	    if params[:form_buscar_pagos_adelantos_id].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_id].present?
 
-	      cond << "pago_adelanto_id = ?"
-	      args << params[:form_buscar_pagos_adelantos_id]
+	      cond << "pago_remuneracion_extra_id = ?"
+	      args << params[:form_buscar_pagos_remuneraciones_extras_id]
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_fecha].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_fecha].present?
 
 	      cond << "fecha = ?"
-	      args << params[:form_buscar_pagos_adelantos_fecha]
+	      args << params[:form_buscar_pagos_remuneraciones_extras_fecha]
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_nombre_personal].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_nombre_personal].present?
 
 	      cond << "personal_nombre ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_nombre_personal]}%"
+	      args << "%#{params[:form_buscar_pagos_remuneraciones_extras_nombre_personal]}%"
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_apellido_personal].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_apellido_personal].present?
 
 	      cond << "personal_apellido ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_apellido_personal]}%"
+	      args << "%#{params[:form_buscar_pagos_remuneraciones_extras_apellido_personal]}%"
  
 	    end
 
-	    if params[:form_buscar_pagos_adelantos][:mes_periodo].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras][:mes_periodo_id].present?
 
-      		@mes_periodo = Mes.where("id = ?", params[:form_buscar_pagos_adelantos][:mes_periodo]).first
-      		cond << "mes_periodo = ?"
-      		args << @mes_periodo.descripcion
+      		cond << "mes_periodo_id = ?"
+      		args << params[:form_buscar_pagos_remuneraciones_extras][:mes_periodo_id]
 
     	end
 
-    	if params[:form_buscar_pagos_adelantos_anho_periodo].present?
+    	if params[:form_buscar_pagos_remuneraciones_extras_anho_periodo].present?
 
 	      cond << "anho_periodo ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_anho_periodo]}%"
+	      args << "%#{params[:form_buscar_pagos_remuneraciones_extras_anho_periodo]}%"
 
 	    end
 	    
-	    if params[:form_buscar_pagos_adelantos_monto].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_monto].present?
 
 	      cond << "monto = ?"
-	      args << params[:form_buscar_pagos_adelantos_monto]
+	      args << params[:form_buscar_pagos_remuneraciones_extras_monto]
 
 	    end
 
-	    if params[:form_buscar_pagos_adelantos_observacion].present?
+	    if params[:form_buscar_pagos_remuneraciones_extras_observacion].present?
 
 	      cond << "observacion ilike ?"
-	      args << "%#{params[:form_buscar_pagos_adelantos_observacion]}%"
+	      args << "%#{params[:form_buscar_pagos_remuneraciones_extras_observacion]}%"
 
 	    end
 	    
@@ -74,13 +73,13 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 	    if cond.size > 0
 
-	      @pagos_adelantos =  VPagoAdelanto.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = VPagoAdelanto.where(cond).count
+	      @pagos_remuneraciones_extras =  VPagoRemuneracionExtra.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = VPagoRemuneracionExtra.where(cond).count
 
 	    else
 
-	      @pagos_adelantos = VPagoAdelanto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = PagoAdelanto.count
+	      @pagos_remuneraciones_extras = VPagoRemuneracionExtra.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = PagoRemuneracionExtra.count
 
 	    end
 
@@ -96,7 +95,7 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 	  def agregar
 
-	    @pago_adelanto = PagoAdelanto.new
+	    @pago_remuneracion_extra = PagoRemuneracionExtra.new
 
 	    respond_to do |f|
 	      f.js
@@ -111,17 +110,17 @@ class PagosRemuneracionesExtrasController < ApplicationController
 	    
 	    if @valido
 
-		    @pago_adelanto = PagoAdelanto.new()
-		    @pago_adelanto.fecha = params[:fecha]
-		    @pago_adelanto.personal_id = params[:personal][:id]
-		    @pago_adelanto.mes_periodo_id = params[:mes_periodo][:id]
-		    @pago_adelanto.anho_periodo = params[:anho_periodo]
-		    @pago_adelanto.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
-		    @pago_adelanto.observacion = params[:observacion]
+		    @pago_remuneracion_extra = PagoRemuneracionExtra.new()
+		    @pago_remuneracion_extra.fecha = params[:fecha]
+		    @pago_remuneracion_extra.personal_id = params[:personal][:id]
+		    @pago_remuneracion_extra.mes_periodo_id = params[:mes_periodo][:id]
+		    @pago_remuneracion_extra.anho_periodo = params[:anho_periodo]
+		    @pago_remuneracion_extra.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
+		    @pago_remuneracion_extra.observacion = params[:observacion]
 
-		    if @pago_adelanto.save
+		    if @pago_remuneracion_extra.save
 
-		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
+		    	auditoria_nueva("Registrar nuevo RemuneracionExtra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
 		        @guardado_ok = true
 		       
 		    end 
@@ -142,14 +141,14 @@ class PagosRemuneracionesExtrasController < ApplicationController
 	    @msg = ""
 	    @eliminado =false
 
-	    @pago_adelanto = PagoAdelanto.find(params[:id])
-	    @pago_adelanto_elim = @pago_adelanto
+	    @pago_remuneracion_extra = PagoRemuneracionExtra.find(params[:id])
+	    @pago_remuneracion_extra_elim = @pago_remuneracion_extra
 
 	    if @valido
 
-	      if @pago_adelanto.destroy
+	      if @pago_remuneracion_extra.destroy
 
-	        auditoria_nueva("Eliminar registro de adelanto", "pagos_adelantos", @pago_adelanto_elim)
+	        auditoria_nueva("Eliminar registro de RemuneracionExtra", "pagos_remuneraciones_extras", @pago_remuneracion_extra_elim)
 	        @eliminado = true
 
 	      end
@@ -166,7 +165,7 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 	  def editar
 
-	    @pago_adelanto = PagoAdelanto.find(params[:id])
+	    @pago_remuneracion_extra = PagoRemuneracionExtra.find(params[:id])
 
 	    respond_to do |f|
 
@@ -181,22 +180,22 @@ class PagosRemuneracionesExtrasController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @pago_adelanto = PagoAdelanto.find(params[:pago_adelanto_id])
-	    auditoria_id = auditoria_antes("actualizar pago_adelanto", "pagos_adelantos", @pago_adelanto)
+	    @pago_remuneracion_extra = PagoRemuneracionExtra.find(params[:pago_remuneracion_extra_id])
+	    auditoria_id = auditoria_antes("actualizar pago_remuneracion_extra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
 
 	    if valido
 
-	    	@pago_adelanto = PagoAdelanto.new()
-		    @pago_adelanto.fecha = params[:pago_adelanto][:fecha]
-		    @pago_adelanto.personal_id = params[:pago_adelanto][:personal_id]
-		    @pago_adelanto.mes_periodo_id = params[:pago_adelanto][:mes_periodo_id]
-		    @pago_adelanto.anho_periodo = params[:pago_adelanto][:anho_periodo]
-		    @pago_adelanto.monto = params[:pago_adelanto][:monto].to_s.gsub(/[$.]/,'').to_i
-		    @pago_adelanto.observacion = params[:pago_adelanto][:observacion]
+	    	@pago_remuneracion_extra = PagoRemuneracionExtra.new()
+		    @pago_remuneracion_extra.fecha = params[:pago_remuneracion_extra][:fecha]
+		    @pago_remuneracion_extra.personal_id = params[:pago_remuneracion_extra][:personal_id]
+		    @pago_remuneracion_extra.mes_periodo_id = params[:pago_remuneracion_extra][:mes_periodo_id]
+		    @pago_remuneracion_extra.anho_periodo = params[:pago_remuneracion_extra][:anho_periodo]
+		    @pago_remuneracion_extra.monto = params[:pago_remuneracion_extra][:monto].to_s.gsub(/[$.]/,'').to_i
+		    @pago_remuneracion_extra.observacion = params[:pago_remuneracion_extra][:observacion]
 
-		    if @pago_adelanto.save
+		    if @pago_remuneracion_extra.save
 
-		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
+		    	auditoria_nueva("Registrar nuevo Remuneracion Extra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
 		        @actualizado_ok = true
 		       
 		    end 

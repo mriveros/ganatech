@@ -1,25 +1,25 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-pago-adelanto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pagos-adelantos");
-   $("#form_buscar_pagos_adelantos_id").val("<%=@pago_adelanto_elim.id%>")
-   $("#form-buscar-pagos-adelantos").submit();
+   $("<div class='col-sm-12' id='msg-eliminar-pago-remuneracion-extra' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pagos-remuneraciones-extras");
+   $("#form_buscar_pagos_remuneraciones_extras_id").val("<%=@pago_remuneracion_extra_elim.id%>")
+   $("#form-buscar-pagos-remuneraciones_extras").submit();
     
     setTimeout(function(){
 
-      $("#msg-eliminar-pago-adelanto").remove();
+      $("#msg-eliminar-pago-remuneracion-extra").remove();
       
-      swal("Adelantos","Registro de Adelanto eliminado exitosamente.", "success");
+      swal("Remuneraciones Extras","Registro de Remuneración Extra eliminado exitosamente.", "success");
 
     }, 1000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-pago-adelanto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-pagos-adelantos");
+  $("<div class='col-sm-12' id='msg-eliminar-pago-remuneracion-extra' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-pagos-remuneraciones-extras");
   
   setTimeout(function(){ 
 
-  	$("#msg-eliminar-pago-adelanto").remove(); 
-	 swal("Adelantos", "No se pudo eliminar el Registro de Adelanto. Intente más tarde.", "error");
+  	$("#msg-eliminar-pago-remuneracion-extra").remove(); 
+	 swal("Remuneraciones Extras", "No se pudo eliminar el Registro de Remuneración Extra. Intente más tarde.", "error");
 
 	}, 1500);
 

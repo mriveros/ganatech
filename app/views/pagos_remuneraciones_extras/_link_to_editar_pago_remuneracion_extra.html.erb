@@ -1,5 +1,5 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-pago-adelanto-#{pago_adelanto.pago_adelanto_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Gastos.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-pago-remuneracion-extra-#{pago_remuneracion_extra.pago_remuneracion_extra_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Remuneración Extra.', onclick: "$('.modal').html('');return false;" %>
 
 
-<%= modal_window( window_id: "modal-window-editar-pago-adelanto", link_to_id: "#link-to-editar-pago-adelanto-#{pago_adelanto.pago_adelanto_id}", url: pagos_adelantos_editar_path( window_id: "modal-window-editar-pago-adelanto", id: pago_adelanto.pago_adelanto_id) )%>
+<%= modal_window( window_id: "modal-window-editar-pago-remuneracion-extra", link_to_id: "#link-to-editar-pago-remuneracion-extra-#{pago_remuneracion_extra.pago_remuneracion_extra_id}", url: pagos_remuneraciones_extras_editar_path( window_id: "modal-window-editar-pago-remuneracion-extra", id: pago_remuneracion_extra.pago_remuneracion_extra_id) )%>
 

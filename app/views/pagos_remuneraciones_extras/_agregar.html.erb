@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Adelanto</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Remuneracion Extra</h4>
       
     </div>
 
-    <%= form_for @pago_adelanto, remote: true, url: pagos_adelantos_guardar_url, html: { id: "form-agregar-pago-adelanto" }, method: 'POST' do |f| %>
+    <%= form_for @pago_remuneracion_extra, remote: true, url: pagos_remuneraciones_extras_guardar_url, html: { id: "form-agregar-pago-remuneracion-extra" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -51,7 +51,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
         
          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-adelanto" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-remuneracion-extra" %> 
 
       </div>
 
@@ -63,9 +63,9 @@
 
 <style type="text/css">
 
-  #form-agregar-pago-adelanto label, #form-agregar-pago-adelanto input[type='text'], #form-agregar-pago-adelanto select { float:left; margin-top:5px;}
-  #form-agregar-pago-adelanto br {clear:both; }
-  #form-agregar-pago-adelanto label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-pago-remuneracion-extra label, #form-agregar-pago-remuneracion-extra input[type='text'], #form-agregar-pago-remuneracion-extra select { float:left; margin-top:5px;}
+  #form-agregar-pago-remuneracion-extra br {clear:both; }
+  #form-agregar-pago-remuneracion-extra label { width:200px;font-size:12px;margin-top:10px;}
   
   
 
@@ -73,7 +73,7 @@
 
 <script type="text/javascript">
 
- $("#btn-guardar-pago-adelanto").bind('click', function () {
+ $("#btn-guardar-pago-remuneracion-extra").bind('click', function () {
 
       valido = true
       msg = ""
@@ -109,7 +109,7 @@
 
       if($("#monto").val().length == 0){
 
-        msg +="Debe ingresar el monto del adelanto.\n"
+        msg +="Debe ingresar el monto de la Remuneración Extra.\n"
         valido = false
       
       }
@@ -117,8 +117,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Adelanto",
-          text: "Al confirmar el Adelanto será restado del Salario por generar.",
+          title: "Confirmar Remuneración Extra",
+          text: "Al confirmar la Remuneracion Extra este será sumado al Salario por generar.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -130,7 +130,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-pago-adelanto").submit();
+            $("#form-agregar-pago-remuneracion-extra").submit();
             
           } 
 

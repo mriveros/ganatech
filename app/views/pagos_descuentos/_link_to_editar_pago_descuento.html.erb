@@ -1,4 +1,4 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-pago-descuento-#{pago_descuento.pago_descuento_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Gastos.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-pago-descuento-#{pago_descuento.pago_descuento_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Registro de Descuento.', onclick: "$('.modal').html('');return false;" %>
 
 
 <%= modal_window( window_id: "modal-window-editar-pago-descuento", link_to_id: "#link-to-editar-pago-descuento-#{pago_descuento.pago_descuento_id}", url: pagos_descuentos_editar_path( window_id: "modal-window-editar-pago-descuento", id: pago_descuento.pago_descuento_id) )%>

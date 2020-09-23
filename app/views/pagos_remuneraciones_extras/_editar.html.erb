@@ -5,14 +5,14 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Adelanto</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Remuneración Extra</h4>
       
     </div>
 
-    <%= form_for @pago_adelanto, remote: true, url: pagos_adelantos_actualizar_url, html: { id: "form-editar-pago-adelanto" }, method: 'POST' do |f| %>
+    <%= form_for @pago_remuneracion_extra, remote: true, url: pagos_remuneraciones_extras_actualizar_url, html: { id: "form-editar-pago-remuneracion-extra" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :pago_adelanto_id, params[:id]%>
+      <%= hidden_field_tag :pago_remuneracion_extra_id, params[:id]%>
 
       <div class="modal-body">
 
@@ -51,7 +51,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
         
          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-actualizar-pago-adelanto" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-actualizar-pago-remuneracion-extra" %> 
 
       </div>
 
@@ -63,9 +63,9 @@
 
 <style type="text/css">
 
-  #form-editar-pago-adelanto label, #form-editar-pago-adelanto input[type='text'], #form-editar-pago-adelanto select { float:left; margin-top:5px;}
-  #form-editar-pago-adelanto br {clear:both; }
-  #form-editar-pago-adelanto label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-pago-remuneracion-extra label, #form-editar-pago-remuneracion-extra input[type='text'], #form-editar-pago-remuneracion-extra select { float:left; margin-top:5px;}
+  #form-editar-pago-remuneracion-extra br {clear:both; }
+  #form-editar-pago-remuneracion-extra label { width:200px;font-size:12px;margin-top:10px;}
   
   
 
@@ -73,33 +73,33 @@
 
 <script type="text/javascript">
 
- $("#btn-actualizar-pago-adelanto").bind('click', function () {
+ $("#btn-actualizar-pago-remuneracion-extra").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#pago_adelanto_fecha").val().length == 0){
+      if($("#pago_remuneracion_extra_fecha").val().length == 0){
 
         msg +="Ingrese la fecha del gasto.\n"
         valido = false
       
       }
 
-      if($("#pago_adelanto_personal_id").val().length == 0){
+      if($("#pago_remuneracion_extra_personal_id").val().length == 0){
 
         msg +="Debe seleccionar un Personal.\n"
         valido = false
       
       }
 
-      if($("#pago_adelanto_mes_periodo_id").val().length == 0){
+      if($("#pago_remuneracion_extra_mes_periodo_id").val().length == 0){
 
         msg +="Debe ingresar el mes.\n"
         valido = false
       
       }
 
-      if($("#pago_adelanto_anho_periodo").val().length == 0){
+      if($("#pago_remuneracion_extra_anho_periodo").val().length == 0){
 
         msg +="Debe ingresar el año.\n"
         valido = false
@@ -107,9 +107,9 @@
       }
 
 
-      if($("#pago_adelanto_monto").val().length == 0){
+      if($("#pago_remuneracion_extra_monto").val().length == 0){
 
-        msg +="Debe ingresar el monto del adelanto.\n"
+        msg +="Debe ingresar el monto del remuneracion_extra.\n"
         valido = false
       
       }
@@ -117,8 +117,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Adelanto",
-          text: "Al confirmar el Adelanto será restado del Salario por generar.",
+          title: "Confirmar Remuneración Extra",
+          text: "Al confirmar el Remuneración extra será restado del Salario por generar.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -130,7 +130,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-editar-pago-adelanto").submit();
+            $("#form-editar-pago-remuneracion-extra").submit();
             
           } 
 

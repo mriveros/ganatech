@@ -1,10 +1,10 @@
-<% if pagos_adelantos.present? %>
+<% if pagos_remuneraciones_extras.present? %>
 
-  <% pagos_adelantos.each do |pa| %>
+  <% pagos_remuneraciones_extras.each do |pa| %>
 
     <tr>
 
-      <td><%= pa.pago_adelanto_id %></td>
+      <td><%= pa.pago_remuneracion_extra_id %></td>
       <td><%= pa.fecha.strftime('%d/%m/%Y')%></td>
       <td><%= pa.personal_nombre %></td>
       <td><%= pa.personal_apellido %></td>
@@ -14,9 +14,9 @@
       <td><%= pa.observacion%></td>
       <td>
       
-      <%= link_to_editar_pago_adelanto(pa) %>
+      <%= link_to_editar_pago_remuneraciones_extras(pa) %>
       
-      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pa.pago_adelanto_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-registro-gasto", title: 'Haga click para eliminar el Pago de Adelanto'  %>
+      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pa.pago_remuneracion_extra_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-registro-remuneracion-extra", title: 'Haga click para eliminar el Pago de Remuneración Extra'  %>
        
          
        </td>
@@ -32,7 +32,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate pagos_adelantos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate pagos_remuneraciones_extras, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -61,7 +61,7 @@
 
     swal({
       title: "Confirmar",
-      text: "Al confirmar se eliminará permanentemente de la lista de Registros de Adelantos",
+      text: "Al confirmar se eliminará permanentemente de la lista de Registros de Remuneraciones Extras",
       type: "warning",
       showCancelButton: true,
       confirmButtonClass: "btn-confirm",
@@ -74,7 +74,7 @@
       if (isConfirm) {
 
         $.ajax({
-          url: "<%= url_for(pagos_adelantos_eliminar_path) %>",
+          url: "<%= url_for(pagos_remuneraciones_extras_eliminar_path) %>",
           data: {id: registro_gasto_id},
           dataType: 'script'
         });
