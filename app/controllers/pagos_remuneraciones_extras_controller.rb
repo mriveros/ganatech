@@ -185,7 +185,7 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 	    if valido
 
-	    	@pago_remuneracion_extra = PagoRemuneracionExtra.new()
+	    	
 		    @pago_remuneracion_extra.fecha = params[:pago_remuneracion_extra][:fecha]
 		    @pago_remuneracion_extra.personal_id = params[:pago_remuneracion_extra][:personal_id]
 		    @pago_remuneracion_extra.mes_periodo_id = params[:pago_remuneracion_extra][:mes_periodo_id]
