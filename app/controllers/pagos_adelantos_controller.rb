@@ -123,6 +123,44 @@ class PagosAdelantosController < ApplicationController
 
 		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
 		        @guardado_ok = true
+		        @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).first
+		        
+		        if @pago_salario.present?
+
+		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+					
+					@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
+					@pago_salario_detalle.each do |psd|
+
+						@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
+			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
+
+			            psd.adelantos = @personal_total_adelantos
+              			psd.descuentos = @personal_total_descuentos
+              			psd.otras_remuneraciones = @personal_total_remuneracion_extra
+              			psd.salario_percibido = @personal_sueldo_percibido
+
+              			if psd.save
+
+              			end
+
+					end
+
+					@pago_salario.monto_total_pagado = @acumulacion_sueldo_percibido
+					
+					if @pago_salario.save
+
+			           @guardado_ok = true
+
+			        end
+
+		        end
 		       
 		    end 
 
@@ -147,12 +185,50 @@ class PagosAdelantosController < ApplicationController
 
 	    if @valido
 
-	      if @pago_adelanto.destroy
+	      	if @pago_adelanto.destroy
 
-	        auditoria_nueva("Eliminar registro de adelanto", "pagos_adelantos", @pago_adelanto_elim)
-	        @eliminado = true
+	        	auditoria_nueva("Eliminar registro de adelanto", "pagos_adelantos", @pago_adelanto_elim)
+	        	@eliminado = true
+	        	@pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).first
+		        
+		        if @pago_salario.present?
 
-	      end
+		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto)
+				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto)
+				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto)
+					
+					@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
+					@pago_salario_detalle.each do |psd|
+
+						@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
+			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto).to_i
+			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto).to_i
+			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, @pago_adelanto_elim.mes_periodo_id, @pago_adelanto_elim.anho_periodo).sum(:monto).to_i
+			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
+
+			            psd.adelantos = @personal_total_adelantos
+              			psd.descuentos = @personal_total_descuentos
+              			psd.otras_remuneraciones = @personal_total_remuneracion_extra
+              			psd.salario_percibido = @personal_sueldo_percibido
+
+              			if psd.save
+
+              			end
+
+					end
+
+					@pago_salario.monto_total_pagado = @acumulacion_sueldo_percibido
+					
+					if @pago_salario.save
+
+			           @guardado_ok = true
+
+			        end
+
+		        end
+
+	      	end
 
 	    end
 	        
@@ -198,7 +274,45 @@ class PagosAdelantosController < ApplicationController
 
 		    	auditoria_nueva("Registrar nuevo adelanto", "pagos_adelantos", @pago_adelanto)
 		        @actualizado_ok = true
-		       
+		       	@pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).first
+		        
+		        if @pago_salario.present?
+
+		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto)
+				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto)
+				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?",params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto)
+					
+					@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
+					@pago_salario_detalle.each do |psd|
+
+						@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
+			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto).to_i
+			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto).to_i
+			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:pago_adelanto][:mes_periodo_id], params[:pago_adelanto][:anho_periodo]).sum(:monto).to_i
+			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
+
+			            psd.adelantos = @personal_total_adelantos
+              			psd.descuentos = @personal_total_descuentos
+              			psd.otras_remuneraciones = @personal_total_remuneracion_extra
+              			psd.salario_percibido = @personal_sueldo_percibido
+
+              			if psd.save
+
+              			end
+
+					end
+
+					@pago_salario.monto_total_pagado = @acumulacion_sueldo_percibido
+					
+					if @pago_salario.save
+
+			           @guardado_ok = true
+
+			        end
+
+		        end
+
 		    end 
 
 		 end
