@@ -295,9 +295,9 @@ before_filter :require_usuario
     if @valido
       
       @potrero_detalle = PotreroBatea.new()
-      @potrero_detalle.descripcion = params[:potrero_detalle][:descripcion].upcase
-      @potrero_detalle.hectareas = params[:potrero_detalle][:capacidad]
-      @potrero_detalle.hectareas = params[:potrero_detalle][:porcentaje]
+      @potrero_detalle.descripcion = params[:potrero_batea][:descripcion].upcase
+      @potrero_detalle.capacidad = params[:potrero_batea][:capacidad]
+      @potrero_detalle.porcentaje = params[:potrero_batea][:porcentaje]
       @potrero_detalle.potrero_id = params[:potrero_id]
       @potrero_detalle.observacion = params[:observacion]
 
@@ -325,6 +325,7 @@ before_filter :require_usuario
     @msg = ""
 
     @potrero_detalle = PotreroBatea.find(params[:potrero_batea_id])
+    @potrero_detalle_elim = @potrero_detalle
 
     if @valido
 
