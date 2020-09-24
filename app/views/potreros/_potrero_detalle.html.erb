@@ -60,7 +60,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Pozos de Agua.</h3>
+        <h3 style="float:left;margin-top:5px;">Bateas y Pozos.</h3>
       </div>
       <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Potrero detalle".html_safe, "#", id: "link-to-agregar-potrero-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
        <%= modal_window( window_id: "modal-window-agregar-potrero-detalle", link_to_id: "#link-to-agregar-potrero-detalle", url: potreros_agregar_potrero_detalle_path( window_id: "modal-window-agregar-potrero-detalle", potrero_id: params[:potrero_id]) )%>
@@ -98,7 +98,28 @@
 
                   <td><%= pd.descripcion %></td>
                   <td><%= pd.capacidad %></td>
-                  <td><%= pd.porcentaje %></td>
+                  <td>
+                    <div class="progress">
+                      <%if pd.porcentaje <= 25%>
+                        
+                        <div class="progress-bar-striped progress-bar" aria-valuenow="<%=pd.porcentaje %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= pd.porcentaje %>%;background-color: #8c0505;"></div>
+
+                      <%elsif pd.porcentaje > 25 && pd.porcentaje <= 50%>
+                        
+                        <div class="progress-bar-striped progress-bar" aria-valuenow="<%=pd.porcentaje %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= pd.porcentaje %>%;background-color: #ed9c28;"></div>
+
+                      <%elsif pd.porcentaje > 50 && pd.porcentaje < 75%>
+                        
+                        <div class="progress-bar-striped progress-bar" aria-valuenow="<%=pd.porcentaje %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= pd.porcentaje %>%"></div>
+
+                      <%elsif pd.porcentaje >= 75%>
+                        
+                        <div class="progress-bar-striped progress-bar" aria-valuenow="<%=pd.porcentaje %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= pd.porcentaje %>%;background-color: #5cb85c;"></div>
+
+                      <%end%>
+                    </div>
+
+                  </td>
                   <td><%= pd.observacion %></td>
                    <td style="width: 50px;text-align:right;">
                     <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{pd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero-detalle", title: 'Haga click para eliminar el detalle del Potrero'  %>
