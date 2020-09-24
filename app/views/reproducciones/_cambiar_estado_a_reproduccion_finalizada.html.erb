@@ -85,8 +85,8 @@
                 <div class="panel-body">
 
                   
-                  <div class="col-sm-4"><%= label_tag :nil, "Muestra(Esperma)#{attr_requerido}".html_safe %></div>
-                  <div class="col-sm-7"><%= f.text_area :esperma_descripcion, class: 'form-control input-sm' %></div>
+                  <div class="col-sm-4"><%= label_tag :nil, "Muestra(Esperma)".html_safe %></div>
+                  <div class="col-sm-7"><%= f.text_area :esperma_descripcion, class: 'form-control input-sm', readonly: true %></div>
                   <div class="col-sm-1"></div><br /><br />
 
                   <div class="col-sm-4"><%= f.label :procedencia_lbl, "Procedencia ".html_safe %></div>
@@ -122,8 +122,8 @@
                     <div class="col-sm-7"><%= f.text_field :esperma_raza_id, class: 'form-control input-sm', readonly: true %></div>
                     <div class="col-sm-1"></div><br /><br />
 
-                    <div class="col-sm-4"><%= label_tag :nil, "Observación (Muestra)#{attr_requerido}".html_safe %></div>
-                    <div class="col-sm-7"><%= f.text_area :esperma_observacion, class: 'form-control input-sm' %></div>
+                    <div class="col-sm-4"><%= label_tag :nil, "Observación (Muestra)".html_safe %></div>
+                    <div class="col-sm-7"><%= f.text_area :esperma_observacion, class: 'form-control input-sm',readonly: true  %></div>
                     <div class="col-sm-1"></div><br /><br />
 
                   <%end%>
@@ -149,7 +149,7 @@
           <div class="col-sm-1"></div><br /><br /> 
 
           
-          <div class="col-sm-4"><%= label_tag :nil, "Nombre ganado #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Nombre ganado".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :nombre_ganado ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br /><br />
 
@@ -215,7 +215,7 @@
     $("#inseminacion_artificial").hide();
 
   } else{
-    alert("sd")
+    
     $("#inseminacion_artificial").show();
     $("#monta_natural").hide();
 
@@ -250,13 +250,6 @@
       if($("#fecha_concepcion").val().length == 0){
 
         msg +="Debe seleccionar una fecha de nacimiento.\n"
-        valido = false
-          
-      }
-
-      if($("#nombre_ganado").val().length == 0){
-
-        msg +="Debe agregar un nombre.\n"
         valido = false
           
       }

@@ -370,7 +370,15 @@ before_filter :require_usuario
       if @valido
 
           ganado = Ganado.new
-          ganado.nombre = params[:nombre_ganado]
+          unless params[:nombre_ganado].present?
+            
+            ganado.nombre = params[:ganado_rp]
+
+          else
+
+            ganado.nombre = params[:nombre_ganado]
+
+          end
           ganado.rp = params[:ganado_rp]
           ganado.codigo_lote = params[:codigo_lote]
 
