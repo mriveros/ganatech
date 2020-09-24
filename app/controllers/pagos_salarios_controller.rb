@@ -27,11 +27,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_pagos_salarios][:mes_periodo].present?
+    if params[:form_buscar_pagos_salarios][:mes_periodo_id].present?
 
-      @mes_periodo = Mes.where("id = ?", params[:form_buscar_pagos_salarios][:mes_periodo]).first
-      cond << "mes_periodo = ?"
-      args << @mes_periodo.descripcion
+      cond << "mes_periodo_id = ?"
+      args << params[:form_buscar_pagos_salarios][:mes_periodo_id]
 
     end
 
@@ -128,7 +127,7 @@ skip_before_action :verify_authenticity_token
     @guardado_ok = false
     @acumulacion_sueldo_percibido = 0
 
-    @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).first
+    @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ? and hacienda_id = ? ", params[:mes_periodo][:id], params[:anho_periodo], params[:hacienda][:id]).first
     
     if @pago_salario.present?
 
@@ -136,14 +135,21 @@ skip_before_action :verify_authenticity_token
       @msg += "El Pago de Salarios del Periodo seleccionado ya fue generado."
 
     end
-
-    @total_salario = VPersonal.where("hacienda_id = ?", params[:hacienda][:id]).sum(:sueldo)
-    @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+    total_hacienda = VPersonal.where("hacienda_id = ?", params[:hacienda][:id])
     
+    unless total_hacienda.present?
 
+      @valido = false
+      @msg += "No existen Personales asignados en la Hacienda seleccionada."
+
+    end
+    
     if @valido
+
+      @total_salario = VPersonal.where("hacienda_id = ?", params[:hacienda][:id]).sum(:sueldo)
+      @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+      @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+      @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
       
       PagoSalarioDetalle.transaction do    
 
