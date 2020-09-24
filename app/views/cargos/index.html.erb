@@ -1,0 +1,130 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+<!--
+  <div class="pull-right btn-lg hidden-xs" id="start-tour"><a title="Ir a la ayuda"><i class="icon-py-ayuda"></i> Ayuda</a></div>
+-->
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Cargos</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-cargo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-cargo", link_to_id: "#link-to-agregar-cargo", url: cargos_agregar_path( window_id: "modal-window-agregar-cargo") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-detalles-creditos">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag cargos_lista_path, remote: true, id: "form-buscar-cargos"  do  %>
+
+        <tr>
+
+          <th style="width:20px;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cargos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+
+          <th style="width:120px;">
+            <span>Descripción<br/> <em style="font-size: 7px;"> Ej: Veterinario</em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cargos_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:120px;">
+            <span>Sueldo</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cargos_sueldo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_sueldo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th style="width:150px;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="cargos-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-cargos").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_cargos_descripcion").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_cargos_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_cargos_descripcion").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#detalles-creditos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-detalles-creditos input, #table-detalles-creditos select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-cargos").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-cargos").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-cargo").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-cargos table th { background:#e6e6e6;}
+    #form-buscar-cargos table th span.limpiar { background:#fff;}
+
+</style>

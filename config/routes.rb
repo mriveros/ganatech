@@ -15,6 +15,15 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+#CARGOS
+  post 'cargos/lista'
+  get 'cargos/lista'
+  get 'cargos/agregar'
+  post 'cargos/guardar'
+  get 'cargos/eliminar'
+  get 'cargos/editar'
+  post 'cargos/actualizar'
+  get 'cargos/index'
 
 #REMUNERACIONES EXTRAS
   post 'pagos_remuneraciones_extras/lista'
