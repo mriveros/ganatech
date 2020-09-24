@@ -124,7 +124,10 @@ get 'crontab_ultron/index'
   post 'potreros/actualizar'
   get 'potreros/eliminar'
   get 'potreros/potrero_detalle'
-
+  get 'potreros/agregar_potrero_detalle'
+  post 'potreros/guardar_potrero_detalle'
+  get 'potreros/eliminar_potrero_detalle'
+  
   #GANADOS
   get 'ganados/index'
   post 'ganados/lista'

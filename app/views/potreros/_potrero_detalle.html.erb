@@ -14,7 +14,7 @@
    
     <div class="panel-body">
       
-      <div class="table-responsive" id="table-tutor-detalle">
+      <div class="table-responsive" id="table-obs-detalle">
           
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
             
@@ -28,14 +28,80 @@
             
           </thead>
        
-          <tbody id="tutor-detalle-lista">
+          <tbody id="potrero-obs-lista">
+
+            <% if @potrero.present? %>
+            
+              <% @potrero.each do |pd|%>
+
+                <tr>
+
+                  <td><%= pd.observacion %></td>
+
+                </tr>
+
+              <% end %>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+
+      </div>
+      
+    </div>
+
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Pozos de Agua.</h3>
+      </div>
+      <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Potrero detalle".html_safe, "#", id: "link-to-agregar-potrero-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+       <%= modal_window( window_id: "modal-window-agregar-potrero-detalle", link_to_id: "#link-to-agregar-potrero-detalle", url: potreros_agregar_potrero_detalle_path( window_id: "modal-window-agregar-potrero-detalle", potrero_id: params[:potrero_id]) )%>
+
+    </div>
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-obs-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Descripción</th>
+              <th>Porcentaje</th>
+              <th>Observación</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="potrero-obs-lista">
 
             <% if @potrero_detalle.present? %>
             
               <% @potrero_detalle.each do |pd|%>
 
                 <tr>
+
+                  <td><%= pd.descripcion %></td>
+                  <td><%= pd.porcentaje %></td>
                   <td><%= pd.observacion %></td>
+                   <td style="width: 50px;text-align:right;">
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{pd.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero-detalle", title: 'Haga click para eliminar el detalle del Potrero'  %>
+                  </td>
+
                 </tr>
 
               <% end %>
@@ -53,12 +119,46 @@
       </div>
       
     </div>
+
+
     
   </div>
 
 </td>
 
-
   <script type="text/javascript">
+
+    function eliminar_registro_detalle(id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el detalle será eliminado del Potrero.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(potreros_eliminar_potrero_detalle_path) %>", 
+                data: {potrero_batea_id: id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
 
   </script>

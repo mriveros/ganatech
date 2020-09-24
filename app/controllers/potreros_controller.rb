@@ -261,8 +261,8 @@ before_filter :require_usuario
 
   def potrero_detalle
     
-    @potrero_detalle = VPotrero.where("potrero_id = ?", params[:potrero_id])
-
+    @potrero = VPotrero.where("potrero_id = ?", params[:potrero_id])
+    @potrero_detalle = PotreroBatea.where("potrero_id = ?", params[:potrero_id])
 
      respond_to do |f|
 
@@ -272,5 +272,78 @@ before_filter :require_usuario
   
   end
 
+
+  def agregar_potrero_detalle
+    
+    @potrero_detalle = PotreroBatea.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+   def guardar_potrero_detalle
+    
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+
+    if @valido
+      
+      @potrero_detalle = PotreroBatea.new()
+      @potrero_detalle.descripcion = params[:potrero_detalle][:descripcion].upcase
+      @potrero_detalle.hectareas = params[:potrero_detalle][:capacidad]
+      @potrero_detalle.hectareas = params[:potrero_detalle][:porcentaje]
+      @potrero_detalle.potrero_id = params[:potrero_id]
+      @potrero_detalle.observacion = params[:observacion]
+
+        if @potrero_detalle.save
+
+          auditoria_nueva("registrar detalle asignado a potrero", "potreros_bateas", @potrero_detalle)
+          @guardado_ok = true
+         
+        end 
+
+    end
+      
+
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def eliminar_potrero_detalle
+
+    @valido = true
+    @msg = ""
+
+    @potrero_detalle = PotreroBatea.find(params[:potrero_batea_id])
+
+    if @valido
+
+      if @potrero_detalle.destroy
+
+        auditoria_nueva("eliminar detalle del potrero", "potreros_bateas", @potrero_detalle)
+
+        @eliminado = true
+
+      end
+
+    end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
 
 end

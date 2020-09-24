@@ -1,0 +1,17 @@
+<% if @guardado_ok %>
+
+ 
+setTimeout( function(){ 
+  
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-potrero-detalle-<%= params[:potrero_id]%>").trigger('click');
+    $("#link-to-potrero-detalle-<%= params[:potrero_id]%>").trigger('click');
+    swal("El detalle fue agregado al Potrero exitosamente!");
+
+    }, 1500);
+ 
+<% else %>
+
+  swal('No se pudo guardar el Detalle al Potrero. Intente más tarde.');
+
+<% end %>
