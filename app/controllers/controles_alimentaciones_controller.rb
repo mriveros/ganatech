@@ -35,8 +35,8 @@ before_filter :require_usuario
 
     if params[:form_buscar_control_alimentacion_ganado_rp].present?
 
-      cond << "ganado_rp  = ?"
-      args << params[:form_buscar_control_alimentacion_ganado_rp]
+      cond << "ganado_rp  ilike ?"
+      args << "%#{params[:form_buscar_control_alimentacion_ganado_rp]}%"
 
     end
 
@@ -82,10 +82,10 @@ before_filter :require_usuario
 
     end
 
-    if params[:form_buscar_control_alimentacion][:clasificacion_control_id].present?
+    if params[:form_buscar_control_alimentacion][:clasificacion_alimentacion_id].present?
 
-      cond << "clasificacion_control_id = ?"
-      args << params[:form_buscar_control_alimentacion][:clasificacion_control_id]
+      cond << "clasificacion_alimentacion_id = ?"
+      args << params[:form_buscar_control_alimentacion][:clasificacion_alimentacion_id]
 
     end
 
@@ -362,8 +362,8 @@ before_filter :require_usuario
 
     if params[:form_buscar_ganado_rp].present?
 
-      cond << "rp = ?"
-      args << params[:form_buscar_ganado_rp]
+      cond << "rp ilike ?"
+      args << "%#{params[:form_buscar_ganado_rp]}%"
 
     end
 

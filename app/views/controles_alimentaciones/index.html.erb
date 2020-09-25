@@ -93,8 +93,8 @@
           <th>
             <span>Clasificación Control</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_alimentacion,:clasificacion_control_id, ClasificacionControl.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-alimentacion', '#form_buscar_control_alimentacion_clasificacion_control_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_control_alimentacion,:clasificacion_alimentacion_id, ClasificacionAlimentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-alimentacion', '#form_buscar_control_alimentacion_clasificacion_alimentacion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
