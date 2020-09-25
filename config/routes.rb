@@ -174,7 +174,7 @@ get 'crontab_ultron/index'
   post 'medicamentos/guardar_medicamento_detalle'
   get 'medicamentos/eliminar_medicamento_detalle'
 
-  #ALIMENTACIONES
+  #ALIMENTOS
   get 'alimentaciones/index'
   post 'alimentaciones/lista'
   get 'alimentaciones/lista'
@@ -289,6 +289,25 @@ get 'crontab_ultron/index'
   get 'controles_ganados/eliminar_ganado_lote'
   get 'controles_ganados/seleccionar_lote'
   post 'controles_ganados/eliminar_lote'
+
+  #CONTROLES ALIMENTACIONES
+  get 'controles_alimentaciones/index'
+  post 'controles_alimentaciones/lista'
+  get 'controles_alimentaciones/lista'
+  get 'controles_alimentaciones/agregar'
+  post 'controles_alimentaciones/guardar'
+  get 'controles_alimentaciones/editar'
+  post 'controles_alimentaciones/actualizar'
+  get 'controles_alimentaciones/eliminar'
+  get 'controles_alimentaciones/buscar_ganado'
+  get 'controles_alimentaciones/crear_lote_ganado'
+  post 'controles_alimentaciones/crear_lote_ganado'
+  post 'controles_alimentaciones/lista_ganado'
+  get 'controles_alimentaciones/lista_ganado'
+  get 'controles_alimentaciones/agregar_ganado_lote'
+  get 'controles_alimentaciones/eliminar_ganado_lote'
+  get 'controles_alimentaciones/seleccionar_lote'
+  post 'controles_alimentaciones/eliminar_lote'
 
 
   #GANADOS ENTRADAS

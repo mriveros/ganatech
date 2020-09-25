@@ -1,0 +1,2 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-esperma-#{esperma_id}", class: 'btn btn-warning btn-xs', title: 'Haga click aquí para editar el estado de la Muestra.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-editar-esperma", link_to_id: "#link-to-editar-esperma-#{esperma_id}", url: espermas_editar_path( window_id: "modal-window-editar-esperma", esperma_id: esperma_id) )%>

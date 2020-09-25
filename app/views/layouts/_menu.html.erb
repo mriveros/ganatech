@@ -90,6 +90,8 @@
           <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
           <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
           <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>
+          <li><%= link_to "Alimentaciones", controles_alimentaciones_index_path if acceso_permitido("controles_alimentaciones.index") %></li>
+
           <li>
 
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Compra/Venta<b class="caret"></b></a>

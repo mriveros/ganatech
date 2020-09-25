@@ -18,6 +18,8 @@ class VGanado < ActiveRecord::Base
 
   scope :modulo_control_ganado, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido], PARAMETRO[:estado_ganado_muerto]])}
 
+   scope :modulo_control_alimento, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido], PARAMETRO[:estado_ganado_muerto]])}
+
   scope :modulo_ganados, -> { where("estado_ganado_id not in (?)", [PARAMETRO[:estado_ganado_vendido]])}
 
 
