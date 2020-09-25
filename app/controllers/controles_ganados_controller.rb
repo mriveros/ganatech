@@ -455,7 +455,7 @@ before_filter :require_usuario
 
   def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike (?) ", "%#{params[:ganado]}%")
+    @ganados = VGanado.modulo_control_ganado.where("nombre ilike (?) ", "%#{params[:ganado]}%")
 
     respond_to do |f|
       
