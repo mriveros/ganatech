@@ -93,7 +93,7 @@ before_filter :require_usuario
 
   end
 
-  def  ganado_enfermo_detalle
+  def ganado_enfermo_detalle
 
     @ganado_detalle = Ganado.where("id = ?", params[:ganado_id]).first
     @control_sanitario = VControlGanado.orden_fecha.where("ganado_enfermo_id =?", params[:ganado_enfermo_id]).paginate(per_page: 5, page: params[:page])

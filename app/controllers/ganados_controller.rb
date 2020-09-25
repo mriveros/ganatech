@@ -1073,7 +1073,17 @@ class GanadosController < ApplicationController
 
     @fecha = Date.today
     
-    @ganado_muerto = GanadoEnfermo.new
+    @ganado_muerto = GanadoMuerto.new
+    @ganado_muerto_codigo = GanadoMuerto.last
+    if @ganado_muerto_codigo.present?
+
+      @ganado_muerto_codigo = @ganado_muerto_codigo.id.to_i + 1
+
+    else
+
+      @ganado_muerto_codigo = 1
+      
+    end
 
    respond_to do |f|
 
@@ -1089,31 +1099,43 @@ class GanadosController < ApplicationController
     @msg = ""
     @valido = true
 
-    GanadoEnfermo.transaction do 
+    GanadoMuerto.transaction do 
 
-      
       if @valido
 
         @ganado = Ganado.where("id = ?", params[:ganado_id]).first
-        auditoria_id = auditoria_antes("guardar ganado con enfermedad", "ganados", @ganado)
 
-        @ganado_enfermedad = GanadoEnfermo.new
-        @ganado_enfermedad.fecha = params[:fecha]
-        @ganado_enfermedad.ganado_id = params[:ganado_id]
-        @ganado_enfermedad.enfermedad_id = params[:enfermedad][:id]
-        @ganado_enfermedad.observacion = params[:observacion]
-        @ganado_enfermedad.estado_enfermedad_id = params[:estado_enfermedad][:id]
+        auditoria_id = auditoria_antes("guardar ganado muerto", "ganados", @ganado)
 
+        @ganado_muerto = GanadoMuerto.new
+        @ganado_muerto.fecha = params[:fecha]
+        @ganado_muerto.ganado_id = params[:ganado_id]
+        @ganado_muerto.motivo_muerte_id = params[:motivo_muerte][:id]
+        @ganado_muerto.observacion = params[:observacion]
         
-        if @ganado_enfermedad.save
+        if @ganado_muerto.save
 
-          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_enfermo]
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_muerto]
           
           if @ganado.save
             
-            @guardado_ok = true
+            
             auditoria_despues(@ganado, auditoria_id)
             
+            @documento_ganatec = DocumentoGanatec.new
+            @documento_ganatec.numero = params[:numero]
+            @documento_ganatec.descripcion = params[:descripcion]
+            @documento_ganatec.fecha_emision = params[:fecha]
+            @documento_ganatec.tipo_resolucion_id = PARAMETRO[:tipo_resolucion_ganado_muerto]
+            @documento_ganatec.data = params[:data]
+
+            if @documento_ganatec.save
+              
+              @guardado_ok = true
+              @ganado_muerto.documento_ganatec_id = @documento_ganatec.id
+              @ganado_muerto.save
+
+            end
 
           end
 
