@@ -21,7 +21,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_control_alimentacion_codigo].present?
 
-      cond << "codigo = ?"
+      cond << "codigo_lote = ?"
       args << params[:form_buscar_control_alimentacion_codigo]
 
     end
@@ -232,7 +232,7 @@ before_filter :require_usuario
           @alimentacion = ControlAlimentacion.new
           @alimentacion.ganado_id = ganado.id
           @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:control][:id]
+          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
           @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
@@ -257,7 +257,7 @@ before_filter :require_usuario
           @alimentacion = ControlAlimentacion.new
           @alimentacion.ganado_id = ganado.id
           @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:control][:id]
+          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
           @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
@@ -282,7 +282,7 @@ before_filter :require_usuario
           @alimentacion = ControlAlimentacion.new
           @alimentacion.ganado_id = ganado.ganado_id
           @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:control][:id]
+          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
           @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
@@ -491,7 +491,7 @@ before_filter :require_usuario
 
     @lote_eliminado = false
 
-    @lote_alimentacion = ControlAlimentacion.where("codigo = ?", params[:codigo_lote])
+    @lote_alimentacion = ControlAlimentacion.where("codigo_lote = ?", params[:codigo_lote])
 
     if @lote_alimentacion.destroy_all
 

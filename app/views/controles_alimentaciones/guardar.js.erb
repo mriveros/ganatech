@@ -19,13 +19,13 @@
   
   setTimeout(function(){ 
     $("#<%= params[:window_id]%>").modal('hide'); 
-    swal("Sanitaciones","Sanidad agregada exitosamente!", "success");
+    swal("Control Alimentación","Alimentación agregada exitosamente!", "success");
   }, 2000);
 
 
 <% else %>
   
     $("<div class='col-sm-12' id='msg-agregar-control-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-control-alimentacion");
-    swal("Sanitaciones", "Error al guardar la sanidad.<%= @msg %> Intente más tarde","error");
+    swal("Control Alimentación", "Error al guardar la Alimentación.<%= @msg %> Intente más tarde","error");
 
 <% end %>
