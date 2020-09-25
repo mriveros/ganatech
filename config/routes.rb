@@ -156,6 +156,8 @@ get 'crontab_ultron/index'
   post 'ganados/guardar_lote_ganado'
   get 'ganados/marcar_con_enfermedad'
   post 'ganados/guardar_ganado_enfermedad'
+  get 'ganados/marcar_como_muerto'
+  post 'ganados/guardar_ganado_muerto'
   get 'ganados/marcar_como_produccion'
 
 

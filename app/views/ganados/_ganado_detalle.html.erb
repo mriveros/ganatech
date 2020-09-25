@@ -51,6 +51,14 @@
           
           <%end%>
 
+          
+
+            <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>marcar ganado muerto".html_safe, "#", id: "link-to-marcar-como-muerto", class: "btn btn-primary btn-xs btn-danger", style: "float:right;" %>
+
+            <%= modal_window( window_id: "modal-window-marcar-muerto", link_to_id: "#link-to-marcar-como-muerto", url: ganados_marcar_como_muerto_path( window_id: "modal-window-marcar-muerto", ganado_id: params[:ganado_id]) )%>
+          
+          
+
         </div>
 
         <div>

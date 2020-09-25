@@ -5,12 +5,12 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Marcar Ganado con Enfermedad</h4>
+      <h4 class="modal-title" id="myModalLabel">Marcar Ganado Muerto</h4>
       
     </div>
 
 
-    <%= form_for @ganado_enfermedad, remote: true, url: ganados_guardar_ganado_enfermedad_url, html: { id: "form-agregar-ganado-enfermedad" }, method: 'POST' do |f| %>
+    <%= form_for @ganado_muerto, remote: true, url: ganados_guardar_ganado_muerto_url, html: { id: "form-agregar-ganado-enfermedad" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :ganado_id, params[:ganado_id]%>

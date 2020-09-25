@@ -1068,6 +1068,69 @@ class GanadosController < ApplicationController
   
   end
 
+
+  def marcar_como_muerto
+
+    @fecha = Date.today
+    
+    @ganado_muerto = GanadoEnfermo.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def guardar_ganado_muerto
+    
+    @guardado_ok = false
+    @msg = ""
+    @valido = true
+
+    GanadoEnfermo.transaction do 
+
+      
+      if @valido
+
+        @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+        auditoria_id = auditoria_antes("guardar ganado con enfermedad", "ganados", @ganado)
+
+        @ganado_enfermedad = GanadoEnfermo.new
+        @ganado_enfermedad.fecha = params[:fecha]
+        @ganado_enfermedad.ganado_id = params[:ganado_id]
+        @ganado_enfermedad.enfermedad_id = params[:enfermedad][:id]
+        @ganado_enfermedad.observacion = params[:observacion]
+        @ganado_enfermedad.estado_enfermedad_id = params[:estado_enfermedad][:id]
+
+        
+        if @ganado_enfermedad.save
+
+          @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_enfermo]
+          
+          if @ganado.save
+            
+            @guardado_ok = true
+            auditoria_despues(@ganado, auditoria_id)
+            
+
+          end
+
+        end
+
+      end
+
+    end #end transaction 
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
   def marcar_como_produccion
 
     @guardado_ok = false
