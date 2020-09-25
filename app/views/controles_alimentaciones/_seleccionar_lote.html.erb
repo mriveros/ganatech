@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @lote, remote: true, url: controles_ganados_eliminar_lote_url, html: { id: "form-eliminar-control-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @lote, remote: true, url: controles_alimentaciones_eliminar_lote_url, html: { id: "form-eliminar-control-alimentaciones" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  
@@ -38,10 +38,10 @@
   
 <style type="text/css">
 
-  #form-eliminar-control-ganado label, #form-eliminar-control-ganado input[type='text'], #form-eliminar-control-ganado select { float:left; margin-top:5px;}
-  #form-eliminar-control-ganado br {clear:both; }
-  #form-eliminar-control-ganado label { width:200px;font-size:12px;margin-top:10px;}
-  #form-eliminar-control-ganado #descripcion { width:100%;}
+  #form-eliminar-control-alimentaciones label, #form-eliminar-control-alimentaciones input[type='text'], #form-eliminar-control-alimentaciones select { float:left; margin-top:5px;}
+  #form-eliminar-control-alimentaciones br {clear:both; }
+  #form-eliminar-control-alimentaciones label { width:200px;font-size:12px;margin-top:10px;}
+  #form-eliminar-control-alimentaciones #descripcion { width:100%;}
 
 </style>
 
@@ -86,7 +86,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-eliminar-control-ganado").submit();
+            $("#form-eliminar-control-alimentaciones").submit();
             
           } 
 

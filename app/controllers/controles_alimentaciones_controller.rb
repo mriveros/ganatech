@@ -94,12 +94,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @controles_ganados =  VControlAlimentacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @controles_alimentaciones =  VControlAlimentacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VControlAlimentacion.where(cond).count
 
     else
      
-      @controles_ganados = VControlAlimentacion.orden_01.paginate(per_page: 10, page: params[:page])
+      @controles_alimentaciones = VControlAlimentacion.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VControlAlimentacion.count
 
     end
@@ -116,10 +116,17 @@ before_filter :require_usuario
 
   def agregar
 
-    @alimentacion = ControlAlimentacion.new
+    @control_alimentacion = ControlAlimentacion.new
     nuevo_incremento = ControlAlimentacion.last
-    @codigo_control = nuevo_incremento.codigo + 1
+    if nuevo_incremento.present?
 
+      @codigo_control = nuevo_incremento.codigo_lote + 1
+
+    else
+
+      @codigo_control = 1
+
+    end
     respond_to do |f|
       
         f.js
@@ -136,9 +143,9 @@ before_filter :require_usuario
 
     
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
         
-        alimento = Alimentacion.where("id = ?", params[:alimento_id]).first
+        alimento = Alimentacion.where("id = ?", params[:alimentacion_id]).first
 
         if alimento.cantidad_stock < params[:cantidad_suministrada].to_i
 
@@ -149,10 +156,10 @@ before_filter :require_usuario
 
       end
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
         
         @ganado_potrero = VGanado.modulo_control_alimento.where("potrero_id = ?", params[:potrero][:id])
-        alimento = Alimentacion.where("id = ?", params[:alimento_id]).first
+        alimento = Alimentacion.where("id = ?", params[:alimentacion_id]).first
 
         if alimento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_potrero.size.to_i)
 
@@ -163,10 +170,10 @@ before_filter :require_usuario
 
       end
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
         
         @ganado_hacienda =VGanado.modulo_control_alimento.where("hacienda_id = ?", params[:hacienda_select][:id])
-        alimento = Alimentacion.where("id = ?", params[:alimento_id]).first
+        alimento = Alimentacion.where("id = ?", params[:alimentacion_id]).first
 
         if alimento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_hacienda.size.to_i)
 
@@ -178,10 +185,10 @@ before_filter :require_usuario
       end
 
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_lote]
         
         @ganado_lote =LoteControlAlimentacion.all
-        alimento = Alimentacion.where("id = ?", params[:alimento_id]).first
+        alimento = Alimentacion.where("id = ?", params[:alimentacion_id]).first
 
         if alimento.cantidad_stock < (params[:cantidad_suministrada].to_i * @ganado_lote.size.to_i)
 
@@ -198,13 +205,13 @@ before_filter :require_usuario
     
     if @valido
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
         
         @alimentacion = ControlAlimentacion.new
         @alimentacion.ganado_id = params[:ganado_id]
         @alimentacion.fecha_control = params[:fecha_control]
-        @alimentacion.tipo_alimentacion_id = params[:control][:id]
-        @alimentacion.alimentacion_id = params[:alimento_id]
+        @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+        @alimentacion.alimentacion_id = params[:alimentacion_id]
         @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
         @alimentacion.codigo_lote = params[:codigo_lote]
         @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
@@ -226,7 +233,7 @@ before_filter :require_usuario
           @alimentacion.ganado_id = ganado.id
           @alimentacion.fecha_control = params[:fecha_control]
           @alimentacion.tipo_alimentacion_id = params[:control][:id]
-          @alimentacion.alimentacion_id = params[:alimento_id]
+          @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
           @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
@@ -243,7 +250,7 @@ before_filter :require_usuario
       end
 
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
         
         @ganado_hacienda.each do |ganado|
 
@@ -251,7 +258,7 @@ before_filter :require_usuario
           @alimentacion.ganado_id = ganado.id
           @alimentacion.fecha_control = params[:fecha_control]
           @alimentacion.tipo_alimentacion_id = params[:control][:id]
-          @alimentacion.alimentacion_id = params[:alimento_id]
+          @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
           @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
@@ -268,7 +275,7 @@ before_filter :require_usuario
       end
 
 
-      if params[:clasificacion_control][:id].to_i == PARAMETRO[:clasificacion_por_lote]
+      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_lote]
         
         @ganado_lote.each do |ganado|
 
@@ -276,7 +283,7 @@ before_filter :require_usuario
           @alimentacion.ganado_id = ganado.ganado_id
           @alimentacion.fecha_control = params[:fecha_control]
           @alimentacion.tipo_alimentacion_id = params[:control][:id]
-          @alimentacion.alimentacion_id = params[:alimento_id]
+          @alimentacion.alimentacion_id = params[:alimentacion_id]
           @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
           @alimentacion.codigo_lote = params[:codigo_lote]
           @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
@@ -312,7 +319,7 @@ before_filter :require_usuario
     @eliminado = false
     @msg = ""
 
-    @alimentacion = ControlAlimentacion.where("id = ?", params[:alimentacion_id]).first
+    @alimentacion = ControlAlimentacion.where("id = ?", params[:control_alimentacion_id]).first
     @alimentacion_elim = @alimentacion
     
     if @alimentacion.destroy
@@ -455,7 +462,7 @@ before_filter :require_usuario
 
   def buscar_ganado
 
-    @ganados = VGanado.where("nombre ilike (?) ", "%#{params[:ganado]}%")
+    @ganados = VGanado.modulo_control_alimento.where("nombre ilike (?) ", "%#{params[:ganado]}%")
 
     respond_to do |f|
       

@@ -20,7 +20,7 @@
    
     <thead> 
 
-      <%= form_tag controles_ganados_lista_ganado_path, remote: true, id: "form-buscar-ganado"  do  %>
+      <%= form_tag controles_alimentaciones_lista_ganado_path, remote: true, id: "form-buscar-ganado"  do  %>
 
         <tr>
           
@@ -130,7 +130,7 @@
     $.ajaxQ.abortAll();
     $.ajax({
       type: 'GET',
-      url: "<%= url_for(controles_ganados_lista_ganado_path) %>",
+      url: "<%= url_for(controles_alimentaciones_lista_ganado_path) %>",
       data: { form_buscar_ganado_nombre: $("#form_buscar_ganado_nombre").val(),
       form_buscar_ganado_rp: $("#form_buscar_ganado_rp").val(),
       form_buscar_ganado_codigo_rfid: $("#form_buscar_ganado_codigo_rfid").val(),

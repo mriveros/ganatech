@@ -10,7 +10,7 @@
       <td ><%= gan.codigo_rfid %></td>
       <td ><%= gan.potrero %></td>
       <td ><%= gan.estado_ganado %></td>
-      <td ><%= check_box_tag "check_box_#{gan.ganado_id}", gan.ganado_id, verificar_ganado_lote(gan.ganado_id), { class: 'form-control input-sm', onclick: "lote_ganado(this, #{gan.ganado_id})"}  %>
+      <td ><%= check_box_tag "check_box_#{gan.ganado_id}", gan.ganado_id, verificar_ganado_lote_alimentacion(gan.ganado_id), { class: 'form-control input-sm', onclick: "lote_ganado(this, #{gan.ganado_id})"}  %>
         <span style="display:none;" title="Item guardado exitosamente." id="si-<%= gan.ganado_id%>" class="btn btn-success btn-xs"><%= icon_ok_sign%></span>
                
         <span style="display:none;" title="Item eliminado exitosamente" id="no-<%= gan.ganado_id %>" class="btn btn-danger btn-xs"><%= icon_minus_sign%></span>
@@ -109,7 +109,7 @@
 
       $.ajax({
       type: 'GET',
-      url: "<%= url_for(controles_ganados_eliminar_ganado_lote_path) %>",
+      url: "<%= url_for(controles_alimentaciones_eliminar_ganado_lote_path) %>",
       data: { ganado_id: ganado_id},
       dataType: 'script'    
       }) 
@@ -118,7 +118,7 @@
 
        $.ajax({
         type: 'GET',
-        url: "<%= url_for(controles_ganados_agregar_ganado_lote_path) %>",
+        url: "<%= url_for(controles_alimentaciones_agregar_ganado_lote_path) %>",
         data: { ganado_id: ganado_id},
         dataType: 'script'    
         }) 
