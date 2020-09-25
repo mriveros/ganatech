@@ -12,80 +12,80 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_alimentacion_id].present?
+    if params[:form_buscar_control_alimentacion_id].present?
 
       cond << "control_alimentacion_id = ?"
-      args << params[:form_buscar_alimentacion_id]
+      args << params[:form_buscar_control_alimentacion_id]
 
     end
 
-    if params[:form_buscar_alimentacion_codigo].present?
+    if params[:form_buscar_control_alimentacion_codigo].present?
 
       cond << "codigo = ?"
-      args << params[:form_buscar_alimentacion_codigo]
+      args << params[:form_buscar_control_alimentacion_codigo]
 
     end
 
-    if params[:form_buscar_alimentacion_nombre].present?
+    if params[:form_buscar_control_alimentacion_nombre].present?
 
       cond << "ganado_nombre ilike ?"
-      args << "%#{params[:form_buscar_alimentacion_nombre]}%"
+      args << "%#{params[:form_buscar_control_alimentacion_nombre]}%"
 
     end
 
-    if params[:form_buscar_alimentacion_ganado_rp].present?
+    if params[:form_buscar_control_alimentacion_ganado_rp].present?
 
       cond << "ganado_rp  = ?"
-      args << params[:form_buscar_alimentacion_ganado_rp]
+      args << params[:form_buscar_control_alimentacion_ganado_rp]
 
     end
 
-    if params[:form_buscar_alimentacion][:alimentacion_id].present?
+    if params[:form_buscar_control_alimentacion][:tipo_alimentacion_id].present?
+
+      cond << "tipo_alimentacion_id = ?"
+      args << params[:form_buscar_control_alimentacion][:tipo_alimentacion_id]
+
+    end
+
+    if params[:form_buscar_control_alimentacion][:alimentacion_id].present?
 
       cond << "alimentacion_id = ?"
-      args << params[:form_buscar_alimentacion][:control_id]
+      args << params[:form_buscar_control_alimentacion][:alimentacion_id]
 
     end
 
-    if params[:form_buscar_alimentacion][:alimentacion_id].present?
-
-      cond << "alimentacion_id = ?"
-      args << params[:form_buscar_alimentacion][:alimentacion_id]
-
-    end
-
-    if params[:form_buscar_alimentacion_cantidad_suministrada].present?
+    if params[:form_buscar_control_alimentacion_cantidad_suministrada].present?
 
       cond << "cantidad_suministrada  = ?"
-      args << params[:form_buscar_alimentacion_cantidad_suministrada]
+      args << params[:form_buscar_control_alimentacion_cantidad_suministrada]
 
     end
 
-    if params[:form_buscar_alimentacion_peso].present?
+    if params[:form_buscar_control_alimentacion_peso].present?
 
       cond << "peso = ?"
-      args << params[:form_buscar_alimentacion_peso]
+      args << params[:form_buscar_control_alimentacion_peso]
 
     end
 
-    if params[:form_buscar_alimentacion_fecha_control].present?
+    if params[:form_buscar_control_alimentacion_fecha_control].present?
 
       cond << "fecha_control = ?"
-      args << params[:form_buscar_alimentacion_fecha_control]
+      args << params[:form_buscar_control_alimentacion_fecha_control]
 
     end
 
-    if params[:form_buscar_alimentacion_observacion].present?
+    if params[:form_buscar_control_alimentacion_observacion].present?
 
       cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_alimentacion_observacion]}%"
+      args << "%#{params[:form_buscar_control_alimentacion_observacion]}%"
 
     end
 
-    if params[:form_buscar_alimentacion][:clasificacion_control_id].present?
+    if params[:form_buscar_control_alimentacion][:clasificacion_control_id].present?
 
       cond << "clasificacion_control_id = ?"
-      args << params[:form_buscar_alimentacion][:clasificacion_control_id]
+      args << params[:form_buscar_control_alimentacion][:clasificacion_control_id]
 
     end
 

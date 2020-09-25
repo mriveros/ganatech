@@ -25,7 +25,7 @@
 
         <tr>
 
-          <th style="width:20px;">
+          <th>
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_control_alimentacion_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -42,7 +42,7 @@
               </div>
          </th>
 
-          <th style="width:20px;">
+          <th >
             <span>Código Lote</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_control_alimentacion_codigo, nil, :class => 'form-control', :placeholder => "" %>
@@ -69,7 +69,7 @@
           <th>
             <span>Tipo Alimento</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_alimentacion, :tipo_alimento_id, TipoAlimentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_control_alimentacion, :tipo_alimentacion_id, TipoAlimentacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-alimentacion', '#form_buscar_control_alimentacion_tipo_alimentacion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -77,8 +77,8 @@
           <th>
             <span>Alimento</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_control_alimentacion, :alimento_id, Alimentacion.orden_descripcion, :id, :nombre_alimento, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-alimentacion', '#form_buscar_control_alimentacion_medicamento_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_control_alimentacion, :alimentacion_id, Alimentacion.orden_descripcion, :id, :nombre_alimento, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-alimentacion', '#form_buscar_control_alimentacion_alimentacion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
