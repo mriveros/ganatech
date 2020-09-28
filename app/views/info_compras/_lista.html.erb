@@ -7,7 +7,7 @@
       <td><%= ac.id %></td>
       <td ><%= ac.fecha.strftime('%d/%m/%Y') %></td>
        <td><%= ac.descripcion%></td>
-      <td><%= ac.monto%></td>
+      <td><%= ac.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
       <td ><%= ac.observacion %></td>
       
 

@@ -174,11 +174,12 @@ class MedicamentosController < ApplicationController
         if @medicamento_detalle.save
           
           @guardado_ok = true
+          
           @compra = AuxCompra.new
           @compra.fecha = Date.today
           @compra.descripcion = "Compra Medicamento: #{@medicamento.nombre_medicamento}"
           @compra.observacion = @medicamento.observacion
-          @compra.monto = @medicamento_detalle.costo_suministro
+          @compra.monto = @medicamento_detalle.costo_total
           @compra.medicamento_detalle_id = @medicamento_detalle.id
           @compra.save
 
@@ -415,6 +416,8 @@ class MedicamentosController < ApplicationController
       @medicamento_detalle = MedicamentoDetalle.where("id = ?", params[:medicamento_detalle_id]).first 
       auditoria_id = auditoria_antes("eliminar suministro medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
 
+      @compra = AuxCompra.where("medicamento_detalle_id = ?", @medicamento_detalle.id).first
+      @compra.destroy
 
       if @valido
 
