@@ -368,7 +368,6 @@ class MedicamentosController < ApplicationController
 
         if @medicamento_detalle.save
 
-          
           auditoria_nueva("agregar medicamento detalle", "medicamentos_detalles", @medicamento_detalle)
 
           @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro

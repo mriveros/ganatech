@@ -6,27 +6,26 @@
 
       <td><%= ac.id %></td>
       <td ><%= ac.fecha.strftime('%d/%m/%Y') %></td>
-       <td><%= ac.descripcion%></td>
+      <td><%= ac.descripcion%></td>
       <td><%= ac.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
       <td ><%= ac.observacion %></td>
       
-
     </tr>
 
   <% end %>
 
-<tr id="tab-paginacion">
+  <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate aux_ventas, :params => params %></div></td>
-</tr>
+      <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate aux_ventas, :params => params %></div></td>
+  </tr>
 
-<tr>
-    <td colspan="12">
+  <tr>
+      <td colspan="12">
 
-      Cantidad de registros encontrados: <%= @total_encontrados %> 
+        Cantidad de registros encontrados: <%= @total_encontrados %> 
 
-    </td>
-</tr>
+      </td>
+  </tr>
 
  
 
