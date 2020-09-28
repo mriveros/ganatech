@@ -406,9 +406,19 @@ before_filter :require_usuario
             
             if @ganado.save
 
-              @actualizado_ok = true
               auditoria_despues(@ganado,auditoria_id)
-                
+              
+              @ganado_muerto = GanadoMuerto.new
+              @ganado_muerto.ganado_id = @ganado.id
+              @ganado_muerto.motivo_muerte_id = PARAMETRO[:motivo_muerte_enfermedad] 
+              @ganado_muerto.fecha = params[:fecha]
+              
+              if @ganado_muerto.save
+
+                @actualizado_ok = true
+
+              end
+
             end
 
          end

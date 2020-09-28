@@ -156,6 +156,11 @@ development:
   estado_personal_vacaciones: 2
   estado_personal_baja: 3
 
+  #MOTIVOS MUERTES GANADOS
+  motivo_muerte_abigeo: 1
+  motivo_muerte_enfermedad: 2
+  motivo_muerte_desconocido: 3  
+
 production:
 
   #ROLES 
@@ -305,3 +310,8 @@ production:
   estado_personal_activo: 1
   estado_personal_vacaciones: 2
   estado_personal_baja: 3
+
+  #MOTIVOS MUERTES GANADOS
+  motivo_muerte_abigeo: 1
+  motivo_muerte_enfermedad: 2
+  motivo_muerte_desconocido: 3  
