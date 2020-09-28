@@ -108,9 +108,9 @@
   $("#form-buscar-info-compra").bind("submit", function () {
 
     var valido = true;
-    if($("#form_buscar_info_compras_nombre").val().length !== 0 ){
+    if($("#form_buscar_info_compras_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_info_compras_nombre").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_info_compras_descripcion").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -123,7 +123,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#ganados-muertos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#info-compras-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
     }
 
     
