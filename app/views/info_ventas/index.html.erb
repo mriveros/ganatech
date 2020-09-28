@@ -1,0 +1,163 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    
+    <h3 style="float:left;margin-top:5px;">ventas</h3>
+
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-ventas">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag info_ventas_lista_path, remote: true, id: "form-buscar-info-venta"  do  %>
+
+        <tr>
+
+          <th>
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_ventas_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
+            <div><%= label_tag nil, "Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_ventas_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_fecha');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th >
+            <span>Descripción</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_ventas_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th >
+            <span>Monto</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_ventas_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_monto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>     
+
+          <th>
+            <span>Observación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_ventas_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th ></th>
+
+        </tr>
+
+        <tr class="td-nivel-2">
+
+          <th >
+            <div><%= label_tag nil, "Desde Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_ventas_fecha_desde, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_fecha_desde');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+          
+          <th >
+            <div><%= label_tag nil, "Hasta Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_ventas_fecha_hasta, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-venta', '#form_buscar_info_ventas_fecha_hasta');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+        </tr>
+        <% end %>
+
+      </thead> 
+
+    <tbody id="info-ventas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+<script type="text/javascript">
+
+  $("#form-buscar-info-venta").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-info-venta").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_info_ventas_nombre").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_info_ventas_nombre").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+                 
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#ganados-muertos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-ventas input, #table-ventas select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-info-venta").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-info-venta table th { background:#e6e6e6;}
+    #form-buscar-info-venta table th span.limpiar { background:#fff;}
+
+</style>

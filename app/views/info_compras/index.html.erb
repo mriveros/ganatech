@@ -1,0 +1,163 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    
+    <h3 style="float:left;margin-top:5px;">Compras</h3>
+
+  </div>
+  
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-compras">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag info_compras_lista_path, remote: true, id: "form-buscar-info-compra"  do  %>
+
+        <tr>
+
+          <th>
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_compras_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
+            <div><%= label_tag nil, "Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_compras_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_fecha');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th >
+            <span>Descripción</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_compras_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_descripcion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th >
+            <span>Monto</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_compras_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_monto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>     
+
+          <th>
+            <span>Observación</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_info_compras_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th ></th>
+
+        </tr>
+
+        <tr class="td-nivel-2">
+
+          <th >
+            <div><%= label_tag nil, "Desde Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_compras_fecha_desde, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_fecha_desde');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+          
+          <th >
+            <div><%= label_tag nil, "Hasta Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_info_compras_fecha_hasta, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_fecha_hasta');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+        </tr>
+        <% end %>
+
+      </thead> 
+
+    <tbody id="info-compras-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+<script type="text/javascript">
+
+  $("#form-buscar-info-compra").submit();
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-info-compra").bind("submit", function () {
+
+    var valido = true;
+    if($("#form_buscar_info_compras_nombre").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_info_compras_nombre").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+                 
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+      
+    $(".nmb").html('');       
+    $("#ganados-muertos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-compras input, #table-compras select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-info-compra").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  
+  //----------------------------------------------------------------------------//
+  
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-info-compra table th { background:#e6e6e6;}
+    #form-buscar-info-compra table th span.limpiar { background:#fff;}
+
+</style>

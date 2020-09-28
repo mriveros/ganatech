@@ -15,13 +15,22 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+
+#INFO COMPRAS
+  get 'info_compras/index'
+  post 'info_compras/lista'
+  get 'info_compras/lista'
+
+#INFO VENTAS
+  get 'info_ventas/index'
+  post 'info_ventas/lista'
+  get 'info_ventas/lista'
+
 #GANADOS MUERTOS
   get 'ganados_muertos/index'
   post 'ganados_muertos/lista'
   get 'ganados_muertos/lista'
   
-
-
 #CARGOS
   post 'cargos/lista'
   get 'cargos/lista'

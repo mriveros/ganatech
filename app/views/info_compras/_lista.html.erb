@@ -1,0 +1,42 @@
+<% if aux_compras.present? %>
+
+  <% aux_compras.each do |ac| %>
+
+    <tr>
+
+      <td><%= ac.id %></td>
+      <td ><%= ac.fecha.strftime('%d/%m/%Y') %></td>
+       <td><%= ac.descripcion%></td>
+      <td><%= ac.monto%></td>
+      <td ><%= ac.observacion %></td>
+      
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate aux_compras, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
