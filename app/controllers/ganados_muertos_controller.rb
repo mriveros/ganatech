@@ -61,6 +61,19 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_ganado_muerto_fecha_desde].present?
+
+      cond << "fecha >= ?"
+      args << params[:form_buscar_ganado_muerto_fecha_desde]
+
+    end
+
+    if params[:form_buscar_ganado_muerto_fecha_hasta].present?
+
+      cond << "fecha <= ?"
+      args << params[:form_buscar_ganado_muerto_fecha_hasta]
+
+    end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 

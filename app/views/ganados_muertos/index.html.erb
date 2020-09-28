@@ -84,6 +84,27 @@
 
         </tr>
 
+        <tr class="td-nivel-2">
+
+          <th >
+            <div><%= label_tag nil, "Desde Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_ganado_muerto_fecha_desde, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-muerto', '#form_buscar_ganado_muerto_fecha_desde');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+          
+          <th >
+            <div><%= label_tag nil, "Hasta Fecha ".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_ganado_muerto_fecha_hasta, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-muerto', '#form_buscar_ganado_muerto_fecha_hasta');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+        </tr>
         <% end %>
 
       </thead> 
