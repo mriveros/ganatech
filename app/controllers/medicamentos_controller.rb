@@ -174,6 +174,13 @@ class MedicamentosController < ApplicationController
         if @medicamento_detalle.save
           
           @guardado_ok = true
+          @compra = AuxCompra.new
+          @compra.fecha = Date.today
+          @compra.descripcion = "Compra Medicamento: #{@medicamento.nombre_medicamento}"
+          @compra.observacion = @medicamento.observacion
+          @compra.monto = @medicamento_detalle.costo_suministro
+          @compra.medicamento_detalle_id = @medicamento_detalle.id
+          @compra.save
 
         end
 
@@ -365,11 +372,18 @@ class MedicamentosController < ApplicationController
 
           @medicamento.cantidad_stock = @medicamento.cantidad_stock + @medicamento_detalle.cantidad_suministro
           
-
           if @medicamento.save
 
             auditoria_despues(@medicamento, auditoria_id)
             @guardado_ok = true
+
+            @compra = AuxCompra.new
+            @compra.fecha = params[:fecha_suministro]
+            @compra.descripcion = "Compra Suministro Medicamento: #{@medicamento.nombre_medicamento}"
+            @compra.observacion = params[:observacion]
+            @compra.monto = @medicamento_detalle.costo_total
+            @compra.medicamento_detalle_id = @medicamento_detalle.id
+            @compra.save
 
           end
 
