@@ -20,6 +20,27 @@
 
                   <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite descargar el archivo adjunto."%>
                 <%end%>
+              <%else%>
+
+                <%@ganado_enfermo = GanadoEnfermo.where("ganado_id = ? and estado_enfermedad_id = ?", gm.ganado_id, PARAMETRO[:estado_enfermedad_muerto]).first
+
+                if @ganado_enfermo.present?
+
+                  @documento_ganatec = DocumentoGanatec.where("id =?", @ganado_enfermo.documento_ganatec_id).first
+
+                    if @documento_ganatec.present?
+                                  
+                        if @documento_ganatec.habilitado == true || rol_administrador%>
+
+                          <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
+
+                        <%end
+
+                    end
+
+                end
+
+                %>
 
             <%end%>
 
