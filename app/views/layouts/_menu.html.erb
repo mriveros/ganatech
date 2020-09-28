@@ -154,8 +154,12 @@
         
         <ul class="dropdown-menu">
 
+              <li><%= link_to "Ganados Muertos", informes_index_path if acceso_permitido("informes.index")%></li>
+
               <li><%= link_to "Compras", informes_index_path if acceso_permitido("informes.index")%></li>
+
               <li><%= link_to "Ventas", informes_index_path if acceso_permitido("informes.index")%></li>
+
               <li><%= link_to "Gastos", informes_index_path if acceso_permitido("informes.index")%></li>
 
         </ul>
