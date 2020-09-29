@@ -151,7 +151,15 @@ class DerivadosLacteosController < ApplicationController
 
           auditoria_nueva("Agregar nueva salida de derivados lacteos", "derivados_lacteos_detalles", @derivado_lacteo_detalle)
           @guardado_ok = true
-
+          
+          @venta = AuxVenta.new
+          @venta.fecha = params[:fecha_salida]
+          @venta.descripcion = "VENTA DERIVADOS LACTEOS"
+          @venta.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
+          @venta.observacion = params[:observacion]
+          @venta.derivado_lacteo_detalle_id = @derivado_lacteo_detalle.id
+          @venta.save
+              
           if @derivado_lacteo.cantidad_actual == 0
 
             @derivado_lacteo.estado_derivado_lacteo_id = PARAMETRO[:estado_derivado_lacteo_sin_stock]

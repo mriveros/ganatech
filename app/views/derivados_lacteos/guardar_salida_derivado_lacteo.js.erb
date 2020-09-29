@@ -1,18 +1,21 @@
 <% if @guardado_ok == true %>
  
-  $("#<%= params[:window_id]%>").modal('hide');
-  $("#form_buscar_derivados_lacteos_id").val('<%=@derivado_lacteo.id%>');
+ $("<div class='col-sm-12' id='msg-guardar-salida-derivado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Salida Registrada Exitosamente.</div>").insertBefore("#form-agregar-salida-derivado-lacteo");
+  
 
   setTimeout( function(){ 
 
-  	
-    swal("Derivados Lacteos","Salida Exitosa!", "success");
+  	$("#<%= params[:window_id]%>").modal('hide');
+  	$("#form_buscar_derivados_lacteos_id").val('<%=@derivado_lacteo.id%>');
+    $("#form-buscar-derivados-lacteos").submit();
+ 	swal("Derivados Lacteos","Salida Exitosa!", "success");
 
-    }, 1000);
+    }, 1500);
 
- 	$("#form-buscar-derivados-lacteos").submit();
-
+ 	
+ 	
 <% else %>
+	
 	$("<div class='col-sm-12' id='msg-guardar-salida-derivado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-salida-derivado-lacteo");
  	swal("Derivados Lacteos", "Error al guardar la Salida: <%=@msg%>. Intente más tarde","error");
 
