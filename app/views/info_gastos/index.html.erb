@@ -85,7 +85,7 @@
 
          <th>
           
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Exportar PDF".html_safe, "#", id: "link-to-exportar-pdf", class: "btn btn-success pull-center", onclick:"exportar_pdf_compras();", style: "float:center;margin-left:10px;" %>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Exportar PDF".html_safe, "#", id: "link-to-exportar-pdf", class: "btn btn-success pull-center", onclick:"exportar_pdf_gastos();", style: "float:center;margin-left:10px;" %>
 
         </th>
 
@@ -150,6 +150,13 @@
     $("#link-to-agregar-detalle-debito").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
+
+  function exportar_pdf_gastos()
+  {
+    alert("en");
+
+  }
+
 </script>
 
 <style>
