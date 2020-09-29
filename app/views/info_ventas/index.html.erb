@@ -88,6 +88,12 @@
               </div>
          </th>
 
+         <th>
+          
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Exportar PDF".html_safe, "#", id: "link-to-exportar-pdf", class: "btn btn-success pull-center", onclick:"exportar_pdf_ventas();", style: "float:center;margin-left:10px;" %>
+
+        </th>
+
         </tr>
         <% end %>
 
@@ -142,7 +148,12 @@
   aplicar_datepicker();
   
   //----------------------------------------------------------------------------//
-  
+  function exportar_pdf_ventas()
+  {
+    alert("en");
+
+  }
+
 </script>
 
 <style>

@@ -5,7 +5,7 @@
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     
     <h3 style="float:left;margin-top:5px;">Compras</h3>
-
+    
   </div>
   
 </div>
@@ -88,6 +88,12 @@
               </div>
          </th>
 
+         <th>
+          
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Exportar PDF".html_safe, "#", id: "link-to-exportar-pdf", class: "btn btn-success pull-center", onclick:"exportar_pdf_compras();", style: "float:center;margin-left:10px;" %>
+
+        </th>
+
         </tr>
         <% end %>
 
@@ -142,7 +148,11 @@
   aplicar_datepicker();
   
   //----------------------------------------------------------------------------//
-  
+  function exportar_pdf_compras()
+  {
+    alert("en");
+
+  }
 </script>
 
 <style>

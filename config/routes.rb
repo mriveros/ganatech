@@ -20,11 +20,13 @@ get 'crontab_ultron/index'
   get 'info_compras/index'
   post 'info_compras/lista'
   get 'info_compras/lista'
+  get 'info_compras/exportar_pdf'
 
 #INFO VENTAS
   get 'info_ventas/index'
   post 'info_ventas/lista'
   get 'info_ventas/lista'
+  get 'info_ventas/exportar_pdf'
 
 #GANADOS MUERTOS
   get 'ganados_muertos/index'
