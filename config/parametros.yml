@@ -159,7 +159,10 @@ development:
   #MOTIVOS MUERTES GANADOS
   motivo_muerte_abigeo: 1
   motivo_muerte_enfermedad: 2
-  motivo_muerte_desconocido: 3  
+  motivo_muerte_desconocido: 3
+
+  #REGISTRO DE GASTOS
+  registro_gasto_pago_salario: 10
 
 production:
 
@@ -314,4 +317,7 @@ production:
   #MOTIVOS MUERTES GANADOS
   motivo_muerte_abigeo: 1
   motivo_muerte_enfermedad: 2
-  motivo_muerte_desconocido: 3  
+  motivo_muerte_desconocido: 3
+
+  #REGISTRO DE GASTOS
+  registro_gasto_pago_salario: 10

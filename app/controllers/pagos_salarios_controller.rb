@@ -126,7 +126,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
     @acumulacion_sueldo_percibido = 0
-
+    @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ? and hacienda_id = ? ", params[:mes_periodo][:id], params[:anho_periodo], params[:hacienda][:id]).first
     
     if @pago_salario.present?
@@ -205,6 +205,14 @@ skip_before_action :verify_authenticity_token
           if @pago_salario.save
 
             @guardado_ok = true
+            
+            @registro_gastos = RegistroGasto.new
+            @registro_gastos.fecha = params[:fecha]
+            @registro_gastos.gasto_id = PARAMETRO[:registro_gasto_pago_salario]
+            @registro_gastos.monto = @pago_salario.monto_total_pagado
+            @registro_gastos.observacion = "PAGO DE SALARIOS: #{@mes.descripcion}/#{params[:anho_periodo]}"
+            @registro_gastos.pago_salario_id = @pago_salario.id
+            @registro_gastos.save
 
           end
 
