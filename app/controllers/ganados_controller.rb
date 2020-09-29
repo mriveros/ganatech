@@ -37,8 +37,8 @@ class GanadosController < ApplicationController
 
     if params[:form_buscar_ganado_rp].present?
 
-      cond << "rp ilike ?"
-      args << "%#{params[:form_buscar_ganado_rp]}%"
+      cond << "rp = ?"
+      args << params[:form_buscar_ganado_rp]
 
     end
 

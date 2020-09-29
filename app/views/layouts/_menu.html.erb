@@ -109,6 +109,7 @@
               <li><%= link_to "Venta Derivados", ventas_derivados_index_path if acceso_permitido("ventas_derivados.index") %></li>
               </ul>
           </li> 
+          <li><%= link_to "Producción Cárnica - Faenas", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
 
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
           <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
