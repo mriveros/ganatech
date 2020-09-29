@@ -155,12 +155,23 @@ class EspermasController < ApplicationController
       @esperma.cantidad = params[:cantidad]
       @esperma.cantidad_inicial = params[:cantidad]
       @esperma.fecha_registro = params[:fecha_registro]
-      @esperma.costo_total = params[:cantidad].to_i * params[:costo].to_i
+      @esperma.costo_total = params[:cantidad].to_i * params[:costo].to_s.gsub(/[$.]/,'').to_i
 
       if @esperma.save
 
         auditoria_nueva("agregar nueva muestra esperma", "espermas", @esperma)
         @guardado_ok = true
+        
+        if params[:esperma_procedencia][:id].to_i == PARAMETRO[:esperma_comprada].to_i
+          
+          @compra = AuxCompra.new
+          @compra.descripcion = params[:descripcion].upcase
+          @compra.fecha = params[:fecha_registro]
+          @compra.observacion = params[:observacion]
+          @compra.monto = params[:cantidad].to_i * params[:costo].to_s.gsub(/[$.]/,'').to_i
+          @compra.save
+
+        end
 
       end
 
@@ -256,6 +267,9 @@ class EspermasController < ApplicationController
       end
 
       if @valido
+
+        @compra = AuxCompra.where("esperma_id = ?", params[:id]).first
+        @compra.destroy
 
         if @esperma.destroy
 

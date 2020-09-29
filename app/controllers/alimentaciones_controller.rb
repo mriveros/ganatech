@@ -171,6 +171,14 @@ class AlimentacionesController < ApplicationController
 
           @guardado_ok = true
 
+          @compra = AuxCompra.new
+          @compra.fecha = Date.today
+          @compra.descripcion = "Compra Alimento: #{@alimento.nombre_alimento}"
+          @compra.observacion = @alimentacion_detalle.observacion
+          @compra.monto = @alimentacion_detalle.costo_total
+          @compra.alimento_detalle_id = @alimentacion_detalle.id
+          @compra.save
+
         end
 
       end
@@ -392,6 +400,14 @@ class AlimentacionesController < ApplicationController
             auditoria_despues(@alimentacion, auditoria_id)
             @guardado_ok = true
 
+            @compra = AuxCompra.new
+            @compra.fecha = Date.today
+            @compra.descripcion = "Compra Alimento: #{@alimentacion.nombre_alimento}"
+            @compra.observacion = @alimentacion_detalle.observacion
+            @compra.monto = @alimentacion_detalle.costo_total
+            @compra.alimento_detalle_id = @alimentacion_detalle.id
+            @compra.save
+
           end
 
         end
@@ -421,6 +437,8 @@ class AlimentacionesController < ApplicationController
       @alimentacion_detalle = AlimentacionDetalle.where("id = ?", params[:alimentacion_detalle_id]).first
       auditoria_id = auditoria_antes("eliminar suministro alimentacion detalle", "alimentaciones_detalles", @alimentacion_detalle)
 
+      @compra_alimento = AuxCompra.where("alimento_detalle_id = ?", params[:alimentacion_detalle_id]).first
+      @compra_alimento.destroy
 
       if @valido
 

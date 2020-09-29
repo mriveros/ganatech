@@ -3,9 +3,9 @@ class InfoComprasController < ApplicationController
 before_filter :require_usuario
 
   def index
-  
  
-  end 
+ 
+  end
  
   def lista
 

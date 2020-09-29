@@ -21,7 +21,7 @@
 
             <div class="col-sm-1"></div><br />
             <div class="col-sm-4"><%= label_tag :nil, "Fecha Salida #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= date_field_tag :fecha_salida, @fecha_actual, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+            <div class="col-sm-7"><%= date_field_tag :fecha_salida, Date.today, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
             </div>    
             <div class="col-sm-1"></div><br /> <br />  
 

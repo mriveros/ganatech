@@ -214,6 +214,15 @@ before_filter :require_usuario
             end
 
             @guardado_ok = true
+            
+            @venta = AuxVenta.new
+            @venta.fecha = params[:fecha_salida]
+            @venta.descripcion = "SALIDA DE GANADOS: Venta de Ganado"
+            @venta.monto = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
+            @venta.observacion = params[:observacion]
+            @venta.ganado_salida_lote = params[:codigo_lote]
+            @venta.ganado_salida_id = @ganado_salida.id
+            @venta.save
 
           end
 
@@ -252,11 +261,20 @@ before_filter :require_usuario
 
               @guardado_ok = true
 
+
             end
 
           end
+          @cantidad_lote = LoteSalidaGanado.count
           #Borrar toda la tabla
           LoteSalidaGanado.destroy_all
+          @venta = AuxVenta.new
+          @venta.fecha = params[:fecha_salida]
+          @venta.descripcion = "SALIDA DE GANADOS: Venta de Ganado CODIGO: #{params[:codigo_lote]} "
+          @venta.monto = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i *  @cantidad_lote
+          @venta.observacion = params[:observacion]
+          @venta.ganado_salida_lote = params[:codigo_lote]
+          @venta.save
 
         end
 
@@ -284,6 +302,10 @@ before_filter :require_usuario
       @ganado_salida = GanadoSalida.where("id = ?", params[:id]).first
       @ganado_salida_elim = @ganado_salida
       
+      @venta = AuxVenta.where("ganado_salida_lote = ?", @ganado_salida.codigo_lote).first
+      @venta.monto = @venta.monto - @ganado_salida.precio_venta
+      @venta.save
+
       if @ganado_salida.destroy
         
         auditoria_nueva("Eliminar salida de Ganado","ganados_salidas", @ganado_salida_elim)
@@ -478,6 +500,9 @@ before_filter :require_usuario
     end
     
     if @valido
+
+      @venta = AuxVenta.where("ganado_salida_lote = ?",params[:codigo_lote])
+      @venta.destroy_all
 
       @lote_salida_ganado_elim = @lote_salida_ganado
       

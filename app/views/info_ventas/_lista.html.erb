@@ -1,14 +1,14 @@
 <% if aux_ventas.present? %>
 
-  <% aux_ventas.each do |gm| %>
+  <% aux_ventas.each do |av| %>
 
     <tr>
 
-      <td><%= ac.id %></td>
-      <td ><%= ac.fecha.strftime('%d/%m/%Y') %></td>
-      <td><%= ac.descripcion%></td>
-      <td><%= ac.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-      <td ><%= ac.observacion %></td>
+      <td><%= av.id %></td>
+      <td ><%= av.fecha.strftime('%d/%m/%Y') %></td>
+      <td><%= av.descripcion%></td>
+      <td><%= av.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+      <td ><%= av.observacion %></td>
       
     </tr>
 

@@ -211,6 +211,14 @@ def agregar_entrada_ganado
 
         auditoria_nueva("registrar entrada de ganado", "ganados_entradas", @ganado_entrada)
         @guardado_ok = true
+
+        @compra = AuxCompra.new
+        @compra.fecha = Date.today
+        @compra.descripcion = "Entrada de Ganados: COMPRA DE GANADOS"
+        @compra.monto = @ganado_entrada.precio_total_compra
+        @compra.observacion = @ganado_entrada.observacion
+        @compra.ganado_entrada_id = @ganado_entrada.id
+        @compra.save
          
       end 
 
@@ -277,7 +285,16 @@ def agregar_entrada_ganado
 
         auditoria_despues(@ganado_entrada, auditoria_id)
         @guardado_ok = true
+        
+        @compra = AuxCompra.where("ganado_entrada_id = ?", @ganado_entrada.id).first
+        @compra.fecha = Date.today
+        @compra.descripcion = "Entrada de Ganados: COMPRA DE GANADOS"
+        @compra.monto = @ganado_entrada.precio_total_compra
+        @compra.observacion = @ganado_entrada.observacion
+        @compra.ganado_entrada_id = @ganado_entrada.id
+        @compra.save
          
+
       end 
 
     end
@@ -310,6 +327,14 @@ def agregar_entrada_ganado
     @ganado_entrada_elim = @ganado_entrada  
 
     if @valido
+
+      @compra = AuxCompra.where("ganado_entrada_id = ?", params[:id]).first
+     
+      if @compra.present?
+        
+        @compra.destroy
+
+      end
 
       if @ganado_entrada.destroy
 
