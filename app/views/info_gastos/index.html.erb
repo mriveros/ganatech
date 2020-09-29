@@ -33,7 +33,7 @@
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_info_gastos_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-celo', '#form_buscar_info_gastos_fecha');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-gastos', '#form_buscar_info_gastos_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
@@ -68,18 +68,18 @@
           <th >
             <div><%= label_tag nil, "Desde Fecha ".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_info_compras_fecha_desde, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_info_gastos_fecha_desde, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_fecha_desde');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-gastos', '#form_buscar_info_gastos_fecha_desde');"><i class="fa fa-times"></i></span>
               </div>
          </th>
           
           <th >
             <div><%= label_tag nil, "Hasta Fecha ".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_info_compras_fecha_hasta, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_info_gastos_fecha_hasta, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-compra', '#form_buscar_info_compras_fecha_hasta');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-info-gastos', '#form_buscar_info_gastos_fecha_hasta');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 

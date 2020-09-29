@@ -12,8 +12,22 @@ class InfoGastosController < ApplicationController
 
 	    if params[:form_buscar_info_gastos_id].present?
 
-	      cond << "id = ?"
+	      cond << "registro_gasto_id = ?"
 	      args << params[:form_buscar_info_gastos_id]
+
+	    end
+
+	     if params[:form_buscar_info_gastos_fecha].present?
+
+	      cond << "fecha = ?"
+	      args << params[:form_buscar_info_gastos_fecha]
+
+	    end
+
+	    if params[:form_buscar_info_gastos_monto].present?
+
+	      cond << "monto = ?"
+	      args << params[:form_buscar_info_gastos_monto]
 
 	    end
 
@@ -24,19 +38,38 @@ class InfoGastosController < ApplicationController
 
 	    end
 
-	    
+	    if params[:form_buscar_info_gastos_observacion].present?
+
+	      cond << "observacion ilike ?"
+	      args << "%#{params[:form_buscar_info_gastos_observacion]}%"
+
+	    end
+
+	    if params[:form_buscar_info_gastos_fecha_desde].present?
+
+	      cond << "fecha >= ?"
+	      args << params[:form_buscar_info_gastos_fecha_desde]
+
+	    end
+
+	    if params[:form_buscar_info_gastos_fecha_hasta].present?
+
+	      cond << "fecha <= ?"
+	      args << params[:form_buscar_info_gastos_fecha_hasta]
+
+	    end
 
 	    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
 	    if cond.size > 0
 
 	      @info_gastos =  VRegistroGasto.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = RegistroGasto.where(cond).count
+	      @total_encontrados = VRegistroGasto.where(cond).count
 
 	    else
 
 	      @info_gastos = VRegistroGasto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = RegistroGasto.count
+	      @total_encontrados = VRegistroGasto.count
 
 	    end
 
