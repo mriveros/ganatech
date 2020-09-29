@@ -10,17 +10,38 @@ class RegistrosGastosController < ApplicationController
 	    cond = []
 	    args = []
 
-	    if params[:form_buscar_detalles_debitos_id].present?
+	    if params[:form_buscar_registros_gastos_id].present?
 
-	      cond << "id = ?"
-	      args << params[:form_buscar_detalles_debitos_id]
+	      cond << "registro_gasto_id = ?"
+	      args << params[:form_buscar_registros_gastos_id]
 
 	    end
 
-	    if params[:form_buscar_detalles_debitos_descripcion].present?
+	    if params[:form_buscar_registros_gastos_fecha].present?
 
-	      cond << "descripcion ilike ?"
-	      args << "%#{params[:form_buscar_detalles_debitos_descripcion]}%"
+	      cond << "fecha = ?"
+	      args << params[:form_buscar_registros_gastos_fecha]
+
+	    end
+
+	    if params[:form_buscar_registros_gastos_monto].present?
+
+	      cond << "monto = ?"
+	      args << params[:form_buscar_registros_gastos_monto]
+
+	    end
+
+	    if params[:form_buscar_registros_gastos_gasto].present?
+
+	      cond << "gasto ilike ?"
+	      args << "%#{params[:form_buscar_registros_gastos_gasto]}%"
+
+	    end
+
+	    if params[:form_buscar_registros_gastos_observacion].present?
+
+	      cond << "observacion ilike ?"
+	      args << "%#{params[:form_buscar_registros_gastos_observacion]}%"
 
 	    end
 
@@ -31,16 +52,16 @@ class RegistrosGastosController < ApplicationController
 	    if cond.size > 0
 
 	      @registros_gastos =  VRegistroGasto.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = RegistroGasto.where(cond).count
+	      @total_encontrados = VRegistroGasto.where(cond).count
 
 	    else
 
 	      @registros_gastos = VRegistroGasto.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = RegistroGasto.count
+	      @total_encontrados = VRegistroGasto.count
 
 	    end
 
-	    @total_registros = RegistroGasto.count
+	    @total_registros = VRegistroGasto.count
 
 	    respond_to do |f|
 
