@@ -15,7 +15,7 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
-#INFO COMPRAS
+#INFO GASTOS
   get 'info_gastos/index'
   post 'info_gastos/lista'
   get 'info_gastos/lista'
@@ -26,6 +26,7 @@ get 'crontab_ultron/index'
   post 'info_compras/lista'
   get 'info_compras/lista'
   get 'info_compras/exportar_pdf'
+  post 'info_compras/exportar_pdf'
 
 #INFO VENTAS
   get 'info_ventas/index'
