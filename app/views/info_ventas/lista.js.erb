@@ -1,2 +1,16 @@
 
 $("#info-ventas-lista").html("<%= escape_javascript(render partial: "lista", locals: { aux_ventas: @aux_ventas }) %>");
+
+function exportar_pdf_ventas()
+  {
+   	if(<%=@aux_ventas.size%> == 0)
+    {
+    	swal("No hay datos para exportar")
+    }
+	else{
+
+		window.open("<%= url_for(info_ventas_exportar_pdf_path(@parametros))%>", '_blank')	
+
+	}
+    
+  }

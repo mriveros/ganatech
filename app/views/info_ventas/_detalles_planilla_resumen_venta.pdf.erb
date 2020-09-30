@@ -1,0 +1,59 @@
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+
+   		<th>ID</th>
+      <th>Fecha</th>
+      <th>Descripción</th>
+      <th>Monto</th>
+      <th>Observación</th>
+
+  </tr>
+  <% @total_venta = 0 %>
+  
+
+
+    <% @aux_ventas.each do |venta|%>
+    
+    <% @total_venta = @total_venta + venta.monto %>
+
+  	<tr>
+
+ 		 	<td><%= venta.id%></td>
+      <td><%= venta.fecha.strftime('%m/%d/%Y') %></td>
+      <td><%= venta.descripcion%></td>
+      <td><%= venta.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%= venta.observacion%></td>
+
+		</tr>
+  		
+  	
+    <%end%>
+  
+  
+
+    <table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+      
+
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th>MONTO VENTAS</th>
+        
+      </tr>
+
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th><%=@total_venta.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+        
+        
+      </tr>
+      
+
+    </table> 
+
+
+<br/>
+<br/>
