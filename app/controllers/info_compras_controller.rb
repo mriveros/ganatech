@@ -91,10 +91,9 @@ before_filter :require_usuario
 
   def exportar_pdf
     
-    if params[:compra_id].present?
-
+          
     @aux_compras =  AuxCompra.where("id in (?)", params[:compra_id]).orden_01.paginate(per_page: 10, page: params[:page])
-
+      
     respond_to do |f|
       
       f.pdf do
@@ -117,7 +116,7 @@ before_filter :require_usuario
       end
       
     end
-  end
+  
   end
 
 
