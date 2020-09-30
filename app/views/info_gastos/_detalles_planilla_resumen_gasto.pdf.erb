@@ -5,25 +5,25 @@
 
    		<th>ID</th>
       <th>Fecha</th>
-      <th>Descripción</th>
+      <th>Gasto</th>
       <th>Monto</th>
       <th>Observación</th>
 
   </tr>
-  <% @total_compra = 0 %>
+  <% @total_gasto = 0 %>
   
 
 
-    <% @aux_compras.each do |compra|%>
+    <% @aux_gastos.each do |gasto|%>
     
-    <% @total_compra = @total_compra + compra.monto %>
+    <% @total_gasto = @total_gasto + gasto.monto %>
   	<tr>
 
- 		 	<td><%= compra.id%></td>
-      <td><%= compra.fecha.strftime('%m/%d/%Y') %></td>
-      <td><%= compra.descripcion%></td>
-      <td><%= compra.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
-      <td><%= compra.observacion%></td>
+ 		 	<td><%= gasto.id%></td>
+      <td><%= gasto.fecha.strftime('%m/%d/%Y') %></td>
+      <td><%= gasto.gasto%></td>
+      <td><%= gasto.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%= gasto.observacion%></td>
 
 		</tr>
   		
@@ -38,14 +38,14 @@
       <tr>
 
         <th>TOTAL GENERAL</th>
-        <th>MONTO COMPRAS</th>
+        <th>MONTO GASTOS</th>
         
       </tr>
 
       <tr>
 
         <th>TOTAL GENERAL</th>
-        <th><%=@total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
+        <th><%=@total_gasto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
         
         
       </tr>

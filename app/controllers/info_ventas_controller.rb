@@ -77,7 +77,7 @@ before_filter :require_usuario
 
     @total_registros = AuxVenta.count
     
-    @parametros = { format: :pdf, venta_id: @aux_ventas.map(&:id), fecha: params[:form_buscar_info_compras_fecha], descripcion: params[:form_buscar_info_compras_descripcion], monto: params[:form_buscar_info_compras_monto], observacion: params[:form_buscar_info_compras_fecha_desde], fecha_desde: params[:form_buscar_info_compras_fecha_desde], fecha_hasta: params[:form_buscar_info_compras_fecha_hasta]}
+    @parametros = { format: :pdf, venta_id: @aux_ventas.map(&:id), fecha: params[:form_buscar_info_ventas_fecha], descripcion: params[:form_buscar_info_ventas_descripcion], monto: params[:form_buscar_info_ventas_monto], observacion: params[:form_buscar_info_ventas_fecha_desde], fecha_desde: params[:form_buscar_info_ventas_fecha_desde], fecha_hasta: params[:form_buscar_info_ventas_fecha_hasta]}
 
     respond_to do |f|
       
