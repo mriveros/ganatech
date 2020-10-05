@@ -1,0 +1,36 @@
+<style>
+  
+  table.cual th {
+    background-color: #EEEEEE;
+    padding: 2px;
+  }
+  table.cual {
+    border-collapse: collapse;
+    font-size: 12px !important;  
+  }
+
+  table.cual tr{
+    border-bottom: 1px solid #000;
+  }
+
+  table.cual td, table.cual th{
+    border-left: 0px solid #000;
+  }
+</style>
+
+<%puts "**************Imprimir Detalles*********************"%>
+
+<%= render :partial => 'detalles_planilla_resumen_compra'%>      
+
+<table width="100%" style="font-size: 14px;">
+   <br/><br/><br/><br/><br/><br/>          
+  <tr>
+            
+    <td style="border-bottom: 1px solid #fff;border-left: 1px solid #fff;border-right: 1px solid #fff;" width="33%" align="center">
+      ......................................<br />Firma Responsable
+              
+    </td>
+              
+  </tr>
+          
+</table>

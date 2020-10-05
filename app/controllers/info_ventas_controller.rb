@@ -85,7 +85,7 @@ before_filter :require_usuario
       
     end
 
-    def exportar_pdf
+  def exportar_pdf
     
           
     @aux_ventas =  AuxVenta.where("id in (?)", params[:venta_id]).orden_01.paginate(per_page: 10, page: params[:page])
