@@ -104,7 +104,7 @@ before_filter :require_usuario
   def exportar_pdf
     
           
-    @ganados_muertos =  AuxVenta.where("id in (?)", params[:venta_id]).orden_01.paginate(per_page: 10, page: params[:page])
+    @ganados_muertos =  VGanadoMuerto.where("ganado_muerto_id in (?)", params[:ganado_muerto_id]).orden_01.paginate(per_page: 10, page: params[:page])
       
     respond_to do |f|
       

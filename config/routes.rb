@@ -38,6 +38,7 @@ get 'crontab_ultron/index'
   get 'ganados_muertos/index'
   post 'ganados_muertos/lista'
   get 'ganados_muertos/lista'
+  get 'ganados_muertos/exportar_pdf'
   
 #CARGOS
   post 'cargos/lista'

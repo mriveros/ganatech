@@ -412,7 +412,8 @@ before_filter :require_usuario
               @ganado_muerto.ganado_id = @ganado.id
               @ganado_muerto.motivo_muerte_id = PARAMETRO[:motivo_muerte_enfermedad] 
               @ganado_muerto.fecha = params[:fecha]
-              
+              @ganado_muerto.observacion = params[:observacion]
+
               if @ganado_muerto.save
 
                 @actualizado_ok = true

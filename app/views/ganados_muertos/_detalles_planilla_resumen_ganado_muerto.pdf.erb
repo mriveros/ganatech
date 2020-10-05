@@ -5,54 +5,29 @@
 
    		<th>ID</th>
       <th>Fecha</th>
-      <th>Descripción</th>
-      <th>Monto</th>
+      <th>Código</th>
+      <th>Ganado</th>
+      <th>RP</th>
+      <th>Motivo Muerte</th>
       <th>Observación</th>
 
   </tr>
-  <% @total_compra = 0 %>
-  
 
-
-    <% @aux_compras.each do |compra|%>
+    <% @ganados_muertos.each do |gm|%>
     
-    <% @total_compra = @total_compra + compra.monto %>
+    
   	<tr>
 
- 		 	<td><%= compra.id%></td>
-      <td><%= compra.fecha.strftime('%m/%d/%Y') %></td>
-      <td><%= compra.descripcion%></td>
-      <td><%= compra.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
-      <td><%= compra.observacion%></td>
+ 		 	<td><%= gm.id%></td>
+      <td><%= gm.fecha.strftime('%m/%d/%Y') %></td>
+      <td><%= gm.ganado_rfid%></td>
+      <td><%= gm.ganado_nombre%></td>
+      <td><%= gm.ganado_rp%></td>
+      <td><%= gm.motivo_muerte%></td>
+      <td><%= gm.observacion%></td>
 
 		</tr>
   		
-  	
     <%end%>
-  
-  
-
-    <table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
-      
-
-      <tr>
-
-        <th>TOTAL GENERAL</th>
-        <th>MONTO COMPRAS</th>
-        
-      </tr>
-
-      <tr>
-
-        <th>TOTAL GENERAL</th>
-        <th><%=@total_compra.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></th>
-        
-        
-      </tr>
-      
-
-    </table> 
-
-
 <br/>
 <br/>

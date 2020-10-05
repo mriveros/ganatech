@@ -1,2 +1,15 @@
-
 $("#ganados-muertos-lista").html("<%= escape_javascript(render partial: "lista", locals: { ganados_muertos: @ganados_muertos }) %>");
+
+function exportar_pdf_ganado_muerto()
+  {
+   	if(<%=@ganados_muertos.size%> == 0)
+    {
+    	swal("No hay datos para exportar")
+    }
+	else{
+
+		window.open("<%= url_for(ganados_muertos_exportar_pdf_path(@parametros))%>", '_blank')	
+
+	}
+    
+  }
