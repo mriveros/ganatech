@@ -1,48 +1,17 @@
-<% if ganados_salidas.present? %>
+<% if ganados_faenas.present? %>
 
-  <% ganados_salidas.each do |gan| %>
+  <% ganados_faenas.each do |gan| %>
 
     <tr>
 
-      <td><%= gan.ganado_salida_id %></td>
+      <td><%= gan.id %></td>
       <td ><%= gan.fecha_salida.strftime('%d/%m/%Y')%></td>
-      <td ><%= gan.codigo_rfid%></td>
-      <td ><%= gan.nombre %></td>
-      <td ><%= gan.rp %></td>
-      <td ><%=gan.sexo_ganado  %></td>
-      <td ><%=gan.raza_ganado  %></td>
-      <td ><%=gan.etapa_ganado  %></td>
+      <td ><%= gan.descripcion%></td>
+      <td ><%= gan.motivo_faena_id%></td>
+      <td ><%= gan.cantidad %></td>
+      <td ><%= gan.monto_total %></td>
       <td > </td>
  
-    </tr>
-
-     <tr >
-
-      <td class="td-nivel-2"><%= gan.ganado_peso_promedio %></td>
-      <td class="td-nivel-2"><%= gan.tipo_salida%></td>
-      <td class="td-nivel-2"><%= gan.precio_venta.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td class="td-nivel-2"><%= gan.peso_promedio %></td>
-      <td class="td-nivel-2"><%= gan.razon_social %></td>
-      <td class="td-nivel-2"><%= gan.estado_movimiento %></td>
-      <td class="td-nivel-2"><%= gan.observacion %></td>
-      <td class="td-nivel-2"><%= gan.codigo_lote %> </td>
-      <td >
-        
-        <%if gan.estado_movimiento_id == PARAMETRO[:estado_movimiento_en_proceso]%>
-        
-          
-          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{gan.ganado_salida_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-salida-ganado", title: 'Haga click para eliminar la Salida de Ganados'  %>
-
-        <%end%>
-
-        <%if gan.estado_movimiento_id != PARAMETRO[:estado_movimiento_finalizado]%>
-          
-          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_salida_ganado_a_finalizado(#{gan.ganado_salida_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-salida-ganado-a-finalizado", title: 'Haga click para confirmar la Venta y la Salida de Ganados'%>
-        
-        <%end%>
-
-       </td>
-
     </tr>
 
 
@@ -50,7 +19,7 @@
 
   <tr id="tab-paginacion">
 
-      <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados_salidas, :params => params %></div></td>
+      <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate ganados_faenas, :params => params %></div></td>
 
   </tr>
 
@@ -75,11 +44,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(ganado_salida_id) {
+  function eliminar_registro(ganado_faena_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de Salidas de Ganados y el Ganado volverá al estado Activo.",
+          text: "Al confirmar se eliminará permanentemente de la lista de Ganados Faenados y el Detalle de Ganado volverá al estado Activo.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -92,7 +61,7 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(ganados_salidas_eliminar_salida_ganado_path) %>", 
+                url: "<%= url_for(ganados_faenas_eliminar_ganado_faena_path) %>", 
                 data: {id: ganado_salida_id},
                 dataType: 'script'
               });
@@ -107,37 +76,5 @@
 
     }
 
-    function cambiar_estado_salida_ganado_a_finalizado(ganado_salida_id) {
-
-        swal({
-          title: "Confirmar",
-          text: "Al confirmar el Ganado pasará al estado Vendido. En el módulo de Ganados se podrá visualizar los datos del ganado como histórico",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-              $.ajax({
-                url: "<%= url_for(ganados_salidas_cambiar_estado_salida_a_finalizado_path) %>", 
-                data: {id: ganado_salida_id},
-                dataType: 'script'
-              });
-            
-          } else{
-
-            return false;
-
-          }
-
-        });
-
-    }
-
-
+    
 </script>

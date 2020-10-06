@@ -15,6 +15,23 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+
+#GANADOS FAENAS
+  get 'ganados_faenas/index'
+  post 'ganados_faenas/lista'
+  get 'ganados_faenas/lista'
+  get 'ganados_faenas/agregar'
+  post 'ganados_faenas/guardar'
+  get 'ganados_faenas/eliminar_ganado_faena'
+  get 'ganados_faenas/crear_lote_ganado'
+  post 'ganados_faenas/crear_lote_ganado'
+  post 'ganados_faenas/lista_ganado'
+  get 'ganados_faenas/lista_ganado'
+  get 'ganados_faenas/agregar_ganado_lote'
+  get 'ganados_faenas/eliminar_ganado_lote'
+  get 'ganados_faenas/seleccionar_lote'
+  post 'ganados_faenas/eliminar_lote'
+
 #INFO GASTOS
   get 'info_gastos/index'
   post 'info_gastos/lista'
