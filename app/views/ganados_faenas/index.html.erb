@@ -4,9 +4,10 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Ganados Faenas</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Salida".html_safe, "#", id: "link-to-agregar-salida-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-salida-ganado", link_to_id: "#link-to-agregar-salida-ganado", url: ganados_faenas_agregar_path( window_id: "modal-window-agregar-salida-ganado"))%>
-    <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-salida-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar faena".html_safe, "#", id: "link-to-agregar-faena-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-faena-ganado", link_to_id: "#link-to-agregar-faena-ganado", url: ganados_faenas_agregar_path( window_id: "modal-window-agregar-faena-ganado"))%>
+    
       
   </div>
   
@@ -20,7 +21,7 @@
    
     <thead>
 
-      <%= form_tag ganados_salidas_lista_path, remote: true, id: "form-buscar-ganado-faena"  do  %>
+      <%= form_tag ganados_faenas_lista_path, remote: true, id: "form-buscar-ganado-faena"  do  %>
 
         <tr class= "td-nivel-1">
 
@@ -35,9 +36,9 @@
            <th>
             <div><%= label_tag nil, "Fecha".html_safe %></div>
               <div class='input-group date'>
-                <%= text_field_tag :form_buscar_ganado_faena_fecha_salida, nil, class: 'form-control input-sm' %>
+                <%= text_field_tag :form_buscar_ganado_faena_fecha_faena, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_fecha_salida');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_fecha_faena');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
