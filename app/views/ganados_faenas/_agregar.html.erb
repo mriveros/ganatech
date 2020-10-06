@@ -66,6 +66,22 @@
               <div class="col-sm-7"><%= text_field_tag :hacienda, nil,class: 'form-control input-sm',style:"text-transform:uppercase;", readonly: true %></div>
              <div class="col-sm-1"></div><br /><br />
 
+              <div class="col-sm-4"><%= label_tag :nil, "Peso Vivo#{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :peso_vivo, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+              <div class="col-sm-4"><%= label_tag :nil, "Peso Neto#{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :peso_neto, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+              <div class="col-sm-4"><%= label_tag :nil, "Precio por Peso#{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :peso_monto, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
+              <div class="col-sm-1"></div><br /><br />
+
+              <div class="col-sm-4"><%= label_tag :nil, "Monto Total#{attr_requerido}".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :monto, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
+              <div class="col-sm-1"></div><br /><br />
+
             </div>
 
             <div id="por_lote" hidden="true" align="center">
@@ -113,7 +129,32 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+  
+  $("#peso_monto").bind('change', function(){
+      
+      var peso_neto = $("#peso_neto").val();
+      var precio_por_peso = $("#peso_monto").val();
 
+      if (peso_neto.length == 0){
+
+        swal("Debe ingresar el peso neto del ganado");
+        $("#peso_neto").val(0);
+        $("#peso_monto").val(0);
+        $("#peso_neto").focus();
+      }
+
+      if (peso_neto.length > 0 && precio_por_peso.length > 0){
+
+        var monto = peso_neto * precio_por_peso;
+        $("#monto").val(monto)
+
+      }
+      
+
+
+   })
+
+ 
   $("#clasificacion_salida_id").bind('change', function(){ 
 
     if ($(this).val() == <%=PARAMETRO[:clasificacion_por_ganado]%>){
@@ -214,7 +255,7 @@
         
         if(j[i].nombre != ganado ){
           
-          ganados.push( {value: j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda});
+          ganados.push( {value: j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid+" - "+j[i].hacienda +" - "+j[i].peso_promedio });
           ganado =j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp +" - "+j[i].codigo_rfid ;
 
           options += "<option value="+ j[i].ganado_id +" - "+ j[i].nombre+" - "+j[i].rp+" - "+j[i].codigo_rfid + "</option>"
@@ -245,6 +286,9 @@
         $("#rp").val(datos[2]);
         $("#codigo_rfid").val(datos[3]);
         $("#hacienda").val(datos[4]);
+        $("#peso_vivo").val(datos[5]);
+
+        
 
         return false;
 
@@ -315,7 +359,7 @@
       if (valido){
 
         swal({
-          title: "Confirmar Salida",
+          title: "Confirmar Faena",
           text: "Al confirmar la Faena de Ganado éste se podrá visualizar en el Módulo de Ganados como ganado Faenado.",
           type: "warning",
           showCancelButton: true,

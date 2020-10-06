@@ -117,29 +117,46 @@ before_filter :require_usuario
           if @ganado_faena.save
 
             auditoria_nueva("Guardar Faena de Ganado","ganados_faenas", @ganado_faena)
-            
-            @ganado = Ganado.where("id = ?", params[:ganado_id]).first
-            auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de faena", "ganados", @ganado)
-            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_faena]
+            #GUARDAR EL DETALLE DE LA FAENA
+            @ganado_faena_detalle = GanadoFaenaDetalle.new
+            @ganado_faena_detalle.ganado_faena_id = @ganado_faena.id
+            @ganado_faena_detalle.ganado_id = params[:ganado_id]
+            @ganado_faena_detalle.peso_vivo = params[:peso_vivo]
+            @ganado_faena_detalle.peso_neto = params[:peso_neto]
+            @ganado_faena_detalle.monto_peso = params[:monto_peso]
+            @ganado_faena_detalle.monto = params[:monto]
+
+            if @ganado_faena_detalle.save
+
+              #ACTUALIZAR EL MONTO TOTAL EN LA CABECERA
+              @ganado_faena = params[:monto]
+              @ganado_faena.save
+              #ACTUALIZAR ESTADO DE GANADO
+              @ganado = Ganado.where("id = ?", params[:ganado_id]).first
+              auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de faena", "ganados", @ganado)
+              @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_faena]
+                
+              if @ganado.save
+
+                auditoria_despues(@ganado, auditoria_id)
+                @guardado_ok = true
+
+              end
+
+             
               
-            if @ganado.save
+              if params[:motivo_faena][:id] == PARAMETRO[:motivo_faena_venta]
+              
+                @venta = AuxVenta.new
+                @venta.fecha = params[:fecha]
+                @venta.descripcion = "VENTA DE GANADOS: Venta de Ganado"
+                @venta.monto = @ganado_faena.monto
+                @venta.observacion = params[:observacion]
+                @venta.ganado_faena_id = @ganado_faena.id
+                @venta.save
+              
+              end
 
-              auditoria_despues(@ganado, auditoria_id)
-
-            end
-
-            @guardado_ok = true
-            
-            if params[:motivo_faena][:id] == PARAMETRO[:motivo_faena_venta]
-            
-              @venta = AuxVenta.new
-              @venta.fecha = params[:fecha]
-              @venta.descripcion = "VENTA DE GANADOS: Venta de Ganado"
-              @venta.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
-              @venta.observacion = params[:observacion]
-              @venta.ganado_faena_id = @ganado_faena.id
-              @venta.save
-            
             end
 
           end
