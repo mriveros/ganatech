@@ -99,28 +99,28 @@ before_filter :require_usuario
 
     if @valido
       
-      GanadoSalida.transaction do
+      GanadoFaena.transaction do
 
         if params[:clasificacion_salida][:id].to_i == PARAMETRO[:clasificacion_salida_por_ganado]
           
-          @ganado_salida = GanadoSalida.new
-          @ganado_salida.peso_promedio = params[:peso_promedio]
-          @ganado_salida.ganado_id = params[:ganado_id]
-          @ganado_salida.tipo_salida_id = params[:tipo_salida][:id]
-          @ganado_salida.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
-          @ganado_salida.observacion = params[:observacion]
-          @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
-          @ganado_salida.cliente_id = params[:cliente_id]
-          @ganado_salida.codigo_lote = params[:codigo_lote]
-          @ganado_salida.clasificacion_salida_id = params[:clasificacion_salida][:id]
-          @ganado_salida.fecha_salida = params[:fecha_salida]
+          @ganado_faena = GanadoSalida.new
+          @ganado_faena.peso_promedio = params[:peso_promedio]
+          @ganado_faena.ganado_id = params[:ganado_id]
+          @ganado_faena.tipo_salida_id = params[:tipo_salida][:id]
+          @ganado_faena.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
+          @ganado_faena.observacion = params[:observacion]
+          @ganado_faena.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
+          @ganado_faena.cliente_id = params[:cliente_id]
+          @ganado_faena.codigo_lote = params[:codigo_lote]
+          @ganado_faena.clasificacion_salida_id = params[:clasificacion_salida][:id]
+          @ganado_faena.fecha_salida = params[:fecha_salida]
 
-          if @ganado_salida.save
+          if @ganado_faena.save
 
-            auditoria_nueva("Guardar salida de Ganado","ganados_salidas", @ganado_salida)
+            auditoria_nueva("Guardar salida de Ganado","ganados_salidas", @ganado_faena)
             @ganado = Ganado.where("id = ?", params[:ganado_id]).first
             auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
-            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_en_proceso_venta]
+            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_faena]
               
             if @ganado.save
 
@@ -149,21 +149,21 @@ before_filter :require_usuario
 
           @ganado_lote.each do |ganado|
 
-            @ganado_salida = GanadoSalida.new
-            @ganado_salida.peso_promedio = params[:peso_promedio]
-            @ganado_salida.ganado_id =  ganado.ganado_id
-            @ganado_salida.tipo_salida_id = params[:tipo_salida][:id]
-            @ganado_salida.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
-            @ganado_salida.observacion = params[:observacion]
-            @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
-            @ganado_salida.cliente_id = params[:cliente_id]
-            @ganado_salida.codigo_lote = params[:codigo_lote]
-            @ganado_salida.clasificacion_salida_id = params[:clasificacion_salida][:id]
-            @ganado_salida.fecha_salida = params[:fecha_salida]
+            @ganado_faena = GanadoSalida.new
+            @ganado_faena.peso_promedio = params[:peso_promedio]
+            @ganado_faena.ganado_id =  ganado.ganado_id
+            @ganado_faena.tipo_salida_id = params[:tipo_salida][:id]
+            @ganado_faena.precio_venta = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i
+            @ganado_faena.observacion = params[:observacion]
+            @ganado_faena.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
+            @ganado_faena.cliente_id = params[:cliente_id]
+            @ganado_faena.codigo_lote = params[:codigo_lote]
+            @ganado_faena.clasificacion_salida_id = params[:clasificacion_salida][:id]
+            @ganado_faena.fecha_salida = params[:fecha_salida]
 
-            if @ganado_salida.save
+            if @ganado_faena.save
 
-              auditoria_nueva("Guardar salida de Ganado","ganados_salidas", @ganado_salida)
+              auditoria_nueva("Guardar salida de Ganado","ganados_salidas", @ganado_faena)
 
               @ganado = Ganado.where("id = ?", ganado.ganado_id).first
               auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
@@ -185,7 +185,7 @@ before_filter :require_usuario
           LoteSalidaGanado.destroy_all
           @venta = AuxVenta.new
           @venta.fecha = params[:fecha_salida]
-          @venta.descripcion = "SALIDA DE GANADOS: Venta de Ganado CODIGO: #{params[:codigo_lote]} "
+          @venta.descripcion = "FAENA DE GANADOS: Venta de Ganado CODIGO: #{params[:codigo_lote]} "
           @venta.monto = params[:precio_venta].to_s.gsub(/[$.]/,'').to_i *  @cantidad_lote
           @venta.observacion = params[:observacion]
           @venta.ganado_salida_lote = params[:codigo_lote]
@@ -197,7 +197,6 @@ before_filter :require_usuario
 
     end
 
-
      respond_to do |f|
 
       f.js
@@ -207,24 +206,24 @@ before_filter :require_usuario
   end
 
  
- def eliminar_salida_ganado
+ def eliminar_ganado_faena
 
     @eliminado = false
     @msg = ""
 
     Ganado.transaction do
 
-      @ganado_salida = GanadoSalida.where("id = ?", params[:id]).first
-      @ganado_salida_elim = @ganado_salida
+      @ganado_faena = GanadoFaena.where("id = ?", params[:id]).first
+      @ganado_faena_elim = @ganado_faena
       
-      @venta = AuxVenta.where("ganado_salida_lote = ?", @ganado_salida.codigo_lote).first
-      @venta.monto = @venta.monto - @ganado_salida.precio_venta
+      @venta = AuxVenta.where("ganado_salida_lote = ?", @ganado_faena.codigo_lote).first
+      @venta.monto = @venta.monto - @ganado_faena.precio_venta
       @venta.save
 
-      if @ganado_salida.destroy
+      if @ganado_faena.destroy
         
-        auditoria_nueva("Eliminar salida de Ganado","ganados_salidas", @ganado_salida_elim)
-        @ganado = Ganado.where("id = ?", @ganado_salida_elim.ganado_id).first
+        auditoria_nueva("Eliminar salida de Ganado","ganados_salidas", @ganado_faena_elim)
+        @ganado = Ganado.where("id = ?", @ganado_faena_elim.ganado_id).first
         auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
         @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_activo]
         
@@ -335,12 +334,12 @@ before_filter :require_usuario
 
   def agregar_ganado_lote
 
-    @lote_control_ganado = LoteSalidaGanado.new
-    @lote_control_ganado.ganado_id = params[:ganado_id]
+    @lote_ganado_faena = LoteGanadoFaena.new
+    @lote_ganado_faena.ganado_id = params[:ganado_id]
     
-    if @lote_control_ganado.save
+    if @lote_ganado_faena.save
 
-      auditoria_nueva("Guardar Lote para para salida de ganado","tmp_ganados_salidas_lotes", @lote_control_ganado)
+      auditoria_nueva("Guardar Lote para para salida de ganado","tmp_ganados_faenas_lotes", @lote_ganado_faena)
 
     end
 
@@ -354,12 +353,13 @@ before_filter :require_usuario
 
   def eliminar_ganado_lote
 
-    @lote_control_ganado = LoteSalidaGanado.where("ganado_id = ? ", params[:ganado_id]).first
-    aux = @lote_control_ganado 
+    @lote_ganado_faena = LoteGanadoFaena.where("ganado_id = ? ", params[:ganado_id]).first
+
+    aux = @lote_ganado_faena 
     
-    if @lote_control_ganado.destroy
+    if @lote_ganado_faena.destroy
     
-      auditoria_nueva("Eliminar Lote para salida de ganado","tmp_ganados_salidas_lotes", @lote_control_ganado)
+      auditoria_nueva("Eliminar Lote para faena de ganado","tmp_ganados_faenas_lotes", @lote_ganado_faena)
 
     end
 
@@ -388,7 +388,7 @@ before_filter :require_usuario
 
   def seleccionar_lote
 
-    @lote = LoteSalidaGanado.new
+    @lote = LoteGanadoFaena.new
 
     respond_to do |f|
 
@@ -405,7 +405,7 @@ before_filter :require_usuario
     @valido = true
     @msg = ""
 
-    @lote_salida_ganado = GanadoSalida.where("codigo_lote = ?", params[:codigo_lote])
+    @lote_salida_ganado = GanadoFaena.where("codigo_lote = ?", params[:codigo_lote])
     
     unless @lote_salida_ganado.present?
       
@@ -458,44 +458,6 @@ before_filter :require_usuario
   end
 
 
-  def cambiar_estado_salida_a_finalizado
-
-    @actualizado = false
-    @msg = ""
-
-    Ganado.transaction do
-
-      @ganado_salida = GanadoSalida.where("id = ?", params[:id]).first
-      @ganado_salida.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
-      
-      if @ganado_salida.save
-        
-        auditoria_nueva("Finalizar salida de ganado, venta concretada","ganados_salidas", @ganado_salida)
-        @ganado = Ganado.where("id = ?", @ganado_salida.ganado_id).first
-        auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
-        @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_vendido]
-        
-        if @ganado.save
-
-          auditoria_despues(@ganado, auditoria_id)
-          @actualizado = true
-
-        end
-        
-
-      end
-
-    end
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
-
-
   def buscar_cliente
     
     @cliente = Cliente.where("nombre_razon_social ilike ?", "%#{params[:cliente]}%")
@@ -508,72 +470,5 @@ before_filter :require_usuario
     end
     
   end
-
-  def seleccionar_lote_a_finalizar
-
-    @lote = LoteSalidaGanado.new
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
-
-
-  def finalizar_lote_ganado
-  
-    @lote_finalizado = false
-    @valido = true
-    @msg = ""
-
-    Ganado.transaction do
-
-      @ganado_salida = GanadoSalida.where("codigo_lote = ? and estado_movimiento_id <> ?", params[:codigo_lote], PARAMETRO[:estado_movimiento_finalizado])
-
-      unless @ganado_salida.present?
-
-        @valido = false
-        @msg = "El lote ingresado no pertenece a un lote a finalizar"
-
-      end
-
-      if @valido
-
-        @ganado_salida.each do |gsl|
-
-          gsl.estado_movimiento_id = PARAMETRO[:estado_movimiento_finalizado]
-          
-          if gsl.save
-            
-            auditoria_nueva("Finalizar salida de ganado, venta concretada","ganados_salidas", gsl)
-            @ganado = Ganado.where("id = ?", gsl.ganado_id).first
-            auditoria_id = auditoria_antes("actualizar estado de ganado en modulo de salida", "ganados", @ganado)
-            @ganado.estado_ganado_id = PARAMETRO[:estado_ganado_vendido]
-            
-            if @ganado.save
-
-              auditoria_despues(@ganado, auditoria_id)
-              @lote_finalizado = true
-
-            end
-          
-          end
-
-        end
-
-      end
-
-    end
-
-    respond_to do |f|
-
-      f.js
-
-    end
-
-  end
-
 
 end
