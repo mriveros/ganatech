@@ -1,17 +1,17 @@
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
-<div class="modal-dialog"  align="center">
+<div class="modal-dialog"  align="left">
       
   <div class="modal-content"  >
         
     <div class="modal-header" style="background:#e6e6e6; ">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Salida</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Faena</h4>
       
     </div>
 
-    <%= form_for @ganado_salida, remote: true, url: ganados_salidas_guardar_url, html: { id: "form-agregar-salida-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @ganado_faena, remote: true, url: ganados_faenas_guardar_url, html: { id: "form-agregar-ganado-faena" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  
@@ -20,25 +20,17 @@
         <div class="panel-body">
 
             <div class="col-sm-1"></div><br />
-            <div class="col-sm-4"><%= label_tag :nil, "Fecha Salida #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= date_field_tag :fecha_salida, Date.today, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
+            <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= date_field_tag :fecha, Date.today, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
             </div>    
             <div class="col-sm-1"></div><br /> <br />  
 
-            <div class="col-sm-4"><%= label_tag :nil, "Código #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :codigo_lote, @codigo_salida ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 10, :readonly=> true %></div>
-            <div class="col-sm-1"></div><br /><br />
+            <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+            <div class="col-sm-7"><%= text_field_tag :descripcion, nil, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+            <div class="col-sm-1"></div><br /><br />  
 
-            <div class="col-sm-4"><%= f.label :lbl_precio_venta, "Precio Venta #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :precio_venta, nil ,:onkeypress=> "return isNumberKey(event)", :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-            <div class="col-sm-1"></div><br /><br />
-
-            <div class="col-sm-4"><%= f.label :lbl_peso_promedio, "Peso Promedio".html_safe %></div>
-            <div class="col-sm-7"><%= text_field_tag :peso_promedio, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-            <div class="col-sm-1"></div><br /><br />
-
-            <div class="col-sm-4"><%= label_tag nil, "Tipo Salida #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :tipo_salida, :id, TipoSalida.orden_01, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-4"><%= label_tag nil, "Motivo Faena #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+            <div class="col-sm-7"><%= collection_select :motivo_faena, :id, MotivoFaena.orden_01, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
 
             <div class="col-sm-4"><%= f.label :nil, "Cliente#{attr_requerido}".html_safe %></div>
@@ -96,7 +88,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-salida-ganado" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-faena-ganado" %>
           
       </div>
  
@@ -108,12 +100,12 @@
 
 <style type="text/css">
 
-  #form-agregar-salida-ganado label, #form-agregar-salida-ganado input[type='text'], #form-agregar-salida-ganado select { float:left; margin-top:5px;}
-  #form-agregar-salida-ganado br {clear:both; }
-  #form-agregar-salida-ganado label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-salida-ganado #descripcion { width:100%;}
-  #form-agregar-salida-ganado #fecha_inicio { width:80%;}
-  #form-agregar-salida-ganado #fecha_fin { width:80%;}
+  #form-agregar-ganado-faena label, #form-agregar-ganado-faena input[type='text'], #form-agregar-ganado-faena select { float:left; margin-top:5px;}
+  #form-agregar-ganado-faena br {clear:both; }
+  #form-agregar-ganado-faena label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-ganado-faena #descripcion { width:100%;}
+  #form-agregar-ganado-faena #fecha_inicio { width:80%;}
+  #form-agregar-ganado-faena #fecha_fin { width:80%;}
   .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
@@ -128,16 +120,13 @@
 
       $("#por_ganado").show();
       $("#por_lote").hide();
-      $("#por_potrero").hide();
-      $("#por_hacienda").hide();
+     
      
     } else if ($(this).val() == <%=PARAMETRO[:clasificacion_por_lote]%>){
 
       $("#por_ganado").hide();
       $("#por_lote").show();
-      $("#por_potrero").hide();
-      $("#por_hacienda").hide();
-     
+          
       $("#lote-ganado").html("<%= escape_javascript(render partial: "crear_lote_ganado") %>");
     } 
 
@@ -162,7 +151,7 @@
     $("#cliente").val('');
     $("#cliente_id").val('');
 
-    $.getJSON("<%= url_for(ganados_salidas_buscar_cliente_path) %>", { cliente: $(this).val()}, function(j){
+    $.getJSON("<%= url_for(ganados_faenas_buscar_cliente_path) %>", { cliente: $(this).val()}, function(j){
         
       var cliente = "";
       var options = "<option value=''> -- Seleccione un Cliente -- </option>"
@@ -217,7 +206,7 @@
     $("#rp").val('');
     $("#codigo_rfid").val('');
 
-    $.getJSON("<%= url_for(ganados_salidas_buscar_ganado_path) %>", { ganado: $(this).val()}, function(j){
+    $.getJSON("<%= url_for(ganados_faenas_buscar_ganado_path) %>", { ganado: $(this).val()}, function(j){
         
       var ganado = "";
       var options = "<option value=''> -- Seleccione un Ganado -- </option>"
@@ -266,21 +255,29 @@
   });
 
 
-  $("#btn-guardar-salida-ganado").bind('click', function () {
+  $("#btn-guardar-faena-ganado").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#fecha_salida").val().length == 0){
+      if($("#fecha").val().length == 0){
 
-        msg +="Ingrese la fecha de salida de ganado.\n"
+        msg +="Ingrese la fecha de faena de ganado.\n"
         valido = false
       
       }
 
-      if($("#tipo_salida_id").val().length == 0){
 
-        msg +="Seleccione el tipo de Salida.\n"
+      if($("#descripcion").val().length == 0){
+
+        msg +="Ingrese una descripción.\n"
+        valido = false
+      
+      }
+
+      if($("#motivo_faena_id").val().length == 0){
+
+        msg +="Seleccione el motivo de Faena.\n"
         valido = false
       
       }
@@ -289,13 +286,6 @@
       if($("#cliente_id").val().length == 0){
 
         msg +="Debe ingresar un Cliente.\n"
-        valido = false
-          
-      }
-
-      if($("#precio_venta").val().length == 0){
-
-        msg +="Debe ingresar el precio de la Salida.\n"
         valido = false
           
       }
@@ -326,7 +316,7 @@
 
         swal({
           title: "Confirmar Salida",
-          text: "Al confirmar la Salida de Ganado éste no se podrá visualizar en el Módulo de Ganados.",
+          text: "Al confirmar la Faena de Ganado éste se podrá visualizar en el Módulo de Ganados como ganado Faenado.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -338,7 +328,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-salida-ganado").submit();
+            $("#form-agregar-ganado-faena").submit();
             
           } 
 
