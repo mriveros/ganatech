@@ -1,0 +1,31 @@
+<% if @lote_finalizado %>
+
+  $("<div class='col-sm-12' id='msg-finalizar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Finalizado exitosamente.</div>").insertBefore("#form-finalizar-lote-salida-ganado");
+  $("#form_buscar_salida_ganado_id").val("");
+  $("#form_buscar_salida_ganado_fecha_salida").val('');
+  $("#form_buscar_salida_ganado_codigo_lote").val("<%=params[:codigo_lote]%>");
+  $("#form_buscar_salida_ganado_codigo").val('');
+  $("#form_buscar_salida_ganado_nombre").val('');
+  $("#form_buscar_salida_ganado_rp").val('');
+  $("#form-buscar-salida-ganado").submit();
+    setTimeout(function(){ 
+      
+      $("#<%= params[:window_id]%>").modal('hide');
+      $("#msg-finalizar-salida-ganado").remove();
+       swal("Salida de Ganados","Salida de Ganado Finalizado Exitosamente!.", "success");
+
+    }, 1000);
+      
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-finalizar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-finalizar-lote-salida-ganado");
+  setTimeout(function(){ 
+
+    $("#msg-finalizar-salida-ganado").remove(); 
+
+    swal("Salida de Ganados", "Error al finalizar la Salida de Ganados. <%=@msg%>. Intente más tarde","error");
+  
+  }, 1000);
+  
+    
+<% end %>
