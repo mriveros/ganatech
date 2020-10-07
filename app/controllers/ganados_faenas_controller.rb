@@ -493,4 +493,19 @@ before_filter :require_usuario
     
   end
 
+
+  def ganado_faena_detalle
+
+    @ganado_faena = GanadoFaena.where("id = ?", params[:ganado_faena_id]).first
+    @ganado_faena_detalle = VGanadoFaenaDetalle.where("ganado_faena_id = ?", params[:ganado_faena_id])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
 end

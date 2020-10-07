@@ -33,6 +33,7 @@ get 'crontab_ultron/index'
   post 'ganados_faenas/eliminar_lote'
   get 'ganados_faenas/buscar_cliente'
   get 'ganados_faenas/buscar_ganado'
+  get 'ganados_faenas/ganado_faena_detalle'
 
 #INFO GASTOS
   get 'info_gastos/index'
