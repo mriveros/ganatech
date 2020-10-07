@@ -165,6 +165,10 @@ development:
   #REGISTRO DE GASTOS
   registro_gasto_pago_salario: 10
 
+  #MOTIVOS FAENAS
+  motivo_faena_consumo_local: 1
+  motivo_faena_venta: 2
+
 production:
 
   #ROLES 
@@ -323,3 +327,7 @@ production:
 
   #REGISTRO DE GASTOS
   registro_gasto_pago_salario: 10
+
+  #MOTIVOS FAENAS
+  motivo_faena_consumo_local: 1
+  motivo_faena_venta: 2

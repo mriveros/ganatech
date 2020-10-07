@@ -108,9 +108,7 @@ before_filter :require_usuario
           @ganado_faena.descripcion = params[:descripcion]
           @ganado_faena.motivo_faena_id = params[:motivo_faena][:id]
           @ganado_faena.cantidad = 1
-          @ganado_faena.estado_movimiento_id = PARAMETRO[:estado_movimiento_en_proceso]
           @ganado_faena.cliente_id = params[:cliente_id]
-          @ganado_faena.codigo_lote = params[:codigo_lote]
           @ganado_faena.clasificacion_salida_id = params[:clasificacion_salida][:id]
           @ganado_faena.observacion = params[:observacion]
 
@@ -123,13 +121,13 @@ before_filter :require_usuario
             @ganado_faena_detalle.ganado_id = params[:ganado_id]
             @ganado_faena_detalle.peso_vivo = params[:peso_vivo]
             @ganado_faena_detalle.peso_neto = params[:peso_neto]
-            @ganado_faena_detalle.monto_peso = params[:monto_peso]
+            @ganado_faena_detalle.monto_peso = params[:peso_monto]
             @ganado_faena_detalle.monto = params[:monto]
 
             if @ganado_faena_detalle.save
 
               #ACTUALIZAR EL MONTO TOTAL EN LA CABECERA
-              @ganado_faena = params[:monto]
+              @ganado_faena.monto_total = params[:monto]
               @ganado_faena.save
               #ACTUALIZAR ESTADO DE GANADO
               @ganado = Ganado.where("id = ?", params[:ganado_id]).first
@@ -142,8 +140,6 @@ before_filter :require_usuario
                 @guardado_ok = true
 
               end
-
-             
               
               if params[:motivo_faena][:id] == PARAMETRO[:motivo_faena_venta]
               

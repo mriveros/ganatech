@@ -1,28 +1,27 @@
 <% if @guardado_ok %>
 
-  $("<div class='col-sm-12' id='msg-agregar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-salida-ganado");
+  $("<div class='col-sm-12' id='msg-agregar-ganado-faena' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-ganado-faena");
   
-  <% if params[:clasificacion_salida][:id].to_i == PARAMETRO[:clasificacion_salida_por_ganado] %>
+
+  $("#form_buscar_ganado_faena_id").val('<%= @ganado_faena.id%>');
+  $("#form_buscar_ganado_faena_fecha_faena").val();
+  $("#form_buscar_ganado_faena_descripcion").val();
+  $("#form_buscar_ganado_faena_motivo_faena_id").val();
+  $("#form_buscar_ganado_faena_cantidad").val();
+  $("#form_buscar_ganado_faena_monto_total").val();
+  
+  $("#form-buscar-ganado-faena").submit();
+  
+  setTimeout(function(){
     
-    $("#form_buscar_salida_ganado_id").val('<%= @ganado_salida.id %>');
-  
-  <%else%>
-
-    $("#form_buscar_salida_ganado_codigo_lote").val('<%= @ganado_salida.codigo_lote%>');
-
-  <%end%>
-  
-  $("#form-buscar-salida-ganado").submit();
-  
-  setTimeout(function(){ 
     $("#<%= params[:window_id]%>").modal('hide'); 
-    swal("Salida de Ganados","Salida de Ganados agregada exitosamente!", "success");
+    swal("Ganados Faenas","Faena de Ganado Agregado Exitosamente!", "success");
   }, 2000);
 
 
 <% else %>
   
-    $("<div class='col-sm-12' id='msg-agregar-salida-ganado' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-salida-ganado");
-    swal("Salida de Ganados", "Error al guardar la Salida.<%= @msg %> Intente más tarde","error");
+    $("<div class='col-sm-12' id='msg-agregar-ganado-faena' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-ganado-faena");
+    swal("Ganados Faenas", "Error al guardar la Faena.<%= @msg %> Intente más tarde","error");
 
 <% end %>
