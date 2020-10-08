@@ -332,12 +332,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @ganados =  VGanado.modulo_ganado_salida.orden_01.where(cond).paginate(per_page: 5, page: params[:page])
+      @ganados =  VGanado.modulo_ganado_salida.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.modulo_ganado_salida.where(cond).count
 
     else
      
-      @ganados = VGanado.modulo_ganado_salida.orden_01.paginate(per_page: 5, page: params[:page])
+      @ganados = VGanado.modulo_ganado_salida.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanado.modulo_ganado_salida.count
 
     end
@@ -497,7 +497,7 @@ before_filter :require_usuario
   def ganado_faena_detalle
 
     @ganado_faena = GanadoFaena.where("id = ?", params[:ganado_faena_id]).first
-    @ganado_faena_detalle = VGanadoFaenaDetalle.where("ganado_faena_id = ?", params[:ganado_faena_id])
+    @ganado_faena_detalle = VGanadoFaenaDetalle.where("ganado_faena_id = ?", params[:ganado_faena_id]).paginate(per_page: 10, page: params[:page])
 
     respond_to do |f|
 

@@ -1,0 +1,84 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Detalles.</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-ganado-detalle-faena">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>GANADO RP</th>
+              <th>NOMBRE</th>
+              <th>CODIGO RFID</th>
+              <th>Peso Vivo</th>
+              <th>Peso Neto</th>
+              <th>Monto por KG</th>
+              <th>Total</th>
+              <th></th>
+
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="ganado-detalle-faena">
+
+            <% if @ganado_faena_detalle.present? %>
+            
+              <% @ganado_faena_detalle.each do |cg|%>
+
+                <tr>
+                  
+                  <td><%= cg.ganado_rp %></td>
+                  <td><%= cg.ganado_nombre %></td>
+                  <td><%= cg.ganado_rfid %></td>
+                  <td><%= cg.peso_vivo %></td>
+                  <td><%= cg.peso_neto %></td>
+                  <td><%= cg.monto_peso.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+                  <td><%= cg.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+
+                </tr>
+
+              <%end %>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @ganado_faena_detalle, :params => params %></div></td>
+                
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+
+</td>
+
