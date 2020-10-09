@@ -9,7 +9,7 @@
       </div>
 
       
-      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
+      <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
 
         <div>
         
@@ -214,7 +214,7 @@
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
                   <td><%= cg.observacion %></td>
                   <td> 
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
                   
                       <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
                   
@@ -229,7 +229,7 @@
                           <%end%>
 
                         <%end%>
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
                   
                     <%= link_to icon_eliminar,"#", onclick: "eliminar_registro_control_sanitario(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control-sanitario", title: 'Haga click para eliminar el Control Sanitario'%>
                   <%end%>

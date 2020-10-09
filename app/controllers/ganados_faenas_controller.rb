@@ -436,7 +436,7 @@ before_filter :require_usuario
 
     end
     
-    if @valido
+    if @valido 
 
       @venta = AuxVenta.where("ganado_salida_lote = ?",params[:codigo_lote])
       @venta.destroy_all
