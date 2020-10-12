@@ -39,7 +39,7 @@
             <div class="col-sm-1"></div><br />
 
             <div class="col-sm-4"><%= label_tag nil, "Salida #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-            <div class="col-sm-7"><%= collection_select :clasificacion_salida, :id, ClasificacionSalida.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+            <div class="col-sm-7"><%= collection_select :clasificacion_salida, :id, ClasificacionSalida.salida_faena_por_ganado, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
             <div class="col-sm-1"></div><br /><br />
 
             <div id="por_ganado" hidden="true">

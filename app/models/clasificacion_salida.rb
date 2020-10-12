@@ -5,5 +5,6 @@ class ClasificacionSalida < ActiveRecord::Base
   
   scope :orden_01, -> {order("id")}
   scope :orden_descripcion, -> { order("descripcion")}
+  scope :salida_faena_por_ganado, -> { where("id = ?", PARAMETRO[:clasificacion_salida_por_ganado])}
 
 end
