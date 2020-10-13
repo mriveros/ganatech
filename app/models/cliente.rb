@@ -6,5 +6,6 @@ class Cliente < ActiveRecord::Base
   attr_accessible :id, :nombre_razon_social, :ruc_ci, :direccion, :telefono, :observacion
   
   scope :orden_01, -> { order("id")}
+  scope :orden_descripcion, -> { order("nombre_razon_social")}
   
 end

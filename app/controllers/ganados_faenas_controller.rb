@@ -53,6 +53,13 @@ before_filter :require_usuario
       args << params[:form_buscar_ganado_faena_monto_total]
 
     end  
+
+    if params[:form_buscar_ganado_faena][:cliente_id].present?
+
+      cond << "cliente_id = ?"
+      args << params[:form_buscar_ganado_faena][:cliente_id]
+
+    end
     
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 

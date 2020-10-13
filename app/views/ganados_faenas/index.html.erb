@@ -62,7 +62,7 @@
             <span>Cantidad</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_faena_cantidad, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_rp');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_cantidad');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -70,7 +70,15 @@
             <span>Monto Total</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ganado_faena_monto_total, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_rp');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_monto_total');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Cliente</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado_faena, :cliente_id, Cliente.orden_descripcion, :id, :nombre_razon_social, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-faena', '#form_buscar_ganado_faena_cliente_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 

@@ -7,9 +7,10 @@
       <td><%= gan.id %></td>
       <td ><%= gan.fecha.strftime('%d/%m/%Y')%></td>
       <td ><%= gan.descripcion%></td>
-      <td ><%= gan.motivo_faena_id%></td>
+      <td ><%= gan.motivo_faena%></td>
       <td ><%= gan.cantidad %></td>
       <td ><%= gan.monto_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= gan.nombre_razon_social %></td>
       <td > <%= link_to_ganado_faena_detalle(gan.id) %> </td>
  
     </tr>
