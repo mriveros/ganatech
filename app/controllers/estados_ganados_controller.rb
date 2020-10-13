@@ -17,7 +17,7 @@ class EstadosGanadosController < ApplicationController
 
     end
 
-
+ 
     if params[:form_buscar_estados_ganados_descripcion].present?
 
       cond << "descripcion ilike ?"
@@ -29,13 +29,13 @@ class EstadosGanadosController < ApplicationController
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
-
-      @estados_ganados =  EstadoGanado.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+ 
+      @estados_ganados =  EstadoGanado.orden_01.where(cond).paginate(per_page: 12, page: params[:page])
       @total_encontrados = EstadoGanado.where(cond).count
 
     else
 
-      @estados_ganados = EstadoGanado.orden_01.paginate(per_page: 10, page: params[:page])
+      @estados_ganados = EstadoGanado.orden_01.paginate(per_page: 12, page: params[:page])
       @total_encontrados = EstadoGanado.count
 
     end
@@ -120,14 +120,7 @@ class EstadosGanadosController < ApplicationController
       end
 
     end
-    rescue Exception => exc
-      # dispone el mensaje de error
-      #puts "Aqui si muestra el error ".concat(exc.message)
-      if exc.present?
-        @excep = exc.message.split(':')
-        @msg = @excep[3].concat(" "+@excep[4])
-        @eliminado = false
-      end
+    
 
     respond_to do |f|
 

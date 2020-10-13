@@ -10,9 +10,12 @@
 
       <td style="width:120px;">
 
+        <%unless PARAMETRO[:estados_ganados_predeterminados].include?(estado_ganado.id) %>
+        
         <%= link_to_editar_estado_ganado(estado_ganado) %>
 
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{estado_ganado.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-estado-ganado", title: 'Haga click para eliminar el estado ganado'  %>
+        <%end%>
 
        </td>
 
@@ -32,7 +35,9 @@
 
 <tr>
     <td colspan="12">
+
       Cantidad de registros encontrados: <%= @total_encontrados %>
+      
     </td>
 </tr>
 

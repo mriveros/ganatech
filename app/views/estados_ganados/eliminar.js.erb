@@ -1,8 +1,8 @@
 <% if @eliminado %>
 
    $("<div class='col-sm-12' id='msg-eliminar-estado-ganado' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-estados-ganados");
-   $("#form_buscar_estados_ganados_id").val("<%=@estado_ganado_elim.id%>")
-   $("#form-buscar-estados_ganados").submit();
+   $("#form_buscar_estados_ganados_id").val("<%=@estado_ganado_elim.id%>");
+   $("#form-buscar-estados-ganados").submit();
     setTimeout(function(){
 
       $("#msg-eliminar-estados-ganados").remove();
