@@ -58,17 +58,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @ganados_faenas =  GanadoFaena.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = GanadoFaena.where(cond).count
+      @ganados_faenas =  VGanadoFaena.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VGanadoFaena.where(cond).count
 
     else
      
-      @ganados_faenas = GanadoFaena.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = GanadoFaena.count
+      @ganados_faenas = VGanadoFaena.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VGanadoFaena.count
 
     end
 
-    @total_registros = GanadoFaena.count
+    @total_registros = VGanadoFaena.count
 
     respond_to do |f|
       
