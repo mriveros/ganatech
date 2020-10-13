@@ -21,7 +21,9 @@
     <ul class="nav navbar-nav">
 
 			<% if current_usuario.present? %>
+
 			<li>
+
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
 
         <ul class="dropdown-menu">
@@ -31,6 +33,7 @@
           <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
           <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
 		  	  </ul>
+
       </li>
 
       <li>
@@ -42,6 +45,7 @@
 				 <li>
 
 			 		  <a class="dropdown-toggle " href="#" data-toggle="dropdown">Datos del Sistema<b class="caret"></b></a>
+
 						<ul class="dropdown-menu">
 
 						  <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li>
@@ -53,25 +57,30 @@
               <li><%= link_to "Clientes", clientes_index_path if acceso_permitido("clientes.index") %></li>
               <li><%= link_to "Proveedores de Ganados", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
               <li><%= link_to "Empresa de Transporte", empresas_transportes_index_path if acceso_permitido("empresas_transportes.index") %></li>
-
           
               <li>
+
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
+
                 <ul class="dropdown-menu">
 
                   <li><%= link_to "Estados de Ganado", razas_index_path if acceso_permitido("razas.index") %></li>
                   <li><%= link_to "Tipo Ganado", razas_index_path if acceso_permitido("razas.index") %></li>
-                  
 
                 </ul>
-                <li>
+              
+              </li>
+
 						</ul>
 
 					</li>
 
           <li>
+
            <a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
+
             <ul class="dropdown-menu">
+
               <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
               <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li> 
               <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li> 
@@ -82,6 +91,7 @@
               <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>           
 
             </ul>
+
           </li>
 
 					<li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
@@ -93,39 +103,34 @@
           <li>
 
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Compra/Venta<b class="caret"></b></a>
+              
               <ul class="dropdown-menu">
 
-              <li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
-              <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
+                <li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
+                <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
+
               </ul>
+
           </li>
 
           <li>
+
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Alta Producción<b class="caret"></b></a>
+
               <ul class="dropdown-menu">
-              <li><%= link_to "Producción Leche", altas_producciones_index_path if acceso_permitido("altas_producciones.index") %></li>
-              <li><%= link_to "Producción Queso", altas_producciones_quesos_index_path if acceso_permitido("altas_producciones_quesos.index") %></li>
-              <li><%= link_to "Derivados Lacteos", derivados_lacteos_index_path if acceso_permitido("derivados_lacteos.index") %></li>
-              <li><%= link_to "Venta Derivados", ventas_derivados_index_path if acceso_permitido("ventas_derivados.index") %></li>
+
+                <li><%= link_to "Producción Leche", altas_producciones_index_path if acceso_permitido("altas_producciones.index") %></li>
+                <li><%= link_to "Producción Queso", altas_producciones_quesos_index_path if acceso_permitido("altas_producciones_quesos.index") %></li>
+                <li><%= link_to "Derivados Lacteos", derivados_lacteos_index_path if acceso_permitido("derivados_lacteos.index") %></li>
+                <li><%= link_to "Venta Derivados", ventas_derivados_index_path if acceso_permitido("ventas_derivados.index") %></li>
+              
               </ul>
-          </li> 
+
+          </li>
+
           <li><%= link_to "Producción Cárnica - Faenas", ganados_faenas_index_path if acceso_permitido("ganados_faenas.index") %></li>
 
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
-          <li><%= link_to "Transporte de Ganado", clientes_index_path if acceso_permitido("clientes.index") %></li>
-          
-
-					<li>
-
-					 <a class="dropdown-toggle " href="#" data-toggle="dropdown">Informes<b class="caret"></b></a>
-
-						<ul class="dropdown-menu">
-
-						  <li><%= link_to "Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
-
-						</ul>
-
-					</li>
 
 					<li>
 
@@ -200,12 +205,12 @@
 
         <li><%= link_to "Mi Cuenta <em style='color:silver;font-size:12px;'></em> <span class='glyphicon glyphicon-edit'></span>".html_safe, usuarios_mi_cuenta_path, :title => "Ver mi Perfil", id: "tab-mi-cuenta" %></li>
 				<li><%= link_to "Salir <span class='glyphicon glyphicon-off'></span>".html_safe, logout_url, :title => "Cerrar Sesión", id: "tab-cerrar-sesion" %></li>
-					  <% else %>
+			<% else %>
 
 				<li><%= link_to "Crear mi Cuenta <span class='glyphicon glyphicon-pencil'></span>".html_safe, principal_agregar_usuario_path, :title => "Crear mi Cuenta", id: "tab-registrarme" %></li>
 				<li><%= link_to "Iniciar Sesi&oacute;n <span class='glyphicon glyphicon-user'></span>".html_safe, login_url, :title => "Iniciar Sesión", id: "tab-iniciar-sesion" %></li>
-			<% end %>
 
+			<% end %>
 
         </div>
 
