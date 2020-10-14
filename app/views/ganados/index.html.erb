@@ -289,6 +289,16 @@
 
   <% end %>
   
+  $("#form-buscar-ganados").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-ganado").trigger('click');
+  <% end %>
+
+  $("#form-buscar-ganados").submit();
+  <% if params[:agregar_lote] %>
+    $("#link-to-agregar-ganado-lote").trigger('click');
+  <% end %>
+
 </script>
 
 <style>

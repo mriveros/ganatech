@@ -173,7 +173,11 @@
   aplicar_datepicker();
   
   //----------------------------------------------------------------------------//
-  
+  $("#form-buscar-controle-ganado").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-control-ganado").trigger('click');
+  <% end %>
+
 </script>
 
 <style>
