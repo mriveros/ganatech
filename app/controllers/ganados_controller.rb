@@ -496,9 +496,10 @@ class GanadosController < ApplicationController
     @data_set_line_chart =  ControlGanado.where("ganado_id = ? and peso IS NOT NULL", params[:ganado_id]).order("fecha_control")
     
     if @data_set_line_chart.present?
-
-      @peso_maximo = ControlGanado.select("max(peso) as peso").where("ganado_id = ?", params[:ganado_id])
-      @peso_minimo = @data_set_line_chart.min().peso
+      
+      
+      @peso_maximo = @data_set_line_chart.maximum("peso")
+      @peso_minimo = @data_set_line_chart.minimum("peso")
       @peso_medio = @data_set_line_chart.average(:peso)
 
     end
