@@ -696,6 +696,7 @@ class GanadosController < ApplicationController
       @control_alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
       @control_alimentacion.observacion = params[:observacion]
       @control_alimentacion.codigo_lote = codigo_lote.codigo_lote + 1
+      @control_alimentacion.clasificacion_alimentacion_id = PARAMETRO[:clasificacion_alimentacion_por_ganado]
 
         if @control_alimentacion.save
 
