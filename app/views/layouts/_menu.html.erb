@@ -48,16 +48,18 @@
 
 						<ul class="dropdown-menu">
 
-						  <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li>
-						  <li><%= link_to "Potreros", potreros_index_path if acceso_permitido("potreros.index") %></li>
-						  <li><%= link_to "Razas", razas_index_path if acceso_permitido("razas.index") %></li>
-						  <li><%= link_to "Medicamentos", medicamentos_index_path if acceso_permitido("medicamentos.index") %></li>
               <li><%= link_to "Alimentos", alimentaciones_index_path if acceso_permitido("alimentaciones.index") %></li>
-               <li><%= link_to "Espermas", espermas_index_path if acceso_permitido("espermas.index") %></li>
+						  <li><%= link_to "Concepto Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
               <li><%= link_to "Clientes", clientes_index_path if acceso_permitido("clientes.index") %></li>
-              <li><%= link_to "Proveedores de Ganados", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
+              <li><%= link_to "Espermas", espermas_index_path if acceso_permitido("espermas.index") %></li>
+              <li><%= link_to "Haciendas", haciendas_index_path if acceso_permitido("haciendas.index") %></li>
+						  <li><%= link_to "Medicamentos", medicamentos_index_path if acceso_permitido("medicamentos.index") %></li>
+              <li><%= link_to "Potreros", potreros_index_path if acceso_permitido("potreros.index") %></li>
+						  <li><%= link_to "Proveedores de Ganados", proveedores_ganados_index_path if acceso_permitido("proveedores_ganados.index") %></li>
+              <li><%= link_to "Razas", razas_index_path if acceso_permitido("razas.index") %></li>
               <li><%= link_to "Empresa de Transporte", empresas_transportes_index_path if acceso_permitido("empresas_transportes.index") %></li>
-          
+              
+
               <li>
 
                <a class="dropdown-toggle " href="#" data-toggle="dropdown">Parámetros<b class="caret"></b></a>
@@ -65,7 +67,7 @@
                 <ul class="dropdown-menu">
 
                   <li><%= link_to "Estados de Ganado", estados_ganados_index_path if acceso_permitido("estados_ganados.index") %></li>
-                  <li><%= link_to "Tipo Ganado", razas_index_path if acceso_permitido("razas.index") %></li>
+                  
 
                 </ul>
               
@@ -81,38 +83,17 @@
 
             <ul class="dropdown-menu">
 
-              <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
-              <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li> 
               <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li> 
               <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li> 
+              <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
+              <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li> 
+              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>
               <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li> 
               <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
-              <li><%= link_to "Concepto Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li>
-              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>           
 
             </ul>
 
           </li>
-
-					<li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
-          <li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
-          <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
-          <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>
-          <li><%= link_to "Alimentaciones", controles_alimentaciones_index_path if acceso_permitido("controles_alimentaciones.index") %></li>
-
-          <li>
-
-             <a class="dropdown-toggle " href="#" data-toggle="dropdown">Compra/Venta<b class="caret"></b></a>
-              
-              <ul class="dropdown-menu">
-
-                <li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
-                <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
-
-              </ul>
-
-          </li>
-
           <li>
 
              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Alta Producción<b class="caret"></b></a>
@@ -127,10 +108,27 @@
               </ul>
 
           </li>
+          <li><%= link_to "Alimentaciones", controles_alimentaciones_index_path if acceso_permitido("controles_alimentaciones.index") %></li>
+					<li><%= link_to "Celos", celos_index_path if acceso_permitido("celos.index") %></li>
+          
+          <li>
 
-          <li><%= link_to "Producción Cárnica - Faenas", ganados_faenas_index_path if acceso_permitido("ganados_faenas.index") %></li>
+             <a class="dropdown-toggle " href="#" data-toggle="dropdown">Compra/Venta<b class="caret"></b></a>
+              
+              <ul class="dropdown-menu">
 
+                <li><%= link_to "Ganado Entrada - Compra", ganados_entradas_index_path if acceso_permitido("ganados_entradas.index") %></li>
+                <li><%= link_to "Ganado Salida - Venta", ganados_salidas_index_path if acceso_permitido("ganados_salidas.index") %></li>
+
+              </ul>
+
+          </li>
+
+          <li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
+          <li><%= link_to "Producción Cárnica - Faenas", ganados_faenas_index_path if acceso_permitido("ganados_faenas.index") %></li>
+          <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
+          <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>
 
 					<li>
 
