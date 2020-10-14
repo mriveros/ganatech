@@ -674,7 +674,8 @@ class GanadosController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
-   
+    codigo_lote = ControlAlimentacion.last
+
     alimentacion = Alimentacion.where("id = ?", params[:alimentacion_id]).first
       
     if alimentacion.cantidad_stock < params[:cantidad_suministrada].to_i
@@ -694,6 +695,7 @@ class GanadosController < ApplicationController
       @control_alimentacion.alimentacion_id = params[:alimentacion_id]
       @control_alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
       @control_alimentacion.observacion = params[:observacion]
+      @control_alimentacion.codigo_lote = codigo_lote.codigo_lote + 1
 
         if @control_alimentacion.save
 
