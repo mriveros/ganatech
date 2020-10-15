@@ -87,12 +87,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @celos =  VCelo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @celos =  VCelo.orden_estado_celo.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCelo.where(cond).count
 
     else
      
-      @celos = VCelo.orden_01.paginate(per_page: 10, page: params[:page])
+      @celos = VCelo.orden_estado_celo.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCelo.count
 
     end

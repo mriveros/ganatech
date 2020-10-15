@@ -8,5 +8,6 @@ class VGanadoEnfermo < ActiveRecord::Base
   
   scope :orden_01, -> { order("ganado_enfermo_id")}
   scope :orden_fecha, -> { order("fecha desc")}
+  scope :orden_estado_enfermedad, -> { order("estado_enfermedad_id")}
   
 end

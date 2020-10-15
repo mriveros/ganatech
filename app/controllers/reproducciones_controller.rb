@@ -95,12 +95,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @reproducciones =  VReproduccion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @reproducciones =  VReproduccion.fecha_creacion.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VReproduccion.where(cond).count
 
     else
      
-      @reproducciones = VReproduccion.orden_01.paginate(per_page: 10, page: params[:page])
+      @reproducciones = VReproduccion.fecha_creacion.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VReproduccion.count
 
     end

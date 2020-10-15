@@ -10,5 +10,6 @@ class VReproduccion < ActiveRecord::Base
   :fecha_reproduccion, :fecha_concepcion, :descripcion, :potrero_id, :potrero, :hacienda_id, :hacienda, 
   :estado_reproduccion_id, :estado_reproduccion, :observacion, :created_at, :updated_at
   scope :orden_01, -> { order("reproduccion_id")}
+  scope :fecha_creacion, -> { order("estado_reproduccion_id")}
   
 end
