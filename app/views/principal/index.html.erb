@@ -61,10 +61,10 @@
         <div class="panel-body">
           <div class="row">
             <p></p>
-            <a href="<%#= url_for(historiales_pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Alimentos</a>
-            <a href="<%#= url_for(historiales_pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Proveedores de Ganados</a><br /><br />
-            <a href="<%#= url_for(historiales_pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Medicamentos</a>
-            <a href="<%#= url_for(historiales_pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Muestras - Espermas</a><br /><br />
+            <a href="<%= url_for(alimentaciones_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Alimentos</a>
+            <a href="<%= url_for(proveedores_ganados_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Proveedores de Ganados</a><br /><br />
+            <a href="<%= url_for(medicamentos_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Medicamentos</a>
+            <a href="<%= url_for(espermas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Muestras - Espermas</a><br /><br />
           </div>
         </div>
       </div>
@@ -80,11 +80,11 @@
         <div class="panel-body">
           <div class="row">
             <p></p>
-            <a href="<%#= url_for(informes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ganados Muertos</a>
-            <a href="<%#= url_for(informes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ganados Faenados</a><br /><br />
-            <a href="<%#= url_for(informes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Compras</a>
-            <a href="<%#= url_for(informes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ventas</a>
-            <a href="<%#= url_for(informes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Gastos</a><br /><br />
+            <a href="<%= url_for(ganados_muertos_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ganados Muertos</a>
+            <a href="<%= url_for(ganados_faenas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ganados Faenados</a><br /><br />
+            <a href="<%= url_for(info_compras_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Compras</a>
+            <a href="<%= url_for(info_ventas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ventas</a>
+            <a href="<%= url_for(info_gastos_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Gastos</a><br /><br />
           </div>
         </div>
       </div>
