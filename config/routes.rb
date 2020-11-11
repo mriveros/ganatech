@@ -9,6 +9,132 @@ Rails.application.routes.draw do
 
     end
   end
+  
+  #WEB SERVICES 
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_user
+      post '/api/v1/web_service_user/index'
+      resources :web_service_recovery
+      post '/api/v1/web_service_recovery/index'
+
+
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_recovery
+      post '/api/v1/web_service_recovery/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_jurisdiccion
+      get '/api/v1/web_service_jurisdiccion/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_institucion
+      get '/api/v1/web_service_institucion/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_rescate
+      get '/api/v1/web_service_rescate/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_seccion
+      get '/api/v1/web_service_seccion/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_alumno
+      get '/api/v1/web_service_alumno/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_asistencia
+      post '/api/v1/web_service_asistencia/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :gcm_server_service
+      get '/api/v1/gcm_server_service/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_tutelado
+      get '/api/v1/web_service_tutelado/index'
+      
+    end
+  
+  end
+
+  namespace :api, defaults: { format: "json" } do
+  
+    namespace :v1 do
+  
+      resources :web_service_ausencia
+      get '/api/v1/web_service_ausencia/index'
+      
+    end
+  
+  end
+
 #-------------------------BLOQUE TAREAS AUTOMATICAS------------------------
 #CRONTAB
 get 'crontab_ultron/index'
