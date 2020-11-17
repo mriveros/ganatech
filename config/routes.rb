@@ -17,8 +17,12 @@ Rails.application.routes.draw do
   
       resources :web_service_user
       post '/api/v1/web_service_user/index'
+      
       resources :web_service_recovery
       post '/api/v1/web_service_recovery/index'
+
+      resources :web_service_ganado
+      get '/api/v1/web_service_ganado/index'
 
 
     end

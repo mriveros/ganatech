@@ -9,7 +9,7 @@ module Api
 
   			def show
 
-				@response = VGanado.all
+				@response = VGanado.modulo_ganados
 
 				respond_to do |f|
 
