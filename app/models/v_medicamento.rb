@@ -8,7 +8,7 @@ class VMedicamento < ActiveRecord::Base
   :fecha_vencimiento, :created_at, :updated_at
   
   scope :orden_01, -> {order("medicamento_id")}
-  scope :disponible, -> {where("cantidad > 0")}
+  scope :disponible, -> {where("cantidad_stock > 0")}
 
   
 end

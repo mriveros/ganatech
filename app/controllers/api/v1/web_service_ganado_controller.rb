@@ -22,7 +22,6 @@ module Api
 
 				end
 				
-				puts json.to_s
 
 				respond_to do |f|
 
