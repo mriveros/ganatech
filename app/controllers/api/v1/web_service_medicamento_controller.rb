@@ -13,24 +13,13 @@ module Api
 
   			def show
 
-				@response = VMedicamento.disponible
-				
-				json = JSON.parse(@response.to_json)
-				json.first.reject! do |key, value|
-
-				  value == ''
-
-				end
-				
-				puts json.to_s
+				@response = VAlimentacion.disponible
 
 				respond_to do |f|
 
-			      f.json { render :json => json.to_s}
+			      f.json { render :json => @response.to_json}
 
-			   
 			    end
-
 
 			 end
 
