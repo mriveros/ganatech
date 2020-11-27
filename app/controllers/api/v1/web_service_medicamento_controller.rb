@@ -13,7 +13,7 @@ module Api
 
   			def show
 
-				@response = VAlimentacion.disponible
+				@response = VMedicamento.disponible
 
 				respond_to do |f|
 
