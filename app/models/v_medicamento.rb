@@ -1,6 +1,7 @@
 class VMedicamento < ActiveRecord::Base
 
   self.table_name="v_medicamentos"
+  self.primary_key="medicamento_id"
 
   attr_accessible :medicamento_id, :medicamento, :nombre_medicamento, :cantidad_stock, :cantidad_aplicacion,
   :ciclo, :intervalo_tiempo, :observacion, :estado_medicamento_id, :estado_medicamento,
