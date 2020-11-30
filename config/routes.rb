@@ -30,6 +30,12 @@ Rails.application.routes.draw do
       resources :web_service_alimento
       get '/api/v1/web_service_alimento/index'
 
+      resources :web_service_hacienda
+      get '/api/v1/web_service_hacienda/index'
+
+      resources :web_service_potrero
+      get '/api/v1/web_service_potrero/index'
+
 
     end
   
