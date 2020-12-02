@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       resources :web_service_potrero
       get '/api/v1/web_service_potrero/index'
 
+      resources :web_service_control_ganado
+      get '/api/v1/web_service_control_ganado/index'
+
 
     end
   
