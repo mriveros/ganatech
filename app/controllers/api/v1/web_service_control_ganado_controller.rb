@@ -22,7 +22,8 @@ module Api
             control_ganado.clasificacion_control_id = params[:clasificacion_control_id]
             control_ganado.codigo = control_ganado_ultimo.codigo + 1
             control_ganado.cantidad_suministrada = params[:cantidad_suministro]
-            control_ganado.observacion = "CONTROL DESDE APP"
+            control_ganado.observacion = params[:observacion]
+            control_ganado.peso = params[:peso]
 
             if control_ganado.save
           
