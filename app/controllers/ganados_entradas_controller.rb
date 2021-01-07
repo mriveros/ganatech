@@ -162,7 +162,7 @@ def agregar_entrada_ganado
 
     @ganado = GanadoEntrada.new
 
-    ultima_produccion = GanadoEntrada.order("created_at").last
+    ultima_produccion = Ganado.order("created_at").last
 
     if ultima_produccion.present?
 
