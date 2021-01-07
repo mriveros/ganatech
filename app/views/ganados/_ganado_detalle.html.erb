@@ -109,7 +109,7 @@
                   
                   <td>
                       
-                    <div class="container-fluid" style="width: 500px;">
+                    <div class="container-fluid" style="width: 300px;">
                     
                       <%= line_chart @data_set_line_chart.pluck("fecha_control", "peso")%> 
                       
@@ -130,7 +130,7 @@
 
                   <td>
 
-                    <div class="container-fluid" style="width: 500px;">
+                    <div class="container-fluid" style="width: 300px;">
                     
                       <%= pie_chart @data_set_pie_chart_med.group("medicamento").sum("cantidad_suministrada")%>
 
@@ -140,7 +140,7 @@
                    
                   <td> 
 
-                    <div class="container-fluid" style="width: 500px;">
+                    <div class="container-fluid" style="width: 300px;">
 
                       <%= pie_chart @data_set_pie_chart_food.group("alimento").sum("cantidad_suministrada")%>
 
