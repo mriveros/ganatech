@@ -159,6 +159,28 @@
 
 
               </tr>
+                     
+               <tr>
+                
+                <td>
+
+                  <div class="col-sm-4"><%= label_tag nil, "Procedencia #{attr_requerido}".html_safe %></div><br/>
+                 <div class="col-sm-7"><%= text_field_tag :procedencia,nil, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 , :readonly=> true%></div>
+                  <div class="col-sm-1"></div><br/>
+
+                </td>
+
+
+                <td>
+
+                 <div class="col-sm-4"><%= label_tag nil, "Proveedor Ganado #{attr_requerido}".html_safe %></div><br/>
+                  <div class="col-sm-7"><%= collection_select :proveedor_ganado, :id, ProveedorGanado.orden_01, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                  <div class="col-sm-1"></div><br/>
+                  
+                </td>
+
+
+              </tr>
 
                </tbody>
 
