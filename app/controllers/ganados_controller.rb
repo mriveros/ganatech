@@ -1001,10 +1001,7 @@ class GanadosController < ApplicationController
         @ganado.observacion = params[:observacion]
         @ganado.codigo_lote = params[:codigo_lote]
         @ganado.finalidad_ganado_id = params[:finalidad_ganado][:id]
-        #agregar correcciones aqui
-        @ganado.procedencia = params[:procedencia]
-        @ganado.proveedor_ganado_id = params[:proveedor_ganado][:id]
-
+        
         if @ganado.save
 
           auditoria_nueva("registrar ganado por lote", "ganados", @ganado)
