@@ -63,7 +63,7 @@
                           
                 if @documento_ganatec.habilitado == true || rol_administrador%>
 
-                  <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
+                  <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? @documento_ganatec.data.url : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
 
                 <%end
 
@@ -82,7 +82,7 @@
                           
                 if @documento_ganatec.habilitado == true || rol_administrador%>
 
-                  <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? "/ganatech/#{@documento_ganatec.data.url}" : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
+                  <%=link_to "<i class='glyphicon glyphicon-download-alt'></i>".html_safe, (Rails.env == 'production' ? @documento_ganatec.data.url : @documento_ganatec.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Descargar Archivo acerca de la muerte del Ganado"%>
 
                 <%end
 
