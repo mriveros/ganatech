@@ -61,6 +61,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_ganado_enfermo][:estado_corporal_id].present?
+
+      cond << "estado_corporal_id = ?"
+      args << params[:form_buscar_ganado_enfermo][:estado_corporal_id]
+
+    end
+
     if params[:form_buscar_ganado_enfermo_observacion].present?
 
       cond << "observacion ilike ?"

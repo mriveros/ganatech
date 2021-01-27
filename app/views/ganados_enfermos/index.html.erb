@@ -78,6 +78,14 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_estado_enfermedad_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
+
+          <th>
+            <span>Estado Corporal</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_ganado_enfermo, :estado_corporal_id, EstadoCorporal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ganado-enfermo', '#form_buscar_ganado_enfermo_estado_corporal_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
           
 
           <th>

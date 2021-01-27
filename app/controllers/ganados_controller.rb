@@ -1067,6 +1067,7 @@ class GanadosController < ApplicationController
         @ganado_enfermedad.enfermedad_id = params[:enfermedad][:id]
         @ganado_enfermedad.observacion = params[:observacion]
         @ganado_enfermedad.estado_enfermedad_id = params[:estado_enfermedad][:id]
+        @ganado_enfermedad.estado_corporal_id = params[:estado_corporal][:id]
 
         
         if @ganado_enfermedad.save
