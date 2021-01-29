@@ -47,7 +47,7 @@
           <div class="col-sm-1"></div><br /><br />  
           
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin Aprox. #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Fin Aprox.".html_safe %></div>
           <div class="col-sm-7"><%= f.date_field :fecha_fin, class: 'form-control input-sm' %>
           </div>    
           <div class="col-sm-1"></div><br /><br />  
@@ -146,12 +146,6 @@
       
       }
 
-      if($("#celo_fecha_fin").val().length == 0){
-
-        msg +="Debe ingresar una fecha aproximada de fin de celo.\n"
-        valido = false
-      
-      }
 
       if($("#celo_descripcion").val().length == 0){
 
