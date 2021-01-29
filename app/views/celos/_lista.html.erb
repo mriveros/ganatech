@@ -9,7 +9,7 @@
       <td><%= cel.ganado_nombre%></td>
       <td><%= cel.ganado_rp%></td>
       <td ><%= cel.fecha_inicio.strftime('%d/%m/%Y') %></td>
-      <td ><%= cel.fecha_fin.strftime('%d/%m/%Y')  %></td>
+      <td ><%= (cel.fecha_fin.present?)? cel.fecha_fin.strftime('%d/%m/%Y') : "Sin estimar" %></td>
       <td ><%= cel.descripcion %></td>
       <td ><%= cel.hacienda %></td>
       <td ><%= cel.estado_celo %></td>
