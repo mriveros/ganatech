@@ -199,12 +199,17 @@
       
       }
 
-       if ($("#fecha_inicio").val() >= $("#fecha_fin").val()) {
+      if($("#fecha_inicio").val().length > 0 && $("#fecha_inicio").val().length > 0){
 
-        msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
-        valido = false
+        if ($("#fecha_inicio").val() >= $("#fecha_fin").val()) {
 
-      }
+          msg +="La fecha fin de celo no puede ser menor o igual al de inicio.\n"
+          valido = false
+
+        } 
+
+    }
+      
 
       if (valido){
 
