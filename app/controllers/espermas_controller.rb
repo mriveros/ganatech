@@ -19,6 +19,13 @@ class EspermasController < ApplicationController
 
     end
 
+    if params[:form_buscar_esperma_fecha_registro].present?
+
+      cond << "fecha_registro = ?"
+      args << params[:form_buscar_esperma_fecha_registro]
+
+    end
+
     if params[:form_buscar_esperma_descripcion].present?
 
       cond << "descripcion ilike ?"
@@ -87,12 +94,12 @@ class EspermasController < ApplicationController
 
     if cond.size > 0
 
-      @espermas =  VEsperma.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @espermas =  VEsperma.orden_fecha.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VEsperma.where(cond).count
 
     else
      
-      @espermas = VEsperma.orden_01.paginate(per_page: 10, page: params[:page])
+      @espermas = VEsperma.orden_fecha.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VEsperma.count
 
     end

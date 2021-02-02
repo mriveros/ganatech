@@ -9,6 +9,7 @@ class VEsperma < ActiveRecord::Base
   :fecha_registro, :costo_total, :cantidad, :created_at, :updated_at, :cantidad_inicial
   
   scope :orden_01, -> { order("esperma_id")}
+  scope :orden_fecha, -> { order("fecha_registro desc")}
   scope :orden_estado, -> { order("estado_esperma_id")}
   
 end
