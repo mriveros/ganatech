@@ -83,6 +83,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_reproduccion][:tipo_concepcion_id].present?
+
+      cond << "tipo_concepcion_id = ?"
+      args << params[:form_buscar_reproduccion][:tipo_concepcion_id]
+
+    end
+
     if params[:form_buscar_reproduccion][:estado_reproduccion_id].present?
 
       cond << "estado_reproduccion_id = ?"

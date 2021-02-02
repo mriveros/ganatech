@@ -89,8 +89,16 @@
             </div>
           </th> 
 
+          <th >
+              <span>Tipo Reproducción</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_reproduccion, :tipo_concepcion_id, TipoConcepcion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_tipo_concepcion_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
            <th >
-              <span>Estado Celo</span>
+              <span>Estado Reproducción</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_reproduccion, :estado_reproduccion_id, EstadoReproduccion.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-reproduccion', '#form_buscar_reproduccion_estado_reproduccion_id');"><i class="fa fa-times"></i></span>
