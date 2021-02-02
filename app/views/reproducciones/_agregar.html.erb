@@ -445,6 +445,7 @@
     
     })
 
+  
 
   $("#tipo_concepcion_id").bind('change', function(){ 
 
@@ -459,6 +460,13 @@
       $("#monta_natural").hide();
 
     } 
+
+  })
+
+
+  $("#fecha_reproduccion").bind('change', function(){ 
+    
+    $("#fecha_concepcion").val ('<%=Date.today + 285.days%>')
 
   })
 
