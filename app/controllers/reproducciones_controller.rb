@@ -163,6 +163,7 @@ before_filter :require_usuario
       else
 
         @reproduccion.esperma_id = params[:esperma_id]
+        @reproduccion.inseminador = params[:inseminador]
 
       end
 
