@@ -5,7 +5,7 @@ class Reproduccion < ActiveRecord::Base
   
   attr_accessible :id, :celo_id, :esperma_id, :descripcion, :observacion, :estado_reproduccion_id,
   :fecha_reproduccion, :fecha_concepcion, :tipo_reproduccion_id, :ganado_reproductor_id,
-  :created_at, :updated_at
+  :created_at, :updated_at, :inseminador, :tipo_aborto_id
   
   scope :orden_01, -> { order("id")}
   

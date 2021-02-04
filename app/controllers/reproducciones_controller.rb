@@ -499,6 +499,8 @@ before_filter :require_usuario
         
         @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_perdido]
         @reproduccion.observacion = params[:observacion]
+        @reproduccion.fecha_aborto = params[:fecha_aborto]
+        @reproduccion.tipo_aborto = params[:tipo_aborto_id]
 
         if @reproduccion.save
           
