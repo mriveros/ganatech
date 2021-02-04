@@ -21,8 +21,8 @@
         <%= link_to_medicamento_detalle(med.medicamento_id) %>
         <%= link_to_editar_medicamento(med.medicamento_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{med.medicamento_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-medicamento", title: 'Haga click para eliminar el medicamento'  %>
-        <%= link_to icon_volver,"#", onclick: "dar_baja_medicamento(#{med.medicamento_id});return false;", class: "btn btn-warning btn-xs", id: "btn-dar-baja-medicamento", title: 'Haga click para dar de baja el medicamento'  %>
 
+        <%= link_to_editar_medicamento(med.medicamento_id) %>
        </td>
 
    
@@ -91,40 +91,6 @@
     
     }
 
-    function dar_baja_medicamento(medicamento_id) {
-
-        swal({
-          title: "Confirmar",
-          input: 'text',
-           inputPlaceholder: 'Enter your password',
-           content: "input",
-          //text: "Al confirmar se dará de baja este medicamento y estará sin Stock con el estado correspondiente.",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-              $.ajax({
-                url: "<%= url_for(medicamentos_eliminar_path) %>", 
-                data: {id: medicamento_id},
-                dataType: 'script'
-              });
-            
-          } else{
-
-            return false;
-
-          }
-
-        });
-
     
-    }
 
 </script>

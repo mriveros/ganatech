@@ -7,6 +7,7 @@ class EstadoMedicamento < ActiveRecord::Base
   
   scope :orden_01, -> { order("id")}
   scope :orden_descripcion, -> { order("descripcion")}
+  scope :dar_baja, -> { where("id = ?", 4)}
 
   
 end

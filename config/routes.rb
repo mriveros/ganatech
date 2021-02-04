@@ -256,6 +256,8 @@ get 'crontab_ultron/index'
   get 'medicamentos/agregar_medicamento_detalle'
   post 'medicamentos/guardar_medicamento_detalle'
   get 'medicamentos/eliminar_medicamento_detalle'
+  get 'medicamentos/dar_baja_medicamento'
+  post 'medicamentos/guardar_baja_medicamento'
 
   #ALIMENTOS
   get 'alimentaciones/index'
