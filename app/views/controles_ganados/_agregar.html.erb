@@ -40,7 +40,7 @@
               <div class="col-sm-7"><%= text_area_tag :medicamento ,nil,class: 'form-control input-sm' %></div>
               <div class="col-sm-1"></div><br /><br />
 
-              <div class="col-sm-4"><%= label_tag :nil, "Cantidad #{attr_requerido}".html_safe %></div>
+              <div class="col-sm-4"><%= label_tag :nil, "Dosis Utilizada #{attr_requerido}".html_safe %></div>
               <div class="col-sm-7"><%= text_field_tag :cantidad_suministrada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
               <div class="col-sm-1"></div><br /><br />
             
