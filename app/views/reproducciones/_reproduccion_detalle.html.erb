@@ -23,6 +23,12 @@
             <tr role="row">
               
               <th>Observación</th>
+              <%if @reproduccion_detalle.present? && @reproduccion_detalle.tipo_aborto_id != nil%>
+                
+                <th>Fecha Aborto</th>
+                <th>Tipo Aborto</th>
+
+              <%end%>
               
             </tr>
             
@@ -35,7 +41,12 @@
                 <tr>
                 
                   <td><%= @reproduccion_detalle.observacion %></td>
+                  <%if @reproduccion_detalle.present? && @reproduccion_detalle.tipo_aborto_id != nil%>
                 
+                    <td><%= @reproduccion_detalle.fecha_aborto %></td>
+                    <td><%= @reproduccion_detalle.tipo_aborto %></td>
+                
+              <%end%>
                 </tr>
 
             <% else %>
