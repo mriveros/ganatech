@@ -448,14 +448,14 @@ class MedicamentosController < ApplicationController
     
   end
 
-   def dar_baja_medicamento
+  def dar_baja_medicamento
 
     @actualizado_ok = false
     @valido = true
 
     Medicamento.transaction do
 
-      
+      @medicamento = Medicamento.where('id = ?', params[:medicamento_id]).first
 
     end
 
