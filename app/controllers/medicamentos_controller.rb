@@ -448,5 +448,24 @@ class MedicamentosController < ApplicationController
     
   end
 
+   def dar_baja_medicamento
+
+    @actualizado_ok = false
+    @valido = true
+
+    Medicamento.transaction do
+
+      
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
 
 end
