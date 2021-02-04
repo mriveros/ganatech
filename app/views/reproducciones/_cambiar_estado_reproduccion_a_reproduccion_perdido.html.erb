@@ -21,6 +21,18 @@
           <div class="col-sm-4"><%= label_tag :nil, "Observación #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_area_tag :observacion ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Tipo Aborto #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_aborto_id, TipoAborto.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;" }%></div>
+          <div class="col-sm-1"></div><br/><br/>
+
+           <div class="col-sm-4"><%= label_tag :nil, "Fecha Aborto #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_ahorto, Date.today.strftime('%d/%m/%Y'), class: 'form-control input-xs' %>
+          </div>    
+          <div class="col-sm-1"></div><br /><br />  
+
+
        
       </div>
 
