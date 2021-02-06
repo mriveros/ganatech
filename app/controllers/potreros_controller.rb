@@ -263,6 +263,8 @@ before_filter :require_usuario
     
     @potrero = VPotrero.where("potrero_id = ?", params[:potrero_id])
     @potrero_detalle = PotreroBatea.where("potrero_id = ?", params[:potrero_id])
+    @ganado_potrero = VGanado.modulo_control_ganado.where('potrero_id = ?',params[:potrero_id])
+    @cantidad_ganado = @ganado_potrero.count
 
      respond_to do |f|
 
