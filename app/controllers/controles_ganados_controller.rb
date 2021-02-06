@@ -501,5 +501,29 @@ before_filter :require_usuario
 
   end
 
+  def obtener_resumen_control_ganado
+
+    @lote_ganado = ControlGanado.new
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def imprimir_resumen_control_ganado
+
+    @lote_ganado = ControlGanado.where("codigo = ? ", params[:codigo_lote])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end
