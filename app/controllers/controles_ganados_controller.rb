@@ -6,6 +6,7 @@ before_filter :require_usuario
   
  
   end 
+  
  
   def lista
 
