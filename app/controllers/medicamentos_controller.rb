@@ -454,10 +454,18 @@ class MedicamentosController < ApplicationController
 
     @actualizado_ok = false
     @valido = true
-
+    @cantidad_baja = params[:medicamento][:cantidad_baja]
+    
     Medicamento.transaction do
 
       @medicamento = Medicamento.where('id = ?', params[:medicamento_id]).first
+      @medicamento_detalle = MedicamentoDetalle.numero_lote.where('medicamento_id = ?', params[:medicamento_id])
+      @medicamento_detalle.each do |md|
+
+        md.
+
+      end
+
 
     end
 
