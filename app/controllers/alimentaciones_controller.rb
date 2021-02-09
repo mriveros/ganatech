@@ -398,7 +398,7 @@ class AlimentacionesController < ApplicationController
           auditoria_nueva("agregar alimentacion detalle", "alimentaciones_detalles", @alimentacion_detalle)
 
           @alimentacion.cantidad_stock = @alimentacion.cantidad_stock + @alimentacion_detalle.cantidad_suministro
-          @alimentacion.cantidad_porciones = @alimentacion.cantidad_porciones + (params[:cantidad_suministro] * params[:cantidad_porciones])
+          @alimentacion.stock_porciones = @alimentacion.stock_porciones + (@alimentacion_detalle.cantidad_suministro * @alimentacion.cantidad_porciones)
 
           if @alimentacion.save
 
