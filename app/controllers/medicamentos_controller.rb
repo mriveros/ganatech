@@ -450,19 +450,31 @@ class MedicamentosController < ApplicationController
 
 
 
-  def dar_baja_medicamento
+  def dar_baja_medicamento    
+
+      @medicamento = Medicamento.where('id = ?', params[:medicamento_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
+  def guardar_baja_medicamento
 
     @actualizado_ok = false
-    @valido = true
-    @cantidad_baja = params[:medicamento][:cantidad_baja]
-    
+    @cantidad_baja = params[:medicamento][:cantidad_stock].to_i
+
     Medicamento.transaction do
 
       @medicamento = Medicamento.where('id = ?', params[:medicamento_id]).first
-      @medicamento_detalle = MedicamentoDetalle.numero_lote.where('medicamento_id = ?', params[:medicamento_id])
-      @medicamento_detalle.each do |md|
+      @medicamento.cantidad_stock = @medicamento.cantidad_stock - @cantidad_baja
 
-        md.
+      if @medicamento.save
+
+        @actualizado_ok = true
 
       end
 

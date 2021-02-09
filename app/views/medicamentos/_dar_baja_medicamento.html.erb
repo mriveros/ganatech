@@ -21,13 +21,6 @@
         <div class="col-sm-7"><%= f.text_field :cantidad_stock ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br/>
 
-        <div class="col-sm-1"></div><br /><br />
-        <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
-        <div class="col-sm-7">
-        <%= f.text_area :observacion, class: 'form-control input-sm' , maxlength: "510" %>
-        </div>
-        <div class="col-sm-1"></div><br /> 
-       
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
@@ -70,7 +63,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se dará de baja este medicamento y estará sin Stock con el estado correspondiente.",
+          text: "Al confirmar se dará de baja la cantidad ingresada de este medicamento.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -82,11 +75,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-              $.ajax({
-                url: "<%= url_for(medicamentos_eliminar_path) %>", 
-                data: {id: medicamento_id},
-                dataType: 'script'
-              });
+              $("#form-dar-baja-medicamento").submit();
             
           } else{
 
