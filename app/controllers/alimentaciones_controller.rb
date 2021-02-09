@@ -391,14 +391,15 @@ class AlimentacionesController < ApplicationController
         @alimentacion_detalle.observacion = params[:observacion]
         @alimentacion_detalle.fecha_vencimiento = params[:fecha_vencimiento]
         @alimentacion_detalle.costo_total = (params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_suministro].to_i)
-
+        @alimentacion_detalle.cantidad_porciones = params[:cantidad_porciones]
+        
         if @alimentacion_detalle.save
 
 
           auditoria_nueva("agregar alimentacion detalle", "alimentaciones_detalles", @alimentacion_detalle)
 
           @alimentacion.cantidad_stock = @alimentacion.cantidad_stock + @alimentacion_detalle.cantidad_suministro
-          @alimentacion.stock_porciones = @alimentacion.stock_porciones + (@alimentacion_detalle.cantidad_suministro * @alimentacion.cantidad_porciones)
+          @alimentacion.stock_porciones = @alimentacion.stock_porciones + (@alimentacion_detalle.cantidad_suministro * @alimentacion_detalle.cantidad_porciones)
 
           if @alimentacion.save
 
