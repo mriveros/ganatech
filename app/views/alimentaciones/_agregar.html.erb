@@ -34,6 +34,10 @@
           <div class="col-sm-7"><%= text_field_tag :cantidad_stock, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br/>
 
+          <div class="col-sm-4"><%= label_tag :nil, "Porciones por unidad#{attr_requerido}".html_safe %></div>
+        <div class="col-sm-7"><%= text_field_tag :cantidad_porciones, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+        <div class="col-sm-1"></div><br/>
+
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Aplicación".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :cantidad_aplicacion, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>5 %></div>
           <div class="col-sm-1"></div><br/>

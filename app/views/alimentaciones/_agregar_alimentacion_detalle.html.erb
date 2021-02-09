@@ -42,6 +42,10 @@
           <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
           <div class="col-sm-1"></div><br/><br />
 
+           <div class="col-sm-4"><%= label_tag :nil, "Porciones por unidad#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :cantidad_porciones, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
+          <div class="col-sm-1"></div><br/>
+
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>

@@ -152,6 +152,7 @@ class AlimentacionesController < ApplicationController
       @alimento.estado_alimento_id = params[:estado_alimento][:id]
       @alimento.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
       @alimento.fecha_vencimiento = params[:fecha_vencimiento]
+      @alimento.cantidad_porciones = params[:cantidad_porciones]
       @alimento.cantidad_porciones = params[:cantidad_stock] * params[:cantidad_porciones]
 
       if @alimento.save
@@ -292,8 +293,8 @@ class AlimentacionesController < ApplicationController
       @alimento.estado_alimento_id = params[:alimentacion][:estado_alimento_id]
       @alimento.tipo_alimentacion_id = params[:alimentacion][:tipo_alimentacion_id]
       @alimento.fecha_vencimiento = params[:alimentacion][:fecha_vencimiento]
-      @alimento.cantidad_porciones = params[:cantidad_stock] * params[:cantidad_porciones]
-      
+      @alimento.cantidad_porciones = params[:alimentacion][:cantidad_porciones]
+      @alimento.stock_porciones = params[:alimentacion][:cantidad_stock] * params[:alimentacion][:cantidad_porciones]
 
       if @alimento.save
 
@@ -398,7 +399,7 @@ class AlimentacionesController < ApplicationController
 
           @alimentacion.cantidad_stock = @alimentacion.cantidad_stock + @alimentacion_detalle.cantidad_suministro
           @alimentacion.cantidad_porciones = @alimentacion.cantidad_porciones + (params[:cantidad_suministro] * params[:cantidad_porciones])
-          
+
           if @alimentacion.save
 
             auditoria_despues(@alimentacion, auditoria_id)
