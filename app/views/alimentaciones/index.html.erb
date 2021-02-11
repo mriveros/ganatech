@@ -57,6 +57,22 @@
           </th>
 
            <th >
+            <span>Cantidad Porciones</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_cantidad_porciones, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_cantidad_porciones');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Stock Porciones</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alimentaciones_stock_porciones, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alimentaciones', '#form_buscar_alimentaciones_stock_porciones');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th >
             <span>Costo Unitario</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_alimentaciones_costo_unitario, nil, :class => 'form-control', :placeholder => "" %>

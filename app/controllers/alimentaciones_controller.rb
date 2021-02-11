@@ -293,8 +293,8 @@ class AlimentacionesController < ApplicationController
       @alimento.estado_alimento_id = params[:alimentacion][:estado_alimento_id]
       @alimento.tipo_alimentacion_id = params[:alimentacion][:tipo_alimentacion_id]
       @alimento.fecha_vencimiento = params[:alimentacion][:fecha_vencimiento]
-      @alimento.cantidad_porciones = params[:alimentacion][:cantidad_porciones]
-      @alimento.stock_porciones = params[:alimentacion][:cantidad_stock] * params[:alimentacion][:cantidad_porciones]
+      @alimento.cantidad_porciones = params[:alimentacion][:cantidad_porciones].to_i
+      @alimento.stock_porciones = params[:alimentacion][:cantidad_stock].to_i * params[:alimentacion][:cantidad_porciones].to_i
 
       if @alimento.save
 
