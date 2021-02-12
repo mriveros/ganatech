@@ -448,7 +448,7 @@ before_filter :require_usuario
   def adjuntar_archivo
 
     @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
-
+    @ganado_enfermo = GanadoEnfermo.where('id = ?', params[:ganado_enfermo_id]).first
 
 
     respond_to do |f|
@@ -465,6 +465,7 @@ before_filter :require_usuario
     @msg = ""
 
     @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
+    @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
 
     if @valido
 

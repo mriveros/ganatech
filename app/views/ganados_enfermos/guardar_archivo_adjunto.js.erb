@@ -1,0 +1,17 @@
+<% if @valido == true %>
+
+  setTimeout(function(){
+
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#link-to-ganado-enfermo-detalle-<%=@ganado_enfermo.ganado_enfermo_id%>").trigger('click');
+    $("#link-to-ganado-enfermo-detalle-<%=@ganado_enfermo.ganado_enfermo_id%>").trigger('click'); 
+    swal("Archivo Adjunto Exitosamente.", "", "success");
+
+  }, 1000);
+  
+
+<% else %>
+  
+  swal({title: "Atención", text: " No se pudo adjuntar el archivo. Intente más tarde. <%= @msg %>", html: false});
+
+<% end %>
