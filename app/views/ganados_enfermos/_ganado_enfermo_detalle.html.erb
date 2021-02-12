@@ -70,7 +70,7 @@
                   <td> 
                   <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_enfermedad_curado] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_enfermedad_muerto]%>
                   
-                      <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                      <%=link_to_adjuntar_archivo(cg.control_ganado_id, cg.ganado_enfermo_id)%>
 
                   <%end%>
 

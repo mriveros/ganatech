@@ -18,9 +18,9 @@ module GanadosEnfermosHelper
 
   end
   
-  def link_to_adjuntar_archivo(control_ganado_id)
+  def link_to_adjuntar_archivo(control_ganado_id, ganado_enfermo_id)
 
-    render partial: 'link_to_adjuntar_archivo', locals: { control_ganado_id: control_ganado_id}
+    render partial: 'link_to_adjuntar_archivo', locals: { control_ganado_id: control_ganado_id, ganado_enfermo_id: ganado_enfermo_id}
 
   end
   
