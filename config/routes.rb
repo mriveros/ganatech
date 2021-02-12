@@ -447,6 +447,8 @@ get 'crontab_ultron/index'
   get 'ganados_enfermos/cambiar_estado_a_recuperado'
   get 'ganados_enfermos/cambiar_estado_a_muerto'
   post 'ganados_enfermos/guardar_estado_ganado_muerto'
+  get 'ganados_enfermos/adjuntar_archivo'
+  post 'ganados_enfermos/guardar_archivo_adjunto'
 
   #ALTAS PRODUCCIONES
   get 'altas_producciones/index'

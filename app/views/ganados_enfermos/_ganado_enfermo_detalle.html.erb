@@ -68,9 +68,10 @@
                   <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
                   <td><%= cg.observacion %></td>
                   <td> 
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido]%>
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_enfermedad_curado] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_enfermedad_muerto]%>
                   
-                      <%#=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                      <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+
                   <%end%>
 
                     <%@documento_ganatec = DocumentoGanatec.where("id =?", cg.documento_ganatec_id).first%>
