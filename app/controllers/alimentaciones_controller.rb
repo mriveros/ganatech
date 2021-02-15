@@ -4,6 +4,7 @@ class AlimentacionesController < ApplicationController
 
   def index
 
+
   end
 
   def lista
