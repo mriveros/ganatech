@@ -213,6 +213,18 @@ before_filter :require_usuario
 
         if @control_ganado.save
 
+          @ganado = Ganado.where('id = ?',params[:ganado_id]).first
+          if params[:control][:id].to_i == PARAMETRO[:control_castracion].to_i
+
+            if @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_torito] || @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_toro]
+
+              @ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_novillo]
+              @ganado.save
+
+            end
+
+          end
+
           @guardado_ok = true
 
         end
@@ -284,6 +296,18 @@ before_filter :require_usuario
           @control_ganado.observacion = params[:observacion]
 
           if @control_ganado.save
+
+            @ganado = Ganado.where('id = ?',ganado.ganado_id).first
+            if params[:control][:id].to_i == PARAMETRO[:control_castracion].to_i
+
+              if @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_torito] || @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_toro]
+
+                @ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_novillo]
+                @ganado.save
+
+              end
+
+            end
 
             @guardado_ok = true
 

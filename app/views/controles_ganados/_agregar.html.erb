@@ -152,7 +152,7 @@
 
   $("#control_id").bind('change', function(){ 
 
-    if ($(this).val() == <%=PARAMETRO[:control_palpacion]%>){
+    if ($(this).val() == <%=PARAMETRO[:control_palpacion]%> || $(this).val() == <%=PARAMETRO[:control_castracion]%> || $(this).val() == <%=PARAMETRO[:control_peso]%>){
       
       $("#div_medicamento").hide();
 
