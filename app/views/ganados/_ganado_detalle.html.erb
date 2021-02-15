@@ -216,7 +216,7 @@
                   <td> 
                   <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
                   
-                      <%=link_to_adjuntar_archivo(cg.control_ganado_id)%>
+                      <%=link_to_adjuntar_archivo_sanidad(cg.control_ganado_id)%>
                   
                   <%end%>
 

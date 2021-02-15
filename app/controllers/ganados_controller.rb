@@ -538,7 +538,7 @@ class GanadosController < ApplicationController
     control_ganado = ControlGanado.order("created_at").last
     codigo_control = control_ganado.id + 1
 
-    if params[:control][:id].to_i != PARAMETRO[:control_peso] &&  params[:control][:id].to_i != PARAMETRO[:control_palpacion]
+    if params[:control][:id].to_i != PARAMETRO[:control_peso] &&  params[:control][:id].to_i != PARAMETRO[:control_palpacion] &&  params[:control][:id].to_i != PARAMETRO[:control_castracion]
 
       medicamento = Medicamento.where("id = ?", params[:medicamento_id]).first
       
@@ -593,6 +593,18 @@ class GanadosController < ApplicationController
           @ganado.save
 
           auditoria_nueva("agregar control sanitario de ganado", "controles_ganados", @control_ganado)
+          
+          if params[:control][:id].to_i == PARAMETRO[:control_castracion].to_i
+
+            if @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_torito] || @ganado.etapa_ganado_id == PARAMETRO[:etapa_ganado_toro]
+
+              @ganado.etapa_ganado_id = PARAMETRO[:etapa_ganado_novillo]
+              @ganado.save
+
+            end
+
+          end
+
           @guardado_ok = true
          
         end 
