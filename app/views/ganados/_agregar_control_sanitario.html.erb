@@ -141,6 +141,13 @@
       $("#control_otro").show();
       $("#control_peso").hide();
 
+    }else if ($("#control_id").val() === "<%=PARAMETRO[:control_peso]%>" ||
+      $("#control_id").val() === "<%=PARAMETRO[:control_palpacion]%>" ||
+      $("#control_id").val() === "<%=PARAMETRO[:control_castracion]%>") {
+      
+      $("#control_otro").hide();
+      $("#control_peso").hide();
+
     }
 
   })
@@ -227,7 +234,8 @@
           }
 
       }else if ($("#control_id").val() != "<%=PARAMETRO[:control_peso]%>" &&
-      $("#control_id").val() != "<%=PARAMETRO[:control_palpacion]%>"){
+      $("#control_id").val() != "<%=PARAMETRO[:control_palpacion]%>" &&
+      $("#control_id").val() != "<%=PARAMETRO[:control_castracion]%>"){
 
         if($("#medicamento_id").val().length == 0){
 
