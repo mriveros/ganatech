@@ -33,7 +33,7 @@
               <th>Peso Neto</th>
               <th>Monto por KG</th>
               <th>Total</th>
-              <th></th>
+              <th>Rendimiento</th>
 
               
             </tr>
@@ -55,6 +55,7 @@
                   <td><%= cg.peso_neto %></td>
                   <td><%= cg.monto_peso.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
                   <td><%= cg.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+                   <td><%= cg.rendimiento%></td>
 
                 </tr>
 

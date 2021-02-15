@@ -78,6 +78,10 @@
               <div class="col-sm-7"><%= text_field_tag :peso_monto, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
               <div class="col-sm-1"></div><br /><br />
 
+              <div class="col-sm-4"><%= label_tag :nil, "Rendimiento".html_safe %></div>
+              <div class="col-sm-7"><%= text_field_tag :rendimiento, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 4 %></div>
+              <div class="col-sm-1"></div><br /><br />
+
               <div class="col-sm-4"><%= label_tag :nil, "Monto Total#{attr_requerido}".html_safe %></div>
               <div class="col-sm-7"><%= text_field_tag :monto, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=> 12 %></div>
               <div class="col-sm-1"></div><br /><br />
@@ -147,6 +151,28 @@
 
         var monto = peso_neto * precio_por_peso;
         $("#monto").val(monto)
+
+      }
+      
+
+
+   })
+
+  $("#peso_neto").bind('change', function(){
+      
+      var peso_neto = $("#peso_neto").val();
+      var peso_vivo = $("#peso_vivo").val();
+
+      if (peso_vivo.length == 0){
+
+        swal("Debe ingresar el peso vivo del ganado");
+        $("#peso_vivo").focus();
+      }
+
+      if (peso_neto.length > 0 && peso_vivo.length > 0){
+
+        var rendimiento = (peso_neto * 100/peso_vivo);
+        $("#rendimiento").val(rendimiento.toFixed(2));
 
       }
       

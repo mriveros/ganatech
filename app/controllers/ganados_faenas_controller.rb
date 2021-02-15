@@ -130,6 +130,7 @@ before_filter :require_usuario
             @ganado_faena_detalle.peso_neto = params[:peso_neto]
             @ganado_faena_detalle.monto_peso = params[:peso_monto]
             @ganado_faena_detalle.monto = params[:monto]
+            @ganado_faena_detalle.rendimiento = params[:rendimiento]
 
             if @ganado_faena_detalle.save
 
