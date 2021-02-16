@@ -88,9 +88,8 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            
-
-            <%@parametros = { format: :pdf } %>
+           
+            <%@parametros = { format: :pdf, codigo_lote: $('codigo_lote').val() } %>
 
             window.open("<%= url_for(controles_ganados_imprimir_resumen_control_ganado_path(@parametros))%>", '_blank');
             
