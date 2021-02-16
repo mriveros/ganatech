@@ -1,0 +1,64 @@
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+
+   		<th>ID</th>
+      <th>CONTROL</th>
+      <th>FECHA</th>
+      <th>GANADO</th>
+      <th>RP</th>
+      <th>MEDICAMENTO</th>
+      <th>CANTIDAD SUMINISTRADA</th>
+
+  </tr>
+  <% @total_suministro = 0 %>
+  
+
+
+    <% @lote_ganado.each do |lote_control_ganado|%>
+    
+    <% @total_suministro = @total_suministro + lote_control_ganado.cantidad_suministrada %>
+
+  	<tr>
+
+ 		 	<td><%= lote_control_ganado.id%></td>
+      <td><%= lote_control_ganado.control%></td>
+      <td><%= lote_control_ganado.fecha_control.strftime('%m/%d/%Y') %></td>
+      <td><%= lote_control_ganado.ganado_nombre%></td>
+      <td><%= lote_control_ganado.ganado_rp%></td>
+      <td><%= lote_control_ganado.medicamento%></td>
+      <td><%= lote_control_ganado.cantidad_suministrada%></td>
+      
+
+		</tr>
+  		
+  	
+    <%end%>
+  
+  
+
+    <table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+      
+
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th>MONTO VENTAS</th>
+        
+      </tr>
+
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th><%=@total_suministro%></th>
+        
+        
+      </tr>
+      
+
+    </table> 
+
+
+<br/>
+<br/>

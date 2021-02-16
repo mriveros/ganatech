@@ -1,0 +1,47 @@
+<div style="width: 100%; text-align: center; margin-top:10px;">
+ 
+    <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
+  
+    <p style="font-size: 14px; text-align: center; font-family: times new roman">
+    
+      Sistema de gestión Ganadera - Ganatec<br />
+      <label style="font-size: 18px;">RESUMEN DE VENTAS</label>
+      <br />
+      <label style="font-size: 15px;"></label>
+      <br />
+      <label style="font-size: 15px;"></label>
+    </p>
+    </br>
+    </br>
+    
+</div>
+
+<div id="cont" style="width:80%;">
+
+  <table style="text-align: left; font-size: 12px; margin-left: 10%;" width="80%">
+    
+    <%if params[:fecha_desde].present?%>
+    <tr>
+    
+      <th width="20%">Fecha desde: </th>
+      <td width="40%"><%=params[:fecha_desde] %></td>
+
+    <%end%>
+
+    </tr>
+
+     <%if params[:fecha_hasta].present?%>
+    <tr>
+    
+      <th width="20%">Fecha hasta: </th>
+      <td width="40%"><%=params[:fecha_hasta] %></td>
+
+    <%end%>
+
+    </tr>
+    
+        
+  </table>
+<br/>
+
+</div>

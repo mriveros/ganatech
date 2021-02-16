@@ -540,15 +540,32 @@ before_filter :require_usuario
 
   def imprimir_resumen_control_ganado
 
-    @lote_ganado = ControlGanado.where("codigo = ? ", params[:codigo_lote])
+    #@lote_ganado = ControlGanado.where("codigo = ? ", params[:codigo_lote])
+    @lote_ganado =  VControlGanado.where("codigo = ?", params[:codigo_lote]).orden_01.paginate(per_page: 10, page: params[:page])
 
     respond_to do |f|
+      
+      f.pdf do
 
-      f.js
+          render  :pdf => "planilla_resumen_control_ganado_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
+                  :template => 'controles_ganados/planilla_resumen_control_ganado.pdf.erb',
+                  :layout => 'pdf.html',
+                  :header => {:html => { :template => "controles_ganados/cabecera_planilla_resumen_control_ganado.pdf.erb" ,
+                  :locals   => { :venta => @lote_ganado }}},
+                  :margin => {:top => 65,
+                  :bottom => 11,
+                  :left => 3,
+                  :right => 3},
+                  :orientation => 'Landscape',
+                  :page_size => "A4",
+                  :footer => { :html => {:template => 'layouts/footer.pdf' },
+                  :spacing => 1,
+                  :line => true }
 
+      end
+      
     end
 
   end
-
 
 end
