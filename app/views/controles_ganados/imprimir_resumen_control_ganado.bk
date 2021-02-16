@@ -1,2 +1,0 @@
-
-window.open("<%= url_for(info_ventas_exportar_pdf_path(@parametros))%>", '_blank')	
