@@ -88,7 +88,9 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            <%@parametros = { format: :pdf, codigo_lote: 92 } %>
+            
+
+            <%@parametros = { format: :pdf } %>
 
             window.open("<%= url_for(controles_ganados_imprimir_resumen_control_ganado_path(@parametros))%>", '_blank');
             
