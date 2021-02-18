@@ -139,6 +139,18 @@
   $("#form-buscar-control-ganado").submit();
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
+  
+  $("#link-to-obtener-resumen-control-ganado").bind("click", function () {
+
+    if ($("#form_buscar_control_ganado_codigo").val().length == 0){
+
+      swal("Debe ingresar un lote para generar el PDF.");
+
+    }
+  
+
+  })
+
   $("#form-buscar-control-ganado").bind("submit", function () {
 
     var valido = true;

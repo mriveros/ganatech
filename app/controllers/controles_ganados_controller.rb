@@ -24,7 +24,7 @@ before_filter :require_usuario
 
       cond << "codigo = ?"
       args << params[:form_buscar_control_ganado_codigo]
-      
+      @parametros = { format: :pdf, codigo_lote: params[:form_buscar_control_ganado_codigo] }
 
     end
 
