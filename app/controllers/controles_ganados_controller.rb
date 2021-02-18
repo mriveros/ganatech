@@ -540,7 +540,7 @@ before_filter :require_usuario
 
   def imprimir_resumen_control_ganado
 
-    #@lote_ganado = ControlGanado.where("codigo = ? ", params[:codigo_lote])
+    
     @lote_ganado =  VControlGanado.where("codigo = ?", params[:codigo_lote]).orden_01.paginate(per_page: 10, page: params[:page])
 
     respond_to do |f|

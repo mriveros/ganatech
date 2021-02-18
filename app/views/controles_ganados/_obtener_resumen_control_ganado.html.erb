@@ -9,7 +9,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h4 class="modal-title" id="myModalLabel">Obtener Resumen Sanidad</h4>
       
-    </div>
+    </div>  
 
     <%= form_for @lote_ganado, remote: true, url: controles_ganados_imprimir_resumen_control_ganado_url, html: { id: "form-resumen-control-ganado" }, method: 'POST' do |f| %>
 
