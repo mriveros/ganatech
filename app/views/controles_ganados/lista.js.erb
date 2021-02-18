@@ -1,2 +1,17 @@
 
 $("#controles-ganados-lista").html("<%= escape_javascript(render partial: "lista", locals: { controles_ganados: @controles_ganados }) %>");
+
+$("#link-to-obtener-resumen-control-ganado").bind("click", function () {
+
+    if ($("#form_buscar_control_ganado_codigo").val().length == 0){
+
+      swal("Debe ingresar un lote para generar el PDF.");
+
+    }else{
+
+      window.open("<%= url_for(controles_ganados_imprimir_resumen_control_ganado_path(@parametros))%>", '_blank')  
+
+    }
+  
+
+  })

@@ -529,7 +529,7 @@ before_filter :require_usuario
 
   def obtener_resumen_control_ganado
 
-    @lote_ganado = ControlGanado.new
+    @lote_ganado = params[:parametros]
 
     respond_to do |f|
 
