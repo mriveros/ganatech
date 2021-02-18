@@ -6,7 +6,6 @@
 
       <td><%= cg.control_ganado_id %></td>
       <td ><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
-       <td><%= cg.codigo%></td>
       <td><%= cg.ganado_nombre%></td>
       <td><%= cg.ganado_rp%></td>
       <td><%= cg.control%></td>
@@ -15,7 +14,7 @@
       <td ><%= cg.peso  %></td>
       <td ><%= cg.clasificacion_control %></td>
       <td ><%= cg.observacion %></td>
-
+      <td><%= cg.codigo%></td>
       <td >
         
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cg.control_ganado_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-control", title: 'Haga click para eliminar el control del Ganado'  %>

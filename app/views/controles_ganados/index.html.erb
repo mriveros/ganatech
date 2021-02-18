@@ -4,14 +4,12 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Sanidades</h3>
-    
+
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Sanidad".html_safe, "#", id: "link-to-agregar-control-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-control-ganado", link_to_id: "#link-to-agregar-control-ganado", url: controles_ganados_agregar_path( window_id: "modal-window-agregar-control-ganado"))%>
+
     <%= link_to "<i class='glyphicon glyphicon-trash'></i> Eliminar Lote".html_safe, "#", id: "link-to-eliminar-control-ganado", class: "btn btn-warning pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-eliminar-control-ganado", link_to_id: "#link-to-eliminar-control-ganado", url: controles_ganados_seleccionar_lote_path( window_id: "modal-window-eliminar-control-ganado"))%>
-
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Obtener Resumen Sanidad".html_safe, "#", id: "link-to-obtener-resumen-control-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-obtener-resumen-control-ganado", link_to_id: "#link-to-obtener-resumen-control-ganado", url: controles_ganados_obtener_resumen_control_ganado_path( window_id: "modal-window-obtener-resumen-control-ganado"))%>
 
     
   </div>
@@ -46,14 +44,6 @@
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_fecha_control');"><i class="fa fa-times"></i></span>
               </div>
          </th>
-
-          <th style="width:20px;">
-            <span>Código Lote</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_control_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_codigo');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
 
           <th >
             <span>Ganado</span>
@@ -120,8 +110,16 @@
             </div>
           </th>
 
+          <th style="width:20px;">
+            <span>Código Lote</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_control_ganado_codigo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-control-ganado', '#form_buscar_control_ganado_codigo');"><i class="fa fa-times"></i></span>
+            </div>
 
-          <th ></th>
+          </th>
+
+          <th ><%= link_to "<i class='glyphicon glyphicon-plus-sign'></i>Resumen PDF".html_safe, "#", id: "link-to-obtener-resumen-control-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %></th>
 
         </tr>
 
