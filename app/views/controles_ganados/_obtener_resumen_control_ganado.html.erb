@@ -11,7 +11,7 @@
       
     </div>  
 
-    <%= form_for @lote_ganado, remote: true, url: controles_ganados_imprimir_resumen_control_ganado_url, html: { id: "form-resumen-control-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @lote_ganado, remote: true, url: controles_ganados_imprimir_resumen_url, html: { id: "form-resumen-control-ganado" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
      
@@ -29,7 +29,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-resumen-control-sanitario" %>
+        <%= link_to "Exportar PDF","#" ,class: "btn btn-primary", id: "btn-resumen-control-sanitario" %>
           
       </div>
  
@@ -89,8 +89,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-           
-            window.open("<%= url_for(controles_ganados_imprimir_resumen_control_ganado_path())%>", '_blank');
+            $("#form-resumen-control-ganado").submit();
             
           } 
 

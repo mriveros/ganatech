@@ -376,6 +376,7 @@ get 'crontab_ultron/index'
   post 'controles_ganados/eliminar_lote'
   get 'controles_ganados/obtener_resumen_control_ganado'
   get 'controles_ganados/imprimir_resumen_control_ganado'
+  post 'controles_ganados/imprimir_resumen'
   
 
   #CONTROLES ALIMENTACIONES
