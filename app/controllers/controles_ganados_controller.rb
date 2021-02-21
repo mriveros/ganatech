@@ -540,6 +540,18 @@ before_filter :require_usuario
 
   end
 
+  def imprimir_resumen
+
+     @parametros = { format: :pdf, codigo_lote: params[:codigo_lote]}
+
+    respond_to do |f|
+
+      f.js
+
+    end
+    
+  end
+
   def imprimir_resumen_control_ganado
 
     
