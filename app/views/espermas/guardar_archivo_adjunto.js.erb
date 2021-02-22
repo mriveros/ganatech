@@ -1,16 +1,16 @@
 <% if @valido == true %>
+  
+  swal("Archivo Adjunto Exitosamente.", "", "success");
 
   setTimeout(function(){
 
     $("#form_buscar_esperma_id").val('<%= @esperma.id %>');
-  	$("#form_buscar_esperma_descripcion").val('');
-  	$("#form_buscar_esperma_numero").val('');
-  	$("#form_buscar_esperma_raza_id").val('');
-    $("#form_buscar_esperma_cantidad").val('');
-  	$("#form-buscar-esperma").submit();
-    swal("Archivo Adjunto Exitosamente.", "", "success");
+    $("#form-buscar-esperma").submit();   
 
-  }, 1000);
+  },1000);
+
+  
+  
   
 
 <% else %>

@@ -41,6 +41,7 @@ development:
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
   tipo_resolucion_ganado_muerto: 2
+  tipo_resolucion_ganado_esperma_reproductor: 3
 
   #ESTADOS CELOS
   estado_celo_en_celo_activo: 1
@@ -220,6 +221,7 @@ production:
   #TIPOS RESOLUCIONES DOCUMENTOS
   tipo_resolucion_control_ganado: 1
   tipo_resolucion_ganado_muerto: 2
+  tipo_resolucion_ganado_esperma_reproductor: 3
 
   #ESTADOS CELOS
   estado_celo_en_celo_activo: 1

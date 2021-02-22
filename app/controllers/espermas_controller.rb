@@ -385,17 +385,6 @@ class EspermasController < ApplicationController
 
     end
 
-    rescue Exception => exc  
-     
-      if exc.present?        
-          
-        @excep = exc.message.split(':')    
-        @msg = @excep
-        @eliminado = false
-        
-      end
-
-    
     respond_to do |f|
 
       f.js
