@@ -19,6 +19,7 @@
       <td >
         
         <%= link_to_esperma_detalle(esp.esperma_id) %>
+        <%= link_to_adjuntar_archivo_reproductor(esp.esperma_id) %>
         <%= link_to_editar_esperma(esp.esperma_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{esp.esperma_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-esperma", title: 'Haga click para eliminar la muestra'  %>
 
