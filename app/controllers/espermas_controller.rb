@@ -335,5 +335,74 @@ class EspermasController < ApplicationController
 
   end
 
+  def adjuntar_archivo_reproductor
+
+    @esperma = Esperma.where("id = ?", params[:esperma_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_archivo_adjunto
+
+    @valido = true
+    @msg = ""
+
+    @esperma = Esperma.where("id = ?", params[:esperma_id]).first
+
+    if @valido
+
+      DocumentoGanatec.transaction do 
+
+        @documento_ganatec = DocumentoGanatec.new
+        @documento_ganatec.numero = params[:numero]
+        @documento_ganatec.descripcion = params[:descripcion]
+        @documento_ganatec.fecha_emision = params[:fecha_emision]
+        @documento_ganatec.tipo_resolucion_id = PARAMETRO[:tipo_resolucion_control_ganado]
+        @documento_ganatec.data = params[:data]
+
+        if @documento_ganatec.save
+
+          auditoria_nueva("agregar documento nuevo en ganatec", "documentos_ganatec", @documento_ganatec)
+
+          @esperma.documento_ganatec_id = @documento_ganatec.id
+          
+          if  @esperma.save
+
+            @valido = true
+            auditoria_nueva("agregar documento adjunto esperma ganado", "espermas", @esperma)
+
+          end
+
+
+        end
+
+      end #end transaction
+
+    end
+
+    rescue Exception => exc  
+     
+      if exc.present?        
+          
+        @excep = exc.message.split(':')    
+        @msg = @excep
+        @eliminado = false
+        
+      end
+
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end

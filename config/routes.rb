@@ -355,7 +355,7 @@ get 'crontab_ultron/index'
   get 'espermas/eliminar'
   get 'espermas/esperma_detalle'
   get 'espermas/buscar_ganado'
-  get 'espermas/adjuntar_archivo'
+  get 'espermas/adjuntar_archivo_reproductor'
   post 'espermas/guardar_archivo_adjunto'
 
   #CONTROLES GANADOS

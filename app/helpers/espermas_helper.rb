@@ -14,7 +14,7 @@ module EspermasHelper
   
   def link_to_adjuntar_archivo_reproductor(esperma_id)
 
-    render partial: 'link_to_esperma_detalle', locals: { esperma_id: esperma_id}
+    render partial: 'link_to_adjuntar_archivo_reproductor', locals: { esperma_id: esperma_id}
 
   end
 
