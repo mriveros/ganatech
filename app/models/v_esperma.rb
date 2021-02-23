@@ -7,7 +7,7 @@ class VEsperma < ActiveRecord::Base
   :numero_pajuela, :raza_id, :raza_ganado, :observacion, :estado_esperma_id, 
   :estado_esperma, :esperma_procedencia_id, :esperma_procedencia, :costo_esperma,
   :fecha_registro, :costo_total, :cantidad, :created_at, :updated_at, :cantidad_inicial,
-  :documento_ganatec_id
+  :documento_ganatec_id, :documento_descripcion, :numero_documento
   
   scope :orden_01, -> { order("esperma_id")}
   scope :orden_fecha, -> { order("fecha_registro desc")}

@@ -310,7 +310,12 @@ class EspermasController < ApplicationController
   def esperma_detalle
     
     @esperma_detalle = VEsperma.where("esperma_id = ?", params[:esperma_id]).first
+    
+    if @esperma_detalle.documento_ganatec_id
 
+      @documento_ganatec = DocumentoGanatec.where("id = ?", @esperma_detalle.documento_ganatec_id).first
+
+    end
 
      respond_to do |f|
 
