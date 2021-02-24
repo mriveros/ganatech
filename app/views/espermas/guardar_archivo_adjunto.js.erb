@@ -1,13 +1,7 @@
 <% if @valido == true %>
-  
-  swal("Archivo Adjunto Exitosamente.", "", "success");
-
-  setTimeout(function(){
 
     $("#form_buscar_esperma_id").val('<%= @esperma.id %>');
-    $("#form-buscar-esperma").submit();   
-
-  },1000);
+    $("#form-buscar-esperma").submit();
 
   
   

@@ -314,7 +314,7 @@ class EspermasController < ApplicationController
     if @esperma_detalle.documento_ganatec_id
 
       @documento_ganatec = DocumentoGanatec.where("id = ?", @esperma_detalle.documento_ganatec_id).first
-
+      puts @documento_ganatec.data.url
     end
 
      respond_to do |f|
