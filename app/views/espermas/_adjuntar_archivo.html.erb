@@ -10,7 +10,7 @@
     </div>
     
       
-    <%= form_for @esperma, remote: true, url: espermas_guardar_archivo_adjunto_url, html: { id: "form-adjuntar-archivo", multipart: true }, method: 'POST' do |f| %>    
+    <%= form_for @esperma, remote: true, url: espermas_guardar_archivo_adjunto_url, html: { id: "form-adjuntar-archivo-esperma-reproductor", multipart: true }, method: 'POST' do |f| %>    
 
       <div class="modal-body">
 
@@ -59,13 +59,13 @@
 
 <style type="text/css">
 
-  #form-adjuntar-archivo label, #form-adjuntar-archivo input[type='text'], #form-form-adjuntar-archivo select { float:left; margin-top:5px;}  
-  #form-adjuntar-archivo {clear:both; }
-  #form-adjuntar-archivo label { width:200px;font-size:12px;margin-top:10px;}
-  #form-adjuntar-archivo #numero { width:100%;}
-  #form-adjuntar-archivo #fecha_emision { width:100%;}
-  #form-adjuntar-archivo #descripcion { width:100%;}
-  #form-adjuntar-archivo #adjunto { width:100%;padding:0px;}
+  #form-adjuntar-archivo-esperma-reproductor label, #form-adjuntar-archivo-esperma-reproductor input[type='text'], #form-form-adjuntar-archivo-esperma-reproductor select { float:left; margin-top:5px;}  
+  #form-adjuntar-archivo-esperma-reproductor {clear:both; }
+  #form-adjuntar-archivo-esperma-reproductor label { width:200px;font-size:12px;margin-top:10px;}
+  #form-adjuntar-archivo-esperma-reproductor #numero { width:100%;}
+  #form-adjuntar-archivo-esperma-reproductor #fecha_emision { width:100%;}
+  #form-adjuntar-archivo-esperma-reproductor #descripcion { width:100%;}
+  #form-adjuntar-archivo-esperma-reproductor #adjunto { width:100%;padding:0px;}
 </style>
 
 <script type="text/javascript">
@@ -80,7 +80,7 @@
     }
     });
 
-  $("#form-adjuntar-archivo").bind("submit", function () {
+  $("#form-adjuntar-archivo-esperma-reproductor").bind("submit", function () {
 
     $("#btn-actualizar-archivo").attr('disabled', true);
 
@@ -136,7 +136,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-adjuntar-archivo").submit();
+            $("#form-adjuntar-archivo-esperma-reproductor").submit();
             
           } 
 
@@ -154,8 +154,12 @@
 
 
   
-  setTimeout(function(){ 
+  setTimeout(function(){
+
     $("#archivo_data").focus();
+
   }, 1000);
+
   aplicar_datepicker2();
+  
 </script>

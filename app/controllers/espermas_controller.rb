@@ -382,7 +382,7 @@ class EspermasController < ApplicationController
             auditoria_nueva("agregar documento adjunto esperma ganado", "espermas", @esperma)
 
           end
-
+ 
 
         end
 

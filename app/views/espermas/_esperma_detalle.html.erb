@@ -99,7 +99,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Reproductor</h3>
+        <h3 style="float:left;margin-top:5px;">Imagen Reproductor</h3>
       </div>
 
     </div>
@@ -109,18 +109,17 @@
     <div class="panel-body">
       
       <div class="table-responsive" id="table-celo-detalle">
-          
-        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+        
           <%if @esperma_detalle.documento_ganatec_id != nil %>
 
+            <center><img src="<%=@documento_ganatec.data.url%>" style="width:450px;height:350px;"></center>
           
-          <%render :text => open(@documento_ganatec.data.url, "rb").read%>
+          <% else %>
+
+            <h3 style="float:left;margin-top:5px;">No se ha adjuntado ninguna imagen.</h3>
 
           <% end %>
-              
-        </table>
 
-        
       </div>
       
     </div>
@@ -135,5 +134,6 @@
 
 
   <script type="text/javascript">
+       
 
   </script>

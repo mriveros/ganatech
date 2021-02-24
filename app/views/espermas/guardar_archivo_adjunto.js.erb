@@ -1,8 +1,11 @@
 <% if @valido == true %>
 
-    $("#form_buscar_esperma_id").val('<%= @esperma.id %>');
-    $("#form-buscar-esperma").submit();
-
+    //$("#form_buscar_esperma_id").val('<%= @esperma.id %>');
+    //$("#form-buscar-esperma").submit();
+	setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    swal("Muestras","Adjunto agregado exitosamente!", "success");
+  }, 2000);
   
   
   
