@@ -1,0 +1,148 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Registro de Gastos</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-registros-gastos", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-registros-gastos", link_to_id: "#link-to-agregar-registros-gastos", url: registros_gastos_agregar_path( window_id: "modal-window-agregar-registros-gastos") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-registros-gastos">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag registros_gastos_lista_path, remote: true, id: "form-buscar-registros-gastos"  do  %>
+
+        <tr>
+
+          <th>
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_registros_gastos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+          <th>
+            <div><%= label_tag nil, "Fecha".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_registros_gastos_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_fecha');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th>
+            <span>Gasto<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_registros_gastos_gasto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_gasto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Monto<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_registros_gastos_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_monto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th>
+            <span>Observación<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_registros_gastos_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-registros-gastos', '#form_buscar_registros_gastos_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="registros-gastos-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-registros-gastos").bind("submit", function () {
+    
+    var valido = true;
+    
+    if($("#form_buscar_registros_gastos_gasto").val().length !== 0 ){
+      
+      valido = false;
+
+      if(($("#form_buscar_registros_gastos_gasto").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_registros_gastos_gasto").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      
+      }else{
+       
+        valido = false;      
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#registros-gastos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-registros-gastos input, #table-registros-gastos select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-registros-gastos").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-registros-gastos").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-detalle-debito").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-registros-gastos table th { background:#e6e6e6;}
+    #form-buscar-registros-gastos table th span.limpiar { background:#fff;}
+
+</style>
