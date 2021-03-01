@@ -1,30 +1,21 @@
-<% if alimentaciones.present? %>
+<% if materiales.present? %>
 
-  <% alimentaciones.each do |alimentacion| %>
+  <% materiales.each do |material| %>
 
     <tr>
 
-      <td><%= alimentacion.alimentacion_id %></td>
-      <td><%= alimentacion.nombre_alimento%></td>
-      <td><%= alimentacion.descripcion_alimento%></td>
-      <td><%= alimentacion.cantidad_stock%></td>
-      <td><%= alimentacion.cantidad_porciones%></td>
-      <td><%= alimentacion.stock_porciones%></td>
-      <td><%= alimentacion.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
-      <td><%= alimentacion.cantidad_aplicacion%></td>
-      <td ><%= alimentacion.ciclo %></td>
-      <td ><%= alimentacion.intervalo_tiempo %></td>
-      <td ><%= alimentacion.estado_alimento %></td>
-      <td ><%= alimentacion.tipo_alimento %></td>
-      <td ><%= alimentacion.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
-
-
-
+      <td><%= material.material_id %></td>
+      <td><%= material.nombre_alimento%></td>
+      <td><%= material.cantidad_stock%></td>
+      <td><%= material.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td ><%= material.estado_material %></td>
+      <td ><%= material.presentacion_material %></td>
+      
       <td style="width:120px;">
 
-        <%= link_to_alimentacion_detalle(alimentacion.alimentacion_id) %>
-        <%= link_to_editar_alimentacion(alimentacion.alimentacion_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{alimentacion.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion", title: 'Haga click para eliminar el alimemto'  %>
+        <%= link_to_material_detalle(material.material_id) %>
+        <%= link_to_editar_material(material.material_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{material.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material", title: 'Haga click para eliminar el material'  %>
 
        </td>
 
@@ -36,7 +27,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate alimentaciones, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate materiales, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -61,11 +52,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(alimentacion_id) {
+  function eliminar_registro(material_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de alimentos",
+          text: "Al confirmar se eliminará permanentemente de la lista de materiales",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -78,8 +69,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(alimentaciones_eliminar_path) %>",
-                data: {id: alimentacion_id},
+                url: "<%= url_for(materiales_eliminar_path) %>",
+                data: {id: material_id},
                 dataType: 'script'
               });
 
