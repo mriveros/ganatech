@@ -1,22 +1,22 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-alimentaciones");
-   $("#form_buscar_alimentaciones_id").val("<%=@alimentacion_elim.id%>")
-   $("#form-buscar-alimentaciones").submit();
+   $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-materiales");
+   $("#form_buscar_materiales_id").val("<%=@material_elim.id%>")
+   $("#form-buscar-materiales").submit();
     setTimeout(function(){
 
-      $("#msg-eliminar-alimentaciones").remove();
+      $("#msg-eliminar-materiales").remove();
       swal("El alimento ha sido eliminado Exitosamente.");
 
     }, 1000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-alimentaciones");
+  $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-materiales");
   setTimeout(function(){ 
     
-    $("#msg-eliminar-alimentacion").remove(); 
-    swal("No se pudo eliminar el Alimento.<%= @msg %> Intente más tarde.")
+    $("#msg-eliminar-material").remove(); 
+    swal("No se pudo eliminar el Material.<%= @msg %> Intente más tarde.")
 
   }, 2000);
 

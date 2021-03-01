@@ -1,10 +1,10 @@
 <% if @guardado_ok %>
 
-   $("<div class='col-sm-12' id='msg-agregar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-alimentacion");
+   $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-material");
 
-  $("#form_buscar_alimentaciones_id").val('<%= @alimento.id %>');
-  $("#form_buscar_alimentaciones_descripcion").val('');
-  $("#form-buscar-alimentaciones").submit();
+  $("#form_buscar_materiales_id").val('<%= @material.id %>');
+  $("#form_buscar_materiales_descripcion").val('');
+  $("#form-buscar-materiales").submit();
 
   setTimeout(function(){
     
@@ -17,6 +17,6 @@
 <% else %>
 
 	swal("Error al guardar el Alimento. Intente más tarde" )
-  $("<div class='col-sm-12' id='msg-agregar-alimentacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-alimentacion");
+  $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-material");
 
 <% end %>
