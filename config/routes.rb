@@ -145,15 +145,21 @@ get 'crontab_ultron/index'
   get 'pagos_salarios/eliminar'
   get 'pagos_salarios/salario_detalle'
   
-  #Materiales
+  #MATERIALES
   get 'materiales/index'
   post 'materiales/lista'
   get 'materiales/lista'
   get 'materiales/agregar'
   post 'materiales/guardar'
-  get 'materiales/eliminar'
   get 'materiales/editar'
   post 'materiales/actualizar'
+  get 'materiales/eliminar'
+  get 'materiales/buscar_material'
+  get 'materiales/material_detalle'
+  get 'materiales/agregar_material_detalle'
+  post 'materiales/guardar_material_detalle'
+  get 'materiales/eliminar_material_detalle'
+
  
 
 #REGISTROS DE GASTOS
