@@ -1,44 +1,51 @@
-<% if materiales.present? %>
+<% if alimentaciones.present? %>
 
-  <% materiales.each do |rg| %>
+  <% alimentaciones.each do |alimentacion| %>
 
     <tr>
 
-      <td><%= rg.registro_gasto_id %></td>
-      <td><%= rg.fecha.strftime('%d/%m/%Y')%></td>
-      <td><%= rg.gasto %></td>
-      <td><%= rg.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= rg.observacion%></td>
-      <td>
-      
-      <%= link_to_editar_registro_gasto(rg) %>
-      
-      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{rg.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-registro-gasto", title: 'Haga click para eliminar el Registro de Gasto'  %>
-       
-         
+      <td><%= alimentacion.alimentacion_id %></td>
+      <td><%= alimentacion.nombre_alimento%></td>
+      <td><%= alimentacion.descripcion_alimento%></td>
+      <td><%= alimentacion.cantidad_stock%></td>
+      <td><%= alimentacion.cantidad_porciones%></td>
+      <td><%= alimentacion.stock_porciones%></td>
+      <td><%= alimentacion.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%= alimentacion.cantidad_aplicacion%></td>
+      <td ><%= alimentacion.ciclo %></td>
+      <td ><%= alimentacion.intervalo_tiempo %></td>
+      <td ><%= alimentacion.estado_alimento %></td>
+      <td ><%= alimentacion.tipo_alimento %></td>
+      <td ><%= alimentacion.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+
+
+
+      <td style="width:120px;">
+
+        <%= link_to_alimentacion_detalle(alimentacion.alimentacion_id) %>
+        <%= link_to_editar_alimentacion(alimentacion.alimentacion_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{alimentacion.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-alimentacion", title: 'Haga click para eliminar el alimemto'  %>
+
        </td>
 
-     
-     
+     </tr>
 
-      </td>
 
-    </tr>
 
   <% end %>
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate materiales, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate alimentaciones, :params => params %></div></td>
 </tr>
 
 <tr>
     <td colspan="12">
-      Cantidad de registros encontrados: <%= @total_encontrados %> 
+      Cantidad de registros encontrados: <%= @total_encontrados %>
     </td>
 </tr>
 
- 
+
 
 <% else %>
 
@@ -54,37 +61,37 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(registro_gasto_id) {
+  function eliminar_registro(alimentacion_id) {
 
-    swal({
-      title: "Confirmar",
-      text: "Al confirmar se eliminará permanentemente de la lista de Materiales.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonClass: "btn-confirm",
-      confirmButtonText: "Confirmar",
-      cancelButtonText: "Cancelar",
-      closeOnConfirm: true,
-      closeOnCancel: true
-    },
-    function(isConfirm) {
-      if (isConfirm) {
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de alimentos",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
 
-        $.ajax({
-          url: "<%= url_for(materiales_eliminar_path) %>",
-          data: {id: registro_gasto_id},
-          dataType: 'script'
+              $.ajax({
+                url: "<%= url_for(alimentaciones_eliminar_path) %>",
+                data: {id: alimentacion_id},
+                dataType: 'script'
+              });
+
+          } else{
+
+            return false;
+
+          }
+
         });
 
-      } else{
 
-        return false;
-
-      }
-
-    });
-
-
-  }
+    }
 
 </script>

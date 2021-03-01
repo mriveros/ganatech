@@ -1,190 +1,444 @@
 class MaterialesController < ApplicationController
 
-	before_filter :require_usuario
+  before_filter :require_usuario
 
-	  def index
-	  end
+  def index
 
-	  def lista
 
-	    cond = []
-	    args = []
+  end
 
-	    if params[:form_buscar_materiales_id].present?
+  def lista
 
-	      cond << "registro_gasto_id = ?"
-	      args << params[:form_buscar_materiales_id]
+    cond = []
+    args = []
 
-	    end
+    if params[:form_buscar_materiales_id].present?
 
-	    if params[:form_buscar_materiales_fecha].present?
+      cond << "material_id = ?"
+      args << params[:form_buscar_materiales_id]
 
-	      cond << "fecha = ?"
-	      args << params[:form_buscar_materiales_fecha]
+    end
 
-	    end
+    if params[:form_buscar_materiales_nombre_material].present?
 
-	    if params[:form_buscar_materiales_monto].present?
+      cond << "nombre_material ilike ?"
+      args << "%#{params[:form_buscar_materiales_nombre_material]}%"
 
-	      cond << "monto = ?"
-	      args << params[:form_buscar_materiales_monto]
+    end
 
-	    end
 
-	    if params[:form_buscar_materiales_gasto].present?
+    if params[:form_buscar_materiales_descripcion_material].present?
 
-	      cond << "gasto ilike ?"
-	      args << "%#{params[:form_buscar_materiales_gasto]}%"
+      cond << "descripcion_material ilike ?"
+      args << "%#{params[:form_buscar_materiales_descripcion_material]}%"
 
-	    end
+    end
 
-	    if params[:form_buscar_materiales_observacion].present?
 
-	      cond << "observacion ilike ?"
-	      args << "%#{params[:form_buscar_materiales_observacion]}%"
+    if params[:form_buscar_materiales_cantidad_stock].present?
 
-	    end
+      cond << "cantidad_stock = ?"
+      args << params[:form_buscar_materiales_cantidad_stock]
 
-	    
+    end
 
-	    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
+    if params[:form_buscar_materiales_costo_unitario].present?
 
-	    if cond.size > 0
+      cond << "costo = ?"
+      args << params[:form_buscar_materiales_costo_unitario]
 
-	      @materiales =  VMaterial.orden_fecha_desc.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = VMaterial.where(cond).count
+    end
 
-	    else
+    if params[:form_buscar_materiales][:estado_material_id].present?
 
-	      @materiales = VMaterial.orden_fecha_desc.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = VMaterial.count
+      cond << "estado_material_id = ?"
+      args << params[:form_buscar_materiales][:estado_material_id]
 
-	    end
+    end
 
-	    @total_registros = VMaterial.count
 
-	    respond_to do |f|
+    if params[:form_buscar_materiales][:tipo_material_id].present?
 
-	      f.js
+      cond << "tipo_material_id = ?"
+      args << params[:form_buscar_materiales][:tipo_material_id]
 
-	    end
+    end
 
-	  end
 
-	  def agregar
+    if params[:form_buscar_materiales_fecha_vencimiento].present?
 
-	    @material = Material.new
+      cond << "fecha_vencimiento = ?"
+      args << params[:form_buscar_materiales_fecha_vencimiento]
 
-	    respond_to do |f|
-	      f.js
-	    end
+    end
 
-	  end
 
-	  def guardar
+    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
-	    @valido = true
-	    @msg = ""
+    if cond.size > 0
 
-	    if @valido
+      @materiales =  Vmaterial.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = Vmaterial.where(cond).count
 
-		    @material = Material.new()
-		    @material.fecha = params[:fecha]
-		    @material.gasto_id = params[:gasto][:id]
-		    @material.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
-		    @material.observacion = params[:observacion]
+    else
 
-		    if @material.save
+      @materiales = Vmaterial.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = Vmaterial.count
 
-		    	auditoria_nueva("Registrar nuevo gasto", "registros_gastos", @material)
-		       
-		        @guardado_ok = true
-		       
+    end
 
-		    end 
+    @total_registros = Vmaterial.count
 
-		 end
-	         
-	    respond_to do |f|
+    respond_to do |f|
 
-	      f.js
+      f.js
 
-	    end
+    end
 
-	  end
+  end
 
-	  def eliminar
+  def agregar
 
-	    @valido = true
-	    @msg = ""
-	    @eliminado =false
+    @material = Material.new
 
-	    @material = Material.find(params[:id])
-	    @material_elim = @material
+    respond_to do |f|
+      f.js
+    end
 
-	    if @valido
+  end
 
-	      if @material.destroy
+  def guardar
 
-	        auditoria_nueva("Eliminar registro de gastos", "registros_gastos", @material_elim)
-	        @eliminado = true
+    valido = true
+    @msg = ""
+    @material_ok = false
 
-	      end
+    material_detalle.transaction do
 
-	    end
-	        
-	    respond_to do |f|
+      @material = Material.new() 
 
-	      f.js
+      @material.descripcion = params[:descripcion].upcase
+      @material.nombre_material = params[:nombre_material].upcase
+      @material.cantidad_stock = params[:cantidad_stock]
+      @material.costo_unitario = params[:costo_unitario].to_s.gsub(/[$.]/,'').to_i
+      @material.observacion = params[:observacion]
+      @material.estado_material_id = params[:estado_material][:id]
+      @material.presentacion_material_id = params[:presentacion_material][:id]
+      @material.costo_total = params[:costo_unitario].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock]
+      
 
-	    end
+      if @material.save
 
-	  end
+        auditoria_nueva("agregar nueva material", "materiales", @material)
+        @material_detalle = MaterialDetalle.new
+        @material_detalle.material_id = @material.id
+        @material_detalle.descripcion = @material.descripcion
+        @material_detalle.fecha_suministro = Date.today
+        @material_detalle.numero_lote = 0
+        @material_detalle.cantidad_suministro = @material.cantidad_stock
+        @material_detalle.costo_suministro = @material.costo
+        @material_detalle.observacion = @material.observacion
+        @material_detalle.fecha_vencimiento = @material.fecha_vencimiento
+        @material_detalle.costo_total =  (params[:costo].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock].to_i)
 
-	  def editar
+        if @material_detalle.save
 
-	    @material = Material.find(params[:id])
+          @guardado_ok = true
 
-	    respond_to do |f|
+          @compra = AuxCompra.new
+          @compra.fecha = Date.today
+          @compra.descripcion = "Compra material: #{@material.nombre_material}"
+          @compra.observacion = @material_detalle.observacion
+          @compra.monto = @material_detalle.costo_total
+          @compra.material_detalle_id = @material_detalle.id
+          @compra.save
 
-	      f.js
+        end
 
-	    end
+      end
 
-	  end
+    end
 
-	  def actualizar
+  rescue Exception => exc
+    # dispone el mensaje de error
+    #puts "Aqui si muestra el error ".concat(exc.message)
+    if exc.present?
+      @excep = exc.message.split(':')
+      @msg = @excep
 
-	    valido = true
-	    @msg = ""
+    end
 
-	    @material = Material.find(params[:id])
-	    auditoria_id = auditoria_antes("actualizar material", "materiales", @material)
 
-	    if valido
+    respond_to do |f|
 
-	    	@material.fecha = params[:material][:fecha]
-		  	@material.gasto_id = params[:material][:gasto_id]
-		    @material.monto = params[:material][:monto].to_s.gsub(/[$.]/,'').to_i
-		    @material.observacion = params[:material][:observacion]
+      f.js
 
-	      if @material.save
+    end
 
-	      	auditoria_despues(@material, auditoria_id)
-	        @material_ok = true
+  end
 
-	      end
+  def eliminar
 
-	    end
-	               
-	        
-	    respond_to do |f|
+    @eliminado = false
+    @valido = true
+    @msg = ""
 
-	      f.js
+    @material = Material.where("id = ?",params[:id]).first
+    @material_elim = @material
 
-	    end
+    material_ganado = UsoMaterial.where("material_id = ?",params[:id])
+    if material_ganado.present?
 
-	  end
-	    
+      @msg += "El material ya ha sido utilizado."
+      @valido = false
+
+    end
+
+    material_detalle = MaterialDetalle.where("material_id = ?",params[:id])
+    if material_detalle.present?
+
+      @msg += " El material ya cuenta con suministros."
+      @valido = false
+
+    end
+
+    if @valido
+
+      if @material.destroy
+
+        auditoria_nueva("eliminar material", "materiales", @material_elim)
+        @eliminado = true
+
+      end
+
+    end
+
+  rescue Exception => exc
+    # dispone el mensaje de error
+    #puts "Aqui si muestra el error ".concat(exc.message)
+    if exc.present?
+
+      @eliminado = false
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def editar
+
+    @material = Material.find(params[:id])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def actualizar
+
+    valido = true
+    @msg = ""
+
+    @material = Material.find(params[:material][:id])
+    auditoria_id = auditoria_antes("actualizar material", "materials", @material)
+
+    if valido
+
+      @material.descripcion = params[:material][:descripcion].upcase
+      @material.nombre_material = params[:material][:nombre_material].upcase
+      @material.cantidad_stock = params[:material][:cantidad_stock]
+      @material.costo = params[:material][:costo].to_s.gsub(/[$.]/,'').to_i
+      @material.observacion = params[:material][:observacion]
+      @material.estado_material_id = params[:material][:estado_material_id]
+      @material.presentacion_material_id = params[:material][:presentacion_material_id]
+     
+      if @material.save
+
+        auditoria_despues(@material, auditoria_id)
+        @material_ok = true
+
+      end
+
+    end
+  rescue Exception => exc
+    # dispone el mensaje de error
+    #puts "Aqui si muestra el error ".concat(exc.message)
+    if exc.present?
+
+      @msg = exc.message.split(':')
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def buscar_material
+
+    #if params[:tipo_material].present?
+
+    @materiales = Material.where("nombre_material ilike ? and presentacion_material_id = ?", "%#{params[:material]}%", params[:presentacion_material_id])
+
+    #end
+
+    respond_to do |f|
+
+      f.html
+      f.json { render :json => @materiales }
+
+    end
+
+  end
+
+  def material_detalle
+
+    @material = Material.where("id = ?", params[:material_id]).first
+
+    @material_detalle = MaterialDetalle.orden_01.where("material_id = ?", params[:material_id]).paginate(per_page: 5, page: params[:page])
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def agregar_material_detalle
+
+
+    @material = Material.where("id = ?", params[:material_id]).first
+    nuevo_codigo = MaterialDetalle.last
+    @numero_lote = nuevo_codigo.numero_lote + 1
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_material_detalle
+
+    @guardado_ok = false
+    @valido = true
+
+    Material.transaction do
+
+      @material = Material.where("id = ?", params[:material_id]).first
+      auditoria_id = auditoria_antes("guardar suministro material detalle", "materiales", @material)
+
+      if @valido
+ 
+        @material_detalle = MaterialDetalle.new
+        @material_detalle.material_id = params[:material_id]
+        @material_detalle.descripcion = params[:descripcion].upcase
+        @material_detalle.fecha_suministro = params[:fecha_suministro]
+        @material_detalle.numero_lote = params[:numero_lote]
+        @material_detalle.cantidad_suministro = params[:cantidad_suministro]
+        @material_detalle.costo_suministro = params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i
+        @material_detalle.observacion = params[:observacion]
+        @material_detalle.costo_total = (params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_suministro].to_i)
+        
+        
+        if @material_detalle.save
+
+
+          auditoria_nueva("agregar material detalle", "materiales_detalles", @material_detalle)
+
+          @material.cantidad_stock = @material.cantidad_stock + @material_detalle.cantidad_suministro
+          
+          if @material.save
+
+            auditoria_despues(@material, auditoria_id)
+            @guardado_ok = true
+
+            @compra = AuxCompra.new
+            @compra.fecha = Date.today
+            @compra.descripcion = "Compra material: #{@material.nombre_material}"
+            @compra.observacion = @material_detalle.observacion
+            @compra.monto = @material_detalle.costo_total
+            @compra.material_detalle_id = @material_detalle.id
+            @compra.save
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def eliminar_material_detalle
+
+    @eliminado_ok = false
+    @valido = true
+
+    Material.transaction do
+
+      @material = Material.where("id = ?", params[:material_id]).first
+      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales", @material)
+
+      @material_detalle = MaterialDetalle.where("id = ?", params[:material_detalle_id]).first
+      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales_detalles", @material_detalle)
+
+      @compra_material = AuxCompra.where("material_detalle_id = ?", params[:material_detalle_id]).first
+      @compra_material.destroy
+
+      if @valido
+
+        @material_detalle_elim = @material_detalle
+
+        if @material_detalle.destroy
+
+          auditoria_nueva("eliminar material detalle", "materiales_detalles", @material_detalle_elim )
+
+          @material.cantidad_stock = @material.cantidad_stock - @material_detalle.cantidad_suministro
+          
+          if @material.save
+
+            @eliminado_ok = true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 end
