@@ -1,0 +1,20 @@
+<% if @guardado_ok %>
+
+	$("<div class='col-sm-12' id='msg-agregar-material-detalle' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-material-detalle");
+
+	setTimeout( function(){
+
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#form_buscar_materiales_id").val('<%= @material.id %>');
+    $("#form-buscar-materiales").submit();
+    
+    swal("Suministro agregado exitosamente!");
+
+    }, 1000);
+
+<% else %>
+	
+	$("<div class='col-sm-12' id='msg-agregar-material-detalle' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-material-detalle");
+  	swal('Error al guardar el suministro. Intente más tarde');
+
+<% end %>
