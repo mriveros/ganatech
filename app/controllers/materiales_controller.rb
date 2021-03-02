@@ -77,17 +77,17 @@ class MaterialesController < ApplicationController
 
     if cond.size > 0
 
-      @materiales =  Vmaterial.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Vmaterial.where(cond).count
+      @materiales =  VMaterial.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VMaterial.where(cond).count
 
     else
 
-      @materiales = Vmaterial.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Vmaterial.count
+      @materiales = VMaterial.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VMaterial.count
 
     end
 
-    @total_registros = Vmaterial.count
+    @total_registros = VMaterial.count
 
     respond_to do |f|
 

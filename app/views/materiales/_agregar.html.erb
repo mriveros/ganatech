@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
 
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Alimento</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Material</h4>
 
     </div>
 
-    <%= form_for @alimento, remote: true, url: alimentaciones_guardar_url, html: { id: "form-agregar-alimentacion" }, method: 'POST' do |f| %>
+    <%= form_for @material, remote: true, url: alimentaciones_guardar_url, html: { id: "form-agregar-alimentacion" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
