@@ -27,14 +27,6 @@ class MaterialesController < ApplicationController
     end
 
 
-    if params[:form_buscar_materiales_descripcion_material].present?
-
-      cond << "descripcion_material ilike ?"
-      args << "%#{params[:form_buscar_materiales_descripcion_material]}%"
-
-    end
-
-
     if params[:form_buscar_materiales_cantidad_stock].present?
 
       cond << "cantidad_stock = ?"
@@ -44,7 +36,7 @@ class MaterialesController < ApplicationController
 
     if params[:form_buscar_materiales_costo_unitario].present?
 
-      cond << "costo = ?"
+      cond << "costo_unitario = ?"
       args << params[:form_buscar_materiales_costo_unitario]
 
     end
@@ -57,20 +49,13 @@ class MaterialesController < ApplicationController
     end
 
 
-    if params[:form_buscar_materiales][:tipo_material_id].present?
+    if params[:form_buscar_materiales][:presentacion_material_id].present?
 
-      cond << "tipo_material_id = ?"
-      args << params[:form_buscar_materiales][:tipo_material_id]
-
-    end
-
-
-    if params[:form_buscar_materiales_fecha_vencimiento].present?
-
-      cond << "fecha_vencimiento = ?"
-      args << params[:form_buscar_materiales_fecha_vencimiento]
+      cond << "presentacion_material_id = ?"
+      args << params[:form_buscar_materiales][:presentacion_material_id]
 
     end
+
 
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
@@ -113,18 +98,17 @@ class MaterialesController < ApplicationController
     @msg = ""
     @material_ok = false
 
-    material_detalle.transaction do
+    MaterialDetalle.transaction do
 
       @material = Material.new() 
 
-      @material.descripcion = params[:descripcion].upcase
       @material.nombre_material = params[:nombre_material].upcase
       @material.cantidad_stock = params[:cantidad_stock]
       @material.costo_unitario = params[:costo_unitario].to_s.gsub(/[$.]/,'').to_i
       @material.observacion = params[:observacion]
       @material.estado_material_id = params[:estado_material][:id]
       @material.presentacion_material_id = params[:presentacion_material][:id]
-      @material.costo_total = params[:costo_unitario].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock]
+      
       
 
       if @material.save
@@ -132,13 +116,12 @@ class MaterialesController < ApplicationController
         auditoria_nueva("agregar nueva material", "materiales", @material)
         @material_detalle = MaterialDetalle.new
         @material_detalle.material_id = @material.id
-        @material_detalle.descripcion = @material.descripcion
+        @material_detalle.descripcion = @material.nombre_material
         @material_detalle.fecha_suministro = Date.today
         @material_detalle.numero_lote = 0
         @material_detalle.cantidad_suministro = @material.cantidad_stock
-        @material_detalle.costo_suministro = @material.costo
+        @material_detalle.costo_suministro = @material.costo_unitario
         @material_detalle.observacion = @material.observacion
-        @material_detalle.fecha_vencimiento = @material.fecha_vencimiento
         @material_detalle.costo_total =  (params[:costo].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock].to_i)
 
         if @material_detalle.save
@@ -160,9 +143,9 @@ class MaterialesController < ApplicationController
     end
 
   rescue Exception => exc
-    # dispone el mensaje de error
-    #puts "Aqui si muestra el error ".concat(exc.message)
+    
     if exc.present?
+      
       @excep = exc.message.split(':')
       @msg = @excep
 

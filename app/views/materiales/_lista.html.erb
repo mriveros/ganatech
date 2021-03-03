@@ -5,9 +5,9 @@
     <tr>
 
       <td><%= material.material_id %></td>
-      <td><%= material.nombre_alimento%></td>
+      <td><%= material.nombre_material%></td>
       <td><%= material.cantidad_stock%></td>
-      <td><%= material.costo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%= material.costo_unitario.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
       <td ><%= material.estado_material %></td>
       <td ><%= material.presentacion_material %></td>
       

@@ -3,20 +3,20 @@
    $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-material");
 
   $("#form_buscar_materiales_id").val('<%= @material.id %>');
-  $("#form_buscar_materiales_descripcion").val('');
+  $("#form_buscar_materiales_nombre_material").val('');
   $("#form-buscar-materiales").submit();
 
   setTimeout(function(){
     
     $("#<%= params[:window_id]%>").modal('hide');
-    swal("El alimento ha sido guardado Exitosamente.");
+    swal("El Material ha sido guardado Exitosamente.");
 
   }, 2000);
 
 
 <% else %>
 
-	swal("Error al guardar el Alimento. Intente más tarde" )
+	swal("Error al guardar el Material. Intente más tarde" )
   $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-material");
 
 <% end %>
