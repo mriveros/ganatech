@@ -4,14 +4,13 @@
 
   $("#form_buscar_materiales_id").val('<%= @material.id %>');
   $("#form_buscar_materiales_nombre_material").val('');
-  $("#form_buscar_materiales_descripcion").val('');
   $("#form_buscar_materiales_cantidad_stock").val('');
 
   setTimeout(function(){
 
     $("#<%= params[:window_id]%>").modal('hide');
     $("#form-buscar-materiales").submit();
-    swal("El alimento ha sido actualizado Exitosamente.");
+    swal("El Material ha sido actualizado Exitosamente.");
 
   }, 2000);
 

@@ -237,10 +237,9 @@ class MaterialesController < ApplicationController
 
     if valido
 
-      @material.descripcion = params[:material][:descripcion].upcase
       @material.nombre_material = params[:material][:nombre_material].upcase
       @material.cantidad_stock = params[:material][:cantidad_stock]
-      @material.costo = params[:material][:costo].to_s.gsub(/[$.]/,'').to_i
+      @material.costo_unitario = params[:material][:costo_unitario].to_s.gsub(/[$.]/,'').to_i
       @material.observacion = params[:material][:observacion]
       @material.estado_material_id = params[:material][:estado_material_id]
       @material.presentacion_material_id = params[:material][:presentacion_material_id]
