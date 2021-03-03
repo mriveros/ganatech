@@ -122,7 +122,7 @@ class MaterialesController < ApplicationController
         @material_detalle.cantidad_suministro = @material.cantidad_stock
         @material_detalle.costo_suministro = @material.costo_unitario
         @material_detalle.observacion = @material.observacion
-        @material_detalle.costo_total =  (params[:costo].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock].to_i)
+        @material_detalle.costo_total =  (params[:costo_unitario].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_stock].to_i)
 
         if @material_detalle.save
 
