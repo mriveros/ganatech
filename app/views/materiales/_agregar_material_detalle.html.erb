@@ -9,11 +9,11 @@
 
     </div>
 
-    <%= form_for @alimentacion, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle" }, method: 'POST' do |f|%>
+    <%= form_for @material, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle" }, method: 'POST' do |f|%>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
-      <%= hidden_field_tag :alimentacion_id, params[:alimentacion_id]%>
+      <%= hidden_field_tag :material_id, params[:material_id]%>
 
       <div class="modal-body">
 
@@ -40,16 +40,6 @@
 
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Suministro #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
-          <div class="col-sm-1"></div><br/><br />
-
-           <div class="col-sm-4"><%= label_tag :nil, "Porciones por unidad#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :cantidad_porciones, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
-          <div class="col-sm-1"></div><br/>
-
-
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha Vencimiento".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
-          </div>
           <div class="col-sm-1"></div><br/><br />
 
 

@@ -61,7 +61,6 @@
               <th>Descripción</th>
               <th>Costo</th>
               <th>Fecha Suministro</th>
-              <th>Fecha Vencimiento</th>
               <th>Lote</th>
               <th>Cantidad Suministro</th>
               <th>Costo Total</th>
@@ -86,7 +85,6 @@
                   <td><%= mat.descripcion %></td>
                   <td><%= mat.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= mat.fecha_suministro.strftime('%d/%m/%Y') %></td>
-                  <td><%= mat.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
                   <td><%= mat.numero_lote %></td>
                   <td><%= mat.cantidad_suministro %></td>
                   <td><%= mat.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
