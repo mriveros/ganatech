@@ -47,8 +47,6 @@ before_filter :require_usuario
 
     end
 
-    
-
     if params[:form_buscar_orden_trabajo_fecha_trabajo].present?
 
       cond << "fecha_trabajo = ?"
