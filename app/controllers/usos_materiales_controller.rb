@@ -1,4 +1,4 @@
-class UsoMaterialController < ApplicationController
+class OrdenTrabajoController < ApplicationController
 
 before_filter :require_usuario
 
@@ -12,99 +12,79 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_uso_material_id].present?
+    if params[:form_buscar_orden_trabajo_id].present?
 
-      cond << "uso_material_id = ?"
-      args << params[:form_buscar_uso_material_id]
+      cond << "orden_trabajo_id = ?"
+      args << params[:form_buscar_orden_trabajo_id]
 
     end
 
-    if params[:form_buscar_uso_material_codigo].present?
+    if params[:form_buscar_orden_trabajo_codigo].present?
 
       cond << "codigo_lote = ?"
-      args << params[:form_buscar_uso_material_codigo]
+      args << params[:form_buscar_orden_trabajo_codigo]
 
     end
 
-    if params[:form_buscar_uso_material_nombre].present?
+    if params[:form_buscar_orden_trabajo][:material_id].present?
 
-      cond << "ganado_nombre ilike ?"
-      args << "%#{params[:form_buscar_uso_material_nombre]}%"
-
-    end
-
-    if params[:form_buscar_uso_material_ganado_rp].present?
-
-      cond << "ganado_rp  ilike ?"
-      args << "%#{params[:form_buscar_uso_material_ganado_rp]}%"
+      cond << "material_id = ?"
+      args << params[:form_buscar_orden_trabajo][:material_id]
 
     end
 
-    if params[:form_buscar_uso_material][:tipo_alimentacion_id].present?
+    if params[:form_buscar_orden_trabajo][:orden_trabajo].present?
 
-      cond << "tipo_alimentacion_id = ?"
-      args << params[:form_buscar_uso_material][:tipo_alimentacion_id]
-
-    end
-
-    if params[:form_buscar_uso_material][:alimentacion_id].present?
-
-      cond << "alimentacion_id = ?"
-      args << params[:form_buscar_uso_material][:alimentacion_id]
+      cond << "orden_trabajo = ?"
+      args << params[:form_buscar_orden_trabajo][:orden_trabajo]
 
     end
 
-    if params[:form_buscar_uso_material_cantidad_suministrada].present?
+    if params[:form_buscar_orden_trabajo_cantidad_utilizada].present?
 
-      cond << "cantidad_suministrada  = ?"
-      args << params[:form_buscar_uso_material_cantidad_suministrada]
-
-    end
-
-    if params[:form_buscar_uso_material_peso].present?
-
-      cond << "peso = ?"
-      args << params[:form_buscar_uso_material_peso]
+      cond << "cantidad_utilizada = ?"
+      args << params[:form_buscar_orden_trabajo_cantidad_utilizada]
 
     end
 
-    if params[:form_buscar_uso_material_fecha_control].present?
+    
 
-      cond << "fecha_control = ?"
-      args << params[:form_buscar_uso_material_fecha_control]
+    if params[:form_buscar_orden_trabajo_fecha_trabajo].present?
+
+      cond << "fecha_trabajo = ?"
+      args << params[:form_buscar_orden_trabajo_fecha_trabajo]
 
     end
 
-    if params[:form_buscar_uso_material_observacion].present?
+    if params[:form_buscar_orden_trabajo][:estado_trabajo_id].present?
+
+      cond << "estado_trabajo_id = ?"
+      args << params[:form_buscar_orden_trabajo][:estado_trabajo_id]
+
+    end
+
+    if params[:form_buscar_orden_trabajo_observacion].present?
 
       cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_uso_material_observacion]}%"
+      args << "%#{params[:form_buscar_orden_trabajo_observacion]}%"
 
     end
-
-    if params[:form_buscar_uso_material][:clasificacion_alimentacion_id].present?
-
-      cond << "clasificacion_alimentacion_id = ?"
-      args << params[:form_buscar_uso_material][:clasificacion_alimentacion_id]
-
-    end
-
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
 
-      @controles_alimentaciones =  VUsoMaterial.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VUsoMaterial.where(cond).count
+      @orden_trabajo =  VOrdenTrabajo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VOrdenTrabajo.where(cond).count
 
     else
      
-      @controles_alimentaciones = VUsoMaterial.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VUsoMaterial.count
+      @orden_trabajo = VOrdenTrabajo.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VOrdenTrabajo.count
 
     end
 
-    @total_registros = VUsoMaterial.count
+    @total_registros = VOrdenTrabajo.count
 
     respond_to do |f|
       
@@ -116,8 +96,8 @@ before_filter :require_usuario
 
   def agregar
 
-    @uso_material = UsoMaterial.new
-    nuevo_incremento = UsoMaterial.last
+    @orden_trabajo = OrdenTrabajo.new
+    nuevo_incremento = OrdenTrabajo.last
     if nuevo_incremento.present?
 
       @codigo_control = nuevo_incremento.codigo_lote + 1
@@ -145,7 +125,7 @@ before_filter :require_usuario
 
       if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
         
-        @alimentacion = UsoMaterial.new
+        @alimentacion = OrdenTrabajo.new
         @alimentacion.ganado_id = params[:ganado_id]
         @alimentacion.fecha_control = params[:fecha_control]
         @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
@@ -177,7 +157,7 @@ before_filter :require_usuario
     @eliminado = false
     @msg = ""
 
-    @alimentacion = UsoMaterial.where("id = ?", params[:uso_material_id]).first
+    @alimentacion = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
     @alimentacion_elim = @alimentacion
     
     if @alimentacion.destroy
