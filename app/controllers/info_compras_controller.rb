@@ -66,12 +66,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @aux_compras =  AuxCompra.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @aux_compras =  AuxCompra.orden_fecha.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = AuxCompra.where(cond).count
 
     else
      
-      @aux_compras = AuxCompra.orden_01.paginate(per_page: 10, page: params[:page])
+      @aux_compras = AuxCompra.orden_fecha.paginate(per_page: 10, page: params[:page])
       @total_encontrados = AuxCompra.count
 
     end

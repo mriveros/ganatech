@@ -26,7 +26,6 @@ class MaterialesController < ApplicationController
 
     end
 
-
     if params[:form_buscar_materiales_cantidad_stock].present?
 
       cond << "cantidad_stock = ?"

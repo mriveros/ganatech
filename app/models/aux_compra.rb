@@ -5,6 +5,7 @@ class AuxCompra < ActiveRecord::Base
   
   attr_accessible :id, :fecha, :descripcion, :monto, :observacion, :created_at,  :updated_at
   
-  scope :orden_01, -> { order("id")}
+  scope :orden_01, -> { order("id" )}
+  scope :orden_fecha, -> { order("fecha desc" )}
   
 end
