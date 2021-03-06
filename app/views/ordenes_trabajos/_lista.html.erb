@@ -1,0 +1,88 @@
+<% if @materiales.present? %>
+
+  <% materiales.each do |material| %>
+
+    <tr>
+
+      <td><%= material.material_id %></td>
+      <td><%= material.nombre_material%></td>
+      <td><%= material.cantidad_stock%></td>
+      <td><%= material.costo_unitario.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td ><%= material.estado_material %></td>
+      <td ><%= material.presentacion_material %></td>
+      
+      <td style="width:120px;">
+
+        <%= link_to_material_detalle(material.material_id) %>
+        <%= link_to_editar_material(material.material_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{material.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material", title: 'Haga click para eliminar el material'  %>
+
+       </td>
+
+     </tr>
+
+
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate materiales, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %>
+    </td>
+</tr>
+
+
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
+
+
+<script type="text/javascript">
+
+  function eliminar_registro(material_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de materiales",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(materiales_eliminar_path) %>",
+                data: {id: material_id},
+                dataType: 'script'
+              });
+
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+
+    }
+
+</script>

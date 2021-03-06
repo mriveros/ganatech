@@ -1,10 +1,8 @@
-class OrdenTrabajoController < ApplicationController
+class OrdenesTrabajosController < ApplicationController
 
   before_filter :require_usuario
 
   def index
-  
- 
   end 
  
   def lista
@@ -96,7 +94,7 @@ class OrdenTrabajoController < ApplicationController
 
     @orden_trabajo = OrdenTrabajo.new
     nuevo_incremento = OrdenTrabajo.last
-    
+
     if nuevo_incremento.present?
 
       @codigo_control = nuevo_incremento.codigo_lote + 1
@@ -143,7 +141,9 @@ class OrdenTrabajoController < ApplicationController
 
       end
 
-     respond_to do |f|
+    end
+
+    respond_to do |f|
 
       f.js
 
@@ -173,6 +173,5 @@ class OrdenTrabajoController < ApplicationController
     end
 
   end
-
 
 end

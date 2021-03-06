@@ -1,0 +1,160 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Material Detalle</h3>
+      </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div class="panel-body">
+
+      <div class="table-responsive" id="table-material-detalle">
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar suministro".html_safe, "#", id: "link-to-agregar-material-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= modal_window( window_id: "modal-window-agregar-material-detalle", link_to_id: "#link-to-agregar-material-detalle", url: materiales_agregar_material_detalle_path( window_id: "modal-window-agregar-material-detalle", material_id: params[:material_id]) )%>
+
+          <thead>
+
+            <tr role="row">
+
+              <th>Observación</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="material-detalle-lista">
+
+            <% if @material.present? %>
+
+                <tr>
+                  <td><%= @material.observacion %></td>
+                </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+        <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Suministros</h3>
+      </div>
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+
+          <thead>
+
+            <tr role="row">
+
+              <th>id</th>
+              <th>Descripción</th>
+              <th>Costo</th>
+              <th>Fecha Suministro</th>
+              <th>Lote</th>
+              <th>Cantidad Suministro</th>
+              <th>Costo Total</th>
+              <th>Observación</th>
+              <th></th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <tbody id="material-detalle-lista">
+
+            <% if @material_detalle.present? %>
+
+              <% @material_detalle.each do |mat| %>
+
+                <tr>
+
+                  <td><%= mat.id %></td>
+                  <td><%= mat.descripcion %></td>
+                  <td><%= mat.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+                  <td><%= mat.fecha_suministro.strftime('%d/%m/%Y') %></td>
+                  <td><%= mat.numero_lote %></td>
+                  <td><%= mat.cantidad_suministro %></td>
+                  <td><%= mat.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+                  <td><%= mat.observacion %></td>
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-detalle", title: 'Haga click para eliminar el suministro del matmento'  %>
+
+                  </td>
+
+
+                </tr>
+
+              <%end%>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate material_detalle, :params => params %></div></td>
+            </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</td>
+
+
+  <script type="text/javascript">
+
+    function eliminar_registro_detalle(id, material_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el suministro será eliminado y el material estará sujeto a cambios como la cantidad de stock disponible.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(materiales_eliminar_material_detalle_path) %>",
+                data: { material_detalle_id: id, material_id: material_id },
+                dataType: 'script'
+              });
+
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+
+    }
+
+  </script>

@@ -1,0 +1,3 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-material-#{material_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el alimento.', onclick: "$('.modal').html('');return false;" %>
+
+<%= modal_window( window_id: "modal-window-editar-material", link_to_id: "#link-to-editar-material-#{material_id}", url: materiales_editar_path( window_id: "modal-window-editar-material", id: material_id) )%>
