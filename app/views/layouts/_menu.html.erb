@@ -127,6 +127,7 @@
 
           <li><%= link_to "Ganados", ganados_index_path if acceso_permitido("ganados.index") %></li>
           <li><%= link_to "Ganados Enfermos", ganados_enfermos_index_path if acceso_permitido("ganados_enfermos.index") %></li>
+          <li><%= link_to "Ordenes de Trabajos", ordenes_trabajos_index_path if acceso_permitido("ordenes_trabajos.index") %></li>
           <li><%= link_to "Producción Cárnica - Faenas", ganados_faenas_index_path if acceso_permitido("ganados_faenas.index") %></li>
           <li><%= link_to "Reproducciones", reproducciones_index_path if acceso_permitido("reproducciones.index") %></li>
           <li><%= link_to "Sanitaciones", controles_ganados_index_path if acceso_permitido("controles_ganados.index") %></li>

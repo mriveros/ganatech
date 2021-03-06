@@ -1,6 +1,6 @@
 class OrdenTrabajoController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
 
   def index
   
@@ -86,7 +86,7 @@ before_filter :require_usuario
 
     respond_to do |f|
       
-     f.js
+      f.js
       
     end
 
@@ -96,6 +96,7 @@ before_filter :require_usuario
 
     @orden_trabajo = OrdenTrabajo.new
     nuevo_incremento = OrdenTrabajo.last
+    
     if nuevo_incremento.present?
 
       @codigo_control = nuevo_incremento.codigo_lote + 1
@@ -105,6 +106,7 @@ before_filter :require_usuario
       @codigo_control = 1
 
     end
+
     respond_to do |f|
       
         f.js
@@ -150,7 +152,7 @@ before_filter :require_usuario
   end
 
  
- def eliminar
+  def eliminar
 
     @eliminado = false
     @msg = ""
@@ -171,5 +173,6 @@ before_filter :require_usuario
     end
 
   end
+
 
 end
