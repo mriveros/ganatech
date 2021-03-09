@@ -10,46 +10,46 @@ class OrdenesTrabajosController < ApplicationController
     cond = []
     args = [] 
 
-    if params[:form_buscar_orden_trabajo_id].present?
+    if params[:form_buscar_ordenes_trabajos_id].present?
 
       cond << "orden_trabajo_id = ?"
-      args << params[:form_buscar_orden_trabajo_id]
+      args << params[:form_buscar_ordenes_trabajos_id]
 
     end
 
-    if params[:form_buscar_orden_trabajo_descripcion].present?
+    if params[:form_buscar_ordenes_trabajos_descripcion].present?
 
       cond << "descripcion = ?"
-      args << params[:form_buscar_orden_trabajo_descripcion]
+      args << params[:form_buscar_ordenes_trabajos_descripcion]
 
     end
 
-    if params[:form_buscar_orden_trabajo][:trabajo_id].present?
+    if params[:form_buscar_ordenes_trabajos][:trabajo_id].present?
 
       cond << "trabajo_id = ?"
-      args << params[:form_buscar_orden_trabajo][:trabajo_id]
+      args << params[:form_buscar_ordenes_trabajos][:trabajo_id]
 
     end
 
-    if params[:form_buscar_orden_trabajo][:fecha_trabajo].present?
+    if params[:form_buscar_ordenes_trabajos][:fecha_trabajo].present?
 
       cond << "fecha_trabajo = ?"
-      args << params[:form_buscar_orden_trabajo][:fecha_trabajo]
+      args << params[:form_buscar_ordenes_trabajos][:fecha_trabajo]
 
     end
 
     
-    if params[:form_buscar_orden_trabajo][:estado_trabajo_id].present?
+    if params[:form_buscar_ordenes_trabajos][:estado_trabajo_id].present?
 
       cond << "estado_trabajo_id = ?"
-      args << params[:form_buscar_orden_trabajo][:estado_trabajo_id]
+      args << params[:form_buscar_ordenes_trabajos][:estado_trabajo_id]
 
     end
 
-    if params[:form_buscar_orden_trabajo_observacion].present?
+    if params[:form_buscar_ordenes_trabajos_observacion].present?
 
       cond << "observacion ilike ?"
-      args << "%#{params[:form_buscar_orden_trabajo_observacion]}%"
+      args << "%#{params[:form_buscar_ordenes_trabajos_observacion]}%"
 
     end
 
