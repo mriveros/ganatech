@@ -4,30 +4,30 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Materiales</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-material", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-material", link_to_id: "#link-to-agregar-material", url: materiales_agregar_path( window_id: "modal-window-agregar-material") )%>
+    <h3 style="float:left;margin-top:5px;">Ordenes Trabajo</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-orden_trabajo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-orden_trabajo", link_to_id: "#link-to-agregar-orden_trabajo", url: ordenes_trabajos_agregar_path( window_id: "modal-window-agregar-orden_trabajo") )%>
 
   </div>
 </div>
 
 <div style="clear:both;"></div>
 
-<div class="table-responsive" id="table-materiales">
+<div class="table-responsive" id="table-ordenes-trabajos">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
 
     <thead>
 
-      <%= form_tag materiales_lista_path, remote: true, id: "form-buscar-materiales"  do  %>
+      <%= form_tag ordenes_trabajos_lista_path, remote: true, id: "form-buscar-ordenes_trabajos"  do  %>
 
         <tr>
 
           <th style="width:10px;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_materiales_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ordenes_trabajos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -35,16 +35,16 @@
           <th >
             <span>Material</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_materiales_nombre_material, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_nombre_material');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ordenes_trabajos_nombre_material, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_nombre_material');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
             <span>Stock</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_materiales_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_cantidad_stock');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ordenes_trabajos_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_cantidad_stock');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -52,24 +52,24 @@
            <th >
             <span>Costo Unitario</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_materiales_costo_unitario, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_costo_unitario');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ordenes_trabajos_costo_unitario, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_costo_unitario');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
               <span>Estado material</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_materiales,:estado_material_id, EstadoMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_estado_material_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ordenes_trabajos,:estado_material_id, EstadoMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_estado_material_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
            <th >
               <span>Presentación Material</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_materiales,:presentacion_material_id, PresentacionMaterial.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-materiales', '#form_buscar_materiales_presentacion_material_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ordenes_trabajos,:presentacion_material_id, PresentacionMaterial.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_presentacion_material_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -81,7 +81,7 @@
 
       </thead>
 
-    <tbody id="materiales-lista"></tbody>
+    <tbody id="ordenes-trabajos-lista"></tbody>
 
   </table>
 
@@ -93,11 +93,11 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-materiales").bind("submit", function () {
+  $("#form-buscar-ordenes-trabajos").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_materiales_nombre_material").val().length !== 0 ){
+    if($("#form_buscar_ordenes_trabajos_nombre_trabajo").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_materiales_nombre_material").val().replace(/\s/g,'')).length > 2){
+      if(($("#form_buscar_ordenes_trabajos_nombre_trabajo").val().replace(/\s/g,'')).length > 2){
         valido = true;
       }else{
         valido = false;
@@ -109,7 +109,7 @@
 
     if(valido){
     $(".nmb").html('');
-    $("#materiales-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    $("#ordenes_trabajos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
     }
 
 
@@ -117,16 +117,16 @@
   })
 
   //---------------------------------------------------------------------------//
-  //---------------------------- BUSCAR MATERIALES-------- -------------------------//
-  $("#table-materiales input, #table-materiales select").bind('change', function () {
+  //---------------------------- BUSCAR ordenes_trabajos-------- -------------------------//
+  $("#table-ordenes-trabajos input, #table-ordenes_trabajos select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-materiales").submit();
+      $("#form-buscar-ordenes-trabajos").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-materiales").submit();
+  $("#form-buscar-ordenes-trabajos").submit();
   <% if params[:agregar] %>
     $("#link-to-agregar-material").trigger('click');
   <% end %>
@@ -145,7 +145,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-materiales table th { background:#e6e6e6;}
-    #form-buscar-materiales table th span.limpiar { background:#fff;}
+    #form-buscar-ordenes-trabajos table th { background:#e6e6e6;}
+    #form-buscar-ordenes-trabajos table th span.limpiar { background:#fff;}
 
 </style>
