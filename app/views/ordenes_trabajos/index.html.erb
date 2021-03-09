@@ -60,7 +60,7 @@
           <th >
               <span>Estado Trabajo</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ordenes_trabajos,:estado_trabajo_id, EstadoTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_ordenes_trabajos,:estado_trabajo_id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_estado_trabajo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>

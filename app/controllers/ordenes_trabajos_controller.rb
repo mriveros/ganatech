@@ -17,41 +17,28 @@ class OrdenesTrabajosController < ApplicationController
 
     end
 
-    if params[:form_buscar_orden_trabajo_codigo].present?
+    if params[:form_buscar_orden_trabajo_descripcion].present?
 
-      cond << "codigo_lote = ?"
-      args << params[:form_buscar_orden_trabajo_codigo]
-
-    end
-
-    if params[:form_buscar_orden_trabajo][:material_id].present?
-
-      cond << "material_id = ?"
-      args << params[:form_buscar_orden_trabajo][:material_id]
+      cond << "descripcion = ?"
+      args << params[:form_buscar_orden_trabajo_descripcion]
 
     end
 
-    if params[:form_buscar_orden_trabajo][:orden_trabajo].present?
+    if params[:form_buscar_orden_trabajo][:trabajo_id].present?
 
-      cond << "orden_trabajo = ?"
-      args << params[:form_buscar_orden_trabajo][:orden_trabajo]
-
-    end
-
-    if params[:form_buscar_orden_trabajo_cantidad_utilizada].present?
-
-      cond << "cantidad_utilizada = ?"
-      args << params[:form_buscar_orden_trabajo_cantidad_utilizada]
+      cond << "trabajo_id = ?"
+      args << params[:form_buscar_orden_trabajo][:trabajo_id]
 
     end
 
-    if params[:form_buscar_orden_trabajo_fecha_trabajo].present?
+    if params[:form_buscar_orden_trabajo][:fecha_trabajo].present?
 
       cond << "fecha_trabajo = ?"
-      args << params[:form_buscar_orden_trabajo_fecha_trabajo]
+      args << params[:form_buscar_orden_trabajo][:fecha_trabajo]
 
     end
 
+    
     if params[:form_buscar_orden_trabajo][:estado_trabajo_id].present?
 
       cond << "estado_trabajo_id = ?"
