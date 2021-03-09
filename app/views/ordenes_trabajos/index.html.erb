@@ -19,7 +19,7 @@
 
     <thead>
 
-      <%= form_tag ordenes_trabajos_lista_path, remote: true, id: "form-buscar-ordenes_trabajos"  do  %>
+      <%= form_tag ordenes_trabajos_lista_path, remote: true, id: "form-buscar-ordenes-trabajos"  do  %>
 
         <tr>
 
@@ -27,49 +27,41 @@
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_ordenes_trabajos_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
 
           <th >
-            <span>Material</span>
+            <span>Descripción</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_ordenes_trabajos_nombre_material, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_nombre_material');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_ordenes_trabajos_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_descripcion');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Stock</span>
+              <span>Trabajo</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_ordenes_trabajos_cantidad_stock, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_cantidad_stock');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ordenes_trabajos,:trabajo_id, Trabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_trabajo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-
-           <th >
-            <span>Costo Unitario</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_ordenes_trabajos_costo_unitario, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_costo_unitario');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+          <th>
+            <div><%= label_tag nil, "Fecha Trabajo".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_ordenes_trabajos_fecha_trabajo, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_fecha_trabajo');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
 
           <th >
-              <span>Estado material</span>
+              <span>Estado Trabajo</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ordenes_trabajos,:estado_material_id, EstadoMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_estado_material_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-           <th >
-              <span>Presentación Material</span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ordenes_trabajos,:presentacion_material_id, PresentacionMaterial.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes_trabajos', '#form_buscar_ordenes_trabajos_presentacion_material_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_ordenes_trabajos,:estado_trabajo_id, EstadoTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_estado_trabajo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -95,13 +87,13 @@
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-ordenes-trabajos").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_ordenes_trabajos_nombre_trabajo").val().length !== 0 ){
+    if($("#form_buscar_ordenes_trabajos_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_ordenes_trabajos_nombre_trabajo").val().replace(/\s/g,'')).length > 2){
+      if(($("#form_buscar_ordenes_trabajos_descripcion").val().replace(/\s/g,'')).length > 2){
         valido = true;
       }else{
         valido = false;
-        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");
+        
         $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
         $(".nmb").attr({'style':'color: red;font-size: 8px;'});
       }

@@ -8,7 +8,7 @@ class OrdenesTrabajosController < ApplicationController
   def lista
 
     cond = []
-    args = []
+    args = [] 
 
     if params[:form_buscar_orden_trabajo_id].present?
 
