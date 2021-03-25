@@ -1,22 +1,23 @@
 <% if @guardado_ok %>
 
-   $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-material");
+   $("<div class='col-sm-12' id='msg-agregar-orden-trabajo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-orden-trabajo");
 
-  $("#form_buscar_materiales_id").val('<%= @material.id %>');
-  $("#form_buscar_materiales_nombre_material").val('');
-  $("#form-buscar-materiales").submit();
+  $("#form_buscar_ordenes_trabajos_id").val('<%= @orden_trabajo.id %>');
+  $("#form_buscar_ordenes_trabajos_trabajo_id").val('');
+  $("#form_buscar_ordenes_trabajos_descripcion").val('');
+  $("#form-buscar-orden-trabajos").submit();
 
   setTimeout(function(){
     
     $("#<%= params[:window_id]%>").modal('hide');
-    swal("El Material ha sido guardado Exitosamente.");
+    swal("La orden de trabajo ha sido guardado Exitosamente.");
 
   }, 2000);
 
 
 <% else %>
 
-	swal("Error al guardar el Material. Intente más tarde" )
-  $("<div class='col-sm-12' id='msg-agregar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-material");
+	swal("Error al guardar la orden de trabajo. Intente más tarde" )
+  $("<div class='col-sm-12' id='msg-agregar-orden-trabajo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#form-agregar-orden-trabajo");
 
 <% end %>

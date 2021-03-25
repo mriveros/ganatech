@@ -10,7 +10,7 @@
 
     </div>
 
-    <%= form_for @orden_trabajo, remote: true, url: ordenes_trabajos_guardar_url, html: { id: "form-agregar-material", autocomplete: "off" }, method: 'POST' do |f| %>
+    <%= form_for @orden_trabajo, remote: true, url: ordenes_trabajos_guardar_url, html: { id: "form-agregar-orden-trabajo", autocomplete: "off" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -19,7 +19,7 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Trabajo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :estado_material, :id, Trabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-7"><%= collection_select :trabajo, :id, Trabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
@@ -27,12 +27,12 @@
           <div class="col-sm-1"></div><br/>
 
          <div class="col-sm-4"><%= label_tag :nil, "Fecha Trabajo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
+          <div class="col-sm-7"><%= date_field_tag :fecha_trabajo, nil, class: 'form-control input-sm' %>
          </div>    
           <div class="col-sm-1"></div><br/>
 
           <div class="col-sm-4"><%= label_tag nil, "Estado Orden Trabajo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :estado_material, :id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-7"><%= collection_select :estado_orden_trabajo, :id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
@@ -46,7 +46,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
-        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-material" %>
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-orden-trabajo" %>
 
       </div>
 
@@ -59,12 +59,12 @@
 <style type="text/css">
 
 
- #form-agregar-material label, #form-agregar-alimento input[type='text'], #form-agregar-material select { float:left; margin-top:5px;}
- #form-agregar-material br {clear:both; }
- #form-agregar-material label { width:200px;font-size:12px;margin-top:10px;}
- #form-agregar-material #descripcion { width:100%;}
- #form-agregar-material #fecha_inicio { width:80%;}
- #form-agregar-material #fecha_fin { width:80%;}
+ #form-agregar-orden-trabajo label, #form-agregar-alimento input[type='text'], #form-agregar-orden-trabajo select { float:left; margin-top:5px;}
+ #form-agregar-orden-trabajo br {clear:both; }
+ #form-agregar-orden-trabajo label { width:200px;font-size:12px;margin-top:10px;}
+ #form-agregar-orden-trabajo #descripcion { width:100%;}
+ #form-agregar-orden-trabajo #fecha_inicio { width:80%;}
+ #form-agregar-orden-trabajo #fecha_fin { width:80%;}
  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 
@@ -85,44 +85,39 @@
     return true;
  }
 
- $("#btn-guardar-material  ").bind('click', function () {
+ $("#btn-guardar-orden-trabajo  ").bind('click', function () {
 
      valido = true
      msg = ""
 
-     if($("#nombre_material").val().length == 0){
+     if($("#trabajo_id").val().length == 0){
 
-       msg +="Es necesario agregar un nombre.\n"
+       msg +="Es necesario agregar un trabajo.\n"
+       valido = false
+
+     }else if ($("#descripcion").val().length == 0){
+
+       msg +="Es necesario agregar una descripción.\n"
+       valido = false
+
+     }else if ($("#fecha_trabajo").val().length == 0){
+
+       msg +="Es necesario agregar una fecha.\n"
+       valido = false
+
+     }else if ($("#estado_orden_trabajo_id").val().length == 0){
+
+       msg +="Es necesario agregar el estado.\n"
        valido = false
 
      }
 
-     if($("#cantidad_stock").val().length == 0){
-
-       msg +="Es necesario agregar la cantidad en almacén.\n"
-       valido = false
-
-     }
-
-     if($("#presentacion_material_id").val().length == 0){
-
-       msg +="Es necesario seleccionar el tipo de Presentación.\n"
-       valido = false
-
-     }
-
-     if($("#estado_material_id").val().length == 0){
-
-       msg +="Es necesario seleccionar el estado del Material.\n"
-       valido = false
-
-     }
-
+     
      if (valido){
 
        swal({
-         title: "Confirmar Material",
-         text: "Al confirmar el material estará disponible para su utilización.",
+         title: "Confirmar orden trabajo",
+         text: "Al confirmar la orden de trabajo estará disponible para agregar los materiales utilizados.",
          type: "warning",
          showCancelButton: true,
          confirmButtonClass: "btn-confirm",
@@ -134,7 +129,7 @@
        function(isConfirm) {
          if (isConfirm) {
 
-           $("#form-agregar-material").submit();
+           $("#form-agregar-orden-trabajo").submit();
 
          }
 

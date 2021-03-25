@@ -58,12 +58,12 @@ class OrdenesTrabajosController < ApplicationController
 
     if cond.size > 0
 
-      @orden_trabajo =  VOrdenTrabajo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ordenes_trabajos =  VOrdenTrabajo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VOrdenTrabajo.where(cond).count
 
     else
      
-      @orden_trabajo = VOrdenTrabajo.orden_01.paginate(per_page: 10, page: params[:page])
+      @ordenes_trabajos = VOrdenTrabajo.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VOrdenTrabajo.count
 
     end
@@ -81,7 +81,7 @@ class OrdenesTrabajosController < ApplicationController
   def agregar
 
     @orden_trabajo = OrdenTrabajo.new
-    
+
     nuevo_incremento = OrdenTrabajo.last
 
     if nuevo_incremento.present?
@@ -110,23 +110,15 @@ class OrdenesTrabajosController < ApplicationController
     
     if @valido
 
-      if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_ganado]
-        
-        @alimentacion = OrdenTrabajo.new
-        @alimentacion.ganado_id = params[:ganado_id]
-        @alimentacion.fecha_control = params[:fecha_control]
-        @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-        @alimentacion.alimentacion_id = params[:alimentacion_id]
-        @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
-        @alimentacion.codigo_lote = params[:codigo_lote]
-        @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
-        @alimentacion.observacion = params[:observacion]
+      @orden_trabajo = OrdenTrabajo.new
+      @orden_trabajo.trabajo_id = params[:trabajo][:id]
+      @orden_trabajo.descripcion = params[:descripcion]
+      @orden_trabajo.fecha_trabajo = params[:fecha_trabajo]
+      @orden_trabajo.estado_orden_trabajo_id = params[:estado_orden_trabajo][:id]
+      @orden_trabajo.observacion = params[:observacion]
+      if  @orden_trabajo.save
 
-        if @alimentacion.save
-
-          @guardado_ok = true
-
-        end
+        @guardado_ok =  true
 
       end
 

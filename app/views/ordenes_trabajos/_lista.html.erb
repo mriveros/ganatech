@@ -5,17 +5,17 @@
     <tr>
 
       <td><%= orden_trabajo.orden_trabajo_id %></td>
-      <td><%= orden_trabajo.descripcion%></td>
-      <td><%= orden_trabajo.trabajo%></td>
-      <td><%= orden_trabajo.fecha_trabajo%></td>
+      <td><%= orden_trabajo.descripcion_orden_trabajo%></td>
+      <td><%= orden_trabajo.orden_trabajo%></td>
+      <td><%= orden_trabajo.fecha_trabajo.strftime('%d/%m/%Y')%></td>
       <td ><%= orden_trabajo.estado_orden_trabajo %></td>
       
       
       <td style="width:120px;">
 
-        <%= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
-        <%= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden_trabajo", title: 'Haga click para eliminar el orden trabajo'  %>
+        <%#= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
+        <%#= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
+        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden_trabajo", title: 'Haga click para eliminar el orden trabajo'  %>
 
        </td>
 
