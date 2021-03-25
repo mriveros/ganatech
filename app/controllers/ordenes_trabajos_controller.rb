@@ -3,6 +3,7 @@ class OrdenesTrabajosController < ApplicationController
   before_filter :require_usuario
 
   def index
+
   end 
  
   def lista
@@ -80,6 +81,7 @@ class OrdenesTrabajosController < ApplicationController
   def agregar
 
     @orden_trabajo = OrdenTrabajo.new
+    
     nuevo_incremento = OrdenTrabajo.last
 
     if nuevo_incremento.present?

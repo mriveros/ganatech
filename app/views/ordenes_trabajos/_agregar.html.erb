@@ -10,7 +10,7 @@
 
     </div>
 
-    <%= form_for @orden_trabajo, remote: true, url: orden_trabajo_guardar_url, html: { id: "form-agregar-material" }, method: 'POST' do |f| %>
+    <%= form_for @orden_trabajo, remote: true, url: ordenes_trabajos_guardar_url, html: { id: "form-agregar-material" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -18,24 +18,22 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag :nil, "Nombre Material #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :nombre_material, nil,class: 'form-control input-sm',style:"text-transform:uppercase;"%></div>
+          <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :descripcion, nil,class: 'form-control input-sm',style:"text-transform:uppercase;"%></div>
           <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag :nil, "Costo Unitario".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :costo_unitario, nil ,:onkeypress=> "return isNumberKey(event)",  :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm'%></div>
+         <div class="col-sm-4"><%= label_tag :nil, "Fecha Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_vencimiento, nil, class: 'form-control input-sm' %>
+         </div>    
           <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag :nil, "Cantidad Stock #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :cantidad_stock, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
-          <div class="col-sm-1"></div><br/>
+          <div class="col-sm-4"><%= label_tag nil, "Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :estado_material, :id, Trabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Presentación Material#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :presentacion_material, :id, PresentacionMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-          <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag nil, "Estado Material #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :estado_material, :id, EstadoMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Estado Orden Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :estado_material, :id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
