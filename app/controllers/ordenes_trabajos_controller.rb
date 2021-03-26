@@ -82,18 +82,6 @@ class OrdenesTrabajosController < ApplicationController
 
     @orden_trabajo = OrdenTrabajo.new
 
-    nuevo_incremento = OrdenTrabajo.last
-
-    if nuevo_incremento.present?
-
-      @codigo_control = nuevo_incremento.codigo_lote + 1
-
-    else
-
-      @codigo_control = 1
-
-    end
-
     respond_to do |f|
       
         f.js

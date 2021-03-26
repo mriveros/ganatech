@@ -2,7 +2,7 @@
 
    $("<div class='col-sm-12' id='msg-eliminar-orden-trabajo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ordenes-trabajos");
    $("#form_buscar_ordenes_trabajos_id").val("<%=@orden_trabajo_elim.id%>")
-   $("#form-buscar-ordenes_trabajos").submit();
+   $("#form-buscar-ordenes-trabajos").submit();
     setTimeout(function(){
 
       $("#msg-eliminar-orden-trabajo").remove();

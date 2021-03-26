@@ -16,7 +16,7 @@
 
         <%#= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
         <%= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden-trabajo", title: 'Haga click para eliminar la orden trabajo'  %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.orden_trabajo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden-trabajo", title: 'Haga click para eliminar la orden trabajo'  %>
 
        </td>
 
@@ -53,7 +53,7 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(material_id) {
+  function eliminar_registro(orden_trabajo_id) {
 
         swal({
           title: "Confirmar",
@@ -71,7 +71,7 @@
 
               $.ajax({
                 url: "<%= url_for(ordenes_trabajos_eliminar_path) %>",
-                data: {id: material_id},
+                data: {orden_trabajo_id: orden_trabajo_id},
                 dataType: 'script'
               });
 
