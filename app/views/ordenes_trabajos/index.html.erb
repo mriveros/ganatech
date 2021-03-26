@@ -60,7 +60,7 @@
           <th >
               <span>Estado Trabajo</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_ordenes_trabajos,:estado_trabajo_id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_ordenes_trabajos,:estado_trabajo_id, EstadoOrdenTrabajo.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-ordenes-trabajos', '#form_buscar_ordenes_trabajos_estado_trabajo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -109,7 +109,7 @@
 
     if(valido){
     $(".nmb").html('');
-    $("#ordenes_trabajos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    $("#ordenes-trabajos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
     }
 
 
@@ -118,7 +118,7 @@
 
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR ordenes_trabajos-------- -------------------------//
-  $("#table-ordenes-trabajos input, #table-ordenes_trabajos select").bind('change', function () {
+  $("#table-ordenes-trabajos input, #table-ordenes-trabajos select").bind('change', function () {
       $.ajaxQ.abortAll();
       $("#form-buscar-ordenes-trabajos").submit();
 
@@ -128,7 +128,7 @@
   aplicar_datepicker();
   $("#form-buscar-ordenes-trabajos").submit();
   <% if params[:agregar] %>
-    $("#link-to-agregar-material").trigger('click');
+    $("#link-to-agregar-orden-trabajo").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
 </script>

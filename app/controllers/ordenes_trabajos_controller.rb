@@ -42,7 +42,7 @@ class OrdenesTrabajosController < ApplicationController
     
     if params[:form_buscar_ordenes_trabajos][:estado_trabajo_id].present?
 
-      cond << "estado_trabajo_id = ?"
+      cond << "estado_orden_trabajo_id = ?"
       args << params[:form_buscar_ordenes_trabajos][:estado_trabajo_id]
 
     end
@@ -151,12 +151,13 @@ class OrdenesTrabajosController < ApplicationController
     valido = true
     @msg = ""
 
-    @orden_trabajo = OrdenTrabajo.find(params[:orden_trabajo][:id])
+    @orden_trabajo = OrdenTrabajo.find(params[:orden_trabajo_id])
+
     auditoria_id = auditoria_antes("actualizar orden de trabajo", "ordenes_trabajos", @orden_trabajo)
 
     if valido
 
-      @orden_trabajo.trabajo_id = params[:orden_trabajo][:id]
+      @orden_trabajo.trabajo_id = params[:orden_trabajo][:trabajo_id]
       @orden_trabajo.descripcion = params[:orden_trabajo][:descripcion]
       @orden_trabajo.fecha_trabajo = params[:orden_trabajo][:fecha_trabajo]
       @orden_trabajo.estado_orden_trabajo_id = params[:orden_trabajo][:estado_orden_trabajo_id]
