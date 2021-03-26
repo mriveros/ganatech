@@ -14,8 +14,8 @@
       <td style="width:120px;">
 
         <%#= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
-        <%#= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
-        <%#= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden_trabajo", title: 'Haga click para eliminar el orden trabajo'  %>
+        <%= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden-trabajo", title: 'Haga click para eliminar la orden trabajo'  %>
 
        </td>
 
@@ -56,7 +56,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de ordenes_trabajos",
+          text: "Al confirmar se eliminará permanentemente de la lista de ordenes de trabajos",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",

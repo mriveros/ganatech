@@ -4,7 +4,7 @@ class OrdenesTrabajosController < ApplicationController
 
   def index
 
-  end 
+  end  
  
   def lista
 
@@ -138,10 +138,10 @@ class OrdenesTrabajosController < ApplicationController
     @eliminado = false
     @msg = ""
 
-    @alimentacion = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
-    @alimentacion_elim = @alimentacion
+    @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
+    @orden_trabajo_elim = @orden_trabajo
     
-    if @alimentacion.destroy
+    if @orden_trabajo.destroy
     
       @eliminado = true
 

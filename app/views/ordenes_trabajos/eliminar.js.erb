@@ -1,22 +1,22 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-materiales");
-   $("#form_buscar_materiales_id").val("<%=@material_elim.id%>")
-   $("#form-buscar-materiales").submit();
+   $("<div class='col-sm-12' id='msg-eliminar-orden-trabajo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-ordenes-trabajos");
+   $("#form_buscar_ordenes_trabajos_id").val("<%=@orden_trabajo_elim.id%>")
+   $("#form-buscar-ordenes_trabajos").submit();
     setTimeout(function(){
 
-      $("#msg-eliminar-materiales").remove();
-      swal("El alimento ha sido eliminado Exitosamente.");
+      $("#msg-eliminar-orden-trabajo").remove();
+      swal("La Orden de Trabajo ha sido eliminado Exitosamente.");
 
     }, 1000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-materiales");
+  $("<div class='col-sm-12' id='msg-eliminar-orden-trabajo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-ordenes-trabajos");
   setTimeout(function(){ 
     
-    $("#msg-eliminar-material").remove(); 
-    swal("No se pudo eliminar el Material.<%= @msg %> Intente más tarde.")
+    $("#msg-eliminar-orden-trabajo").remove(); 
+    swal("No se pudo eliminar la Orden de Trabajo.<%= @msg %> Intente más tarde.")
 
   }, 2000);
 
