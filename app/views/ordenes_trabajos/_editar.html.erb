@@ -10,47 +10,44 @@
 
     </div>
 
-    <%= form_for @material, remote: true, url: materiales_actualizar_url, html: { id: "form-editar-materiales" }, method: 'POST' do |f| %>
+    <%= form_for @orden_trabajo, remote: true, url: ordenes_trabajos_actualizar_url, html: { id: "form-editar-orden-trabajo", autocomplete: "off" }, method: 'POST' do |f| %>
 
-      <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag :nil, "Nombre Material #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :nombre_material,class: 'form-control input-sm',style:"text-transform:uppercase;"%></div>
+          <div class="col-sm-4"><%= label_tag nil, "Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :trabajo, :id, Trabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion,class: 'form-control input-sm',style:"text-transform:uppercase;"%></div>
           <div class="col-sm-1"></div><br/>
 
-
-          <div class="col-sm-4"><%= label_tag :nil, "Costo Material".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :costo_unitario ,:onkeypress=> "return isNumberKey(event)", :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm'%></div>
+         <div class="col-sm-4"><%= label_tag :nil, "Fecha Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= date_field_tag :fecha_trabajo, nil, class: 'form-control input-sm' %>
+         </div>    
           <div class="col-sm-1"></div><br/>
 
-          <div class="col-sm-4"><%= label_tag :nil, "Cantidad Stock #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :cantidad_stock ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm'%></div>
-          <div class="col-sm-1"></div><br/>
-
-          <div class="col-sm-4"><%= label_tag nil, "Presentación Material#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :presentacion_material_id, PresentacionMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-          <div class="col-sm-1"></div><br/>
-
-          <div class="col-sm-4"><%= label_tag nil, "Estado Material #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :estado_material_id, EstadoMaterial.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Estado Orden Trabajo #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= collection_select :estado_orden_trabajo, :id, EstadoOrdenTrabajo.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe, id: "lbl-observacion" %></div>
           <div class="col-sm-7">
-          <%= f.text_area :observacion, class: 'form-control input-sm' , maxlength: "510" %>
+            <%= text_area_tag :observacion,nil, class: 'form-control input-sm' , maxlength: "510" %>
           </div>
           <div class="col-sm-1"></div><br />
 
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
+
         <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
-       <%= link_to "Actualizar","#" ,class: "btn btn-primary", id: "btn-actualizar-material" %>
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-orden-trabajo" %>
+
       </div>
 
     <% end %>

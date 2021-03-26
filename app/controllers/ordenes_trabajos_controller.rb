@@ -132,6 +132,63 @@ class OrdenesTrabajosController < ApplicationController
   
   end
 
+
+  def editar
+
+    @orden_trabajo = OrdenTrabajo.find(params[:id])
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def actualizar
+
+    valido = true
+    @msg = ""
+
+    @orden_trabajo = OrdenTrabajo.find(params[:orden_trabajo][:id])
+    auditoria_id = auditoria_antes("actualizar orden de trabajo", "ordenes_trabajos", @orden_trabajo)
+
+    if valido
+
+      @orden_trabajo.trabajo_id = params[:orden_trabajo][:id]
+      @orden_trabajo.descripcion = params[:orden_trabajo][:descripcion]
+      @orden_trabajo.fecha_trabajo = params[:orden_trabajo][:fecha_trabajo]
+      @orden_trabajo.estado_orden_trabajo_id = params[:orden_trabajo][:estado_orden_trabajo_id]
+      @orden_trabajo.observacion = params[:orden_trabajo][:observacion]
+
+      if  @orden_trabajo.save
+
+        auditoria_despues(@orden_trabajo, auditoria_id)
+        @orden_trabajo_ok = true
+
+      end
+
+    end
+
+  rescue Exception => exc
+    # dispone el mensaje de error
+    #puts "Aqui si muestra el error ".concat(exc.message)
+    if exc.present?
+
+      @msg = exc.message.split(':')
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
  
   def eliminar
 
