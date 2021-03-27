@@ -8,7 +8,7 @@ class OrdenesTrabajosController < ApplicationController
  
   def lista
 
-    cond = []
+    cond = [] 
     args = [] 
 
     if params[:form_buscar_ordenes_trabajos_id].present?
@@ -200,5 +200,21 @@ class OrdenesTrabajosController < ApplicationController
     end
 
   end
+
+  def trabajos_detalles
+
+    @orden_trabajo = OrdenTrabajo.where('id = ?', params[:orden_trabajo_id]).first
+    @orden_trabajo_detalle = VOrdenTrabajoDetalle.where('orden_trabajo_id = ?', params[:orden_trabajo_id])
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
 
 end

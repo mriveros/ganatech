@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Material Detalle</h3>
+        <h3 style="float:left;margin-top:5px;">Orden Trabajo Detalle</h3>
       </div>
 
     </div>
@@ -14,11 +14,11 @@
 
     <div class="panel-body">
 
-      <div class="table-responsive" id="table-material-detalle">
+      <div class="table-responsive" id="table-material-trabajo">
 
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
-          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar suministro".html_safe, "#", id: "link-to-agregar-material-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
-          <%= modal_window( window_id: "modal-window-agregar-material-detalle", link_to_id: "#link-to-agregar-material-detalle", url: materiales_agregar_material_detalle_path( window_id: "modal-window-agregar-material-detalle", material_id: params[:material_id]) )%>
+          <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Material".html_safe, "#", id: "link-to-agregar-material-material-trabajo", class: "btn btn-primary btn-xs", style: "float:right;" %>
+          <%= modal_window( window_id: "modal-window-agregar-material-material-trabajo", link_to_id: "#link-to-agregar-material-material-trabajo", url: materiales_agregar_material_trabajo_path( window_id: "modal-window-agregar-material-material-trabajo", orden_trabajo_id: params[:orden_trabajo_id]) )%>
 
           <thead>
 
@@ -30,12 +30,12 @@
 
           </thead>
 
-          <tbody id="material-detalle-lista">
+          <tbody id="material-trabajo-detalle-lista">
 
-            <% if @material.present? %>
+            <% if @orden_trabajo.present? %>
 
                 <tr>
-                  <td><%= @material.observacion %></td>
+                  <td><%= @orden_trabajo.observacion %></td>
                 </tr>
 
             <% else %>
@@ -49,7 +49,7 @@
         </table>
 
         <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Suministros</h3>
+        <h3 style="float:left;margin-top:5px;">Materiales</h3>
       </div>
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
 
@@ -58,13 +58,8 @@
             <tr role="row">
 
               <th>id</th>
-              <th>Descripción</th>
-              <th>Costo</th>
-              <th>Fecha Suministro</th>
-              <th>Lote</th>
-              <th>Cantidad Suministro</th>
-              <th>Costo Total</th>
-              <th>Observación</th>
+              <th>Material</th>
+              <th>Cantidad Utilizada</th>
               <th></th>
 
             </tr>
@@ -75,21 +70,17 @@
 
           <tbody id="material-detalle-lista">
 
-            <% if @material_detalle.present? %>
+            <% if @material_trabajo.present? %>
 
-              <% @material_detalle.each do |mat| %>
+              <% @material_trabajo.each do |mat| %>
 
                 <tr>
 
                   <td><%= mat.id %></td>
-                  <td><%= mat.descripcion %></td>
-                  <td><%= mat.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-                  <td><%= mat.fecha_suministro.strftime('%d/%m/%Y') %></td>
-                  <td><%= mat.numero_lote %></td>
-                  <td><%= mat.cantidad_suministro %></td>
-                  <td><%= mat.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-                  <td><%= mat.observacion %></td>
-                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-detalle", title: 'Haga click para eliminar el suministro del matmento'  %>
+                  <td><%= mat.material %></td>
+                  <td><%= mat.cantidad_utilizada %></td>
+                  
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-trabajo-detalle", title: 'Haga click para eliminar el Material utilizado en el Trabajo'  %>
 
                   </td>
 
@@ -100,7 +91,7 @@
 
               <tr id="tab-paginacion">
 
-                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate material_detalle, :params => params %></div></td>
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate material_trabajo, :params => params %></div></td>
             </tr>
 
             <% else %>

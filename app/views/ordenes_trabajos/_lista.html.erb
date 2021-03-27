@@ -14,7 +14,7 @@
       
       <td style="width:120px;">
 
-        <%#= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
+        <%= link_to_orden_trabajo_detalle(orden_trabajo.orden_trabajo_id) %>
         <%= link_to_editar_orden_trabajo(orden_trabajo.orden_trabajo_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{orden_trabajo.orden_trabajo_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-orden-trabajo", title: 'Haga click para eliminar la orden trabajo'  %>
 

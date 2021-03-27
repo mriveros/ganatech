@@ -169,6 +169,10 @@ get 'crontab_ultron/index'
   get 'ordenes_trabajos/editar'
   post 'ordenes_trabajos/actualizar'
   get 'ordenes_trabajos/eliminar'
+  get 'ordenes_trabajos/orden_trabajo_detalle'
+  get 'ordenes_trabajos/agregar_material_trabajo'
+  post 'ordenes_trabajos/guardar_material_trabajo'
+  get 'ordenes_trabajos/eliminar_material_trabajo'
 
 
 #REGISTROS DE GASTOS
