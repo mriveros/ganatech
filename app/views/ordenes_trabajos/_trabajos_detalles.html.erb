@@ -18,7 +18,7 @@
 
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
           <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar Material".html_safe, "#", id: "link-to-agregar-material-material-trabajo", class: "btn btn-primary btn-xs", style: "float:right;" %>
-          <%= modal_window( window_id: "modal-window-agregar-material-material-trabajo", link_to_id: "#link-to-agregar-material-material-trabajo", url: materiales_agregar_material_trabajo_path( window_id: "modal-window-agregar-material-material-trabajo", orden_trabajo_id: params[:orden_trabajo_id]) )%>
+          <%= modal_window( window_id: "modal-window-agregar-material-material-trabajo", link_to_id: "#link-to-agregar-material-material-trabajo", url: ordenes_trabajos_agregar_material_trabajo_path( window_id: "modal-window-agregar-material-material-trabajo", orden_trabajo_id: params[:orden_trabajo_id]) )%>
 
           <thead>
 
