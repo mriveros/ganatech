@@ -233,43 +233,35 @@ class OrdenesTrabajosController < ApplicationController
     @guardado_ok = false
     @valido = true
 
-    Material.transaction do
+    OrdenTrabajoDetalle.transaction do
 
-      @material = Material.where("id = ?", params[:material_id]).first
-      auditoria_id = auditoria_antes("guardar suministro material detalle", "materiales", @material)
+      @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
+      @material.cantidad_stock = Material.where("id = ?",params[:material_id]).first
+      auditoria_id = auditoria_antes("actualizar orden de trabajo", "ordenes_trabajos", @material)
+
+      if @material < params[:cantidad_utilizada].to_i
+
+        @valido = false
+        @msg = "No hay suficiente stock de material."
+
+      end
 
       if @valido
  
-        @material_detalle = MaterialDetalle.new
-        @material_detalle.material_id = params[:material_id]
-        @material_detalle.descripcion = params[:descripcion].upcase
-        @material_detalle.fecha_suministro = params[:fecha_suministro]
-        @material_detalle.numero_lote = params[:numero_lote]
-        @material_detalle.cantidad_suministro = params[:cantidad_suministro]
-        @material_detalle.costo_suministro = params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i
-        @material_detalle.observacion = params[:observacion]
-        @material_detalle.costo_total = (params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_suministro].to_i)
+        @orden_trabajo_detalle = OrdenTrabajoDetalle.new
+        @orden_trabajo_detalle.material_id = params[:material_id]
+        @orden_trabajo_detalle.cantidad_utilizada = params[:cantidad_utilizada]
+        @orden_trabajo_detalle.fecha = params[:fecha]
+        @orden_trabajo_detalle.observacion = params[:observacion] 
         
-        
-        if @material_detalle.save
+        if @orden_trabajo_detalle.save
 
-
-          auditoria_nueva("agregar material detalle", "materiales_detalles", @material_detalle)
-
-          @material.cantidad_stock = @material.cantidad_stock + @material_detalle.cantidad_suministro
+          @material.cantidad_stock = @material.cantidad_stock - @orden_trabajo_detalle.cantidad_utilizada
           
           if @material.save
 
             auditoria_despues(@material, auditoria_id)
             @guardado_ok = true
-
-            @compra = AuxCompra.new
-            @compra.fecha = Date.today
-            @compra.descripcion = "Compra material: #{@material.nombre_material}"
-            @compra.observacion = @material_detalle.observacion
-            @compra.monto = @material_detalle.costo_total
-            @compra.material_detalle_id = @material_detalle.id
-            @compra.save
 
           end
 
