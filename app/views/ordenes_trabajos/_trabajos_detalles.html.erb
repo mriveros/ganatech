@@ -70,17 +70,17 @@
 
           <tbody id="material-detalle-lista">
 
-            <% if @material_trabajo.present? %>
+            <% if @orden_trabajo_detalle.present? %>
 
-              <% @material_trabajo.each do |mat| %>
+              <% @orden_trabajo_detalle.each do |mat| %>
 
                 <tr>
 
-                  <td><%= mat.id %></td>
-                  <td><%= mat.material %></td>
+                  <td><%= mat.orden_trabajo_detalle_id %></td>
+                  <td><%= mat.nombre_material %></td>
                   <td><%= mat.cantidad_utilizada %></td>
                   
-                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-trabajo-detalle", title: 'Haga click para eliminar el Material utilizado en el Trabajo'  %>
+                  <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.orden_trabajo_detalle_id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-trabajo-detalle", title: 'Haga click para eliminar el Material utilizado en el Trabajo'  %>
 
                   </td>
 
@@ -91,7 +91,7 @@
 
               <tr id="tab-paginacion">
 
-                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate material_trabajo, :params => params %></div></td>
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @orden_trabajo_detalle, :params => params %></div></td>
             </tr>
 
             <% else %>
@@ -119,7 +119,7 @@
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar el suministro será eliminado y el material estará sujeto a cambios como la cantidad de stock disponible.",
+          text: "Al confirmar el material será eliminado del trabajo y la cantidad utilizada será restaurada a la cantidad de stock disponible.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -132,8 +132,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(materiales_eliminar_material_detalle_path) %>",
-                data: { material_detalle_id: id, material_id: material_id },
+                url: "<%= url_for(ordenes_trabajos_eliminar_material_trabajo_path) %>",
+                data: { orden_trabajo_detalle_id: id, material_id: material_id },
                 dataType: 'script'
               });
 

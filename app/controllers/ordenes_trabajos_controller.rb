@@ -204,7 +204,7 @@ class OrdenesTrabajosController < ApplicationController
   def trabajos_detalles
 
     @orden_trabajo = OrdenTrabajo.where('id = ?', params[:orden_trabajo_id]).first
-    @orden_trabajo_detalle = VOrdenTrabajoDetalle.where('orden_trabajo_id = ?', params[:orden_trabajo_id])
+    @orden_trabajo_detalle = VOrdenTrabajoDetalle.where('orden_trabajo_id = ?', params[:orden_trabajo_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
@@ -236,7 +236,7 @@ class OrdenesTrabajosController < ApplicationController
     OrdenTrabajoDetalle.transaction do
 
       @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
-      @material = Material.where("id = ?",params[:material_id]).first
+      @material = Material.where("id = ?",params[:material][:id]).first
       auditoria_id = auditoria_antes("actualizar orden de trabajo", "ordenes_trabajos", @material)
 
       if @material.cantidad_stock < params[:cantidad_utilizada].to_i
@@ -249,7 +249,8 @@ class OrdenesTrabajosController < ApplicationController
       if @valido
  
         @orden_trabajo_detalle = OrdenTrabajoDetalle.new
-        @orden_trabajo_detalle.material_id = params[:material_id]
+        @orden_trabajo_detalle.material_id = params[:material][:id]
+        @orden_trabajo_detalle.orden_trabajo_id =  params[:orden_trabajo_id]
         @orden_trabajo_detalle.cantidad_utilizada = params[:cantidad_utilizada]
         @orden_trabajo_detalle.fecha = params[:fecha]
         @orden_trabajo_detalle.observacion = params[:observacion] 
