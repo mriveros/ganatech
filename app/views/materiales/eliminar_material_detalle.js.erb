@@ -6,7 +6,7 @@ setTimeout( function(){
     $("#<%= params[:window_id]%>").modal('hide');
     $("#link-to-material-detalle-<%= params[:material_id]%>").trigger('click');
     $("#link-to-material-detalle-<%= params[:material_id]%>").trigger('click');
-    swal("Sumnistro Eliminado exitosamente!");
+    swal("Suministro Eliminado exitosamente!");
     $("#form_buscar_materiales_id").val('<%=params[:material_id] %>');
     $("#form-buscar-materiales").submit();
 
