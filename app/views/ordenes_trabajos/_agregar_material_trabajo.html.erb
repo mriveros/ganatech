@@ -5,30 +5,30 @@
     <div class="modal-header" style="background:#e6e6e6;">
 
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Suministro Material</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Material</h4>
 
     </div>
 
-    <%= form_for @orden_trabajo, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle" }, method: 'POST' do |f|%>
+    <%= form_for @orden_trabajo, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle", autocomplete: "off" }, method: 'POST' do |f|%>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
-      <%= hidden_field_tag :material_id, params[:material_id]%>
+      <%= hidden_field_tag :material_id, params[:orden_trabajo_id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Material #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= collection_select :trabajo, :id, Material.orden_descripcion, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
-          <div class="col-sm-1"></div><br />
+          <div class="col-sm-7"><%= collection_select :material, :id, Material.orden_descripcion, :id, :nombre_material, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+          <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Cantidad Utilizada #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :cantidad_suministro, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
+          <div class="col-sm-7"><%= number_field_tag :cantidad_utilizada, nil ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm', :maxlength=>12 %></div>
           <div class="col-sm-1"></div><br/><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha_suministro, Date.today, class: 'form-control input-sm' %>
+          <div class="col-sm-7"><%= date_field_tag :fecha, Date.today, class: 'form-control input-sm' %>
           </div>
           <div class="col-sm-1"></div><br/><br />
 
