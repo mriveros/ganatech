@@ -5,6 +5,6 @@ class Material < ActiveRecord::Base
   :costo_unitario, :costo_total, :created_at, :updated_at
 
   scope :orden_01, -> {order("id")}
-  scope :orden_descripcion, -> {order("descripcion")}
+  scope :orden_descripcion, -> {order("nombre_material")}
 
 end
