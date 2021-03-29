@@ -9,11 +9,11 @@
 
     </div>
 
-    <%= form_for @orden_trabajo, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle", autocomplete: "off" }, method: 'POST' do |f|%>
+    <%= form_for @orden_trabajo, remote: true, url: ordenes_trabajos_guardar_material_trabajo_url, html: { id: "form-agregar-orden-trabajo-detalle", autocomplete: "off" }, method: 'POST' do |f|%>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
-      <%= hidden_field_tag :material_id, params[:orden_trabajo_id]%>
+      <%= hidden_field_tag :orden_trabajo_id, params[:orden_trabajo_id]%>
 
       <div class="modal-body">
 
@@ -47,7 +47,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-alimentacion-detalle" %>
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-orden-trabajo-detalle" %>
 
       </div>
 
@@ -58,9 +58,9 @@
 
 <style type="text/css">
 
-  #form-agregar-alimentacion-detalle label, #form-agregar-alimentacion-detalle input[type='text'] { float:left; margin-top:5px;}
-  #form-agregar-alimentacion-detalle br {clear:both; }
-  #form-agregar-alimentacion-detalle label { width:200px; font-size:12px;}
+  #form-agregar-orden-trabajo-detalle label, #form-agregar-orden-trabajo-detalle input[type='text'] { float:left; margin-top:5px;}
+  #form-agregar-orden-trabajo-detalle br {clear:both; }
+  #form-agregar-orden-trabajo-detalle label { width:200px; font-size:12px;}
 
 </style>
 
@@ -79,27 +79,27 @@
      return true;
   }
 
-  $("#btn-guardar-alimentacion-detalle").bind('click', function () {
+  $("#btn-guardar-orden-trabajo-detalle").bind('click', function () {
 
       valido = true
       msg = ""
 
 
-      if($("#descripcion").val().length == 0){
+      if($("#material_id").val().length == 0){
 
-        msg +="Es necesario ingresar una descripción.\n"
+        msg +="Es necesario ingresar un material.\n"
         valido = false
 
       }
 
-      if($("#fecha_suministro").val().length == 0){
+      if($("#fecha").val().length == 0){
 
-        msg +="Es necesario ingresar una fecha del suministro.\n"
+        msg +="Es necesario ingresar una fecha.\n"
         valido = false
 
       }
 
-      if($("#cantidad_suministro").val().length == 0){
+      if($("#cantidad_utilizada").val().length == 0){
 
         msg +="Es necesario ingresar una cantidad.\n"
         valido = false
@@ -110,8 +110,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Detalle",
-          text: "Al confirmar la Alimentacion será actualizado en cantidad de Stock Disponible.",
+          title: "Confirmar Material Utilizado",
+          text: "Al confirmar el Material será actualizado en cantidad de Stock Disponible.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -123,7 +123,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-alimentacion-detalle").submit();
+            $("#form-agregar-orden-trabajo-detalle").submit();
 
           }
 

@@ -236,10 +236,10 @@ class OrdenesTrabajosController < ApplicationController
     OrdenTrabajoDetalle.transaction do
 
       @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
-      @material.cantidad_stock = Material.where("id = ?",params[:material_id]).first
+      @material = Material.where("id = ?",params[:material_id]).first
       auditoria_id = auditoria_antes("actualizar orden de trabajo", "ordenes_trabajos", @material)
 
-      if @material < params[:cantidad_utilizada].to_i
+      if @material.cantidad_stock < params[:cantidad_utilizada].to_i
 
         @valido = false
         @msg = "No hay suficiente stock de material."
@@ -284,29 +284,27 @@ class OrdenesTrabajosController < ApplicationController
     @eliminado_ok = false
     @valido = true
 
-    Material.transaction do
+    OrdenTrabajoDetalle.transaction do
 
-      @material = Material.where("id = ?", params[:material_id]).first
-      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales", @material)
+      @orden_trabajo_detalle = OrdenTrabajoDetalle.where("id = ?", params[:orden_trabajo_detalle_id]).first
+      
+      @material = Material.where("id = ?", @orden_trabajo_detalle.material_id).first
+      auditoria_id = auditoria_antes("eliminar suministro orden trabajo detalle", "materiales", @material)
 
-      @material_detalle = MaterialDetalle.where("id = ?", params[:material_detalle_id]).first
-      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales_detalles", @material_detalle)
-
-      @compra_material = AuxCompra.where("material_detalle_id = ?", params[:material_detalle_id]).first
-      @compra_material.destroy
 
       if @valido
 
-        @material_detalle_elim = @material_detalle
+        @orden_trabajo_detalle_elim = @orden_trabajo_detalle
 
-        if @material_detalle.destroy
+        if @orden_trabajo_detalle.destroy
 
-          auditoria_nueva("eliminar material detalle", "materiales_detalles", @material_detalle_elim )
+          auditoria_nueva("eliminar orden trabajo detalle", "ordenes_trabajos_detalles", @orden_trabajo_detalle_elim )
 
-          @material.cantidad_stock = @material.cantidad_stock - @material_detalle.cantidad_suministro
+          @material.cantidad_stock = @material.cantidad_stock + @orden_trabajo_detalle_elim.cantidad_utilizada
           
           if @material.save
 
+            auditoria_despues(@material, auditoria_id)
             @eliminado_ok = true
 
           end
