@@ -215,6 +215,124 @@ class OrdenesTrabajosController < ApplicationController
 
   end
 
+  def agregar_material_trabajo
+
+
+    @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_material_trabajo
+
+    @guardado_ok = false
+    @valido = true
+
+    Material.transaction do
+
+      @material = Material.where("id = ?", params[:material_id]).first
+      auditoria_id = auditoria_antes("guardar suministro material detalle", "materiales", @material)
+
+      if @valido
+ 
+        @material_detalle = MaterialDetalle.new
+        @material_detalle.material_id = params[:material_id]
+        @material_detalle.descripcion = params[:descripcion].upcase
+        @material_detalle.fecha_suministro = params[:fecha_suministro]
+        @material_detalle.numero_lote = params[:numero_lote]
+        @material_detalle.cantidad_suministro = params[:cantidad_suministro]
+        @material_detalle.costo_suministro = params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i
+        @material_detalle.observacion = params[:observacion]
+        @material_detalle.costo_total = (params[:costo_suministro].to_s.gsub(/[$.]/,'').to_i * params[:cantidad_suministro].to_i)
+        
+        
+        if @material_detalle.save
+
+
+          auditoria_nueva("agregar material detalle", "materiales_detalles", @material_detalle)
+
+          @material.cantidad_stock = @material.cantidad_stock + @material_detalle.cantidad_suministro
+          
+          if @material.save
+
+            auditoria_despues(@material, auditoria_id)
+            @guardado_ok = true
+
+            @compra = AuxCompra.new
+            @compra.fecha = Date.today
+            @compra.descripcion = "Compra material: #{@material.nombre_material}"
+            @compra.observacion = @material_detalle.observacion
+            @compra.monto = @material_detalle.costo_total
+            @compra.material_detalle_id = @material_detalle.id
+            @compra.save
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def eliminar_material_trabajo
+
+    @eliminado_ok = false
+    @valido = true
+
+    Material.transaction do
+
+      @material = Material.where("id = ?", params[:material_id]).first
+      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales", @material)
+
+      @material_detalle = MaterialDetalle.where("id = ?", params[:material_detalle_id]).first
+      auditoria_id = auditoria_antes("eliminar suministro material detalle", "materiales_detalles", @material_detalle)
+
+      @compra_material = AuxCompra.where("material_detalle_id = ?", params[:material_detalle_id]).first
+      @compra_material.destroy
+
+      if @valido
+
+        @material_detalle_elim = @material_detalle
+
+        if @material_detalle.destroy
+
+          auditoria_nueva("eliminar material detalle", "materiales_detalles", @material_detalle_elim )
+
+          @material.cantidad_stock = @material.cantidad_stock - @material_detalle.cantidad_suministro
+          
+          if @material.save
+
+            @eliminado_ok = true
+
+          end
+
+        end
+
+      end
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 
 end
