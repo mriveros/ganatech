@@ -1,0 +1,54 @@
+
+<div class="modal-dialog">
+
+  <div class="modal-content">
+
+    <div class="modal-header" style="background:#e6e6e6;">
+
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Agregar Estado Ganado</h4>
+
+    </div>
+
+    <%= form_for @estado_ganado, remote: true, url: estados_ganados_guardar_url, html: { id: "form-agregar-estado-ganado" }, method: 'POST' do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id]%>
+
+      <div class="modal-body">
+
+        <div class="panel-body">
+
+           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+
+        <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-estado-ganado" %>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>
+
+<style type="text/css">
+
+  #form-agregar-estado-ganado label, #form-agregar-estado-ganado input[type='text'], #form-agregar-estado-ganado select { float:left; margin-top:5px;}
+  #form-agregar-estado-ganado br {clear:both; }
+  #form-agregar-estado-ganado label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-estado-ganado #descripcion { width:50%;}
+
+
+</style>
+
+<script type="text/javascript">
+
+  aplicar_datepicker2();
+
+</script>
