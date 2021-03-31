@@ -160,6 +160,18 @@ get 'crontab_ultron/index'
   post 'materiales/guardar_material_detalle'
   get 'materiales/eliminar_material_detalle'
 
+
+  #TRABAJOS
+  get 'trabajos/index'
+  post 'trabajos/lista'
+  get 'trabajos/lista'
+  get 'trabajos/agregar'
+  post 'trabajos/guardar'
+  get 'trabajos/editar'
+  post 'trabajos/actualizar'
+  get 'trabajos/eliminar'
+
+
   #ORDENES TRABAJOS
   get 'ordenes_trabajos/index'
   post 'ordenes_trabajos/lista'
