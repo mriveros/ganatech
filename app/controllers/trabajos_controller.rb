@@ -52,7 +52,7 @@ class TrabajosController < ApplicationController
 
   def agregar
 
-    @estado_ganado = Trabajo.new
+    @trabajo = Trabajo.new
 
     respond_to do |f|
 
@@ -66,16 +66,16 @@ class TrabajosController < ApplicationController
 
     valido = true
     @msg = ""
-    @estado_ganado_ok = false
+    @trabajo_ok = false
 
-    @estado_ganado = Trabajo.new()
+    @trabajo = Trabajo.new()
 
-    @estado_ganado.descripcion = params[:estado_ganado][:descripcion].upcase
+    @trabajo.descripcion = params[:trabajo][:descripcion].upcase
 
-    if @estado_ganado.save
+    if @trabajo.save
 
-      auditoria_nueva("registrar estado ganado", "trabajos", @estado_ganado)
-      @estado_ganado_ok = true
+      auditoria_nueva("registrar trabajo", "trabajos", @trabajo)
+      @trabajo_ok = true
 
     end
 
@@ -101,21 +101,21 @@ class TrabajosController < ApplicationController
     valido = true
     @msg = ""
 
-    @estado_ganado = Trabajo.find(params[:id])
+    @trabajo = Trabajo.find(params[:id])
 
-    @estado_ganado_elim = @estado_ganado
+    @trabajo_elim = @trabajo
 
     if valido
 
-      if @estado_ganado.destroy
+      if @trabajo.destroy
 
-        auditoria_nueva("eliminar estado ganado", "trabajos", @estado_ganado_elim)
+        auditoria_nueva("eliminar trabajo", "trabajos", @trabajo_elim)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el estado ganado. Intente más tarde."
+        @msg = "ERROR: No se ha podido eliminar el trabajo. Intente más tarde."
 
       end
 
@@ -132,7 +132,7 @@ class TrabajosController < ApplicationController
 
   def editar
 
-    @estado_ganado = Trabajo.find(params[:id])
+    @trabajo = Trabajo.find(params[:id])
 
     respond_to do |f|
 
@@ -147,17 +147,17 @@ class TrabajosController < ApplicationController
     valido = true
     @msg = ""
 
-    @estado_ganado = Trabajo.find(params[:estado_ganado][:id])
-    auditoria_id = auditoria_antes("actualizar estado ganado", "trabajos", @estado_ganado)
+    @trabajo = Trabajo.find(params[:trabajo][:id])
+    auditoria_id = auditoria_antes("actualizar trabajo", "trabajos", @trabajo)
 
     if valido
 
-      @estado_ganado.descripcion = params[:estado_ganado][:descripcion].upcase
+      @trabajo.descripcion = params[:trabajo][:descripcion].upcase
 
-      if @estado_ganado.save
+      if @trabajo.save
 
-        auditoria_despues(@estado_ganado, auditoria_id)
-        @estado_ganado_ok = true
+        auditoria_despues(@trabajo, auditoria_id)
+        @trabajo_ok = true
 
       end
 

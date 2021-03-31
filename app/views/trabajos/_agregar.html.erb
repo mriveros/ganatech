@@ -10,7 +10,7 @@
 
     </div>
 
-    <%= form_for @trabajo, remote: true, url: trabajos_ganados_guardar_url, html: { id: "form-agregar-trabajo" }, method: 'POST' do |f| %>
+    <%= form_for @trabajo, remote: true, url: trabajos_guardar_url, html: { id: "form-agregar-trabajo" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
