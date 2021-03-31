@@ -181,18 +181,6 @@ class TrabajosController < ApplicationController
   end
 
 
-  def buscar_estado_ganado
-
-     @trabajos = Trabajo.where("descripcion ilike ?", "%#{params[:descripcion]}%")
-
-    respond_to do |f|
-
-      f.html
-      f.json { render :json => @trabajos }
-
-    end
-
-  end
 
 
 end

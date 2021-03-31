@@ -1,21 +1,18 @@
-<% if estados_ganados.present? %>
+<% if trabajos.present? %>
 
-  <% estados_ganados.each do |estado_ganado| %>
+  <% trabajos.each do |trabajo| %>
 
     <tr>
 
-      <td><%= estado_ganado.id %></td>
-      <td><%= estado_ganado.descripcion%></td>
+      <td><%= trabajo.id %></td>
+      <td><%= trabajo.descripcion%></td>
      </td>
 
       <td style="width:120px;">
 
-        <%unless PARAMETRO[:estados_ganados_predeterminados].include?(estado_ganado.id) %>
-        
-        <%= link_to_editar_estado_ganado(estado_ganado) %>
+        <%= link_to_editar_trabajo(trabajo) %>
 
-        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{estado_ganado.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-estado-ganado", title: 'Haga click para eliminar el estado ganado'  %>
-        <%end%>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{trabajo.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-trabajo", title: 'Haga click para eliminar el Trabajo'  %>
 
        </td>
 
@@ -30,7 +27,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate estados_ganados, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate trabajos, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -57,11 +54,11 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(estado_ganado_id) {
+  function eliminar_registro(trabajo_id) {
 
         swal({
           title: "Confirmar",
-          text: "Al confirmar se eliminará permanentemente de la lista de estados ganados",
+          text: "Al confirmar se eliminará permanentemente de la lista de Trabajos",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -74,8 +71,8 @@
           if (isConfirm) {
 
               $.ajax({
-                url: "<%= url_for(estados_ganados_eliminar_path) %>",
-                data: {id: estado_ganado_id},
+                url: "<%= url_for(trabajos_eliminar_path) %>",
+                data: {id: trabajo_id},
                 dataType: 'script'
               });
 

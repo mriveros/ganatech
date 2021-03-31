@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
 
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Estado Ganado</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Trabajo</h4>
 
     </div>
 
-    <%= form_for @estado_ganado, remote: true, url: estados_ganados_actualizar_url, html: { id: "form-editar-estado-ganados" }, method: 'POST' do |f| %>
+    <%= form_for @trabajo, remote: true, url: trabajos_actualizar_url, html: { id: "form-editar-trabajo" }, method: 'POST' do |f| %>
 
       <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
@@ -27,7 +27,7 @@
 
       <div class="modal-footer" style="background:#e6e6e6;">
         <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %>
-        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-estado-ganado" %>
+        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-trabajo" %>
       </div>
 
     <% end %>
@@ -37,9 +37,9 @@
 
 <style type="text/css">
 
-  #form-editar-estado-ganado label, #form-editar-estado-ganado input[type='text'], #form-editar-estado-ganado select { float:left; margin-top:5px;}
-  #form-editar-estado-ganado br {clear:both; }
-  #form-editar-estado-ganado label { width:200px;font-size:12px;margin-top:10px;}
+  #form-editar-trabajo label, #form-editar-trabajo input[type='text'], #form-editar-trabajo select { float:left; margin-top:5px;}
+  #form-editar-trabajo br {clear:both; }
+  #form-editar-trabajo label { width:200px;font-size:12px;margin-top:10px;}
 
 
 </style>

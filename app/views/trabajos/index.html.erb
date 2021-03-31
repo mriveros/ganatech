@@ -4,30 +4,30 @@
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Estados Ganados</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-estado-ganado", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-estado-ganado", link_to_id: "#link-to-agregar-estado-ganado", url: estados_ganados_agregar_path( window_id: "modal-window-agregar-estado-ganado") )%>
+    <h3 style="float:left;margin-top:5px;">Trabajos</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-trabajo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-trabajo", link_to_id: "#link-to-agregar-trabajo", url: trabajos_agregar_path( window_id: "modal-window-agregar-trabajo") )%>
 
   </div>
 </div>
 
 <div style="clear:both;"></div>
 
-<div class="table-responsive" id="table-estados-ganados">
+<div class="table-responsive" id="table-trabajos">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
 
     <thead>
 
-      <%= form_tag estados_ganados_lista_path, remote: true, id: "form-buscar-estados-ganados"  do  %>
+      <%= form_tag trabajos_lista_path, remote: true, id: "form-buscar-trabajos"  do  %>
 
         <tr>
 
           <th style="width:15%;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_estados_ganados_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-estados-ganados', '#form_buscar_estados_ganados_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_trabajos_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-trabajos', '#form_buscar_trabajos_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -35,20 +35,20 @@
           <th style="width:25%;">
             <span>Descripción</span>
             <div class="input-group input-group-sm">
-                <%= text_field_tag :form_buscar_estados_ganados_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-                <span class="input-group-addon limpiar" onclick="$('#form_buscar_estados_ganados_id').val('');quitar_filtro('#form-buscar-estados-ganados', '#form_buscar_estados_ganados_descripcion');"><i class="fa fa-times"></i></span>
+                <%= text_field_tag :form_buscar_trabajos_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_trabajos_id').val('');quitar_filtro('#form-buscar-trabajos', '#form_buscar_trabajos_descripcion');"><i class="fa fa-times"></i></span>
             </div>
 
-            <%= hidden_field_tag :form_buscar_estados_ganados_descripcion %>
-            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+            <%#= hidden_field_tag :form_buscar_trabajos_descripcion %>
+            <%#= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
                   atributo_descripcion: :descripcion,
                   atributo_tipo: :text,
                   model: :EstadoGanado,
                   limit: 10,
                   cadena_consulta: "upper(quitar_acentos(descripcion))",
                   orden: "descripcion"),
-              parametro_id: "form_buscar_estados_ganados_descripcion",
-              resultado_id: "form_buscar_estados_ganados_id",
+              parametro_id: "form_buscar_trabajos_descripcion",
+              resultado_id: "form_buscar_trabajos_id",
               min_length: 2
               ) %>
           </th>
@@ -63,7 +63,7 @@
 
       </thead>
 
-    <tbody id="estados-ganados-lista"></tbody>
+    <tbody id="trabajos-lista"></tbody>
 
   </table>
 
@@ -75,11 +75,11 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-estados-ganados").bind("submit", function () {
+  $("#form-buscar-trabajos").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_estados_ganados_descripcion").val().length !== 0 ){
+    if($("#form_buscar_trabajos_descripcion").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_estados_ganados_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_estados_ganados_descripcion").val().replace(/\s/g,'')).length > 2){
+      if(($("#form_buscar_trabajos_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_trabajos_descripcion").val().replace(/\s/g,'')).length > 2){
         valido = true;
       }else{
         valido = false;
@@ -91,7 +91,7 @@
 
     if(valido){
     $(".nmb").html('');
-    $("#estados-ganados-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+    $("#trabajos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
     }
 
 
@@ -100,17 +100,17 @@
 
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-estados-ganados input, #table-estados-ganados select").bind('change', function () {
+  $("#table-trabajos input, #table-trabajos select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-estados-ganados").submit();
+      $("#form-buscar-trabajos").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-estados-ganados").submit();
+  $("#form-buscar-trabajos").submit();
   <% if params[:agregar] %>
-    $("#link-to-agregar-estado-ganado").trigger('click');
+    $("#link-to-agregar-trabajo").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
 </script>
@@ -127,7 +127,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-estados-ganados table th { background:#e6e6e6;}
-    #form-buscar-estados-ganados table th span.limpiar { background:#fff;}
+    #form-buscar-trabajos table th { background:#e6e6e6;}
+    #form-buscar-trabajos table th span.limpiar { background:#fff;}
 
 </style>
