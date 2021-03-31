@@ -183,13 +183,26 @@ class OrdenesTrabajosController < ApplicationController
 
     @eliminado = false
     @msg = ""
+    @valido = true
 
     @orden_trabajo = OrdenTrabajo.where("id = ?", params[:orden_trabajo_id]).first
-    @orden_trabajo_elim = @orden_trabajo
-    
-    if @orden_trabajo.destroy
-    
-      @eliminado = true
+    orden_trabajo_detalle = OrdenTrabajoDetalle.where("orden_trabajo_id = ?", params[:orden_trabajo_id])
+    if orden_trabajo_detalle.present?
+
+      @valido = false
+      @msg = "El trabajo cuenta con materiales utilizados."
+
+    end
+
+    if @valido
+
+      @orden_trabajo_elim = @orden_trabajo
+      
+      if @orden_trabajo.destroy
+      
+        @eliminado = true
+
+      end
 
     end
     

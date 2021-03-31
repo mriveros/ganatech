@@ -12,11 +12,11 @@
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= @msg %></div>").insertBefore("#table-materiales");
+  $("<div class='col-sm-12' id='msg-eliminar-material' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>El Material ya ha sido utilizado</div>").insertBefore("#table-materiales");
   setTimeout(function(){ 
     
     $("#msg-eliminar-material").remove(); 
-    swal("No se pudo eliminar el Material.<%= @msg %> Intente más tarde.")
+    swal("No se pudo eliminar el Material. <%= @msg %> Intente más tarde.")
 
   }, 2000);
 

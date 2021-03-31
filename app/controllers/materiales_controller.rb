@@ -168,8 +168,8 @@ class MaterialesController < ApplicationController
     @material = Material.where("id = ?",params[:id]).first
     @material_elim = @material
 
-    material_ganado = UsoMaterial.where("material_id = ?",params[:id])
-    if material_ganado.present?
+    material_trabajo = OrdenTrabajoDetalle.where("material_id = ?",params[:id])
+    if material_trabajo.present?
 
       @msg += "El material ya ha sido utilizado."
       @valido = false
