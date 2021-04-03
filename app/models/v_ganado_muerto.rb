@@ -7,7 +7,6 @@ class VGanadoMuerto < ActiveRecord::Base
    :fecha, :observacion, :documento_ganatec_id, :created_at, :updated_at
   
   scope :orden_01, -> { order("ganado_muerto_id")}
-  
-  
+  scope :orden_fecha, -> { order("fecha desc")}
   
 end
