@@ -131,12 +131,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @ganados_salidas =  VGanadoSalida.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @ganados_salidas =  VGanadoSalida.fecha_salida.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanadoSalida.where(cond).count
 
     else
      
-      @ganados_salidas = VGanadoSalida.orden_01.paginate(per_page: 10, page: params[:page])
+      @ganados_salidas = VGanadoSalida.fecha_salida.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VGanadoSalida.count
 
     end

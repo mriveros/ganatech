@@ -7,5 +7,6 @@ class VGanadoSalida < ActiveRecord::Base
   :cliente_id, :codigo_lote, :created_at, :updated_at
   
   scope :orden_01, -> { order("ganado_salida_id")}
+  scope :fecha_salida, -> { order("fecha_salida desc")}
   
 end
