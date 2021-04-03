@@ -60,6 +60,7 @@
               <th>id</th>
               <th>Material</th>
               <th>Cantidad Utilizada</th>
+              <th>Orservación</th>
               <th></th>
 
             </tr>
@@ -79,6 +80,7 @@
                   <td><%= mat.orden_trabajo_detalle_id %></td>
                   <td><%= mat.nombre_material %></td>
                   <td><%= mat.cantidad_utilizada %></td>
+                  <td><%= mat.observacion %></td>
                   
                   <td><%= link_to icon_eliminar,"#", onclick: "eliminar_registro_detalle(#{mat.orden_trabajo_detalle_id}, #{mat.material_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-material-trabajo-detalle", title: 'Haga click para eliminar el Material utilizado en el Trabajo'  %>
 
