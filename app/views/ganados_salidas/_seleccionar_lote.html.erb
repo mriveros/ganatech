@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @lote, remote: true, url: ganados_salidas_eliminar_lote_url, html: { id: "form-eliminar-lote-salida-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @lote, remote: true, url: ganados_salidas_eliminar_lote_url, html: { id: "form-eliminar-lote-salida-ganado"  }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  
