@@ -3,6 +3,8 @@ class AltasProduccionesController < ApplicationController
   before_filter :require_usuario
 
   def index
+
+
   end
 
   def lista
@@ -167,7 +169,7 @@ class AltasProduccionesController < ApplicationController
   def alta_produccion_detalle
 
     @alta_produccion = AltaProduccion.where("id = ?", params[:alta_produccion_id] ).first
-    @alta_produccion_detalle = VAltaProduccionDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 10, page: params[:page])
+    @alta_produccion_detalle = VAltaProduccionDetalle.orden_fecha_creacion.where("alta_produccion_id = ?", params[:alta_produccion_id]).paginate(per_page: 5, page: params[:page])
 
 
     respond_to do |f|
