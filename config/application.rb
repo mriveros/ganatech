@@ -2,8 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-ENV['gmail_username'] = 'kantytransportadora@gmail.com'
-ENV['gmail_password'] = 'rafaelmartinez'
+ENV['gmail_username'] = 'smarthub.py@gmail.com'
+ENV['gmail_password'] = 'SmartHub200587!'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

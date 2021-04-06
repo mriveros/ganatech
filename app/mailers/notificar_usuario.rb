@@ -1,6 +1,6 @@
 class NotificarUsuario < ActionMailer::Base
   
-  default from: "kantytransportadora@gmail.com"
+  default from: "smarthub.py@gmail.com"
 
   def test_email(user_id, adjuntos)
 
@@ -9,9 +9,11 @@ class NotificarUsuario < ActionMailer::Base
 
     if (@user)
 
-      to = @user.email
-      mail(:to => to, :subject => "Aviso para cobro de producciones", :from => "kantytransportadora@gmail.com") 
+      usuario = @user.email
+      mail(:to => usuario, :subject => "Aviso para cobro de producciones", :from => "smarthub.py@gmail.com") 
+    
     end
+
   end
 
   def email(usuario, password)

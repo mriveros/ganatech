@@ -94,12 +94,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @controles_alimentaciones =  VControlAlimentacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @controles_alimentaciones =  VControlAlimentacion.orden_fecha.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VControlAlimentacion.where(cond).count
 
     else
      
-      @controles_alimentaciones = VControlAlimentacion.orden_01.paginate(per_page: 10, page: params[:page])
+      @controles_alimentaciones = VControlAlimentacion.orden_fecha.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VControlAlimentacion.count
 
     end
