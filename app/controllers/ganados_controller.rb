@@ -1099,7 +1099,10 @@ class GanadosController < ApplicationController
       end
 
     end #end transaction 
-    
+    estado_enfermedad = EstadoEnfermedad.where('id = ?', params[:estado_enfermedad][:id]).first
+    @adjunto = 'Ganado: ' + @ganado.nombre + 'RFID: ' + @ganado.codigo_rfid + 'Estado: ' + estado_enfermedad.descripcion.to_s
+    NotificarUsuario.test_email(current_usuario.id, @adjunto).deliver
+
     respond_to do |f|
 
       f.js
