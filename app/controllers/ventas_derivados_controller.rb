@@ -56,12 +56,12 @@ class VentasDerivadosController < ApplicationController
 
     if cond.size > 0
 
-      @derivados_lacteos =  VDerivadoLacteo.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @derivados_lacteos =  VDerivadoLacteo.orden_cantidad.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VDerivadoLacteo.where(cond).count
 
     else
 
-      @derivados_lacteos = VDerivadoLacteo.orden_01.paginate(per_page: 10, page: params[:page])
+      @derivados_lacteos = VDerivadoLacteo.orden_cantidad.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VDerivadoLacteo.count
 
     end
