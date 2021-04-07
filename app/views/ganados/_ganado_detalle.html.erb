@@ -334,6 +334,28 @@
     
   </div>
 
+
+
+  <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Ubicación</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+    <div align="center">  
+    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d4554.5606838876565!2d-57.520825624089014!3d-25.299366584958726!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2spy!4v1617764642524!5m2!1ses!2spy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+      
+    </div>
+
+    
+  </div>
+
 </td>
 
 
@@ -439,4 +461,22 @@
     
     }
 
+
+    function initMap() {
+    // The location of Uluru
+      const uluru = { lat: -25.344, lng: 131.036 };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: uluru,
+      });
+      // The marker, positioned at Uluru
+      
+    } 
+
 </script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARbGe5NIq3XfBy61JkrUlem0IsgTg5zzo&callback=initMap">
+</script>
+
+
