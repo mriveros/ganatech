@@ -227,23 +227,31 @@ before_filter :require_usuario
 
       if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_potrero]
         
-        @ganado_potrero.each do |ganado|
+        if @ganado_potrero.present?
+        
+          @ganado_potrero.each do |ganado|
 
-          @alimentacion = ControlAlimentacion.new
-          @alimentacion.ganado_id = ganado.id
-          @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-          @alimentacion.alimentacion_id = params[:alimentacion_id]
-          @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
-          @alimentacion.codigo_lote = params[:codigo_lote]
-          @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
-          @alimentacion.observacion = params[:observacion]
+            @alimentacion = ControlAlimentacion.new
+            @alimentacion.ganado_id = ganado.id
+            @alimentacion.fecha_control = params[:fecha_control]
+            @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+            @alimentacion.alimentacion_id = params[:alimentacion_id]
+            @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
+            @alimentacion.codigo_lote = params[:codigo_lote]
+            @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
+            @alimentacion.observacion = params[:observacion]
 
-          if @alimentacion.save
+            if @alimentacion.save
 
-            @guardado_ok = true
+              @guardado_ok = true
+
+            end
 
           end
+        
+        else
+
+          @msg = ' No hay Ganados en este Potrero.'
 
         end
 
@@ -252,23 +260,30 @@ before_filter :require_usuario
 
       if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_hacienda]
         
-        @ganado_hacienda.each do |ganado|
+        if @ganado_hacienda.present?
 
-          @alimentacion = ControlAlimentacion.new
-          @alimentacion.ganado_id = ganado.id
-          @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-          @alimentacion.alimentacion_id = params[:alimentacion_id]
-          @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
-          @alimentacion.codigo_lote = params[:codigo_lote]
-          @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
-          @alimentacion.observacion = params[:observacion]
+          @ganado_hacienda.each do |ganado|
 
-          if @alimentacion.save
+            @alimentacion = ControlAlimentacion.new
+            @alimentacion.ganado_id = ganado.id
+            @alimentacion.fecha_control = params[:fecha_control]
+            @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+            @alimentacion.alimentacion_id = params[:alimentacion_id]
+            @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
+            @alimentacion.codigo_lote = params[:codigo_lote]
+            @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
+            @alimentacion.observacion = params[:observacion]
 
-            @guardado_ok = true
+            if @alimentacion.save
+
+              @guardado_ok = true
+
+            end
 
           end
+        else
+
+          @msg = ' No hay Ganados en esta Hacienda.'
 
         end
 
@@ -276,24 +291,31 @@ before_filter :require_usuario
 
 
       if params[:clasificacion_alimentacion][:id].to_i == PARAMETRO[:clasificacion_por_lote]
-        
-        @ganado_lote.each do |ganado|
+        if @ganado_lote.present?
+          
+          @ganado_lote.each do |ganado|
 
-          @alimentacion = ControlAlimentacion.new
-          @alimentacion.ganado_id = ganado.ganado_id
-          @alimentacion.fecha_control = params[:fecha_control]
-          @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
-          @alimentacion.alimentacion_id = params[:alimentacion_id]
-          @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
-          @alimentacion.codigo_lote = params[:codigo_lote]
-          @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
-          @alimentacion.observacion = params[:observacion]
+            @alimentacion = ControlAlimentacion.new
+            @alimentacion.ganado_id = ganado.ganado_id
+            @alimentacion.fecha_control = params[:fecha_control]
+            @alimentacion.tipo_alimentacion_id = params[:tipo_alimentacion][:id]
+            @alimentacion.alimentacion_id = params[:alimentacion_id]
+            @alimentacion.cantidad_suministrada = params[:cantidad_suministrada]
+            @alimentacion.codigo_lote = params[:codigo_lote]
+            @alimentacion.clasificacion_alimentacion_id = params[:clasificacion_alimentacion][:id]
+            @alimentacion.observacion = params[:observacion]
 
-          if @alimentacion.save
+            if @alimentacion.save
 
-            @guardado_ok = true
+              @guardado_ok = true
+
+            end
 
           end
+        
+        else
+
+          @msg = ' No hay Ganados seleccionados en el Lote.'
 
         end
         #Borrar toda la tabla
