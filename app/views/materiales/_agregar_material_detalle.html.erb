@@ -9,7 +9,7 @@
 
     </div>
 
-    <%= form_for @material, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle" }, method: 'POST' do |f|%>
+    <%= form_for @material, remote: true, url: materiales_guardar_material_detalle_url, html: { id: "form-agregar-alimentacion-detalle", autocomplete: 'off' }, method: 'POST' do |f|%>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

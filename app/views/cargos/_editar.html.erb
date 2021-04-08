@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @cargo, remote: true, url: cargos_actualizar_url, html: { id: "form-editar-cargo" }, method: 'POST' do |f| %>
+    <%= form_for @cargo, remote: true, url: cargos_actualizar_url, html: { id: "form-editar-cargo" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>

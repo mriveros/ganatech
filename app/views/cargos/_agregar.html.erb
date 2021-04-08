@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @cargo, remote: true, url: cargos_guardar_url, html: { id: "form-agregar-cargo" }, method: 'POST' do |f| %>
+    <%= form_for @cargo, remote: true, url: cargos_guardar_url, html: { id: "form-agregar-cargo" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

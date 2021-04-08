@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @alta_produccion_detalle, remote: true, url: altas_producciones_guardar_alta_produccion_detalle_url, html: { id: "form-agregar-alta-produccion-detalle" } do |f| %>
+    <%= form_for @alta_produccion_detalle, remote: true, url: altas_producciones_guardar_alta_produccion_detalle_url, html: { id: "form-agregar-alta-produccion-detalle" , autocomplete: 'off'} do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
