@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @pago_remuneracion_extra, remote: true, url: pagos_remuneraciones_extras_guardar_url, html: { id: "form-agregar-pago-remuneracion-extra" }, method: 'POST' do |f| %>
+    <%= form_for @pago_remuneracion_extra, remote: true, url: pagos_remuneraciones_extras_guardar_url, html: { id: "form-agregar-pago-remuneracion-extra" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

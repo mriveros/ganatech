@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @precio, remote: true, url: precios_guardar_url, html: { id: "form-agregar-precio" }, method: 'POST' do |f| %>
+    <%= form_for @precio, remote: true, url: precios_guardar_url, html: { id: "form-agregar-precio", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @potrero, remote: true, url: potreros_guardar_url, html: { id: "form-agregar-potrero" }, method: 'POST' do |f| %>
+    <%= form_for @potrero, remote: true, url: potreros_guardar_url, html: { id: "form-agregar-potrero", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       

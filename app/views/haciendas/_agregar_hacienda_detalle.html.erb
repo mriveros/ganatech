@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @hacienda_detalle, remote: true, url: haciendas_guardar_hacienda_detalle_url, html: { id: "form-agregar-hacienda-detalle" } do |f| %>
+    <%= form_for @hacienda_detalle, remote: true, url: haciendas_guardar_hacienda_detalle_url, html: { id: "form-agregar-hacienda-detalle", autocomplete: 'off' } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

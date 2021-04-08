@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @registro_gasto, remote: true, url: registros_gastos_guardar_url, html: { id: "form-agregar-registro-gasto" }, method: 'POST' do |f| %>
+    <%= form_for @registro_gasto, remote: true, url: registros_gastos_guardar_url, html: { id: "form-agregar-registro-gasto", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

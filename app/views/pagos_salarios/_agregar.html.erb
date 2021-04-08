@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @pago_salario, remote: true, url: pagos_salarios_guardar_url, html: { id: "form-agregar-pago-salario" }, method: 'POST' do |f| %>
+    <%= form_for @pago_salario, remote: true, url: pagos_salarios_guardar_url, html: { id: "form-agregar-pago-salario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

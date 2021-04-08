@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @raza, remote: true, url: razas_guardar_url, html: { id: "form-agregar-raza" }, method: 'POST' do |f| %>
+    <%= form_for @raza, remote: true, url: razas_guardar_url, html: { id: "form-agregar-raza", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

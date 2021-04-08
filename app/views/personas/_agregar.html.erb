@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @persona, remote: true, url: personas_guardar_url, html: { id: "form-agregar-persona" }, method: 'POST' do |f| %>
+    <%= form_for @persona, remote: true, url: personas_guardar_url, html: { id: "form-agregar-persona" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

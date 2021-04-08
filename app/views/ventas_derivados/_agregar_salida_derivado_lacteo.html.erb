@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @derivado_lacteo_detalle, remote: true, url: ventas_derivados_guardar_salida_derivado_lacteo_url, html: { id: "form-agregar-salida-derivado-lacteo" } do |f| %>
+    <%= form_for @derivado_lacteo_detalle, remote: true, url: ventas_derivados_guardar_salida_derivado_lacteo_url, html: { id: "form-agregar-salida-derivado-lacteo", autocomplete: 'off' } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @detalle_credito, remote: true, url: detalles_creditos_guardar_url, html: { id: "form-agregar-detalle-credito" }, method: 'POST' do |f| %>
+    <%= form_for @detalle_credito, remote: true, url: detalles_creditos_guardar_url, html: { id: "form-agregar-detalle-credito" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

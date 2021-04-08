@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @detalle_debito, remote: true, url: detalles_debitos_guardar_url, html: { id: "form-agregar-detalle-debito" }, method: 'POST' do |f| %>
+    <%= form_for @detalle_debito, remote: true, url: detalles_debitos_guardar_url, html: { id: "form-agregar-detalle-debito", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

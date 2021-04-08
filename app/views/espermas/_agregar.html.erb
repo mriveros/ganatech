@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @esperma, remote: true, url: espermas_guardar_url, html: { id: "form-agregar-esperma" }, method: 'POST' do |f| %>
+    <%= form_for @esperma, remote: true, url: espermas_guardar_url, html: { id: "form-agregar-esperma", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  

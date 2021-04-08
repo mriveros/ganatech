@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_url, html: { id: "form-agregar-reproduccion" }, method: 'POST' do |f| %>
+    <%= form_for @reproduccion, remote: true, url: reproducciones_guardar_url, html: { id: "form-agregar-reproduccion" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 

@@ -11,7 +11,7 @@
       
     </div>
 
-    <%= form_for @control_ganado, remote: true, url: controles_ganados_guardar_url, html: { id: "form-agregar-control-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @control_ganado, remote: true, url: controles_ganados_guardar_url, html: { id: "form-agregar-control-ganado" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
  

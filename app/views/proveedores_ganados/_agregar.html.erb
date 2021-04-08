@@ -10,7 +10,7 @@
 
     </div>
 
-    <%= form_for @proveedor_ganado, remote: true, url: proveedores_ganados_guardar_url, html: { id: "form-agregar-proveedor-ganado" }, method: 'POST' do |f| %>
+    <%= form_for @proveedor_ganado, remote: true, url: proveedores_ganados_guardar_url, html: { id: "form-agregar-proveedor-ganado", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
