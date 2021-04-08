@@ -424,6 +424,11 @@ before_filter :require_usuario
               if @ganado_muerto.save
 
                 @actualizado_ok = true
+                motivo_muerte = MotivoMuerte.where('id = ?', PARAMETRO[:motivo_muerte_enfermedad]).first
+                subject = 'Ganado marcado como Muerto'
+                adjunto = 'Ganado nombre: ' + @ganado.nombre + '  Motivo: ' + motivo_muerte.descripcion
+                modulo = 'Ganados Enfermos'
+                NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
               end
 
