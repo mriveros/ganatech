@@ -1,6 +1,6 @@
 <%= link_to icon_detalles, "#", id: "link-to-alimentacion-detalle-#{alimentacion_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles de la Alimnetacion', onclick: "$('.modal').html('');return false;" %>
 
-<script type="text/javascript">
+<script type="text/javascript"> 
 
   $("#link-to-alimentacion-detalle-<%= alimentacion_id %>").bind('click', function(){
 

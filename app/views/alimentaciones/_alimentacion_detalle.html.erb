@@ -86,7 +86,7 @@
                   <td><%= ali.descripcion %></td>
                   <td><%= ali.costo_suministro.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
                   <td><%= ali.fecha_suministro.strftime('%d/%m/%Y') %></td>
-                  <td><%= ali.fecha_vencimiento.strftime('%d/%m/%Y') %></td>
+                  <td><%= (ali.fecha_vencimiento.present?)? ali.fecha_vencimiento.strftime('%d/%m/%Y') : "Sin Especificar" %></td>
                   <td><%= ali.numero_lote %></td>
                   <td><%= ali.cantidad_suministro %></td>
                   <td><%= ali.costo_total.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
