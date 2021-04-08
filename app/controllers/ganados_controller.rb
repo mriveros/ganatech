@@ -1101,10 +1101,10 @@ class GanadosController < ApplicationController
     end #end transaction 
     estado_enfermedad = EstadoEnfermedad.where('id = ?', params[:estado_enfermedad][:id]).first
     enfermedad = Enfermedad.where('id = ?', params[:enfermedad][:id]).first
-    @modulo = 'Módulo Ganados Enfermos'
-    @subject = 'Ganado Marcado como Enfermo'
-    @adjunto =  'Ganado Nombre: ' + @ganado.nombre + 'RFID: ' + @ganado.codigo_rfid + ' Enfermedad: ' + enfermedad.descripcion.to_s + ' Estado: ' + estado_enfermedad.descripcion.to_s
-    NotificarUsuario.test_email(current_usuario.id,@subject ,@adjunto, @modulo).deliver
+    modulo = 'Módulo Ganados Enfermos'
+    subject = 'Ganado Marcado como Enfermo'
+    adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' Enfermedad: ' + enfermedad.descripcion.to_s + ' Estado: ' + estado_enfermedad.descripcion.to_s
+    NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
     respond_to do |f|
 
@@ -1180,6 +1180,11 @@ class GanadosController < ApplicationController
               @guardado_ok = true
               @ganado_muerto.documento_ganatec_id = @documento_ganatec.id
               @ganado_muerto.save
+              motivo_muerte = MotivoMuerte.where('id = ?', params[:motivo_muerte][:id]).first
+              subject = 'Ganado marcado como muerto'
+              modulo = 'Ganados'
+              adjunto = 'Nombre Ganado: ' + @ganado.nombre  + ' Motivo: ' + motivo_muerte.descripcion.to_s
+              NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
             end
 
