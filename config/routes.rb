@@ -51,6 +51,15 @@ get 'crontab_ultron/index'
 #--------------------------------------------------------------------------
 
 #----------------------------INICIO BLOQUE DE RUTAS GANATEC-----------------------
+#NOTIFICACIONES
+  post 'notificaciones/lista'
+  get 'notificaciones/lista'
+  get 'notificaciones/agregar'
+  post 'notificaciones/guardar'
+  get 'notificaciones/eliminar'
+  get 'notificaciones/editar'
+  post 'notificaciones/actualizar'
+  get 'notificaciones/index'
 
 #GANADOS FAENAS
   get 'ganados_faenas/index'
