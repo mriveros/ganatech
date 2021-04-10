@@ -1,20 +1,22 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-cargo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-cargos");
-   $("#form_buscar_cargos_id").val('<%= @cargo_elim.id %>');
-   $("#form_buscar_cargos_descripcion").val('');
-   $("#form_buscar_cargos_sueldo").val('');
+   $("<div class='col-sm-12' id='msg-eliminar-notificacion-usuario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-notificaciones-usuarios");
+   $("#form_buscar_notificaciones_usuarios_id").val('<%= @notificacion_usuario_elim.id %>');
+  $("#form_buscar_notificaciones_usuarios_descripcion").val('');
+  $("#form_buscar_notificaciones_usuarios_nombre_persona").val('');
+  $("#form_buscar_notificaciones_usuarios_apellido_persona").val('');
+  $("#form_buscar_notificaciones_usuarios_email").val('');
 
     setTimeout(function(){ 
 
-    	$("#msg-eliminar-cargo").remove(); 
-    	$("#form-buscar-cargos").submit(); 
+    	$("#msg-eliminar-notificacion-usuario").remove(); 
+    	$("#form-buscar-notificaciones-usuarios").submit(); 
     }, 1500);
    
     	swal("Eliminado Exitosamente.")
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-cargo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al eliminar el Cargo. Intente más tarde.</div>").insertBefore("#table-cargos");
+  $("<div class='col-sm-12' id='msg-eliminar-notificacion-usuario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al eliminar la Notificación de Usuario. Intente más tarde.</div>").insertBefore("#table-notificaciones-usuarios");
   
 <% end %>
