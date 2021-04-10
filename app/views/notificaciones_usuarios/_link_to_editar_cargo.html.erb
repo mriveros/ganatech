@@ -1,0 +1,5 @@
+<%= link_to icon_editar, "#", id: "link-to-editar-cargo-#{cargo.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Cargo.', onclick: "$('.modal').html('');return false;" %>
+
+
+<%= modal_window( window_id: "modal-window-editar-cargo", link_to_id: "#link-to-editar-cargo-#{cargo.id}", url: cargos_editar_path( window_id: "modal-window-editar-cargo", id: cargo.id) )%>
+

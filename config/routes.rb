@@ -60,6 +60,8 @@ get 'crontab_ultron/index'
   get 'notificaciones/editar'
   post 'notificaciones/actualizar'
   get 'notificaciones/index'
+  get 'notificaciones/activar_notificacion'
+
 
 #GANADOS FAENAS
   get 'ganados_faenas/index'
