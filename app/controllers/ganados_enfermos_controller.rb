@@ -356,6 +356,12 @@ before_filter :require_usuario
         auditoria_despues(@ganado, auditoria_id )
         @actualizado_ok = true
 
+
+        subject = 'Ganado Recuperado exitosamente.'
+        adjunto = 'Ganado nombre: ' + @ganado.nombre + 'ID Ganado: ' + @ganado.id
+        modulo = 'Ganados Enfermos'
+        NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
+
       end
 
     end
@@ -426,7 +432,7 @@ before_filter :require_usuario
                 @actualizado_ok = true
                 motivo_muerte = MotivoMuerte.where('id = ?', PARAMETRO[:motivo_muerte_enfermedad]).first
                 subject = 'Ganado marcado como Muerto'
-                adjunto = 'Ganado nombre: ' + @ganado.nombre + '  Motivo: ' + motivo_muerte.descripcion
+                adjunto = 'Ganado nombre: ' + @ganado.nombre + '  Motivo: ' + motivo_muerte.descripcion 
                 modulo = 'Ganados Enfermos'
                 NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
