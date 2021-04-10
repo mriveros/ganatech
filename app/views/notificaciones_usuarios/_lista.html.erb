@@ -1,17 +1,20 @@
-<% if cargos.present? %>
+<% if notificaciones_usuarios.present? %>
 
-  <% cargos.each do |dc| %>
+  <% notificaciones_usuarios.each do |nu| %>
 
     <tr>
 
-      <td ><%= dc.id %></td>
-      <td ><%= dc.descripcion%></td>
-      <td ><%= dc.sueldo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= nu.notificacion_usuario_id %></td>
+      <td ><%= nu.descripcion%></td>
+      <td ><%= nu.nombre_persona%></td>
+      <td ><%= nu.apellido_persona%></td>
+      <td ><%= nu.email%></td>
+      
       <td >
         
-        <%= link_to_editar_cargo(dc) %>
+        <%= link_to_editar_notificacion_usuario(nu) %>
 
-        <%= link_to icon_eliminar, cargos_eliminar_path(id: dc.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cargo', data: { confirm: "Está seguro de eliminar el Cargo?"} %>
+        <%= link_to icon_eliminar, notificaciones_usuarios_eliminar_path(id: nu.notificacion_usuario_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cargo', data: { confirm: "Está seguro de eliminar el Cargo?"} %>
          
        </td>
 
@@ -23,7 +26,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cargos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate notificaciones_usuarios, :params => params %></div></td>
 </tr>
 
 <tr>
