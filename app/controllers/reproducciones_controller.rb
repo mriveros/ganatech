@@ -1,7 +1,7 @@
 class ReproduccionesController < ApplicationController
 
 before_filter :require_usuario
-
+ 
 
   def index
   
@@ -346,6 +346,7 @@ before_filter :require_usuario
       end 
 
     else
+
       @codigo_lote = 1
       @nuevo_autoincremento = 1
 
@@ -450,6 +451,13 @@ before_filter :require_usuario
                 auditoria_despues(@reproduccion, auditoria_id_reproduccion)
                 @guardado_ok = true
 
+                #Notificar usuarios email
+                modulo = 'Módulo Reproducciones'
+                subject = 'Reprodución Finalizada(Nuevo Ganado)'
+                adjunto =  'Ganado Nombre: ' + ganado.nombre + ' RP: ' + ganado.rp
+                NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
+
+
               end
 
             end
@@ -500,7 +508,7 @@ before_filter :require_usuario
         @reproduccion.estado_reproduccion_id = PARAMETRO[:estado_reproduccion_perdido]
         @reproduccion.observacion = params[:observacion]
         @reproduccion.fecha_aborto = params[:fecha_aborto]
-        @reproduccion.tipo_aborto_id = params[:tipo_aborto_id]
+        @reproduccion.tipo_aborto_id = params[:reproduccion][:tipo_aborto_id]
 
         if @reproduccion.save
           
@@ -511,6 +519,13 @@ before_filter :require_usuario
             
             auditoria_despues(@ganado, auditoria_id_ganado)
             @guardado_ok = true
+
+            #Notificar usuarios email
+            tipo_aborto = TipoAborto.where('id = ?', params[:reproduccion][:tipo_aborto_id]).first
+            modulo = 'Módulo Reproducciones'
+            subject = 'Reprodución Perdida(Aborto)'
+            adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' RP: ' + @ganado.rp + ' Tipo Aborto: ' + tipo_aborto.descripcion.to_s + ' Fecha: ' + params[:fecha_aborto]
+            NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
 
           end
           
