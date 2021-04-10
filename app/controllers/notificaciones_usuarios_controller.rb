@@ -18,31 +18,31 @@ class NotificacionesUsuariosController < ApplicationController
 
 	    end
 
-	    if params[:form_buscar_notificaciones_descripcion].present?
+	    if params[:form_buscar_notificaciones_usuarios_descripcion].present?
 
 	      cond << "descripcion ilike ?"
-	      args << "%#{params[:form_buscar_notificaciones_descripcion]}%"
+	      args << "%#{params[:form_buscar_notificaciones_usuarios_descripcion]}%"
 
 	    end
 
-	    if params[:form_buscar_notificaciones_nombre_persona].present?
+	    if params[:form_buscar_notificaciones_usuarios_nombre_persona].present?
 
 	      cond << "nombre_persona ilike ?"
-	      args << "%#{params[:form_buscar_notificaciones_nombre_persona]}%"
+	      args << "%#{params[:form_buscar_notificaciones_usuarios_nombre_persona]}%"
 
 	    end
 
-	    if params[:form_buscar_notificaciones_apellido_persona].present?
+	    if params[:form_buscar_notificaciones_usuarios_apellido_persona].present?
 
 	      cond << "apellido ilike ?"
-	      args << "%#{params[:form_buscar_notificaciones_apellido_persona]}%"
+	      args << "%#{params[:form_buscar_notificaciones_usuarios_apellido_persona]}%"
 
 	    end
 
-	    if params[:form_buscar_notificaciones_email].present?
+	    if params[:form_buscar_notificaciones_usuarios_email].present?
 
 	      cond << "email ilike ?"
-	      args << "%#{params[:form_buscar_notificaciones_email]}%"
+	      args << "%#{params[:form_buscar_notificaciones_usuarios_email]}%"
 
 	    end
 

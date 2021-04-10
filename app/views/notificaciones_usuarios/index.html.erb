@@ -6,7 +6,7 @@
   <div class="pull-right btn-lg hidden-xs" id="start-tour"><a title="Ir a la ayuda"><i class="icon-py-ayuda"></i> Ayuda</a></div>
 -->
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Puestos de Trabajo - Cargos</h3>
+    <h3 style="float:left;margin-top:5px;">Notificaciones Usuarios</h3>
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-cargo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
     <%= modal_window( window_id: "modal-window-agregar-cargo", link_to_id: "#link-to-agregar-cargo", url: cargos_agregar_path( window_id: "modal-window-agregar-cargo") )%>
     
@@ -15,40 +15,60 @@
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-detalles-creditos">
+<div class="table-responsive" id="table-notificaciones-usuarios">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag cargos_lista_path, remote: true, id: "form-buscar-cargos"  do  %>
+      <%= form_tag notificaciones_usuarios_lista_path, remote: true, id: "form-buscar-notificaciones-usuarios"  do  %>
 
         <tr>
 
           <th style="width:20px;">
             <span>ID</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cargos_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_notificaciones_usuarios_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-notificaciones-usuarios', '#form_buscar_notificaciones_usuarios_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
 
           <th style="width:120px;">
-            <span>Descripción<br/> <em style="font-size: 7px;"> Ej: Veterinario</em></span>
+            <span>Descripción<br/> <em style="font-size: 7px;"> Ej: Notificacion</em></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cargos_descripcion, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_descripcion');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_notificaciones_usuarios_descripcion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-notificaciones-usuarios', '#form_buscar_notificaciones_usuarios_descripcion');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
           </th>
 
           <th style="width:120px;">
-            <span>Sueldo</span>
+            <span>Nombre<br/> <em style="font-size: 7px;"></em></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cargos_sueldo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-cargos', '#form_buscar_cargos_sueldo');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_notificaciones_usuarios_nombre_persona, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-notificaciones-usuarios', '#form_buscar_notificaciones_usuarios_nombre_persona');"><i class="fa fa-times"></i></span>
             </div>
+            <em class="nmb"></em>
+          </th>
+
+
+          <th style="width:120px;">
+            <span>Apellido<br/> <em style="font-size: 7px;"> </em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_notificaciones_usuarios_apellido_persona, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-notificaciones-usuarios', '#form_buscar_notificaciones_usuarios_apellido_persona');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:120px;">
+            <span>Email<br/> <em style="font-size: 7px;"> Ej: marcos.riveros@smarthub.com.py</em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_notificaciones_usuarios_email, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-notificaciones-usuarios', '#form_buscar_notificaciones_usuarios_email');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
           </th>
 
 
@@ -60,7 +80,7 @@
 
       </thead> 
 
-    <tbody id="cargos-lista"></tbody>
+    <tbody id="notificaciones-usuarios-lista"></tbody>
   
   </table>
 
@@ -72,11 +92,11 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-cargos").bind("submit", function () {
+  $("#form-buscar-notificaciones-usuarios").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_cargos_descripcion").val().length !== 0 ){
+    if($("#form_buscar_notificaciones_usuarios_nombre_persona").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_cargos_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_cargos_descripcion").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_notificaciones_usuarios_nombre_persona").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_notificaciones_usuarios_apellido_persona").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
@@ -88,7 +108,7 @@
       
     if(valido){
     $(".nmb").html('');       
-    $("#detalles-creditos-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#notificaciones-usuarios-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -97,15 +117,15 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-detalles-creditos input, #table-detalles-creditos select").bind('change', function () {
+  $("#table-notificaciones-usuarios input, #table-notificaciones-usuarios select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-cargos").submit();
+      $("#form-buscar-notificaciones-usuarios").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-cargos").submit();
+  $("#form-buscar-notificaciones-usuarios").submit();
   <% if params[:agregar] %>
     $("#link-to-agregar-cargo").trigger('click');
   <% end %>
@@ -124,7 +144,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-cargos table th { background:#e6e6e6;}
-    #form-buscar-cargos table th span.limpiar { background:#fff;}
+    #form-buscar-notificaciones-usuarios table th { background:#e6e6e6;}
+    #form-buscar-notificaciones-usuarios table th span.limpiar { background:#fff;}
 
 </style>
