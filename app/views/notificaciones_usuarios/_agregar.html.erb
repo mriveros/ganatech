@@ -5,11 +5,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Cargo</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Notificación Usuario</h4>
       
     </div>
 
-    <%= form_for @cargo, remote: true, url: cargos_guardar_url, html: { id: "form-agregar-cargo" , autocomplete: 'off'}, method: 'POST' do |f| %>
+    <%= form_for @notificacion_usuario, remote: true, url: notificaciones_usuarios_guardar_url, html: { id: "form-agregar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -21,9 +21,21 @@
           <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Sueldo #{attr_requerido}".html_safe %></div>
-            <div class="col-sm-7"><%= f.text_field :sueldo, :onkeyup=>' formatear_numero(this)' ,:onkeypress=> "return isNumberKey(event)", class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 12 %></div>
-          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nombre #{attr_requerido}".html_safe, id: "lbl-nombre" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_nombre, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Apellido #{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :email, "Email #{attr_requerido}".html_safe, id: "lbl-email" %></div>
+          <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
        
       </div>
 
@@ -40,10 +52,10 @@
 
 <style type="text/css">
 
-  #form-agregar-cargo label, #form-agregar-cargo input[type='text'], #form-agregar-cargo select { float:left; margin-top:5px;}
-  #form-agregar-cargo br {clear:both; }
-  #form-agregar-cargo label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-cargo #descripcion { width:50%;}
+  #form-agregar-notificacion-usuario label, #form-agregar-notificacion-usuario input[type='text'], #form-agregar-notificacion-usuario select { float:left; margin-top:5px;}
+  #form-agregar-notificacion-usuario br {clear:both; }
+  #form-agregar-notificacion-usuario label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-notificacion-usuario #descripcion { width:50%;}
   
 
 </style>
@@ -51,5 +63,13 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+  $("#persona_documento").bind("keydown", function(e){
+      
+    if(e.keyCode == 13 || e.keyCode == 9){
+    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
+      return false;
+    }
+ 
+  })
 
 </script>
