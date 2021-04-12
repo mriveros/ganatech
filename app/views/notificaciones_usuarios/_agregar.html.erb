@@ -64,7 +64,7 @@
 
   aplicar_datepicker2();
   $("#persona_documento").bind("keydown", function(e){
-      
+     
     if(e.keyCode == 13 || e.keyCode == 9){
     buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
       return false;
