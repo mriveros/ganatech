@@ -1,4 +1,4 @@
-class NotificacionesUsuariosController < ApplicationController
+class NotificacionesPersonasController < ApplicationController
 
 	before_filter :require_usuario
 
@@ -53,17 +53,17 @@ class NotificacionesUsuariosController < ApplicationController
 
 	    if cond.size > 0
 
-	      @notificaciones =  VNotificacionUsuario.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = VNotificacionUsuario.where(cond).count
+	      @notificaciones =  VNotificacionPersona.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = VNotificacionPersona.where(cond).count
 
 	    else
 
-	      @notificaciones = VNotificacionUsuario.orden_01.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = VNotificacionUsuario.count
+	      @notificaciones = VNotificacionPersona.orden_01.paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = VNotificacionPersona.count
 
 	    end
 
-	    @total_registros = VNotificacionUsuario.count
+	    @total_registros = VNotificacionPersona.count
 
 	    respond_to do |f|
 
@@ -76,7 +76,7 @@ class NotificacionesUsuariosController < ApplicationController
 
 	  def agregar
 
-	    @notificacion_usuario = NotificacionUsuario.new
+	    @notificacion_usuario = NotificacionPersona.new
 
 	    respond_to do |f|
 
@@ -92,14 +92,14 @@ class NotificacionesUsuariosController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @notificacion_usuario = NotificacionUsuario.new()
+	    @notificacion_usuario = NotificacionPersona.new()
 
-	    @notificacion_usuario.descripcion = params[:NotificacionUsuario][:descripcion].upcase
-	    @notificacion_usuario.sueldo = params[:NotificacionUsuario][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    @notificacion_usuario.descripcion = params[:NotificacionPersona][:descripcion].upcase
+	    @notificacion_usuario.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
 	    
 	      if @notificacion_usuario.save
 
-	        auditoria_nueva("registrar NotificacionUsuario", "notificaciones", @notificacion_usuario)
+	        auditoria_nueva("registrar NotificacionPersona", "notificaciones", @notificacion_usuario)
 	       
 	        @notificacion_usuario_ok = true
 	       
@@ -120,14 +120,14 @@ class NotificacionesUsuariosController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @notificacion_usuario = NotificacionUsuario.find(params[:id])
+	    @notificacion_usuario = NotificacionPersona.find(params[:id])
 		@notificacion_usuario_elim = @notificacion_usuario
 
 	    if valido
 
 	      	if @notificacion_usuario.destroy
 
-		        auditoria_nueva("eliminar NotificacionUsuario", "notificaciones", @notificacion_usuario)
+		        auditoria_nueva("eliminar NotificacionPersona", "notificaciones", @notificacion_usuario)
 		        @eliminado = true
 
 	    	end
@@ -143,7 +143,7 @@ class NotificacionesUsuariosController < ApplicationController
 
 	  def editar
 
-	    @notificacion_usuario = NotificacionUsuario.find(params[:id])
+	    @notificacion_usuario = NotificacionPersona.find(params[:id])
 
 	    respond_to do |f|
 
@@ -158,14 +158,14 @@ class NotificacionesUsuariosController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @notificacion_usuario =Cargo NotificacionUsuario.find(params[:NotificacionUsuario][:id])
-	    auditoria_id = auditoria_antes("actualizar NotificacionUsuario", "notificaciones", @notificacion_usuario)
+	    @notificacion_usuario =Cargo NotificacionPersona.find(params[:NotificacionPersona][:id])
+	    auditoria_id = auditoria_antes("actualizar NotificacionPersona", "notificaciones", @notificacion_usuario)
 
 	    if valido
 
 	      
-	    	@notificacion_usuario.descripcion = params[:NotificacionUsuario][:descripcion].upcase
-	    	@notificacion_usuario.sueldo = params[:NotificacionUsuario][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    	@notificacion_usuario.descripcion = params[:NotificacionPersona][:descripcion].upcase
+	    	@notificacion_usuario.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
 	      	
 	      	if @notificacion_usuario.save
 
