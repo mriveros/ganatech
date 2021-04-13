@@ -1,4 +1,4 @@
-class VNotificacionUsuario < ActiveRecord::Base
+class VNotificacionPersona < ActiveRecord::Base
   
   self.table_name= "v_notificaciones_personas"
   self.primary_key = "notificacion_persona_id"
