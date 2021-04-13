@@ -6,8 +6,8 @@
 
       <td ><%= nu.notificacion_persona_id %></td>
       <td ><%= nu.descripcion%></td>
-      <td ><%= nu.nombre_persona%></td>
-      <td ><%= nu.apellido_persona%></td>
+      <td ><%= nu.nombre_persona.upcase%></td>
+      <td ><%= nu.apellido_persona.upcase%></td>
       <td ><%= nu.email%></td>
       <%if nu.estado == true%>
       
