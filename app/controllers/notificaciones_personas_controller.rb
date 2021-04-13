@@ -140,17 +140,18 @@ class NotificacionesPersonasController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @notificacion_usuario = NotificacionPersona.find(params[:id])
-		@notificacion_usuario_elim = @notificacion_usuario
+	    @notificacion_persona = NotificacionPersona.find(params[:id])
+		@notificacion_persona_elim = @notificacion_persona
 
 	    if valido
 
-	      	if @notificacion_usuario.destroy
+	      	if @notificacion_persona.destroy
 
-		        auditoria_nueva("eliminar NotificacionPersona", "notificaciones", @notificacion_usuario)
+		        auditoria_nueva("eliminar Notificacion Persona", "notificaciones_persona", @notificacion_persona)
 		        @eliminado = true
 
 	    	end
+	    	
 		end
 
 	    respond_to do |f|

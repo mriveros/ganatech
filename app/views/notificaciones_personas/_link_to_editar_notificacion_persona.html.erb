@@ -1,5 +1,5 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-notificacion-usuario-#{notificacion_usuario.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar la Notificación de usuario.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-notificacion-usuario-#{notificacion_persona.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar la Notificación de usuario.', onclick: "$('.modal').html('');return false;" %>
 
 
-<%= modal_window( window_id: "modal-window-editar-notificacion-usuario", link_to_id: "#link-to-editar-notificacion-usuario-#{notificacion_usuario.id}", url: notificaciones_usuarios_editar_path( window_id: "modal-window-editar-notificacion-usuario", id: notificacion_usuario.id) )%>
+<%= modal_window( window_id: "modal-window-editar-notificacion-usuario", link_to_id: "#link-to-editar-notificacion-usuario-#{notificacion_persona.id}", url: notificaciones_personas_editar_path( window_id: "modal-window-editar-notificacion-usuario", id: notificacion_persona.id) )%>
 

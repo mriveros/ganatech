@@ -1,8 +1,8 @@
 module NotificacionesPersonasHelper
 
-  def link_to_editar_notificacion_persona(notificacion_usuario)
+  def link_to_editar_notificacion_persona(notificacion_persona)
 
-      render partial: 'link_to_editar_notificacion_usuario', locals: { notificacion_usuario: notificacion_usuario }
+      render partial: 'link_to_editar_notificacion_persona', locals: { notificacion_persona: notificacion_persona }
       
   end
 

@@ -4,7 +4,7 @@
 
     <tr>
 
-      <td ><%= nu.notificacion_usuario_id %></td>
+      <td ><%= nu.notificacion_persona_id %></td>
       <td ><%= nu.descripcion%></td>
       <td ><%= nu.nombre_persona%></td>
       <td ><%= nu.apellido_persona%></td>
@@ -12,9 +12,9 @@
       
       <td >
         
-        <%= link_to_editar_notificacion_usuario(nu) %>
+        <%= link_to_editar_notificacion_persona(nu) %>
 
-        <%= link_to icon_eliminar, notificaciones_personas_eliminar_path(id: nu.notificacion_usuario_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cargo', data: { confirm: "Está seguro de eliminar el Cargo?"} %>
+        <%= link_to icon_eliminar, notificaciones_personas_eliminar_path(id: nu.notificacion_persona_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la Notificación a la Persona.', data: { confirm: "Está seguro de eliminar la Notificación?"} %>
          
        </td>
 
