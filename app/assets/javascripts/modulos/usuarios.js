@@ -633,5 +633,39 @@ function buscar_usuario(tipo_documento_id, nacionalidad_id, documento, fecha_nac
   })
 }
 //--------------------------------------------------------------------//
+// -------------------------- BUSCAR USUARIO ------------------------//
+function buscar_usuario_v2(tipo_documento_id, nacionalidad_id, documento, ruta){
+
+  $("#msg-documento-persona").remove();
+
+  $.ajax({
+    type: 'GET',
+    url: ruta,
+    data: {tipo_documento_id: tipo_documento_id, nacionalidad_id: nacionalidad_id, documento:documento},
+    success: function(data){
+      
+      if(data != null){
+          
+        $("#persona_documento").next();
+        
+        $("#persona_nombre").val(data.nombre_persona); 
+        $("#persona_apellido").val(data.apellido_persona);
+        $("#email").val(data.correo_electronico);
+        $("#usuario_id").val(data.usuario_id);
+        $("#descripcion").focus();
+          
+      }else{
+
+
+        $("<span id='msg-documento-persona' style='color:red;padding-top:20px;font-size:10px;'>Esta persona no existe, comuniquese a rue@mec.gov.py adjuntando copia del documento de identidad para registrar la persona y habilitar la creación del usuario.</span>").insertAfter("#persona_documento");
+
+        $("#persona_nombre").val('');
+        $("#persona_apellido").val('');
+          
+      }
+    },
+    typeData: 'json'     
+  })
+}
 
 

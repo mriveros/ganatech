@@ -1,3 +1,4 @@
+<%= javascript_include_tag "modulos/usuarios.js" %>
 <div class="modal-dialog">
       
   <div class="modal-content">
@@ -12,13 +13,18 @@
     <%= form_for @notificacion_usuario, remote: true, url: notificaciones_usuarios_guardar_url, html: { id: "form-agregar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= hidden_field_tag :usuario_id%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
@@ -34,7 +40,11 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :email, "Email #{attr_requerido}".html_safe, id: "lbl-email" %></div>
-          <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_field_tag :email, nil,class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :descripcion, "Comentario".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
        
       </div>
@@ -62,12 +72,21 @@
 
 <script type="text/javascript">
 
+  setTimeout(function(){ 
+    $("#persona_documento").focus();
+    $("#persona_tipo_documento_id").val(1);
+    $("#persona_nacionalidad_id").val(1);
+  }, 1000);
+
   aplicar_datepicker2();
+
   $("#persona_documento").bind("keydown", function(e){
      
     if(e.keyCode == 13 || e.keyCode == 9){
-    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
+
+      buscar_usuario_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(usuarios_buscar_persona_path ) %>");
       return false;
+
     }
  
   })

@@ -4,6 +4,7 @@ class NotificacionesUsuariosController < ApplicationController
 
 	  def index
 
+
 	  end
 
 	  def lista
