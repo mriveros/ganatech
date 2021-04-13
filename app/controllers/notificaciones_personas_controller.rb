@@ -188,12 +188,13 @@ class NotificacionesPersonasController < ApplicationController
 	    	@msg = "Debe agregar un email. "
 
 	   	end
-	   	
+
 	    if @valido
 
 	      
 	    	@notificacion_persona.descripcion = params[:notificacion_persona][:descripcion].upcase
 	    	@notificacion_persona.email = params[:notificacion_persona][:email]
+	    	@notificacion_persona.estado = params[:notificacion_persona][:estado]
 	      	
 	      	if @notificacion_persona.save
 

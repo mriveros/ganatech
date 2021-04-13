@@ -19,6 +19,10 @@
 
         <div class="panel-body">
 
+          <div class="col-sm-4"><%= f.label :email, "Comentario".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
           <div class="col-sm-4"><%= f.label :email, "Correo #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
