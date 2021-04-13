@@ -39,12 +39,12 @@
           <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :email, "Email #{attr_requerido}".html_safe, id: "lbl-email" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Email #{attr_requerido}".html_safe, id: "lbl-email" %></div>
           <div class="col-sm-7"><%= text_field_tag :email, nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :descripcion, "Comentario".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Comentario".html_safe %></div>
+          <div class="col-sm-7"><%=text_field_tag :descripcion, nil,class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
        
       </div>

@@ -1,8 +1,8 @@
-<% if @cargo_ok %>
+<% if @notificacion_persona_ok %>
 
    $("<div class='col-sm-12' id='msg-agregar-notificacion-usuario' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Registrado Exitosamente.</div>").insertBefore("#form-agregar-notificacion-usuario");
    
-  $("#form_buscar_notificaciones_usuarios_id").val('<%= @notificacion_usuario.id %>');
+  $("#form_buscar_notificaciones_usuarios_id").val('<%= @notificacion_persona.id %>');
   $("#form_buscar_notificaciones_usuarios_descripcion").val('');
   $("#form_buscar_notificaciones_usuarios_nombre_persona").val('');
   $("#form_buscar_notificaciones_usuarios_apellido_persona").val('');
@@ -21,5 +21,11 @@
 <% else %>
 
     $("<div class='col-sm-12' id='msg-agregar-notificacion-usuario' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-agregar-notificacion-usuario");
+     setTimeout(function(){ 
+
+      $("#msg-agregar-notificacion-usuario").hide(); 
+      swal("<%=@msg%>")
+
+  }, 3000);
 
 <% end %>

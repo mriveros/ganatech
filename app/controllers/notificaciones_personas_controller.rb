@@ -53,12 +53,12 @@ class NotificacionesPersonasController < ApplicationController
 
 	    if cond.size > 0
 
-	      @notificaciones =  VNotificacionPersona.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+	      @notificaciones_personas =  VNotificacionPersona.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = VNotificacionPersona.where(cond).count
 
 	    else
 
-	      @notificaciones = VNotificacionPersona.orden_01.paginate(per_page: 10, page: params[:page])
+	      @notificaciones_personas = VNotificacionPersona.orden_01.paginate(per_page: 10, page: params[:page])
 	      @total_encontrados = VNotificacionPersona.count
 
 	    end
@@ -96,16 +96,24 @@ class NotificacionesPersonasController < ApplicationController
 	    
 	    unless persona.present?
 
-	    	valido = false
-	    	@msg = "La persona no existe."
+	    	@valido = false
+	    	@msg = "La persona no existe. "
+
+	   	end
+
+	   	unless params[:email].present?
+	   		
+	   		@valido = false
+	    	@msg = "Debe agregar un email. "
 
 	   	end
 
 	   	if @valido
 	    
-		    @notificacion_usuario = NotificacionPersona.new()
-		    @notificacion_usuario.descripcion = params[:notificacionPersona][:descripcion].upcase
+		    @notificacion_persona = NotificacionPersona.new()
+		    @notificacion_persona.descripcion = params[:descripcion]
 		    @notificacion_persona.persona_id = params[:persona_id]
+		    @notificacion_persona.email = params[:email]
 		    
 		    if @notificacion_persona.save
 
@@ -117,7 +125,7 @@ class NotificacionesPersonasController < ApplicationController
 
 	    end           
 	             
-	               
+
 	    respond_to do |f|
 
 	      f.js
