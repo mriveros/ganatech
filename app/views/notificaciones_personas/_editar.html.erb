@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Cargo</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Notificación Persona</h4>
       
     </div>
 
-    <%= form_for @cargo, remote: true, url: notificaciones_personas_actualizar_url, html: { id: "form-editar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
+    <%= form_for @notificacion_persona, remote: true, url: notificaciones_personas_actualizar_url, html: { id: "form-editar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
@@ -24,7 +24,7 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :active, "Activo ?".html_safe %></div>
-          <div class="col-sm-7"><%= f.check_box :active %></div>
+          <div class="col-sm-7"><%= f.check_box :estado %></div>
           <div class="col-sm-1"></div><br />
           
       </div>

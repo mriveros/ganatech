@@ -176,17 +176,24 @@ class NotificacionesPersonasController < ApplicationController
 
 	  def actualizar
 
-	    valido = true
+	    @valido = true
 	    @msg = ""
 
 	    @notificacion_persona = NotificacionPersona.find(params[:notificacion_persona][:id])
 	    auditoria_id = auditoria_antes("actualizar Notificacion Persona", "notificaciones_personas", @notificacion_persona)
 
-	    if valido
+	    unless params[:notificacion_persona][:email].present?
+	   		
+	   		@valido = false
+	    	@msg = "Debe agregar un email. "
+
+	   	end
+	   	
+	    if @valido
 
 	      
-	    	@notificacion_persona.descripcion = params[:NotificacionPersona][:descripcion].upcase
-	    	@notificacion_persona.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    	@notificacion_persona.descripcion = params[:notificacion_persona][:descripcion].upcase
+	    	@notificacion_persona.email = params[:notificacion_persona][:email]
 	      	
 	      	if @notificacion_persona.save
 

@@ -9,8 +9,16 @@
       <td ><%= nu.nombre_persona%></td>
       <td ><%= nu.apellido_persona%></td>
       <td ><%= nu.email%></td>
-      <td ><%= nu.estado%></td>
+      <%if nu.estado == true%>
       
+        <td ><%= 'Activo' %></td>
+
+      <%else%>
+      
+        <td ><%= 'Inactivo' %></td>
+
+      <%end%>
+
       <td >
         
         <%= link_to_editar_notificacion_persona(nu) %>
