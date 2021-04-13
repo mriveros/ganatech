@@ -76,7 +76,7 @@ class NotificacionesPersonasController < ApplicationController
 
 	  def agregar
 
-	    @notificacion_usuario = NotificacionPersona.new
+	    @notificacion_persona = NotificacionPersona.new
 
 	    respond_to do |f|
 
@@ -89,22 +89,34 @@ class NotificacionesPersonasController < ApplicationController
 
 	  def guardar
 
-	    valido = true
+	    @valido = true
 	    @msg = ""
 
-	    @notificacion_usuario = NotificacionPersona.new()
-
-	    @notificacion_usuario.descripcion = params[:NotificacionPersona][:descripcion].upcase
-	    @notificacion_usuario.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    persona = Persona.where("id = ?", params[:persona_id]).first
 	    
-	      if @notificacion_usuario.save
+	    unless persona.present?
 
-	        auditoria_nueva("registrar NotificacionPersona", "notificaciones", @notificacion_usuario)
-	       
-	        @notificacion_usuario_ok = true
-	       
+	    	valido = false
+	    	@msg = "La persona no existe."
 
-	      end              
+	   	end
+
+	   	if @valido
+	    
+		    @notificacion_usuario = NotificacionPersona.new()
+		    @notificacion_usuario.descripcion = params[:notificacionPersona][:descripcion].upcase
+		    @notificacion_persona.persona_id = params[:persona_id]
+		    
+		    if @notificacion_persona.save
+
+		      auditoria_nueva("registrar Notificacion Persona", "notificaciones_personas", @notificacion_persona)
+		      @notificacion_persona_ok = true
+		       
+
+		    end   
+
+	    end           
+	             
 	               
 	    respond_to do |f|
 
