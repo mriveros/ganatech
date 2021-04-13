@@ -151,7 +151,7 @@ class NotificacionesPersonasController < ApplicationController
 		        @eliminado = true
 
 	    	end
-	    	
+
 		end
 
 	    respond_to do |f|
@@ -164,7 +164,7 @@ class NotificacionesPersonasController < ApplicationController
 
 	  def editar
 
-	    @notificacion_usuario = NotificacionPersona.find(params[:id])
+	    @notificacion_persona = NotificacionPersona.find(params[:id])
 
 	    respond_to do |f|
 
@@ -179,19 +179,19 @@ class NotificacionesPersonasController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @notificacion_usuario =Cargo NotificacionPersona.find(params[:NotificacionPersona][:id])
-	    auditoria_id = auditoria_antes("actualizar NotificacionPersona", "notificaciones", @notificacion_usuario)
+	    @notificacion_persona = NotificacionPersona.find(params[:notificacion_persona][:id])
+	    auditoria_id = auditoria_antes("actualizar Notificacion Persona", "notificaciones_personas", @notificacion_persona)
 
 	    if valido
 
 	      
-	    	@notificacion_usuario.descripcion = params[:NotificacionPersona][:descripcion].upcase
-	    	@notificacion_usuario.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    	@notificacion_persona.descripcion = params[:NotificacionPersona][:descripcion].upcase
+	    	@notificacion_persona.sueldo = params[:NotificacionPersona][:sueldo].to_s.gsub(/[$.]/,'').to_i
 	      	
-	      	if @notificacion_usuario.save
+	      	if @notificacion_persona.save
 
-	      		auditoria_despues(@notificacion_usuario, auditoria_id)
-	        	@notificacion_usuario_ok = true
+	      		auditoria_despues(@notificacion_persona, auditoria_id)
+	        	@notificacion_persona_ok = true
 
 	      end
 
