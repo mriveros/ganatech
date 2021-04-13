@@ -32,7 +32,7 @@
           <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
           <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
           <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
-          <li><%= link_to "Notificaciones", notificaciones_usuarios_index_path if acceso_permitido("notificaciones_usuarios.index") %></li>
+          <li><%= link_to "Notificaciones", notificaciones_personas_index_path if acceso_permitido("notificaciones_personas.index") %></li>
 		  	  </ul>
 
       </li>
