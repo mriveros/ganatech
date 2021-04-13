@@ -8,7 +8,7 @@
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Notificaciones Usuarios</h3>
     <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-cargo", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-cargo", link_to_id: "#link-to-agregar-cargo", url: notificaciones_usuarios_agregar_path( window_id: "modal-window-agregar-cargo") )%>
+    <%= modal_window( window_id: "modal-window-agregar-cargo", link_to_id: "#link-to-agregar-cargo", url: notificaciones_personas_agregar_path( window_id: "modal-window-agregar-cargo") )%>
     
   </div>
 </div>
@@ -21,7 +21,7 @@
    
     <thead>
 
-      <%= form_tag notificaciones_usuarios_lista_path, remote: true, id: "form-buscar-notificaciones-usuarios"  do  %>
+      <%= form_tag notificaciones_personas_lista_path, remote: true, id: "form-buscar-notificaciones-usuarios"  do  %>
 
         <tr>
 

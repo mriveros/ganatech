@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @cargo, remote: true, url: notificaciones_usuarios_actualizar_url, html: { id: "form-editar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
+    <%= form_for @cargo, remote: true, url: notificaciones_personas_actualizar_url, html: { id: "form-editar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
