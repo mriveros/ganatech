@@ -13,7 +13,7 @@
     <%= form_for @notificacion_usuario, remote: true, url: notificaciones_usuarios_guardar_url, html: { id: "form-agregar-notificacion-usuario" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
-      <%= hidden_field_tag :usuario_id%>
+      <%= hidden_field_tag :persona_id%>
 
       <div class="modal-body">
 

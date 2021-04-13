@@ -651,7 +651,7 @@ function buscar_usuario_v2(tipo_documento_id, nacionalidad_id, documento, ruta){
         $("#persona_nombre").val(data.nombre_persona); 
         $("#persona_apellido").val(data.apellido_persona);
         $("#email").val(data.correo_electronico);
-        $("#usuario_id").val(data.usuario_id);
+        $("#persona_id").val(data.id);
         $("#descripcion").focus();
           
       }else{
