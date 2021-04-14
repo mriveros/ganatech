@@ -358,9 +358,16 @@ before_filter :require_usuario
 
 
         subject = 'Ganado Recuperado exitosamente.'
-        adjunto = 'Ganado nombre: ' + @ganado.nombre + 'ID Ganado: ' + @ganado.id
+        adjunto = 'Ganado nombre: ' + @ganado.nombre + 'ID Ganado: ' + @ganado.id.to_s
         modulo = 'Ganados Enfermos'
         NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
+
+        notificaciones_personas = NotificacionPersona.where('estado = ?', true)
+        notificaciones_personas.each do |nu|
+
+          NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
+
+        end
 
       end
 
