@@ -657,7 +657,7 @@ function buscar_usuario_v2(tipo_documento_id, nacionalidad_id, documento, ruta){
       }else{
 
 
-        $("<span id='msg-documento-persona' style='color:red;padding-top:20px;font-size:10px;'>Esta persona no existe, comuniquese a rue@mec.gov.py adjuntando copia del documento de identidad para registrar la persona y habilitar la creación del usuario.</span>").insertAfter("#persona_documento");
+        $("<span id='msg-documento-persona' style='color:red;padding-top:20px;font-size:10px;'>Esta persona no existe, comuniquese a marcos.riveros@smarthub.com.py adjuntando copia del documento de identidad para registrar la persona y habilitar la creación del usuario.</span>").insertAfter("#persona_documento");
 
         $("#persona_nombre").val('');
         $("#persona_apellido").val('');

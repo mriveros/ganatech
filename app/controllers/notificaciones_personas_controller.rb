@@ -111,7 +111,7 @@ class NotificacionesPersonasController < ApplicationController
 	   	if @valido
 	    
 		    @notificacion_persona = NotificacionPersona.new()
-		    @notificacion_persona.descripcion = params[:descripcion]
+		    @notificacion_persona.descripcion = params[:descripcion].upcase
 		    @notificacion_persona.persona_id = params[:persona_id]
 		    @notificacion_persona.email = params[:email]
 		    
