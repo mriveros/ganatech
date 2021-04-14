@@ -457,6 +457,12 @@ before_filter :require_usuario
                 adjunto =  'Ganado Nombre: ' + ganado.nombre + ' RP: ' + ganado.rp
                 NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
 
+                notificaciones_personas = NotificacionPersona.where('estado = ?', true)
+                notificaciones_personas.each do |nu|
+
+                  NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
+
+                end
 
               end
 
@@ -526,6 +532,13 @@ before_filter :require_usuario
             subject = 'Reprodución Perdida(Aborto)'
             adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' RP: ' + @ganado.rp + ' Tipo Aborto: ' + tipo_aborto.descripcion.to_s + ' Fecha: ' + params[:fecha_aborto]
             NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
+
+            notificaciones_personas = NotificacionPersona.where('estado = ?', true)
+            notificaciones_personas.each do |nu|
+
+                NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
+
+            end
 
           end
           

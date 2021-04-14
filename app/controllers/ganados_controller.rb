@@ -1194,6 +1194,13 @@ class GanadosController < ApplicationController
               adjunto = 'Nombre Ganado: ' + @ganado.nombre  + ' Motivo: ' + motivo_muerte.descripcion.to_s
               NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
+              notificaciones_personas = NotificacionPersona.where('estado = ?', true)
+              notificaciones_personas.each do |nu|
+
+                NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
+
+              end
+              
             end
 
           end

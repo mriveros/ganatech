@@ -15,7 +15,7 @@ class NotificarUsuario < ActionMailer::Base
       mail(:to => usuario, :subject => @subject, :from => "smarthub.py@gmail.com") 
     
     end
-
+    
   end
 
 
