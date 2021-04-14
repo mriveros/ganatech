@@ -18,6 +18,8 @@ class NotificarUsuario < ActionMailer::Base
 
   end
 
+
+
   def email(usuario, password)
     
     @usuario = usuario
@@ -42,6 +44,21 @@ class NotificarUsuario < ActionMailer::Base
     @password = password
 
     mail(to: @usuario.email, subject: "ULTRON: Recuperar Contraseña")
+
+  end
+
+  def enviar_notificacion(email, subject ,adjuntos, modulo)
+
+    @modulo = modulo
+    @datos_adjuntos = adjuntos
+    @subject = subject
+    @email = email
+
+    if (@email)
+
+      mail(:to => @email, :subject => @subject, :from => "smarthub.py@gmail.com") 
+    
+    end
 
   end
 

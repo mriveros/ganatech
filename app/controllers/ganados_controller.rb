@@ -1106,15 +1106,14 @@ class GanadosController < ApplicationController
     adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' Enfermedad: ' + enfermedad.descripcion.to_s + ' Estado: ' + estado_enfermedad.descripcion.to_s
     NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
-    notificaciones_usuarios = NotificacionUsuario.where('estado = ?', true)
-    notificaciones_usuarios.each do |nu|
+    notificaciones_personas = NotificacionPersona.where('estado = ?', true)
+    notificaciones_personas.each do |nu|
 
-      usuario = Usuario.where('persona_id = ?', nu.persona_id).first
-      NotificarUsuario.test_email(usuario.id,subject ,adjunto,modulo).deliver
+      NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
 
     end
 
-    
+
     respond_to do |f|
 
       f.js
