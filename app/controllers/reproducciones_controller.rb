@@ -542,7 +542,6 @@ before_filter :require_usuario
 
           end
           
-
         end
 
       end
