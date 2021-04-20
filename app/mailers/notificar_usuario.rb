@@ -3,7 +3,7 @@ class NotificarUsuario < ActionMailer::Base
   default from: "smarthub.py@gmail.com"
 
   def test_email(user_id, subject ,adjuntos, modulo)
-
+    notificaciones_personas = NotificacionPersona.where('estado = ?', true)
     @modulo = modulo
     @datos_adjuntos = adjuntos
     @subject = subject
@@ -12,7 +12,7 @@ class NotificarUsuario < ActionMailer::Base
     if (@user)
 
       usuario = @user.email
-      mail(:to => usuario, :subject => @subject, :from => "smarthub.py@gmail.com") 
+      mail(:to => notificaciones_personas.map(&:email), :subject => @subject, :from => "smarthub.py@gmail.com") 
     
     end
     
