@@ -1106,14 +1106,6 @@ class GanadosController < ApplicationController
     adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' Enfermedad: ' + enfermedad.descripcion.to_s + ' Estado: ' + estado_enfermedad.descripcion.to_s
     NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
 
-    notificaciones_personas = NotificacionPersona.where('estado = ?', true)
-    notificaciones_personas.each do |nu|
-
-      NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
-
-    end
-
-
     respond_to do |f|
 
       f.js
@@ -1193,13 +1185,6 @@ class GanadosController < ApplicationController
               modulo = 'Ganados'
               adjunto = 'Nombre Ganado: ' + @ganado.nombre  + ' Motivo: ' + motivo_muerte.descripcion.to_s
               NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
-
-              notificaciones_personas = NotificacionPersona.where('estado = ?', true)
-              notificaciones_personas.each do |nu|
-
-                NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
-
-              end
               
             end
 
