@@ -157,6 +157,15 @@ before_filter :require_usuario
 
               @guardado_ok = true
               auditoria_despues(@ganado, auditoria_id)
+              #AGREGAR HISTORIAL GANADO
+              historial_ganado = HistorialGanado.new
+              historial_ganado.ganado_id = params[:ganado_id]
+              historial_ganado.modulo = "CELOS"
+              historial_ganado.accion = "Ganado Marcado como en Celo"
+              historial_ganado.fecha = Date.today
+              historial_ganado.celo_ganado_id = @celo.id
+              historial_ganado.observacion = params[:observacion]
+              historial_ganado.save
 
             end
 
