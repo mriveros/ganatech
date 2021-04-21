@@ -278,7 +278,16 @@ class AltasProduccionesController < ApplicationController
     
     if @alta_produccion.save
 
-      @actualizado_ok = true     
+      @actualizado_ok = true
+      #AGREGAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.new
+      historial_ganado.ganado_id = @alta_produccion.ganado_id
+      historial_ganado.modulo = "ALTA PRODUCCION"
+      historial_ganado.accion = "Ganado desmarcado como Alta Producción"
+      historial_ganado.fecha = Date.today
+      historial_ganado.alta_produccion_id = @alta_produccion.id
+      historial_ganado.observacion = 'El Ganado fue dado de baja de Alta Producción'
+      historial_ganado.save 
 
     end
         

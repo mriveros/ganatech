@@ -1128,6 +1128,16 @@ class GanadosController < ApplicationController
             
             @guardado_ok = true
             auditoria_despues(@ganado, auditoria_id)
+
+            #AGREGAR HISTORIAL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = params[:ganado_id]
+            historial_ganado.modulo = "GANADOS ENFERMOS"
+            historial_ganado.accion = "Ganado marcado con Enfermedad"
+            historial_ganado.fecha = params[:fecha]
+            historial_ganado.ganado_enfermo_id = @ganado_enfermedad.id
+            historial_ganado.observacion = params[:observacion]
+            historial_ganado.save
             
 
           end
@@ -1230,6 +1240,16 @@ class GanadosController < ApplicationController
 
         end
 
+        #AGREGAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = params[:ganado_id]
+        historial_ganado.modulo = "GANADOS MUERTOS"
+        historial_ganado.accion = "Ganado marcado como Muerto"
+        historial_ganado.fecha = params[:fecha]
+        historial_ganado.ganado_muerto_id = @ganado_muerto.id
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
+
       end
 
     end #end transaction 
@@ -1269,6 +1289,16 @@ class GanadosController < ApplicationController
       if ganado_alta_produccion.save
 
         @guardado_ok = true
+
+        #AGREGAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = params[:ganado_id]
+        historial_ganado.modulo = "ALTA PRODUCCION"
+        historial_ganado.accion = "Ganado marcado como Alta Producción"
+        historial_ganado.fecha = Date.today
+        historial_ganado.alta_produccion_id = ganado_alta_produccion.id
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
 
       end
 
