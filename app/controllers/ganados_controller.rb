@@ -609,7 +609,7 @@ class GanadosController < ApplicationController
           
         end 
 
-        #HISTORIAL GANADO
+        #AGREGAR HISTORIAL GANADO
         historial_ganado = HistorialGanado.new
         historial_ganado.ganado_id = params[:ganado_id]
         historial_ganado.modulo = "CONTROLES GANADOS"
@@ -650,10 +650,13 @@ class GanadosController < ApplicationController
 
     if @valido
 
+      #ELIMINAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.where("control_ganado_id = ?",@control_sanitario_elim.id).first
+      historial_ganado.destroy
+
       if @control_sanitario.destroy
 
         auditoria_nueva("eliminar control sanitario", "controles_ganados", @control_sanitario_elim)
-
         @eliminado = true
 
       end
@@ -727,7 +730,17 @@ class GanadosController < ApplicationController
           auditoria_nueva("agregar control de alimentacion al ganado", "controles_alimentaciones", @control_alimentacion)
           @guardado_ok = true
          
-        end 
+        end
+
+        #AGREGAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = params[:ganado_id]
+        historial_ganado.modulo = "CONTROLES ALIMENTACION"
+        historial_ganado.accion = "Alimentaciones"
+        historial_ganado.fecha = params[:fecha_control]
+        historial_ganado.control_alimentacion_id = @control_alimentacion.id
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
 
     end
   
@@ -756,6 +769,10 @@ class GanadosController < ApplicationController
     @control_alimentacion = ControlAlimentacion.where("id = ?", params[:control_alimentacion_id]).first
 
     @control_alimentacion_elim = @control_alimentacion  
+
+    #ELIMINAR HISTORIAL GANADO
+    historial_ganado = HistorialGanado.where("control_alimentacion_id = ?",@control_alimentacion_elim.id).first
+    historial_ganado.destroy
 
     if @valido
 
@@ -907,6 +924,16 @@ class GanadosController < ApplicationController
         end
 
       end
+
+      #AGREGAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.new
+      historial_ganado.ganado_id = params[:ganado_id]
+      historial_ganado.modulo = "CELOS"
+      historial_ganado.accion = "Ganado marcado con Celo"
+      historial_ganado.fecha = Date.today
+      historial_ganado.celo_id = @celo.id
+      historial_ganado.observacion = params[:descripcion].to_s + ' - ' + params[:observacion].to_s
+      historial_ganado.save
 
     end #end transaction
 
