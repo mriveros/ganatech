@@ -336,7 +336,7 @@ class GanadosController < ApplicationController
     raza = Raza.where("id = ?", params[:ganado][:raza_id]).first
 
     if valido
-      puts"debug!!!"
+      
       @ganado.fecha_nacimiento = params[:ganado][:fecha_nacimiento]
       @ganado.nombre = params[:ganado][:nombre]
       @ganado.rp = params[:ganado][:rp]
@@ -577,6 +577,7 @@ class GanadosController < ApplicationController
 
         if @control_ganado.save
 
+          @guardado_ok = true
           #ACTUALIZAR PESO DEL GANADO
           @ganado = Ganado.where("id = ?", params[:ganado_id]).first
           if params[:peso_promedio_control].present?
@@ -590,6 +591,7 @@ class GanadosController < ApplicationController
             @ganado.peso_promedio = params[:peso_promedio]
             
           end
+
           @ganado.save
 
           auditoria_nueva("agregar control sanitario de ganado", "controles_ganados", @control_ganado)
@@ -604,10 +606,19 @@ class GanadosController < ApplicationController
             end
 
           end
-
-          @guardado_ok = true
-         
+          
         end 
+
+        #HISTORIAL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = params[:ganado_id]
+        historial_ganado.modulo = "CONTROLES GANADOS"
+        historial_ganado.accion = "Sanitaciones"
+        historial_ganado.fecha = params[:fecha_control]
+        historial_ganado.control_ganado_id = @control_ganado.id
+        historial_ganado.peso = @control_ganado.peso
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
 
     end
   
