@@ -393,6 +393,7 @@ before_filter :require_usuario
         historial_ganado.observacion = params[:observacion]
         historial_ganado.save
 
+        #AGREGAR HISTORIAL GANADO REPRODUCTO        
         historial_ganado = HistorialGanado.new
         historial_ganado.ganado_id = params[:ganado_reproductor_id]
         historial_ganado.modulo = "REPRODUCCIONES"
@@ -400,7 +401,6 @@ before_filter :require_usuario
         historial_ganado.fecha = Date.today
         historial_ganado.observacion = params[:observacion]
         historial_ganado.save
-
         
       end
 
@@ -457,6 +457,16 @@ before_filter :require_usuario
           @guardado_ok = true
 
         end
+
+        #AGREGAR HISTORIAL GANADO REPRODUCTO        
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = @celo.ganado_id
+        historial_ganado.modulo = "CELOS"
+        historial_ganado.accion = "El celo del Ganado no se ha aprovechado. Celo Perdido para Reproducción"
+        historial_ganado.fecha = Date.today
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
+        
         
 
       end
