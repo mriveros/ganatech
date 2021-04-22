@@ -242,6 +242,10 @@ before_filter :require_usuario
 
       if valido
 
+        #ELIMINAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.where("reproduccion_id = ?", @reproduccion_elim.id).first
+        historial_ganado.destroy
+
         if @reproduccion.destroy
 
           auditoria_nueva("eliminar reproduccion", "reproducciones", @reproduccion_elim)
