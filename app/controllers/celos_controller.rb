@@ -387,9 +387,17 @@ before_filter :require_usuario
         historial_ganado = HistorialGanado.new
         historial_ganado.ganado_id = @ganado.id
         historial_ganado.modulo = "REPRODUCCIONES"
-        historial_ganado.accion = "Ganado Marcado como en Reproducción"
+        historial_ganado.accion = "Ganado marcado en Reproducción"
         historial_ganado.fecha = Date.today
-        historial_ganado.celo_id = @celo.id
+        historial_ganado.reproduccion_id = @reproduccion.id
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
+
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = params[:ganado_reproductor_id]
+        historial_ganado.modulo = "REPRODUCCIONES"
+        historial_ganado.accion = "Ganado marcado como Reproductor"
+        historial_ganado.fecha = Date.today
         historial_ganado.observacion = params[:observacion]
         historial_ganado.save
 
