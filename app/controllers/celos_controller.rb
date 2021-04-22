@@ -393,14 +393,18 @@ before_filter :require_usuario
         historial_ganado.observacion = params[:observacion]
         historial_ganado.save
 
-        #AGREGAR HISTORIAL GANADO REPRODUCTO        
-        historial_ganado = HistorialGanado.new
-        historial_ganado.ganado_id = params[:ganado_reproductor_id]
-        historial_ganado.modulo = "REPRODUCCIONES"
-        historial_ganado.accion = "Ganado marcado como Reproductor"
-        historial_ganado.fecha = Date.today
-        historial_ganado.observacion = params[:observacion]
-        historial_ganado.save
+        if params[:tipo_concepcion][:id].to_i == PARAMETRO[:tipo_concepcion_monta_natural].to_i
+          
+          #AGREGAR HISTORIAL GANADO REPRODUCTOR        
+          historial_ganado = HistorialGanado.new
+          historial_ganado.ganado_id = params[:ganado_reproductor_id]
+          historial_ganado.modulo = "REPRODUCCIONES"
+          historial_ganado.accion = "Ganado marcado como Reproductor"
+          historial_ganado.fecha = Date.today
+          historial_ganado.observacion = params[:observacion]
+          historial_ganado.save
+          
+        end
         
       end
 
