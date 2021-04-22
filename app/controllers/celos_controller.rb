@@ -163,7 +163,7 @@ before_filter :require_usuario
               historial_ganado.modulo = "CELOS"
               historial_ganado.accion = "Ganado Marcado como en Celo"
               historial_ganado.fecha = Date.today
-              historial_ganado.celo_ganado_id = @celo.id
+              historial_ganado.celo_id = @celo.id
               historial_ganado.observacion = params[:observacion]
               historial_ganado.save
 
@@ -258,6 +258,11 @@ before_filter :require_usuario
       @celo_elim = @celo
 
       if valido
+
+        #ELIMINAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.where("celo_id = ?",@celo_elim.id).first
+        historial_ganado.destroy
+
 
         if @celo.destroy
 
@@ -377,6 +382,17 @@ before_filter :require_usuario
           end
 
         end
+
+        #AGREGAR HISTORIAL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = @ganado.id
+        historial_ganado.modulo = "REPRODUCCIONES"
+        historial_ganado.accion = "Ganado Marcado como en Reproducción"
+        historial_ganado.fecha = Date.today
+        historial_ganado.celo_id = @celo.id
+        historial_ganado.observacion = params[:observacion]
+        historial_ganado.save
+
         
       end
 
