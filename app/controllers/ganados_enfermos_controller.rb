@@ -137,6 +137,10 @@ before_filter :require_usuario
       @ganado_enfermo = GanadoEnfermo.where("id = ?", params[:ganado_enfermo_id]).first
       @ganado_enfermo_elim = @ganado_enfermo
       
+      #ELIMINAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.where("ganado_enfermo_id = ?", @ganado_enfermo.id).first
+      historial_ganado.destroy
+
       if @ganado_enfermo.destroy
         
         @ganado = Ganado.where("id = ?", @ganado_enfermo.ganado_id).first
@@ -196,6 +200,15 @@ before_filter :require_usuario
       if @ganado_enfermo.save
 
         @actualizado_ok = true
+        #AGREGAR HISTORIAL AL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = @ganado_enfermo.ganado_id
+        historial_ganado.modulo = "GANADOS ENFERMOS"
+        historial_ganado.accion = "Se ha actualizado datos del ganado enfermo."
+        historial_ganado.fecha = Date.today
+        historial_ganado.ganado_enfermo_id = params[:ganado_enfermo_id]
+        historial_ganado.observacion = params[:ganado_enfermo][:observacion]
+        historial_ganado.save
 
       end
 
@@ -276,6 +289,17 @@ before_filter :require_usuario
 
           auditoria_nueva("agregar control sanitario en modulo de ganados enfermos", "controles_ganados", @control_ganado)
           @guardado_ok = true
+          
+          #AGREGAR HISTORIAL AL GANADO
+          historial_ganado = HistorialGanado.new
+          historial_ganado.ganado_id = @control_ganado.ganado_id
+          historial_ganado.modulo = "GANADOS ENFERMOS"
+          historial_ganado.accion = "El ganado se ha marcado como enfermo."
+          historial_ganado.fecha = Date.today
+          historial_ganado.ganado_enfermo_id = params[:ganado_enfermo_id]
+          historial_ganado.control_ganado_id = @control_ganado.id
+          historial_ganado.observacion = params[:observacion]
+          historial_ganado.save
          
         end 
 
@@ -308,6 +332,10 @@ before_filter :require_usuario
     @control_sanitario_elim = @control_sanitario  
 
     if @valido
+
+      #ELIMINAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.where("control_sanitario_id = ?", @control_sanitario.id).first
+      historial_ganado.destroy
 
       if @control_sanitario.destroy
 
@@ -356,18 +384,10 @@ before_filter :require_usuario
         auditoria_despues(@ganado, auditoria_id )
         @actualizado_ok = true
 
-
         subject = 'Ganado Recuperado exitosamente.'
         adjunto = 'Ganado nombre: ' + @ganado.nombre + 'ID Ganado: ' + @ganado.id.to_s
         modulo = 'Ganados Enfermos'
         NotificarUsuario.test_email(current_usuario.id,subject ,adjunto,modulo).deliver
-
-        notificaciones_personas = NotificacionPersona.where('estado = ?', true)
-        notificaciones_personas.each do |nu|
-
-          NotificarUsuario.enviar_notificacion(nu.email,subject ,adjunto,modulo).deliver
-
-        end
 
       end
 
