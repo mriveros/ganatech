@@ -383,6 +383,16 @@ before_filter :require_usuario
 
         auditoria_despues(@ganado, auditoria_id )
         @actualizado_ok = true
+        #AGREGAR HISTORIAL AL GANADO
+        historial_ganado = HistorialGanado.new
+        historial_ganado.ganado_id = @ganado_enfermo.ganado_id
+        historial_ganado.modulo = "GANADOS ENFERMOS"
+        historial_ganado.accion = "El ganado se ha marcado como recuperado."
+        historial_ganado.fecha = Date.today
+        historial_ganado.ganado_enfermo_id = params[:ganado_enfermo_id]
+        historial_ganado.observacion = "El ganado se ha recuperado exitosamente."
+        historial_ganado.save
+
 
         subject = 'Ganado Recuperado exitosamente.'
         adjunto = 'Ganado nombre: ' + @ganado.nombre + 'ID Ganado: ' + @ganado.id.to_s
@@ -455,6 +465,17 @@ before_filter :require_usuario
               @ganado_muerto.observacion = params[:observacion]
 
               if @ganado_muerto.save
+
+                #AGREGAR HISTORIAL AL GANADO
+                historial_ganado = HistorialGanado.new
+                historial_ganado.ganado_id = @ganado.id
+                historial_ganado.modulo = "GANADOS ENFERMOS"
+                historial_ganado.accion = "El ganado se ha marcado como muerto."
+                historial_ganado.fecha = Date.today
+                historial_ganado.ganado_enfermo_id = params[:ganado_enfermo_id]
+                historial_ganado.ganado_muerto_id = @ganado_muerto.id
+                historial_ganado.observacion = params[:observacion]
+                historial_ganado.save
 
                 @actualizado_ok = true
                 motivo_muerte = MotivoMuerte.where('id = ?', PARAMETRO[:motivo_muerte_enfermedad]).first
