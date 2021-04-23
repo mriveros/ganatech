@@ -201,6 +201,7 @@ before_filter :require_usuario
       historial_ganado.accion = "Ganado Marcado en Reproducción"
       historial_ganado.fecha = Date.today
       historial_ganado.reproduccion_id = @reproduccion.id
+      historial_ganado.celo_id = @celo.id
       historial_ganado.observacion = params[:observacion]
       historial_ganado.save
 
@@ -333,8 +334,19 @@ before_filter :require_usuario
 
             auditoria_despues(@ganado, auditoria_id_ganado)
             @guardado_ok = true
+            #AGREGAR HISTORIAL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = @ganado.id
+            historial_ganado.modulo = "REPRODUCCIONES"
+            historial_ganado.accion = "El ganado se encuentra preñada."
+            historial_ganado.fecha = Date.today
+            historial_ganado.reproduccion_id = @reproduccion.id
+            historial_ganado.celo_id = celo.id
+            historial_ganado.observacion = "Se ha confirmado que el ganado se ha preñado."
+            historial_ganado.save
 
           end
+          
 
         end
 
@@ -481,6 +493,25 @@ before_filter :require_usuario
                 modulo = 'Módulo Reproducciones'
                 subject = 'Reprodución Finalizada(Nuevo Ganado)'
                 adjunto =  'Ganado Nombre: ' + ganado.nombre + ' RP: ' + ganado.rp
+                #AGREGAR HISTORIAL AL GANADO
+                historial_ganado = HistorialGanado.new
+                historial_ganado.ganado_id = @ganado_madre.id
+                historial_ganado.modulo = "REPRODUCCIONES"
+                historial_ganado.accion = "El ganado ha parido."
+                historial_ganado.fecha = Date.today
+                historial_ganado.reproduccion_id = @reproduccion.id
+                historial_ganado.celo_id = @celo.id
+                historial_ganado.observacion = "Se ha confirmado que el ganado ha dado a luz."
+                historial_ganado.save
+
+                historial_ganado = HistorialGanado.new
+                historial_ganado.ganado_id = ganado.id
+                historial_ganado.modulo = "GANADO NACIMIENTO"
+                historial_ganado.accion = "El ganado ha nacido."
+                historial_ganado.fecha = Date.today
+                historial_ganado.observacion = params[:observacion]
+                historial_ganado.save
+
                 NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
 
               end
@@ -550,6 +581,17 @@ before_filter :require_usuario
             modulo = 'Módulo Reproducciones'
             subject = 'Reprodución Perdida(Aborto)'
             adjunto =  'Ganado Nombre: ' + @ganado.nombre + ' RP: ' + @ganado.rp + ' Tipo Aborto: ' + tipo_aborto.descripcion.to_s + ' Fecha: ' + params[:fecha_aborto]
+            #AGREGAR HISTORIAL AL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = @ganado.id
+            historial_ganado.modulo = "REPRODUCCIONES"
+            historial_ganado.accion = "El ganado ha tenido un Aborto."
+            historial_ganado.fecha = Date.today
+            historial_ganado.reproduccion_id = @reproduccion.id
+            historial_ganado.celo_id = celo.id
+            historial_ganado.observacion = params[:observacion]
+            historial_ganado.save
+
             NotificarUsuario.test_email(current_usuario.id, subject, adjunto, modulo).deliver
 
           end
