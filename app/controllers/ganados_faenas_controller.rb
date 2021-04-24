@@ -219,7 +219,19 @@ before_filter :require_usuario
 
             end
 
-          end
+            #AGREGAR HISTORIAL GANADO
+              historial_ganado = HistorialGanado.new
+              historial_ganado.ganado_id = ganado.ganado_id
+              historial_ganado.modulo = "GANADOS FAENAS"
+              historial_ganado.accion = "Se ha faenado el Ganado"
+              historial_ganado.fecha = params[:fecha]
+              historial_ganado.ganado_faena_detalle_id = @ganado_faena.id
+              historial_ganado.peso = ganado.peso_vivo
+              historial_ganado.observacion = "Ganado Faena por Lote"
+              historial_ganado.save
+
+
+          end #end loop
 
           @cantidad_lote = LoteSalidaGanado.count
           #Borrar toda la tabla
