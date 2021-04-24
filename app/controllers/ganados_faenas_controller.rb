@@ -220,15 +220,15 @@ before_filter :require_usuario
             end
 
             #AGREGAR HISTORIAL GANADO
-              historial_ganado = HistorialGanado.new
-              historial_ganado.ganado_id = ganado.ganado_id
-              historial_ganado.modulo = "GANADOS FAENAS"
-              historial_ganado.accion = "Se ha faenado el Ganado"
-              historial_ganado.fecha = params[:fecha]
-              historial_ganado.ganado_faena_detalle_id = @ganado_faena.id
-              historial_ganado.peso = ganado.peso_vivo
-              historial_ganado.observacion = "Ganado Faena por Lote"
-              historial_ganado.save
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = ganado.ganado_id
+            historial_ganado.modulo = "GANADOS FAENAS"
+            historial_ganado.accion = "Se ha faenado el Ganado"
+            historial_ganado.fecha = params[:fecha]
+            historial_ganado.ganado_faena_detalle_id = @ganado_faena.id
+            historial_ganado.peso = ganado.peso_vivo
+            historial_ganado.observacion = "Ganado Faena por Lote"
+            historial_ganado.save
 
 
           end #end loop
@@ -268,10 +268,15 @@ before_filter :require_usuario
 
       @ganado_faena = GanadoFaena.where("id = ?", params[:id]).first
       @ganado_faena_elim = @ganado_faena
+      @ganado_faena_detalle = GanadoFaenaDetalle.where('ganado_faena_id = ?', @ganado_faena.id).first
       
       @venta = AuxVenta.where("ganado_salida_lote = ?", @ganado_faena.codigo_lote).first
       @venta.monto = @venta.monto - @ganado_faena.precio_venta
       @venta.save
+
+      #ELIMINAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.where("ganado_faena_detalle_id = ?",@ganado_faena_detalle.id).first
+      historial_ganado.destroy
 
       if @ganado_faena.destroy
         
