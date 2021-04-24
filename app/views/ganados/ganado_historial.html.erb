@@ -1,0 +1,83 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div style="clear:both;"></div>
+
+
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Historial del Ganado</h3>
+      </div>
+        
+      <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-ganado-historial">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>Fecha</th>
+              <th>Módulo</th>
+              <th>Accion</th>
+              <th>Medicamento</th>
+              <th>Cantidad Suministrada</th>
+              <th>Observación</th>
+              <th></th>
+
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="ganado-historial">
+
+            <% if @historial_ganado.present? %>
+            
+              <% @historial_ganado.each do |cg|%>
+
+                <tr>
+                  
+                  <td><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
+                  <td><%= cg.control %></td>
+                  <td><%= cg.peso %></td>
+                  <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
+                  <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
+                  <td><%= cg.observacion %></td>
+                  <td> 
+                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
+                  
+                      <%=link_to_adjuntar_archivo_sanidad(cg.control_ganado_id)%>
+                </tr>
+
+              <%end%>
+
+              <tr id="tab-paginacion">
+
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_sanitario, :params => params %></div></td>
+                  
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+
+</td>
+
