@@ -131,7 +131,7 @@ before_filter :require_usuario
             @ganado_faena_detalle.monto_peso = params[:peso_monto]
             @ganado_faena_detalle.monto = params[:monto]
             @ganado_faena_detalle.rendimiento = params[:rendimiento]
-
+ 
             if @ganado_faena_detalle.save
 
               #ACTUALIZAR EL MONTO TOTAL EN LA CABECERA
@@ -160,6 +160,17 @@ before_filter :require_usuario
                 @venta.save
               
               end
+
+              #AGREGAR HISTORIAL GANADO
+              historial_ganado = HistorialGanado.new
+              historial_ganado.ganado_id = params[:ganado_id]
+              historial_ganado.modulo = "GANADOS FAENAS"
+              historial_ganado.accion = "Se ha faenado el Ganado"
+              historial_ganado.fecha = params[:fecha]
+              historial_ganado.ganado_faena_detalle_id = @ganado_faena.id
+              historial_ganado.peso = params[:peso_vivo]
+              historial_ganado.observacion = params[:observacion]
+              historial_ganado.save
 
             end
 
