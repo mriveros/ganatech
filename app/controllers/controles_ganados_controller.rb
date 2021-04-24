@@ -226,6 +226,16 @@ before_filter :require_usuario
 
           end
 
+          #AGREGAR HISTORIAL GANADO
+          historial_ganado = HistorialGanado.new
+          historial_ganado.ganado_id = params[:ganado_id]
+          historial_ganado.modulo = "CONTROLES GANADOS"
+          historial_ganado.accion = "Sanitaciones"
+          historial_ganado.fecha = params[:fecha_control]
+          historial_ganado.control_ganado_id = @control_ganado.id
+          historial_ganado.observacion = params[:observacion]
+          historial_ganado.save
+
           @guardado_ok = true
 
         end
@@ -249,6 +259,15 @@ before_filter :require_usuario
           if @control_ganado.save
 
             @guardado_ok = true
+            #AGREGAR HISTORIAL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = ganado.ganado_id
+            historial_ganado.modulo = "CONTROLES GANADOS"
+            historial_ganado.accion = "Sanitaciones"
+            historial_ganado.fecha = params[:fecha_control]
+            historial_ganado.control_ganado_id = @control_ganado.id
+            historial_ganado.observacion = params[:observacion]
+            historial_ganado.save
 
           end
 
@@ -274,6 +293,15 @@ before_filter :require_usuario
           if @control_ganado.save
 
             @guardado_ok = true
+            #AGREGAR HISTORIAL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = ganado.ganado_id
+            historial_ganado.modulo = "CONTROLES GANADOS"
+            historial_ganado.accion = "Sanitaciones"
+            historial_ganado.fecha = params[:fecha_control]
+            historial_ganado.control_ganado_id = @control_ganado.id
+            historial_ganado.observacion = params[:observacion]
+            historial_ganado.save
 
           end
 
@@ -310,6 +338,16 @@ before_filter :require_usuario
 
             end
 
+            #AGREGAR HISTORIAL GANADO
+            historial_ganado = HistorialGanado.new
+            historial_ganado.ganado_id = ganado.ganado_id
+            historial_ganado.modulo = "CONTROLES GANADOS"
+            historial_ganado.accion = "Sanitaciones"
+            historial_ganado.fecha = params[:fecha_control]
+            historial_ganado.control_ganado_id = @control_ganado.id
+            historial_ganado.observacion = params[:observacion]
+            historial_ganado.save
+
             @guardado_ok = true
 
           end
@@ -340,6 +378,10 @@ before_filter :require_usuario
 
     @control_ganado = ControlGanado.where("id = ?", params[:control_ganado_id]).first
     @control_ganado_elim = @control_ganado
+    
+    #ELIMINAR HISTORIAL GANADO
+    historial_ganado = HistorialGanado.where("control_ganado_id = ?",@control_ganado.id).first
+    historial_ganado.destroy
     
     if @control_ganado.destroy
     
@@ -511,6 +553,13 @@ before_filter :require_usuario
     @lote_eliminado = false
 
     @lote_control_ganado = ControlGanado.where("codigo = ?", params[:codigo_lote])
+    @lote_control_ganado.each do |lcg|
+
+      #ELIMINAR HISTORIAL GANADO
+      historial_ganado = HistorialGanado.where("control_ganado_id = ?", lcg.id).first
+      historial_ganado.destroy
+      
+    end
 
     if @lote_control_ganado.destroy_all
 
