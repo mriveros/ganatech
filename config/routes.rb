@@ -292,6 +292,7 @@ get 'crontab_ultron/index'
   get 'ganados/marcar_como_muerto'
   post 'ganados/guardar_ganado_muerto'
   get 'ganados/marcar_como_produccion'
+  get 'ganados/historial_ganado'
 
 
   #MEDICAMENTOS

@@ -1,22 +1,22 @@
-<%= link_to icon_detalles, "#", id: "link-to-ganado-historial-#{ganado_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver el Historial del ganado', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_detalles, "#", id: "link-to-historial-ganado-#{ganado_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver el Historial del ganado', onclick: "$('.modal').html('');return false;" %>
 
 
 <script type="text/javascript">
 
-  $("#link-to-ganado-historial-<%= ganado_id %>").bind('click', function(){
+  $("#link-to-historial-ganado-<%= ganado_id %>").bind('click', function(){
 
-    var contenido = $.trim($("#ganado-historial-<%= ganado_id %>").html());
+    var contenido = $.trim($("#historial-ganado-<%= ganado_id %>").html());
 
-    $(".ganado-historial").html('');
+    $(".historial-ganado").html('');
 
     if(contenido.length == 0){
 
-    $(this).parent().parent().after("<tr id='ganado-historial-<%= ganado_id %>' class='ganado-historial'><td colspan='12' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+    $(this).parent().parent().after("<tr id='historial-ganado-<%= ganado_id %>' class='historial-ganado'><td colspan='12' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
 
       $.ajax({
 
         type: 'GET',
-        url: '<%= url_for(ganados_ganado_historial_path) %>',  
+        url: '<%= url_for(ganados_historial_ganado_path) %>',  
         data: { ganado_id: <%= ganado_id %>},
         dataType: 'script'
         

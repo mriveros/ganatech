@@ -1314,7 +1314,7 @@ class GanadosController < ApplicationController
   end
 
 
-  def ganado_historial
+  def historial_ganado
 
 
     @historial_ganado = HistorialGanado.where('ganado_id = ?', params[:ganado_id])
