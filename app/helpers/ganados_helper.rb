@@ -12,6 +12,12 @@ module GanadosHelper
 
   end
 
+  def link_to_historial_ganado(ganado_id)
+
+    render partial: 'link_to_historial_ganado', locals: { ganado_id: ganado_id}
+
+  end
+
   def link_to_adjuntar_archivo_sanidad(control_ganado_id)
 
     render partial: 'link_to_adjuntar_archivo_sanidad', locals: { control_ganado_id: control_ganado_id}
