@@ -1314,5 +1314,21 @@ class GanadosController < ApplicationController
   end
 
 
+  def ganado_historial
+
+
+    @historial_ganado = HistorialGanado.where('ganado_id = ?', params[:ganado_id])
+
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+
+  end
+
+
 
 end
