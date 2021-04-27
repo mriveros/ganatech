@@ -45,23 +45,20 @@
 
                 <tr>
                   
-                  <td><%= cg.fecha_control.strftime('%d/%m/%Y') %></td>
-                  <td><%= cg.control %></td>
-                  <td><%= cg.peso %></td>
-                  <td><%= (cg.medicamento.present?)? cg.medicamento : "Sin Medicamento"%></td>
-                  <td><%= (cg.cantidad_suministrada.present?)? cg.cantidad_suministrada : "Sin Medicamento" %></td>
+                  <td><%= cg.fecha.strftime('%d/%m/%Y') %></td>
+                  <td><%= cg.modulo %></td>
+                  <td><%= cg.accion %></td>
+                  <td><%= cg.control_ganado_id%></td>
+                  <td><%= %></td>
                   <td><%= cg.observacion %></td>
-                  <td> 
-                  <%if @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_vendido] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_muerto] && @ganado_detalle.estado_ganado_id != PARAMETRO[:estado_ganado_faena]%>
                   
-                      <%=link_to_adjuntar_archivo_sanidad(cg.control_ganado_id)%>
                 </tr>
 
               <%end%>
 
               <tr id="tab-paginacion">
 
-                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @control_sanitario, :params => params %></div></td>
+                <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @historial_ganado, :params => params %></div></td>
                   
               </tr>
 
