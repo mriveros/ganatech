@@ -1317,7 +1317,7 @@ class GanadosController < ApplicationController
   def historial_ganado
 
 
-    @historial_ganado = HistorialGanado.where('ganado_id = ?', params[:ganado_id]).paginate(per_page: 10, page: params[:page])
+    @historial_ganado = VHistorialGanado.where('ganado_id = ?', params[:ganado_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
