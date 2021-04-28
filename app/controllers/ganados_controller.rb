@@ -198,11 +198,11 @@ class GanadosController < ApplicationController
 
       if ultima_produccion.created_at.year != Time.now.year
 
-        @nuevo_autoincremento = "RP-0" + 1.to_s
+        @nuevo_autoincremento = "RP" + 1.to_s
 
       else
 
-         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+         @nuevo_autoincremento = "RP" + (ultima_produccion.id + 1).to_s 
 
       end 
 
@@ -986,11 +986,11 @@ class GanadosController < ApplicationController
 
       if ultima_produccion.created_at.year != Time.now.year
 
-        @nuevo_autoincremento = "RP-0" + 1.to_s
+        @nuevo_autoincremento = "RP" + 1.to_s
 
       else
 
-         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+         @nuevo_autoincremento = "RP" + (ultima_produccion.id + 1).to_s 
 
       end 
 
@@ -1026,7 +1026,7 @@ class GanadosController < ApplicationController
         @ganado = Ganado.new()
         
         ultima_produccion = Ganado.order("created_at").last
-        nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+        nuevo_rp = "RP" + (ultima_produccion.id + 1).to_s 
         @ganado.nombre = nuevo_rp
         @ganado.rp = nuevo_rp
         @ganado.rp_padre = "No Especificado"

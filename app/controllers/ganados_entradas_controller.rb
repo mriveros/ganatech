@@ -427,7 +427,7 @@ def agregar_entrada_ganado
           @ganado = Ganado.new()
           
           ultima_produccion = Ganado.order("created_at").last
-          nuevo_rp = "RP-0" + (ultima_produccion.id + 1).to_s 
+          nuevo_rp = "RP" + (ultima_produccion.id + 1).to_s 
           @ganado.nombre = nuevo_rp
           @ganado.rp = nuevo_rp
           @ganado.rp_padre = "No Especificado"

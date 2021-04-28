@@ -375,11 +375,11 @@ before_filter :require_usuario
 
       if ultima_produccion.created_at.year != Time.now.year
 
-        @nuevo_autoincremento = "RP-0" + 1.to_s
+        @nuevo_autoincremento = "RP" + 1.to_s
 
       else
 
-         @nuevo_autoincremento = "RP-0" + (ultima_produccion.id + 1).to_s 
+         @nuevo_autoincremento = "RP" + (ultima_produccion.id + 1).to_s 
 
       end 
 
