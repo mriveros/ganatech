@@ -260,7 +260,8 @@ get 'crontab_ultron/index'
   get 'potreros/agregar_potrero_detalle'
   post 'potreros/guardar_potrero_detalle'
   get 'potreros/eliminar_potrero_detalle'
-  
+  get 'potreros/potrero_geocerca'
+
   #GANADOS
   get 'ganados/index'
   post 'ganados/lista'

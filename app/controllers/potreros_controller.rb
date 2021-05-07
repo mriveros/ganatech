@@ -349,4 +349,16 @@ before_filter :require_usuario
   
   end
 
+  def potrero_geocerca
+    
+    @potrero = VPotrero.where("potrero_id = ?", params[:potrero_id]).first
+
+     respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
 end
