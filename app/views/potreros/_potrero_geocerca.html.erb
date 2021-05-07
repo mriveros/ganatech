@@ -1,14 +1,35 @@
-<%= javascript_include_tag "roke/Roke.js" %>
-<%= javascript_include_tag "roke/Class.js" %>
-<%= javascript_include_tag "roke/polygons/Utils.js" %>
-<%= javascript_include_tag "roke/polygons/Marker.js" %>
-<%= javascript_include_tag "roke/polygons/Polygon.js" %>
-<%= javascript_include_tag "roke/polygons/Map.js" %>
-
 <td colspan="12">
-
   
+	</head>
+	<div>
+
+		<div class="container">
+			<div class="row">
+				<div id="map"></div>
+			</div>
+		</div>
+		
+		<div id="footer" class="container">
+			<div class="row">
+				<p>Polygons Google Maps API extension, &copy; RokeSoftware</p>
+			</div>
+		</div>
+
+	</div>
 
    
 
 </td>
+
+<script type="text/javascript">
+
+  			alert("debug")
+			$(function() {
+				new roke.polygons.Map(document.getElementById("map"), {
+					zoom: 10,
+					center: new google.maps.LatLng(50.0933, 14.4167),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+			});
+
+</script>

@@ -11,20 +11,14 @@
       <td ><%= pot.departamento %></td>
       <td ><%= pot.jurisdiccion %></td>
       
-      
       <td >
-        
         
         <%= link_to_potrero_detalle(pot.potrero_id) %>
         <%= link_to_potrero_geocerca(pot.potrero_id) %>
         <%= link_to_editar_potrero(pot.potrero_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pot.potrero_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-potrero", title: 'Haga click para eliminar el potrero'  %>
-
       
        </td>
-
-   
-
 
     </tr>
 
