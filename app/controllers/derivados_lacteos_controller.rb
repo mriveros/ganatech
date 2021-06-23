@@ -3,6 +3,7 @@ class DerivadosLacteosController < ApplicationController
   before_filter :require_usuario
 
   def index
+    
   end
 
   def lista

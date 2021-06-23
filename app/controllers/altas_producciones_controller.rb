@@ -446,7 +446,6 @@ class AltasProduccionesController < ApplicationController
     @valido = true
     @msg = ""
     @guardado_ok = false
-    
 
     if @valido
 
@@ -466,7 +465,7 @@ class AltasProduccionesController < ApplicationController
             @derivados_lacteos_leche = DerivadoLacteo.new
             @derivados_lacteos_leche.tipo_derivado_id = PARAMETRO[:tipo_derivado_leche]
             @derivados_lacteos_leche.alta_produccion_queso_id = nil
-            @derivados_lacteos_leche.alta_produccion_id = @alta_produccion_detalle.id
+            @derivados_lacteos_leche.alta_produccion_detalle_id = @alta_produccion_detalle.id
             @derivados_lacteos_leche.cantidad_inicial = @alta_produccion_detalle.cantidad_litros
             @derivados_lacteos_leche.cantidad_actual = @alta_produccion_detalle.cantidad_litros
             @derivados_lacteos_leche.tipo_medicion_id = PARAMETRO[:tipo_medicion_derivado_lacteo_leche]
