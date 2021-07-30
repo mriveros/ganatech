@@ -7,6 +7,6 @@ class VCelo < ActiveRecord::Base
   :fecha_inicio, :fecha_fin, :descripcion, :potrero_id, :potrero,:hacienda_id, :hacienda, 
   :estado_celo_id, :estado_celo, :observacion, :created_at, :updated_at
   scope :orden_01, -> { order("celo_id")}
-  scope :orden_estado_celo, -> { order("estado_celo_id")}
+  scope :orden_estado_celo, -> { order("estado_celo_id, celo_id desc")}
   
 end

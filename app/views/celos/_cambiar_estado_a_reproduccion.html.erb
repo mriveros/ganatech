@@ -10,7 +10,7 @@
     </div>
 
 
-    <%= form_for @celo, remote: true, url: celos_guardar_cambiar_estado_a_en_reproduccion_url, html: { id: "form-cambiar-estado-celo" }, method: 'POST' do |f| %>
+    <%= form_for @celo, remote: true, url: celos_guardar_cambiar_estado_a_en_reproduccion_url, html: { id: "form-cambiar-estado-celo", autocomplete: 'off' }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :celo_id, @celo.id%>
@@ -95,7 +95,7 @@
           <div class="col-sm-4"><%= label_tag :nil, "Descripción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :descripcion ,nil,class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br /><br />
-
+ 
 
           <div class="col-sm-4"><%= label_tag :nil, "Observación ".html_safe %></div>
           <div class="col-sm-7"><%= text_area_tag :observacion ,nil,class: 'form-control input-sm' %></div>
