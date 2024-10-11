@@ -303,10 +303,9 @@ class MedicamentosController < ApplicationController
     @medicamentos = Medicamento.where("nombre_medicamento ilike ?", "%#{params[:medicamento]}%")
 
     respond_to do |f|
-      
-      f.html
-      f.json { render :json => @medicamentos }
-    
+
+      f.json { render :json => @medicamentos}
+
     end
 
   end

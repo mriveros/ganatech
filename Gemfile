@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'dragonfly', '~> 1.0.11'
+gem 'avatar_magick', '~> 1.0.1'
+gem 'serviceworker-rails'
 gem 'chartkick', '~>2.0.0'
 gem 'highcharts'
 gem 'groupdate'
@@ -53,6 +56,7 @@ gem "magic_encoding", "0.0.2"
 #gem "paperclip", "3.5.4"
 gem "paperclip"
 gem 'csv_builder', "2.1.1"
+gem 'ffi', '1.12.0'
 gem 'scrypt', "3.0.7"
 gem 'protected_attributes'
 gem "recaptcha", :require => "recaptcha/rails"
